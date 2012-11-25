@@ -1,6 +1,5 @@
 On windows XP 32 built in visual studio
 Determining sizeof() important types that are used throughout:
-Determining sizeof() important types that are used throughout:
 WorkUnit: 60
 DefaultRollingAverage<Whole>::Type: 12
 WeightedRollingAverage<Whole,Whole>: 12

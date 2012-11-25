@@ -1,0 +1,2 @@
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousworkunit.h:60: warning: Member DoWork(ThreadSpecificStorage &CurrentThreadStorage, FrameScheduler &CurrentFrameScheduler)=0 (function) of class Mezzanine::Threading::AsynchronousWorkUnit is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousworkunit.h:58: warning: Member IsWorkDone() (function) of class Mezzanine::Threading::AsynchronousWorkUnit is not documented.

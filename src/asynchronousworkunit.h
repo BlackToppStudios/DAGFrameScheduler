@@ -51,7 +51,7 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @todo
+        /// @todo Create this and document it.
         class MEZZ_LIB AsynchronousWorkUnit
         {
             public:

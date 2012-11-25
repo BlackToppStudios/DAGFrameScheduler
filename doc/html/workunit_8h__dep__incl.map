@@ -1,7 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="460,86,551,117"/>
 <area shape="rect" id="node7" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="49,166,199,197"/>
-<area shape="rect" id="node13" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that." alt="" coords="5,86,168,117"/>
+<area shape="rect" id="node13" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or writes a." alt="" coords="5,86,168,117"/>
 <area shape="rect" id="node16" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="243,86,424,117"/>
 <area shape="rect" id="node22" href="$workunit_8cpp.html" title="This file has the implementation of the workunit." alt="" coords="575,86,668,117"/>
 <area shape="rect" id="node5" href="$asynchronousworkunit_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="441,166,620,197"/>

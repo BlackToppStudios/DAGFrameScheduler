@@ -110,7 +110,7 @@ namespace Mezzanine
         {
             if(TargetFrameLength)
             {
-                /*Whole TargetFrameEnd = 1000000/TargetFrameRate + CurrentFrameStart;  // original Timing algorithm is usually about 8 milliseconds longer than 60 seconds
+                /*Whole TargetFrameEnd = 1000000/TargetFrameRate + CurrentFrameStart;  // original Timing algorithm is usually about 8 milliseconds longer than 60 seconds on Sqeaky's workstation Mercury
                 Whole WaitTime = TargetFrameEnd - GetTimeStamp();
                 if(WaitTime>1000000)
                     { WaitTime = 0; }
@@ -217,10 +217,15 @@ namespace Mezzanine
             { return TargetFrameLength; }
 
         void FrameScheduler::SetFrameRate(Whole FrameRate)
-            { TargetFrameLength = 1000000/FrameRate; }
+        {
+            if(FrameRate)
+                { TargetFrameLength = 1000000/FrameRate; }
+            else
+                { TargetFrameLength = 0; }
+        }
 
-        void FrameScheduler::SetFrameLength(Whole FrameRate)
-            { TargetFrameLength = FrameRate; }
+        void FrameScheduler::SetFrameLength(Whole FrameLength)
+            { TargetFrameLength = FrameLength; }
 
     }
 }

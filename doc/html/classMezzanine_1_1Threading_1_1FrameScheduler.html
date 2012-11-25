@@ -18,7 +18,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>MezzanineEngine&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
   </td>
  </tr>
  </tbody>
@@ -32,6 +32,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -123,8 +124,9 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Do one frame worth of work.  <a href="#a93e8f9d384197837fcf8fc0f3c058a5c"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3d2a83c6411e7c5686c68cfc982b8236">GetFrameCount</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current number of frames that have elapsed.  <a href="#a3d2a83c6411e7c5686c68cfc982b8236"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a7af749e5eb3f5d53cc9b3fc122a03af6">GetFrameLength</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the desired framerate.  <a href="#a7af749e5eb3f5d53cc9b3fc122a03af6"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7af749e5eb3f5d53cc9b3fc122a03af6"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetFrameLength" ref="a7af749e5eb3f5d53cc9b3fc122a03af6" args="() const " -->
+<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a7af749e5eb3f5d53cc9b3fc122a03af6">GetFrameLength</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the desired length of a a frame. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a0e4e2774f5112075493f9bb0eb787538">GetNextWorkUnit</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next available workunit for execution.  <a href="#a0e4e2774f5112075493f9bb0eb787538"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a45299a4ebe34674b09c7b40ccccae8ce">GetThreadCount</a> ()</td></tr>
@@ -132,12 +134,10 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af11e18b5ea39b77fee60c3a3d0e65bd4"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::ResetAllWorkUnits" ref="af11e18b5ea39b77fee60c3a3d0e65bd4" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af11e18b5ea39b77fee60c3a3d0e65bd4">ResetAllWorkUnits</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Take any steps required to prepare all owned WorkUnits for execution next frame. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60fbfa1fdd301cf931dd01b9474d2ec8"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SetFrameLength" ref="a60fbfa1fdd301cf931dd01b9474d2ec8" args="(Whole FrameRate)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a60fbfa1fdd301cf931dd01b9474d2ec8">SetFrameLength</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> FrameRate)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Desired length of a frame in microseconds. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4f018d5cd5f64a25dddd274068177add"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SetFrameRate" ref="a4f018d5cd5f64a25dddd274068177add" args="(Whole FrameRate)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">SetFrameRate</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> FrameRate)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired Frate rate. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8e0872f75c8fecf19c452a478ea6234">SetFrameLength</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> FrameLength)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Desired length of a frame in microseconds.  <a href="#ac8e0872f75c8fecf19c452a478ea6234"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">SetFrameRate</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> FrameRate)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired Frate rate.  <a href="#a4f018d5cd5f64a25dddd274068177add"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a810bda1947bafd31168e02d391b709ad">SetThreadCount</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> NewThreadCount)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the amount of thread to use.  <a href="#a810bda1947bafd31168e02d391b709ad"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b766481a3c031d19064d5055d2890ee"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SortWorkUnits" ref="a9b766481a3c031d19064d5055d2890ee" args="()" -->
@@ -346,6 +346,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 
 <p>Do one frame worth of work. </p>
 <p>Every Monopoly will be executed once and each work unit will be executed once. </p>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><p class="startdd">Cause Threads that stop because work appear exhausted from dependency issues to spin/wait until work is done. </p>
+<p class="enddd">implement thread affinity. </p>
+</dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00187">187</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
@@ -369,30 +372,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the Frame Count. </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00213">213</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a7af749e5eb3f5d53cc9b3fc122a03af6"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetFrameLength" ref="a7af749e5eb3f5d53cc9b3fc122a03af6" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a7af749e5eb3f5d53cc9b3fc122a03af6">Mezzanine::Threading::FrameScheduler::GetFrameLength</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the desired framerate. </p>
-<p>Defaults to 60, to maximize smoothmess of execution (no human can see that fast), while not killing battery life. This is a maximum framerate, if WorkUnits take too long to execute this will not make them finish faster. This controls a delay to prevent the machine's resources from being completely tapped. <br/>
- <br/>
- Set this to 0 to never puase and run as fast as possible. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the Target frame rate. </dd></dl>
-
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00216">216</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -457,6 +436,64 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole with the current desired thread count. </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00181">181</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac8e0872f75c8fecf19c452a478ea6234"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SetFrameLength" ref="ac8e0872f75c8fecf19c452a478ea6234" args="(Whole FrameLength)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8e0872f75c8fecf19c452a478ea6234">Mezzanine::Threading::FrameScheduler::SetFrameLength</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td>
+          <td class="paramname"><em>FrameLength</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the Desired length of a frame in microseconds. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FrameLength</td><td>The desired minimum length of the frame. Use 0 for no pause. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00227">227</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4f018d5cd5f64a25dddd274068177add"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SetFrameRate" ref="a4f018d5cd5f64a25dddd274068177add" args="(Whole FrameRate)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">Mezzanine::Threading::FrameScheduler::SetFrameRate</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td>
+          <td class="paramname"><em>FrameRate</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Set the desired Frate rate. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">FrameRate</td><td>in frames per second</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Defaults to 60, to maximize smoothmess of execution (no human can see that fast), while not killing battery life. This is a maximum framerate, if WorkUnits take too long to execute this will not make them finish faster. This controls a delay to prevent the machine's resources from being completely tapped. <br/>
+ <br/>
+ Set this to 0 to never pause and run as fast as possible. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the Target frame rate. </dd></dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00219">219</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -583,6 +620,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 24 2012 21:23:43 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Nov 25 2012 02:12:42 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

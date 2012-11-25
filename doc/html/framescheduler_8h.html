@@ -18,7 +18,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>MezzanineEngine&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
   </td>
  </tr>
  </tbody>
@@ -32,6 +32,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
@@ -151,7 +152,7 @@ Defines</h2></td></tr>
 <div class="memdoc">
 
 <p>This is a configuration settings to tune the precision of timing at compile time. </p>
-<p>Each frame that is executed has a desired length of time as determined by the Desired Frame Rate that can set using <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">FrameScheduler::SetFrameRate()</a> or <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a60fbfa1fdd301cf931dd01b9474d2ec8">FrameScheduler::SetFrameLength()</a>. If execution of a frame finishes before it has consumed its portion of a second, then work is paused the desired length has elapsed. This means that if there is too much work each frame that the frame rate will suffer. <br/>
+<p>Each frame that is executed has a desired length of time as determined by the Desired Frame Rate that can set using <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">FrameScheduler::SetFrameRate()</a> or <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8e0872f75c8fecf19c452a478ea6234">FrameScheduler::SetFrameLength()</a>. If execution of a frame finishes before it has consumed its portion of a second, then work is paused the desired length has elapsed. This means that if there is too much work each frame that the frame rate will suffer. <br/>
  <br/>
  The timing of frame lengths with this algorithm is not perfect. Each frame ends a certain amount of microseconds early or late. This inaccuracy can be introduced by the system's timer resolution, the time it takes to lookup the time, or by the work that must be done outside of the of the timed work or pause periods to aggregate data. On Ubuntu 12.04 x64 has a simple timer with a single microsecond resolution, this algorithm tends to drift less than 2 microseconds per frame. Some other algorithms are more precise, and others are simpler, this is a balance between those. If this is not acceptable <a class="el" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849">GetTimeStamp()</a> and <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac59d45091a7758912f9e7c7871c7c5d9">FrameScheduler::WaitUntilNextThread()</a> could be modified to adjust this. <br/>
  <br/>
@@ -179,6 +180,6 @@ Defines</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 24 2012 21:23:43 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Nov 25 2012 02:12:42 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

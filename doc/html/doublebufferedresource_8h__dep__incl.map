@@ -6,7 +6,7 @@
 <area shape="rect" id="node8" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly." alt="" coords="5,326,200,357"/>
 <area shape="rect" id="node14" href="$workunit_8h.html" title="This file has the defintion of the workunit." alt="" coords="473,166,553,197"/>
 <area shape="rect" id="node16" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="673,246,764,277"/>
-<area shape="rect" id="node24" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that." alt="" coords="385,246,548,277"/>
+<area shape="rect" id="node24" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or writes a." alt="" coords="385,246,548,277"/>
 <area shape="rect" id="node29" href="$workunit_8cpp.html" title="This file has the implementation of the workunit." alt="" coords="268,246,361,277"/>
 <area shape="rect" id="node18" href="$asynchronousworkunit_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="464,326,643,357"/>
 <area shape="rect" id="node22" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="667,326,771,357"/>

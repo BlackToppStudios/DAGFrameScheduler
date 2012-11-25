@@ -114,6 +114,7 @@ namespace Mezzanine
         //------------------------------------------------------------------------------
 
         /// Information to pass to the new thread (what to run).
+        /// @todo document this
         struct _thread_start_info {
           void (*mFunction)(void *); ///< Pointer to the function to be executed.
           void * mArg;               ///< Function argument for the thread function.

@@ -225,6 +225,8 @@ namespace Mezzanine
 
                 /// @brief Do one frame worth of work.
                 /// @details Every Monopoly will be executed once and each work unit will be executed once.
+                /// @todo Cause Threads that stop because work appear exhausted from dependency issues to spin/wait until work is done.
+                /// @todo implement thread affinity.
                 virtual void DoOneFrame();
 
                 /// @brief Take any steps required to prepare all owned WorkUnits for execution next frame.
@@ -237,20 +239,22 @@ namespace Mezzanine
                 /// @return A Whole containing the Frame Count.
                 Whole GetFrameCount() const;
 
-                /// @brief Get the desired framerate.
-            /// @details Defaults to 60, to maximize smoothmess of execution (no human can see that fast),
-            /// while not killing battery life. This is a maximum framerate, if WorkUnits take too long
-            /// to execute this will not make them finish faster. This controls a delay to prevent the
-            /// machine's resources from being completely tapped. @n @n Set this to 0 to never puase
-            /// and run as fast as possible.
-            /// @return A Whole containing the Target frame rate.
+                /// @brief Get the desired length of a a frame.
                 Whole GetFrameLength() const;
 
                 /// @brief Set the desired Frate rate.
+                /// @param FrameRate in frames per second
+                /// @details Defaults to 60, to maximize smoothmess of execution (no human can see that fast),
+                /// while not killing battery life. This is a maximum framerate, if WorkUnits take too long
+                /// to execute this will not make them finish faster. This controls a delay to prevent the
+                /// machine's resources from being completely tapped. @n @n Set this to 0 to never pause
+                /// and run as fast as possible.
+                /// @return A Whole containing the Target frame rate.
                 void SetFrameRate(Whole FrameRate);
 
                 /// @brief Set the Desired length of a frame in microseconds.
-                void SetFrameLength(Whole FrameRate);
+                /// @param FrameLength The desired minimum length of the frame. Use 0 for no pause.
+                void SetFrameLength(Whole FrameLength);
 
 
         };

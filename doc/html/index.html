@@ -18,7 +18,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>MezzanineEngine&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
   </td>
  </tr>
  </tbody>
@@ -32,6 +32,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -128,10 +129,26 @@ Convention Work Queue/ThreadPools - Fig 3.</div></div>
  <br/>
  The other, and less obvious, point of contention that has not be circumvented in a satisfactory way for games is the large of amount of synchronization required between units of work that must communicate. For example, there may be hundreds of thousands of pieces of data that must be passed from a system into a 3d rendering system. Apply mutexes to each would slow execution an impossibly long time (if it didn't introduce deadlock), while more coarse grained lock would prevent large portions of physics and rendering from occurring at the time causing one or both of them to wait/block. A simple solution would be to run physics before graphics, but common work queues do not provide good guarantees in this regard. <br/>
  <br/>
- The DAGFrameScheduler was explicitly designed to provide exactly this guarantee. If the physics <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> is add to the graphics <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> with <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a81d86d99de616681a41957384fa86e55">AddDependent(WorkUnit*)</a> then it will always be run before the graphics workunit in a given frame. </p>
+ The DAGFrameScheduler was explicitly designed to provide exactly this guarantee. If the physics <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> is added to the graphics <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> with <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a81d86d99de616681a41957384fa86e55">AddDependent(WorkUnit*)</a> then it will always be run before the graphics workunit in a given frame. The drawback of this is that it is more difficult to make runtime creation of workunits, but completely removes the locking mechanisms a conventional work queues. The DAGFrameScheduler has traded one useless feature for a useful guarantee. </p>
 <h2><a class="anchor" id="algorithm_sec"></a>
 The Algorithm</h2>
-<p>Dagma-CP - Directed Acyclic Graph Minimal Assembly of Critical Path </p>
+<p>When first creating the DAGFrameScheduler it was called it "Dagma-CP" because when describing it the phrase "Directed Acyclic Graph Minimal Assembly of Critical Path" if you are in the lucky 1% who knows what all those terms mean that is very descriptive. For rest of us the algorithm tries to determine what is the shortest way to execute the work that must be executed each frame. It does this by assembling a logical graph of work that must done each frame and executing it. Because all the entries in this will have a definite location somewhere between the beginning and end, and will never circle around back to an earlier point this is called an acyclic graph. <br/>
+ <br/>
+ For scheduling concerns, there are 3 kinds of <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a>s. All <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a>s are expected to monopolize cpu resources at the beginning of each frame. This is ideal when working with other systems, for example a phsyics system like Bullet3D. If the calls to a physics system are wrapped in a <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> then it will be given full opportunity to run before the <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a>s and <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html">AsynchronousWorkUnit</a>s are run. </p>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>AsynchronousWorkUnit and Work Unit affinity are not completely implemented at this point in time. The automatic Thread adjusting hueristic is also not complete.</dd></dl>
+<p>Once all the <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a>s are done then the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> class instance spawns or activates a number of threads based on a simple heuristic. Each thread queries the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> for the next piece of work that has the most <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a>s that depend on it, and in the case of a tie the <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> that takes the longest to execute. Execution length rather than brevity is preferred because it helps keep each thread's execution time time consistently short (I will add a few more pictures to describe this clearly). <br/>
+ <br/>
+ Some work must be run on specific threads, such as calls to underlying devices (for example, graphics cards using Directx or OpenGL). These <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a>s are put into a different listing where only the main thread will attempt to execute them. Other than running these, and running these first, the behavior of the main thread is very similar to other threads. Once a <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> has been completed the thread will query the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> for more work. Because the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> is never modified during a frame there is no need for synchronization with it specifically, this avoids a key point of contention that reduces scaling. Instead the synchronization is performed with each <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> and is an Atomic CAS operation to maximize performance. <br/>
+ <br/>
+ Even much of the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a>'s work is performed in <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a>s, such as log aggregation and certain functions that must be performed each frame. <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html">AsynchronousWorkUnit</a>s continue to run in a thread beyond normal scheduling and are intended to will consume fewer CPU resources and more IO resources. For example loading a large file or listening for network traffic. These will be normal <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a>s in most regards and will check on the asynchronous tasks they manage each frame when they run as a normally scheduled. <br/>
+ <br/>
+ If a thread should run out of work because all the work is completed the frame will pause. This pause length is calulated using a runtime configurable value on the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a>. If there is more work to be executed, currently fewer threads will continue its execution, in future versions thread will spin or wait until more work has its dependencies met or all work is complete. <br/>
+ <br/>
+ The <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> classes are designed to be inherited from and inserted into a <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> which will manage their lifetime and execute them when requested via <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a93e8f9d384197837fcf8fc0f3c058a5c">FrameScheduler::DoOneFrame()</a>. <br/>
+ <br/>
+ Insert DAGFramescheduler picture here. <br/>
+ <br/>
+ This documentation should not be considered complete nor should the algorithm both are still under development. </p>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -148,6 +165,6 @@ The Algorithm</h2>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Nov 24 2012 21:23:43 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Nov 25 2012 02:12:42 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

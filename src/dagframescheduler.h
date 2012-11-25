@@ -194,9 +194,72 @@
 /// mechanisms a conventional work queues. The DAGFrameScheduler has traded one useless feature
 /// for a useful guarantee.
 /// @section algorithm_sec The Algorithm
-/// When first creating the DAG FrameScheduler the explantationDagma-CP - Directed Acyclic Graph Minimal Assembly of Critical Path
+/// When first creating the DAGFrameScheduler it was called it "Dagma-CP" because when describing it
+/// the phrase "Directed Acyclic Graph Minimal Assembly of Critical Path" if you are in the lucky 1%
+/// who knows what all those terms mean that is very descriptive. For rest of us the algorithm tries
+/// to determine what is the shortest way to execute the work that must be executed each frame. It
+/// does this by assembling a logical graph of work that must done each frame and executing it.
+/// Because all the entries in this will have a definite location somewhere between the beginning
+/// and end, and will never circle around back to an earlier point this is called an acyclic graph.
+/// @n @n For scheduling concerns, there are 3 kinds of @ref Mezzanine::Threading::WorkUnit "WorkUnit"s.
+/// All @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are expected to monopolize cpu
+/// resources at the beginning of each frame. This is ideal when working with other systems, for
+/// example a phsyics system like Bullet3D. If the calls to a physics system are wrapped in a
+/// @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit" then it will be given full
+/// opportunity to run before the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s and
+/// @ref Mezzanine::Threading::AsynchronousWorkUnit "AsynchronousWorkUnit"s are run.
+/// @warning AsynchronousWorkUnit and Work Unit affinity are not completely implemented at this point
+/// in time. The automatic Thread adjusting hueristic is also not complete.
 ///
-///
+/// Once all the @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are done then the
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" class instance spawns or activates
+/// a number of threads based on a simple heuristic. Each thread queries the
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for the next piece of work that has
+/// the most @ref Mezzanine::Threading::WorkUnit "WorkUnit"s that depend on it, and in the case of
+/// a tie the @ref Mezzanine::Threading::WorkUnit "WorkUnit" that takes the longest to execute.
+/// Execution length rather than brevity is preferred because it helps keep each thread's execution
+/// time time consistently short (I will add a few more pictures to describe this clearly).
+/// @n @n
+/// Some work must be run on specific threads, such as calls to underlying devices (for example,
+/// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
+/// are put into a different listing where only the main thread will attempt to execute them. Other
+/// than running these, and running these first, the behavior of the main thread is very similar to
+/// other threads. Once a @ref Mezzanine::Threading::WorkUnit "WorkUnit" has been completed the
+/// thread will query the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for more work.
+/// Because the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" is never modified during
+/// a frame there is no need for synchronization with it specifically, this avoids a key point of
+/// contention that reduces scaling. Instead the synchronization is performed with each
+/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" and is an Atomic CAS operation to maximize
+/// performance.
+/// @n @n
+/// Even much of the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler"'s work is performed
+/// in @ref Mezzanine::Threading::WorkUnit "WorkUnit"s, such as log aggregation and certain functions
+/// that must be performed each frame.
+/// @ref Mezzanine::Threading::AsynchronousWorkUnit "AsynchronousWorkUnit"s continue to run in a thread beyond normal scheduling
+/// and are intended to will consume fewer CPU resources and more IO resources. For example loading a
+/// large file or listening for network traffic. These will be normal @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
+/// in most regards and will check on the asynchronous tasks they manage each frame when they run
+/// as a normally scheduled.
+/// @n @n
+/// If a thread should run out of work because all the work is completed the frame will pause. This
+/// pause length is calulated using a runtime configurable value on the
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler". If there is more work to be executed,
+/// currently fewer threads will continue its execution, in future versions thread will spin or wait
+/// until more work has its dependencies met or all work is complete.
+/// @n @n
+/// The @ref Mezzanine::Threading::WorkUnit "WorkUnit" classes are designed to be inherited from
+/// and inserted into a @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" which will
+/// manage their lifetime and execute them when requested via
+/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() "FrameScheduler::DoOneFrame()".
+/// @n @n
+/// Insert DAGFramescheduler picture here.
+/// @n @n
+/// This documentation should not be considered complete nor should the algorithm
+/// both are still under development.
+
+
+
+
 /// @brief All of the Mezzanine game library components reside in this namespace.
 /// @details The DAG Frame Scheduler is just one part of many in the Mezzanine. The Mezzanine as a
 /// whole is intended to tie a complex collection of libraries into one cohesive library.

@@ -110,6 +110,7 @@ namespace Mezzanine
                 /// @brief Perform whatever tracking is required to have another workunit no longer depend on this one.
                 /// @details In this simple implementation decrement the DependentCount.
                 /// @param RemoveDependent Removed from the list of Dependents.
+                /// @todo Cleanup WorkUnit Dependency removal.
                 virtual void RemoveDependent(WorkUnit* RemoveDependent);
 
                 /// @brief Drop any information about what work Units depend on this one.
