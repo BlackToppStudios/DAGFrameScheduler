@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classMezzanine_1_1BufferedRollingAverage.html" title="A RollingAverage that stores a copy of each record. and does the math when queried." alt="" coords="348,5,687,35"/>
+<area shape="rect" id="node5" href="$classMezzanine_1_1WeightedRollingAverage.html" title="A weighted average that does math with every insertion and stores nothing." alt="" coords="344,58,691,89"/>
+</map>

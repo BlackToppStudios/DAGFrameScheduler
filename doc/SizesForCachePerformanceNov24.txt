@@ -1,0 +1,59 @@
+On windows XP 32 built in visual studio
+Determining sizeof() important types that are used throughout:
+Determining sizeof() important types that are used throughout:
+WorkUnit: 60
+DefaultRollingAverage<Whole>::Type: 12
+WeightedRollingAverage<Whole,Whole>: 12
+BufferedRollingAverage<Whole>: 36
+WorkUnitMonpoly: 60
+ThreadSpecificStorage: 28
+FrameScheduler: 112
+thread: 40
+mutex: 28
+vector<Whole>: 20
+vector<WorkUnit*>: 20
+set<WorkUnit*>: 20
+volatile int32_t: 4
+std::ostream*: 4
+MaxInt: 8
+Whole: 4
+
+
+On windows XP 32 built in MinGW
+Determining sizeof() important types that are used throughout:
+WorkUnit: 44
+DefaultRollingAverage<Whole>::Type: 12
+WeightedRollingAverage<Whole,Whole>: 12
+BufferedRollingAverage<Whole>: 20
+WorkUnitMonpoly: 44
+ThreadSpecificStorage: 20
+FrameScheduler: 80
+thread: 40
+mutex: 28
+vector<Whole>: 12
+vector<WorkUnit*>: 12
+set<WorkUnit*>: 24
+volatile int32_t: 4
+std::ostream*: 4
+MaxInt: 8
+Whole: 4
+
+
+on ubuntu x64 gcc
+Determining sizeof() important types that are used throughout:
+WorkUnit: 80
+DefaultRollingAverage<Whole>::Type: 16
+WeightedRollingAverage<Whole,Whole>: 16
+BufferedRollingAverage<Whole>: 40
+WorkUnitMonpoly: 80
+ThreadSpecificStorage: 40
+FrameScheduler: 136
+thread: 56
+mutex: 40
+vector<Whole>: 24
+vector<WorkUnit*>: 24
+set<WorkUnit*>: 48
+volatile int32_t: 4
+std::ostream*: 8
+MaxInt: 8
+Whole: 4

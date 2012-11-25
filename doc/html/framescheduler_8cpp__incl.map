@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="432,246,557,277"/>
+<area shape="rect" id="node35" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="68,326,241,357"/>
+<area shape="rect" id="node54" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="532,86,623,117"/>
+<area shape="rect" id="node5" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="783,486,873,517"/>
+<area shape="rect" id="node21" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="980,326,1049,357"/>
+<area shape="rect" id="node24" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="777,406,879,437"/>
+<area shape="rect" id="node43" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="644,326,745,357"/>
+<area shape="rect" id="node7" href="$compilerthreadcompat_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="959,566,1124,597"/>
+<area shape="rect" id="node27" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="1007,486,1073,517"/>
+<area shape="rect" id="node57" href="$workunit_8h.html" title="This file has the defintion of the workunit." alt="" coords="705,166,785,197"/>
+<area shape="rect" id="node62" href="$rollingaverage_8h.html" title="This Store the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="839,326,956,357"/>
+<area shape="rect" id="node66" href="$threadingenumerations_8h.html" title="Any enumerations the threading library requires are all declared here." alt="" coords="783,246,951,277"/>
+</map>
