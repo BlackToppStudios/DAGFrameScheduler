@@ -1,0 +1,16 @@
+The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library designed for use in video games.
+
+Currently this is not ready for most production use but is ready for peer review and possibly for integration into simple games.
+
+
+This  is licensed under the GPL v3 license as per the file 'LICENSE'.
+
+The 'src' folder includes the source and header in the library.
+
+The contents of the 'tests' folder are required only for verifying the library works.
+
+The 'doc' folder contains further licensing details, technical documentation and notes BTS developers may a have left.
+	Technical docs derived from the source code is located in 'doc/html', see 'index.html'
+	The Doxygen configuration resides in 'doc/doxyfiles'
+
+
