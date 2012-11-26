@@ -44,7 +44,6 @@
 
 #include "datatypes.h"
 #include "workunit.h"
-#include "doublebufferedresource.h"
 
 /// @file
 /// @brief This defines a number of workunits that are required for doing some tasks that the Framescheduler requires.

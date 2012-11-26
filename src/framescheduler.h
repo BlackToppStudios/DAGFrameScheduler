@@ -43,7 +43,6 @@
 
 #include "datatypes.h"
 #include "thread.h"
-#include "doublebufferedresource.h"
 #include "workunitkey.h"
 #include "systemcalls.h"
 
@@ -105,6 +104,7 @@ namespace Mezzanine
         class LogAggregator;
         class LogBufferSwapper;
         class FrameScheduler;
+		class ThreadSpecificStorage;
 
         /// @brief This is central object in this algorithm, it is responsible for spawning threads and managing the order that work units are executed.
         class MEZZ_LIB FrameScheduler

@@ -42,6 +42,7 @@
 #define _frameschedulerworkunits_cpp
 
 #include "frameschedulerworkunits.h"
+#include "doublebufferedresource.h"
 
 /// @file
 /// @brief The implementation of any workunits the framescheduler needs to work correctly

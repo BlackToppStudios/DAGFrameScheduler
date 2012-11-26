@@ -139,8 +139,8 @@ namespace Mezzanine
                 }
         };
 
-        /// @brief DoubleBufferedResources has a default instantiation to be used for logging.
-        template class DoubleBufferedResource<std::stringstream>;
+        // @brief DoubleBufferedResources has a default instantiation to be used for logging.
+        //template class DoubleBufferedResource<std::stringstream>;
 
         /// @brief A better default name for the Default Logger instance.
         typedef DoubleBufferedResource<std::stringstream> DoubleBufferedLogger;

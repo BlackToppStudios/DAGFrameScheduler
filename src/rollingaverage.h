@@ -175,8 +175,8 @@ namespace Mezzanine
             /// @brief Constructor
             /// @param RecordCount How many records should this emulate
             WeightedRollingAverage(Whole RecordCount=10) :
-                WeightCount(RecordCount),
-                CurrentAverage(0)
+                CurrentAverage(0),
+				WeightCount(RecordCount)
                 {}
 
             /// @brief Returns how many records this is emulating.

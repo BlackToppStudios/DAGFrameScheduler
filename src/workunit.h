@@ -85,7 +85,7 @@ namespace Mezzanine
 
                 /// @brief This controls do work with this after it has .
                 //volatile int32_t CurrentRunningState;
-                volatile int32_t CurrentRunningState;
+                volatile Int32 CurrentRunningState;
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the dependents as in what must not start until this finishes.

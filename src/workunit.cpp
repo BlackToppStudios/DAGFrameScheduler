@@ -47,6 +47,7 @@
 #include "workunit.h"
 #include "systemcalls.h"
 #include "atomiccas.h"
+#include "doublebufferedresource.h"
 
 #ifdef MEZZ_DEBUG
 #include <cassert>

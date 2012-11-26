@@ -288,6 +288,7 @@ class RestartMetric
 std::ostream& operator<< (std::ostream& out, RestartMetric Lhs)
 {
     out << "Name: " << Lhs.Name << " \tStarted: " << Lhs.UnitStart << " \tEnded: " << Lhs.UnitEnd << " \tThread: " << Lhs.Threadid;
+	return out;
 }
 
 // Documented above at prototype line.
@@ -383,6 +384,7 @@ int main (int argc, char** argv)
     ////////////////////////////////////////////////////////////////////////////////////////////////
     cout << "Determining sizeof() important types that are used throughout:" << endl
          << "WorkUnit: " << sizeof(WorkUnit) << endl
+         << "WorkUnitKey: " << sizeof(WorkUnitKey) << endl
          << "DefaultRollingAverage<Whole>::Type: " << sizeof(DefaultRollingAverage<Whole>::Type) << endl
          << "WeightedRollingAverage<Whole,Whole>: " << sizeof(WeightedRollingAverage<Whole,Whole>) << endl
          << "BufferedRollingAverage<Whole>: " << sizeof(BufferedRollingAverage<Whole>) << endl

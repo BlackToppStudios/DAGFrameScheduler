@@ -129,19 +129,19 @@ namespace Mezzanine
         }
 
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
-            LogDestination(_LogDestination),
-            LoggingToAnOwnedFileStream(true),
-            CurrentThreadCount(StartingThreadCount),
+			LogDestination(_LogDestination),
+			CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666), CurrentFrameStart(0),
-            TimingCostAllowance(125)
+            TimingCostAllowance(125),
+			LoggingToAnOwnedFileStream(true)
         { Resources.push_back(new ThreadSpecificStorage(this)); }
 
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
-            LogDestination(_LogDestination),
-            LoggingToAnOwnedFileStream(false),
+			LogDestination(_LogDestination),
             CurrentThreadCount(StartingThreadCount),
-            FrameCount(0), TargetFrameLength(16666), CurrentFrameStart(0),
-            TimingCostAllowance(125)
+			FrameCount(0), TargetFrameLength(16666), CurrentFrameStart(0),
+			TimingCostAllowance(125),
+			LoggingToAnOwnedFileStream(false)
         { Resources.push_back(new ThreadSpecificStorage(this)); }
 
         FrameScheduler::~FrameScheduler()
@@ -171,7 +171,6 @@ namespace Mezzanine
         {
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
             {
-                WorkUnit* temp = Iter->Unit;
                 if(NotStarted==Iter->Unit->GetRunningState())
                     return Iter->Unit;
             }

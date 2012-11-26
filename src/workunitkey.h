@@ -56,8 +56,10 @@ namespace Mezzanine
         class MEZZ_LIB WorkUnitKey
         {
             public:
-
-                /// @brief This stores how many things must run after the target workunit.
+				/// @brief The WorkUnit this carries metadata for.
+				WorkUnit* Unit;
+                
+				/// @brief This stores how many things must run after the target workunit.
                 /// @details This is most important sorting factor. In the Default algorithm
                 /// All of the Workunit that the most workunits depend on are run before the
                 /// any others. Since this number is usually low (less than 10ish) in large
@@ -66,7 +68,7 @@ namespace Mezzanine
                 /// counting a workunit twice hurts, and it may even help if something
                 /// actually depend on multiple workunits that depend on this.)
                 /// @note I chose the word depender instead of dependent, to make the distinction between this field and dependencies more clear when communicated verbally. In some english dialects dependencies it pronounced Dee-pen-dent-sees only one syllable off from Dee-pen-dent.
-                Integer Dependers;
+                Whole Dependers;
 
                 /// @brief Some representation of the time the target workunit takes to execute.
                 /// @details In the default algorithm this is used to determine what executes
@@ -76,9 +78,6 @@ namespace Mezzanine
                 /// means nothing if many other workunits run serialized in one thread rather than
                 /// in parrellel.
                 Whole Time;
-
-                /// @brief The WorkUnit this carries metadata for.
-                WorkUnit* Unit;
 
                 /// @brief Constructor
                 /// @param Dependers_ How many items depend on this, This needs to be calculated the same for all WorkUnitKeys
@@ -104,6 +103,8 @@ namespace Mezzanine
                 /// @return True if the left hand WorkUnit should be prioritized ahead of the right hand work unit.
                 virtual bool operator< (const WorkUnitKey& rhs ) const;
         };
+		
+		
     }
 }
 #endif
