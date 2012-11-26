@@ -1,12 +1,12 @@
 <map id="G" name="G">
-<area shape="rect" id="node4" href="$classMezzanine_1_1Threading_1_1thread.html" title="A small wrapper around the system thread." alt="" coords="864,5,1069,35"/>
-<area shape="rect" id="node8" href="$classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads." alt="" coords="828,58,1105,89"/>
-<area shape="rect" id="node10" href="$classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="455,107,673,138"/>
-<area shape="rect" id="node23" href="$classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted." alt="" coords="845,165,1088,195"/>
-<area shape="rect" id="node15" href="$structMezzanine_1_1DefaultRollingAverage.html" title="Mezzanine::DefaultRollingAverage\&lt; Whole \&gt;" alt="" coords="7,107,300,138"/>
-<area shape="rect" id="node19" href="$classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double&#45;buffered and algorithm specific resources." alt="" coords="813,218,1120,249"/>
-<area shape="rect" id="node26" title="STL class." alt="" coords="1311,271,1407,302"/>
-<area shape="rect" id="node28" title="STL class." alt="" coords="873,271,1060,302"/>
-<area shape="rect" id="node30" title="STL class." alt="" coords="485,271,643,302"/>
-<area shape="rect" id="node32" title="STL class." alt="" coords="103,271,204,302"/>
+<area shape="rect" id="node4" href="$classMezzanine_1_1Threading_1_1thread.html" title="A small wrapper around the system thread." alt="" coords="864,6,1069,37"/>
+<area shape="rect" id="node8" href="$classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads." alt="" coords="828,59,1105,90"/>
+<area shape="rect" id="node10" href="$classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="455,109,673,139"/>
+<area shape="rect" id="node23" href="$classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted." alt="" coords="845,166,1088,197"/>
+<area shape="rect" id="node15" href="$structMezzanine_1_1DefaultRollingAverage.html" title="Mezzanine::DefaultRollingAverage\&lt; Whole \&gt;" alt="" coords="7,109,300,139"/>
+<area shape="rect" id="node19" href="$classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double&#45;buffered and algorithm specific resources." alt="" coords="813,219,1120,250"/>
+<area shape="rect" id="node26" title="STL class." alt="" coords="1311,273,1407,303"/>
+<area shape="rect" id="node28" title="STL class." alt="" coords="873,273,1060,303"/>
+<area shape="rect" id="node30" title="STL class." alt="" coords="485,273,643,303"/>
+<area shape="rect" id="node32" title="STL class." alt="" coords="103,273,204,303"/>
 </map>

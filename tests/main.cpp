@@ -175,7 +175,7 @@ class PausesWorkUnit : public Mezzanine::Threading::WorkUnit
         virtual void DoWork(ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
         {
             DoubleBufferedLogger& CurrentLogger = CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger);
-            CurrentLogger.GetUsable() << "<Pause Pause=\"" << Length << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
+            CurrentLogger.GetUsable() << "<Pause PauseLength=\"" << Length << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
             Mezzanine::Threading::this_thread::sleep_for(Length);
         }
 };
@@ -267,6 +267,28 @@ class PiMakerMonopoly : public Mezzanine::Threading::MonopolyWorkUnit
             Scheduler = 0;
         }
 };
+
+/// @brief Used in the thread restart test
+class RestartMetric
+{
+    public:
+        /// @brief when the given unit started
+        String UnitStart;
+
+        /// @brief when the given unit completed
+        String UnitEnd;
+
+        /// @brief name of the given unit
+        String Name;
+
+        /// @brief The thread the unit ran in.
+        String Threadid;
+};
+/// @brief Used to easily output a work unit metrics
+std::ostream& operator<< (std::ostream& out, RestartMetric Lhs)
+{
+    out << "Name: " << Lhs.Name << " \tStarted: " << Lhs.UnitStart << " \tEnded: " << Lhs.UnitEnd << " \tThread: " << Lhs.Threadid;
+}
 
 // Documented above at prototype line.
 void PiMakerMonopolyHelper(void* Data)
@@ -888,8 +910,103 @@ int main (int argc, char** argv)
     LogCache.str("");
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Testing FrameScheduler thread restart
+    cout << endl << "Creating a few WorkUnits with a " << endl;
+    cout << "Creating WorkUnits a Dependency chain as follows: "
+            << endl << "    +--->B"
+            << endl << "    |"
+            << endl << "A---+"
+            << endl << "    |"
+            << endl << "    +--->C"
+            << endl;
+    PausesWorkUnit *RestartA = new PausesWorkUnit(10000,"A");
+    PausesWorkUnit *RestartB = new PausesWorkUnit(10000,"B");
+    PausesWorkUnit *RestartC = new PausesWorkUnit(10000,"C");
+    RestartB->AddDependency(RestartA);
+    RestartC->AddDependency(RestartA);
+    LogCache.str("");
+    FrameScheduler RestartScheduler1(&LogCache,2);
+    LogBufferSwapper Swapper3;
+    LogAggregator Agg3;
+    ThreadSpecificStorage SwapResource3(&RestartScheduler1);
+    RestartScheduler1.AddWorkUnit(RestartA);
+    RestartScheduler1.AddWorkUnit(RestartB);
+    RestartScheduler1.AddWorkUnit(RestartC);
+    RestartScheduler1.SortWorkUnits();
+    RestartScheduler1.DoOneFrame();
+    Swapper3(SwapResource3, RestartScheduler1);
+    Agg3(SwapResource3, RestartScheduler1);
+    // Check that two threads exist and that B and C run in different thread, and after A finished
+
+    cout << LogCache.str() << "Parsing log to determine if everything happened correctly" << endl;
+    pugi::xml_document Doc;
+    Doc.load(LogCache);
+    pugi::xml_node Thread1Node = Doc.child("Frame").first_child();
+    pugi::xml_node Thread2Node = Doc.child("Frame").last_child();
+    assert(Thread1Node);
+    assert(Thread2Node);
+    vector<RestartMetric> UnitTracking;
+    UnitTracking.push_back(RestartMetric());
+    UnitTracking.push_back(RestartMetric());
+    UnitTracking.push_back(RestartMetric());
+    UnitTracking.push_back(RestartMetric());
+
+    // gather all the data that might be useful in this test.
+    UnitTracking[0].UnitStart = String(Thread1Node.child("WorkunitStart").attribute("BeginTimeStamp").as_string());
+    UnitTracking[0].Name = String(Thread1Node.child("WorkunitStart").next_sibling().attribute("WorkUnitName").as_string());
+    UnitTracking[0].Threadid = String(Thread1Node.child("WorkunitStart").next_sibling().attribute("ThreadID").as_string());
+    UnitTracking[0].UnitEnd = String(Thread1Node.child("WorkunitStart").next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+    cout << UnitTracking[0] << endl;
+    UnitTracking[1].UnitStart = String(Thread1Node.child("WorkunitEnd").next_sibling().attribute("BeginTimeStamp").as_string());
+    UnitTracking[1].Name = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("WorkUnitName").as_string());
+    UnitTracking[1].Threadid = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("ThreadID").as_string());
+    UnitTracking[1].UnitEnd = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+    cout << UnitTracking[1] << endl;
+    UnitTracking[2].UnitStart = String(Thread2Node.child("WorkunitStart").attribute("BeginTimeStamp").as_string());
+    UnitTracking[2].Name = String(Thread2Node.child("WorkunitStart").next_sibling().attribute("WorkUnitName").as_string());
+    UnitTracking[2].Threadid = String(Thread2Node.child("WorkunitStart").next_sibling().attribute("ThreadID").as_string());
+    UnitTracking[2].UnitEnd = String(Thread2Node.child("WorkunitStart").next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+    cout << UnitTracking[2] << endl;
+    UnitTracking[3].UnitStart = String(Thread2Node.child("WorkunitEnd").next_sibling().attribute("BeginTimeStamp").as_string());
+    UnitTracking[3].Name = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("WorkUnitName").as_string());
+    UnitTracking[3].Threadid = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("ThreadID").as_string());
+    UnitTracking[3].UnitEnd = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+    cout << UnitTracking[3] << endl;
+
+    // Get exactly what we need.
+    String BThread;
+    String CThread;
+    String AEnd;
+    String BStart;
+    String CStart;
+    for(vector<RestartMetric>::iterator Iter = UnitTracking.begin(); Iter != UnitTracking.end(); ++Iter)
+    {
+        if(Iter->Name=="A")
+        {
+            AEnd = Iter->UnitEnd;
+        }
+        if(Iter->Name=="B")
+        {
+            BStart = Iter->UnitStart;
+            BThread = Iter->Threadid;
+        }
+        if(Iter->Name=="C")
+        {
+            CStart = Iter->UnitStart;
+            CThread = Iter->Threadid;
+        }
+    }
+
+    cout << "Was A complete before B started: " << (AEnd<=BStart) << endl; // This realies  on lexigraphical ordering matching numeric ordering
+    assert(AEnd<=BStart);
+    cout << "Was A complete before C started: " << (AEnd<=CStart) << endl; // if it doesn't then these numbers need to be converted.
+    assert(AEnd<=CStart);
+    cout << "Were B and C run in different threads: " << (BThread<=CThread) << endl;
+    assert(BThread<=CThread);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     // Testing FrameScheduler timing
-    cout << endl << "Creating a few Schedulers with only one work unit and testing a variety of framerates." << endl;
+    cout << endl << "Creating a few Schedulers with only one work unit and testing a variety of framerates timing accuracies." << endl;
     std::vector<Whole> Rates;
     Rates.push_back(10);
     Rates.push_back(25);
@@ -897,6 +1014,7 @@ int main (int argc, char** argv)
     Rates.push_back(30);
     Rates.push_back(60);
     Rates.push_back(100);
+    BufferedRollingAverage<double> VarianceTotal(Rates.size());
 
     for(std::vector<Whole>::iterator Iter = Rates.begin(); Iter!=Rates.end(); ++Iter)
     {
@@ -918,13 +1036,11 @@ int main (int argc, char** argv)
         double Variance = (double(Error))/double(1000000) * 100;
         double ErrorPerFrame = double(Error)/double(*Iter);
         cout << "  " << "This is a variance of " << Error << " Frames or " << Variance << "%. Which is " << ErrorPerFrame << " microsecond drift per frame." << endl;
-        //assert(0.3>Variance); // Allow a .3% variance - incosistent achievable even on even on winxp with its crappy 3.5 millisecond timer
-        //assert(0.1>Variance); // Allow a .1% variance - This is very achievable with an accurate timer, bu
+        VarianceTotal.Insert(Variance);
+        assert(1>Variance); // Allow a 1% variance - incosistent achievable even on even on winxp with its crappy 3.5 millisecond timer
+        //assert(0.1>Variance); // Allow a .1% variance - This is very achievable with an accurate microsecond timer
     }
-
-
-    //put verifcation
-
+    cout << "Average Variance: " << VarianceTotal.GetAverage() << "% or " << VarianceTotal.GetAverage() * 100 << " microseconds per frame." << endl;
 
 
 

@@ -118,6 +118,8 @@ namespace Mezzanine
                 /// higher/later in the set.
                 std::vector<WorkUnitKey> WorkUnitsMain;
 
+                std::vector<WorkUnitKey> WorkUnitAffinity;
+
                 /// @brief This maintains ownership of all the thread specific resources.
                 /// @note There should be the same amount of more these than entries in the Threads vector.
                 std::vector<ThreadSpecificStorage*> Resources;
@@ -225,8 +227,10 @@ namespace Mezzanine
 
                 /// @brief Do one frame worth of work.
                 /// @details Every Monopoly will be executed once and each work unit will be executed once.
-                /// @todo Cause Threads that stop because work appear exhausted from dependency issues to spin/wait until work is done.
                 /// @todo implement thread affinity.
+                /// @warning Do not call this on an unsorted set of WorkUnits. Use @ref FrameScheduler::SortWorkUnits() to sort WorkUnits after
+                /// They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just the frames
+                /// new WorkUnits are added.
                 virtual void DoOneFrame();
 
                 /// @brief Take any steps required to prepare all owned WorkUnits for execution next frame.
@@ -234,6 +238,10 @@ namespace Mezzanine
 
                 /// @brief Sort the workUnits
                 void SortWorkUnits();
+
+                void SortAffinityWorkUnits();
+
+                void SortAllWorkUnits();
 
                 /// @brief Get the current number of frames that have elapsed
                 /// @return A Whole containing the Frame Count.

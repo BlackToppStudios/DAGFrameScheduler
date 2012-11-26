@@ -105,7 +105,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1FrameScheduler__coll__graph.svg" width="100%" height="270"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1FrameScheduler__coll__graph.svg" width="100%" height="271"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classMezzanine_1_1Threading_1_1FrameScheduler-members.html">List of all members.</a></p>
@@ -140,6 +141,10 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired Frate rate.  <a href="#a4f018d5cd5f64a25dddd274068177add"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a810bda1947bafd31168e02d391b709ad">SetThreadCount</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> NewThreadCount)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the amount of thread to use.  <a href="#a810bda1947bafd31168e02d391b709ad"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a885959f72ac583eafcc87be921e8b2e9"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SortAffinityWorkUnits" ref="a885959f72ac583eafcc87be921e8b2e9" args="()" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SortAffinityWorkUnits</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ada4c4a69d0b9adc1e8d1156b139afe1e"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SortAllWorkUnits" ref="ada4c4a69d0b9adc1e8d1156b139afe1e" args="()" -->
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SortAllWorkUnits</b> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9b766481a3c031d19064d5055d2890ee"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::SortWorkUnits" ref="a9b766481a3c031d19064d5055d2890ee" args="()" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9b766481a3c031d19064d5055d2890ee">SortWorkUnits</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort the workUnits. <br/></td></tr>
@@ -189,6 +194,8 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkU
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6aab80a2e99f134f12e4aab16dd33b4f"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::TimingCostAllowance" ref="a6aab80a2e99f134f12e4aab16dd33b4f" args="" -->
 <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a6aab80a2e99f134f12e4aab16dd33b4f">TimingCostAllowance</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To prevent frame time drift this many microseconds is subtracted from the wait period to allow time for calculations. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab4dc20295c2fd63f9f4b90a54c76c6f6"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::WorkUnitAffinity" ref="ab4dc20295c2fd63f9f4b90a54c76c6f6" args="" -->
+std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnitAffinity</b></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af5c99359d324eb79b9080464b32be098">WorkUnitsMain</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of all the work units that are not Monopolies and do not have affinity for a given thread.  <a href="#af5c99359d324eb79b9080464b32be098"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="friends"></a>
@@ -346,9 +353,8 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 
 <p>Do one frame worth of work. </p>
 <p>Every Monopoly will be executed once and each work unit will be executed once. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd><p class="startdd">Cause Threads that stop because work appear exhausted from dependency issues to spin/wait until work is done. </p>
-<p class="enddd">implement thread affinity. </p>
-</dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>implement thread affinity. </dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Do not call this on an unsorted set of WorkUnits. Use <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9b766481a3c031d19064d5055d2890ee">FrameScheduler::SortWorkUnits()</a> to sort WorkUnits after They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just the frames new WorkUnits are added. </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00187">187</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
@@ -560,7 +566,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>This maintains ownership of all the thread specific resources. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>There should be the same amount of more these than entries in the Threads vector. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00123">123</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00125">125</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
 </div>
 </div>
@@ -578,7 +584,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>A way to track an arbitrary number of threads. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>There should never be more of these than Resources, and if there are more at the beginning of a frame the resources will be created in <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e" title="Create more threads if they are required.">CreateThreads()</a>. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00127">127</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00129">129</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
 </div>
 </div>
@@ -620,6 +626,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 25 2012 02:12:42 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Nov 25 2012 18:14:03 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>
