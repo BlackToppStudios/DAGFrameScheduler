@@ -624,21 +624,26 @@ int main (int argc, char** argv)
          << TestThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
          << "Average Execution Time (Microseconds): " << WorkUnitSample1.GetPerformanceLog().GetAverage() << endl;
 
-    cout << endl << "Starting WorkUnit Dependent and Dependency count Tests. Creating a chain in which C depends on B which depends on A." << endl;
-    PiMakerWorkUnit WorkUnitA(50,"A",false);
-    PiMakerWorkUnit WorkUnitB(50,"B",false);
-    PiMakerWorkUnit WorkUnitC(50,"C",false);
-    WorkUnitC.AddDependency(&WorkUnitB);
-    WorkUnitB.AddDependency(&WorkUnitA);
-    cout << "A dependency count: " << WorkUnitA.GetDependencyCount() << " \t A dependent count: " << WorkUnitA.GetDependentCount() << endl;
-    cout << "B dependency count: " << WorkUnitB.GetDependencyCount() << " \t B dependent count: " << WorkUnitB.GetDependentCount() << endl;
-    cout << "C dependency count: " << WorkUnitC.GetDependencyCount() << " \t C dependent count: " << WorkUnitC.GetDependentCount() << endl;
-    assert(WorkUnitA.GetDependencyCount()==0);
-    assert(WorkUnitA.GetDependentCount()==2);
-    assert(WorkUnitB.GetDependencyCount()==1);
-    assert(WorkUnitB.GetDependentCount()==1);
-    assert(WorkUnitC.GetDependencyCount()==2);
-    assert(WorkUnitC.GetDependentCount()==0);
+    cout << endl << "Starting WorkUnit Dependent and Dependency count Tests. Creating a chain in which C depends on B which depends on A."
+         << endl << "C --> B --> A" << endl;
+    PiMakerWorkUnit* WorkUnitA = new PiMakerWorkUnit(50,"A",false);
+    PiMakerWorkUnit* WorkUnitB = new PiMakerWorkUnit(50,"B",false);
+    PiMakerWorkUnit* WorkUnitC = new PiMakerWorkUnit(50,"C",false);
+    WorkUnitC->AddDependency(WorkUnitB);
+    WorkUnitB->AddDependency(WorkUnitA);
+    TestScheduler.AddWorkUnit(WorkUnitA);
+    TestScheduler.AddWorkUnit(WorkUnitB);
+    TestScheduler.AddWorkUnit(WorkUnitC);
+    TestScheduler.UpdateDependentGraph();
+    cout << "A dependency count: " << WorkUnitA->GetDependencyCount() << " \t A dependent count: " << WorkUnitA->GetDependentCount(TestScheduler) << endl;
+    cout << "B dependency count: " << WorkUnitB->GetDependencyCount() << " \t B dependent count: " << WorkUnitB->GetDependentCount(TestScheduler) << endl;
+    cout << "C dependency count: " << WorkUnitC->GetDependencyCount() << " \t C dependent count: " << WorkUnitC->GetDependentCount(TestScheduler) << endl;
+    assert(WorkUnitA->GetDependencyCount()==0);
+    assert(WorkUnitA->GetDependentCount(TestScheduler)==2);
+    assert(WorkUnitB->GetDependencyCount()==1);
+    assert(WorkUnitB->GetDependentCount(TestScheduler)==1);
+    assert(WorkUnitC->GetDependencyCount()==2);
+    assert(WorkUnitC->GetDependentCount(TestScheduler)==0);
     cout << "Creating a WorkUnit D which depends on B, So we should have:"
             << endl << "D --"
             << endl << "   |"
@@ -647,28 +652,31 @@ int main (int argc, char** argv)
             << endl << "   ^"
             << endl << "   |"
             << endl << "C --" << endl;
-    PiMakerWorkUnit WorkUnitD(50,"D",false);
-    WorkUnitD.AddDependency(&WorkUnitB);
-    cout << "A dependency count: " << WorkUnitA.GetDependencyCount() << " \t A dependent count: " << WorkUnitA.GetDependentCount() << endl;
-    cout << "B dependency count: " << WorkUnitB.GetDependencyCount() << " \t B dependent count: " << WorkUnitB.GetDependentCount() << endl;
-    cout << "C dependency count: " << WorkUnitC.GetDependencyCount() << " \t C dependent count: " << WorkUnitC.GetDependentCount() << endl;
-    cout << "D dependency count: " << WorkUnitD.GetDependencyCount() << " \t D dependent count: " << WorkUnitD.GetDependentCount() << endl;
-    assert(WorkUnitA.GetDependencyCount()==0);
-    assert(WorkUnitA.GetDependentCount()==3);
-    assert(WorkUnitB.GetDependencyCount()==1);
-    assert(WorkUnitB.GetDependentCount()==2);
-    assert(WorkUnitC.GetDependencyCount()==2);
-    assert(WorkUnitC.GetDependentCount()==0);
-    assert(WorkUnitD.GetDependencyCount()==2);
-    assert(WorkUnitD.GetDependentCount()==0);
+    PiMakerWorkUnit* WorkUnitD = new PiMakerWorkUnit(50,"D",false);
+    WorkUnitD->AddDependency(WorkUnitB);
+    TestScheduler.AddWorkUnit(WorkUnitD);
+    TestScheduler.UpdateDependentGraph();
+    cout << "A dependency count: " << WorkUnitA->GetDependencyCount() << " \t A dependent count: " << WorkUnitA->GetDependentCount(TestScheduler) << endl;
+    cout << "B dependency count: " << WorkUnitB->GetDependencyCount() << " \t B dependent count: " << WorkUnitB->GetDependentCount(TestScheduler) << endl;
+    cout << "C dependency count: " << WorkUnitC->GetDependencyCount() << " \t C dependent count: " << WorkUnitC->GetDependentCount(TestScheduler) << endl;
+    cout << "D dependency count: " << WorkUnitD->GetDependencyCount() << " \t D dependent count: " << WorkUnitD->GetDependentCount(TestScheduler) << endl;
+    assert(WorkUnitA->GetDependencyCount()==0);
+    assert(WorkUnitA->GetDependentCount(TestScheduler)==3);
+    assert(WorkUnitB->GetDependencyCount()==1);
+    assert(WorkUnitB->GetDependentCount(TestScheduler)==2);
+    assert(WorkUnitC->GetDependencyCount()==2);
+    assert(WorkUnitC->GetDependentCount(TestScheduler)==0);
+    assert(WorkUnitD->GetDependencyCount()==2);
+    assert(WorkUnitD->GetDependentCount(TestScheduler)==0);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // A smoke test for the monopoly
     cout << endl << "Starting MonopolyWorkUnit test. Creating a monopoly that will calculate pi in a number of threads simultaneously." << endl;
     PiMakerMonopoly Pioply(50,"Pioply",false,4);
-    ThreadSpecificStorage PioplyStorage(&TestScheduler);
+    FrameScheduler TestSchedulerMono(&std::cout,1);
+    ThreadSpecificStorage PioplyStorage(&TestSchedulerMono);
     for(Whole Counter=0; Counter<20; Counter++)
-        { Pioply(PioplyStorage, TestScheduler); }
+        { Pioply(PioplyStorage, TestSchedulerMono); }
     cout << "Here is the un-aggregated (main thread only) log of Twenty Test Runs" << endl
          << PioplyStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
          << "Average Execution Time (Microseconds): " << Pioply.GetPerformanceLog().GetAverage() << endl;
@@ -677,10 +685,10 @@ int main (int argc, char** argv)
     // Test for the logger workunits
     cout << endl << "Testing the logger workunits to get a handle on the monopolies logs, logging to cout: " << endl;
     LogBufferSwapper Swapper;
-    ThreadSpecificStorage SwapResource(&TestScheduler);
-    Swapper(SwapResource, TestScheduler);
+    ThreadSpecificStorage SwapResource(&TestSchedulerMono);
+    Swapper(SwapResource, TestSchedulerMono);
     LogAggregator Agg;
-    Agg(SwapResource, TestScheduler);
+    Agg(SwapResource, TestSchedulerMono);
     cout << "Large log should have been emitted that showed PI being calculated 80 times and which thread it was calculated in. 20 iterations should have occurred in the main thread, and the rest each in fresh threads." << endl;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

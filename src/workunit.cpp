@@ -60,7 +60,7 @@ namespace Mezzanine
         /////////////////////////////////////////////////////////////////////////////////////////////
         // Work with the dependents as in what must not start until this finishes.
 
-        Whole WorkUnit::GetDependentCount(WorkUnit* Caller) const
+        /*Whole WorkUnit::GetDependentCount(WorkUnit* Caller) const
         {
             #ifdef MEZZ_DEBUG
             assert(this != Caller); // This will throw if the function is called a second time from the first calling Workunit. Since this should get called on every WorkUnit if the least dependent WorkUnits are called first this can finds all errors.
@@ -69,21 +69,24 @@ namespace Mezzanine
             #endif
 
             Whole Results = Dependents.size();
-            for(std::vector<WorkUnit*>::const_iterator Iter=Dependents.begin(); Iter!=Dependents.end(); ++Iter)
+
                 { Results += (*Iter)->GetDependentCount(Caller); }
             return Results;
-        }
+        }*/
 
-        Whole WorkUnit::GetDependentCount() const
+        Whole WorkUnit::GetDependentCount(FrameScheduler &SchedulerToCount)
+            { return SchedulerToCount.GetDependentCountOf(this); }
+
+        /*Whole WorkUnit::GetDependentCount() const
         {
             #ifdef MEZZ_DEBUG
                 return GetDependentCount(0);
             #else
                 return GetDependentCount((WorkUnit*)this);
             #endif
-        }
+        }*/
 
-        void WorkUnit::AddDependent(WorkUnit* NewDependent)
+        /*void WorkUnit::AddDependent(WorkUnit* NewDependent)
             { Dependents.push_back(NewDependent); }
 
         void WorkUnit::RemoveDependent(WorkUnit* RemoveDependent)
@@ -96,6 +99,7 @@ namespace Mezzanine
 
         void WorkUnit::ClearDependents()
             { Dependents.clear(); }
+        */
 
         /////////////////////////////////////////////////////////////////////////////////////////////
         // Work with the dependencies as in what must finish before we can run this work unit.
@@ -122,10 +126,11 @@ namespace Mezzanine
                 return GetDependencyCount((WorkUnit*)this);
             #endif
         }
+
         void WorkUnit::AddDependency(WorkUnit* NewDependency)
         {
             Dependencies.push_back(NewDependency);
-            NewDependency->AddDependent(this);
+            //NewDependency->AddDependent(this);
         }
 
         void WorkUnit::RemoveDependency(WorkUnit* RemoveDependency)
@@ -188,8 +193,9 @@ namespace Mezzanine
             #endif
         }
 
-        WorkUnitKey WorkUnit::GetSortingKey()
-            { return WorkUnitKey( this->GetDependentCount(), GetPerformanceLog().GetAverage(), this); }
+        WorkUnitKey WorkUnit::GetSortingKey(FrameScheduler& SchedulerToCount)
+            { return WorkUnitKey( this->GetDependentCount(SchedulerToCount), GetPerformanceLog().GetAverage(), this); }
+
 
     }
 

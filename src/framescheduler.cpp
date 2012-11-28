@@ -128,6 +128,28 @@ namespace Mezzanine
             }
         }
 
+        void FrameScheduler::UpdateDependentGraph(const std::vector<WorkUnitKey>& Units)
+        {
+            // for each WorkUnit
+            for(std::vector<WorkUnitKey>::const_iterator Iter=Units.begin(); Iter!=Units.end(); ++Iter)
+            {
+                // For each Dependent of that Workunit
+                for(std::vector<WorkUnit*>::const_iterator DepIter=Iter->Unit->Dependencies.begin(); DepIter!=Iter->Unit->Dependencies.end(); ++DepIter)
+                {
+                    // Make a record of the reverse association
+                    DependentGraph[*DepIter].insert(Iter->Unit);
+                }
+            }
+        }
+
+        void FrameScheduler::UpdateWorkUnitKeys(std::vector<WorkUnitKey> &Units)
+        {
+            for(std::vector<WorkUnitKey>::iterator Iter=Units.begin(); Iter!=Units.end(); ++Iter)
+            {
+                *Iter = Iter->Unit->GetSortingKey(*this);
+            }
+        }
+
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
 			CurrentThreadCount(StartingThreadCount),
@@ -162,17 +184,37 @@ namespace Mezzanine
         }
 
         void FrameScheduler::AddWorkUnit(WorkUnit* MoreWork)
-            { this->WorkUnitsMain.push_back(MoreWork->GetSortingKey()); }
+        { this->WorkUnitsMain.push_back(MoreWork->GetSortingKey(*this)); }
+
+        Whole FrameScheduler::GetDependentCountOf(WorkUnit* Work, bool UsedCached)
+        {
+            if(UsedCached)
+                { UpdateDependentGraph(); }
+            Whole Results = DependentGraph[Work].size();
+            for(std::set<WorkUnit*>::iterator Iter=DependentGraph[Work].begin(); Iter!=DependentGraph[Work].end(); ++Iter)
+            {
+                Results+=GetDependentCountOf(*Iter);
+            }
+            return Results;
+        }
 
         //void FrameScheduler::RemoveWorkUnit(WorkUnit* LessWork)
         //    { WorkUnitsMain.erase(LessWork->GetSortingKey()); }
 
         WorkUnit* FrameScheduler::GetNextWorkUnit()
         {
+            /// @todo here the shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
+            /*
+            for (std::vector<WorkUnit*>::iterator Iter = Dependencies.begin(); Iter!=Dependencies.end(); ++Iter)
+            {
+                if( Complete != (*Iter)->GetRunningState() )
+                    { return NotStarted; }
+            }*/
+
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
             {
                 if(NotStarted==Iter->Unit->GetRunningState())
-                    return Iter->Unit;
+                    { return Iter->Unit; }
             }
             return 0;
         }
@@ -204,9 +246,36 @@ namespace Mezzanine
                 { Iter->Unit->PrepareForNextFrame(); }
         }
 
-        void FrameScheduler::SortWorkUnits()
+        void FrameScheduler::SortWorkUnits(bool UpdateDependentGraph_)
         {
+            /// @todo make the contents of this a function to reduce code duplication
+            if(UpdateDependentGraph_)
+                { UpdateDependentGraph(); }
+            UpdateWorkUnitKeys(WorkUnitsMain);
             std::sort(WorkUnitsMain.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+        }
+
+        void FrameScheduler::SortAffinityWorkUnits(bool UpdateDependentGraph_)
+        {
+            if(UpdateDependentGraph_)
+                { UpdateDependentGraph(); }
+            UpdateWorkUnitKeys(WorkUnitAffinity);
+            std::sort(WorkUnitAffinity.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+        }
+
+        void FrameScheduler::SortAllWorkUnits(bool UpdateDependentGraph_)
+        {
+            if(UpdateDependentGraph_)
+                { UpdateDependentGraph(); }
+            SortAffinityWorkUnits(false);
+            SortWorkUnits(false);
+        }
+
+        void FrameScheduler::UpdateDependentGraph()
+        {
+            DependentGraph.clear();
+            UpdateDependentGraph(WorkUnitsMain);
+            UpdateDependentGraph(WorkUnitAffinity);
         }
 
         Whole FrameScheduler::GetFrameCount() const

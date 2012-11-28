@@ -61,6 +61,7 @@ namespace Mezzanine
         /// @brief Default implementation of WorkUnit. This represents on piece of work through time.
         class MEZZ_LIB WorkUnit
         {
+                friend class FrameScheduler;
             private:
                 //WorkUnit(const WorkUnit&) = delete;
                 //WorkUnit& operator=(const WorkUnit&) = delete;
@@ -74,8 +75,9 @@ namespace Mezzanine
             protected:
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Data Members
-                /// @brief Used when sorting, as a means of determining priority. This is a count of workunits that cannot be run until
-                std::vector<WorkUnit*> Dependents;
+
+                // @brief Used when sorting, as a means of determining priority. This is a count of workunits that cannot be run until
+                //std::vector<WorkUnit*> Dependents;
 
                 /// @brief A collection of of workunits that must be complete before this one can start.
                 std::vector<WorkUnit*> Dependencies;
@@ -90,32 +92,33 @@ namespace Mezzanine
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the dependents as in what must not start until this finishes.
             protected:
-                /// @brief Does any required work for GetDependentCount() and calls GetDependentCount(WorkUnit*) on all dependentWorkUnits.
-                /// @param Caller The WorkUnit that initiated the query to allow breaking of cycles.
-                /// @return A partial count of dependents unless this == Caller, then it returns a complete count.
-                Whole GetDependentCount(WorkUnit* Caller) const;
+                // @brief Does any required work for GetDependentCount() and calls GetDependentCount(WorkUnit*) on all dependentWorkUnits.
+                // @param Caller The WorkUnit that initiated the query to allow breaking of cycles.
+                // @return A partial count of dependents unless this == Caller, then it returns a complete count.
+                //Whole GetDependentCount(WorkUnit* Caller) const;
 
             public:
                 /// @brief This returns the count workunits that depend on this work unit.
-                /// @details The dependent tracking on this WorkUnit.
+                /// @details Because Dependents are not tracked this iterates over entry in the
+                /// FrameScheduler it is passed
                 /// @return A Whole is returned containing the count.
-                /// @throw This will fail an assert if compiling indebug mode and a cycle of workunits, otherwise this will hang if a cycle exists.
-                virtual Whole GetDependentCount() const;
+                // @throw This will fail an assert if compiling indebug mode and a cycle of workunits, otherwise this will hang if a cycle exists.
+                virtual Whole GetDependentCount(FrameScheduler &SchedulerToCount);
 
-                /// @brief Perform whatever tracking is required to have another workunit depend on this one.
-                /// @param NewDependent The WorkUnit That Depends on this one.
-                /// @details Increment the DependentCount. NewDependent Ignored in this niave implemention, but could be useful in derived versions.
-                virtual void AddDependent(WorkUnit* NewDependent);
+                // @brief Perform whatever tracking is required to have another workunit depend on this one.
+                // @param NewDependent The WorkUnit That Depends on this one.
+                // @details Increment the DependentCount. NewDependent Ignored in this niave implemention, but could be useful in derived versions.
+                //virtual void AddDependent(WorkUnit* NewDependent);
 
-                /// @brief Perform whatever tracking is required to have another workunit no longer depend on this one.
-                /// @details In this simple implementation decrement the DependentCount.
-                /// @param RemoveDependent Removed from the list of Dependents.
-                /// @todo Cleanup WorkUnit Dependency removal.
-                virtual void RemoveDependent(WorkUnit* RemoveDependent);
+                // @brief Perform whatever tracking is required to have another workunit no longer depend on this one.
+                // @details In this simple implementation decrement the DependentCount.
+                // @param RemoveDependent Removed from the list of Dependents.
+                // @todo Cleanup WorkUnit Dependency removal.
+                //virtual void RemoveDependent(WorkUnit* RemoveDependent);
 
-                /// @brief Drop any information about what work Units depend on this one.
-                /// @details Set dependent count to zero, but a derived implementation could do anything.
-                virtual void ClearDependents();
+                // @brief Drop any information about what work Units depend on this one.
+                // @details Set dependent count to zero, but a derived implementation could do anything.
+                //virtual void ClearDependents();
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the dependencies as in what must finish before we can run this work unit.
@@ -172,13 +175,13 @@ namespace Mezzanine
 
                 /// @brief Get the sorting metadata.
                 /// @return A WorkUnitKey suitable for sorting this workunit
-                virtual WorkUnitKey GetSortingKey();
+                virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount);
 
                 /// @brief WorkUnits Must implement these to do the work
                 virtual void DoWork(ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler) = 0;
 
                 /// @brief Simple constructor
-                WorkUnit() : Dependents(0), CurrentRunningState(NotStarted)
+                WorkUnit() : CurrentRunningState(NotStarted)
                 {}
 
                 /// @brief Virtual destructor

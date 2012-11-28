@@ -111,6 +111,7 @@ namespace Mezzanine
         {
             friend class LogAggregator;
             friend class LogBufferSwapper;
+            friend class WorkUnit; // for GetDependentCount(Framescheduler&)
 
             protected:
                 /// @brief A collection of all the work units that are not Monopolies and do not have affinity for a given thread.
@@ -119,6 +120,13 @@ namespace Mezzanine
                 std::vector<WorkUnitKey> WorkUnitsMain;
 
                 std::vector<WorkUnitKey> WorkUnitAffinity;
+
+                typedef std::map<
+                                WorkUnit*,
+                                std::set<WorkUnit*>
+                            > DependentGraphType;
+
+                DependentGraphType DependentGraph;
 
                 /// @brief This maintains ownership of all the thread specific resources.
                 /// @note There should be the same amount of more these than entries in the Threads vector.
@@ -169,6 +177,9 @@ namespace Mezzanine
                 /// @details Wait 1/TargetFrame Seconds, minus time already run.
                 void WaitUntilNextThread();
 
+                void UpdateDependentGraph(const std::vector<WorkUnitKey> &Units);
+                void UpdateWorkUnitKeys(std::vector<WorkUnitKey> &Units);
+
                 //std::vector<WorkUnit*> WorkUnitsWithAffinity;
                 //virtual void StartEachThread();
                 //virtual void JoinWithEachThread();
@@ -202,6 +213,8 @@ namespace Mezzanine
                 //ThreadSpecificStorage& GetThreadSpecificStorage(thread::id ThreadID);
                 //ThreadSpecificStorage& GetThisThreadsSpecificStorage();
 
+
+
                 /// @brief Add a normal WorkUnit to this For scheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
                 virtual void AddWorkUnit(WorkUnit* MoreWork);
@@ -210,6 +223,8 @@ namespace Mezzanine
                 // @param LessWork a pointer to a WorkUnit that should no longer be scheduled.
                 // @warning This does not cleanup dependencies and can get you in trouble if other work units depend on the one removed
                 // virtual void RemoveWorkUnit(WorkUnit* LessWork);
+
+                virtual Whole GetDependentCountOf(WorkUnit *Work, bool UsedCached=false);
 
                 /// @brief Gets the next available workunit for execution.
                 /// @details This finds the next available WorkUnit which has not started execution, has no dependencies that have
@@ -237,11 +252,14 @@ namespace Mezzanine
                 virtual void ResetAllWorkUnits();
 
                 /// @brief Sort the workUnits
-                void SortWorkUnits();
+                void SortWorkUnits(bool UpdateDependentGraph_ = true);
 
-                void SortAffinityWorkUnits();
+                void SortAffinityWorkUnits(bool UpdateDependentGraph_ = true);
 
-                void SortAllWorkUnits();
+                void SortAllWorkUnits(bool UpdateDependentGraph_ = true);
+
+                // advanced is done by default when sorting the WorkUnits
+                void UpdateDependentGraph();
 
                 /// @brief Get the current number of frames that have elapsed
                 /// @return A Whole containing the Frame Count.
