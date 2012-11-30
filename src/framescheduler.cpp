@@ -249,18 +249,24 @@ namespace Mezzanine
         void FrameScheduler::SortWorkUnits(bool UpdateDependentGraph_)
         {
             /// @todo make the contents of this a function to reduce code duplication
-            if(UpdateDependentGraph_)
-                { UpdateDependentGraph(); }
-            UpdateWorkUnitKeys(WorkUnitsMain);
-            std::sort(WorkUnitsMain.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+            if(WorkUnitsMain.size())
+            {
+                if(UpdateDependentGraph_)
+                    { UpdateDependentGraph(); }
+                UpdateWorkUnitKeys(WorkUnitsMain);
+                std::sort(WorkUnitsMain.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+            }
         }
 
         void FrameScheduler::SortAffinityWorkUnits(bool UpdateDependentGraph_)
         {
-            if(UpdateDependentGraph_)
-                { UpdateDependentGraph(); }
-            UpdateWorkUnitKeys(WorkUnitAffinity);
-            std::sort(WorkUnitAffinity.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+            if(WorkUnitAffinity.size())
+            {
+                if(UpdateDependentGraph_)
+                    { UpdateDependentGraph(); }
+                UpdateWorkUnitKeys(WorkUnitAffinity);
+                std::sort(WorkUnitAffinity.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+            }
         }
 
         void FrameScheduler::SortAllWorkUnits(bool UpdateDependentGraph_)

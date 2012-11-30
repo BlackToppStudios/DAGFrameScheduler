@@ -1032,10 +1032,10 @@ int main (int argc, char** argv)
         FrameScheduler TimingTest(&LogCache,1);
         PiMakerWorkUnit* WorkUnitTT1 = new PiMakerWorkUnit(50,"ForeverAlone",false);
         TimingTest.AddWorkUnit(WorkUnitTT1);
+        TimingTest.SetFrameRate(*Iter);
         Whole TimingTestStart = GetTimeStamp();
         for(Whole Counter=0; Counter<*Iter; ++Counter)
         {
-            TimingTest.SetFrameRate(*Iter);
             TimingTest.DoOneFrame();
         }
         Whole TimingTestEnd = GetTimeStamp();
@@ -1050,9 +1050,77 @@ int main (int argc, char** argv)
         assert(1>Variance); // Allow a 1% variance - incosistent achievable even on even on winxp with its crappy 3.5 millisecond timer
         //assert(0.1>Variance); // Allow a .1% variance - This is very achievable with an accurate microsecond timer
     }
-    cout << "Average Variance: " << VarianceTotal.GetAverage() << "% or " << VarianceTotal.GetAverage() * 100 << " microseconds per frame." << endl;
+    cout << "Average Variance: " << VarianceTotal.GetAverage() << endl;
 
+    cout << endl << "Testing the same FrameScheduler setup with a framrate of 0 to see max performance: " << endl;
+    std::vector<Whole> Durations;
+    Durations.push_back(10);
+    Durations.push_back(25);
+    Durations.push_back(28);
+    Durations.push_back(30);
+    Durations.push_back(60);
+    Durations.push_back(100);
+    Durations.push_back(1000);
+    Durations.push_back(10000);
+    Durations.push_back(100000);
+    Durations.push_back(1000000);
+    Durations.push_back(10000000);
+    Durations.push_back(100000000);
 
+    BufferedRollingAverage<Whole> PerformanceTotals(Durations.size()*2); // happen to be skewed to later test results
+
+    for(std::vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
+    {
+        cout << "Creating a Scheduler with a variety of WorkUnits running at full speed. " << endl;
+        FrameScheduler TimingTest(&LogCache,1);
+        TimingTest.SetFrameRate(0);
+        Whole TimingTestStart = GetTimeStamp();
+        for(Whole Counter=0; Counter<*Iter; ++Counter)
+            { TimingTest.DoOneFrame(); }
+        Whole TimingTestEnd = GetTimeStamp();
+        Whole TestLength = TimingTestEnd-TimingTestStart;
+        Whole FrameRate = (1000000*TestLength)/ *Iter;
+        cout << "  " << *Iter << " Empty Frames took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
+        PerformanceTotals.Insert(FrameRate);
+        if(1000000<TestLength)
+            { cout << "Single Test longer than one second, bailing from other performace tests" << endl; break; }
+
+        //WorkUnit* WorkUnitTT2 = new PausesWorkUnit(0,"ForeverAlone");
+        WorkUnit* WorkUnitTT2 = new PiMakerWorkUnit(0,"ForeverAlone",false);
+        TimingTest.AddWorkUnit(WorkUnitTT2);
+        TimingTestStart = GetTimeStamp();
+        for(Whole Counter=0; Counter<*Iter; ++Counter)
+            { TimingTest.DoOneFrame(); }
+        TimingTestEnd = GetTimeStamp();
+        TestLength = TimingTestEnd-TimingTestStart;
+        FrameRate = (1000000*TestLength)/ *Iter;
+        cout << "  " << *Iter << " Single WorkUnit Frames took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
+        PerformanceTotals.Insert(FrameRate);
+        if(1000000<TestLength)
+            { cout << "Single Test longer than one second, bailing from other performace tests" << endl; break; }
+
+        //WorkUnit* WorkUnitTT2A = new PausesWorkUnit(0,"ForeverAlone");
+        WorkUnit* WorkUnitTT2A = new PiMakerWorkUnit(0,"A",false);
+        WorkUnit* WorkUnitTT2B = new PiMakerWorkUnit(0,"B",false);
+        WorkUnit* WorkUnitTT2C = new PiMakerWorkUnit(0,"C",false);
+        TimingTest.AddWorkUnit(WorkUnitTT2A);
+        TimingTest.AddWorkUnit(WorkUnitTT2B);
+        TimingTest.AddWorkUnit(WorkUnitTT2C);
+        WorkUnitTT2C->AddDependency(WorkUnitTT2B);
+        WorkUnitTT2B->AddDependency(WorkUnitTT2A);
+        TimingTest.SortAllWorkUnits();
+        TimingTestStart = GetTimeStamp();
+        for(Whole Counter=0; Counter<*Iter; ++Counter)
+            { TimingTest.DoOneFrame(); }
+        TimingTestEnd = GetTimeStamp();
+        TestLength = TimingTestEnd-TimingTestStart;
+        FrameRate = (1000000*TestLength)/ *Iter;
+        cout << "  " << *Iter << " Frames with the previous and an extra dependency set (A->B->C) took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
+        PerformanceTotals.Insert(FrameRate);
+        if(1000000<TestLength)
+            { cout << "Single Test longer than one second, bailing from other performace tests" << endl; break; }
+    }
+    cout << "Average FrameRate: " << PerformanceTotals.GetAverage() << endl;
 
     #if defined(_MEZZ_THREAD_WIN32_)
     system("pause");

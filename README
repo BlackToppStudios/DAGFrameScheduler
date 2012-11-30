@@ -2,7 +2,6 @@ The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling lib
 
 Currently this is not ready for most production use but is ready for peer review and possibly for integration into simple games.
 
-
 This  is licensed under the GPL v3 license as per the file 'LICENSE'.
 
 The 'src' folder includes the source and header in the library.
@@ -12,5 +11,17 @@ The contents of the 'tests' folder are required only for verifying the library w
 The 'doc' folder contains further licensing details, technical documentation and notes BTS developers may a have left.
 	Technical docs derived from the source code is located in 'doc/html', see 'index.html'
 	The Doxygen configuration resides in 'doc/doxyfiles'
+
+ -- NEWS --
+	Nov 28, 2012
+		Bugfixes with workunit sorting and a simple performance test has been added.
+
+	Nov 27, 2012
+		Removed Bi-Directionality from Dependency Graph. At their largest WorkUnits are now 56 bytes. This was done so that they would fit in a single cache line on most systems. This also speeds up adding or removing WorkUnits. When the information the Reverse dependency graph needed is required a temporary cache is updated on the scheduler itself. When this depedent (no cy) graph is updated the WorkUnitKeys used for sorting the work are also updated. This can done with calls to FrameScheduler::UpdateDependencyCache and can be control with a bool argument passed in to FrameScheduler::SortWorkUnits().
+ 
+	Nov 26, 2012
+		Verified support for Mac OS X. Now this compiles on Mac os X 10.6.8 with GCC 4.2.1, Ubuntu x64 with GCC 4.3.2 or Clang 3.0.6-6, or on windows xp with MinGW or visual studio 10.
+		Timing test on Mac OS X and Linux both have submicrosecond accuracy, and they both provide 1 microsecond times, winxp does not, but this is still accurate on the order of 1000s of microseconds, and the timer is usually about that accurate.
+
 
 
