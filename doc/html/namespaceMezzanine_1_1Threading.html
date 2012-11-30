@@ -138,7 +138,7 @@ typedef <a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResourc
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a6e0664b750836569d08b8b1fc0e1bca7">AtomicCompareAndSwap</a> (volatile <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;OldValue, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;NewValue)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares and Swaps a value.  <a href="#a6e0664b750836569d08b8b1fc0e1bca7"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a value.  <a href="#a6e0664b750836569d08b8b1fc0e1bca7"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b25e77bc7d4377570b358c9bd8c6e04"></a><!-- doxytag: member="Mezzanine::Threading::DBRInvalid" ref="a2b25e77bc7d4377570b358c9bd8c6e04" args="" -->
@@ -185,8 +185,9 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </div>
 <div class="memdoc">
 
-<p>Atomically Compares and Swaps a value. </p>
-<p>In such a way that this cannot be interupted by another thread this checks performs a number of steps. First, it compare the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue to the memory location VariableToChange points to. If they did not match, no work is perform except the dereferencing. In either case since VariableToChange has been derefenced the value stored before any exchange that might have occured is returned </p>
+<p>Atomically Compares And Swaps a value. </p>
+<p>In such a way that this cannot be interupted by another thread this performs a number of steps. First, it compares the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue to the memory location VariableToChange points to. If they did not match, no work is performed except the dereferencing. In either case since VariableToChange has been derefenced the value stored before any exchange that might have occured is returned. </p>
+<dl class="note"><dt><b>Note:</b></dt><dd>volatile does not mean thread-safe. You should read your compiler's documentation and make sure it will behave as you expect. Despite any other meaning this function will always be thread-safe. </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">VariableToChange</td><td>A pointer to the value to compare and if it matches OldValue Atomically change. </td></tr>
@@ -197,7 +198,7 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>This always returns the value that was pointed to by VariableToChange immediately before this call. </dd></dl>
 
-<p>Definition at line <a class="el" href="atomiccas_8h_source.html#l00063">63</a> of file <a class="el" href="atomiccas_8h_source.html">atomiccas.h</a>.</p>
+<p>Definition at line <a class="el" href="atomiccas_8h_source.html#l00064">64</a> of file <a class="el" href="atomiccas_8h_source.html">atomiccas.h</a>.</p>
 
 </div>
 </div>
@@ -237,6 +238,6 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 25 2012 18:14:03 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

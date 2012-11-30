@@ -1067,7 +1067,7 @@ int main (int argc, char** argv)
     Durations.push_back(10000000);
     Durations.push_back(100000000);
 
-    BufferedRollingAverage<Whole> PerformanceTotals(Durations.size()*2); // happen to be skewed to later test results
+    BufferedRollingAverage<Whole> PerformanceTotals(Durations.size()*2); // happens to be skewed to later test results, just in case they all don't finish
 
     for(std::vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
     {
@@ -1114,7 +1114,7 @@ int main (int argc, char** argv)
             { TimingTest.DoOneFrame(); }
         TimingTestEnd = GetTimeStamp();
         TestLength = TimingTestEnd-TimingTestStart;
-        FrameRate = (1000000*TestLength)/ *Iter;
+        FrameRate = (*Iter * 1000000)/TestLength;
         cout << "  " << *Iter << " Frames with the previous and an extra dependency set (A->B->C) took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
         PerformanceTotals.Insert(FrameRate);
         if(1000000<TestLength)

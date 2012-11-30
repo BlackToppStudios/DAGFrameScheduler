@@ -149,134 +149,137 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00061"></a>00061 <span class="comment">        /// @brief Default implementation of WorkUnit. This represents on piece of work through time.</span>
 <a name="l00062"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html">00062</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>
 <a name="l00063"></a>00063         {
-<a name="l00064"></a>00064             <span class="keyword">private</span>:
-<a name="l00065"></a>00065                 <span class="comment">//WorkUnit(const WorkUnit&amp;) = delete;</span>
-<a name="l00066"></a>00066                 <span class="comment">//WorkUnit&amp; operator=(const WorkUnit&amp;) = delete;</span>
-<a name="l00067"></a>00067                 <span class="comment">//WorkUnit&amp; operator=(const WorkUnit&amp;) volatile = delete;</span>
-<a name="l00068"></a>00068 <span class="comment"></span>
-<a name="l00069"></a>00069 <span class="comment">                /// @brief Remove Copy constructor, Copying a work unit does not make sense, it breaks scheduling, made private.</span>
-<a name="l00070"></a>00070 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>(<span class="keyword">const</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>&amp;) {}<span class="comment"></span>
-<a name="l00071"></a>00071 <span class="comment">                /// @brief Assignment operator, Assignment on a WorkUnit Does Not make sense, it breaks scheduling, made private.</span>
-<a name="l00072"></a>00072 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>&amp; operator=(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>&amp; Unused) { <span class="keywordflow">return</span> Unused; }
-<a name="l00073"></a>00073 
-<a name="l00074"></a>00074             <span class="keyword">protected</span>:<span class="comment"></span>
-<a name="l00075"></a>00075 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
-<a name="l00076"></a>00076 <span class="comment"></span>                <span class="comment">// Data Members</span><span class="comment"></span>
-<a name="l00077"></a>00077 <span class="comment">                /// @brief Used when sorting, as a means of determining priority. This is a count of workunits that cannot be run until</span>
-<a name="l00078"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a06d4fee13f94e6418c99d04bac35fa08">00078</a> <span class="comment"></span>                std::vector&lt;WorkUnit*&gt; <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a06d4fee13f94e6418c99d04bac35fa08" title="Used when sorting, as a means of determining priority. This is a count of workunits that cannot be ru...">Dependents</a>;
-<a name="l00079"></a>00079 <span class="comment"></span>
-<a name="l00080"></a>00080 <span class="comment">                /// @brief A collection of of workunits that must be complete before this one can start.</span>
-<a name="l00081"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a4a5f83f2dc791ed2c729d6592a44557a">00081</a> <span class="comment"></span>                std::vector&lt;WorkUnit*&gt; <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a4a5f83f2dc791ed2c729d6592a44557a" title="A collection of of workunits that must be complete before this one can start.">Dependencies</a>;
-<a name="l00082"></a>00082 <span class="comment"></span>
-<a name="l00083"></a>00083 <span class="comment">                /// @brief A rolling average of execution times.</span>
-<a name="l00084"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a7dc033632fcc80ecb48f0a644b7ff78d">00084</a> <span class="comment"></span>                <a class="code" href="structMezzanine_1_1DefaultRollingAverage.html" title="Use this to get the default rolling average for a given type.">DefaultRollingAverage&lt;Whole&gt;::Type</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a7dc033632fcc80ecb48f0a644b7ff78d" title="A rolling average of execution times.">PerformanceLog</a>;
-<a name="l00085"></a>00085 <span class="comment"></span>
-<a name="l00086"></a>00086 <span class="comment">                /// @brief This controls do work with this after it has .</span>
-<a name="l00087"></a>00087 <span class="comment"></span>                <span class="comment">//volatile int32_t CurrentRunningState;</span>
-<a name="l00088"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a02a7275b2e5e3978d43713a5568b9370">00088</a>                 <span class="keyword">volatile</span> int32_t <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a02a7275b2e5e3978d43713a5568b9370" title="This controls do work with this after it has .">CurrentRunningState</a>;
-<a name="l00089"></a>00089 <span class="comment"></span>
-<a name="l00090"></a>00090 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
-<a name="l00091"></a>00091 <span class="comment"></span>                <span class="comment">// Work with the dependents as in what must not start until this finishes.</span>
-<a name="l00092"></a>00092             <span class="keyword">protected</span>:<span class="comment"></span>
-<a name="l00093"></a>00093 <span class="comment">                /// @brief Does any required work for GetDependentCount() and calls GetDependentCount(WorkUnit*) on all dependentWorkUnits.</span>
-<a name="l00094"></a>00094 <span class="comment">                /// @param Caller The WorkUnit that initiated the query to allow breaking of cycles.</span>
-<a name="l00095"></a>00095 <span class="comment">                /// @return A partial count of dependents unless this == Caller, then it returns a complete count.</span>
-<a name="l00096"></a>00096 <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetDependentCount(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* Caller) <span class="keyword">const</span>;
-<a name="l00097"></a>00097 
-<a name="l00098"></a>00098             <span class="keyword">public</span>:<span class="comment"></span>
-<a name="l00099"></a>00099 <span class="comment">                /// @brief This returns the count workunits that depend on this work unit.</span>
-<a name="l00100"></a>00100 <span class="comment">                /// @details The dependent tracking on this WorkUnit.</span>
-<a name="l00101"></a>00101 <span class="comment">                /// @return A Whole is returned containing the count.</span>
-<a name="l00102"></a>00102 <span class="comment">                /// @throw This will fail an assert if compiling indebug mode and a cycle of workunits, otherwise this will hang if a cycle exists.</span>
-<a name="l00103"></a>00103 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetDependentCount() <span class="keyword">const</span>;
-<a name="l00104"></a>00104 <span class="comment"></span>
-<a name="l00105"></a>00105 <span class="comment">                /// @brief Perform whatever tracking is required to have another workunit depend on this one.</span>
-<a name="l00106"></a>00106 <span class="comment">                /// @param NewDependent The WorkUnit That Depends on this one.</span>
-<a name="l00107"></a>00107 <span class="comment">                /// @details Increment the DependentCount. NewDependent Ignored in this niave implemention, but could be useful in derived versions.</span>
-<a name="l00108"></a>00108 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> AddDependent(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* NewDependent);
-<a name="l00109"></a>00109 <span class="comment"></span>
-<a name="l00110"></a>00110 <span class="comment">                /// @brief Perform whatever tracking is required to have another workunit no longer depend on this one.</span>
-<a name="l00111"></a>00111 <span class="comment">                /// @details In this simple implementation decrement the DependentCount.</span>
-<a name="l00112"></a>00112 <span class="comment">                /// @param RemoveDependent Removed from the list of Dependents.</span>
-<a name="l00113"></a>00113 <span class="comment">                /// @todo Cleanup WorkUnit Dependency removal.</span>
-<a name="l00114"></a>00114 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> RemoveDependent(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* RemoveDependent);
-<a name="l00115"></a>00115 <span class="comment"></span>
-<a name="l00116"></a>00116 <span class="comment">                /// @brief Drop any information about what work Units depend on this one.</span>
-<a name="l00117"></a>00117 <span class="comment">                /// @details Set dependent count to zero, but a derived implementation could do anything.</span>
-<a name="l00118"></a>00118 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> ClearDependents();
-<a name="l00119"></a>00119 <span class="comment"></span>
-<a name="l00120"></a>00120 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
-<a name="l00121"></a>00121 <span class="comment"></span>                <span class="comment">// Work with the dependencies as in what must finish before we can run this work unit.</span>
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123             <span class="keyword">protected</span>:<span class="comment"></span>
-<a name="l00124"></a>00124 <span class="comment">                /// @brief Does any required work for GetDependencyCount() and calls GetDependencyCount(WorkUnit*) on all dependency WorkUnits.</span>
-<a name="l00125"></a>00125 <span class="comment">                /// @param Caller The WorkUnit that initiated the query to allow breaking of cycles.</span>
-<a name="l00126"></a>00126 <span class="comment">                /// @return A partial count of dependencies unless this == Caller, then it returns a complete count.</span>
-<a name="l00127"></a>00127 <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetDependencyCount(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* Caller) <span class="keyword">const</span>;
-<a name="l00128"></a>00128 
-<a name="l00129"></a>00129             <span class="keyword">public</span>:<span class="comment"></span>
-<a name="l00130"></a>00130 <span class="comment">                /// @brief How many other WorkUnits does this one depend on?</span>
-<a name="l00131"></a>00131 <span class="comment">                /// @return A Whole containing the answer.</span>
-<a name="l00132"></a>00132 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetDependencyCount() <span class="keyword">const</span>;
-<a name="l00133"></a>00133 <span class="comment"></span>
-<a name="l00134"></a>00134 <span class="comment">                /// @brief Force this WorkUnit to Start after another has completed.</span>
-<a name="l00135"></a>00135 <span class="comment">                /// @param NewDependency The WorkUnit that must start after this one has completed.</span>
-<a name="l00136"></a>00136 <span class="comment">                /// @warning Changing this outside the schedule, once the scheduler has started can cause undefined behavior.</span>
-<a name="l00137"></a>00137 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> AddDependency(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* NewDependency);
-<a name="l00138"></a>00138 <span class="comment"></span>
-<a name="l00139"></a>00139 <span class="comment">                /// @brief Remove a dependency</span>
-<a name="l00140"></a>00140 <span class="comment">                /// @param RemoveDependency A pointer to the WorkUnit to remove as a dependency</span>
-<a name="l00141"></a>00141 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> RemoveDependency(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* RemoveDependency);
-<a name="l00142"></a>00142 <span class="comment"></span>
-<a name="l00143"></a>00143 <span class="comment">                /// @brief Drop any information about what work Units this one depends on.</span>
-<a name="l00144"></a>00144 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> ClearDependencies();
+<a name="l00064"></a>00064                 <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>;
+<a name="l00065"></a>00065             <span class="keyword">private</span>:
+<a name="l00066"></a>00066                 <span class="comment">//WorkUnit(const WorkUnit&amp;) = delete;</span>
+<a name="l00067"></a>00067                 <span class="comment">//WorkUnit&amp; operator=(const WorkUnit&amp;) = delete;</span>
+<a name="l00068"></a>00068                 <span class="comment">//WorkUnit&amp; operator=(const WorkUnit&amp;) volatile = delete;</span>
+<a name="l00069"></a>00069 <span class="comment"></span>
+<a name="l00070"></a>00070 <span class="comment">                /// @brief Remove Copy constructor, Copying a work unit does not make sense, it breaks scheduling, made private.</span>
+<a name="l00071"></a>00071 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>(<span class="keyword">const</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>&amp;) {}<span class="comment"></span>
+<a name="l00072"></a>00072 <span class="comment">                /// @brief Assignment operator, Assignment on a WorkUnit Does Not make sense, it breaks scheduling, made private.</span>
+<a name="l00073"></a>00073 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>&amp; operator=(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>&amp; Unused) { <span class="keywordflow">return</span> Unused; }
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075             <span class="keyword">protected</span>:<span class="comment"></span>
+<a name="l00076"></a>00076 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
+<a name="l00077"></a>00077 <span class="comment"></span>                <span class="comment">// Data Members</span>
+<a name="l00078"></a>00078 
+<a name="l00079"></a>00079                 <span class="comment">// @brief Used when sorting, as a means of determining priority. This is a count of workunits that cannot be run until</span>
+<a name="l00080"></a>00080                 <span class="comment">//std::vector&lt;WorkUnit*&gt; Dependents;</span>
+<a name="l00081"></a>00081 <span class="comment"></span>
+<a name="l00082"></a>00082 <span class="comment">                /// @brief A collection of of workunits that must be complete before this one can start.</span>
+<a name="l00083"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a4a5f83f2dc791ed2c729d6592a44557a">00083</a> <span class="comment"></span>                std::vector&lt;WorkUnit*&gt; <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a4a5f83f2dc791ed2c729d6592a44557a" title="A collection of of workunits that must be complete before this one can start.">Dependencies</a>;
+<a name="l00084"></a>00084 <span class="comment"></span>
+<a name="l00085"></a>00085 <span class="comment">                /// @brief A rolling average of execution times.</span>
+<a name="l00086"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a7dc033632fcc80ecb48f0a644b7ff78d">00086</a> <span class="comment"></span>                <a class="code" href="structMezzanine_1_1DefaultRollingAverage.html" title="Use this to get the default rolling average for a given type.">DefaultRollingAverage&lt;Whole&gt;::Type</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a7dc033632fcc80ecb48f0a644b7ff78d" title="A rolling average of execution times.">PerformanceLog</a>;
+<a name="l00087"></a>00087 <span class="comment"></span>
+<a name="l00088"></a>00088 <span class="comment">                /// @brief This controls do work with this after it has .</span>
+<a name="l00089"></a>00089 <span class="comment"></span>                <span class="comment">//volatile int32_t CurrentRunningState;</span>
+<a name="l00090"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ad8bc3a094a4389b484ea298b8c22471b">00090</a>                 <span class="keyword">volatile</span> <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ad8bc3a094a4389b484ea298b8c22471b" title="This controls do work with this after it has .">CurrentRunningState</a>;
+<a name="l00091"></a>00091 <span class="comment"></span>
+<a name="l00092"></a>00092 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
+<a name="l00093"></a>00093 <span class="comment"></span>                <span class="comment">// Work with the dependents as in what must not start until this finishes.</span>
+<a name="l00094"></a>00094             <span class="keyword">protected</span>:
+<a name="l00095"></a>00095                 <span class="comment">// @brief Does any required work for GetDependentCount() and calls GetDependentCount(WorkUnit*) on all dependentWorkUnits.</span>
+<a name="l00096"></a>00096                 <span class="comment">// @param Caller The WorkUnit that initiated the query to allow breaking of cycles.</span>
+<a name="l00097"></a>00097                 <span class="comment">// @return A partial count of dependents unless this == Caller, then it returns a complete count.</span>
+<a name="l00098"></a>00098                 <span class="comment">//Whole GetDependentCount(WorkUnit* Caller) const;</span>
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00101"></a>00101 <span class="comment">                /// @brief This returns the count workunits that depend on this work unit.</span>
+<a name="l00102"></a>00102 <span class="comment">                /// @details Because Dependents are not tracked this iterates over entry in the</span>
+<a name="l00103"></a>00103 <span class="comment">                /// FrameScheduler it is passed</span>
+<a name="l00104"></a>00104 <span class="comment">                /// @return A Whole is returned containing the count.</span>
+<a name="l00105"></a>00105 <span class="comment"></span>                <span class="comment">// @throw This will fail an assert if compiling indebug mode and a cycle of workunits, otherwise this will hang if a cycle exists.</span>
+<a name="l00106"></a>00106                 <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetDependentCount(<a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> &amp;SchedulerToCount);
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108                 <span class="comment">// @brief Perform whatever tracking is required to have another workunit depend on this one.</span>
+<a name="l00109"></a>00109                 <span class="comment">// @param NewDependent The WorkUnit That Depends on this one.</span>
+<a name="l00110"></a>00110                 <span class="comment">// @details Increment the DependentCount. NewDependent Ignored in this niave implemention, but could be useful in derived versions.</span>
+<a name="l00111"></a>00111                 <span class="comment">//virtual void AddDependent(WorkUnit* NewDependent);</span>
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113                 <span class="comment">// @brief Perform whatever tracking is required to have another workunit no longer depend on this one.</span>
+<a name="l00114"></a>00114                 <span class="comment">// @details In this simple implementation decrement the DependentCount.</span>
+<a name="l00115"></a>00115                 <span class="comment">// @param RemoveDependent Removed from the list of Dependents.</span>
+<a name="l00116"></a>00116                 <span class="comment">// @todo Cleanup WorkUnit Dependency removal.</span>
+<a name="l00117"></a>00117                 <span class="comment">//virtual void RemoveDependent(WorkUnit* RemoveDependent);</span>
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119                 <span class="comment">// @brief Drop any information about what work Units depend on this one.</span>
+<a name="l00120"></a>00120                 <span class="comment">// @details Set dependent count to zero, but a derived implementation could do anything.</span>
+<a name="l00121"></a>00121                 <span class="comment">//virtual void ClearDependents();</span>
+<a name="l00122"></a>00122 <span class="comment"></span>
+<a name="l00123"></a>00123 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
+<a name="l00124"></a>00124 <span class="comment"></span>                <span class="comment">// Work with the dependencies as in what must finish before we can run this work unit.</span>
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126             <span class="keyword">protected</span>:<span class="comment"></span>
+<a name="l00127"></a>00127 <span class="comment">                /// @brief Does any required work for GetDependencyCount() and calls GetDependencyCount(WorkUnit*) on all dependency WorkUnits.</span>
+<a name="l00128"></a>00128 <span class="comment">                /// @param Caller The WorkUnit that initiated the query to allow breaking of cycles.</span>
+<a name="l00129"></a>00129 <span class="comment">                /// @return A partial count of dependencies unless this == Caller, then it returns a complete count.</span>
+<a name="l00130"></a>00130 <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetDependencyCount(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* Caller) <span class="keyword">const</span>;
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00133"></a>00133 <span class="comment">                /// @brief How many other WorkUnits does this one depend on?</span>
+<a name="l00134"></a>00134 <span class="comment">                /// @return A Whole containing the answer.</span>
+<a name="l00135"></a>00135 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetDependencyCount() <span class="keyword">const</span>;
+<a name="l00136"></a>00136 <span class="comment"></span>
+<a name="l00137"></a>00137 <span class="comment">                /// @brief Force this WorkUnit to Start after another has completed.</span>
+<a name="l00138"></a>00138 <span class="comment">                /// @param NewDependency The WorkUnit that must start after this one has completed.</span>
+<a name="l00139"></a>00139 <span class="comment">                /// @warning Changing this outside the schedule, once the scheduler has started can cause undefined behavior.</span>
+<a name="l00140"></a>00140 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> AddDependency(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* NewDependency);
+<a name="l00141"></a>00141 <span class="comment"></span>
+<a name="l00142"></a>00142 <span class="comment">                /// @brief Remove a dependency</span>
+<a name="l00143"></a>00143 <span class="comment">                /// @param RemoveDependency A pointer to the WorkUnit to remove as a dependency</span>
+<a name="l00144"></a>00144 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> RemoveDependency(<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* RemoveDependency);
 <a name="l00145"></a>00145 <span class="comment"></span>
-<a name="l00146"></a>00146 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
-<a name="l00147"></a>00147 <span class="comment"></span>                <span class="comment">// Work with the ownership and RunningState</span>
+<a name="l00146"></a>00146 <span class="comment">                /// @brief Drop any information about what work Units this one depends on.</span>
+<a name="l00147"></a>00147 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> ClearDependencies();
 <a name="l00148"></a>00148 <span class="comment"></span>
-<a name="l00149"></a>00149 <span class="comment">                /// @brief Attempts to atomically start the work unit in the current thread.</span>
-<a name="l00150"></a>00150 <span class="comment">                /// @return Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise</span>
-<a name="l00151"></a>00151 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> TakeOwnerShip();
-<a name="l00152"></a>00152 <span class="comment"></span>
-<a name="l00153"></a>00153 <span class="comment">                /// @brief Retrieves the current RunningState of the thread.</span>
-<a name="l00154"></a>00154 <span class="comment">                /// @return A RunningState that indicates if the thread is running, started, etc... This information can be changed at any time and should be considered stale immediately after retrieval.</span>
-<a name="l00155"></a>00155 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> GetRunningState() <span class="keyword">const</span>;
-<a name="l00156"></a>00156 <span class="comment"></span>
-<a name="l00157"></a>00157 <span class="comment">                /// @brief This resets the running state and takes any further action required to use the WorkUnit again.</span>
-<a name="l00158"></a>00158 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> PrepareForNextFrame();
+<a name="l00149"></a>00149 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
+<a name="l00150"></a>00150 <span class="comment"></span>                <span class="comment">// Work with the ownership and RunningState</span>
+<a name="l00151"></a>00151 <span class="comment"></span>
+<a name="l00152"></a>00152 <span class="comment">                /// @brief Attempts to atomically start the work unit in the current thread.</span>
+<a name="l00153"></a>00153 <span class="comment">                /// @return Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise</span>
+<a name="l00154"></a>00154 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> TakeOwnerShip();
+<a name="l00155"></a>00155 <span class="comment"></span>
+<a name="l00156"></a>00156 <span class="comment">                /// @brief Retrieves the current RunningState of the thread.</span>
+<a name="l00157"></a>00157 <span class="comment">                /// @return A RunningState that indicates if the thread is running, started, etc... This information can be changed at any time and should be considered stale immediately after retrieval.</span>
+<a name="l00158"></a>00158 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> GetRunningState() <span class="keyword">const</span>;
 <a name="l00159"></a>00159 <span class="comment"></span>
-<a name="l00160"></a>00160 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
-<a name="l00161"></a>00161 <span class="comment"></span>                <span class="comment">// Work with the preformance log</span>
+<a name="l00160"></a>00160 <span class="comment">                /// @brief This resets the running state and takes any further action required to use the WorkUnit again.</span>
+<a name="l00161"></a>00161 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> PrepareForNextFrame();
 <a name="l00162"></a>00162 <span class="comment"></span>
-<a name="l00163"></a>00163 <span class="comment">                /// @brief Get the internal rolling average for querying.</span>
-<a name="l00164"></a>00164 <span class="comment">                /// @return A const reference to the internal Rolling Average.</span>
-<a name="l00165"></a>00165 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1RollingAverage.html" title="The interface for rolling averages used in the mezzanine, and threading library.">RollingAverage&lt;Whole&gt;</a> &amp;GetPerformanceLog();
-<a name="l00166"></a>00166 <span class="comment"></span>
-<a name="l00167"></a>00167 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
-<a name="l00168"></a>00168 <span class="comment"></span>                <span class="comment">// Deciding when to and doing the work</span>
+<a name="l00163"></a>00163 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
+<a name="l00164"></a>00164 <span class="comment"></span>                <span class="comment">// Work with the preformance log</span>
+<a name="l00165"></a>00165 <span class="comment"></span>
+<a name="l00166"></a>00166 <span class="comment">                /// @brief Get the internal rolling average for querying.</span>
+<a name="l00167"></a>00167 <span class="comment">                /// @return A const reference to the internal Rolling Average.</span>
+<a name="l00168"></a>00168 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1RollingAverage.html" title="The interface for rolling averages used in the mezzanine, and threading library.">RollingAverage&lt;Whole&gt;</a> &amp;GetPerformanceLog();
 <a name="l00169"></a>00169 <span class="comment"></span>
-<a name="l00170"></a>00170 <span class="comment">                /// @brief This tracks work unit metadata, then calls DoWork</span>
-<a name="l00171"></a>00171 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> operator() (<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>&amp; CurrentThreadStorage, <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>&amp; CurrentFrameScheduler);
+<a name="l00170"></a>00170 <span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span>
+<a name="l00171"></a>00171 <span class="comment"></span>                <span class="comment">// Deciding when to and doing the work</span>
 <a name="l00172"></a>00172 <span class="comment"></span>
-<a name="l00173"></a>00173 <span class="comment">                /// @brief Get the sorting metadata.</span>
-<a name="l00174"></a>00174 <span class="comment">                /// @return A WorkUnitKey suitable for sorting this workunit</span>
-<a name="l00175"></a>00175 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> GetSortingKey();
-<a name="l00176"></a>00176 <span class="comment"></span>
-<a name="l00177"></a>00177 <span class="comment">                /// @brief WorkUnits Must implement these to do the work</span>
-<a name="l00178"></a>00178 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>&amp; CurrentThreadStorage, <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>&amp; CurrentFrameScheduler) = 0;
+<a name="l00173"></a>00173 <span class="comment">                /// @brief This tracks work unit metadata, then calls DoWork</span>
+<a name="l00174"></a>00174 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> operator() (<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>&amp; CurrentThreadStorage, <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>&amp; CurrentFrameScheduler);
+<a name="l00175"></a>00175 <span class="comment"></span>
+<a name="l00176"></a>00176 <span class="comment">                /// @brief Get the sorting metadata.</span>
+<a name="l00177"></a>00177 <span class="comment">                /// @return A WorkUnitKey suitable for sorting this workunit</span>
+<a name="l00178"></a>00178 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> GetSortingKey(<a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> &amp;SchedulerToCount);
 <a name="l00179"></a>00179 <span class="comment"></span>
-<a name="l00180"></a>00180 <span class="comment">                /// @brief Simple constructor</span>
-<a name="l00181"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ac18f01a609feca7c5fb22edacbf1571d">00181</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>() : Dependents(0), CurrentRunningState(<a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70" title="Task is not yet started this frame, this can change without notice.">NotStarted</a>)
-<a name="l00182"></a>00182                 {}
-<a name="l00183"></a>00183 <span class="comment"></span>
-<a name="l00184"></a>00184 <span class="comment">                /// @brief Virtual destructor</span>
-<a name="l00185"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a08fe38d349f58f9983c2c4685bc34700">00185</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a08fe38d349f58f9983c2c4685bc34700" title="Virtual destructor.">~WorkUnit</a>(){}
-<a name="l00186"></a>00186         };
-<a name="l00187"></a>00187 
-<a name="l00188"></a>00188     } <span class="comment">// \Threading</span>
-<a name="l00189"></a>00189 }
+<a name="l00180"></a>00180 <span class="comment">                /// @brief WorkUnits Must implement these to do the work</span>
+<a name="l00181"></a>00181 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>&amp; CurrentThreadStorage, <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>&amp; CurrentFrameScheduler) = 0;
+<a name="l00182"></a>00182 <span class="comment"></span>
+<a name="l00183"></a>00183 <span class="comment">                /// @brief Simple constructor</span>
+<a name="l00184"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ac18f01a609feca7c5fb22edacbf1571d">00184</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>() : CurrentRunningState(<a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70" title="Task is not yet started this frame, this can change without notice.">NotStarted</a>)
+<a name="l00185"></a>00185                 {}
+<a name="l00186"></a>00186 <span class="comment"></span>
+<a name="l00187"></a>00187 <span class="comment">                /// @brief Virtual destructor</span>
+<a name="l00188"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a08fe38d349f58f9983c2c4685bc34700">00188</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a08fe38d349f58f9983c2c4685bc34700" title="Virtual destructor.">~WorkUnit</a>(){}
+<a name="l00189"></a>00189         };
 <a name="l00190"></a>00190 
-<a name="l00191"></a>00191 <span class="preprocessor">#endif</span>
+<a name="l00191"></a>00191     } <span class="comment">// \Threading</span>
+<a name="l00192"></a>00192 }
+<a name="l00193"></a>00193 
+<a name="l00194"></a>00194 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -293,6 +296,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 25 2012 18:14:03 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

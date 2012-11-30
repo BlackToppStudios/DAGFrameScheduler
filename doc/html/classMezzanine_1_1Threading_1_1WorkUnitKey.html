@@ -103,7 +103,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1WorkUnitKey__coll__graph.svg" width="448" height="259"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1WorkUnitKey__coll__graph.svg" width="448" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classMezzanine_1_1Threading_1_1WorkUnitKey-members.html">List of all members.</a></p>
@@ -119,8 +120,8 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The function that does the comparison in most containers.  <a href="#a9cfc6d10736fae2504aeca0acd65caba"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a3255e3403209b45d41e1c21b58e1ed19">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#af1b56413698a777593b8f11036b62e6e">Dependers</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores how many things must run after the target workunit.  <a href="#af1b56413698a777593b8f11036b62e6e"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#aaa1dc5448044054cd8c775416e710f4b">Dependers</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This stores how many things must run after the target workunit.  <a href="#aaa1dc5448044054cd8c775416e710f4b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f">Time</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Some representation of the time the target workunit takes to execute.  <a href="#abd10e9d22795c4b933c899c1030e405f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a218950cdcb24fc8e656ae8ecdea27089"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnitKey::Unit" ref="a218950cdcb24fc8e656ae8ecdea27089" args="" -->
@@ -208,12 +209,12 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <hr/><h2>Member Data Documentation</h2>
-<a class="anchor" id="af1b56413698a777593b8f11036b62e6e"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnitKey::Dependers" ref="af1b56413698a777593b8f11036b62e6e" args="" -->
+<a class="anchor" id="aaa1dc5448044054cd8c775416e710f4b"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnitKey::Dependers" ref="aaa1dc5448044054cd8c775416e710f4b" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a3255e3403209b45d41e1c21b58e1ed19">Integer</a> <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#af1b56413698a777593b8f11036b62e6e">Mezzanine::Threading::WorkUnitKey::Dependers</a></td>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#aaa1dc5448044054cd8c775416e710f4b">Mezzanine::Threading::WorkUnitKey::Dependers</a></td>
         </tr>
       </table>
 </div>
@@ -223,7 +224,7 @@ Public Attributes</h2></td></tr>
 <p>This is most important sorting factor. In the Default algorithm All of the Workunit that the most workunits depend on are run before the any others. Since this number is usually low (less than 10ish) in large groups of workunits, then there must be a tie-breaker. This should be calculated including the dependers of all the dependers (I don't think counting a workunit twice hurts, and it may even help if something actually depend on multiple workunits that depend on this.) </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>I chose the word depender instead of dependent, to make the distinction between this field and dependencies more clear when communicated verbally. In some english dialects dependencies it pronounced Dee-pen-dent-sees only one syllable off from Dee-pen-dent. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunitkey_8h_source.html#l00069">69</a> of file <a class="el" href="workunitkey_8h_source.html">workunitkey.h</a>.</p>
+<p>Definition at line <a class="el" href="workunitkey_8h_source.html#l00071">71</a> of file <a class="el" href="workunitkey_8h_source.html">workunitkey.h</a>.</p>
 
 </div>
 </div>
@@ -241,7 +242,7 @@ Public Attributes</h2></td></tr>
 <p>Some representation of the time the target workunit takes to execute. </p>
 <p>In the default algorithm this is used to determine what executes first after dependents are counted. It is important to know what takes the longest time and start it first so that it might finish coterminously with shorter workunits. This is used second because length of execution of one workunit means nothing if many other workunits run serialized in one thread rather than in parrellel. </p>
 
-<p>Definition at line <a class="el" href="workunitkey_8h_source.html#l00078">78</a> of file <a class="el" href="workunitkey_8h_source.html">workunitkey.h</a>.</p>
+<p>Definition at line <a class="el" href="workunitkey_8h_source.html#l00080">80</a> of file <a class="el" href="workunitkey_8h_source.html">workunitkey.h</a>.</p>
 
 </div>
 </div>
@@ -265,6 +266,6 @@ Public Attributes</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 25 2012 18:14:03 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

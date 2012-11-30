@@ -104,14 +104,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1LogAggregator__inherit__graph.svg" width="270" height="123"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1LogAggregator__inherit__graph.svg" width="270" height="123"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Mezzanine::Threading::LogAggregator:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1LogAggregator__coll__graph.svg" width="464" height="259"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1LogAggregator__coll__graph.svg" width="464" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classMezzanine_1_1Threading_1_1LogAggregator-members.html">List of all members.</a></p>
@@ -120,25 +122,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#aa4aa268eb7fb596308c109f275c8d7b7">AddDependency</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *NewDependency)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Force this <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> to Start after another has completed.  <a href="#aa4aa268eb7fb596308c109f275c8d7b7"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a81d86d99de616681a41957384fa86e55">AddDependent</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *NewDependent)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform whatever tracking is required to have another workunit depend on this one.  <a href="#a81d86d99de616681a41957384fa86e55"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77a7c810b2f416f59d21a3c2a03d1a25"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::ClearDependencies" ref="a77a7c810b2f416f59d21a3c2a03d1a25" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a77a7c810b2f416f59d21a3c2a03d1a25">ClearDependencies</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Drop any information about what work Units this one depends on. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a381b649858a065655a8acf1d751d5498">ClearDependents</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Drop any information about what work Units depend on this one.  <a href="#a381b649858a065655a8acf1d751d5498"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1LogAggregator.html#acbd0cf429b38bb6158def20c3f18ef94">DoWork</a> (<a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a> &amp;CurrentThreadStorage, <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;CurrentFrameScheduler)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This does the actual work of log aggregation.  <a href="#acbd0cf429b38bb6158def20c3f18ef94"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a6c6f4a882cf335b5186a9d04e567414d">GetDependencyCount</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many other WorkUnits does this one depend on?  <a href="#a6c6f4a882cf335b5186a9d04e567414d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a517e162cb567caf9220411a0f59ba997">GetDependentCount</a> () const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns the count workunits that depend on this work unit.  <a href="#a517e162cb567caf9220411a0f59ba997"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ab893489fe0d7c1a32bbc8be0b29eb494">GetDependentCount</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns the count workunits that depend on this work unit.  <a href="#ab893489fe0d7c1a32bbc8be0b29eb494"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1RollingAverage.html">RollingAverage</a>&lt; <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a5df53f7bc431eb1e00b23b44a0aa19a1">GetPerformanceLog</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the internal rolling average for querying.  <a href="#a5df53f7bc431eb1e00b23b44a0aa19a1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a6eb738f3409d67390ea0bfaad83e021a">GetRunningState</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current RunningState of the thread.  <a href="#a6eb738f3409d67390ea0bfaad83e021a"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a8523bb88eb9e34b391b6e755bb377b98">GetSortingKey</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sorting metadata.  <a href="#a8523bb88eb9e34b391b6e755bb377b98"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#acc5f22f1abf1ee7459e4e901553920d3">GetSortingKey</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sorting metadata.  <a href="#acc5f22f1abf1ee7459e4e901553920d3"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d22687b18671c07294fdeb0a553084d"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::operator()" ref="a1d22687b18671c07294fdeb0a553084d" args="(ThreadSpecificStorage &amp;CurrentThreadStorage, FrameScheduler &amp;CurrentFrameScheduler)" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a1d22687b18671c07294fdeb0a553084d">operator()</a> (<a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a> &amp;CurrentThreadStorage, <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;CurrentFrameScheduler)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This tracks work unit metadata, then calls DoWork. <br/></td></tr>
@@ -147,27 +145,20 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This resets the running state and takes any further action required to use the <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> again. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a275641f9e5368d75ca8ede24417527c0">RemoveDependency</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a275641f9e5368d75ca8ede24417527c0">RemoveDependency</a>)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a dependency.  <a href="#a275641f9e5368d75ca8ede24417527c0"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#adf7cb6a1876796cdc14abe56cbed4f88">RemoveDependent</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#adf7cb6a1876796cdc14abe56cbed4f88">RemoveDependent</a>)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform whatever tracking is required to have another workunit no longer depend on this one.  <a href="#adf7cb6a1876796cdc14abe56cbed4f88"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a36cffab01dce68a6ca05a12f061d536f">TakeOwnerShip</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to atomically start the work unit in the current thread.  <a href="#a36cffab01dce68a6ca05a12f061d536f"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ae7a1a2d040ee4b674b1f31ad6fb6a5bf">GetDependencyCount</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *Caller) const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Does any required work for <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ae7a1a2d040ee4b674b1f31ad6fb6a5bf" title="Does any required work for GetDependencyCount() and calls GetDependencyCount(WorkUnit*) on all depend...">GetDependencyCount()</a> and calls GetDependencyCount(WorkUnit*) on all dependency WorkUnits.  <a href="#ae7a1a2d040ee4b674b1f31ad6fb6a5bf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a50f8c570c3f72b52b823516a4f5ab86b">GetDependentCount</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *Caller) const </td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Does any required work for <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a50f8c570c3f72b52b823516a4f5ab86b" title="Does any required work for GetDependentCount() and calls GetDependentCount(WorkUnit*) on all dependen...">GetDependentCount()</a> and calls GetDependentCount(WorkUnit*) on all dependentWorkUnits.  <a href="#a50f8c570c3f72b52b823516a4f5ab86b"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a02a7275b2e5e3978d43713a5568b9370"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::CurrentRunningState" ref="a02a7275b2e5e3978d43713a5568b9370" args="" -->
-volatile int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a02a7275b2e5e3978d43713a5568b9370">CurrentRunningState</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8bc3a094a4389b484ea298b8c22471b"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::CurrentRunningState" ref="ad8bc3a094a4389b484ea298b8c22471b" args="" -->
+volatile <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ad8bc3a094a4389b484ea298b8c22471b">CurrentRunningState</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This controls do work with this after it has . <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4a5f83f2dc791ed2c729d6592a44557a"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::Dependencies" ref="a4a5f83f2dc791ed2c729d6592a44557a" args="" -->
 std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a4a5f83f2dc791ed2c729d6592a44557a">Dependencies</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of of workunits that must be complete before this one can start. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a06d4fee13f94e6418c99d04bac35fa08"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::Dependents" ref="a06d4fee13f94e6418c99d04bac35fa08" args="" -->
-std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a06d4fee13f94e6418c99d04bac35fa08">Dependents</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used when sorting, as a means of determining priority. This is a count of workunits that cannot be run until. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7dc033632fcc80ecb48f0a644b7ff78d"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::PerformanceLog" ref="a7dc033632fcc80ecb48f0a644b7ff78d" args="" -->
 <a class="el" href="structMezzanine_1_1DefaultRollingAverage.html">DefaultRollingAverage</a>&lt; <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> &gt;<br class="typebreak"/>
 ::Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a7dc033632fcc80ecb48f0a644b7ff78d">PerformanceLog</a></td></tr>
@@ -177,7 +168,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <div class="textblock"><p>Gather all the thread specific logs and commit them to the main log. </p>
 <p>All the logs are double buffered. This reads from the commitable buffer which should otherwise be unused. This task was separated </p>
 
-<p>Definition at line <a class="el" href="frameschedulerworkunits_8h_source.html#l00059">59</a> of file <a class="el" href="frameschedulerworkunits_8h_source.html">frameschedulerworkunits.h</a>.</p>
+<p>Definition at line <a class="el" href="frameschedulerworkunits_8h_source.html#l00058">58</a> of file <a class="el" href="frameschedulerworkunits_8h_source.html">frameschedulerworkunits.h</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="aa4aa268eb7fb596308c109f275c8d7b7"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::AddDependency" ref="aa4aa268eb7fb596308c109f275c8d7b7" args="(WorkUnit *NewDependency)" -->
 <div class="memitem">
@@ -203,56 +194,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 </dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>Changing this outside the schedule, once the scheduler has started can cause undefined behavior. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00124">124</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a81d86d99de616681a41957384fa86e55"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::AddDependent" ref="a81d86d99de616681a41957384fa86e55" args="(WorkUnit *NewDependent)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a81d86d99de616681a41957384fa86e55">Mezzanine::Threading::WorkUnit::AddDependent</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *&#160;</td>
-          <td class="paramname"><em>NewDependent</em></td><td>)</td>
-          <td><code> [virtual, inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Perform whatever tracking is required to have another workunit depend on this one. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">NewDependent</td><td>The <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> That Depends on this one.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Increment the DependentCount. NewDependent Ignored in this niave implemention, but could be useful in derived versions. </p>
-
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00085">85</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a381b649858a065655a8acf1d751d5498"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::ClearDependents" ref="a381b649858a065655a8acf1d751d5498" args="()" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a381b649858a065655a8acf1d751d5498">Mezzanine::Threading::WorkUnit::ClearDependents</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td><code> [virtual, inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Drop any information about what work Units depend on this one. </p>
-<p>Set dependent count to zero, but a derived implementation could do anything. </p>
-
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00096">96</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00130">130</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +234,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 
 <p>Implements <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ab9ad6d9c74204480bd6f8f0d9a8686eb">Mezzanine::Threading::WorkUnit</a>.</p>
 
-<p>Definition at line <a class="el" href="frameschedulerworkunits_8cpp_source.html#l00053">53</a> of file <a class="el" href="frameschedulerworkunits_8cpp_source.html">frameschedulerworkunits.cpp</a>.</p>
+<p>Definition at line <a class="el" href="frameschedulerworkunits_8cpp_source.html#l00054">54</a> of file <a class="el" href="frameschedulerworkunits_8cpp_source.html">frameschedulerworkunits.cpp</a>.</p>
 
 </div>
 </div>
@@ -320,7 +262,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A partial count of dependencies unless this == Caller, then it returns a complete count. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00102">102</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00107">107</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -341,63 +283,30 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>How many other WorkUnits does this one depend on? </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the answer. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00116">116</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00121">121</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a50f8c570c3f72b52b823516a4f5ab86b"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::GetDependentCount" ref="a50f8c570c3f72b52b823516a4f5ab86b" args="(WorkUnit *Caller) const " -->
+<a class="anchor" id="ab893489fe0d7c1a32bbc8be0b29eb494"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::GetDependentCount" ref="ab893489fe0d7c1a32bbc8be0b29eb494" args="(FrameScheduler &amp;SchedulerToCount)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a50f8c570c3f72b52b823516a4f5ab86b">Mezzanine::Threading::WorkUnit::GetDependentCount</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ab893489fe0d7c1a32bbc8be0b29eb494">Mezzanine::Threading::WorkUnit::GetDependentCount</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *&#160;</td>
-          <td class="paramname"><em>Caller</em></td><td>)</td>
-          <td> const<code> [protected, inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Does any required work for <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a50f8c570c3f72b52b823516a4f5ab86b" title="Does any required work for GetDependentCount() and calls GetDependentCount(WorkUnit*) on all dependen...">GetDependentCount()</a> and calls GetDependentCount(WorkUnit*) on all dependentWorkUnits. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">Caller</td><td>The <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> that initiated the query to allow breaking of cycles. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A partial count of dependents unless this == Caller, then it returns a complete count. </dd></dl>
-
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00062">62</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a517e162cb567caf9220411a0f59ba997"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::GetDependentCount" ref="a517e162cb567caf9220411a0f59ba997" args="() const " -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a50f8c570c3f72b52b823516a4f5ab86b">Mezzanine::Threading::WorkUnit::GetDependentCount</a> </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const<code> [virtual, inherited]</code></td>
+          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;&#160;</td>
+          <td class="paramname"><em>SchedulerToCount</em></td><td>)</td>
+          <td><code> [virtual, inherited]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>This returns the count workunits that depend on this work unit. </p>
-<p>The dependent tracking on this <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>. </p>
+<p>Because Dependents are not tracked this iterates over entry in the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> it is passed </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole is returned containing the count. </dd></dl>
-<dl class="exception"><dt><b>Exceptions:</b></dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">This</td><td>will fail an assert if compiling indebug mode and a cycle of workunits, otherwise this will hang if a cycle exists. </td></tr>
-  </table>
-  </dd>
-</dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00076">76</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00077">77</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -418,7 +327,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>Get the internal rolling average for querying. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A const reference to the internal Rolling Average. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00170">170</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00176">176</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -439,18 +348,19 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>Retrieves the current RunningState of the thread. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A RunningState that indicates if the thread is running, started, etc... This information can be changed at any time and should be considered stale immediately after retrieval. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00158">158</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00164">164</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a8523bb88eb9e34b391b6e755bb377b98"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::GetSortingKey" ref="a8523bb88eb9e34b391b6e755bb377b98" args="()" -->
+<a class="anchor" id="acc5f22f1abf1ee7459e4e901553920d3"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::GetSortingKey" ref="acc5f22f1abf1ee7459e4e901553920d3" args="(FrameScheduler &amp;SchedulerToCount)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a8523bb88eb9e34b391b6e755bb377b98">Mezzanine::Threading::WorkUnit::GetSortingKey</a> </td>
+          <td class="memname"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#acc5f22f1abf1ee7459e4e901553920d3">Mezzanine::Threading::WorkUnit::GetSortingKey</a> </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;&#160;</td>
+          <td class="paramname"><em>SchedulerToCount</em></td><td>)</td>
           <td><code> [virtual, inherited]</code></td>
         </tr>
       </table>
@@ -460,7 +370,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>Get the sorting metadata. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> suitable for sorting this workunit </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00190">190</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00196">196</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -487,36 +397,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00130">130</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="adf7cb6a1876796cdc14abe56cbed4f88"></a><!-- doxytag: member="Mezzanine::Threading::LogAggregator::RemoveDependent" ref="adf7cb6a1876796cdc14abe56cbed4f88" args="(WorkUnit *RemoveDependent)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#adf7cb6a1876796cdc14abe56cbed4f88">Mezzanine::Threading::WorkUnit::RemoveDependent</a> </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *&#160;</td>
-          <td class="paramname"><em>RemoveDependent</em></td><td>)</td>
-          <td><code> [virtual, inherited]</code></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Perform whatever tracking is required to have another workunit no longer depend on this one. </p>
-<p>In this simple implementation decrement the DependentCount. </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">RemoveDependent</td><td>Removed from the list of Dependents. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Cleanup <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> Dependency removal. </dd></dl>
-
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00088">88</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00136">136</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -537,7 +418,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>Attempts to atomically start the work unit in the current thread. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00143">143</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00149">149</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -561,6 +442,6 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 25 2012 18:14:03 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

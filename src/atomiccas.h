@@ -44,18 +44,19 @@
 #include "datatypes.h"
 
 /// @file
-/// @brief A simple thread safe way to check and change a specified variable atomically
+/// @brief Simple thread safe ways to check and change a specified variable atomically.
 
 namespace Mezzanine
 {
     namespace Threading
     {
-        /// @brief Atomically Compares and Swaps a value.
-        /// @details In such a way that this cannot be interupted by another thread this checks performs a number of steps.
-        /// First, it compare the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue
-        /// to the memory location VariableToChange points to. If they did not match, no work is perform except the dereferencing.
+        /// @brief Atomically Compares And Swaps a value.
+        /// @details In such a way that this cannot be interupted by another thread this performs a number of steps.
+        /// First, it compares the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue
+        /// to the memory location VariableToChange points to. If they did not match, no work is performed except the dereferencing.
         /// In either case since VariableToChange has been derefenced the value stored before any exchange that might have
-        /// occured is returned
+        /// occured is returned.
+        /// @note volatile does not mean thread-safe. You should read your compiler's documentation and make sure it will behave as you expect. Despite any other meaning this function will always be thread-safe.
         /// @param VariableToChange A pointer to the value to compare and if it matches OldValue Atomically change.
         /// @param OldValue what is expected to be at the other end of VariableToChange
         /// @param NewValue The value to be written to VariableToChange if at the time the actual CPU instruction is executed OldValue Matches *VariableToChange.

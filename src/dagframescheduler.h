@@ -69,13 +69,13 @@
 /// This attempts to provide a multithreading solution for workloads that must be run in many iterations in
 /// a given amount of realtime. Games are an ideal example. Every frame a video game, must update physics
 /// simulations, make AI decisions, accept/interpret user input, enforce game rules, perform dynamic I/O
-/// and render it to the screen all while maintaining a smooth FrameRate and do that while draining batteries on
-/// portable devices (sometimes without even knowing if the device is portable).
+/// and render it to the screen all while maintaining a smooth FrameRate and do that while minimizing drain
+/// batteries on portable devices (sometimes without even knowing if the device is portable).
 /// @n @n
-/// This accomplishes those goals by removing the conventional mutlithreading primitives that so many
+/// This library accomplishes those goals by removing the conventional mutlithreading primitives that so many
 /// developers have come to fear, loathe or misunderstand. Mutexes, threads, memory fences, thread_local
 /// storage, atomic variables, and all the pitfalls that come with them are replaced by a small set of
-/// of primitives that provide all the required sophistication a typical multiple iteration application
+/// of primitives that provide all the required sophistication a typical multi-threaded application
 /// requires. It does this using a new kind of @ref Mezzanine::Threading::WorkUnit "WorkUnit",
 /// @ref Mezzanine::Threading::DoubleBufferedResource "Double Buffering", A strong concept of
 /// Dependencies and a @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" that uses heuristics
@@ -85,34 +85,47 @@
 /// The DAGFrameScheduler is a variation on a common multithreaded work queue. It seeks to avoid its pitfalls,
 /// such as non-determinism, thread contention and lackluster scalability, while keeping its advantages
 /// including simplicity, understandiblity and low overhead.
-/// @n @n With this algorithm very few if any
-/// calls will need to be made to the underlying system for synchronization, instead it will provide limited
+/// @n @n
+/// With this algorithm very few if any
+/// calls will need to be made to the underlying system for synchronization in the actual work to be performed.
+/// Instead, this library will provide limited
 /// deterministic ordering of @ref Mezzanine::Threading::WorkUnit "WorkUnit" execution through a dependency
 /// feature. Having the knowledge that one @ref Mezzanine::Threading::WorkUnit "WorkUnit" will complete after
 /// another allows for resources to be used without using expensive and complex synchronization mechansisms
-/// like @ref Mezzanine::Threading::mutex "mutexes", semaphores, or any of their kin.
-/// @n @n The internal work queue is not changed while a frame is executing. Because it is only read, each
+/// like @ref Mezzanine::Threading::mutex "mutexes", semaphores, or even an
+/// @ref Mezzanine::Threading::AtomicCompareAndSwap "Atomic Compare And Swap". These primitives are provided
+/// to allow use of this library in advanced ways for developers who are already familiar with
+/// multithreaded systems.
+/// @n @n
+/// The internal work queue is not changed while a frame is executing. Because it is only read, each
 /// thread can pick its own work. Synchronization still needs to occur, but it has been moved onto each
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" it is manages with atomic CPU operations. Like this,
-/// contention is less frequent, occurring only when threads simultaneously access the same
+/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" it is manages this with atomic CPU operations. Like this,
+/// contention is less frequent, occurring only when threads simultaneously attempt to start the same
 /// @ref Mezzanine::Threading::WorkUnit "WorkUnit", and it consumes far less time because atomic operations
-/// are CPU instructions instead of Operating System calls.
+/// are CPU instructions instead of Operating System calls. This is managed by the library, so individual
+/// @ref Mezzanine::Threading::WorkUnit "WorkUnit"s do not need to worry synchronization beyond telling
+/// each @ref Mezzanine::Threading::WorkUnit "WorkUnit" about its data dependencies and making sure
+/// all the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s added to a
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler".
+///
 /// @section broken_sec Broken Algorithms
 /// To understand why a new multithreading system is needed, it is helpful to look at other methods
 /// of threading that have been used in the past, and understand what they lack or how they aren't ideal
 /// for the kinds of work this algorithm is is intended for.
-/// @n @n I will use charts that plots possible resource use of a computer across time. Generally time will
-/// run accross the top a resources, usually cpus will run down one side.
-///
-/// @n @n These threading models models aren't necessarily broken, some of these clearly have a place in software
+/// @n @n
+/// I will use charts that plot possible resource use of a computer across time. Generally time will
+/// run accross the top a resources, usually CPUs will run down one side.
+/// @n @n
+/// These threading models aren't necessarily broken, some of these clearly have a place in software
 /// development. None of these are ideal for video games or other tasks that have realtime recurring execution
-/// requirements. Many of these require complex algorithms, subtle knowledge or simply aren't performant enough
-/// for realtime environments.
+/// requirements. Many of these require complex algorithms, require subtle knowledge or simply aren't
+/// performant enough for realtime environments.
 /// @subsection broken_Single Single Threaded
 /// An application using this threading model is not actually multithreaded at all. However, It has been shown
 /// that software can run in a single and get good perfomance. This is benchmark all other threading models
 /// get compared too.
-/// @n @n There is a term, Speedup ( http://en.wikipedia.org/wiki/Speedup ), which is simply a
+/// @n @n
+/// There is a term, Speedup ( http://en.wikipedia.org/wiki/Speedup ), which is simply a
 /// comparison of the single threaded performance of an algorithm to the mutlithreaded performance. You simply
 /// determine how many times more work the multithreaded algorithm does in the same time, or how many times
 /// longer the single threaded algorithm takes to the same work. Ideally two threads will be twice as fast
@@ -124,28 +137,30 @@
 /// @image rtf Single.png "Single Threaded Execution - Fig 1."
 /// @n @n The DAGFrameScheduler library tries to tailor the threading model to the problem to minimize that
 /// overhead. With a single threaded application one thread does all the work and always wastes every other
-/// thread.
+/// thread, but there is no overhead
 /// @n @n
 /// @subsection broken_Unplanned Unplanned Thread
 /// Sometimes someone means well and tries to increase the performance of a single threaded program and tries
-/// to add extras threads to increase performance. Sometimes this works, really well, sometimes there is a
+/// to add extra threads to increase performance. Sometimes this works, really well, sometimes there is a
 /// marginal increase in performance or a significant increase in bugs. If that someone has a good plan
 /// then they can usually achieve close to the best speedup possible in the given situation. This is not easy
 /// and many cannot do this or do not want to invest the time it would take. If not carefully planned
-/// bugs like deadlock ( http://en.wikipedia.org/wiki/Deadlock ) and race conditions ( http://stackoverflow.com/questions/34510/what-is-a-race-condition )
+/// bugs like deadlock ( http://en.wikipedia.org/wiki/Deadlock ) and race conditions
+/// ( http://stackoverflow.com/questions/34510/what-is-a-race-condition )
 /// can be introduced. Unfortunately no amount of testing can replace this careful planning. Without a
 /// complete understanding of how multithreaded software is assembled (a plan) it is not possible to prove
 /// that multithreaded software will not hang/freeze or that it will produce the correct results.
 /// @n @n
-/// Software with no multithreading plan could have just about any kind of execution behavior. Ussually they
-/// perform at least slightly better than single threaded versions of the software, but frequently suffer
-/// do not utilize all the available resources. Generally performance does not scale well as unplanned
-/// software is run on more processors. Frequently there is contention for a specific resource and a
-/// thread will wait for that resource longer than is actually need.
+/// Software with no multithreading plan could have just about any kind of execution behavior. Usually
+/// unplanned software performs at least slightly better than single threaded versions of the software, but
+/// frequently does not utilize all the available resources. Generally performance does not scale well as
+/// unplanned software is run on more processors. Frequently, there is contention for a specific resource and
+/// a thread will wait for that resource longer than is actually need.
 /// @image html Unplanned.png "Unplanned Threaded Execution - Fig 2."
 /// @image latex Unplanned.png "Unplanned Threaded Execution - Fig 2."
 /// @image rtf Unplanned.png "Unplanned Threaded Execution - Fig 2."
-/// @n @n The DAGFrameScheduler is carefully planned and completely avoids costly synchronization
+/// @n @n
+/// The DAGFrameScheduler is carefully planned and completely avoids costly synchronization
 /// mechanisms in favor of less costly minimalistic ones. Marking one @ref Mezzanine::Threading::WorkUnit "WorkUnit"
 /// as dependent on another allows the reordering of @ref Mezzanine::Threading::WorkUnit "WorkUnits" so that
 /// some @ref Mezzanine::Threading::WorkUnit "WorkUnit" can be executed with no thread waiting or blocking.
@@ -157,11 +172,12 @@
 /// @subsection broken_ConventionWorkQueue Convention Work Queue/Thread Pools
 /// Conventional work queues and thread pools are well known and robust way to increase the throughput of
 /// of an application. These are ideal solutions for many systems, but not games.
-/// @n @n In work conventional workqueues all of the work is broken into a number of small thread-safe
+/// @n @n
+/// In conventional workqueues all of the work is broken into a number of small thread-safe
 /// units. As these units are created they are stuffed into a queue and threads pull out units of work
 /// as it completes other units it has started. This simple plan has many advantages. If there is work
-/// to do, then at least one thread will be doing, and usually more threads will be working; this is good
-/// for games and the DAGFrameScheduler mimics it. If the kind of work is unknown when the software is
+/// to do, then at least one thread will be doing some, and usually more threads will be working; this is
+/// good for games and the DAGFrameScheduler mimics it. If the kind of work is unknown when the software is
 /// written heuristics and runtime decisions can create the kind of units of work that are required. This
 /// is not the case with games and the others kinds of software this library caters to, so changes can
 /// be made that remove the problems this causes. One such drawback is that a given unit of work never
@@ -169,7 +185,8 @@
 /// @image html Threadpool.png "Convention Work Queue/ThreadPools - Fig 3."
 /// @image latex Threadpool.png "Convention Work Queue/ThreadPools - Fig 3."
 /// @image rtf Threadpool.png "Convention Work Queue/ThreadPools - Fig 3."
-/// @n @n Common synchronization mechanisms like mutexes or semaphores block the thread for an unknown
+/// @n @n
+/// Common synchronization mechanisms like mutexes or semaphores block the thread for an unknown
 /// amount of time, and are required by the design of workqueues. There are two times this is required.
 /// The first time is whenever a work unit is acquired by a thread, a mutex (or similar) must be used
 /// to prevent other threads from modifying the queue as well. This impacts scalability, but can be
@@ -177,7 +194,8 @@
 /// pre-emptively, or feed the threads work units from varying points in the queue. The
 /// DAGFrameScheduler moves the synchronizantion onto each work to greatly reduce the contention as
 /// more workunits are added.
-/// @n @n The other, and less obvious, point of contention that has not be circumvented in a
+/// @n @n
+/// The other, and less obvious, point of contention that has not be circumvented in a
 /// satisfactory way for games is the large of amount of synchronization required between units of
 /// work that must communicate. For example, there may be hundreds of thousands of pieces of data
 /// that must be passed from a system into a 3d rendering system. Apply mutexes to each would slow
@@ -185,23 +203,27 @@
 /// lock would prevent large portions of physics and rendering from occurring at the time causing
 /// one or both of them to wait/block. A simple solution would be to run physics before graphics,
 /// but common work queues do not provide good guarantees in this regard.
-/// @n @n The DAGFrameScheduler was explicitly designed to provide exactly this guarantee. If the
+/// @n @n
+/// The DAGFrameScheduler was explicitly designed to provide exactly this guarantee. If the
 /// physics @ref Mezzanine::Threading::WorkUnit "WorkUnit" is added to the graphics
 /// @ref Mezzanine::Threading::WorkUnit "WorkUnit" with
-/// @ref Mezzanine::Threading::WorkUnit::AddDependent() "AddDependent(WorkUnit*)" then it will
+/// @ref Mezzanine::Threading::WorkUnit::AddDependency() "AddDependency(WorkUnit*)" then it will
 /// always be run before the graphics workunit in a given frame. The drawback of this is that it
-/// is more difficult to make runtime creation of workunits, but completely removes the locking
+/// is more difficult to make runtime creation of workunits (It is possible but it cannot be done
+/// during any frame execution), but completely removes the locking
 /// mechanisms a conventional work queues. The DAGFrameScheduler has traded one useless feature
 /// for a useful guarantee.
+///
 /// @section algorithm_sec The Algorithm
 /// When first creating the DAGFrameScheduler it was called it "Dagma-CP" because when describing it
 /// the phrase "Directed Acyclic Graph Minimal Assembly of Critical Path" if you are in the lucky 1%
-/// who knows what all those terms mean that is very descriptive. For rest of us the algorithm tries
+/// who knows what all those terms mean they are very descriptive. For rest of us the algorithm tries
 /// to determine what is the shortest way to execute the work that must be executed each frame. It
 /// does this by assembling a logical graph of work that must done each frame and executing it.
 /// Because all the entries in this will have a definite location somewhere between the beginning
 /// and end, and will never circle around back to an earlier point this is called an acyclic graph.
-/// @n @n For scheduling concerns, there are 3 kinds of @ref Mezzanine::Threading::WorkUnit "WorkUnit"s.
+/// @n @n
+/// For scheduling concerns, there are 3 kinds of @ref Mezzanine::Threading::WorkUnit "WorkUnit"s.
 /// All @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are expected to monopolize cpu
 /// resources at the beginning of each frame. This is ideal when working with other systems, for
 /// example a phsyics system like Bullet3D. If the calls to a physics system are wrapped in a
@@ -209,7 +231,7 @@
 /// opportunity to run before the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s and
 /// @ref Mezzanine::Threading::AsynchronousWorkUnit "AsynchronousWorkUnit"s are run.
 /// @warning AsynchronousWorkUnit and Work Unit affinity are not completely implemented at this point
-/// in time. The automatic Thread adjusting hueristic is also not complete.
+/// in time. The automatic thread adjusting hueristic is also not complete.
 ///
 /// Once all the @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are done then the
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" class instance spawns or activates
@@ -218,7 +240,7 @@
 /// the most @ref Mezzanine::Threading::WorkUnit "WorkUnit"s that depend on it, and in the case of
 /// a tie the @ref Mezzanine::Threading::WorkUnit "WorkUnit" that takes the longest to execute.
 /// Execution length rather than brevity is preferred because it helps keep each thread's execution
-/// time time consistently short (I will add a few more pictures to describe this clearly).
+/// time consistently short (I will add a few more pictures to describe this clearly).
 /// @n @n
 /// Some work must be run on specific threads, such as calls to underlying devices (for example,
 /// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
@@ -229,23 +251,29 @@
 /// Because the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" is never modified during
 /// a frame there is no need for synchronization with it specifically, this avoids a key point of
 /// contention that reduces scaling. Instead the synchronization is performed with each
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" and is an Atomic CAS operation to maximize
+/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" and is an
+/// @ref Mezzanine::Threading::AtomicCompareAndSwap "Atomic Compare And Swap" operation to maximize
 /// performance.
 /// @n @n
 /// Even much of the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler"'s work is performed
 /// in @ref Mezzanine::Threading::WorkUnit "WorkUnit"s, such as log aggregation and certain functions
 /// that must be performed each frame.
-/// @ref Mezzanine::Threading::AsynchronousWorkUnit "AsynchronousWorkUnit"s continue to run in a thread beyond normal scheduling
-/// and are intended to will consume fewer CPU resources and more IO resources. For example loading a
-/// large file or listening for network traffic. These will be normal @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
-/// in most regards and will check on the asynchronous tasks they manage each frame when they run
-/// as a normally scheduled.
+/// @ref Mezzanine::Threading::AsynchronousWorkUnit "AsynchronousWorkUnit"s continue to run in a thread
+/// beyond normal scheduling and are intended to will consume fewer CPU resources and more IO resources.
+/// For example loading a large file or listening for network traffic. These will be normal
+/// @ref Mezzanine::Threading::WorkUnit "WorkUnit"s in most regards and will check on the asynchronous
+/// tasks they manage each frame when they run as a normally scheduled.
 /// @n @n
-/// If a thread should run out of work because all the work is completed the frame will pause. This
-/// pause length is calulated using a runtime configurable value on the
-/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler". If there is more work to be executed,
-/// currently fewer threads will continue its execution, in future versions thread will spin or wait
-/// until more work has its dependencies met or all work is complete.
+/// If a thread should run out of work because all the work is completed the frame will pause until it
+/// should start the next frame. This pause length is calulated using a runtime configurable value on
+/// the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler". If a thread has checked every
+/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" and some are still not executing, but could not
+/// be started because of incomplete dependencies the thread will simply iterate over every
+/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" in the
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" until the dependencies of one are
+/// met and allows one to be executed. This implicitly guarantees that at least one thread will
+/// always do work, and if dependencies chains are kept short then it is more likely that several
+/// threads will advance.
 /// @n @n
 /// The @ref Mezzanine::Threading::WorkUnit "WorkUnit" classes are designed to be inherited from
 /// and inserted into a @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" which will

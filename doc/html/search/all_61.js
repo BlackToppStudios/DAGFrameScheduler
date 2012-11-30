@@ -1,7 +1,6 @@
 var searchData=
 [
   ['adddependency',['AddDependency',['../classMezzanine_1_1Threading_1_1WorkUnit.html#aa4aa268eb7fb596308c109f275c8d7b7',1,'Mezzanine::Threading::WorkUnit']]],
-  ['adddependent',['AddDependent',['../classMezzanine_1_1Threading_1_1WorkUnit.html#a81d86d99de616681a41957384fa86e55',1,'Mezzanine::Threading::WorkUnit']]],
   ['addworkunit',['AddWorkUnit',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a54a5da1cd950bbc0652031c781c675c1',1,'Mezzanine::Threading::FrameScheduler']]],
   ['asynchronousworkunit',['AsynchronousWorkUnit',['../classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html',1,'Mezzanine::Threading']]],
   ['asynchronousworkunit_2ecpp',['asynchronousworkunit.cpp',['../asynchronousworkunit_8cpp.html',1,'']]],
