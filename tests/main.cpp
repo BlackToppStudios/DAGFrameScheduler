@@ -52,6 +52,9 @@
 #include <cstdlib>
 #include <sstream>
 #include <set>
+#include <map>
+#include <algorithm>
+#include <cctype>
 
 #include "pugixml.h" // Not needed for regular operation of the library, just needed for tests.
 
@@ -60,6 +63,93 @@ using std::endl;
 using std::vector;
 using namespace Mezzanine;
 using namespace Mezzanine::Threading;
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Required testing functionality
+
+/// @brief A pointer to the kinds of tests. no return type is needed, they will throw on error.
+typedef void (*Test)();
+/// @brief A collection of tests and their names
+typedef std::map<String,Test> TestGroup;
+
+void Usage(String Executable, TestGroup& Tests)
+{
+    cout << "Usage:" << endl << endl;
+    cout << "\t" << Executable << " [testname1] [testname2] [testname3] ..." << endl << endl;
+    cout << "If no tests are provide then every test will be run. The test names are not case sensitive. Here is a listing of test names: " << endl;
+
+    Whole ColumnWidth=23;
+    Whole ColumnCount=3;
+    Whole WhichColumn=0;
+    String CurrentOutput;
+
+    cout << "  ";
+    for(TestGroup::iterator Iter=Tests.begin(); Iter!=Tests.end(); ++Iter)
+    {
+        WhichColumn++;
+        if(!(WhichColumn % ColumnCount))
+        {
+            WhichColumn=0;
+            cout << endl << "  ";
+        }
+
+        CurrentOutput = Iter->first;
+        for(CurrentOutput = Iter->first; CurrentOutput.size()<ColumnWidth; CurrentOutput += " ") {}
+
+        cout << CurrentOutput;
+    }
+    cout << endl;
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+/// Basic information acquisition
+
+// 'sizes' Test
+void Sizes()
+{
+    cout << "Determining sizeof() important types that are used throughout:" << endl
+         << "WorkUnit: " << sizeof(WorkUnit) << endl
+         << "WorkUnitKey: " << sizeof(WorkUnitKey) << endl
+         << "DefaultRollingAverage<Whole>::Type: " << sizeof(DefaultRollingAverage<Whole>::Type) << endl
+         << "WeightedRollingAverage<Whole,Whole>: " << sizeof(WeightedRollingAverage<Whole,Whole>) << endl
+         << "BufferedRollingAverage<Whole>: " << sizeof(BufferedRollingAverage<Whole>) << endl
+         << "WorkUnitMonpoly: " << sizeof(MonopolyWorkUnit) << endl
+         << "DefaultThreadSpecificStorage::Type: " << sizeof(DefaultThreadSpecificStorage::Type) << endl
+         << "FrameScheduler: " << sizeof(FrameScheduler) << endl
+         << "thread: " << sizeof(thread) << endl
+         << "mutex: " << sizeof(mutex) << endl
+         << "vector<Whole>: " << sizeof(vector<Whole>) << endl
+         << "vector<WorkUnit*>: " << sizeof(vector<Whole*>) << endl
+         << "set<WorkUnit*>: " << sizeof(std::set<WorkUnit*>) << endl
+         << "volatile int32_t: " << sizeof(volatile int32_t) << endl
+         << "std::ostream*: " << sizeof(std::ostream*) << endl
+         << "MaxInt: " << sizeof(MaxInt) << endl
+         << "Whole: " << sizeof(Whole) << endl;
+}
+
+//
+void Untestable()
+{
+    cout << "Displaying Output of untestable functions. There is no way to have known when this was written, what the results of these would be:" << endl
+         << "The current time in microseconds GetTimeStamp(): " << GetTimeStamp() << endl
+         << "What is the smallest amount of time the clock can measure in microseconds GetTimeStampResolution(): " << GetTimeStampResolution() << endl
+         << "Current Logical Processor Count GetCPUCount(): " << GetCPUCount() << endl
+//         << "Cache size available before using RAM GetCacheSize(): " << GetCacheSize() << endl;
+//         << "Size of one entry in the fastest cache GetCachelineSize(): " << GetCachelineSize() << endl;
+            ;
+}
+
+
+
+
+
+
+
+
+
+
 
 /// @brief Simulate a 20 sided die
 /// @return A Mezzanine::Whole containing a a random number between 1 and 20 inclusive with equal chance.
@@ -379,34 +469,62 @@ void PutIdInGlobal(void*)
 void PrintHello(void*)
     { cout << "Hello from thread T1 with id: " << Mezzanine::Threading::this_thread::get_id() << endl; }
 
+
+
+
+
+
+
+
 int main (int argc, char** argv)
 {
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    cout << "Determining sizeof() important types that are used throughout:" << endl
-         << "WorkUnit: " << sizeof(WorkUnit) << endl
-         << "WorkUnitKey: " << sizeof(WorkUnitKey) << endl
-         << "DefaultRollingAverage<Whole>::Type: " << sizeof(DefaultRollingAverage<Whole>::Type) << endl
-         << "WeightedRollingAverage<Whole,Whole>: " << sizeof(WeightedRollingAverage<Whole,Whole>) << endl
-         << "BufferedRollingAverage<Whole>: " << sizeof(BufferedRollingAverage<Whole>) << endl
-         << "WorkUnitMonpoly: " << sizeof(MonopolyWorkUnit) << endl
-         << "DefaultThreadSpecificStorage::Type: " << sizeof(DefaultThreadSpecificStorage::Type) << endl
-         << "FrameScheduler: " << sizeof(FrameScheduler) << endl
-         << "thread: " << sizeof(thread) << endl
-         << "mutex: " << sizeof(mutex) << endl
-         << "vector<Whole>: " << sizeof(vector<Whole>) << endl
-         << "vector<WorkUnit*>: " << sizeof(vector<Whole*>) << endl
-         << "set<WorkUnit*>: " << sizeof(std::set<WorkUnit*>) << endl
-         << "volatile int32_t: " << sizeof(volatile int32_t) << endl
-         << "std::ostream*: " << sizeof(std::ostream*) << endl
-         << "MaxInt: " << sizeof(MaxInt) << endl
-         << "Whole: " << sizeof(Whole) << endl;
+    // Make a vector of Test names to run
+    std::vector<String> TargetTests;
+    String ThisExecutable(argv[0]);
+    for(int Counter=1; Counter<argc; Counter++)
+        { TargetTests.push_back(argv[Counter]); }
+    for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter)
+        { std::transform(Iter->begin(), Iter->end(), Iter->begin(), ::tolower); }
 
-    cout << endl << "Displaying Output of untestable functions. There is no way to have known when this was written, what the results of these would be:" << endl;
-    cout << "The current time in microseconds GetTimeStamp(): " << GetTimeStamp() << endl;
-    cout << "What is the smallest amount of time the clock can measure in microseconds GetTimeStampResolution(): " << GetTimeStampResolution() << endl;
-    cout << "Current Logical Processor Count GetCPUCount(): " << GetCPUCount() << endl;
-    //cout << "Cache size available before using RAM GetCacheSize(): " << GetCacheSize() << endl;
-    //cout << "Size of one entry in the fastest cache GetCachelineSize(): " << GetCachelineSize() << endl;
+    // The mapping of all the tests to their name
+    TestGroup AllTheTests;
+    AllTheTests["sizes"]=Sizes;
+    AllTheTests["untestable"]=Untestable;
+
+    if(TargetTests.size())
+    {
+        for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter) // Check for invalid tests
+        {
+            if(AllTheTests.find(*Iter)==AllTheTests.end())
+            {
+                cout << "\"" << *Iter << "\" is not a valid test name." <<  endl << endl;
+                Usage(ThisExecutable, AllTheTests);
+                exit(1);
+            }
+        }
+        for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter)
+            { AllTheTests[*Iter](); }
+    }else{
+
+        for(TestGroup::iterator Iter=AllTheTests.begin(); Iter!=AllTheTests.end(); ++Iter)
+        {
+            cout << "Beginning test '" << Iter->first << "' :" << endl;
+            Iter->second();
+            cout << endl << endl;
+        }
+
+    }
+
+
+
+    exit(0);
+
+
+
+
+
+
+
 
 
 
@@ -1011,8 +1129,8 @@ int main (int argc, char** argv)
     assert(AEnd<=BStart);
     cout << "Was A complete before C started: " << (AEnd<=CStart) << endl; // if it doesn't then these numbers need to be converted.
     assert(AEnd<=CStart);
-    cout << "Were B and C run in different threads: " << (BThread<=CThread) << endl;
-    assert(BThread<=CThread);
+    cout << "Were B and C run in different threads: " << (BThread!=CThread) << endl;
+    assert(BThread!=CThread);
 
 
 
