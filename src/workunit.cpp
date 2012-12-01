@@ -176,7 +176,7 @@ namespace Mezzanine
         RollingAverage<Whole>& WorkUnit::GetPerformanceLog()
             { return PerformanceLog; }
 
-        void WorkUnit::operator() (ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
+        void WorkUnit::operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
         {
             MaxInt Begin = Mezzanine::GetTimeStamp();
             #ifdef MEZZ_DEBUG

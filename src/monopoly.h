@@ -42,6 +42,7 @@
 #define _threadmonopoly_h
 
 #include "datatypes.h"
+#include "doublebufferedresource.h"
 #include "workunit.h"
 
 /// @file
@@ -51,7 +52,6 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        class ThreadSpecificStorage;
         class FrameScheduler;
 
         /// @brief A kind of workunit given exclusive runtime so it can consume time on multiple threads
@@ -65,7 +65,7 @@ namespace Mezzanine
                 /// resource is non-senscial.
                 /// @param CurrentThreadStorage ignored.
                 /// @param CurrentFrameScheduler passed to @ref DoWork(FrameScheduler&) .
-                virtual void DoWork(ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler);
+                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler);
             public:
                 /// @brief Constructor, currently does nothing
                 MonopolyWorkUnit();

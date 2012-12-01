@@ -140,7 +140,7 @@ class PiMakerWorkUnit : public Mezzanine::Threading::WorkUnit
         /// @brief Calculate Pi and log it.
         /// @paramCurrentThreadStorage used to retrieve a valid logger.
         /// @brief CurrentFrameScheduler ignored
-        virtual void DoWork(ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
+        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
         {
             DoubleBufferedLogger& CurrentLogger = CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger);
             CurrentLogger.GetUsable() << "<MakePi Pi=\"" << MakePi(Length,SpikesOn) << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
@@ -172,7 +172,7 @@ class PausesWorkUnit : public Mezzanine::Threading::WorkUnit
         /// @brief Wait and log it.
         /// @param CurrentThreadStorage used to retrieve a valid logger.
         /// @brief CurrentFrameScheduler ignored
-        virtual void DoWork(ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
+        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
         {
             DoubleBufferedLogger& CurrentLogger = CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger);
             CurrentLogger.GetUsable() << "<Pause PauseLength=\"" << Length << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
@@ -194,11 +194,11 @@ struct PiMakerThreadData
     PiMakerMonopoly *Maker;
 
     /// @brief The Resources the target thread should use.
-    ThreadSpecificStorage *Storage;
+    DefaultThreadSpecificStorage::Type *Storage;
 
     /// @brief constructor
     /// @param Maker_ A pointer to a PiMakerMonopoly that the targe
-    explicit PiMakerThreadData(PiMakerMonopoly *Maker_) : Maker(Maker_), Storage(new ThreadSpecificStorage(0)) // This is not exception safe, if we ran out of memory here this could leak.1
+    explicit PiMakerThreadData(PiMakerMonopoly *Maker_) : Maker(Maker_), Storage(new DefaultThreadSpecificStorage::Type(0)) // This is not exception safe, if we ran out of memory here this could leak.1
         {}
 
     /// @brief Deletes allocated data.
@@ -389,7 +389,7 @@ int main (int argc, char** argv)
          << "WeightedRollingAverage<Whole,Whole>: " << sizeof(WeightedRollingAverage<Whole,Whole>) << endl
          << "BufferedRollingAverage<Whole>: " << sizeof(BufferedRollingAverage<Whole>) << endl
          << "WorkUnitMonpoly: " << sizeof(MonopolyWorkUnit) << endl
-         << "ThreadSpecificStorage: " << sizeof(ThreadSpecificStorage) << endl
+         << "DefaultThreadSpecificStorage::Type: " << sizeof(DefaultThreadSpecificStorage::Type) << endl
          << "FrameScheduler: " << sizeof(FrameScheduler) << endl
          << "thread: " << sizeof(thread) << endl
          << "mutex: " << sizeof(mutex) << endl
@@ -616,7 +616,7 @@ int main (int argc, char** argv)
     cout << endl << "Starting WorkUnit Tests, 20 runs with WorkUnitSample1" << endl;
     PiMakerWorkUnit WorkUnitSample1(5000,"WorkUnitSample1",false);
     FrameScheduler TestScheduler(&std::cout,1);
-    Mezzanine::Threading::ThreadSpecificStorage TestThreadStorage(&TestScheduler);
+    Mezzanine::Threading::DefaultThreadSpecificStorage::Type TestThreadStorage(&TestScheduler);
     // run work unit
     for(Whole Counter=0; Counter<20; Counter++)
         { WorkUnitSample1(TestThreadStorage, TestScheduler); }
@@ -674,7 +674,7 @@ int main (int argc, char** argv)
     cout << endl << "Starting MonopolyWorkUnit test. Creating a monopoly that will calculate pi in a number of threads simultaneously." << endl;
     PiMakerMonopoly Pioply(50,"Pioply",false,4);
     FrameScheduler TestSchedulerMono(&std::cout,1);
-    ThreadSpecificStorage PioplyStorage(&TestSchedulerMono);
+    DefaultThreadSpecificStorage::Type PioplyStorage(&TestSchedulerMono);
     for(Whole Counter=0; Counter<20; Counter++)
         { Pioply(PioplyStorage, TestSchedulerMono); }
     cout << "Here is the un-aggregated (main thread only) log of Twenty Test Runs" << endl
@@ -770,7 +770,7 @@ int main (int argc, char** argv)
     cout << endl << "Creating a simple dependency chain in 4 WorkUnits and inserting them into a Test FrameScheduler. Then they will be pulled out one at a time and mark them as completed: " << endl;
 
     FrameScheduler SchedulingTest1(&cout,1);
-    ThreadSpecificStorage Storage1(&SchedulingTest1);
+    DefaultThreadSpecificStorage::Type Storage1(&SchedulingTest1);
     WorkUnitK4->AddDependency(WorkUnitK3);
     WorkUnitK3->AddDependency(WorkUnitK2);
     WorkUnitK2->AddDependency(WorkUnitK1);
@@ -799,7 +799,7 @@ int main (int argc, char** argv)
 
     cout << endl << "Creating 4 WorkUnits with precise runtimes and inserting them into a Test FrameScheduler. Then they will be pulled out one at a time and mark them as completed: " << endl;
     FrameScheduler SchedulingTest2(&cout,1);
-    ThreadSpecificStorage Storage2(&SchedulingTest2);
+    DefaultThreadSpecificStorage::Type Storage2(&SchedulingTest2);
 
     PausesWorkUnit *FiveHundred = new PausesWorkUnit(500,"FiveHundred-ms");
     PausesWorkUnit *FiveThousand = new PausesWorkUnit(5000,"FiveThousand-ms");
@@ -858,7 +858,7 @@ int main (int argc, char** argv)
     PiMakerWorkUnit* WorkUnitR4 = new PiMakerWorkUnit(50000,"Run4",false);
     LogBufferSwapper Swapper2;
     LogAggregator Agg2;
-    ThreadSpecificStorage SwapResource2(&ThreadCreationTest1);
+    DefaultThreadSpecificStorage::Type SwapResource2(&ThreadCreationTest1);
     ThreadCreationTest1.AddWorkUnit(WorkUnitR1);
     ThreadCreationTest1.AddWorkUnit(WorkUnitR2);
     ThreadCreationTest1.AddWorkUnit(WorkUnitR3);
@@ -938,7 +938,7 @@ int main (int argc, char** argv)
     FrameScheduler RestartScheduler1(&LogCache,2);
     LogBufferSwapper Swapper3;
     LogAggregator Agg3;
-    ThreadSpecificStorage SwapResource3(&RestartScheduler1);
+    DefaultThreadSpecificStorage::Type SwapResource3(&RestartScheduler1);
     RestartScheduler1.AddWorkUnit(RestartA);
     RestartScheduler1.AddWorkUnit(RestartB);
     RestartScheduler1.AddWorkUnit(RestartC);
@@ -1007,12 +1007,24 @@ int main (int argc, char** argv)
         }
     }
 
-    cout << "Was A complete before B started: " << (AEnd<=BStart) << endl; // This realies  on lexigraphical ordering matching numeric ordering
+    cout << "Was A complete before B started: " << (AEnd<=BStart) << endl; // This relies  on lexigraphical ordering matching numeric ordering
     assert(AEnd<=BStart);
     cout << "Was A complete before C started: " << (AEnd<=CStart) << endl; // if it doesn't then these numbers need to be converted.
     assert(AEnd<=CStart);
     cout << "Were B and C run in different threads: " << (BThread<=CThread) << endl;
     assert(BThread<=CThread);
+
+
+
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Testing FrameScheduler Affinity execution
+
+    // Make a scheduler
+    // 3 affinity WorkUnits and 3 normal
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Testing FrameScheduler timing
@@ -1108,7 +1120,7 @@ int main (int argc, char** argv)
         TimingTest.AddWorkUnit(WorkUnitTT2C);
         WorkUnitTT2C->AddDependency(WorkUnitTT2B);
         WorkUnitTT2B->AddDependency(WorkUnitTT2A);
-        TimingTest.SortAllWorkUnits();
+        TimingTest.SortWorkUnitsAll();
         TimingTestStart = GetTimeStamp();
         for(Whole Counter=0; Counter<*Iter; ++Counter)
             { TimingTest.DoOneFrame(); }

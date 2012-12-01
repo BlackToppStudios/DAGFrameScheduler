@@ -57,7 +57,7 @@
 namespace Mezzanine
 {
 
-    /// @brief A type that any pointer can be converted to and back from, and insures after the conversion back it will be identical
+    /// @brief A type that any pointer can be converted to and back from, and insures after the conversion back it will be identical.
     #ifdef _MEZZ_CPP11_PARTIAL_
     typedef std::intptr_t ConvertiblePointer;
     #else
@@ -98,9 +98,9 @@ namespace Mezzanine
     typedef std::string String;
 
 
-    /// @brief A large integer type suitable for compile time math in the chrono implementation.
+    /// @brief A large integer type suitable for compile time math and long term microseconf time keeping.
     /// @details For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807.
-    /// That is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between
+    /// In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between
     /// 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for
     /// 292 years.
     #ifdef _MEZZ_CPP11_PARTIAL_
@@ -109,7 +109,8 @@ namespace Mezzanine
         typedef long long MaxInt;
     #endif
 
-    /// @brief In case we ever replace the stringstream with another class
+    /// @brief In case we ever replace the stringstream with another class, this will allow us to swap it out.
+    /// @details This will always support <<, str() but may lose support for formatting functions like std::hex.
     typedef std::stringstream Logger;
 }
 

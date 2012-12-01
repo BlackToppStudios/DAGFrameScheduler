@@ -42,6 +42,7 @@
 #define _framescheduler_h
 
 #include "datatypes.h"
+#include "doublebufferedresource.h"
 #include "thread.h"
 #include "workunitkey.h"
 #include "systemcalls.h"
@@ -79,12 +80,12 @@ namespace Mezzanine
         /// The pause that is inserted each frame is not simply calculated by subtracting the current time
         /// from the target time once the work is done each frame. A small
         /// @ref Mezzanine::Threading::FrameScheduler::TimingCostAllowance "TimingCostAllowance" is
-        /// subtracted from the pause before the next frame begins. This allowance allows for the compensation of
+        /// subtracted from the pause before the next frame begins. This allowance is for the compensation of
         /// variances in scheduling from the underlying system, rounding errors of the system clock and
         /// the execution of the time tracking itself. As part of this time tracking the timing cost allowance
         /// is adjusted. If the allowance was too large, therefor making the frame too short, then it is made
         /// longer for the next frame. If the allowance is too small it is made larger for the next frame. It does
-        /// seem possible to track this length within a single frame without increasing the complexity a
+        /// not seem possible to track this length within a single frame without increasing the complexity a
         /// significant amount.
         /// @n @n
         /// Rather than increase the complexity of the algorithm when the default level of accuracy is
@@ -96,7 +97,6 @@ namespace Mezzanine
         /// then the timing allowance is not adjusted. This gap in the adjustment of the timing allowance could
         /// allow adjustment on different platforms in the precision of this algorithm without incurring extra
         /// complexity in timing. By default this is set to 10 microseconds.
-        /// @ref Mezzanine::Threading::FrameScheduler::GetFrameLength "FrameScheduler::GetFrameLength()"
         #define  TimingCostAllowanceGap 10
 
         class MonopolyWorkUnit;
@@ -104,9 +104,10 @@ namespace Mezzanine
         class LogAggregator;
         class LogBufferSwapper;
         class FrameScheduler;
-		class ThreadSpecificStorage;
 
         /// @brief This is central object in this algorithm, it is responsible for spawning threads and managing the order that work units are executed.
+        /// @details For a detailed description of the @ref algorithm_sec "Algorithm" this implements see the @ref algorithm_sec "Algorithm" section on
+        /// the Main page.
         class MEZZ_LIB FrameScheduler
         {
             friend class LogAggregator;
@@ -115,10 +116,15 @@ namespace Mezzanine
 
             protected:
                 /// @brief A collection of all the work units that are not Monopolies and do not have affinity for a given thread.
-                /// @details This stores and sorts the WorkUnit instances so that the ones that should be run first will be
-                /// higher/later in the set.
+                /// @details This stores a sorted listing(currently a vector) of @ref Mezzanine::Threading::WorkUnitKey "WorkUnitKey" instances.
+                /// These include just the metadata required for sorting @ref Mezzanine::Threading::WorkUnit "WorkUnit"s. Higher priority
+                /// @ref Mezzanine::Threading::WorkUnit "WorkUnit"s are higher/later in the collection. This is list is sorted by calls
+                /// to @ref SortWorkUnits or @ref SortAllWorkUnits .
                 std::vector<WorkUnitKey> WorkUnitsMain;
 
+                /// @brief A collection of @ref Mezzanine::Threading::WorkUnit "WorkUnit"s that must be run on the main thread.
+                /// @details This is very similar to @ref WorkUnitsMain except that the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
+                /// are only run in the main thread and are sorted by calls to @ref SortWorkUnits or @ref SortAffinityWorkUnits .
                 std::vector<WorkUnitKey> WorkUnitAffinity;
 
                 typedef std::map<
@@ -130,7 +136,7 @@ namespace Mezzanine
 
                 /// @brief This maintains ownership of all the thread specific resources.
                 /// @note There should be the same amount of more these than entries in the Threads vector.
-                std::vector<ThreadSpecificStorage*> Resources;
+                std::vector<DefaultThreadSpecificStorage::Type*> Resources;
 
                 /// @brief A way to track an arbitrary number of threads.
                 /// @note There should never be more of these than Resources, and if there are more at the beginning of a frame the resources will be created in CreateThreads().
@@ -229,8 +235,12 @@ namespace Mezzanine
                 /// @brief Gets the next available workunit for execution.
                 /// @details This finds the next available WorkUnit which has not started execution, has no dependencies that have
                 /// not complete, has the most WorkUnits Units that depend on it (has the highest runtime in the case of a tie).
-                /// @return A pointer to the WorkUnit that could be executed. This does not give ownership of that WorkUnit.
+                /// @return A pointer to the WorkUnit that could be executed or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
                 virtual WorkUnit* GetNextWorkUnit();
+
+                /// @brief Just like
+                /// @return A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
+                virtual WorkUnit* GetNextWorkUnitAffinity();
 
                 /// @brief Get the amount of threads that will be used to execute WorkUnits a the start of the next frame.
                 /// @return A Whole with the current desired thread count.
@@ -254,9 +264,9 @@ namespace Mezzanine
                 /// @brief Sort the workUnits
                 void SortWorkUnits(bool UpdateDependentGraph_ = true);
 
-                void SortAffinityWorkUnits(bool UpdateDependentGraph_ = true);
+                void SortWorkUnitsAffinity(bool UpdateDependentGraph_ = true);
 
-                void SortAllWorkUnits(bool UpdateDependentGraph_ = true);
+                void SortWorkUnitsAll(bool UpdateDependentGraph_ = true);
 
                 // advanced is done by default when sorting the WorkUnits
                 void UpdateDependentGraph();

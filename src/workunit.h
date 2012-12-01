@@ -171,14 +171,14 @@ namespace Mezzanine
                 // Deciding when to and doing the work
 
                 /// @brief This tracks work unit metadata, then calls DoWork
-                virtual void operator() (ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler);
+                virtual void operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler);
 
                 /// @brief Get the sorting metadata.
                 /// @return A WorkUnitKey suitable for sorting this workunit
                 virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount);
 
                 /// @brief WorkUnits Must implement these to do the work
-                virtual void DoWork(ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler) = 0;
+                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler) = 0;
 
                 /// @brief Simple constructor
                 WorkUnit() : CurrentRunningState(NotStarted)

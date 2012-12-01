@@ -65,11 +65,10 @@ namespace Mezzanine
         const static Whole DBRUser = 1;
 
         /// @brief A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanisms.
-        /// @details It is intended for there to be a work unit that just swaps buffers. This work unit will depend on every
-        /// other work unit (that is not also not a buffer swapper, so that it will not conflict with any other thread specific
-        /// system resources. Only one other workunit may access the buffered data. For example. With the Logging Double buffered
-        /// resource there is a workunit that swaps the logs that is ran almost last every time, and another that runs at no
-        /// specified time (other than before the log swapping workunit) which aggregates all the logs to be committed.
+        /// @details It is intended for a @ref Mezzanine::Threading::WorkUnit "WorkUnit" like the
+        /// @ref Mezzanine::Threading::LogBufferSwapper "LogBufferSwapper" that just swaps buffers. This work unit should be
+        /// configured depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict
+        /// with any other double buffered resources).
         template<typename T>
         class DoubleBufferedResource
         {
@@ -82,11 +81,9 @@ namespace Mezzanine
 
             public:
                 /// @brief A Constructor that creates default versions of the resources.
-                /// @details This calls the default constructors for type T. This
-                DoubleBufferedResource()
+                /// @details This calls the default constructors for type T.
+                DoubleBufferedResource() : ResourceA(0), ResourceB(0)
                 {
-                    ResourceA=0;
-                    ResourceB=0;
                     try
                     {
                         ResourceA = new T;
@@ -104,10 +101,10 @@ namespace Mezzanine
                 /// @brief A constructor that takes ownership of the the resources passed.
                 /// @param Current This will be used as the first resource for threads to use.
                 /// @param Buffer This will wait for the other thread
-                DoubleBufferedResource(T* Current, T* Buffer) : ResourceA(Current), ResourceB(Buffer)
+                DoubleBufferedResource(T* Current, T* Buffer)
                     {}
 
-                /// @brief Move the buffered to the active and vice versa.
+                /// @brief Make the buffered resource the active and vice versa.
                 void SwapUsableAndCommitable()
                     { std::swap(ResourceA,ResourceB); }
 
@@ -141,10 +138,12 @@ namespace Mezzanine
 
         // @brief DoubleBufferedResources has a default instantiation to be used for logging.
         //template class DoubleBufferedResource<std::stringstream>;
+        // As much as I like having the explicit declaration some compilers (Mac OSX gcc 4.2.1) decide to allocate resources here and that usually results in duplicate symbols during linking
 
         /// @brief A better default name for the Default Logger instance.
         typedef DoubleBufferedResource<std::stringstream> DoubleBufferedLogger;
 
+        // forward declarations
         class FrameScheduler;
 
         /// @brief A threadspecific collection of double-buffered and algorithm specific resources.
@@ -194,21 +193,14 @@ namespace Mezzanine
                     delete (DoubleBufferedLogger*)this->ThreadResources[DBRLogger]; // Items must wind up in the correct spot in the vector for this to work. Be careful to get the order right if you overload this.
                 }
 
-                // @brief Should the thread this resource is associated with quit.
-                // @return A bool containing true if the thread should quit, and false if it shouldn't
-                // bool ShouldThreadQuit()
-                //    { return Quit; }
+        };
 
-                // @brief Tell the thread associated with this resource to quit or prevent it from quiting.
-                // @details This is intended to be called by the frame scheduler. Calling it carelessly
-                // could cause a race condition. In the Default implementation each thread only checks if
-                // it should quit just before it does its work for the frame. Remember that the CPU can
-                // re-order any instructions that have no memory barrier around them. This must be set prior
-                // to somekind of mutex or atomic action, to insure that your thread and the target thread
-                // see the same value in this bool.
-                // @param Quit_ Should be true if you want the thread to quit and false otherwise.
-                // void SetShouldThreadQuit(bool Quit_)
-                //    { Quit=Quit_; }
+        /// @brief Use this to change the default resource type.
+        /// @details use "DefaultThreadSpecificStorage::Type" as Type to instantiate an instance of whatever type this is.
+        struct DefaultThreadSpecificStorage
+        {
+            /// @brief A single point at which all the thread specific resources can be changed.
+            typedef ThreadSpecificStorage Type;
         };
 
     }

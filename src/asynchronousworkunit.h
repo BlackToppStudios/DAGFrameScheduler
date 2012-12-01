@@ -42,6 +42,7 @@
 #define _asynchronousworkunit_h
 
 #include "datatypes.h"
+#include "doublebufferedresource.h"
 #include "workunit.h"
 
 /// @file
@@ -57,7 +58,7 @@ namespace Mezzanine
             public:
                 virtual bool IsWorkDone();
 
-                virtual void DoWork(ThreadSpecificStorage& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler) = 0;
+                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler) = 0;
 
 
         };

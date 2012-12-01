@@ -13,6 +13,14 @@ The 'doc' folder contains further licensing details, technical documentation and
 	The Doxygen configuration resides in 'doc/doxyfiles'
 
  -- NEWS --
+	Nov 30, 2012
+		Created a single point at which to update all the creation of double buffered resources. The goal is to make changing this easy if another project wants to add double buffered resources to each thread.
+		Added WorkUnit affinity. A special way to add WorkUnits so that they will be scheduled with the rest of the WorkUnits, but only executed on the main thread.
+		More Documentation updates.
+
+	Nov 29, 2012
+		Documentation updates.
+
 	Nov 28, 2012
 		Bugfixes with workunit sorting and a simple performance test has been added.
 

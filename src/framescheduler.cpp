@@ -59,11 +59,11 @@ namespace Mezzanine
 
         /// @cond 0
 
-        /// @brief This is the function that all threads will run.
-        /// @param ThreadStorage A pointer to a ThreadSpecificStorage that has the required data to launch a thread.
+        /// @brief This is the function that all threads will run, except the main.
+        /// @param ThreadStorage A pointer to a ThreadSpecificStorage that has the required data for a thread after it launches.
         void ThreadWork(void* ThreadStorage)
         {
-            ThreadSpecificStorage& Storage = *((ThreadSpecificStorage*)ThreadStorage);
+            DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
             WorkUnit* CurrentUnit;
             while(CurrentUnit = FS.GetNextWorkUnit())
@@ -72,6 +72,21 @@ namespace Mezzanine
                     { CurrentUnit->operator()(Storage,FS); }
             }
         }
+
+        /// @brief This is the function that the main thread rungs.
+        /// @param ThreadStorage A pointer to a ThreadSpecificStorage that has the required data for a thread after it launches.
+        void ThreadWorkAffinity(void* ThreadStorage)
+        {
+            DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
+            FrameScheduler& FS = *(Storage.GetFrameScheduler());
+            WorkUnit* CurrentUnit;
+            while(CurrentUnit = FS.GetNextWorkUnitAffinity())
+            {
+                if(Starting==CurrentUnit->TakeOwnerShip())
+                    { CurrentUnit->operator()(Storage,FS); }
+            }
+        }
+
         /// @endcond
 
         // Protected Methods
@@ -83,7 +98,7 @@ namespace Mezzanine
             for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
             {
                 if(Count+1>Resources.size())
-                    { Resources.push_back(new ThreadSpecificStorage(this)); }
+                    { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
                 Threads.push_back(new thread(ThreadWork, Resources[Count]));
             }
             // Add the check for trying a different amount of frames here
@@ -156,7 +171,7 @@ namespace Mezzanine
             FrameCount(0), TargetFrameLength(16666), CurrentFrameStart(0),
             TimingCostAllowance(125),
 			LoggingToAnOwnedFileStream(true)
-        { Resources.push_back(new ThreadSpecificStorage(this)); }
+        { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
@@ -164,7 +179,7 @@ namespace Mezzanine
 			FrameCount(0), TargetFrameLength(16666), CurrentFrameStart(0),
 			TimingCostAllowance(125),
 			LoggingToAnOwnedFileStream(false)
-        { Resources.push_back(new ThreadSpecificStorage(this)); }
+        { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
         FrameScheduler::~FrameScheduler()
         {
@@ -178,7 +193,7 @@ namespace Mezzanine
                 { delete Iter->Unit; }
             for(std::vector<MonopolyWorkUnit*>::iterator Iter = Monopolies.begin(); Iter!=Monopolies.end(); ++Iter)
                 { delete *Iter; }
-            for(std::vector<ThreadSpecificStorage*>::iterator Iter = Resources.begin(); Iter!=Resources.end(); ++Iter)
+            for(std::vector<DefaultThreadSpecificStorage::Type*>::iterator Iter = Resources.begin(); Iter!=Resources.end(); ++Iter)
                 { delete *Iter; }
             DeleteThreads();
         }
@@ -203,7 +218,7 @@ namespace Mezzanine
 
         WorkUnit* FrameScheduler::GetNextWorkUnit()
         {
-            /// @todo here the shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
+            /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
             /*
             for (std::vector<WorkUnit*>::iterator Iter = Dependencies.begin(); Iter!=Dependencies.end(); ++Iter)
             {
@@ -217,6 +232,18 @@ namespace Mezzanine
                     { return Iter->Unit; }
             }
             return 0;
+        }
+
+        WorkUnit* FrameScheduler::GetNextWorkUnitAffinity()
+        {
+            /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
+
+            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitAffinity.rbegin(); Iter!=WorkUnitAffinity.rend(); ++Iter)
+            {
+                if(NotStarted==Iter->Unit->GetRunningState())
+                    { return Iter->Unit; }
+            }
+            return GetNextWorkUnit();
         }
 
         Whole FrameScheduler::GetThreadCount()
@@ -258,7 +285,7 @@ namespace Mezzanine
             }
         }
 
-        void FrameScheduler::SortAffinityWorkUnits(bool UpdateDependentGraph_)
+        void FrameScheduler::SortWorkUnitsAffinity(bool UpdateDependentGraph_)
         {
             if(WorkUnitAffinity.size())
             {
@@ -269,11 +296,11 @@ namespace Mezzanine
             }
         }
 
-        void FrameScheduler::SortAllWorkUnits(bool UpdateDependentGraph_)
+        void FrameScheduler::SortWorkUnitsAll(bool UpdateDependentGraph_)
         {
             if(UpdateDependentGraph_)
                 { UpdateDependentGraph(); }
-            SortAffinityWorkUnits(false);
+            SortWorkUnitsAffinity(false);
             SortWorkUnits(false);
         }
 
