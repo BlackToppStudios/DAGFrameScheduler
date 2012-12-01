@@ -32,7 +32,7 @@
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 1470;
+var viewWidth = 1502;
 var viewHeight = 300;
 var sectionId = 'dynsection-0';
 </script>
@@ -40,22 +40,22 @@ var sectionId = 'dynsection-0';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>G</title>
-<polygon fill="white" stroke="white" points="-4,5 -4,-296 1467,-296 1467,5 -4,5"/>
+<polygon fill="white" stroke="white" points="-4,5 -4,-296 1499,-296 1499,5 -4,5"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<polygon fill="#bfbfbf" stroke="black" points="1262,-97 1262,-119 1462,-119 1462,-97 1262,-97"/>
-<text text-anchor="middle" x="1362" y="-106" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::FrameScheduler</text>
+<polygon fill="#bfbfbf" stroke="black" points="1294,-97 1294,-119 1494,-119 1494,-97 1294,-97"/>
+<text text-anchor="middle" x="1394" y="-106" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::FrameScheduler</text>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
-<polygon fill="white" stroke="#bfbfbf" points="920,-240 920,-262 1144,-262 1144,-240 920,-240"/>
-<text text-anchor="middle" x="1032" y="-249" font-family="FreeSans" font-size="10.00">std::map&lt; WorkUnit *, std::set&lt; WorkUnit * &gt; &gt;</text>
+<polygon fill="white" stroke="#bfbfbf" points="936,-240 936,-262 1160,-262 1160,-240 936,-240"/>
+<text text-anchor="middle" x="1048" y="-249" font-family="FreeSans" font-size="10.00">std::map&lt; WorkUnit *, std::set&lt; WorkUnit * &gt; &gt;</text>
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge2" class="edge"><title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1090.42,-237.468C1133.93,-226.289 1194.17,-208.457 1244,-185 1284.06,-166.142 1326.46,-135.458 1347.87,-119.099"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1089.4,-234.114 1080.57,-239.958 1091.12,-240.9 1089.4,-234.114"/>
-<text text-anchor="middle" x="1203" y="-220" font-family="FreeSans" font-size="10.00"> DependentGraph</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1111.14,-237.599C1157.91,-226.455 1222.52,-208.462 1276,-184 1316.11,-165.654 1358.49,-135.258 1379.88,-119.023"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1110.09,-234.252 1101.15,-239.941 1111.68,-241.067 1110.09,-234.252"/>
+<text text-anchor="middle" x="1235" y="-218" font-family="FreeSans" font-size="10.00"> DependentGraph</text>
 </g>
 <!-- Node3 -->
 <g id="node4" class="node"><title>Node3</title>
@@ -64,8 +64,8 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node3&#45;&gt;Node2 -->
 <g id="edge4" class="edge"><title>Node3&#45;&gt;Node2</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M790.429,-251C828.296,-251 876.524,-251 919.914,-251"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="790.035,-247.5 780.035,-251 790.035,-254.5 790.035,-247.5"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M790.45,-251C832.375,-251 887.319,-251 935.685,-251"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="790.355,-247.5 780.355,-251 790.355,-254.5 790.355,-247.5"/>
 <text text-anchor="middle" x="879" y="-256" font-family="FreeSans" font-size="10.00"> elements</text>
 </g>
 <!-- Node4 -->
@@ -77,7 +77,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node4&#45;&gt;Node2 -->
 <g id="edge14" class="edge"><title>Node4&#45;&gt;Node2</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M450.019,-227.338C469.667,-236.513 495.84,-247.759 520,-255 558.079,-266.412 568.408,-267.43 608,-271 738.142,-282.735 771.796,-280.017 902,-269 921.639,-267.338 942.848,-264.744 962.324,-262.038"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M450.019,-227.338C469.667,-236.513 495.84,-247.759 520,-255 558.079,-266.412 568.408,-267.43 608,-271 738.142,-282.735 771.717,-279.046 902,-269 923.899,-267.311 947.561,-264.726 969.33,-262.037"/>
 <polygon fill="#9a32cd" stroke="#9a32cd" points="451.47,-224.152 440.936,-223.027 448.469,-230.476 451.47,-224.152"/>
 <text text-anchor="middle" x="723" y="-283" font-family="FreeSans" font-size="10.00"> keys</text>
 </g>
@@ -98,15 +98,15 @@ var sectionId = 'dynsection-0';
 <polygon fill="#9a32cd" stroke="#9a32cd" points="511.656,-208.195 501.668,-211.728 511.679,-215.195 511.656,-208.195"/>
 <text text-anchor="middle" x="555" y="-216" font-family="FreeSans" font-size="10.00"> elements</text>
 </g>
-<!-- Node10 -->
-<g id="node20" class="node"><title>Node10</title>
+<!-- Node12 -->
+<g id="node24" class="node"><title>Node12</title>
 <a xlink:href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" target="_top" xlink:title="A kind of workunit given exclusive runtime so it can consume time on multiple threads.">
 <polygon fill="white" stroke="black" points="618.5,-160 618.5,-182 827.5,-182 827.5,-160 618.5,-160"/>
 <text text-anchor="middle" x="723" y="-169" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::MonopolyWorkUnit</text>
 </a>
 </g>
-<!-- Node4&#45;&gt;Node10 -->
-<g id="edge24" class="edge"><title>Node4&#45;&gt;Node10</title>
+<!-- Node4&#45;&gt;Node12 -->
+<g id="edge28" class="edge"><title>Node4&#45;&gt;Node12</title>
 <path fill="none" stroke="midnightblue" d="M471.465,-198.635C487.006,-195.061 504.116,-191.501 520,-189 551.805,-183.992 586.65,-180.27 618.354,-177.553"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="470.442,-195.28 461.507,-200.974 472.043,-202.094 470.442,-195.28"/>
 </g>
@@ -144,14 +144,14 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node7 -->
 <g id="node14" class="node"><title>Node7</title>
-<polygon fill="white" stroke="#bfbfbf" points="973.5,-80 973.5,-102 1090.5,-102 1090.5,-80 973.5,-80"/>
-<text text-anchor="middle" x="1032" y="-89" font-family="FreeSans" font-size="10.00">std::vector&lt; thread * &gt;</text>
+<polygon fill="white" stroke="#bfbfbf" points="989.5,-80 989.5,-102 1106.5,-102 1106.5,-80 989.5,-80"/>
+<text text-anchor="middle" x="1048" y="-89" font-family="FreeSans" font-size="10.00">std::vector&lt; thread * &gt;</text>
 </g>
 <!-- Node7&#45;&gt;Node1 -->
 <g id="edge16" class="edge"><title>Node7&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1100.58,-88.5197C1142.14,-87.6335 1196.18,-87.573 1244,-91 1261.34,-92.2428 1280.01,-94.5003 1297.26,-96.9728"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1100.49,-85.0209 1090.57,-88.7543 1100.65,-92.019 1100.49,-85.0209"/>
-<text text-anchor="middle" x="1203" y="-96" font-family="FreeSans" font-size="10.00"> Threads</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1116.66,-88.4463C1161.97,-87.39 1222.59,-87.1726 1276,-91 1293.34,-92.2428 1312.01,-94.5003 1329.26,-96.9728"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1116.57,-84.9475 1106.66,-88.6989 1116.74,-91.9453 1116.57,-84.9475"/>
+<text text-anchor="middle" x="1235" y="-96" font-family="FreeSans" font-size="10.00"> Threads</text>
 </g>
 <!-- Node8 -->
 <g id="node16" class="node"><title>Node8</title>
@@ -162,81 +162,81 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node8&#45;&gt;Node7 -->
 <g id="edge18" class="edge"><title>Node8&#45;&gt;Node7</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M810.419,-91C862.517,-91 927.245,-91 973.26,-91"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="810.177,-87.5001 800.177,-91 810.177,-94.5001 810.177,-87.5001"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M810.063,-91C866.813,-91 939.337,-91 989.318,-91"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="810.02,-87.5001 800.02,-91 810.02,-94.5001 810.02,-87.5001"/>
 <text text-anchor="middle" x="879" y="-96" font-family="FreeSans" font-size="10.00"> elements</text>
 </g>
 <!-- Node9 -->
 <g id="node18" class="node"><title>Node9</title>
-<polygon fill="white" stroke="#bfbfbf" points="945.5,-166 945.5,-188 1118.5,-188 1118.5,-166 945.5,-166"/>
-<text text-anchor="middle" x="1032" y="-175" font-family="FreeSans" font-size="10.00">std::vector&lt; MonopolyWorkUnit * &gt;</text>
+<polygon fill="white" stroke="#bfbfbf" points="920.5,-40 920.5,-62 1175.5,-62 1175.5,-40 920.5,-40"/>
+<text text-anchor="middle" x="1048" y="-49" font-family="FreeSans" font-size="10.00">std::vector&lt; DefaultThreadSpecificStorage::Type * &gt;</text>
 </g>
 <!-- Node9&#45;&gt;Node1 -->
 <g id="edge20" class="edge"><title>Node9&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1128.87,-171.195C1165.32,-167.667 1206.91,-162.02 1244,-153 1277.66,-144.815 1314.72,-129.592 1338.16,-119.136"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1128.37,-167.726 1118.73,-172.135 1129.01,-174.696 1128.37,-167.726"/>
-<text text-anchor="middle" x="1203" y="-172" font-family="FreeSans" font-size="10.00"> Monopolies</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1185.77,-56.5124C1215.7,-59.2001 1247.06,-63.1643 1276,-69 1307.94,-75.4405 1343.25,-87.8519 1366.85,-96.9497"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1185.94,-53.0143 1175.68,-55.649 1185.34,-59.9888 1185.94,-53.0143"/>
+<text text-anchor="middle" x="1235" y="-74" font-family="FreeSans" font-size="10.00"> Resources</text>
 </g>
-<!-- Node10&#45;&gt;Node9 -->
-<g id="edge22" class="edge"><title>Node10&#45;&gt;Node9</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M838.051,-173.234C873.621,-173.925 912.179,-174.673 945.477,-175.32"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="837.679,-169.726 827.613,-173.031 837.543,-176.725 837.679,-169.726"/>
-<text text-anchor="middle" x="879" y="-179" font-family="FreeSans" font-size="10.00"> elements</text>
-</g>
-<!-- Node11 -->
-<g id="node23" class="node"><title>Node11</title>
-<polygon fill="white" stroke="#bfbfbf" points="935,-40 935,-62 1129,-62 1129,-40 935,-40"/>
-<text text-anchor="middle" x="1032" y="-49" font-family="FreeSans" font-size="10.00">std::vector&lt; ThreadSpecificStorage * &gt;</text>
-</g>
-<!-- Node11&#45;&gt;Node1 -->
-<g id="edge26" class="edge"><title>Node11&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1139.55,-55.9863C1173.22,-58.7884 1210.36,-63.1648 1244,-70 1275.43,-76.3856 1310.24,-88.2108 1333.86,-96.9805"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1139.47,-52.4687 1129.22,-55.1663 1138.91,-59.4467 1139.47,-52.4687"/>
-<text text-anchor="middle" x="1203" y="-75" font-family="FreeSans" font-size="10.00"> Resources</text>
-</g>
-<!-- Node12 -->
-<g id="node25" class="node"><title>Node12</title>
+<!-- Node10 -->
+<g id="node20" class="node"><title>Node10</title>
 <a xlink:href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" target="_top" xlink:title="A threadspecific collection of double&#45;buffered and algorithm specific resources.">
 <polygon fill="white" stroke="black" points="608,-40 608,-62 838,-62 838,-40 608,-40"/>
 <text text-anchor="middle" x="723" y="-49" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::ThreadSpecificStorage</text>
 </a>
 </g>
-<!-- Node12&#45;&gt;Node11 -->
-<g id="edge28" class="edge"><title>Node12&#45;&gt;Node11</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M848.177,-51C876.963,-51 907.16,-51 934.568,-51"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="848.06,-47.5001 838.06,-51 848.06,-54.5001 848.06,-47.5001"/>
+<!-- Node10&#45;&gt;Node9 -->
+<g id="edge22" class="edge"><title>Node10&#45;&gt;Node9</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M848.119,-51C871.811,-51 896.624,-51 920.391,-51"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="848.04,-47.5001 838.04,-51 848.04,-54.5001 848.04,-47.5001"/>
 <text text-anchor="middle" x="879" y="-56" font-family="FreeSans" font-size="10.00"> elements</text>
+</g>
+<!-- Node11 -->
+<g id="node22" class="node"><title>Node11</title>
+<polygon fill="white" stroke="#bfbfbf" points="961.5,-166 961.5,-188 1134.5,-188 1134.5,-166 961.5,-166"/>
+<text text-anchor="middle" x="1048" y="-175" font-family="FreeSans" font-size="10.00">std::vector&lt; MonopolyWorkUnit * &gt;</text>
+</g>
+<!-- Node11&#45;&gt;Node1 -->
+<g id="edge24" class="edge"><title>Node11&#45;&gt;Node1</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1144.63,-171.723C1185.55,-168.123 1233.5,-162.089 1276,-152 1309.4,-144.072 1346.21,-129.319 1369.69,-119.094"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1144.33,-168.236 1134.66,-172.565 1144.92,-175.211 1144.33,-168.236"/>
+<text text-anchor="middle" x="1235" y="-171" font-family="FreeSans" font-size="10.00"> Monopolies</text>
+</g>
+<!-- Node12&#45;&gt;Node11 -->
+<g id="edge26" class="edge"><title>Node12&#45;&gt;Node11</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M837.84,-173.12C878.433,-173.87 923.378,-174.699 961.251,-175.398"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="837.684,-169.617 827.621,-172.931 837.555,-176.616 837.684,-169.617"/>
+<text text-anchor="middle" x="879" y="-179" font-family="FreeSans" font-size="10.00"> elements</text>
 </g>
 <!-- Node13 -->
 <g id="node27" class="node"><title>Node13</title>
-<polygon fill="white" stroke="#bfbfbf" points="962.5,-120 962.5,-142 1101.5,-142 1101.5,-120 962.5,-120"/>
-<text text-anchor="middle" x="1032" y="-129" font-family="FreeSans" font-size="10.00">std::vector&lt; WorkUnitKey &gt;</text>
+<polygon fill="white" stroke="#bfbfbf" points="978.5,-120 978.5,-142 1117.5,-142 1117.5,-120 978.5,-120"/>
+<text text-anchor="middle" x="1048" y="-129" font-family="FreeSans" font-size="10.00">std::vector&lt; WorkUnitKey &gt;</text>
 </g>
 <!-- Node13&#45;&gt;Node1 -->
 <g id="edge30" class="edge"><title>Node13&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1111.61,-125.451C1156.76,-122.305 1213.68,-118.338 1261.83,-114.981"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1111.31,-121.963 1101.58,-126.15 1111.8,-128.947 1111.31,-121.963"/>
-<text text-anchor="middle" x="1203" y="-140" font-family="FreeSans" font-size="10.00"> WorkUnitsMain</text>
-<text text-anchor="middle" x="1203" y="-126" font-family="FreeSans" font-size="10.00">WorkUnitAffinity</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1127.59,-125.709C1176.98,-122.426 1240.86,-118.18 1293.69,-114.668"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1127.35,-122.218 1117.6,-126.373 1127.81,-129.202 1127.35,-122.218"/>
+<text text-anchor="middle" x="1235" y="-139" font-family="FreeSans" font-size="10.00"> WorkUnitsMain</text>
+<text text-anchor="middle" x="1235" y="-125" font-family="FreeSans" font-size="10.00">WorkUnitAffinity</text>
 </g>
 <!-- Node14&#45;&gt;Node13 -->
 <g id="edge32" class="edge"><title>Node14&#45;&gt;Node13</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M824.162,-131C869.341,-131 921.455,-131 962.197,-131"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="824.039,-127.5 814.039,-131 824.039,-134.5 824.039,-127.5"/>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M824.595,-131C874.598,-131 933.598,-131 978.406,-131"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="824.396,-127.5 814.396,-131 824.395,-134.5 824.396,-127.5"/>
 <text text-anchor="middle" x="879" y="-136" font-family="FreeSans" font-size="10.00"> elements</text>
 </g>
 <!-- Node15 -->
 <g id="node32" class="node"><title>Node15</title>
 <a xlink:title="STL class.">
-<polygon fill="white" stroke="#bfbfbf" points="995.5,-0 995.5,-22 1068.5,-22 1068.5,-0 995.5,-0"/>
-<text text-anchor="middle" x="1032" y="-9" font-family="FreeSans" font-size="10.00">std::ostream</text>
+<polygon fill="white" stroke="#bfbfbf" points="1011.5,-0 1011.5,-22 1084.5,-22 1084.5,-0 1011.5,-0"/>
+<text text-anchor="middle" x="1048" y="-9" font-family="FreeSans" font-size="10.00">std::ostream</text>
 </a>
 </g>
 <!-- Node15&#45;&gt;Node1 -->
 <g id="edge36" class="edge"><title>Node15&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1078.68,-12.238C1122.44,-14.5878 1189.17,-21.2566 1244,-40 1284.05,-53.6893 1325.78,-81.4806 1347.27,-96.9604"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1078.77,-8.73843 1068.61,-11.7521 1078.43,-15.7303 1078.77,-8.73843"/>
-<text text-anchor="middle" x="1203" y="-45" font-family="FreeSans" font-size="10.00"> LogDestination</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1094.72,-11.2495C1141.68,-12.7582 1215.58,-18.5972 1276,-39 1316.47,-52.6666 1358.37,-81.2271 1379.68,-96.9804"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1094.63,-7.74607 1084.54,-10.9771 1094.45,-14.7436 1094.63,-7.74607"/>
+<text text-anchor="middle" x="1235" y="-44" font-family="FreeSans" font-size="10.00"> LogDestination</text>
 </g>
 <!-- Node16 -->
 <g id="node34" class="node"><title>Node16</title>
@@ -247,8 +247,8 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node16&#45;&gt;Node15 -->
 <g id="edge38" class="edge"><title>Node16&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M803.275,-11C865.326,-11 948.328,-11 995.381,-11"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="803.117,-7.5001 793.117,-11 803.117,-14.5001 803.117,-7.5001"/>
+<path fill="none" stroke="midnightblue" d="M803.149,-11C869.607,-11 961.045,-11 1011.27,-11"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="803.12,-7.5001 793.12,-11 803.12,-14.5001 803.12,-7.5001"/>
 </g>
 <!-- Node17 -->
 <g id="node36" class="node"><title>Node17</title>

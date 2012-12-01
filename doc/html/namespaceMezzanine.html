@@ -112,11 +112,10 @@ typedef int8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3255e3403209b45d41e1c21b58e1ed19"></a><!-- doxytag: member="Mezzanine::Integer" ref="a3255e3403209b45d41e1c21b58e1ed19" args="" -->
 typedef int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a3255e3403209b45d41e1c21b58e1ed19">Integer</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Integer is a signed integer. In general it will be the most efficient signed type for math. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac0e305210456ef0132dc20c06aa292dd"></a><!-- doxytag: member="Mezzanine::Logger" ref="ac0e305210456ef0132dc20c06aa292dd" args="" -->
-typedef std::stringstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd">Logger</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">In case we ever replace the stringstream with another class. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef std::stringstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd">Logger</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">In case we ever replace the stringstream with another class, this will allow us to swap it out.  <a href="#ac0e305210456ef0132dc20c06aa292dd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A large integer type suitable for compile time math in the chrono implementation.  <a href="#ad7ab1b85229be184e16d96c505143f9b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A large integer type suitable for compile time math and long term microseconf time keeping.  <a href="#ad7ab1b85229be184e16d96c505143f9b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a35eea04e090afa5803c92b8be71c67"></a><!-- doxytag: member="Mezzanine::String" ref="a1a35eea04e090afa5803c92b8be71c67" args="" -->
 typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">String</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">String will provide most of the functionality of std::string but could be implemented in a variety of ways to optimize it. <br/></td></tr>
@@ -160,6 +159,24 @@ Functions</h2></td></tr>
 <div class="textblock"><p>All of the <a class="el" href="namespaceMezzanine.html" title="All of the Mezzanine game library components reside in this namespace.">Mezzanine</a> game library components reside in this namespace. </p>
 <p>The DAG Frame Scheduler is just one part of many in the <a class="el" href="namespaceMezzanine.html" title="All of the Mezzanine game library components reside in this namespace.">Mezzanine</a>. The <a class="el" href="namespaceMezzanine.html" title="All of the Mezzanine game library components reside in this namespace.">Mezzanine</a> as a whole is intended to tie a complex collection of libraries into one cohesive library. </p>
 </div><hr/><h2>Typedef Documentation</h2>
+<a class="anchor" id="ac0e305210456ef0132dc20c06aa292dd"></a><!-- doxytag: member="Mezzanine::Logger" ref="ac0e305210456ef0132dc20c06aa292dd" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef std::stringstream <a class="el" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd">Mezzanine::Logger</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>In case we ever replace the stringstream with another class, this will allow us to swap it out. </p>
+<p>This will always support &lt;&lt;, str() but may lose support for formatting functions like std::hex. </p>
+
+<p>Definition at line <a class="el" href="datatypes_8h_source.html#l00114">114</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ad7ab1b85229be184e16d96c505143f9b"></a><!-- doxytag: member="Mezzanine::MaxInt" ref="ad7ab1b85229be184e16d96c505143f9b" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -171,8 +188,8 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>A large integer type suitable for compile time math in the chrono implementation. </p>
-<p>For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807. That is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for 292 years. </p>
+<p>A large integer type suitable for compile time math and long term microseconf time keeping. </p>
+<p>For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807. In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for 292 years. </p>
 
 <p>Definition at line <a class="el" href="datatypes_8h_source.html#l00109">109</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
 
@@ -297,6 +314,6 @@ Functions</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Fri Nov 30 2012 17:58:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

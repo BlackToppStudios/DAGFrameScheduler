@@ -1,22 +1,22 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="175,406,265,437"/>
-<area shape="rect" id="node7" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="753,486,903,517"/>
-<area shape="rect" id="node13" href="$workunit_8h.html" title="This file has the defintion of the workunit." alt="" coords="647,326,727,357"/>
-<area shape="rect" id="node16" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or writes a." alt="" coords="865,406,1028,437"/>
-<area shape="rect" id="node19" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="340,406,521,437"/>
-<area shape="rect" id="node27" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="865,246,991,277"/>
-<area shape="rect" id="node32" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1088,86,1189,117"/>
-<area shape="rect" id="node43" href="$systemcalls_8cpp.html" title="This file defines some time&#45;tracking functions." alt="" coords="1269,166,1387,197"/>
-<area shape="rect" id="node47" href="$atomiccas_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="476,86,569,117"/>
-<area shape="rect" id="node51" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="329,326,503,357"/>
-<area shape="rect" id="node58" href="$rollingaverage_8h.html" title="This Store the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="380,246,497,277"/>
-<area shape="rect" id="node62" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="681,166,783,197"/>
-<area shape="rect" id="node5" href="$asynchronousworkunit_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="296,486,475,517"/>
+<area shape="rect" id="node3" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="237,406,328,437"/>
+<area shape="rect" id="node7" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="717,486,867,517"/>
+<area shape="rect" id="node13" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="360,166,533,197"/>
+<area shape="rect" id="node16" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="509,246,635,277"/>
+<area shape="rect" id="node18" href="$workunit_8h.html" title="This file has the defintion of the workunit." alt="" coords="839,326,919,357"/>
+<area shape="rect" id="node21" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or writes a." alt="" coords="813,406,976,437"/>
+<area shape="rect" id="node24" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="352,406,533,437"/>
+<area shape="rect" id="node41" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1215,86,1316,117"/>
+<area shape="rect" id="node52" href="$systemcalls_8cpp.html" title="This file defines some time&#45;tracking functions." alt="" coords="1115,166,1232,197"/>
+<area shape="rect" id="node56" href="$atomiccas_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="1296,326,1389,357"/>
+<area shape="rect" id="node61" href="$rollingaverage_8h.html" title="This Store the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="1003,246,1120,277"/>
+<area shape="rect" id="node65" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="672,166,773,197"/>
+<area shape="rect" id="node5" href="$asynchronousworkunit_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="168,486,347,517"/>
 <area shape="rect" id="node9" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm." alt="" coords="5,486,144,517"/>
-<area shape="rect" id="node11" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="168,486,272,517"/>
-<area shape="rect" id="node25" href="$workunit_8cpp.html" title="This file has the implementation of the workunit." alt="" coords="647,406,740,437"/>
-<area shape="rect" id="node22" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly." alt="" coords="499,486,693,517"/>
-<area shape="rect" id="node34" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1072,166,1141,197"/>
-<area shape="rect" id="node38" href="$thread_8cpp.html" title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1065,246,1148,277"/>
-<area shape="rect" id="node67" href="$workunitkey_8cpp.html" title="This file declares the functionality of the metadata used to sort workunits." alt="" coords="673,246,791,277"/>
+<area shape="rect" id="node11" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="589,486,693,517"/>
+<area shape="rect" id="node27" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly." alt="" coords="371,486,565,517"/>
+<area shape="rect" id="node30" href="$workunit_8cpp.html" title="This file has the implementation of the workunit." alt="" coords="1161,406,1255,437"/>
+<area shape="rect" id="node43" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1256,166,1325,197"/>
+<area shape="rect" id="node47" href="$thread_8cpp.html" title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1245,246,1328,277"/>
+<area shape="rect" id="node70" href="$workunitkey_8cpp.html" title="This file declares the functionality of the metadata used to sort workunits." alt="" coords="760,246,877,277"/>
 </map>

@@ -1,24 +1,24 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="851,86,941,117"/>
-<area shape="rect" id="node9" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="492,566,641,597"/>
-<area shape="rect" id="node36" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="252,246,321,277"/>
-<area shape="rect" id="node73" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="139,166,205,197"/>
-<area shape="rect" id="node5" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="943,486,1033,517"/>
-<area shape="rect" id="node15" href="$workunit_8h.html" title="This file has the defintion of the workunit." alt="" coords="751,406,831,437"/>
-<area shape="rect" id="node18" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or writes a." alt="" coords="604,486,767,517"/>
-<area shape="rect" id="node21" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="1108,486,1289,517"/>
-<area shape="rect" id="node29" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="888,326,1013,357"/>
-<area shape="rect" id="node34" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="845,166,947,197"/>
-<area shape="rect" id="node45" href="$systemcalls_8cpp.html" title="This file defines some time&#45;tracking functions." alt="" coords="947,246,1064,277"/>
-<area shape="rect" id="node49" href="$atomiccas_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="1240,406,1333,437"/>
-<area shape="rect" id="node53" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="1357,406,1531,437"/>
-<area shape="rect" id="node60" href="$rollingaverage_8h.html" title="This Store the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="403,326,520,357"/>
-<area shape="rect" id="node64" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="669,246,771,277"/>
-<area shape="rect" id="node7" href="$asynchronousworkunit_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="733,566,912,597"/>
-<area shape="rect" id="node11" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm." alt="" coords="1064,566,1203,597"/>
-<area shape="rect" id="node13" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="936,566,1040,597"/>
-<area shape="rect" id="node27" href="$workunit_8cpp.html" title="This file has the implementation of the workunit." alt="" coords="1313,486,1407,517"/>
-<area shape="rect" id="node24" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly." alt="" coords="1312,566,1507,597"/>
-<area shape="rect" id="node40" href="$thread_8cpp.html" title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="245,326,328,357"/>
-<area shape="rect" id="node69" href="$workunitkey_8cpp.html" title="This file declares the functionality of the metadata used to sort workunits." alt="" coords="696,326,813,357"/>
+<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="932,86,1023,117"/>
+<area shape="rect" id="node9" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="869,566,1019,597"/>
+<area shape="rect" id="node45" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1460,246,1529,277"/>
+<area shape="rect" id="node76" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="1435,166,1501,197"/>
+<area shape="rect" id="node5" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="212,486,303,517"/>
+<area shape="rect" id="node15" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="336,246,509,277"/>
+<area shape="rect" id="node18" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="539,326,664,357"/>
+<area shape="rect" id="node20" href="$workunit_8h.html" title="This file has the defintion of the workunit." alt="" coords="1032,406,1112,437"/>
+<area shape="rect" id="node23" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or writes a." alt="" coords="981,486,1144,517"/>
+<area shape="rect" id="node26" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="387,486,568,517"/>
+<area shape="rect" id="node43" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1021,166,1123,197"/>
+<area shape="rect" id="node54" href="$systemcalls_8cpp.html" title="This file defines some time&#45;tracking functions." alt="" coords="1116,246,1233,277"/>
+<area shape="rect" id="node58" href="$atomiccas_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="1237,406,1331,437"/>
+<area shape="rect" id="node63" href="$rollingaverage_8h.html" title="This Store the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="1285,326,1403,357"/>
+<area shape="rect" id="node67" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="788,246,889,277"/>
+<area shape="rect" id="node7" href="$asynchronousworkunit_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="168,566,347,597"/>
+<area shape="rect" id="node11" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm." alt="" coords="5,566,144,597"/>
+<area shape="rect" id="node13" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="371,566,475,597"/>
+<area shape="rect" id="node29" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly." alt="" coords="499,566,693,597"/>
+<area shape="rect" id="node32" href="$workunit_8cpp.html" title="This file has the implementation of the workunit." alt="" coords="1219,486,1312,517"/>
+<area shape="rect" id="node49" href="$thread_8cpp.html" title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1528,326,1611,357"/>
+<area shape="rect" id="node72" href="$workunitkey_8cpp.html" title="This file declares the functionality of the metadata used to sort workunits." alt="" coords="688,326,805,357"/>
 </map>

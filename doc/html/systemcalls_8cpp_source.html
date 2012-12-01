@@ -150,7 +150,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00062"></a>00062 <span class="keyword">namespace </span>Mezzanine
 <a name="l00063"></a>00063 {
 <a name="l00064"></a>00064 <span class="preprocessor">    #ifdef _MEZZ_CPP11_</span>
-<a name="l00065"></a>00065 <span class="preprocessor"></span>    <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math in the chrono implementation.">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
+<a name="l00065"></a>00065 <span class="preprocessor"></span>    <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microseconf time keeping...">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
 <a name="l00066"></a>00066         { <span class="keywordflow">return</span> std::chrono::duration_cast&lt;std::chrono::microseconds&gt;(std::chrono::high_resolution_clock::now()).count(); }
 <a name="l00067"></a>00067 <span class="preprocessor">    #else</span>
 <a name="l00068"></a>00068 <span class="preprocessor"></span><span class="preprocessor">        #ifdef _MEZZ_THREAD_WIN32_</span>
@@ -165,25 +165,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00077"></a>00077                         Timer()
 <a name="l00078"></a>00078                             { QueryPerformanceFrequency(&amp;frequency); }
 <a name="l00079"></a>00079 
-<a name="l00080"></a>00080                         <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math in the chrono implementation.">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
+<a name="l00080"></a>00080                         <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microseconf time keeping...">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
 <a name="l00081"></a>00081                         {
 <a name="l00082"></a>00082                             LARGE_INTEGER Current;
 <a name="l00083"></a>00083                             QueryPerformanceCounter(&amp;Current);
-<a name="l00084"></a>00084                             <span class="keywordflow">return</span> <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math in the chrono implementation.">MaxInt</a>(Current.QuadPart * (1000000.0 / frequency.QuadPart));
+<a name="l00084"></a>00084                             <span class="keywordflow">return</span> <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microseconf time keeping...">MaxInt</a>(Current.QuadPart * (1000000.0 / frequency.QuadPart));
 <a name="l00085"></a>00085                         }
 <a name="l00086"></a>00086                 };
 <a name="l00087"></a>00087 
 <a name="l00088"></a>00088                 <span class="keyword">static</span> Timer ATimer;
 <a name="l00089"></a>00089             }
 <a name="l00090"></a>00090 
-<a name="l00091"></a>00091             <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math in the chrono implementation.">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
+<a name="l00091"></a>00091             <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microseconf time keeping...">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
 <a name="l00092"></a>00092                 { <span class="keywordflow">return</span> ATimer.GetTimeStamp(); }
 <a name="l00093"></a>00093 
 <a name="l00094"></a>00094             <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="namespaceMezzanine.html#a13a4a2c3420cfd2a2b3a9e4db40c583b" title="Get the resolution of the timestamp in microseconds.">GetTimeStampResolution</a>()
 <a name="l00095"></a>00095                 { <span class="keywordflow">return</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>(ATimer.frequency.QuadPart/1000); }
 <a name="l00096"></a>00096 
 <a name="l00097"></a>00097 <span class="preprocessor">        #else</span>
-<a name="l00098"></a><a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849">00098</a> <span class="preprocessor"></span>            <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math in the chrono implementation.">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
+<a name="l00098"></a><a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849">00098</a> <span class="preprocessor"></span>            <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microseconf time keeping...">MaxInt</a> <a class="code" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849" title="Get a timestamp.">GetTimeStamp</a>()
 <a name="l00099"></a>00099             {
 <a name="l00100"></a>00100                 timeval Now;
 <a name="l00101"></a>00101                 gettimeofday(&amp;Now, NULL); <span class="comment">// Posix says this must return 0, so it seems it can&#39;t fail</span>
@@ -301,6 +301,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Fri Nov 30 2012 17:58:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

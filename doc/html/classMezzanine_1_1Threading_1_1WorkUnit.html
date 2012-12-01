@@ -105,16 +105,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1WorkUnit__inherit__graph.svg" width="560" height="147"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1WorkUnit__inherit__graph.svg" width="560" height="147"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Mezzanine::Threading::WorkUnit:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1WorkUnit__coll__graph.svg" width="304" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1WorkUnit__coll__graph.svg" width="304" height="240"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classMezzanine_1_1Threading_1_1WorkUnit-members.html">List of all members.</a></p>
@@ -132,8 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a77a7c810b2f416f59d21a3c2a03d1a25"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnit::ClearDependencies" ref="a77a7c810b2f416f59d21a3c2a03d1a25" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a77a7c810b2f416f59d21a3c2a03d1a25">ClearDependencies</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Drop any information about what work Units this one depends on. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9ad6d9c74204480bd6f8f0d9a8686eb"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnit::DoWork" ref="ab9ad6d9c74204480bd6f8f0d9a8686eb" args="(ThreadSpecificStorage &amp;CurrentThreadStorage, FrameScheduler &amp;CurrentFrameScheduler)=0" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ab9ad6d9c74204480bd6f8f0d9a8686eb">DoWork</a> (<a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a> &amp;CurrentThreadStorage, <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;CurrentFrameScheduler)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a05a588a4d5410a07d87bc6799aded2f4"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnit::DoWork" ref="a05a588a4d5410a07d87bc6799aded2f4" args="(DefaultThreadSpecificStorage::Type &amp;CurrentThreadStorage, FrameScheduler &amp;CurrentFrameScheduler)=0" -->
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a05a588a4d5410a07d87bc6799aded2f4">DoWork</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage, <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;CurrentFrameScheduler)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">WorkUnits Must implement these to do the work. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a6c6f4a882cf335b5186a9d04e567414d">GetDependencyCount</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many other WorkUnits does this one depend on?  <a href="#a6c6f4a882cf335b5186a9d04e567414d"></a><br/></td></tr>
@@ -145,8 +143,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current RunningState of the thread.  <a href="#a6eb738f3409d67390ea0bfaad83e021a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#acc5f22f1abf1ee7459e4e901553920d3">GetSortingKey</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sorting metadata.  <a href="#acc5f22f1abf1ee7459e4e901553920d3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d22687b18671c07294fdeb0a553084d"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnit::operator()" ref="a1d22687b18671c07294fdeb0a553084d" args="(ThreadSpecificStorage &amp;CurrentThreadStorage, FrameScheduler &amp;CurrentFrameScheduler)" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a1d22687b18671c07294fdeb0a553084d">operator()</a> (<a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a> &amp;CurrentThreadStorage, <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;CurrentFrameScheduler)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5d1d439b8cd4d4a059c8631d48c9e006"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnit::operator()" ref="a5d1d439b8cd4d4a059c8631d48c9e006" args="(DefaultThreadSpecificStorage::Type &amp;CurrentThreadStorage, FrameScheduler &amp;CurrentFrameScheduler)" -->
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a5d1d439b8cd4d4a059c8631d48c9e006">operator()</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage, <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;CurrentFrameScheduler)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This tracks work unit metadata, then calls DoWork. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad059368c3456f3a810ea7b3260da9772"></a><!-- doxytag: member="Mezzanine::Threading::WorkUnit::PrepareForNextFrame" ref="ad059368c3456f3a810ea7b3260da9772" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ad059368c3456f3a810ea7b3260da9772">PrepareForNextFrame</a> ()</td></tr>
@@ -413,6 +411,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>FrameScheduler</b></
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Fri Nov 30 2012 17:58:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

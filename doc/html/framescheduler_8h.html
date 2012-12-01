@@ -94,6 +94,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>This file has the Declarations for the main FrameScheduler class.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="datatypes_8h_source.html">datatypes.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="thread_8h_source.html">thread.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="workunitkey_8h_source.html">workunitkey.h</a>&quot;</code><br/>
 <code>#include &quot;<a class="el" href="systemcalls_8h_source.html">systemcalls.h</a>&quot;</code><br/>
@@ -105,16 +106,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="framescheduler_8h__incl.svg" width="583" height="443"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="framescheduler_8h__incl.svg" width="100%" height="372"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="framescheduler_8h__dep__incl.svg" width="100%" height="252"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="framescheduler_8h__dep__incl.svg" width="100%" height="252"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="framescheduler_8h_source.html">Go to the source code of this file.</a></p>
@@ -157,9 +156,9 @@ Defines</h2></td></tr>
  <br/>
  The timing of frame lengths with this algorithm is not perfect. Each frame ends a certain amount of microseconds early or late. This inaccuracy can be introduced by the system's timer resolution, the time it takes to lookup the time, or by the work that must be done outside of the of the timed work or pause periods to aggregate data. On Ubuntu 12.04 x64 has a simple timer with a single microsecond resolution, this algorithm tends to drift less than 2 microseconds per frame. Some other algorithms are more precise, and others are simpler, this is a balance between those. If this is not acceptable <a class="el" href="namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849">GetTimeStamp()</a> and <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac59d45091a7758912f9e7c7871c7c5d9">FrameScheduler::WaitUntilNextThread()</a> could be modified to adjust this. <br/>
  <br/>
- The pause that is inserted each frame is not simply calculated by subtracting the current time from the target time once the work is done each frame. A small <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a6aab80a2e99f134f12e4aab16dd33b4f">TimingCostAllowance</a> is subtracted from the pause before the next frame begins. This allowance allows for the compensation of variances in scheduling from the underlying system, rounding errors of the system clock and the execution of the time tracking itself. As part of this time tracking the timing cost allowance is adjusted. If the allowance was too large, therefor making the frame too short, then it is made longer for the next frame. If the allowance is too small it is made larger for the next frame. It does seem possible to track this length within a single frame without increasing the complexity a significant amount. <br/>
+ The pause that is inserted each frame is not simply calculated by subtracting the current time from the target time once the work is done each frame. A small <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a6aab80a2e99f134f12e4aab16dd33b4f">TimingCostAllowance</a> is subtracted from the pause before the next frame begins. This allowance is for the compensation of variances in scheduling from the underlying system, rounding errors of the system clock and the execution of the time tracking itself. As part of this time tracking the timing cost allowance is adjusted. If the allowance was too large, therefor making the frame too short, then it is made longer for the next frame. If the allowance is too small it is made larger for the next frame. It does not seem possible to track this length within a single frame without increasing the complexity a significant amount. <br/>
  <br/>
- Rather than increase the complexity of the algorithm when the default level of accuracy is suitable for most purposes, a manual compile time adjustment has been added. When comparing the length of the frame after execution and frame pause have occurred, the timing allowance is made smaller or larger based on how close the result is to the desired time. If the frame was not exactly as fast as it should have been, then the allowance is adjusted. Frames tend to take slightly longer than the target length. To compensate for this if the frame executed faster by a predefined amount or less then the timing allowance is not adjusted. This gap in the adjustment of the timing allowance could allow adjustment on different platforms in the precision of this algorithm without incurring extra complexity in timing. By default this is set to 10 microseconds. <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a7af749e5eb3f5d53cc9b3fc122a03af6">FrameScheduler::GetFrameLength()</a> </p>
+ Rather than increase the complexity of the algorithm when the default level of accuracy is suitable for most purposes, a manual compile time adjustment has been added. When comparing the length of the frame after execution and frame pause have occurred, the timing allowance is made smaller or larger based on how close the result is to the desired time. If the frame was not exactly as fast as it should have been, then the allowance is adjusted. Frames tend to take slightly longer than the target length. To compensate for this if the frame executed faster by a predefined amount or less then the timing allowance is not adjusted. This gap in the adjustment of the timing allowance could allow adjustment on different platforms in the precision of this algorithm without incurring extra complexity in timing. By default this is set to 10 microseconds. </p>
 
 <p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00100">100</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
@@ -181,6 +180,6 @@ Defines</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Fri Nov 30 2012 17:58:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

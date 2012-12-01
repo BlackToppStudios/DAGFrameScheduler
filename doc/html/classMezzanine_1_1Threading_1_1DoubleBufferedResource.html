@@ -119,16 +119,16 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the resource that can be used.  <a href="#a79d66e2596805d091278670c5e5ab6d2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39aaf41d673f805c2f28e9e2e5ca6b64"></a><!-- doxytag: member="Mezzanine::Threading::DoubleBufferedResource::SwapUsableAndCommitable" ref="a39aaf41d673f805c2f28e9e2e5ca6b64" args="()" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a39aaf41d673f805c2f28e9e2e5ca6b64">SwapUsableAndCommitable</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Move the buffered to the active and vice versa. <br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Make the buffered resource the active and vice versa. <br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T&gt;<br/>
 class Mezzanine::Threading::DoubleBufferedResource&lt; T &gt;</h3>
 
 <p>A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanisms. </p>
-<p>It is intended for there to be a work unit that just swaps buffers. This work unit will depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict with any other thread specific system resources. Only one other workunit may access the buffered data. For example. With the Logging Double buffered resource there is a workunit that swaps the logs that is ran almost last every time, and another that runs at no specified time (other than before the log swapping workunit) which aggregates all the logs to be committed. </p>
+<p>It is intended for a <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> like the <a class="el" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html">LogBufferSwapper</a> that just swaps buffers. This work unit should be configured depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict with any other double buffered resources). </p>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00074">74</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00073">73</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a2047b7dee35eef0c761c43cb03a20929"></a><!-- doxytag: member="Mezzanine::Threading::DoubleBufferedResource::DoubleBufferedResource" ref="a2047b7dee35eef0c761c43cb03a20929" args="()" -->
 <div class="memitem">
@@ -147,9 +147,9 @@ template&lt;typename T &gt; </div>
 <div class="memdoc">
 
 <p>A Constructor that creates default versions of the resources. </p>
-<p>This calls the default constructors for type T. This </p>
+<p>This calls the default constructors for type T. </p>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00086">86</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00085">85</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -189,7 +189,7 @@ template&lt;typename T &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00107">107</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00104">104</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -213,7 +213,7 @@ template&lt;typename T &gt; </div>
 <p>Get a reference to the resource that can be committed. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the commitable resource </dd></dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00131">131</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00128">128</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -236,7 +236,7 @@ template&lt;typename T &gt; </div>
 <p>Get a pointer to the resource that can be committed. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the commitable resource </dd></dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00121">121</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00118">118</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -259,7 +259,7 @@ template&lt;typename T &gt; </div>
 <p>Get a reference to the resource that can be used. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the usable resource </dd></dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00126">126</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00123">123</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -282,7 +282,7 @@ template&lt;typename T &gt; </div>
 <p>Get a pointer to the resource that can be used. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the usable resource </dd></dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00116">116</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00113">113</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -305,6 +305,6 @@ template&lt;typename T &gt; </div>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Nov 29 2012 23:08:35 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Fri Nov 30 2012 17:58:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

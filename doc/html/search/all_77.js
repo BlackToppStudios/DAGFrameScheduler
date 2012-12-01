@@ -9,6 +9,7 @@ var searchData=
   ['workunit',['WorkUnit',['../classMezzanine_1_1Threading_1_1WorkUnit.html',1,'Mezzanine::Threading']]],
   ['workunit_2ecpp',['workunit.cpp',['../workunit_8cpp.html',1,'']]],
   ['workunit_2eh',['workunit.h',['../workunit_8h.html',1,'']]],
+  ['workunitaffinity',['WorkUnitAffinity',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ab4dc20295c2fd63f9f4b90a54c76c6f6',1,'Mezzanine::Threading::FrameScheduler']]],
   ['workunitkey',['WorkUnitKey',['../classMezzanine_1_1Threading_1_1WorkUnitKey.html',1,'Mezzanine::Threading']]],
   ['workunitkey',['WorkUnitKey',['../classMezzanine_1_1Threading_1_1WorkUnitKey.html#ae014bd9db51842194c8a382190633b92',1,'Mezzanine::Threading::WorkUnitKey']]],
   ['workunitkey_2ecpp',['workunitkey.cpp',['../workunitkey_8cpp.html',1,'']]],
