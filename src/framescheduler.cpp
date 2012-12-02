@@ -66,7 +66,7 @@ namespace Mezzanine
             DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
             WorkUnit* CurrentUnit;
-            while(CurrentUnit = FS.GetNextWorkUnit())
+            while( (CurrentUnit = FS.GetNextWorkUnit()) )
             {
                 if(Starting==CurrentUnit->TakeOwnerShip())
                     { CurrentUnit->operator()(Storage,FS); }
@@ -80,7 +80,7 @@ namespace Mezzanine
             DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
             WorkUnit* CurrentUnit;
-            while(CurrentUnit = FS.GetNextWorkUnitAffinity())
+            while( (CurrentUnit = FS.GetNextWorkUnitAffinity()) )
             {
                 if(Starting==CurrentUnit->TakeOwnerShip())
                     { CurrentUnit->operator()(Storage,FS); }
