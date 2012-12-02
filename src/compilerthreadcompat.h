@@ -83,8 +83,10 @@
     #define _MEZZ_PLATFORM_DEFINED_
 
     #if defined(_MEZZ_THREAD_WIN32_)
-        #pragma warning( disable : 4251) // Disable the dll import/export warnings on items that are set correctly.
-        #pragma warning( disable : 4244) // Disable the double to float conversions, they are in their by design to minimize floating point rounding during intermediate calculations.
+        #ifdef _MSC_VER
+            #pragma warning( disable : 4251) // Disable the dll import/export warnings on items that are set correctly.
+            #pragma warning( disable : 4244) // Disable the double to float conversions, they are in their by design to minimize floating point rounding during intermediate calculations.
+        #endif
         #ifndef WIN32_LEAN_AND_MEAN
             #define WIN32_LEAN_AND_MEAN
             #define __UNDEF_LEAN_AND_MEAN

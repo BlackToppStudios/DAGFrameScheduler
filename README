@@ -13,10 +13,13 @@ The 'doc' folder contains further licensing details, technical documentation and
 	The Doxygen configuration resides in 'doc/doxyfiles'
 
  -- NEWS --
+	Dec 2, 2012
+		Fixed warnings in Mingw, clang and VS2012. 0 warnings in any of these compilers at this moment and it passes tests in windows/linux with these compilers where applicable.
+		Removed integer overflow in some places where the results of GetTimeStamp() were assigned to datatypes smaller than 64 bit.
 
 	Dec 1, 2012
 		Enabled all build warnings, and corrected them in GCC.
-		Updated the way unit tests were run to allow the isolated of execution of one test or all the tests at once. Fixed Framerate calculation bugs in performane tests
+		Updated the way unit tests are run to allow the isolated of execution of one test or all the tests at once. Fixed Framerate calculation bugs in performane tests.
 
 	Nov 30, 2012
 		Created a single point at which to update all the creation of double buffered resources. The goal is to make changing this easy if another project wants to add double buffered resources to each thread.

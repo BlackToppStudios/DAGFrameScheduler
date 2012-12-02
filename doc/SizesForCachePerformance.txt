@@ -1,16 +1,74 @@
+Dec 2, 2012
+  Ubuntu x64 GCC 4.6.3	
+	WorkUnit: 56			// one cache line on i7
+	WorkUnitKey: 24
+	DefaultRollingAverage<Whole>::Type: 16
+	WeightedRollingAverage<Whole,Whole>: 16
+	BufferedRollingAverage<Whole>: 40
+	WorkUnitMonpoly: 56
+	DefaultThreadSpecificStorage::Type: 40
+	FrameScheduler: 216
+	thread: 56
+	mutex: 40
+	vector<Whole>: 24
+	vector<WorkUnit*>: 24
+	set<WorkUnit*>: 48
+	volatile int32_t: 4
+	ostream*: 8
+	MaxInt: 8
+	Whole: 4
+
+  winxp MinGW 4.7.0
+	WorkUnit: 32			//2 per cache line on i7 I should start looking at enforcing allignment on nearest power of 2 boundary
+	WorkUnitKey: 16
+	DefaultRollingAverage<Whole>::Type: 12
+	WeightedRollingAverage<Whole,Whole>: 12
+	BufferedRollingAverage<Whole>: 20
+	WorkUnitMonpoly: 32
+	DefaultThreadSpecificStorage::Type: 20
+	FrameScheduler: 128
+	thread: 40
+	mutex: 28
+	vector<Whole>: 12
+	vector<WorkUnit*>: 12
+	set<WorkUnit*>: 24
+	volatile int32_t: 4
+	ostream*: 4
+	MaxInt: 8
+	Whole: 4
+
+  winxp visual studio 10
+	WorkUnit: 40			// if I do sstart looking at alignment test if what vs is doing is a fast as what mingw is doing
+	WorkUnitKey: 16
+	DefaultRollingAverage<Whole>::Type: 12
+	WeightedRollingAverage<Whole,Whole>: 12
+	BufferedRollingAverage<Whole>: 36
+	WorkUnitMonpoly: 40
+	DefaultThreadSpecificStorage::Type: 28
+	FrameScheduler: 168
+	thread: 40
+	mutex: 28
+	vector<Whole>: 20
+	vector<WorkUnit*>: 20
+	set<WorkUnit*>: 20
+	volatile int32_t: 4
+	ostream*: 4
+	MaxInt: 8
+	Whole: 4
+
+////////////////////////////////////////////
 With new(Nov28 2012) unidirectional graph
   Ubuntu x64 GCC 4.6.3
   // the WorkUnit is now small than 64 bytes, with 8 whole bytes
   // left over it now fits in one common sized cache line, 
   // but the Scheduler itself nearly doubled in size.
-	Determining sizeof() important types that are used throughout:
 	WorkUnit: 56
 	WorkUnitKey: 24
 	DefaultRollingAverage<Whole>::Type: 16
 	WeightedRollingAverage<Whole,Whole>: 16
 	BufferedRollingAverage<Whole>: 40
 	WorkUnitMonpoly: 56
-	ThreadSpecificStorage: 40
+	DefaultThreadSpecificStorage::Type: 40
 	FrameScheduler: 208
 	thread: 56
 	mutex: 40
@@ -18,13 +76,11 @@ With new(Nov28 2012) unidirectional graph
 	vector<WorkUnit*>: 24
 	set<WorkUnit*>: 48
 	volatile int32_t: 4
-	std::ostream*: 8
+	ostream*: 8
 	MaxInt: 8
 	Whole: 4
 
-
-
-
+////////////////////////////////////////////
 With Older Dual Direction Graph
 	On windows XP 32 built in visual studio
 	Determining sizeof() important types that are used throughout:

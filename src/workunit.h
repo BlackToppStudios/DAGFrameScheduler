@@ -185,7 +185,7 @@ namespace Mezzanine
                 {}
 
                 /// @brief Virtual destructor
-                ~WorkUnit(){}
+                virtual ~WorkUnit(){}
         };
 
     } // \Threading

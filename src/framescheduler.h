@@ -148,6 +148,9 @@ namespace Mezzanine
                 /// @brief When the logs are aggregated, this is where they are sent
                 std::ostream* LogDestination;
 
+                /// @brief What time did the current Frame Start at.
+                MaxInt CurrentFrameStart;
+
                 /// @brief How many threads with this try to execute with in the next frame.
                 Whole CurrentThreadCount;
 
@@ -156,9 +159,6 @@ namespace Mezzanine
 
                 /// @brief The Maximum frame rate this algorithm should run at.
                 Whole TargetFrameLength;
-
-                /// @brief What time did the current Frame Start at.
-                Whole CurrentFrameStart;
 
                 /// @brief To prevent frame time drift this many microseconds is subtracted from the wait period to allow time for calculations.
                 Whole TimingCostAllowance;

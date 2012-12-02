@@ -67,7 +67,7 @@ namespace Mezzanine
             Log << "</Frame>" << std::endl;
         }
 
-        void LogBufferSwapper::DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
+        void LogBufferSwapper::DoWork(DefaultThreadSpecificStorage::Type&, FrameScheduler& CurrentFrameScheduler)
         {
             for(std::vector<DefaultThreadSpecificStorage::Type*>::const_iterator Iter=CurrentFrameScheduler.Resources.begin();
                 Iter!=CurrentFrameScheduler.Resources.end();

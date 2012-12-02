@@ -52,6 +52,13 @@
 /// @file
 /// @brief This is the core object implementation for this algorithm
 
+#ifdef _MEZZ_THREAD_WIN32_
+    #ifdef _MSC_VER
+        #pragma warning( disable : 4706) // Disable Legitimate assignment in a WorkUnit acquisition loops
+    #endif
+#endif
+
+
 namespace Mezzanine
 {
     namespace Threading
@@ -131,11 +138,11 @@ namespace Mezzanine
                     { WaitTime = 0; }
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );*/
                 Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
-                Whole WaitTime = TargetFrameEnd - GetTimeStamp() - TimingCostAllowance;
+                Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) - TimingCostAllowance;
                 if(WaitTime>1000000)
                     { WaitTime = 0; }
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );
-                Whole AdjustmentTime = GetTimeStamp();
+                MaxInt AdjustmentTime = GetTimeStamp();
                 if(AdjustmentTime<TargetFrameEnd-TimingCostAllowanceGap)
                     { TimingCostAllowance-=(TargetFrameEnd-AdjustmentTime)/2; }
                 if(AdjustmentTime>TargetFrameEnd)
@@ -167,16 +174,18 @@ namespace Mezzanine
 
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
+            CurrentFrameStart(0),
 			CurrentThreadCount(StartingThreadCount),
-            FrameCount(0), TargetFrameLength(16666), CurrentFrameStart(0),
+            FrameCount(0), TargetFrameLength(16666),
             TimingCostAllowance(125),
 			LoggingToAnOwnedFileStream(true)
         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
+            CurrentFrameStart(0),
             CurrentThreadCount(StartingThreadCount),
-			FrameCount(0), TargetFrameLength(16666), CurrentFrameStart(0),
+            FrameCount(0), TargetFrameLength(16666),
 			TimingCostAllowance(125),
 			LoggingToAnOwnedFileStream(false)
         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
