@@ -72,13 +72,14 @@ typedef void (*Test)();
 /// @brief A collection of tests and their names
 typedef std::map<String,Test> TestGroup;
 
+/// @brief The error and help message.
 void Usage(String Executable, TestGroup& Tests)
 {
     cout << "Usage:" << endl << endl;
     cout << "\t" << Executable << " [testname1] [testname2] [testname3] ..." << endl << endl;
     cout << "If no tests are provide then every test will be run. The test names are not case sensitive. Here is a listing of test names: " << endl;
 
-    Whole ColumnWidth=23;
+    Whole ColumnWidth=25;
     Whole ColumnCount=3;
     Whole WhichColumn=0;
     String CurrentOutput;
@@ -86,12 +87,12 @@ void Usage(String Executable, TestGroup& Tests)
     cout << "  ";
     for(TestGroup::iterator Iter=Tests.begin(); Iter!=Tests.end(); ++Iter)
     {
-        WhichColumn++;
         if(!(WhichColumn % ColumnCount))
         {
             WhichColumn=0;
             cout << endl << "  ";
         }
+        WhichColumn++;
 
         CurrentOutput = Iter->first;
         for(CurrentOutput = Iter->first; CurrentOutput.size()<ColumnWidth; CurrentOutput += " ") {}
@@ -101,12 +102,67 @@ void Usage(String Executable, TestGroup& Tests)
     cout << endl;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Testing Random Number facilities
 
+/// @brief Simulate a 20 sided die
+/// @details Used in @ref RandomTests
+/// @return A Mezzanine::Whole containing a a random number between 1 and 20 inclusive with equal chance.
+Mezzanine::Whole DiceD20()
+    { return rand()%20+1; }
 
+/// @brief Simulate 2x 3 sided die being added
+/// @details Used in @ref RandomTests
+/// @return A Mezzanine::Whole containing a a random number between 2 and 6 inclusive with a bell curve probability. This actually generates 2 numbers between 1 and 3 inclusive adds them, then returns that.
+Mezzanine::Whole Dice2D3()
+    { return ((rand()%3) + (rand()%3) + 2); }
+
+/// @brief The 'random' Test.
+/// @details This tests nothing in the library itself, but good quality random numbers are required for stressing the Scheduler in other tests
+void RandomTests()
+{
+    cout << endl << "Starting random number generation tests. Not part of the library, but required for testing." << endl;
+    Mezzanine::MaxInt Timestamp1 = Mezzanine::GetTimeStamp();
+    srand((int)Timestamp1);
+    Whole TestRuns = 1000000;
+    vector<Whole> D20Rolls;
+    vector<Whole> D2d3Rolls;
+    vector<Whole> D20Histogram;
+    vector<Whole> D2d3Histogram;
+
+    cout <<  "Doing " << TestRuns << " iterations of generatining numbers with each function, and initializing random seed with " << Timestamp1 << "." << endl;
+    for (Whole Counter=0; Counter<TestRuns; ++Counter)
+    {
+        D20Rolls.push_back(DiceD20());
+        D2d3Rolls.push_back(Dice2D3());
+    }
+
+    cout << "Preparing counts of the rolls." << endl;
+    // init some 0s
+    for (Whole Counter=0; Counter<=21; ++Counter) //providing a small amount of buffer space on either side in case dice algorithm has off by one issue.
+        { D20Histogram.push_back(0); }
+    for (Whole Counter=0; Counter<=7; ++Counter)
+        { D2d3Histogram.push_back(0); }
+
+    // count the actual rolls
+    for(vector<Whole>::iterator Iter=D20Rolls.begin(); Iter!=D20Rolls.end(); ++Iter)
+        { D20Histogram[*Iter]++; }
+    for(vector<Whole>::iterator Iter=D2d3Rolls.begin(); Iter!=D2d3Rolls.end(); ++Iter)
+        { D2d3Histogram[*Iter]++; }
+
+    // display chart
+    cout << "D20 rolls should be distributed evenly between 1 and 20 inclusive:" << endl;
+    for (Whole Counter=0; Counter<=21; ++Counter) //providing a small amount of buffer space on either side in case dice algorithm has off by one issue.
+    { cout << Counter << ": " << D20Histogram[Counter] << " \t" << (((double)D20Histogram[Counter])/((double)TestRuns))*100 << "% " << endl; }
+
+    cout << "2d3 rolls should be distributed on a bell curve 2 and 6 inclusive:" << endl;
+    for (Whole Counter=0; Counter<=7; ++Counter)
+        { cout << Counter << ": " << D2d3Histogram[Counter] << " \t" << (((double)D2d3Histogram[Counter])/((double)TestRuns))*100 << "% " <<  endl; }
+}
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /// Basic information acquisition
 
-// 'sizes' Test
+/// @brief The 'sizes' Test.
 void Sizes()
 {
     cout << "Determining sizeof() important types that are used throughout:" << endl
@@ -129,7 +185,8 @@ void Sizes()
          << "Whole: " << sizeof(Whole) << endl;
 }
 
-//
+/// @brief The 'untestable' Test.
+/// @note This test never fails but can be verified manually if it seems something is wrong.
 void Untestable()
 {
     cout << "Displaying Output of untestable functions. There is no way to have known when this was written, what the results of these would be:" << endl
@@ -143,37 +200,258 @@ void Untestable()
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Basic functionality test
 
+/// @brief Used in @ref BasicThreading
+void PrintHello(void*)
+    { cout << "Hello from thread T1 with id: " << Mezzanine::Threading::this_thread::get_id() << endl; }
 
-
-
-
-
-
-
-/// @brief Simulate a 20 sided die
-/// @return A Mezzanine::Whole containing a a random number between 1 and 20 inclusive with equal chance.
-Mezzanine::Whole DiceD20()
-    { return rand()%20+1; }
-
-/// @brief Simulate 2x 3 sided die being added
-/// @return A Mezzanine::Whole containing a a random number between 2 and 6 inclusive with a bell curve probability. This actually generates 2 numbers between 1 and 3 inclusive adds them, then returns that.
-Mezzanine::Whole Dice2D3()
-    { return ((rand()%3) + (rand()%3) + 2); }
-
-/// @brief Converts anything streamable to a Mezzanine::String
-/// @param Datum the item to convert
-/// @return a string containing the lexographically casted data
-template <typename T>
-Mezzanine::String ToString(T Datum)
+/// @brief The 'basicthreading' Test.
+/// @details One of a group of tests that check the compatibility wrapper around OS functionality.
+/// This checks that the Thread wrapper works
+void BasicThreading()
 {
-    std::stringstream Converter;
-    Converter << Datum;
-    return Converter.str();
+    cout << "Testing Basic Thread functionality." << endl;
+    cout << "This Threads id: " <<  Mezzanine::Threading::this_thread::get_id() << endl;
+
+    cout << "Creating a thread with identifier T1 and unkown id." << endl;
+    Mezzanine::Threading::thread T1(PrintHello);
+    cout << "T1 should have an id of: " << T1.get_id() << endl;
+
+    cout << "Is T1 joinable: " << T1.joinable() << endl;
+    cout << "Joining T1" << endl;
+    T1.join();
+    cout << "Is T1 joinable: " << T1.joinable() << endl;
+
+    cout << "Sleeping main thread for 300ms." << endl;
+    Mezzanine::Threading::this_thread::sleep_for(300000);
+
+    cout << "Yielding thread to OS scheduler." << endl;
+    Mezzanine::Threading::this_thread::yield();
 }
 
-/// @brief An intentionally large and slow to process type chosen once here, to allwo easy adjusting of these tests.
+/// @brief Used in @ref BasicMutex
+static Mezzanine::Threading::thread::id ThreadIDTest=0;
+/// @brief Used in @ref BasicMutex
+static Mezzanine::Threading::mutex ThreadIDLock;
+/// @brief Used in @ref BasicMutex
+void PutIdInGlobal(void*)
+{
+    cout << "Thread T2 trying to lock mutex ThreadIDLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
+    ThreadIDLock.lock();
+    cout << "Thread T2 locked mutex: " << endl;
+    ThreadIDTest = Mezzanine::Threading::this_thread::get_id();
+    cout << "Thread T2 work complete unlocking mutex: " << endl;
+    ThreadIDLock.unlock();
+}
+
+/// @brief The 'basicmutex' Test.
+/// @details One of a group of tests that check the compatibility wrapper around OS functionality. This
+/// checks that the mutex wrapper works
+void BasicMutex()
+{
+    cout << "Testing basic mutex functionality" << endl;
+    cout << "Locking ThreadIDLock in thread: " << Mezzanine::Threading::this_thread::get_id() << endl;
+    ThreadIDLock.lock();
+
+    cout << "Creating a thread with identifier T2 and unkown id." << endl;
+    Mezzanine::Threading::thread T2(PutIdInGlobal);
+
+    cout << "Storing T2's id: " << T2.get_id() << endl;
+    cout << "Unlocking ThreadIDLock from main and sleeping for 300 ms." << endl;
+    Mezzanine::Threading::thread::id T2id = T2.get_id();
+    ThreadIDLock.unlock();
+    Mezzanine::Threading::this_thread::sleep_for(300000);
+
+    ThreadIDLock.lock();
+    cout << "Does the thread report the same ID as we gathered: " << (ThreadIDTest == T2id) << endl;
+    assert(ThreadIDTest == T2id);
+    ThreadIDLock.unlock();
+
+    cout << "Joining T2" << endl;
+    T2.join();
+}
+
+/// @brief Used in @ref BasicThreadingPassing
+static Mezzanine::Integer ThreadPassTest=0;
+/// @brief Used in @ref BasicThreadingPassing
+static Mezzanine::Threading::mutex ThreadPassLock;
+/// @brief Used in @ref BasicThreadingPassing
+/// @param Value The functionality being tested is that is passed correctly
+void SquareInThread(void* Value)
+{
+    cout << "Thread T3 waiting for lock on mutex ThreadPassLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
+    ThreadPassLock.lock();
+    cout << "Thread T3 locked mutex: " << endl;
+    ThreadPassTest = *(Mezzanine::Integer*)Value * *(Mezzanine::Integer*)Value;
+    cout << "Thread T3 work complete unlocking mutex: " << endl;
+    ThreadPassLock.unlock();
+}
+
+/// @brief The 'basicthreadingpassing' Test.
+/// @details One of a group of tests that check the compatibility wrapper around OS functionality. This
+/// checks that data passed into a thread makes alright
+void BasicThreadingPassing()
+{
+    cout << "Testing passing to thread functionality" << endl;
+    cout << "Locking ThreadPassLock in thread: " << Mezzanine::Threading::this_thread::get_id() << endl;
+    ThreadPassLock.lock();
+
+    cout << "Creating a thread with identifier T3 and unkown id." << endl;
+    Mezzanine::Integer Value = 9;
+    cout << "Passing " << Value << " into thread T3." << endl;
+    Mezzanine::Threading::thread T3(SquareInThread, &Value);
+
+    cout << "Unlocking ThreadPassLock from main and sleeping for 300 ms." << endl;
+    ThreadPassLock.unlock();
+    Mezzanine::Threading::this_thread::sleep_for(300000);
+
+    ThreadPassLock.lock();
+    cout << "Thread gives us: " << ThreadPassTest << endl;
+    cout << "Does the thread give us the square of what we passed it: " << (Value*Value == ThreadPassTest) << endl;
+    assert(Value*Value == ThreadPassTest);
+    ThreadPassLock.unlock();
+
+    cout << "Joining T3" << endl;
+    T3.join();
+}
+
+/// @brief Used in @ref BasicMutexTry
+static Mezzanine::Integer TryLockTest=0;
+/// @brief Used in @ref BasicMutexTry
+static Mezzanine::Threading::mutex TryLock;
+/// @brief Used in @ref BasicMutexTry
+/// @param Value This is the a value passed into the thread to confirm that it works
+void TryToSquareInThread(void* Value)
+{
+    cout << "Thread T4 trying to lock mutex ThreadPassLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
+    if (TryLock.try_lock())
+    {
+        cout << "Thread T4 locked mutex, Squaring the value " << endl;
+        TryLockTest = *(Mezzanine::Integer*)Value * *(Mezzanine::Integer*)Value;
+        TryLock.unlock();
+    }else{
+        cout << "Thread T4 could not acquire lock, no work done" << endl;
+    }
+}
+
+/// @brief The 'basicthreadingpassing' Test.
+/// @details One of a group of tests that check the compatibility wrapper around OS functionality. This
+/// checks that data passed into a thread makes alright
+void BasicMutexTry()
+{
+   cout << "Testing Mutex try_lock()" << endl;
+
+    cout << "Locking TryLock in main thread with id: " << Mezzanine::Threading::this_thread::get_id() << endl;
+    assert(TryLock.try_lock());
+
+    Mezzanine::Integer Value = 9;
+    cout << "Creating a thread with identifier T4 and unkown id." << endl;
+    cout << "Passing " << Value << " into thread T4, and assigning to output and waiting 200ms." << endl;
+    TryLockTest = Value;
+    Mezzanine::Threading::thread T4(TryToSquareInThread, &Value);
+
+    Mezzanine::Threading::this_thread::sleep_for(300000);
+
+    cout << "Joining T4" << endl;
+    T4.join();
+
+    cout << "Unlocking TryLock." << endl;
+    TryLock.unlock();
+    cout << "Value from thread's return point is " << TryLockTest << " it should be " << Value << " if it wasn't able to get mutex" << endl;
+    cout << "Did T4 not get the mutex and proceed past mutex as expected: " << (TryLockTest == Value) << endl;
+    assert(TryLockTest == Value);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// rolling average tests
+
+/// @brief The 'rollingaverage' Test.
+void RollingAverageTests()
+{
+    cout << "Starting Rolling Average Tests" << endl;
+    cout << "Is the Default Rolling Average the BufferedRollingAverage: " << (typeid(Mezzanine::DefaultRollingAverage<Mezzanine::Whole>::Type)==typeid(Mezzanine::BufferedRollingAverage<Mezzanine::Whole>)) << endl;
+    //assert((typeid(Mezzanine::DefaultRollingAverage<Mezzanine::Whole>::Type)==typeid(Mezzanine::BufferedRollingAverage<Mezzanine::Whole>)));
+
+    cout << "Creating a BufferedRollingAverage, WeightedRollingAverage and DefaultRollingAverage with Mezzanine::Whole (and sometimes float for math)" << endl;
+    Mezzanine::BufferedRollingAverage<Mezzanine::Whole> RollingB(10);
+    Mezzanine::WeightedRollingAverage<Mezzanine::Whole,float> RollingW(10);
+    Mezzanine::DefaultRollingAverage<Mezzanine::Whole>::Type RollingD(10);
+
+    cout << "Inserting into each: ";
+    for(Mezzanine::Whole Counter=1; Counter<=20; Counter++)
+    {
+        cout << Counter << (20==Counter?".":", ");
+        RollingB.Insert(Counter);
+        RollingW.Insert(Counter);
+        RollingD.Insert(Counter);
+    }
+    cout << endl;
+
+    cout << "BufferedRollingAverage Result, should be 15: " << RollingB.GetAverage() << endl;
+    assert(RollingB.GetAverage()==15);
+    cout << "WeightedRollingAverage Result, should be about 10: " << RollingW.GetAverage() << endl;
+    assert(RollingW.GetAverage()>9||RollingW.GetAverage()<16);
+    cout << "DefaultRollingAverage Result, should match its underlying type : " << RollingD.GetAverage() << endl;
+    //assert(RollingD.GetAverage()==15);
+
+    cout << "Creating a BufferedRollingAverage, WeightedRollingAverage and DefaultRollingAverage with floats" << endl;
+    Mezzanine::BufferedRollingAverage<float> RollingB2(10);
+    Mezzanine::WeightedRollingAverage<float,float> RollingW2(10);
+    Mezzanine::DefaultRollingAverage<float>::Type RollingD2(10);
+
+    cout << "Inserting into each: ";
+    for(float Counter=1.0; Counter<=20.0; Counter++)
+    {
+        cout << Counter << (20.0<=Counter?".":", ");
+        RollingB2.Insert(Counter);
+        RollingW2.Insert(Counter);
+        RollingD2.Insert(Counter);
+    }
+    cout << endl;
+
+    cout << "BufferedRollingAverage Result, should be ~15.5: " << RollingB2.GetAverage() << endl;
+    assert(RollingB2.GetAverage()>15.4 && RollingB2.GetAverage()<15.6);
+    cout << "WeightedRollingAverage Result, should be ~12.2158: " << RollingW2.GetAverage() << endl;
+    assert(RollingW2.GetAverage()>12.1 && RollingW2.GetAverage()<12.3);
+    cout << "DefaultRollingAverage Result, should match its underlying type : " << RollingD2.GetAverage() << endl;
+    //assert(RollingD2.GetAverage()>15.4 && RollingD2.GetAverage()<15.6);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Timestamp Tests
+
+/// @brief The 'timestamp' Test.
+void TimeStamp()
+{
+    cout << "Starting timekeeping tests." << endl;
+    cout << "Getting Timestamp1" << endl;
+    Mezzanine::MaxInt Timestamp1 = Mezzanine::GetTimeStamp();
+
+    cout << "Sleeping main thread for 300ms." << endl;
+    Mezzanine::Threading::this_thread::sleep_for(300000);
+
+    cout << "Getting Timestamp2" << endl;
+    Mezzanine::MaxInt Timestamp2 = Mezzanine::GetTimeStamp();
+
+    cout << "Timestamp1: " << Timestamp1 << endl;
+    cout << "Timestamp2: " << Timestamp2 << endl;
+    cout << "Is Timestamp2 - Timestamp1 = " << Timestamp2-Timestamp1 << endl;
+    cout << "Is Timestamp1 <= Timestamp2: " << (Timestamp1<=Timestamp2) << endl;
+    cout << "Timer Resolution: " << GetTimeStampResolution() << " microsecond(s)" << endl;
+    assert((Timestamp1<=Timestamp2));
+    cout << "Is Timestamp1+300000-(2*TimerResolution) <= Timestamp2 = " << Timestamp1+300000-(2*GetTimeStampResolution()) << "<=" << Timestamp2 << endl;
+    cout << "Is Timestamp1+300000-(2*TimerResolution) <= Timestamp2: " << (Timestamp1+300000-(2*GetTimeStampResolution())<=Timestamp2) << endl;
+    assert((Timestamp1+300000-(2*GetTimeStampResolution()))<=Timestamp2);
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// WorkUnit tests
+
+/// @brief An intentionally large and slow to process type chosen once here, to allow easy adjusting of these tests.
 typedef long double PreciseFloat;
+
 
 /// @brief A very inefficient way to calculate Pi with some spikes in execution time
 /// @param Length How many iteration to use when calculating Pi
@@ -202,6 +480,7 @@ PreciseFloat MakePi(Mezzanine::Whole Length, Whole Spike = 0)
 }
 
 /// @brief A samplework unit that calculates pi
+/// @brief Used in @ref WorkUnitTests and other tests that require actual cpu consumption
 /// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
 class PiMakerWorkUnit : public Mezzanine::Threading::WorkUnit
 {
@@ -237,45 +516,76 @@ class PiMakerWorkUnit : public Mezzanine::Threading::WorkUnit
         }
 };
 
-/// @brief A samplework unit that that just block the thread it is in
-/// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
-class PausesWorkUnit : public Mezzanine::Threading::WorkUnit
+
+/// @brief The 'workunit' Test.
+void WorkUnitTests()
 {
-    public:
-        /// @brief How many milliseconds should this thread block for.
-        Mezzanine::Whole Length;
+    cout << "Starting WorkUnit Tests, 20 runs with WorkUnitSample1" << endl;
+    PiMakerWorkUnit WorkUnitSample1(5000,"WorkUnitSample1",false);
+    FrameScheduler TestScheduler(&std::cout,1);
+    Mezzanine::Threading::DefaultThreadSpecificStorage::Type TestThreadStorage(&TestScheduler);
+    // run work unit
+    for(Whole Counter=0; Counter<20; Counter++)
+        { WorkUnitSample1(TestThreadStorage, TestScheduler); }
+    cout << "Here is the complete log of Twenty Test Runs" << endl
+         << TestThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
+         << "Average Execution Time (Microseconds): " << WorkUnitSample1.GetPerformanceLog().GetAverage() << endl;
 
-        /// @brief Name used for clarifying output and enhancing logging.
-        Mezzanine::String Name;
+    cout << endl << "Starting WorkUnit Dependent and Dependency count Tests. Creating a chain in which C depends on B which depends on A."
+         << endl << "C --> B --> A" << endl;
+    PiMakerWorkUnit* WorkUnitA = new PiMakerWorkUnit(50,"A",false);
+    PiMakerWorkUnit* WorkUnitB = new PiMakerWorkUnit(50,"B",false);
+    PiMakerWorkUnit* WorkUnitC = new PiMakerWorkUnit(50,"C",false);
+    WorkUnitC->AddDependency(WorkUnitB);
+    WorkUnitB->AddDependency(WorkUnitA);
+    TestScheduler.AddWorkUnit(WorkUnitA);
+    TestScheduler.AddWorkUnit(WorkUnitB);
+    TestScheduler.AddWorkUnit(WorkUnitC);
+    TestScheduler.UpdateDependentGraph();
+    cout << "A dependency count: " << WorkUnitA->GetDependencyCount() << " \t A dependent count: " << WorkUnitA->GetDependentCount(TestScheduler) << endl;
+    cout << "B dependency count: " << WorkUnitB->GetDependencyCount() << " \t B dependent count: " << WorkUnitB->GetDependentCount(TestScheduler) << endl;
+    cout << "C dependency count: " << WorkUnitC->GetDependencyCount() << " \t C dependent count: " << WorkUnitC->GetDependentCount(TestScheduler) << endl;
+    assert(WorkUnitA->GetDependencyCount()==0);
+    assert(WorkUnitA->GetDependentCount(TestScheduler)==2);
+    assert(WorkUnitB->GetDependencyCount()==1);
+    assert(WorkUnitB->GetDependentCount(TestScheduler)==1);
+    assert(WorkUnitC->GetDependencyCount()==2);
+    assert(WorkUnitC->GetDependentCount(TestScheduler)==0);
+    cout << "Creating a WorkUnit D which depends on B, So we should have:"
+            << endl << "D --"
+            << endl << "   |"
+            << endl << "   v"
+            << endl << "   B --> A"
+            << endl << "   ^"
+            << endl << "   |"
+            << endl << "C --" << endl;
+    PiMakerWorkUnit* WorkUnitD = new PiMakerWorkUnit(50,"D",false);
+    WorkUnitD->AddDependency(WorkUnitB);
+    TestScheduler.AddWorkUnit(WorkUnitD);
+    TestScheduler.UpdateDependentGraph();
+    cout << "A dependency count: " << WorkUnitA->GetDependencyCount() << " \t A dependent count: " << WorkUnitA->GetDependentCount(TestScheduler) << endl;
+    cout << "B dependency count: " << WorkUnitB->GetDependencyCount() << " \t B dependent count: " << WorkUnitB->GetDependentCount(TestScheduler) << endl;
+    cout << "C dependency count: " << WorkUnitC->GetDependencyCount() << " \t C dependent count: " << WorkUnitC->GetDependentCount(TestScheduler) << endl;
+    cout << "D dependency count: " << WorkUnitD->GetDependencyCount() << " \t D dependent count: " << WorkUnitD->GetDependentCount(TestScheduler) << endl;
+    assert(WorkUnitA->GetDependencyCount()==0);
+    assert(WorkUnitA->GetDependentCount(TestScheduler)==3);
+    assert(WorkUnitB->GetDependencyCount()==1);
+    assert(WorkUnitB->GetDependentCount(TestScheduler)==2);
+    assert(WorkUnitC->GetDependencyCount()==2);
+    assert(WorkUnitC->GetDependentCount(TestScheduler)==0);
+    assert(WorkUnitD->GetDependencyCount()==2);
+    assert(WorkUnitD->GetDependentCount(TestScheduler)==0);
+}
 
-        /// @brief Create one of these workunit
-        /// @param Length_ Defaults to 50 and is the number of Milliseconds to wait
-        /// @param Name Defaults to "Default" only used in output logs
-        PausesWorkUnit(Mezzanine::Whole Length_ = 50, Mezzanine::String Name_ = "Default")
-            : Length(Length_), Name(Name_)
-            { }
-
-        /// @brief Empty Virtual Deconstructor
-        virtual ~PausesWorkUnit()
-            { }
-
-        /// @brief Wait and log it.
-        /// @param CurrentThreadStorage used to retrieve a valid logger.
-        /// @brief CurrentFrameScheduler ignored
-        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
-        {
-            DoubleBufferedLogger& CurrentLogger = CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger);
-            CurrentLogger.GetUsable() << "<Pause PauseLength=\"" << Length << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
-            Mezzanine::Threading::this_thread::sleep_for(Length);
-        }
-};
-
-
-/// @brief Used to pass and accept data from the Pi calculating function with multiple threads.
-/// @param PiMakerMonopoly_ a PiMakerMonopoly void pointer that provides all the required meta data for its execution
-void PiMakerMonopolyHelper(void* PiMakerMonopoly_);
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Monopoly Tests
 
 class PiMakerMonopoly;
+
+/// @brief Used to pass and accept data from the Pi calculating function with multiple threads.
+/// @details Used in @ref MonopolyTest
+/// @param PiMakerMonopoly_ a PiMakerMonopoly void pointer that provides all the required meta data for its execution
+void PiMakerMonopolyHelper(void* PiMakerMonopoly_);
 
 /// @brief The data a single thread in the Pi make monopoly needs.
 struct PiMakerThreadData
@@ -297,6 +607,7 @@ struct PiMakerThreadData
 };
 
 /// @brief PiMakerMonopoly Consume every thread for a brief period to calculate Pi.
+/// @details Used in @ref MonopolyTest
 /// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
 class PiMakerMonopoly : public Mezzanine::Threading::MonopolyWorkUnit
 {
@@ -358,29 +669,6 @@ class PiMakerMonopoly : public Mezzanine::Threading::MonopolyWorkUnit
         }
 };
 
-/// @brief Used in the thread restart test
-class RestartMetric
-{
-    public:
-        /// @brief when the given unit started
-        String UnitStart;
-
-        /// @brief when the given unit completed
-        String UnitEnd;
-
-        /// @brief name of the given unit
-        String Name;
-
-        /// @brief The thread the unit ran in.
-        String Threadid;
-};
-/// @brief Used to easily output a work unit metrics
-std::ostream& operator<< (std::ostream& out, RestartMetric Lhs)
-{
-    out << "Name: " << Lhs.Name << " \tStarted: " << Lhs.UnitStart << " \tEnded: " << Lhs.UnitEnd << " \tThread: " << Lhs.Threadid;
-	return out;
-}
-
 // Documented above at prototype line.
 void PiMakerMonopolyHelper(void* Data)
 {
@@ -391,405 +679,11 @@ void PiMakerMonopolyHelper(void* Data)
     MakePi(Mono->Length);
 }
 
-/// @brief Performs basic checks on the logs
-/// @param Log The Log to check
-/// @param TargetThreadCount there better be this many threads.
-/// @param WorkUnitCount There better be this many uniquely named WorkUnits.
-/// @return A Set of WorkUnit names in case extra work needs to be performed on it.
-std::set<String> CheckSchedulerLog(Mezzanine::Logger& Log, Whole TargetThreadCount_, Whole WorkUnitCount_)
+/// @brief The 'monopoly' Test. A smoke test for the monopoly
+/// @todo intercept the log in the MonopolyTest and check that the log is good.
+void MonopolyTest()
 {
-    pugi::xml_document Doc;
-    Doc.load(Log);
-    pugi::xml_node TestLog = Doc.child("Frame");
-    assert (TestLog);
-    Whole ThreadCount = 0;
-    Whole WorkUnitCount = 0;
-    pugi::xml_node LogCommit = TestLog.child("Thread");
-
-    std::set<String> WorkUnitNames;
-    while(LogCommit)
-    {
-        pugi::xml_node OneUnit = LogCommit.child("MakePi");
-        while(OneUnit)
-        {
-            pugi::xml_attribute CurrentName = OneUnit.attribute("WorkUnitName");
-            WorkUnitNames.insert(CurrentName.value());
-
-            WorkUnitCount++;
-            OneUnit = OneUnit.next_sibling("MakePi");
-        }
-        ThreadCount++;
-        LogCommit = LogCommit.next_sibling("Thread");
-    }
-    assert(ThreadCount==TargetThreadCount_);
-    assert(WorkUnitCount_==WorkUnitNames.size()); // unique names vs expected
-    assert(WorkUnitCount_==WorkUnitCount); // actual work units vs expected
-    return WorkUnitNames;
-}
-
-static Mezzanine::Integer TryLockTest=0;
-static Mezzanine::Threading::mutex TryLock;
-void TryToSquareInThread(void* Value)
-{
-    cout << "Thread T4 trying to lock mutex ThreadPassLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    if (TryLock.try_lock())
-    {
-        cout << "Thread T4 locked mutex, Squaring the value " << endl;
-        TryLockTest = *(Mezzanine::Integer*)Value * *(Mezzanine::Integer*)Value;
-        TryLock.unlock();
-    }else{
-        cout << "Thread T4 could not acquire lock, no work done" << endl;
-    }
-}
-
-static Mezzanine::Integer ThreadPassTest=0;
-static Mezzanine::Threading::mutex ThreadPassLock;
-void SquareInThread(void* Value)
-{
-    cout << "Thread T3 waiting for lock on mutex ThreadPassLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadPassLock.lock();
-    cout << "Thread T3 locked mutex: " << endl;
-    ThreadPassTest = *(Mezzanine::Integer*)Value * *(Mezzanine::Integer*)Value;
-    cout << "Thread T3 work complete unlocking mutex: " << endl;
-    ThreadPassLock.unlock();
-}
-
-static Mezzanine::Threading::thread::id ThreadIDTest=0;
-static Mezzanine::Threading::mutex ThreadIDLock;
-void PutIdInGlobal(void*)
-{
-    cout << "Thread T2 trying to lock mutex ThreadIDLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadIDLock.lock();
-    cout << "Thread T2 locked mutex: " << endl;
-    ThreadIDTest = Mezzanine::Threading::this_thread::get_id();
-    cout << "Thread T2 work complete unlocking mutex: " << endl;
-    ThreadIDLock.unlock();
-}
-
-void PrintHello(void*)
-    { cout << "Hello from thread T1 with id: " << Mezzanine::Threading::this_thread::get_id() << endl; }
-
-
-
-
-
-
-
-
-int main (int argc, char** argv)
-{
-    // Make a vector of Test names to run
-    std::vector<String> TargetTests;
-    String ThisExecutable(argv[0]);
-    for(int Counter=1; Counter<argc; Counter++)
-        { TargetTests.push_back(argv[Counter]); }
-    for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter)
-        { std::transform(Iter->begin(), Iter->end(), Iter->begin(), ::tolower); }
-
-    // The mapping of all the tests to their name
-    TestGroup AllTheTests;
-    AllTheTests["sizes"]=Sizes;
-    AllTheTests["untestable"]=Untestable;
-
-    if(TargetTests.size())
-    {
-        for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter) // Check for invalid tests
-        {
-            if(AllTheTests.find(*Iter)==AllTheTests.end())
-            {
-                cout << "\"" << *Iter << "\" is not a valid test name." <<  endl << endl;
-                Usage(ThisExecutable, AllTheTests);
-                exit(1);
-            }
-        }
-        for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter)
-            { AllTheTests[*Iter](); }
-    }else{
-
-        for(TestGroup::iterator Iter=AllTheTests.begin(); Iter!=AllTheTests.end(); ++Iter)
-        {
-            cout << "Beginning test '" << Iter->first << "' :" << endl;
-            Iter->second();
-            cout << endl << endl;
-        }
-
-    }
-
-
-
-    exit(0);
-
-
-
-
-
-
-
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    cout << endl << "Testing Basic Thread functionality." << endl;
-    cout << "This Threads id: " <<  Mezzanine::Threading::this_thread::get_id() << endl;
-
-    cout << "Creating a thread with identifier T1 and unkown id." << endl;
-    Mezzanine::Threading::thread T1(PrintHello);
-    cout << "T1 should have an id of: " << T1.get_id() << endl;
-
-    cout << "Is T1 joinable: " << T1.joinable() << endl;
-    cout << "Joining T1" << endl;
-    T1.join();
-    cout << "Is T1 joinable: " << T1.joinable() << endl;
-
-    cout << "Sleeping main thread for 300ms." << endl;
-    Mezzanine::Threading::this_thread::sleep_for(300000);
-
-    cout << "Yielding thread to OS scheduler." << endl;
-    Mezzanine::Threading::this_thread::yield();
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    cout << endl << "Testing basic mutex functionality" << endl;
-    cout << "Locking ThreadIDLock in thread: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadIDLock.lock();
-
-    cout << "Creating a thread with identifier T2 and unkown id." << endl;
-    Mezzanine::Threading::thread T2(PutIdInGlobal);
-
-    cout << "Storing T2's id: " << T2.get_id() << endl;
-    cout << "Unlocking ThreadIDLock from main and sleeping for 300 ms." << endl;
-    Mezzanine::Threading::thread::id T2id = T2.get_id();
-    ThreadIDLock.unlock();
-    Mezzanine::Threading::this_thread::sleep_for(300000);
-
-    ThreadIDLock.lock();
-    cout << "Does the thread report the same ID as we gathered: " << (ThreadIDTest == T2id) << endl;
-    assert(ThreadIDTest == T2id);
-    ThreadIDLock.unlock();
-
-    cout << "Joining T2" << endl;
-    T2.join();
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    cout << endl << "Testing passing to thread functionality" << endl;
-    cout << "Locking ThreadPassLock in thread: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadPassLock.lock();
-
-    cout << "Creating a thread with identifier T3 and unkown id." << endl;
-    Mezzanine::Integer Value = 9;
-    cout << "Passing " << Value << " into thread T3." << endl;
-    Mezzanine::Threading::thread T3(SquareInThread, &Value);
-
-    cout << "Unlocking ThreadPassLock from main and sleeping for 300 ms." << endl;
-    ThreadPassLock.unlock();
-    Mezzanine::Threading::this_thread::sleep_for(300000);
-
-
-    ThreadPassLock.lock();
-    cout << "Thread gives us: " << ThreadPassTest << endl;
-    cout << "Does the thread give us the square of what we passed it: " << (Value*Value == ThreadPassTest) << endl;
-    assert(Value*Value == ThreadPassTest);
-    ThreadPassLock.unlock();
-
-    cout << "Joining T3" << endl;
-    T3.join();
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    cout << endl << "Testing Mutex try_lock()" << endl;
-    cout << "Locking TryLock in main thread with id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    assert(TryLock.try_lock());
-
-    cout << "Creating a thread with identifier T4 and unkown id." << endl;
-    cout << "Passing " << Value << " into thread T4, and assigning to output and waiting 200ms." << endl;
-    TryLockTest = Value;
-    Mezzanine::Threading::thread T4(TryToSquareInThread, &Value);
-
-    Mezzanine::Threading::this_thread::sleep_for(300000);
-
-    cout << "Joining T4" << endl;
-    T4.join();
-
-    cout << "Unlocking TryLock." << endl;
-    TryLock.unlock();
-
-    cout << "Value from thread's return point is " << TryLockTest << " it should be " << Value << " if it wasn't able to get mutex" << endl;
-    cout << "Did T4 not get the mutex and proceed past mutex as expected: " << (TryLockTest == Value) << endl;
-    assert(TryLockTest == Value);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // rolling average tests
-
-    cout << endl << "Starting Rolling Average Tests" << endl;
-    cout << "Is the Default Rolling Average the BufferedRollingAverage: " << (typeid(Mezzanine::DefaultRollingAverage<Mezzanine::Whole>::Type)==typeid(Mezzanine::BufferedRollingAverage<Mezzanine::Whole>)) << endl;
-    //assert((typeid(Mezzanine::DefaultRollingAverage<Mezzanine::Whole>::Type)==typeid(Mezzanine::BufferedRollingAverage<Mezzanine::Whole>)));
-
-    cout << "Creating a BufferedRollingAverage, WeightedRollingAverage and DefaultRollingAverage with Mezzanine::Whole (and sometimes float for math)" << endl;
-    Mezzanine::BufferedRollingAverage<Mezzanine::Whole> RollingB(10);
-    Mezzanine::WeightedRollingAverage<Mezzanine::Whole,float> RollingW(10);
-    Mezzanine::DefaultRollingAverage<Mezzanine::Whole>::Type RollingD(10);
-
-    cout << "Inserting into each: ";
-    for(Mezzanine::Whole Counter=1; Counter<=20; Counter++)
-    {
-        cout << Counter << (20==Counter?".":", ");
-        RollingB.Insert(Counter);
-        RollingW.Insert(Counter);
-        RollingD.Insert(Counter);
-    }
-    cout << endl;
-
-    cout << "BufferedRollingAverage Result, should be 15: " << RollingB.GetAverage() << endl;
-    assert(RollingB.GetAverage()==15);
-    cout << "WeightedRollingAverage Result, should be about 10: " << RollingW.GetAverage() << endl;
-    assert(RollingW.GetAverage()>9||RollingW.GetAverage()<16);
-    cout << "DefaultRollingAverage Result, should match its underlying type : " << RollingD.GetAverage() << endl;
-    //assert(RollingD.GetAverage()==15);
-
-    cout << "Creating a BufferedRollingAverage, WeightedRollingAverage and DefaultRollingAverage with floats" << endl;
-    Mezzanine::BufferedRollingAverage<float> RollingB2(10);
-    Mezzanine::WeightedRollingAverage<float,float> RollingW2(10);
-    Mezzanine::DefaultRollingAverage<float>::Type RollingD2(10);
-
-    cout << "Inserting into each: ";
-    for(float Counter=1.0; Counter<=20.0; Counter++)
-    {
-        cout << Counter << (20.0<=Counter?".":", ");
-        RollingB2.Insert(Counter);
-        RollingW2.Insert(Counter);
-        RollingD2.Insert(Counter);
-    }
-    cout << endl;
-
-    cout << "BufferedRollingAverage Result, should be ~15.5: " << RollingB2.GetAverage() << endl;
-    assert(RollingB2.GetAverage()>15.4 && RollingB2.GetAverage()<15.6);
-    cout << "WeightedRollingAverage Result, should be ~12.2158: " << RollingW2.GetAverage() << endl;
-    assert(RollingW2.GetAverage()>12.1 && RollingW2.GetAverage()<12.3);
-    cout << "DefaultRollingAverage Result, should match its underlying type : " << RollingD2.GetAverage() << endl;
-    //assert(RollingD2.GetAverage()>15.4 && RollingD2.GetAverage()<15.6);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Timestamp Tests
-
-    cout << endl << "Starting timekeeping tests." << endl;
-    cout << "Getting Timestamp1" << endl;
-    Mezzanine::MaxInt Timestamp1 = Mezzanine::GetTimeStamp();
-
-    cout << "Sleeping main thread for 300ms." << endl;
-    Mezzanine::Threading::this_thread::sleep_for(300000);
-
-    cout << "Getting Timestamp2" << endl;
-    Mezzanine::MaxInt Timestamp2 = Mezzanine::GetTimeStamp();
-
-    cout << "Timestamp1: " << Timestamp1 << endl;
-    cout << "Timestamp2: " << Timestamp2 << endl;
-    cout << "Is Timestamp2 - Timestamp1 = " << Timestamp2-Timestamp1 << endl;
-    cout << "Is Timestamp1 <= Timestamp2: " << (Timestamp1<=Timestamp2) << endl;
-    cout << "Timer Resolution: " << GetTimeStampResolution() << " microsecond(s)" << endl;
-    assert((Timestamp1<=Timestamp2));
-    cout << "Is Timestamp1+300000-(2*TimerResolution) <= Timestamp2 = " << Timestamp1+300000-(2*GetTimeStampResolution()) << "<=" << Timestamp2 << endl;
-    cout << "Is Timestamp1+300000-(2*TimerResolution) <= Timestamp2: " << (Timestamp1+300000-(2*GetTimeStampResolution())<=Timestamp2) << endl;
-    assert((Timestamp1+300000-(2*GetTimeStampResolution()))<=Timestamp2);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Testing Random Number facilities
-    cout << endl << "Starting random number generation tests. Not part of the library, but required for testing." << endl;
-    srand((int)Timestamp1);
-    Whole TestRuns = 1000000;
-    vector<Whole> D20Rolls;
-    vector<Whole> D2d3Rolls;
-    vector<Whole> D20Histogram;
-    vector<Whole> D2d3Histogram;
-
-    cout <<  "Doing " << TestRuns << " iterations of generatining numbers with each function, and initializing random seed with " << Timestamp1 << "." << endl;
-    for (Whole Counter=0; Counter<TestRuns; ++Counter)
-    {
-        D20Rolls.push_back(DiceD20());
-        D2d3Rolls.push_back(Dice2D3());
-    }
-
-    cout << "Preparing counts of the rolls." << endl;
-    // init some 0s
-    for (Whole Counter=0; Counter<=21; ++Counter) //providing a small amount of buffer space on either side in case dice algorithm has off by one issue.
-        { D20Histogram.push_back(0); }
-    for (Whole Counter=0; Counter<=7; ++Counter)
-        { D2d3Histogram.push_back(0); }
-
-    // count the actual rolls
-    for(vector<Whole>::iterator Iter=D20Rolls.begin(); Iter!=D20Rolls.end(); ++Iter)
-        { D20Histogram[*Iter]++; }
-    for(vector<Whole>::iterator Iter=D2d3Rolls.begin(); Iter!=D2d3Rolls.end(); ++Iter)
-        { D2d3Histogram[*Iter]++; }
-
-    // display chart
-    cout << "D20 rolls should be distributed evenly between 1 and 20 inclusive:" << endl;
-    for (Whole Counter=0; Counter<=21; ++Counter) //providing a small amount of buffer space on either side in case dice algorithm has off by one issue.
-    { cout << Counter << ": " << D20Histogram[Counter] << " \t" << (((double)D20Histogram[Counter])/((double)TestRuns))*100 << "% " << endl; }
-
-    cout << "2d3 rolls should be distributed on a bell curve 2 and 6 inclusive:" << endl;
-    for (Whole Counter=0; Counter<=7; ++Counter)
-        { cout << Counter << ": " << D2d3Histogram[Counter] << " \t" << (((double)D2d3Histogram[Counter])/((double)TestRuns))*100 << "% " <<  endl; }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // WorkUnit tests
-
-    cout << endl << "Starting WorkUnit Tests, 20 runs with WorkUnitSample1" << endl;
-    PiMakerWorkUnit WorkUnitSample1(5000,"WorkUnitSample1",false);
-    FrameScheduler TestScheduler(&std::cout,1);
-    Mezzanine::Threading::DefaultThreadSpecificStorage::Type TestThreadStorage(&TestScheduler);
-    // run work unit
-    for(Whole Counter=0; Counter<20; Counter++)
-        { WorkUnitSample1(TestThreadStorage, TestScheduler); }
-    cout << "Here is the complete log of Twenty Test Runs" << endl
-         << TestThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
-         << "Average Execution Time (Microseconds): " << WorkUnitSample1.GetPerformanceLog().GetAverage() << endl;
-
-    cout << endl << "Starting WorkUnit Dependent and Dependency count Tests. Creating a chain in which C depends on B which depends on A."
-         << endl << "C --> B --> A" << endl;
-    PiMakerWorkUnit* WorkUnitA = new PiMakerWorkUnit(50,"A",false);
-    PiMakerWorkUnit* WorkUnitB = new PiMakerWorkUnit(50,"B",false);
-    PiMakerWorkUnit* WorkUnitC = new PiMakerWorkUnit(50,"C",false);
-    WorkUnitC->AddDependency(WorkUnitB);
-    WorkUnitB->AddDependency(WorkUnitA);
-    TestScheduler.AddWorkUnit(WorkUnitA);
-    TestScheduler.AddWorkUnit(WorkUnitB);
-    TestScheduler.AddWorkUnit(WorkUnitC);
-    TestScheduler.UpdateDependentGraph();
-    cout << "A dependency count: " << WorkUnitA->GetDependencyCount() << " \t A dependent count: " << WorkUnitA->GetDependentCount(TestScheduler) << endl;
-    cout << "B dependency count: " << WorkUnitB->GetDependencyCount() << " \t B dependent count: " << WorkUnitB->GetDependentCount(TestScheduler) << endl;
-    cout << "C dependency count: " << WorkUnitC->GetDependencyCount() << " \t C dependent count: " << WorkUnitC->GetDependentCount(TestScheduler) << endl;
-    assert(WorkUnitA->GetDependencyCount()==0);
-    assert(WorkUnitA->GetDependentCount(TestScheduler)==2);
-    assert(WorkUnitB->GetDependencyCount()==1);
-    assert(WorkUnitB->GetDependentCount(TestScheduler)==1);
-    assert(WorkUnitC->GetDependencyCount()==2);
-    assert(WorkUnitC->GetDependentCount(TestScheduler)==0);
-    cout << "Creating a WorkUnit D which depends on B, So we should have:"
-            << endl << "D --"
-            << endl << "   |"
-            << endl << "   v"
-            << endl << "   B --> A"
-            << endl << "   ^"
-            << endl << "   |"
-            << endl << "C --" << endl;
-    PiMakerWorkUnit* WorkUnitD = new PiMakerWorkUnit(50,"D",false);
-    WorkUnitD->AddDependency(WorkUnitB);
-    TestScheduler.AddWorkUnit(WorkUnitD);
-    TestScheduler.UpdateDependentGraph();
-    cout << "A dependency count: " << WorkUnitA->GetDependencyCount() << " \t A dependent count: " << WorkUnitA->GetDependentCount(TestScheduler) << endl;
-    cout << "B dependency count: " << WorkUnitB->GetDependencyCount() << " \t B dependent count: " << WorkUnitB->GetDependentCount(TestScheduler) << endl;
-    cout << "C dependency count: " << WorkUnitC->GetDependencyCount() << " \t C dependent count: " << WorkUnitC->GetDependentCount(TestScheduler) << endl;
-    cout << "D dependency count: " << WorkUnitD->GetDependencyCount() << " \t D dependent count: " << WorkUnitD->GetDependentCount(TestScheduler) << endl;
-    assert(WorkUnitA->GetDependencyCount()==0);
-    assert(WorkUnitA->GetDependentCount(TestScheduler)==3);
-    assert(WorkUnitB->GetDependencyCount()==1);
-    assert(WorkUnitB->GetDependentCount(TestScheduler)==2);
-    assert(WorkUnitC->GetDependencyCount()==2);
-    assert(WorkUnitC->GetDependentCount(TestScheduler)==0);
-    assert(WorkUnitD->GetDependencyCount()==2);
-    assert(WorkUnitD->GetDependentCount(TestScheduler)==0);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // A smoke test for the monopoly
-    cout << endl << "Starting MonopolyWorkUnit test. Creating a monopoly that will calculate pi in a number of threads simultaneously." << endl;
+    cout << "Starting MonopolyWorkUnit test. Creating a monopoly that will calculate pi in a number of threads simultaneously." << endl;
     PiMakerMonopoly Pioply(50,"Pioply",false,4);
     FrameScheduler TestSchedulerMono(&std::cout,1);
     DefaultThreadSpecificStorage::Type PioplyStorage(&TestSchedulerMono);
@@ -798,20 +692,37 @@ int main (int argc, char** argv)
     cout << "Here is the un-aggregated (main thread only) log of Twenty Test Runs" << endl
          << PioplyStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
          << "Average Execution Time (Microseconds): " << Pioply.GetPerformanceLog().GetAverage() << endl;
+}
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Test for the logger workunits
-    cout << endl << "Testing the logger workunits to get a handle on the monopolies logs, logging to cout: " << endl;
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Test for the logger workunits
+
+/// @brief The 'logaggregator' Test. A smoke test for the monopoly
+/// @todo intercept the log in the LogAggregatorTests and check that the log is good.
+void LogAggregatorTests()
+{
+    cout << endl << "Creating a FrameScheduler with a monopoly Testing the logger workunits to get a handle on the monopolies logs, logging to cout: " << endl;
+    PiMakerMonopoly Pioply(50,"Pioply",false,4);
+    FrameScheduler TestSchedulerMono(&std::cout,1);
+    DefaultThreadSpecificStorage::Type PioplyStorage(&TestSchedulerMono);
+    for(Whole Counter=0; Counter<20; Counter++)
+        { Pioply(PioplyStorage, TestSchedulerMono); }
     LogBufferSwapper Swapper;
     ThreadSpecificStorage SwapResource(&TestSchedulerMono);
     Swapper(SwapResource, TestSchedulerMono);
     LogAggregator Agg;
     Agg(SwapResource, TestSchedulerMono);
     cout << "Large log should have been emitted that showed PI being calculated 80 times and which thread it was calculated in. 20 iterations should have occurred in the main thread, and the rest each in fresh threads." << endl;
+}
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Tests for the WorkUnitKey
-    cout << endl << "Creating a number of WorkUnitKeys and tesing their ability to sort: " << endl;
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Tests for the WorkUnitKey
+
+/// @brief The 'workunitkey' Test. A smoke test for the monopoly
+void WorkUnitKeyTests()
+{
+    cout << "Creating a number of WorkUnitKeys and tesing their ability to sort: " << endl;
     cout << "\t" << "                   Deps, Time, Ptr" << endl;
     cout << "\t" << "WorkUnitKey First(   10, 500,  0  );" << endl;
     cout << "\t" << "WorkUnitKey Second(   5, 600,  0  );" << endl;
@@ -882,10 +793,55 @@ int main (int argc, char** argv)
     assert( ((PiMakerWorkUnit*)(Iter->Unit))->Name == String("Fourth") );
     Iter++;
     cout << endl;
+}
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Tests for the Framescheduler getting the next WorkUnit.
-    cout << endl << "Creating a simple dependency chain in 4 WorkUnits and inserting them into a Test FrameScheduler. Then they will be pulled out one at a time and mark them as completed: " << endl;
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Tests for the Framescheduler getting the next WorkUnit.
+
+
+/// @brief A samplework unit that that just block the thread it is in
+/// @details Used in @ref FrameSchedulerGetNext and other tests
+/// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
+class PausesWorkUnit : public Mezzanine::Threading::WorkUnit
+{
+    public:
+        /// @brief How many milliseconds should this thread block for.
+        Mezzanine::Whole Length;
+
+        /// @brief Name used for clarifying output and enhancing logging.
+        Mezzanine::String Name;
+
+        /// @brief Create one of these workunit
+        /// @param Length_ Defaults to 50 and is the number of Milliseconds to wait
+        /// @param Name Defaults to "Default" only used in output logs
+        PausesWorkUnit(Mezzanine::Whole Length_ = 50, Mezzanine::String Name_ = "Default")
+            : Length(Length_), Name(Name_)
+            { }
+
+        /// @brief Empty Virtual Deconstructor
+        virtual ~PausesWorkUnit()
+            { }
+
+        /// @brief Wait and log it.
+        /// @param CurrentThreadStorage used to retrieve a valid logger.
+        /// @brief CurrentFrameScheduler ignored
+        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
+        {
+            DoubleBufferedLogger& CurrentLogger = CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger);
+            CurrentLogger.GetUsable() << "<Pause PauseLength=\"" << Length << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
+            Mezzanine::Threading::this_thread::sleep_for(Length);
+        }
+};
+
+/// @brief The 'frameschedulergetnext' Test. A smoke test for the monopoly
+void FrameSchedulerGetNext()
+{
+    cout <<  "Creating a simple dependency chain in 4 WorkUnits and inserting them into a Test FrameScheduler. Then they will be pulled out one at a time and mark them as completed: " << endl;
+
+    PiMakerWorkUnit *WorkUnitK1 = new PiMakerWorkUnit(500,"First",false);
+    PiMakerWorkUnit *WorkUnitK2 = new PiMakerWorkUnit(500,"Second",false);
+    PiMakerWorkUnit *WorkUnitK3 = new PiMakerWorkUnit(500,"Third",false);
+    PiMakerWorkUnit *WorkUnitK4 = new PiMakerWorkUnit(500,"Fourth",false);
 
     FrameScheduler SchedulingTest1(&cout,1);
     DefaultThreadSpecificStorage::Type Storage1(&SchedulingTest1);
@@ -915,7 +871,7 @@ int main (int argc, char** argv)
     assert( ((PiMakerWorkUnit*)Counter)->Name == String("Fourth") );
     Counter->operator()(Storage1, SchedulingTest1);
 
-    cout << endl << "Creating 4 WorkUnits with precise runtimes and inserting them into a Test FrameScheduler. Then they will be pulled out one at a time and mark them as completed: " << endl;
+    cout << endl << "Creating 3 WorkUnits with precise runtimes and inserting them into a Test FrameScheduler. Then they will be pulled out one at a time and mark them as completed: " << endl;
     FrameScheduler SchedulingTest2(&cout,1);
     DefaultThreadSpecificStorage::Type Storage2(&SchedulingTest2);
 
@@ -964,10 +920,65 @@ int main (int argc, char** argv)
     cout << "Getting the WorkUnit Named " << ((PausesWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     assert( ((PausesWorkUnit*)Counter)->Name == String("FiveHundred-ms") );
     Counter->operator()(Storage2, SchedulingTest2);
+}
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Testing Thread creation and destruction
-    cout << endl << "Creating a FrameScheduler with 4 WorkUnits Running one frame with different thread counts: " << endl;
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Testing Thread creation and destruction
+
+/// @brief Performs basic checks on the logs
+/// @details Used in @ref ThreadCreate
+/// @param Log The Log to check
+/// @param TargetThreadCount there better be this many threads.
+/// @param WorkUnitCount There better be this many uniquely named WorkUnits.
+/// @return A Set of WorkUnit names in case extra work needs to be performed on it.
+std::set<String> CheckSchedulerLog(Mezzanine::Logger& Log, Whole TargetThreadCount_, Whole WorkUnitCount_)
+{
+    pugi::xml_document Doc;
+    Doc.load(Log);
+    pugi::xml_node TestLog = Doc.child("Frame");
+    assert (TestLog);
+    Whole ThreadCount = 0;
+    Whole WorkUnitCount = 0;
+    pugi::xml_node LogCommit = TestLog.child("Thread");
+
+    std::set<String> WorkUnitNames;
+    while(LogCommit)
+    {
+        pugi::xml_node OneUnit = LogCommit.child("MakePi");
+        while(OneUnit)
+        {
+            pugi::xml_attribute CurrentName = OneUnit.attribute("WorkUnitName");
+            WorkUnitNames.insert(CurrentName.value());
+
+            WorkUnitCount++;
+            OneUnit = OneUnit.next_sibling("MakePi");
+        }
+        ThreadCount++;
+        LogCommit = LogCommit.next_sibling("Thread");
+    }
+    assert(ThreadCount==TargetThreadCount_);
+    assert(WorkUnitCount_==WorkUnitNames.size()); // unique names vs expected
+    assert(WorkUnitCount_==WorkUnitCount); // actual work units vs expected
+    return WorkUnitNames;
+}
+
+
+/// @brief Converts anything streamable to a Mezzanine::String
+/// @details Used in @ref ThreadCreate
+/// @param Datum the item to convert
+/// @return a string containing the lexographically casted data
+template <typename T>
+Mezzanine::String ToString(T Datum)
+{
+    std::stringstream Converter;
+    Converter << Datum;
+    return Converter.str();
+}
+
+/// @brief The 'threadcreate' Test. A smoke test for the monopoly
+void ThreadCreate()
+{
+    cout << "Creating a FrameScheduler with 4 WorkUnits Running one frame with different thread counts: " << endl;
     std::stringstream LogCache;
     FrameScheduler ThreadCreationTest1(&LogCache,1);
     PiMakerWorkUnit* WorkUnitR1 = new PiMakerWorkUnit(50000,"Run1",false);
@@ -1036,10 +1047,41 @@ int main (int argc, char** argv)
     CheckSchedulerLog(LogCache,4,1004);
     cout << "It ran correctly." << endl;
     LogCache.str("");
+}
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Testing FrameScheduler thread restart
-    cout << endl << "Creating a few WorkUnits with a " << endl;
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Testing FrameScheduler thread restart
+
+/// @brief Used in @ref ThreadRestart
+class RestartMetric
+{
+    public:
+        /// @brief when the given unit started
+        String UnitStart;
+
+        /// @brief when the given unit completed
+        String UnitEnd;
+
+        /// @brief name of the given unit
+        String Name;
+
+        /// @brief The thread the unit ran in.
+        String Threadid;
+};
+
+/// @brief Used to easily output a work unit metrics
+/// @details Used in @ref ThreadCreate
+std::ostream& operator<< (std::ostream& out, RestartMetric Lhs)
+{
+    out << "Name: " << Lhs.Name << " \tStarted: " << Lhs.UnitStart << " \tEnded: " << Lhs.UnitEnd << " \tThread: " << Lhs.Threadid;
+    return out;
+}
+
+/// @brief The 'threadrestart' Test. A smoke test for the monopoly
+void ThreadRestart()
+{
+    cout << "Creating a few WorkUnits with a " << endl;
+    std::stringstream LogCache;
     cout << "Creating WorkUnits a Dependency chain as follows: "
             << endl << "    +--->B"
             << endl << "    |"
@@ -1131,22 +1173,15 @@ int main (int argc, char** argv)
     assert(AEnd<=CStart);
     cout << "Were B and C run in different threads: " << (BThread!=CThread) << endl;
     assert(BThread!=CThread);
+}
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Testing FrameScheduler Timings
 
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Testing FrameScheduler Affinity execution
-
-    // Make a scheduler
-    // 3 affinity WorkUnits and 3 normal
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Testing FrameScheduler timing
-    cout << endl << "Creating a few Schedulers with only one work unit and testing a variety of framerates timing accuracies." << endl;
+/// @brief The 'timing' Test. A smoke test for the monopoly
+void Timing()
+{
+    cout << "Creating a few Schedulers with only one work unit and testing a variety of framerates timing accuracies." << endl;
     std::vector<Whole> Rates;
     Rates.push_back(10);
     Rates.push_back(25);
@@ -1158,6 +1193,7 @@ int main (int argc, char** argv)
 
     for(std::vector<Whole>::iterator Iter = Rates.begin(); Iter!=Rates.end(); ++Iter)
     {
+        std::stringstream LogCache;
         cout << "Creating a Scheduler with only one work unit " << *Iter << " Frame Per Second running " << *Iter << " frames. " << endl;
         FrameScheduler TimingTest(&LogCache,1);
         PiMakerWorkUnit* WorkUnitTT1 = new PiMakerWorkUnit(50,"ForeverAlone",false);
@@ -1181,8 +1217,12 @@ int main (int argc, char** argv)
         //assert(0.1>Variance); // Allow a .1% variance - This is very achievable with an accurate microsecond timer
     }
     cout << "Average Variance: " << VarianceTotal.GetAverage() << endl;
+}
 
-    cout << endl << "Testing the same FrameScheduler setup with a framrate of 0 to see max performance: " << endl;
+/// @brief The 'performanceframes' Test. A smoke test for the monopoly
+void PerformanceFrames()
+{
+    cout << "Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: " << endl;
     std::vector<Whole> Durations;
     Durations.push_back(10);
     Durations.push_back(25);
@@ -1190,9 +1230,41 @@ int main (int argc, char** argv)
     Durations.push_back(30);
     Durations.push_back(60);
     Durations.push_back(100);
+    Durations.push_back(200);
+    Durations.push_back(300);
+    Durations.push_back(400);
+    Durations.push_back(500);
+    Durations.push_back(600);
+    Durations.push_back(700);
+    Durations.push_back(800);
+    Durations.push_back(900);
     Durations.push_back(1000);
+    Durations.push_back(2000);
+    Durations.push_back(3000);
+    Durations.push_back(4000);
+    Durations.push_back(5000);
+    Durations.push_back(6000);
+    Durations.push_back(7000);
+    Durations.push_back(8000);
+    Durations.push_back(9000);
     Durations.push_back(10000);
+    Durations.push_back(20000);
+    Durations.push_back(30000);
+    Durations.push_back(40000);
+    Durations.push_back(50000);
+    Durations.push_back(60000);
+    Durations.push_back(70000);
+    Durations.push_back(80000);
+    Durations.push_back(90000);
     Durations.push_back(100000);
+    Durations.push_back(200000);
+    Durations.push_back(300000);
+    Durations.push_back(400000);
+    Durations.push_back(500000);
+    Durations.push_back(600000);
+    Durations.push_back(700000);
+    Durations.push_back(800000);
+    Durations.push_back(900000);
     Durations.push_back(1000000);
     Durations.push_back(10000000);
     Durations.push_back(100000000);
@@ -1201,6 +1273,7 @@ int main (int argc, char** argv)
 
     for(std::vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
     {
+        std::stringstream LogCache;
         cout << "Creating a Scheduler with a variety of WorkUnits running at full speed. " << endl;
         FrameScheduler TimingTest(&LogCache,1);
         TimingTest.SetFrameRate(0);
@@ -1209,11 +1282,11 @@ int main (int argc, char** argv)
             { TimingTest.DoOneFrame(); }
         Whole TimingTestEnd = GetTimeStamp();
         Whole TestLength = TimingTestEnd-TimingTestStart;
-        Whole FrameRate = (1000000*TestLength)/ *Iter;
+        Whole FrameRate = double(*Iter)/(double(TestLength)/double(1000000));
         cout << "  " << *Iter << " Empty Frames took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
         PerformanceTotals.Insert(FrameRate);
-        if(1000000<TestLength)
-            { cout << "Single Test longer than one second, bailing from other performace tests" << endl; break; }
+        if(3000000<TestLength)
+            { cout << "Single Test longer than three seconds, bailing from other performace tests" << endl; break; }
 
         //WorkUnit* WorkUnitTT2 = new PausesWorkUnit(0,"ForeverAlone");
         WorkUnit* WorkUnitTT2 = new PiMakerWorkUnit(0,"ForeverAlone",false);
@@ -1223,11 +1296,11 @@ int main (int argc, char** argv)
             { TimingTest.DoOneFrame(); }
         TimingTestEnd = GetTimeStamp();
         TestLength = TimingTestEnd-TimingTestStart;
-        FrameRate = (1000000*TestLength)/ *Iter;
+        FrameRate = double(*Iter)/(double(TestLength)/double(1000000));
         cout << "  " << *Iter << " Single WorkUnit Frames took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
         PerformanceTotals.Insert(FrameRate);
-        if(1000000<TestLength)
-            { cout << "Single Test longer than one second, bailing from other performace tests" << endl; break; }
+        if(3000000<TestLength)
+            { cout << "Single Test longer than three seconds, bailing from other performace tests" << endl; break; }
 
         //WorkUnit* WorkUnitTT2A = new PausesWorkUnit(0,"ForeverAlone");
         WorkUnit* WorkUnitTT2A = new PiMakerWorkUnit(0,"A",false);
@@ -1244,13 +1317,170 @@ int main (int argc, char** argv)
             { TimingTest.DoOneFrame(); }
         TimingTestEnd = GetTimeStamp();
         TestLength = TimingTestEnd-TimingTestStart;
-        FrameRate = (*Iter * 1000000)/TestLength;
+        FrameRate = double(*Iter)/(double(TestLength)/double(1000000));
         cout << "  " << *Iter << " Frames with the previous and an extra dependency set (A->B->C) took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
         PerformanceTotals.Insert(FrameRate);
-        if(1000000<TestLength)
-            { cout << "Single Test longer than one second, bailing from other performace tests" << endl; break; }
+        if(3000000<TestLength)
+            { cout << "Single Test longer than three seconds, bailing from other performance tests" << endl; break; }
+        cout << endl;
     }
     cout << "Average FrameRate: " << PerformanceTotals.GetAverage() << endl;
+}
+
+//PerformanceSeconds
+/// @brief The 'performanceseconds' Test. A smoke test for the monopoly
+void PerformanceSeconds()
+{
+    cout << "Testing the FrameScheduler setup with a framrate of 0 to see max performance over fixed length of time: " << endl;
+    std::vector<Whole> Durations;
+    Durations.push_back(10);
+    Durations.push_back(100);
+    Durations.push_back(1000);
+    Durations.push_back(10000);
+    Durations.push_back(100000);
+    Durations.push_back(1000000); // one second
+    Durations.push_back(10000000);
+
+    BufferedRollingAverage<Whole> PerformanceTotals(Durations.size()*2); // happens to be skewed to later test results, just in case they all don't finish
+
+    for(std::vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
+    {
+        std::stringstream LogCache;
+        cout << "Creating a Scheduler with a variety of WorkUnits running at full speed. " << endl;
+        FrameScheduler TimingTest1(&LogCache,1);
+        TimingTest1.SetFrameRate(0);
+        Whole TimingTestStart = GetTimeStamp();
+        Whole TimingTestEnd = TimingTestStart + *Iter;
+        while(Whole(GetTimeStamp())<TimingTestEnd)
+            { TimingTest1.DoOneFrame(); }
+        Whole FrameCount = TimingTest1.GetFrameCount();
+        TimingTestEnd = GetTimeStamp();
+        Whole TimingTestLength = TimingTestEnd-TimingTestStart;
+        Whole FrameRate = 0;
+        if(FrameCount)
+            { FrameRate = double(FrameCount) / (double(TimingTestLength)/double(1000000))  ; }
+        cout << "  " << FrameCount << " Empty Frames took " << TimingTestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
+        PerformanceTotals.Insert(FrameRate);
+
+        FrameScheduler TimingTest2(&LogCache,1);
+        TimingTest2.SetFrameRate(0);
+        //WorkUnit* WorkUnitTT2 = new PausesWorkUnit(0,"ForeverAlone");
+        WorkUnit* WorkUnitTT2 = new PiMakerWorkUnit(0,"ForeverAlone",false);
+        TimingTest2.AddWorkUnit(WorkUnitTT2);
+        TimingTestStart = GetTimeStamp();
+        TimingTestEnd = TimingTestStart + *Iter;
+        while(Whole(GetTimeStamp())<TimingTestEnd)
+            { TimingTest1.DoOneFrame(); }
+        TimingTestEnd = GetTimeStamp();
+        TimingTestLength = TimingTestEnd-TimingTestStart;
+        FrameRate = 0;
+        if(FrameCount)
+            { FrameRate = double(FrameCount) / (double(TimingTestLength)/double(1000000))  ; }
+        cout << "  " << FrameCount << " Single WorkUnit Frames took " << TimingTestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
+        PerformanceTotals.Insert(FrameRate);
+
+        FrameScheduler TimingTest3(&LogCache,1);
+        TimingTest3.SetFrameRate(0);
+        //WorkUnit* WorkUnitTT2A = new PausesWorkUnit(0,"ForeverAlone");
+        WorkUnit* WorkUnitTT3 = new PiMakerWorkUnit(0,"ForeverAlone",false);
+        WorkUnit* WorkUnitTT2A = new PiMakerWorkUnit(0,"A",false);
+        WorkUnit* WorkUnitTT2B = new PiMakerWorkUnit(0,"B",false);
+        WorkUnit* WorkUnitTT2C = new PiMakerWorkUnit(0,"C",false);
+        TimingTest3.AddWorkUnit(WorkUnitTT2A);
+        TimingTest3.AddWorkUnit(WorkUnitTT2B);
+        TimingTest3.AddWorkUnit(WorkUnitTT2C);
+        TimingTest3.AddWorkUnit(WorkUnitTT3);
+
+        WorkUnitTT2C->AddDependency(WorkUnitTT2B);
+        WorkUnitTT2B->AddDependency(WorkUnitTT2A);
+        TimingTest3.SortWorkUnitsAll();
+        TimingTestStart = GetTimeStamp();
+        TimingTestEnd = TimingTestStart + *Iter;
+        while(Whole(GetTimeStamp())<TimingTestEnd)
+            { TimingTest1.DoOneFrame(); }
+        TimingTestEnd = GetTimeStamp();
+        TimingTestLength = TimingTestEnd-TimingTestStart;
+        FrameRate = 0;
+        if(FrameCount)
+            { FrameRate = double(FrameCount) / (double(TimingTestLength)/double(1000000))  ; }
+        cout << "  " << FrameCount << " Frames with the previous and an extra dependency set (A->B->C) took " << TimingTestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
+        PerformanceTotals.Insert(FrameRate);
+        cout << endl;
+    }
+    cout << "Average FrameRate: " << PerformanceTotals.GetAverage() << endl;
+}
+
+
+
+
+int main (int argc, char** argv)
+{
+    // Make a vector of Test names to run
+    std::vector<String> TargetTests;
+    String ThisExecutable(argv[0]);
+    for(int Counter=1; Counter<argc; Counter++)
+        { TargetTests.push_back(argv[Counter]); }
+    for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter)
+        { std::transform(Iter->begin(), Iter->end(), Iter->begin(), ::tolower); }
+
+    // The mapping of all the tests to their name
+    TestGroup AllTheTests;
+    AllTheTests["sizes"]=Sizes;
+    AllTheTests["untestable"]=Untestable;
+    AllTheTests["basicthreading"]=BasicThreading;
+    AllTheTests["basicmutex"]=BasicMutex;
+    AllTheTests["basicthreadingpassing"]=BasicThreadingPassing;
+    AllTheTests["basicmutextry"]=BasicMutexTry;
+    AllTheTests["rollingaverage"]=RollingAverageTests;
+    AllTheTests["timestamp"]=TimeStamp;
+    AllTheTests["random"]=RandomTests;
+    AllTheTests["workunit"]=WorkUnitTests;
+    AllTheTests["monopoly"]=MonopolyTest;
+    AllTheTests["logaggregator"]=LogAggregatorTests;
+    AllTheTests["workunitkey"]=WorkUnitKeyTests;
+    AllTheTests["frameschedulergetnext"]=FrameSchedulerGetNext;
+    AllTheTests["threadcreate"]=ThreadCreate;
+    AllTheTests["threadrestart"]=ThreadRestart;
+    AllTheTests["timing"]=Timing;
+    AllTheTests["performanceframes"]=PerformanceFrames;
+    AllTheTests["performanceseconds"]=PerformanceSeconds;
+    AllTheTests["basicthreading"]=BasicThreading;
+
+    if(TargetTests.size())
+    {
+        for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter) // Check for invalid tests
+        {
+            if(AllTheTests.find(*Iter)==AllTheTests.end())
+            {
+                cout << "\"" << *Iter << "\" is not a valid test name." <<  endl << endl;
+                Usage(ThisExecutable, AllTheTests);
+                exit(EXIT_SUCCESS);
+            }
+        }
+        for(std::vector<String>::iterator Iter=TargetTests.begin(); Iter!=TargetTests.end(); ++Iter)
+            { AllTheTests[*Iter](); }
+    }else{
+
+        for(TestGroup::iterator Iter=AllTheTests.begin(); Iter!=AllTheTests.end(); ++Iter)
+        {
+            cout << "Beginning test '" << Iter->first << "' :" << endl;
+            Iter->second();
+            cout << endl << endl;
+        }
+
+    }
+
+    exit(EXIT_SUCCESS);
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Testing FrameScheduler Affinity execution
+
+    // Make a scheduler
+    // 3 affinity WorkUnits and 3 normal
+
+
+
+
 
     #if defined(_MEZZ_THREAD_WIN32_)
     system("pause");

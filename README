@@ -13,6 +13,11 @@ The 'doc' folder contains further licensing details, technical documentation and
 	The Doxygen configuration resides in 'doc/doxyfiles'
 
  -- NEWS --
+
+	Dec 1, 2012
+		Enabled all build warnings, and corrected them in GCC.
+		Updated the way unit tests were run to allow the isolated of execution of one test or all the tests at once. Fixed Framerate calculation bugs in performane tests
+
 	Nov 30, 2012
 		Created a single point at which to update all the creation of double buffered resources. The goal is to make changing this easy if another project wants to add double buffered resources to each thread.
 		Added WorkUnit affinity. A special way to add WorkUnits so that they will be scheduled with the rest of the WorkUnits, but only executed on the main thread.
