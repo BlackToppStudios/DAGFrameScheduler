@@ -50,8 +50,8 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        void MonopolyWorkUnit::DoWork(DefaultThreadSpecificStorage::Type&, FrameScheduler& CurrentFrameScheduler)
-            { DoWork(CurrentFrameScheduler); }
+        void MonopolyWorkUnit::DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
+            { DoWork( *CurrentThreadStorage.GetFrameScheduler() ); }
 
         MonopolyWorkUnit::MonopolyWorkUnit()
             {}

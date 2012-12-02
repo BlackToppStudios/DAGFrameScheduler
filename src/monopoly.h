@@ -65,7 +65,7 @@ namespace Mezzanine
                 /// resource is non-senscial.
                 /// @param CurrentThreadStorage ignored.
                 /// @param CurrentFrameScheduler passed to @ref DoWork(FrameScheduler&) .
-                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler);
+                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
             public:
                 /// @brief Constructor, currently does nothing
                 MonopolyWorkUnit();

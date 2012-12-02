@@ -51,9 +51,10 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        void LogAggregator::DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
+        void LogAggregator::DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
-            std::ostream& Log = CurrentThreadStorage.GetFrameScheduler()->GetLog();
+            FrameScheduler& CurrentFrameScheduler= * CurrentThreadStorage.GetFrameScheduler();
+            std::ostream& Log = CurrentFrameScheduler.GetLog();
             Log << "<Frame Count=\"" << CurrentFrameScheduler.GetFrameCount() << "\">" << std::endl;
             for(std::vector<DefaultThreadSpecificStorage::Type*>::const_iterator Iter=CurrentThreadStorage.GetFrameScheduler()->Resources.begin();
                 Iter!=CurrentFrameScheduler.Resources.end();
@@ -67,8 +68,9 @@ namespace Mezzanine
             Log << "</Frame>" << std::endl;
         }
 
-        void LogBufferSwapper::DoWork(DefaultThreadSpecificStorage::Type&, FrameScheduler& CurrentFrameScheduler)
+        void LogBufferSwapper::DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
+            FrameScheduler& CurrentFrameScheduler= * CurrentThreadStorage.GetFrameScheduler();
             for(std::vector<DefaultThreadSpecificStorage::Type*>::const_iterator Iter=CurrentFrameScheduler.Resources.begin();
                 Iter!=CurrentFrameScheduler.Resources.end();
                 ++Iter)

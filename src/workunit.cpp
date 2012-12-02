@@ -176,14 +176,14 @@ namespace Mezzanine
         RollingAverage<Whole>& WorkUnit::GetPerformanceLog()
             { return PerformanceLog; }
 
-        void WorkUnit::operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler)
+        void WorkUnit::operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
             MaxInt Begin = Mezzanine::GetTimeStamp();
             #ifdef MEZZ_DEBUG
             CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable() << "<WorkunitStart BeginTimeStamp=\"" << Begin << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << std::endl;
             #endif
 
-            this->DoWork(CurrentThreadStorage, CurrentFrameScheduler);
+            this->DoWork(CurrentThreadStorage);
             MaxInt End = Mezzanine::GetTimeStamp();
             this->GetPerformanceLog().Insert( Whole(End-Begin)); // A whole is usually a 32 bit type, which is fine unless a single workunit runs for 35 minutes.
             CurrentRunningState = Complete;

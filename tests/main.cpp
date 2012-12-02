@@ -536,7 +536,7 @@ class PiMakerWorkUnit : public Mezzanine::Threading::WorkUnit
         /// @brief Calculate Pi and log it.
         /// @paramCurrentThreadStorage used to retrieve a valid logger.
         /// @brief CurrentFrameScheduler ignored
-        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler&)
+        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
             DoubleBufferedLogger& CurrentLogger = CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger);
             CurrentLogger.GetUsable() << "<MakePi Pi=\"" << MakePi(Length,SpikesOn) << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
@@ -553,7 +553,7 @@ void WorkUnitTests()
     Mezzanine::Threading::DefaultThreadSpecificStorage::Type TestThreadStorage(&TestScheduler);
     // run work unit
     for(Whole Counter=0; Counter<20; Counter++)
-        { WorkUnitSample1(TestThreadStorage, TestScheduler); }
+        { WorkUnitSample1(TestThreadStorage); }
     cout << "Here is the complete log of Twenty Test Runs" << endl
          << TestThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
          << "Average Execution Time (Microseconds): " << WorkUnitSample1.GetPerformanceLog().GetAverage() << endl;
@@ -715,7 +715,7 @@ void MonopolyTest()
     FrameScheduler TestSchedulerMono(&cout,1);
     DefaultThreadSpecificStorage::Type PioplyStorage(&TestSchedulerMono);
     for(Whole Counter=0; Counter<20; Counter++)
-        { Pioply(PioplyStorage, TestSchedulerMono); }
+        { Pioply(PioplyStorage); }
     cout << "Here is the un-aggregated (main thread only) log of Twenty Test Runs" << endl
          << PioplyStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
          << "Average Execution Time (Microseconds): " << Pioply.GetPerformanceLog().GetAverage() << endl;
@@ -733,12 +733,12 @@ void LogAggregatorTests()
     FrameScheduler TestSchedulerMono(&cout,1);
     DefaultThreadSpecificStorage::Type PioplyStorage(&TestSchedulerMono);
     for(Whole Counter=0; Counter<20; Counter++)
-        { Pioply(PioplyStorage, TestSchedulerMono); }
+        { Pioply(PioplyStorage); }
     LogBufferSwapper Swapper;
     ThreadSpecificStorage SwapResource(&TestSchedulerMono);
-    Swapper(SwapResource, TestSchedulerMono);
+    Swapper(SwapResource);
     LogAggregator Agg;
-    Agg(SwapResource, TestSchedulerMono);
+    Agg(SwapResource);
     cout << "Large log should have been emitted that showed PI being calculated 80 times and which thread it was calculated in. 20 iterations should have occurred in the main thread, and the rest each in fresh threads." << endl;
 }
 
@@ -852,7 +852,7 @@ class PausesWorkUnit : public Mezzanine::Threading::WorkUnit
         /// @brief Wait and log it.
         /// @param CurrentThreadStorage used to retrieve a valid logger.
         /// @brief CurrentFrameScheduler ignored
-        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler&)
+        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
             DoubleBufferedLogger& CurrentLogger = CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger);
             CurrentLogger.GetUsable() << "<Pause PauseLength=\"" << Length << "\" WorkUnitName=\"" << Name << "\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << endl;
@@ -884,19 +884,19 @@ void FrameSchedulerGetNext()
     WorkUnit* Counter = SchedulingTest1.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PiMakerWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PiMakerWorkUnit*)Counter)->Name == String("First"), "Getting the WorkUnit Named First" );
-    Counter->operator()(Storage1, SchedulingTest1);
+    Counter->operator()(Storage1);
     Counter = SchedulingTest1.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PiMakerWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PiMakerWorkUnit*)Counter)->Name == String("Second"), "Getting the WorkUnit Named Second" );
-    Counter->operator()(Storage1, SchedulingTest1);
+    Counter->operator()(Storage1);
     Counter = SchedulingTest1.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PiMakerWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PiMakerWorkUnit*)Counter)->Name == String("Third"), "Getting the WorkUnit Named Third" );
-    Counter->operator()(Storage1, SchedulingTest1);
+    Counter->operator()(Storage1);
     Counter = SchedulingTest1.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PiMakerWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PiMakerWorkUnit*)Counter)->Name == String("Fourth"), "Getting the WorkUnit Named Fourth" );
-    Counter->operator()(Storage1, SchedulingTest1);
+    Counter->operator()(Storage1);
 
     cout << endl << "Creating 3 WorkUnits with precise runtimes and inserting them into a Test FrameScheduler. Then they will be pulled out one at a time and mark them as completed: " << endl;
     FrameScheduler SchedulingTest2(&cout,1);
@@ -909,9 +909,9 @@ void FrameSchedulerGetNext()
     cout << "Work Units (FiveHundred-ms, FiveThousand-ms, FiftyThousand-ms)[ms is microseconds in this context] Created, executing each ten times: " << endl;
     for(Int8 Counter = 0; Counter <10; ++Counter)
     {
-        FiveHundred->operator()(Storage2,SchedulingTest2);
-        FiveThousand->operator()(Storage2,SchedulingTest2);
-        FiftyThousand->operator()(Storage2,SchedulingTest2);
+        FiveHundred->operator()(Storage2);
+        FiveThousand->operator()(Storage2);
+        FiftyThousand->operator()(Storage2);
         //FiveHundredThousand->operator()(Storage2,SchedulingTest2);
     }
     SchedulingTest2.AddWorkUnit(FiveHundred);
@@ -938,15 +938,15 @@ void FrameSchedulerGetNext()
     Counter = SchedulingTest2.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PausesWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PausesWorkUnit*)Counter)->Name == String("FiftyThousand-ms"), "Getting the WorkUnit Named FiftyThousand-ms" );
-    Counter->operator()(Storage2, SchedulingTest2);
+    Counter->operator()(Storage2);
     Counter = SchedulingTest2.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PausesWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PausesWorkUnit*)Counter)->Name == String("FiveThousand-ms"), "Getting the WorkUnit Named FiveThousand-ms" );
-    Counter->operator()(Storage2, SchedulingTest2);
+    Counter->operator()(Storage2);
     Counter = SchedulingTest2.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PausesWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PausesWorkUnit*)Counter)->Name == String("FiveHundred-ms"), "Getting the WorkUnit Named FiveHundred-ms" );
-    Counter->operator()(Storage2, SchedulingTest2);
+    Counter->operator()(Storage2);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1023,8 +1023,8 @@ void ThreadCreate()
     cout << "Thread count on initial creation: " << ThreadCreationTest1.GetThreadCount() << endl;
     cout << "Running One Frame." << endl;
     ThreadCreationTest1.DoOneFrame();
-    Swapper2(SwapResource2, ThreadCreationTest1);
-    Agg2(SwapResource2, ThreadCreationTest1);
+    Swapper2(SwapResource2);
+    Agg2(SwapResource2);
     CheckSchedulerLog(LogCache,1,4);
     cout << "It ran correctly. Emitting log." << endl;
     cout << LogCache.str() << endl;
@@ -1034,8 +1034,8 @@ void ThreadCreate()
     cout << endl << "Thread count after setting to: " << ThreadCreationTest1.GetThreadCount() << endl;
     cout << "Running One Frame." << endl;
     ThreadCreationTest1.DoOneFrame();
-    Swapper2(SwapResource2, ThreadCreationTest1);
-    Agg2(SwapResource2, ThreadCreationTest1);
+    Swapper2(SwapResource2);
+    Agg2(SwapResource2);
     CheckSchedulerLog(LogCache,2,4);
     cout << "It ran correctly. Emitting log." << endl;
     cout << LogCache.str() << endl;
@@ -1045,8 +1045,8 @@ void ThreadCreate()
     cout << endl << "Thread count after setting to: " << ThreadCreationTest1.GetThreadCount() << endl;
     cout << "Running One Frame." << endl;
     ThreadCreationTest1.DoOneFrame();
-    Swapper2(SwapResource2, ThreadCreationTest1);
-    Agg2(SwapResource2, ThreadCreationTest1);
+    Swapper2(SwapResource2);
+    Agg2(SwapResource2);
     CheckSchedulerLog(LogCache,3,4);
     cout << "It ran correctly. Emitting log." << endl;
     cout << LogCache.str() << endl;
@@ -1056,8 +1056,8 @@ void ThreadCreate()
     cout << endl << "Thread count after setting to: " << ThreadCreationTest1.GetThreadCount() << endl;
     cout << "Running One Frame." << endl;
     ThreadCreationTest1.DoOneFrame();
-    Swapper2(SwapResource2, ThreadCreationTest1);
-    Agg2(SwapResource2, ThreadCreationTest1);
+    Swapper2(SwapResource2);
+    Agg2(SwapResource2);
     CheckSchedulerLog(LogCache,4,4);
     cout << "It ran correctly. Emitting log." << endl;
     cout << LogCache.str() << endl;
@@ -1069,8 +1069,8 @@ void ThreadCreate()
     for (Whole Counter=0; Counter<Work; ++Counter)
         { ThreadCreationTest1.AddWorkUnit( new PiMakerWorkUnit(50000,"Dyn"+ToString(Counter),false) ); }
     ThreadCreationTest1.DoOneFrame();
-    Swapper2(SwapResource2, ThreadCreationTest1);
-    Agg2(SwapResource2, ThreadCreationTest1);
+    Swapper2(SwapResource2);
+    Agg2(SwapResource2);
     CheckSchedulerLog(LogCache,4,1004);
     cout << "It ran correctly." << endl;
     LogCache.str("");
@@ -1131,8 +1131,8 @@ void ThreadRestart()
     RestartScheduler1.AddWorkUnit(RestartC);
     RestartScheduler1.SortWorkUnits();
     RestartScheduler1.DoOneFrame();
-    Swapper3(SwapResource3, RestartScheduler1);
-    Agg3(SwapResource3, RestartScheduler1);
+    Swapper3(SwapResource3);
+    Agg3(SwapResource3);
     // Check that two threads exist and that B and C run in different thread, and after A finished
 
     cout << LogCache.str() << "Parsing log to determine if everything happened correctly" << endl;

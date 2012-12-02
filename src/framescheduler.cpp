@@ -76,7 +76,7 @@ namespace Mezzanine
             while( (CurrentUnit = FS.GetNextWorkUnit()) )
             {
                 if(Starting==CurrentUnit->TakeOwnerShip())
-                    { CurrentUnit->operator()(Storage,FS); }
+                    { CurrentUnit->operator()(Storage); }
             }
         }
 
@@ -90,7 +90,7 @@ namespace Mezzanine
             while( (CurrentUnit = FS.GetNextWorkUnitAffinity()) )
             {
                 if(Starting==CurrentUnit->TakeOwnerShip())
-                    { CurrentUnit->operator()(Storage,FS); }
+                    { CurrentUnit->operator()(Storage); }
             }
         }
 
@@ -265,10 +265,9 @@ namespace Mezzanine
         {
             CurrentFrameStart=GetTimeStamp();
             for(std::vector<MonopolyWorkUnit*>::iterator Iter = Monopolies.begin(); Iter!=Monopolies.end(); ++Iter)
-                { (*Iter)->operator()(*(Resources.at(0)),*this); }
+                { (*Iter)->operator()(*(Resources.at(0))); }
             CreateThreads();
-            ThreadWork(Resources[0]); // Do work in this thread
-            // run work units with affinity here.
+            ThreadWorkAffinity(Resources[0]); // Do work in this thread and get the units with affinity
             // run the thing to fixup workunit sorting
             JoinAllThreads();
             FrameCount++;
