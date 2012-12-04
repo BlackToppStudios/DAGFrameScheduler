@@ -216,8 +216,8 @@ var sectionId = 'dynsection-0';
 <g id="edge30" class="edge"><title>Node13&#45;&gt;Node1</title>
 <path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1127.59,-125.709C1176.98,-122.426 1240.86,-118.18 1293.69,-114.668"/>
 <polygon fill="#9a32cd" stroke="#9a32cd" points="1127.35,-122.218 1117.6,-126.373 1127.81,-129.202 1127.35,-122.218"/>
-<text text-anchor="middle" x="1235" y="-139" font-family="FreeSans" font-size="10.00"> WorkUnitsMain</text>
-<text text-anchor="middle" x="1235" y="-125" font-family="FreeSans" font-size="10.00">WorkUnitAffinity</text>
+<text text-anchor="middle" x="1235" y="-139" font-family="FreeSans" font-size="10.00"> WorkUnitsAffinity</text>
+<text text-anchor="middle" x="1235" y="-125" font-family="FreeSans" font-size="10.00">WorkUnitsMain</text>
 </g>
 <!-- Node14&#45;&gt;Node13 -->
 <g id="edge32" class="edge"><title>Node14&#45;&gt;Node13</title>

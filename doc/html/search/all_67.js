@@ -12,6 +12,7 @@ var searchData=
   ['getframescheduler',['GetFrameScheduler',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a613ddf6ec3fdd5fbc5295479237a883a',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
   ['getlog',['GetLog',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ad10391522f786d4b5644362aa5e75897',1,'Mezzanine::Threading::FrameScheduler']]],
   ['getnextworkunit',['GetNextWorkUnit',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a0e4e2774f5112075493f9bb0eb787538',1,'Mezzanine::Threading::FrameScheduler']]],
+  ['getnextworkunitaffinity',['GetNextWorkUnitAffinity',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ab7941e0453a4340dc5dd2469e288a640',1,'Mezzanine::Threading::FrameScheduler']]],
   ['getperformancelog',['GetPerformanceLog',['../classMezzanine_1_1Threading_1_1WorkUnit.html#a5df53f7bc431eb1e00b23b44a0aa19a1',1,'Mezzanine::Threading::WorkUnit']]],
   ['getresource',['GetResource',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
   ['getrunningstate',['GetRunningState',['../classMezzanine_1_1Threading_1_1WorkUnit.html#a6eb738f3409d67390ea0bfaad83e021a',1,'Mezzanine::Threading::WorkUnit']]],

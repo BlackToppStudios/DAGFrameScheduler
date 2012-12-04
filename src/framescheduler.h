@@ -58,47 +58,6 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @def TimingCostAllowanceGap
-        /// @brief This is a configuration settings to tune the precision of timing at compile time.
-        /// @details Each frame that is executed has a desired length of time as determined by the Desired
-        /// Frame Rate that can set using @ref Mezzanine::Threading::FrameScheduler::SetFrameRate "FrameScheduler::SetFrameRate()"
-        /// or @ref Mezzanine::Threading::FrameScheduler::SetFrameLength "FrameScheduler::SetFrameLength()".
-        /// If execution of a frame finishes before it has consumed its portion of a second, then work is paused
-        /// the desired length has elapsed. This means that if there is too much work each frame that the frame rate
-        /// will suffer.
-        /// @n @n
-        /// The timing of frame lengths with this algorithm is not perfect. Each frame ends a certain
-        /// amount of microseconds early or late. This inaccuracy can be introduced by the system's timer
-        /// resolution, the time it takes to lookup the time, or by the work that must be done outside of
-        /// the of the timed work or pause periods to aggregate data. On Ubuntu 12.04 x64 has a simple
-        /// timer with a single microsecond resolution, this algorithm tends to drift less than 2 microseconds per
-        /// frame. Some other algorithms are more precise, and others are simpler, this is a balance between
-        /// those. If this is not acceptable @ref Mezzanine::GetTimeStamp() "GetTimeStamp()" and
-        /// @ref Mezzanine::Threading::FrameScheduler::WaitUntilNextThread() "FrameScheduler::WaitUntilNextThread()" could be
-        /// modified to adjust this.
-        /// @n @n
-        /// The pause that is inserted each frame is not simply calculated by subtracting the current time
-        /// from the target time once the work is done each frame. A small
-        /// @ref Mezzanine::Threading::FrameScheduler::TimingCostAllowance "TimingCostAllowance" is
-        /// subtracted from the pause before the next frame begins. This allowance is for the compensation of
-        /// variances in scheduling from the underlying system, rounding errors of the system clock and
-        /// the execution of the time tracking itself. As part of this time tracking the timing cost allowance
-        /// is adjusted. If the allowance was too large, therefor making the frame too short, then it is made
-        /// longer for the next frame. If the allowance is too small it is made larger for the next frame. It does
-        /// not seem possible to track this length within a single frame without increasing the complexity a
-        /// significant amount.
-        /// @n @n
-        /// Rather than increase the complexity of the algorithm when the default level of accuracy is
-        /// suitable for most purposes, a manual compile time adjustment has been added. When comparing the length
-        /// of the frame after execution and frame pause have occurred, the timing allowance is made smaller or
-        /// larger based on how close the result is to the desired time. If the frame was not exactly as fast as
-        /// it should have been, then the allowance is adjusted. Frames tend to take slightly longer than the
-        /// target length. To compensate for this if the frame executed faster by a predefined amount or less
-        /// then the timing allowance is not adjusted. This gap in the adjustment of the timing allowance could
-        /// allow adjustment on different platforms in the precision of this algorithm without incurring extra
-        /// complexity in timing. By default this is set to 10 microseconds.
-        #define  TimingCostAllowanceGap 10
-
         class MonopolyWorkUnit;
         class WorkUnit;
         class LogAggregator;
@@ -119,19 +78,23 @@ namespace Mezzanine
                 /// @details This stores a sorted listing(currently a vector) of @ref Mezzanine::Threading::WorkUnitKey "WorkUnitKey" instances.
                 /// These include just the metadata required for sorting @ref Mezzanine::Threading::WorkUnit "WorkUnit"s. Higher priority
                 /// @ref Mezzanine::Threading::WorkUnit "WorkUnit"s are higher/later in the collection. This is list is sorted by calls
-                /// to @ref SortWorkUnits or @ref SortAllWorkUnits .
+                /// to @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsMain "SortWorkUnitsMain" or @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAll "SortWorkUnitsAll".
                 std::vector<WorkUnitKey> WorkUnitsMain;
 
                 /// @brief A collection of @ref Mezzanine::Threading::WorkUnit "WorkUnit"s that must be run on the main thread.
                 /// @details This is very similar to @ref WorkUnitsMain except that the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
-                /// are only run in the main thread and are sorted by calls to @ref SortWorkUnits or @ref SortAffinityWorkUnits .
-                std::vector<WorkUnitKey> WorkUnitAffinity;
+                /// are only run in the main thread and are sorted by calls to @ref SortWorkUnitsAll or @ref SortWorkUnitsAffinity .
+                std::vector<WorkUnitKey> WorkUnitsAffinity;
 
+                /// @brief A structure designed to minimalistically reprsent Dependency and Reverse Dependency Graphs in work units
                 typedef std::map<
                                 WorkUnit*,
                                 std::set<WorkUnit*>
                             > DependentGraphType;
 
+                /// @brief This structure allows reverse lookup of dependencies.
+                /// @details This is is a key part of the workunit sorting algorithm. This is calculated
+                /// @warning
                 DependentGraphType DependentGraph;
 
                 /// @brief This maintains ownership of all the thread specific resources.
@@ -161,7 +124,7 @@ namespace Mezzanine
                 Whole TargetFrameLength;
 
                 /// @brief To prevent frame time drift this many microseconds is subtracted from the wait period to allow time for calculations.
-                Whole TimingCostAllowance;
+                Integer TimingCostAllowance;
 
                 /// @brief Set based on which constructor is called, and only used during destruction.
                 bool LoggingToAnOwnedFileStream;
@@ -183,6 +146,7 @@ namespace Mezzanine
                 /// @details Wait 1/TargetFrame Seconds, minus time already run.
                 void WaitUntilNextThread();
 
+                /// @brief
                 void UpdateDependentGraph(const std::vector<WorkUnitKey> &Units);
                 void UpdateWorkUnitKeys(std::vector<WorkUnitKey> &Units);
 
@@ -219,11 +183,13 @@ namespace Mezzanine
                 //ThreadSpecificStorage& GetThreadSpecificStorage(thread::id ThreadID);
                 //ThreadSpecificStorage& GetThisThreadsSpecificStorage();
 
-
-
                 /// @brief Add a normal WorkUnit to this For scheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
                 virtual void AddWorkUnit(WorkUnit* MoreWork);
+
+                /// @brief Add a normal WorkUnit to this For scheduling.
+                /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
+                virtual void AddWorkUnitAffinity(WorkUnit* MoreWork);
 
                 // @brief Remove a WorkUnit, and regain ownership of it
                 // @param LessWork a pointer to a WorkUnit that should no longer be scheduled.
@@ -238,7 +204,7 @@ namespace Mezzanine
                 /// @return A pointer to the WorkUnit that could be executed or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
                 virtual WorkUnit* GetNextWorkUnit();
 
-                /// @brief Just like
+                /// @brief Just like @ref GetNextWorkUnit except that it searchs through and prioritizes work units with affinity.
                 /// @return A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
                 virtual WorkUnit* GetNextWorkUnitAffinity();
 
@@ -252,8 +218,7 @@ namespace Mezzanine
 
                 /// @brief Do one frame worth of work.
                 /// @details Every Monopoly will be executed once and each work unit will be executed once.
-                /// @todo implement thread affinity.
-                /// @warning Do not call this on an unsorted set of WorkUnits. Use @ref FrameScheduler::SortWorkUnits() to sort WorkUnits after
+                /// @warning Do not call this on an unsorted set of WorkUnits. Use @ref FrameScheduler::SortWorkUnitsAll() and @ref DependentGraph to sort WorkUnits after
                 /// They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just the frames
                 /// new WorkUnits are added.
                 virtual void DoOneFrame();
@@ -261,11 +226,22 @@ namespace Mezzanine
                 /// @brief Take any steps required to prepare all owned WorkUnits for execution next frame.
                 virtual void ResetAllWorkUnits();
 
-                /// @brief Sort the workUnits
-                void SortWorkUnits(bool UpdateDependentGraph_ = true);
+                /// @brief Sort the the main pool of WorkUnits to allow them to be used more efficiently in the next frame executed.
+                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
+                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
+                /// for the appropriate times to use this.
+                void SortWorkUnitsMain(bool UpdateDependentGraph_ = true);
 
+                /// @brief Sort the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.
+                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
+                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
+                /// for the appropriate times to use this.
                 void SortWorkUnitsAffinity(bool UpdateDependentGraph_ = true);
 
+                /// @brief Sort all the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.
+                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
+                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
+                /// for the appropriate times to use this.
                 void SortWorkUnitsAll(bool UpdateDependentGraph_ = true);
 
                 // advanced is done by default when sorting the WorkUnits

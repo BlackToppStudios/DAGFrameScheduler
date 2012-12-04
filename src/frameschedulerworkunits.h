@@ -60,7 +60,6 @@ namespace Mezzanine
             public:
                 /// @brief This does the actual work of log aggregation.
                 /// @param CurrentThreadStorage Ignored, this workunits goals requires this.
-                /// @param CurrentFrameScheduler The logs for each thread in this scheduler will be iterated over and aggregated.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
         };
 
@@ -72,7 +71,6 @@ namespace Mezzanine
             public:
                 /// @brief This does the swapping of buffers.
                 /// @param CurrentThreadStorage Ignored, this workunits goals requires this.
-                /// @param CurrentFrameScheduler This is used to get the data to iterate over each thread.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
         };
 

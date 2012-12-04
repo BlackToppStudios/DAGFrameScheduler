@@ -107,6 +107,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>AddWorkUnit()
 : <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a54a5da1cd950bbc0652031c781c675c1">Mezzanine::Threading::FrameScheduler</a>
 </li>
+<li>AddWorkUnitAffinity()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a0324ac0c3d5b82c85c31dc62df0b5581">Mezzanine::Threading::FrameScheduler</a>
+</li>
 </ul>
 
 
@@ -141,11 +144,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a2047b7dee35eef0c761c43cb03a20929">Mezzanine::Threading::DoubleBufferedResource&lt; T &gt;</a>
 </li>
 <li>DoWork()
-: <a class="el" href="classMezzanine_1_1Threading_1_1LogAggregator.html#a22fad82338e076affd124f21e651eea6">Mezzanine::Threading::LogAggregator</a>
-, <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a6acdb99ee4a18af7c07218b62147f8d3">Mezzanine::Threading::MonopolyWorkUnit</a>
-, <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a05a588a4d5410a07d87bc6799aded2f4">Mezzanine::Threading::WorkUnit</a>
+: <a class="el" href="classMezzanine_1_1Threading_1_1LogAggregator.html#a8b55d0fd87b1b13c631598fdf89450cb">Mezzanine::Threading::LogAggregator</a>
+, <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html#add9fea12e759e57711d14c18283ecdbb">Mezzanine::Threading::AsynchronousWorkUnit</a>
+, <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#aa8c0a4b281b1f2901fd924b2ca2acd8f">Mezzanine::Threading::MonopolyWorkUnit</a>
+, <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ac62c3f71ca76e87ce33405c7f1e0cd1d">Mezzanine::Threading::WorkUnit</a>
 , <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a171da6ebadf4dff5da4fe8c56a6a23c0">Mezzanine::Threading::MonopolyWorkUnit</a>
-, <a class="el" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html#a3d125ced30202085461ca4047336800d">Mezzanine::Threading::LogBufferSwapper</a>
+, <a class="el" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html#ae4747b2f2e6700bb4d79d58c19d5fc74">Mezzanine::Threading::LogBufferSwapper</a>
 </li>
 </ul>
 
@@ -192,6 +196,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>GetNextWorkUnit()
 : <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a0e4e2774f5112075493f9bb0eb787538">Mezzanine::Threading::FrameScheduler</a>
+</li>
+<li>GetNextWorkUnitAffinity()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ab7941e0453a4340dc5dd2469e288a640">Mezzanine::Threading::FrameScheduler</a>
 </li>
 <li>GetPerformanceLog()
 : <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a5df53f7bc431eb1e00b23b44a0aa19a1">Mezzanine::Threading::WorkUnit</a>
@@ -284,7 +291,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_o"></a>- o -</h3><ul>
 <li>operator()()
-: <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a5d1d439b8cd4d4a059c8631d48c9e006">Mezzanine::Threading::WorkUnit</a>
+: <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#afd5b17bae766f34f4c0547ddc7b106ca">Mezzanine::Threading::WorkUnit</a>
 </li>
 <li>operator&lt;()
 : <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a9cfc6d10736fae2504aeca0acd65caba">Mezzanine::Threading::WorkUnitKey</a>
@@ -328,8 +335,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>SetThreadCount()
 : <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a810bda1947bafd31168e02d391b709ad">Mezzanine::Threading::FrameScheduler</a>
 </li>
-<li>SortWorkUnits()
-: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad46dc6804b63993193854cb87373d2a7">Mezzanine::Threading::FrameScheduler</a>
+<li>SortWorkUnitsAffinity()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a80628895bdad74d03e5ac3b247e58741">Mezzanine::Threading::FrameScheduler</a>
+</li>
+<li>SortWorkUnitsAll()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">Mezzanine::Threading::FrameScheduler</a>
+</li>
+<li>SortWorkUnitsMain()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9f2e92ae7cbd9e4179da6aa895d766fe">Mezzanine::Threading::FrameScheduler</a>
 </li>
 <li>SwapUsableAndCommitable()
 : <a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a39aaf41d673f805c2f28e9e2e5ca6b64">Mezzanine::Threading::DoubleBufferedResource&lt; T &gt;</a>
@@ -414,7 +427,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMezzanine_1_1WeightedRollingAverage.html#aa58eed1d5eb81c191881f139565d20c5">Mezzanine::WeightedRollingAverage&lt; RecordType, MathType &gt;</a>
 </li>
 <li>~WorkUnit()
-: <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a08fe38d349f58f9983c2c4685bc34700">Mezzanine::Threading::WorkUnit</a>
+: <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a55f56a46e6294779e22d22874684a3b4">Mezzanine::Threading::WorkUnit</a>
 </li>
 <li>~WorkUnitKey()
 : <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a9c990bbfbab5bd0dd848bc98a03d5ca6">Mezzanine::Threading::WorkUnitKey</a>
@@ -436,6 +449,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 30 2012 17:58:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Dec 3 2012 22:06:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

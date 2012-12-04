@@ -63,8 +63,7 @@ namespace Mezzanine
                 /// @details Because most WorkUnits are single threaded having access to thread specific resources
                 /// makes sense. Since a monopoly uses multiple threads, having access to any one group of thread specific
                 /// resource is non-senscial.
-                /// @param CurrentThreadStorage ignored.
-                /// @param CurrentFrameScheduler passed to @ref DoWork(FrameScheduler&) .
+                /// @param CurrentThreadStorage Even though this is not thread specific it is assumed that monopolies have the appropriate synchronization mechanisms to make use of the data in this in a thread safe way.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
             public:
                 /// @brief Constructor, currently does nothing

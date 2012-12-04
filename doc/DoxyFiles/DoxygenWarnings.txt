@@ -1,20 +1,5 @@
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousworkunit.h:61: warning: Member DoWork(DefaultThreadSpecificStorage::Type &CurrentThreadStorage, FrameScheduler &CurrentFrameScheduler)=0 (function) of class Mezzanine::Threading::AsynchronousWorkUnit is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousworkunit.h:59: warning: Member IsWorkDone() (function) of class Mezzanine::Threading::AsynchronousWorkUnit is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:232: warning: Member GetDependentCountOf(WorkUnit *Work, bool UsedCached=false) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:262: warning: Member SortAffinityWorkUnits(bool UpdateDependentGraph_=true) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:264: warning: Member SortAllWorkUnits(bool UpdateDependentGraph_=true) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:267: warning: Member UpdateDependentGraph() (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:132: warning: Member DependentGraphType (typedef) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:185: warning: Member UpdateDependentGraph(const std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:186: warning: Member UpdateWorkUnitKeys(std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:134: warning: Member DependentGraph (variable) of class Mezzanine::Threading::FrameScheduler is not documented.
-<SortWorkUnits>:1: warning: parameters of member Mezzanine::Threading::FrameScheduler::SortWorkUnits are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:121: warning: unable to resolve reference to `SortAllWorkUnits' for \ref command
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:101: warning: parameters of member Mezzanine::Threading::WorkUnit::GetDependentCount are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:176: warning: parameters of member Mezzanine::Threading::WorkUnit::GetSortingKey are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:101: warning: parameters of member Mezzanine::Threading::WorkUnit::GetDependentCount are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:176: warning: parameters of member Mezzanine::Threading::WorkUnit::GetSortingKey are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:101: warning: parameters of member Mezzanine::Threading::WorkUnit::GetDependentCount are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:176: warning: parameters of member Mezzanine::Threading::WorkUnit::GetSortingKey are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:101: warning: parameters of member Mezzanine::Threading::WorkUnit::GetDependentCount are not (all) documented
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/workunit.h:176: warning: parameters of member Mezzanine::Threading::WorkUnit::GetSortingKey are not (all) documented
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousworkunit.h:59: warning: Member IsWorkDone()=0 (function) of class Mezzanine::Threading::AsynchronousWorkUnit is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:199: warning: Member GetDependentCountOf(WorkUnit *Work, bool UsedCached=false) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:248: warning: Member UpdateDependentGraph() (function) of class Mezzanine::Threading::FrameScheduler is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:150: warning: Member UpdateDependentGraph(const std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:151: warning: Member UpdateWorkUnitKeys(std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.

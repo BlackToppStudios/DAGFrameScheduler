@@ -138,8 +138,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00050"></a>00050 {
 <a name="l00051"></a>00051     <span class="keyword">namespace </span>Threading
 <a name="l00052"></a>00052     {
-<a name="l00053"></a><a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a6acdb99ee4a18af7c07218b62147f8d3">00053</a>         <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a6acdb99ee4a18af7c07218b62147f8d3" title="The implementation of That WorkUnit Requires.">MonopolyWorkUnit::DoWork</a>(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage, <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>&amp; CurrentFrameScheduler)
-<a name="l00054"></a>00054             { <a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a6acdb99ee4a18af7c07218b62147f8d3" title="The implementation of That WorkUnit Requires.">DoWork</a>(CurrentFrameScheduler); }
+<a name="l00053"></a><a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#aa8c0a4b281b1f2901fd924b2ca2acd8f">00053</a>         <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#aa8c0a4b281b1f2901fd924b2ca2acd8f" title="The implementation of That WorkUnit Requires.">MonopolyWorkUnit::DoWork</a>(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage)
+<a name="l00054"></a>00054             { <a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#aa8c0a4b281b1f2901fd924b2ca2acd8f" title="The implementation of That WorkUnit Requires.">DoWork</a>( *CurrentThreadStorage.<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a613ddf6ec3fdd5fbc5295479237a883a" title="Get a pointer to the FrameScheduler that owns this resource.">GetFrameScheduler</a>() ); }
 <a name="l00055"></a>00055 
 <a name="l00056"></a><a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a28bd8176cb4008621f73dd06c9acb06a">00056</a>         <a class="code" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a28bd8176cb4008621f73dd06c9acb06a" title="Constructor, currently does nothing.">MonopolyWorkUnit::MonopolyWorkUnit</a>()
 <a name="l00057"></a>00057             {}
@@ -165,6 +165,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Nov 30 2012 17:58:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Dec 3 2012 22:06:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

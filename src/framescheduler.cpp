@@ -137,7 +137,7 @@ namespace Mezzanine
                 if(WaitTime>1000000)
                     { WaitTime = 0; }
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );*/
-                Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
+                /*Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;         //Second algorithm works great in debug but it is not
                 Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) - TimingCostAllowance;
                 if(WaitTime>1000000)
                     { WaitTime = 0; }
@@ -146,7 +146,13 @@ namespace Mezzanine
                 if(AdjustmentTime<TargetFrameEnd-TimingCostAllowanceGap)
                     { TimingCostAllowance-=(TargetFrameEnd-AdjustmentTime)/2; }
                 if(AdjustmentTime>TargetFrameEnd)
-                    { TimingCostAllowance+=(AdjustmentTime-TargetFrameEnd)/2; }
+                    { TimingCostAllowance+=(AdjustmentTime-TargetFrameEnd)/2; }*/
+                Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
+                Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) + TimingCostAllowance;
+                if(WaitTime>1000000)
+                    { WaitTime = 0; }
+                Mezzanine::Threading::this_thread::sleep_for( WaitTime );
+                TimingCostAllowance -= (GetTimeStamp()-TargetFrameEnd);
             }
         }
 
@@ -177,7 +183,7 @@ namespace Mezzanine
             CurrentFrameStart(0),
 			CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
-            TimingCostAllowance(125),
+            TimingCostAllowance(0),
 			LoggingToAnOwnedFileStream(true)
         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
@@ -186,7 +192,7 @@ namespace Mezzanine
             CurrentFrameStart(0),
             CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
-			TimingCostAllowance(125),
+            TimingCostAllowance(0),
 			LoggingToAnOwnedFileStream(false)
         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
@@ -208,7 +214,10 @@ namespace Mezzanine
         }
 
         void FrameScheduler::AddWorkUnit(WorkUnit* MoreWork)
-        { this->WorkUnitsMain.push_back(MoreWork->GetSortingKey(*this)); }
+            { this->WorkUnitsMain.push_back(MoreWork->GetSortingKey(*this)); }
+
+        void FrameScheduler::AddWorkUnitAffinity(WorkUnit* MoreWork)
+            { this->WorkUnitsAffinity.push_back(MoreWork->GetSortingKey(*this)); }
 
         Whole FrameScheduler::GetDependentCountOf(WorkUnit* Work, bool UsedCached)
         {
@@ -247,7 +256,7 @@ namespace Mezzanine
         {
             /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
 
-            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitAffinity.rbegin(); Iter!=WorkUnitAffinity.rend(); ++Iter)
+            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsAffinity.rbegin(); Iter!=WorkUnitsAffinity.rend(); ++Iter)
             {
                 if(NotStarted==Iter->Unit->GetRunningState())
                     { return Iter->Unit; }
@@ -281,7 +290,7 @@ namespace Mezzanine
                 { Iter->Unit->PrepareForNextFrame(); }
         }
 
-        void FrameScheduler::SortWorkUnits(bool UpdateDependentGraph_)
+        void FrameScheduler::SortWorkUnitsMain(bool UpdateDependentGraph_)
         {
             /// @todo make the contents of this a function to reduce code duplication
             if(WorkUnitsMain.size())
@@ -295,12 +304,12 @@ namespace Mezzanine
 
         void FrameScheduler::SortWorkUnitsAffinity(bool UpdateDependentGraph_)
         {
-            if(WorkUnitAffinity.size())
+            if(WorkUnitsAffinity.size())
             {
                 if(UpdateDependentGraph_)
                     { UpdateDependentGraph(); }
-                UpdateWorkUnitKeys(WorkUnitAffinity);
-                std::sort(WorkUnitAffinity.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+                UpdateWorkUnitKeys(WorkUnitsAffinity);
+                std::sort(WorkUnitsAffinity.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
             }
         }
 
@@ -309,14 +318,14 @@ namespace Mezzanine
             if(UpdateDependentGraph_)
                 { UpdateDependentGraph(); }
             SortWorkUnitsAffinity(false);
-            SortWorkUnits(false);
+            SortWorkUnitsMain(false);
         }
 
         void FrameScheduler::UpdateDependentGraph()
         {
             DependentGraph.clear();
             UpdateDependentGraph(WorkUnitsMain);
-            UpdateDependentGraph(WorkUnitAffinity);
+            UpdateDependentGraph(WorkUnitsAffinity);
         }
 
         Whole FrameScheduler::GetFrameCount() const

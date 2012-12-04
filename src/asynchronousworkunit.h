@@ -53,12 +53,12 @@ namespace Mezzanine
     namespace Threading
     {
         /// @todo Create this and document it.
-        class MEZZ_LIB AsynchronousWorkUnit
+        class MEZZ_LIB AsynchronousWorkUnit : public WorkUnit
         {
             public:
-                virtual bool IsWorkDone();
+                virtual bool IsWorkDone() = 0;
 
-                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage, FrameScheduler& CurrentFrameScheduler) = 0;
+                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
 
 
         };

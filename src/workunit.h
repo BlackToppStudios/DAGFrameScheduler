@@ -61,7 +61,8 @@ namespace Mezzanine
         /// @brief Default implementation of WorkUnit. This represents on piece of work through time.
         class MEZZ_LIB WorkUnit
         {
-                friend class FrameScheduler;
+            friend class FrameScheduler;
+
             private:
                 //WorkUnit(const WorkUnit&) = delete;
                 //WorkUnit& operator=(const WorkUnit&) = delete;
@@ -76,9 +77,6 @@ namespace Mezzanine
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Data Members
 
-                // @brief Used when sorting, as a means of determining priority. This is a count of workunits that cannot be run until
-                //std::vector<WorkUnit*> Dependents;
-
                 /// @brief A collection of of workunits that must be complete before this one can start.
                 std::vector<WorkUnit*> Dependencies;
 
@@ -91,18 +89,12 @@ namespace Mezzanine
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the dependents as in what must not start until this finishes.
-            protected:
-                // @brief Does any required work for GetDependentCount() and calls GetDependentCount(WorkUnit*) on all dependentWorkUnits.
-                // @param Caller The WorkUnit that initiated the query to allow breaking of cycles.
-                // @return A partial count of dependents unless this == Caller, then it returns a complete count.
-                //Whole GetDependentCount(WorkUnit* Caller) const;
 
             public:
                 /// @brief This returns the count workunits that depend on this work unit.
-                /// @details Because Dependents are not tracked this iterates over entry in the
-                /// FrameScheduler it is passed
+                /// @param SchedulerToCount The @ref FrameScheduler has a cache of this data, it is impossible to calculate without the complete list of WorkUnits on it either.
+                /// @details Because Dependents are not tracked this iterates over entry in the FrameScheduler it is passed
                 /// @return A Whole is returned containing the count.
-                // @throw This will fail an assert if compiling indebug mode and a cycle of workunits, otherwise this will hang if a cycle exists.
                 virtual Whole GetDependentCount(FrameScheduler &SchedulerToCount);
 
                 // @brief Perform whatever tracking is required to have another workunit depend on this one.
@@ -171,9 +163,11 @@ namespace Mezzanine
                 // Deciding when to and doing the work
 
                 /// @brief This tracks work unit metadata, then calls DoWork
+                /// @param CurrentThreadStorage The @ref ThreadSpecificStorage that this WorkUnit will operate with when executing.
                 virtual void operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
 
                 /// @brief Get the sorting metadata.
+                /// @param SchedulerToCount This uses the metadata on the @ref FrameScheduler to generate the Dependency listing required.
                 /// @return A WorkUnitKey suitable for sorting this workunit
                 virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount);
 

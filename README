@@ -13,9 +13,15 @@ The 'doc' folder contains further licensing details, technical documentation and
 	The Doxygen configuration resides in 'doc/doxyfiles'
 
  -- NEWS --
+	Dec 3, 2012
+		Simplified parameter passing to WorkUnits now they only recieve one ThreadSpecific storage.
+		Re-worked pause timing algorithm to make it more simple. Logically it just carries a portion of any amount it was off into the next frame.
+		Updated documentation. I have started a small project attempt to read/revise every piece of doxygen docs going over each file alphabetically to and I am at framescheduler.h.
+
 	Dec 2, 2012
 		Fixed warnings in Mingw, clang and VS2012. 0 warnings in any of these compilers at this moment and it passes tests in windows/linux with these compilers where applicable.
 		Removed integer overflow in some places where the results of GetTimeStamp() were assigned to datatypes smaller than 64 bit.
+
 
 	Dec 1, 2012
 		Enabled all build warnings, and corrected them in GCC.
