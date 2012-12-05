@@ -128,10 +128,7 @@ namespace Mezzanine
         }
 
         void WorkUnit::AddDependency(WorkUnit* NewDependency)
-        {
-            Dependencies.push_back(NewDependency);
-            //NewDependency->AddDependent(this);
-        }
+            { Dependencies.push_back(NewDependency); }
 
         void WorkUnit::RemoveDependency(WorkUnit* RemoveDependency)
         {
@@ -142,18 +139,24 @@ namespace Mezzanine
         }
 
         void WorkUnit::ClearDependencies()
-            { Dependencies.clear(); }
+        { Dependencies.clear(); }
+
+        bool WorkUnit::IsEveryDependencyComplete()
+        {
+            for (std::vector<WorkUnit*>::iterator Iter = Dependencies.begin(); Iter!=Dependencies.end(); ++Iter)
+            {
+                if( Complete != (*Iter)->GetRunningState() )
+                    { return false; }
+            }
+            return true;
+        }
 
         /////////////////////////////////////////////////////////////////////////////////////////////
         // Work with the ownership and RunningState
         RunningState WorkUnit::TakeOwnerShip()
         {
-            // We check that all the dependencies are met before trying to search the framescheduler
-            for (std::vector<WorkUnit*>::iterator Iter = Dependencies.begin(); Iter!=Dependencies.end(); ++Iter)
-            {
-                if( Complete != (*Iter)->GetRunningState() )
+            if(!IsEveryDependencyComplete())
                     { return NotStarted; }
-            }
 
             if(NotStarted ==  AtomicCompareAndSwap(&CurrentRunningState, NotStarted, Running) )
                 { return Starting;} // This is the only place a starting should be generated, and it is never placed in CurrentRunningState

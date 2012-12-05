@@ -208,6 +208,8 @@ namespace Mezzanine
                 /// @return A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
                 virtual WorkUnit* GetNextWorkUnitAffinity();
 
+                virtual bool AreAllWorkUnitsComplete();
+
                 /// @brief Get the amount of threads that will be used to execute WorkUnits a the start of the next frame.
                 /// @return A Whole with the current desired thread count.
                 virtual Whole GetThreadCount();

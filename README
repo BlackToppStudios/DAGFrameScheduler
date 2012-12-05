@@ -4,15 +4,23 @@ Currently this is not ready for most production use but is ready for peer review
 
 This  is licensed under the GPL v3 license as per the file 'LICENSE'.
 
-The 'src' folder includes the source and header in the library.
+ -- Project layout --
 
-The contents of the 'tests' folder are required only for verifying the library works.
+	The 'src' folder includes the source and header in the library.
 
-The 'doc' folder contains further licensing details, technical documentation and notes BTS developers may a have left.
+	The contents of the 'tests' folder are required only for verifying the library works.
+
+	The 'doc' folder contains further licensing details, technical documentation and notes BTS developers may a have left.
 	Technical docs derived from the source code is located in 'doc/html', see 'index.html'
 	The Doxygen configuration resides in 'doc/doxyfiles'
 
+
  -- NEWS --
+	Dec 4, 2012
+		Fixed a scheduling issue which caused a thread to stall on a specific workunit if it had unment dependencies.
+		Test for thread affinity emits manually checkable contents and passes manual inspection.
+		I found a bug with the the 'threadrestart' test, where it sometimes runs all wokunits on one thread. This is not ideal, but it is valid, I have found a way to fix this, but it will take time to implement.
+
 	Dec 3, 2012
 		Simplified parameter passing to WorkUnits now they only recieve one ThreadSpecific storage.
 		Re-worked pause timing algorithm to make it more simple. Logically it just carries a portion of any amount it was off into the next frame.

@@ -1116,9 +1116,9 @@ void ThreadRestart()
             << endl << "    |"
             << endl << "    +--->C"
             << endl;
-    PausesWorkUnit *RestartA = new PausesWorkUnit(10000,"A");
-    PausesWorkUnit *RestartB = new PausesWorkUnit(10000,"B");
-    PausesWorkUnit *RestartC = new PausesWorkUnit(10000,"C");
+    PausesWorkUnit *RestartA = new PausesWorkUnit(100000,"A");
+    PausesWorkUnit *RestartB = new PausesWorkUnit(100000,"B");
+    PausesWorkUnit *RestartC = new PausesWorkUnit(100000,"C");
     RestartB->AddDependency(RestartA);
     RestartC->AddDependency(RestartA);
     LogCache.str("");
@@ -1138,68 +1138,77 @@ void ThreadRestart()
     cout << LogCache.str() << "Parsing log to determine if everything happened correctly" << endl;
     pugi::xml_document Doc;
     Doc.load(LogCache);
+
     pugi::xml_node Thread1Node = Doc.child("Frame").first_child();
     pugi::xml_node Thread2Node = Doc.child("Frame").last_child();
     ThrowOnFalse(Thread1Node,"Could not find first Frame node");
     ThrowOnFalse(Thread2Node,"Could not find second Frame node");
-    vector<RestartMetric> UnitTracking;
-    UnitTracking.push_back(RestartMetric());
-    UnitTracking.push_back(RestartMetric());
-    UnitTracking.push_back(RestartMetric());
-    UnitTracking.push_back(RestartMetric());
 
-    // gather all the data that might be useful in this test.
-    UnitTracking[0].UnitStart = String(Thread1Node.child("WorkunitStart").attribute("BeginTimeStamp").as_string());
-    UnitTracking[0].Name = String(Thread1Node.child("WorkunitStart").next_sibling().attribute("WorkUnitName").as_string());
-    UnitTracking[0].Threadid = String(Thread1Node.child("WorkunitStart").next_sibling().attribute("ThreadID").as_string());
-    UnitTracking[0].UnitEnd = String(Thread1Node.child("WorkunitStart").next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
-    cout << UnitTracking[0] << endl;
-    UnitTracking[1].UnitStart = String(Thread1Node.child("WorkunitEnd").next_sibling().attribute("BeginTimeStamp").as_string());
-    UnitTracking[1].Name = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("WorkUnitName").as_string());
-    UnitTracking[1].Threadid = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("ThreadID").as_string());
-    UnitTracking[1].UnitEnd = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
-    cout << UnitTracking[1] << endl;
-    UnitTracking[2].UnitStart = String(Thread2Node.child("WorkunitStart").attribute("BeginTimeStamp").as_string());
-    UnitTracking[2].Name = String(Thread2Node.child("WorkunitStart").next_sibling().attribute("WorkUnitName").as_string());
-    UnitTracking[2].Threadid = String(Thread2Node.child("WorkunitStart").next_sibling().attribute("ThreadID").as_string());
-    UnitTracking[2].UnitEnd = String(Thread2Node.child("WorkunitStart").next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
-    cout << UnitTracking[2] << endl;
-    UnitTracking[3].UnitStart = String(Thread2Node.child("WorkunitEnd").next_sibling().attribute("BeginTimeStamp").as_string());
-    UnitTracking[3].Name = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("WorkUnitName").as_string());
-    UnitTracking[3].Threadid = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("ThreadID").as_string());
-    UnitTracking[3].UnitEnd = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
-    cout << UnitTracking[3] << endl;
+    #ifdef MEZZ_DEBUG
+        vector<RestartMetric> UnitTracking;
+        UnitTracking.push_back(RestartMetric());
+        UnitTracking.push_back(RestartMetric());
+        UnitTracking.push_back(RestartMetric());
+        UnitTracking.push_back(RestartMetric());
 
-    // Get exactly what we need.
-    String BThread;
-    String CThread;
-    String AEnd;
-    String BStart;
-    String CStart;
-    for(vector<RestartMetric>::iterator Iter = UnitTracking.begin(); Iter != UnitTracking.end(); ++Iter)
-    {
-        if(Iter->Name=="A")
-        {
-            AEnd = Iter->UnitEnd;
-        }
-        if(Iter->Name=="B")
-        {
-            BStart = Iter->UnitStart;
-            BThread = Iter->Threadid;
-        }
-        if(Iter->Name=="C")
-        {
-            CStart = Iter->UnitStart;
-            CThread = Iter->Threadid;
-        }
-    }
 
-    cout << "Was A complete before B started: " << (AEnd<=BStart) << endl; // This relies  on lexigraphical ordering matching numeric ordering
-    ThrowOnFalse(AEnd<=BStart,"Was A complete before B started");
-    cout << "Was A complete before C started: " << (AEnd<=CStart) << endl; // if it doesn't then these numbers need to be converted.
-    ThrowOnFalse(AEnd<=CStart,"Was A complete before C started");
-    cout << "Were B and C run in different threads: " << (BThread!=CThread) << endl;
-    ThrowOnFalse(BThread!=CThread,"Were B and C run in different threads");
+        // gather all the data that might be useful in this test.
+        UnitTracking[0].UnitStart = String(Thread1Node.child("WorkunitStart").attribute("BeginTimeStamp").as_string());
+        UnitTracking[0].Name = String(Thread1Node.child("WorkunitStart").next_sibling().attribute("WorkUnitName").as_string());
+        UnitTracking[0].Threadid = String(Thread1Node.child("WorkunitStart").next_sibling().attribute("ThreadID").as_string());
+        UnitTracking[0].UnitEnd = String(Thread1Node.child("WorkunitStart").next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+        cout << UnitTracking[0] << endl;
+        UnitTracking[1].UnitStart = String(Thread1Node.child("WorkunitEnd").next_sibling().attribute("BeginTimeStamp").as_string());
+        UnitTracking[1].Name = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("WorkUnitName").as_string());
+        UnitTracking[1].Threadid = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("ThreadID").as_string());
+        UnitTracking[1].UnitEnd = String(Thread1Node.child("WorkunitEnd").next_sibling().next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+        cout << UnitTracking[1] << endl;
+        UnitTracking[2].UnitStart = String(Thread2Node.child("WorkunitStart").attribute("BeginTimeStamp").as_string());
+        UnitTracking[2].Name = String(Thread2Node.child("WorkunitStart").next_sibling().attribute("WorkUnitName").as_string());
+        UnitTracking[2].Threadid = String(Thread2Node.child("WorkunitStart").next_sibling().attribute("ThreadID").as_string());
+        UnitTracking[2].UnitEnd = String(Thread2Node.child("WorkunitStart").next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+        cout << UnitTracking[2] << endl;
+        UnitTracking[3].UnitStart = String(Thread2Node.child("WorkunitEnd").next_sibling().attribute("BeginTimeStamp").as_string());
+        UnitTracking[3].Name = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("WorkUnitName").as_string());
+        UnitTracking[3].Threadid = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().attribute("ThreadID").as_string());
+        UnitTracking[3].UnitEnd = String(Thread2Node.child("WorkunitEnd").next_sibling().next_sibling().next_sibling().attribute("EndTimeStamp").as_string());
+        cout << UnitTracking[3] << endl;
+
+        // Get exactly what we need.
+        String BThread;
+        String CThread;
+        String AEnd;
+        String BStart;
+        String CStart;
+        for(vector<RestartMetric>::iterator Iter = UnitTracking.begin(); Iter != UnitTracking.end(); ++Iter)
+        {
+            if(Iter->Name=="A")
+            {
+                AEnd = Iter->UnitEnd;
+            }
+            if(Iter->Name=="B")
+            {
+                BStart = Iter->UnitStart;
+                BThread = Iter->Threadid;
+            }
+            if(Iter->Name=="C")
+            {
+                CStart = Iter->UnitStart;
+                CThread = Iter->Threadid;
+            }
+        }
+
+        cout << "Was A complete before B started: " << (AEnd<=BStart) << endl; // This relies  on lexigraphical ordering matching numeric ordering
+        ThrowOnFalse(AEnd<=BStart,"Was A complete before B started");
+        cout << "Was A complete before C started: " << (AEnd<=CStart) << endl; // if it doesn't then these numbers need to be converted.
+        ThrowOnFalse(AEnd<=CStart,"Was A complete before C started");
+        cout << "Were B and C run in different threads: " << (BThread!=CThread) << endl;
+        ThrowOnFalse(BThread!=CThread,"Were B and C run in different threads");
+    #else
+        cout << "This test does not validate when not in debug mode. The log is missing much meta data.";
+        // can still do some tests here
+    #endif
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1452,9 +1461,14 @@ void ThreadAffinity()
             << endl;
     PausesWorkUnit *AffinityA = new PausesWorkUnit(10000,"A");
     PausesWorkUnit *AffinityB = new PausesWorkUnit(10000,"B");
-    PausesWorkUnit *AffinityAffinity = new PausesWorkUnit(10000,"B");
+    PausesWorkUnit *AffinityAffinity = new PausesWorkUnit(10000,"Affinity");
     PausesWorkUnit *AffinityC = new PausesWorkUnit(10000,"C");
     PausesWorkUnit *AffinityD = new PausesWorkUnit(10000,"D");
+    /*PiMakerWorkUnit *AffinityA = new PiMakerWorkUnit(100000,"A",false);
+    PiMakerWorkUnit *AffinityB = new PiMakerWorkUnit(100000,"B",false);
+    PiMakerWorkUnit *AffinityAffinity = new PiMakerWorkUnit(10000,"Affinity",false);
+    PiMakerWorkUnit *AffinityC = new PiMakerWorkUnit(100000,"C",false);
+    PiMakerWorkUnit *AffinityD = new PiMakerWorkUnit(100000,"D",false);*/
     AffinityAffinity->AddDependency(AffinityA);
     AffinityAffinity->AddDependency(AffinityB);
     AffinityC->AddDependency(AffinityAffinity);
@@ -1474,8 +1488,16 @@ void ThreadAffinity()
     Swapper1(SwapResource);
     Agg1(SwapResource);
     // Check that two threads exist and that B and C run in different thread, and after A finished
-
+    cout << "Affinity should run in this This thread and this thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
     cout << LogCache.str() << "Parsing log to determine if everything happened correctly" << endl;
+
+    #ifdef MEZZ_DEBUG
+        /// @todo make a function that checks the order works units ran in returns that as a vector
+    #else
+        cout << "This test does not validate when not in debug mode. The log is missing much meta data.";
+        // can still do some tests here
+    #endif
+    // Affinity starts after A and B end
     /*pugi::xml_document Doc;
     Doc.load(LogCache);
     pugi::xml_node Thread1Node = Doc.child("Frame").first_child();

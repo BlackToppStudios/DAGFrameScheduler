@@ -73,11 +73,15 @@ namespace Mezzanine
             DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
             WorkUnit* CurrentUnit;
-            while( (CurrentUnit = FS.GetNextWorkUnit()) )
+            do
             {
-                if(Starting==CurrentUnit->TakeOwnerShip())
-                    { CurrentUnit->operator()(Storage); }
+                while( (CurrentUnit = FS.GetNextWorkUnit()) ) /// @todo needs to skip ahead a unit instead of spinning
+                {
+                    if(Starting==CurrentUnit->TakeOwnerShip())
+                        { CurrentUnit->operator()(Storage); }
+                }
             }
+            while(!FS.AreAllWorkUnitsComplete());
         }
 
         /// @brief This is the function that the main thread rungs.
@@ -87,11 +91,15 @@ namespace Mezzanine
             DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
             WorkUnit* CurrentUnit;
-            while( (CurrentUnit = FS.GetNextWorkUnitAffinity()) )
+            do
             {
-                if(Starting==CurrentUnit->TakeOwnerShip())
-                    { CurrentUnit->operator()(Storage); }
+                while( (CurrentUnit = FS.GetNextWorkUnitAffinity()) ) /// @todo needs to skip ahead a unit instead of spinning
+                {
+                    if(Starting==CurrentUnit->TakeOwnerShip())
+                        { CurrentUnit->operator()(Storage); }
+                }
             }
+            while(!FS.AreAllWorkUnitsComplete());
         }
 
         /// @endcond
@@ -237,16 +245,9 @@ namespace Mezzanine
         WorkUnit* FrameScheduler::GetNextWorkUnit()
         {
             /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
-            /*
-            for (std::vector<WorkUnit*>::iterator Iter = Dependencies.begin(); Iter!=Dependencies.end(); ++Iter)
-            {
-                if( Complete != (*Iter)->GetRunningState() )
-                    { return NotStarted; }
-            }*/
-
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
             {
-                if(NotStarted==Iter->Unit->GetRunningState())
+                if(NotStarted==Iter->Unit->GetRunningState() && Iter->Unit->IsEveryDependencyComplete())
                     { return Iter->Unit; }
             }
             return 0;
@@ -258,10 +259,28 @@ namespace Mezzanine
 
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsAffinity.rbegin(); Iter!=WorkUnitsAffinity.rend(); ++Iter)
             {
-                if(NotStarted==Iter->Unit->GetRunningState())
+                if(NotStarted==Iter->Unit->GetRunningState() && Iter->Unit->IsEveryDependencyComplete())
                     { return Iter->Unit; }
             }
             return GetNextWorkUnit();
+        }
+
+        bool FrameScheduler::AreAllWorkUnitsComplete()
+        {
+            // start reading from units likely to be executed last.
+            for(std::vector<WorkUnitKey>::iterator Iter = WorkUnitsMain.begin(); Iter!=WorkUnitsMain.end(); ++Iter)
+            {
+                if(!Iter->Unit->IsEveryDependencyComplete())
+                    { return false; }
+            }
+
+            for(std::vector<WorkUnitKey>::iterator Iter = WorkUnitsAffinity.begin(); Iter!=WorkUnitsAffinity.end(); ++Iter)
+            {
+                if(!Iter->Unit->IsEveryDependencyComplete())
+                    { return false; }
+            }
+
+            return true;
         }
 
         Whole FrameScheduler::GetThreadCount()

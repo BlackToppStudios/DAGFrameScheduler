@@ -88,7 +88,7 @@ namespace Mezzanine
                 volatile Int32 CurrentRunningState;
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
-                // Work with the dependents as in what must not start until this finishes.
+                // Work with the dependents as in what WorkUnits must not start until this finishes.
 
             public:
                 /// @brief This returns the count workunits that depend on this work unit.
@@ -137,6 +137,8 @@ namespace Mezzanine
 
                 /// @brief Drop any information about what work Units this one depends on.
                 virtual void ClearDependencies();
+
+                virtual bool IsEveryDependencyComplete();
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the ownership and RunningState
