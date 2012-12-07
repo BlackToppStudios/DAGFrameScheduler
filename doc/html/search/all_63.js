@@ -8,6 +8,6 @@ var searchData=
   ['current',['Current',['../classMezzanine_1_1BufferedRollingAverage.html#a3315c77e867e8ba0583aa251bfc7fafb',1,'Mezzanine::BufferedRollingAverage']]],
   ['currentaverage',['CurrentAverage',['../classMezzanine_1_1WeightedRollingAverage.html#abee604713707f22224965db2e0e8249f',1,'Mezzanine::WeightedRollingAverage']]],
   ['currentframestart',['CurrentFrameStart',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a2c2540f09e443e7d9f8bd2ed48354f93',1,'Mezzanine::Threading::FrameScheduler']]],
-  ['currentrunningstate',['CurrentRunningState',['../classMezzanine_1_1Threading_1_1WorkUnit.html#ad8bc3a094a4389b484ea298b8c22471b',1,'Mezzanine::Threading::WorkUnit']]],
+  ['currentrunningstate',['CurrentRunningState',['../classMezzanine_1_1Threading_1_1WorkUnit.html#ad83b4e86efd1be74b759f955d90d23b9',1,'Mezzanine::Threading::WorkUnit']]],
   ['currentthreadcount',['CurrentThreadCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a57b119db75cf6fbde2fbfccf60700d41',1,'Mezzanine::Threading::FrameScheduler']]]
 ];

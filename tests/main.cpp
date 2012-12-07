@@ -209,7 +209,6 @@ void Sizes()
          << "vector<Whole>: " << sizeof(vector<Whole>) << endl
          << "vector<WorkUnit*>: " << sizeof(vector<Whole*>) << endl
          << "set<WorkUnit*>: " << sizeof(set<WorkUnit*>) << endl
-         << "volatile int32_t: " << sizeof(volatile int32_t) << endl
          << "ostream*: " << sizeof(ostream*) << endl
          << "MaxInt: " << sizeof(MaxInt) << endl
          << "Whole: " << sizeof(Whole) << endl;
@@ -1565,6 +1564,91 @@ void ThreadAffinity()
     */
 }
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Testing Barrier synchronization primitive
+
+/// @brief The Barrier instance to be used in the test 'barrier'
+Barrier TestBarrier(4);
+
+vector<Whole> BarrierData1;
+vector<Whole> BarrierData2;
+
+
+/// @brief A simple function to synchronize in the 'barrier' test
+void BarrierTestHelper(void* ThreadID)
+{
+    Int32 Position = *((Int32*)ThreadID);
+    stringstream Output;
+    Output << "-------------------" << endl
+           << "This is the thread with id: " <<  Mezzanine::Threading::this_thread::get_id() << endl
+           << "For this test it requires the data in position: " << Position-1 << endl
+           << "doubling data in position: " << Position%4 << endl;
+    BarrierData1[Position-1] *= 2;
+    cout << Output.str();
+    Output.str("");
+
+
+    //Mezzanine::Threading::this_thread::sleep_for(10000*DiceD20()); // just because the standard says streams need to synchronize output does not mean they actually output data in correct order, this lets cout catchup and makes guessing which thread makes it to the barrier last impossible
+    if(TestBarrier.Wait())
+    {
+        Output << "-------------------" << endl
+               << "This is the thread with id: " <<  Mezzanine::Threading::this_thread::get_id() << endl
+               << "This thread broke the barrier" << endl
+               << "Copy data in position:" << Position%4 << endl;
+    }else{
+        Output << "-------------------" << endl
+               << "This is the thread with id: " <<  Mezzanine::Threading::this_thread::get_id() << endl
+               << "This thread waited for another to break it." << endl
+               << "Copy data in position: " << Position%4 << endl;
+    }
+    BarrierData2[Position%4]=BarrierData1[Position%4];
+    Output << "Data: " << BarrierData2[Position%4] << endl;
+
+    cout << Output.str();
+    Output.str("");
+}
+
+/// @brief The 'barrier' Test. A smoke test for the monopoly
+void BarrierTest()
+{
+    cout << "Testing Basic Thread Barrier functionality." << endl
+         << "This Threads id: " <<  Mezzanine::Threading::this_thread::get_id() << endl
+         << "A group of data has been populated with 5,10,15 and 20, this should be doubled and copied into a new field of data and will be done by 4 threads. Each thread will be indexed, and will adjust the data from some other thread then synchronize and copy its own data." << endl;
+
+    Int32 One = 1;
+    Int32 Two = 2;
+    Int32 Three = 3;
+    Int32 Four = 4;
+    BarrierData1.push_back(5);
+    BarrierData1.push_back(10);
+    BarrierData1.push_back(15);
+    BarrierData1.push_back(20);
+    BarrierData2.push_back(0);
+    BarrierData2.push_back(0);
+    BarrierData2.push_back(0);
+    BarrierData2.push_back(0);
+
+    Mezzanine::Threading::thread T1(BarrierTestHelper,&One);
+    Mezzanine::Threading::thread T2(BarrierTestHelper,&Two);
+    Mezzanine::Threading::thread T3(BarrierTestHelper,&Three);
+    Mezzanine::Threading::thread T4(BarrierTestHelper,&Four);
+    T1.join();
+    T2.join();
+    T3.join();
+    T4.join();
+
+    ThrowOnFalse(10==BarrierData2[0], "This thread should have copied 10");
+    ThrowOnFalse(20==BarrierData2[1], "This thread should have copied 20");
+    ThrowOnFalse(30==BarrierData2[2], "This thread should have copied 30");
+    ThrowOnFalse(40==BarrierData2[3], "This thread should have copied 40");
+
+}
+
+
+
+
+
+
 
 int main (int argc, char** argv)
 {
@@ -1598,7 +1682,7 @@ int main (int argc, char** argv)
     AllTheTests["performanceframes"]=PerformanceFrames;
     AllTheTests["performanceseconds"]=PerformanceSeconds;
     AllTheTests["threadaffinity"]=ThreadAffinity;
-    //AllTheTests["basicthreading"]=BasicThreading;
+    AllTheTests["barrier"]=BarrierTest;
     //AllTheTests["basicthreading"]=BasicThreading;
     //AllTheTests["basicthreading"]=BasicThreading;
     //AllTheTests["basicthreading"]=BasicThreading;
@@ -1634,12 +1718,5 @@ int main (int argc, char** argv)
     #endif
 
     exit(EXIT_SUCCESS);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Testing FrameScheduler Affinity execution
-
-    // Make a scheduler
-    // 3 affinity WorkUnits and 3 normal
-
 }
 #endif

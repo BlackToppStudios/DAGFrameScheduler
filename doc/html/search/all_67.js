@@ -7,6 +7,7 @@ var searchData=
   ['getcpucount',['GetCPUCount',['../namespaceMezzanine.html#afc972295dbb71a9a6c2f57d5290caf46',1,'Mezzanine']]],
   ['getdependencycount',['GetDependencyCount',['../classMezzanine_1_1Threading_1_1WorkUnit.html#ae7a1a2d040ee4b674b1f31ad6fb6a5bf',1,'Mezzanine::Threading::WorkUnit::GetDependencyCount(WorkUnit *Caller) const '],['../classMezzanine_1_1Threading_1_1WorkUnit.html#a6c6f4a882cf335b5186a9d04e567414d',1,'Mezzanine::Threading::WorkUnit::GetDependencyCount() const ']]],
   ['getdependentcount',['GetDependentCount',['../classMezzanine_1_1Threading_1_1WorkUnit.html#ab893489fe0d7c1a32bbc8be0b29eb494',1,'Mezzanine::Threading::WorkUnit']]],
+  ['getdependentcountof',['GetDependentCountOf',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ab9a38e656343ce4d0206dd84f742c434',1,'Mezzanine::Threading::FrameScheduler']]],
   ['getframecount',['GetFrameCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a3d2a83c6411e7c5686c68cfc982b8236',1,'Mezzanine::Threading::FrameScheduler']]],
   ['getframelength',['GetFrameLength',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a7af749e5eb3f5d53cc9b3fc122a03af6',1,'Mezzanine::Threading::FrameScheduler']]],
   ['getframescheduler',['GetFrameScheduler',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a613ddf6ec3fdd5fbc5295479237a883a',1,'Mezzanine::Threading::ThreadSpecificStorage']]],

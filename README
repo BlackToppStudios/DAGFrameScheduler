@@ -2,7 +2,7 @@ The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling lib
 
 Currently this is not ready for most production use but is ready for peer review and possibly for integration into simple games.
 
-This  is licensed under the GPL v3 license as per the file 'LICENSE'.
+This is licensed under the GPL v3 license as per the file 'LICENSE'.
 
  -- Project layout --
 
@@ -16,6 +16,10 @@ This  is licensed under the GPL v3 license as per the file 'LICENSE'.
 
 
  -- NEWS --
+	Dec 5, 2012
+		Removed all occurrences of volatile keyword.
+		
+
 	Dec 4, 2012
 		Fixed a scheduling issue which caused a thread to stall on a specific workunit if it had unment dependencies.
 		Test for thread affinity emits manually checkable contents and passes manual inspection.

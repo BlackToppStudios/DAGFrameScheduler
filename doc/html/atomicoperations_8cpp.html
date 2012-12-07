@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>atomiccas.h File Reference</title>
+<title>atomicoperations.cpp File Reference</title>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -84,33 +84,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#namespaces">Namespaces</a> &#124;
+<a href="#define-members">Defines</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">atomiccas.h File Reference</div>  </div>
+<div class="title">atomicoperations.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Simple thread safe ways to check and change a specified variable atomically.  
+<p>The implemenation of Simple thread safe ways to check and change a specified variable atomically.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="datatypes_8h_source.html">datatypes.h</a>&quot;</code><br/>
 </div><div class="textblock"><div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for atomiccas.h:</div>
+  <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Include dependency graph for atomicoperations.cpp:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="atomiccas_8h__incl.svg" width="436" height="283"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="atomicoperations_8cpp__incl.svg" width="436" height="283"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
-</div><div class="textblock"><div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
-  <img id="dynsection-1-trigger" src="closed.png" alt="+"/> This graph shows which files directly or indirectly include this file:</div>
-<div id="dynsection-1-summary" class="dynsummary" style="display:block;">
-</div>
-<div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="atomiccas_8h__dep__incl.svg" width="104" height="123"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
-</div>
-<p><a href="atomiccas_8h_source.html">Go to the source code of this file.</a></p>
+<p><a href="atomicoperations_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="namespaces"></a>
 Namespaces</h2></td></tr>
@@ -122,13 +114,15 @@ Namespaces</h2></td></tr>
 <br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">Int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a6e0664b750836569d08b8b1fc0e1bca7">Mezzanine::Threading::AtomicCompareAndSwap</a> (volatile Int32 *VariableToChange, const Int32 &amp;OldValue, const Int32 &amp;NewValue)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a value.  <a href="#a6e0664b750836569d08b8b1fc0e1bca7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d">Mezzanine::Threading::AtomicAdd</a> (Int32 *VariableToChange, Int32 Value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments a value in a way guaranteed to not lose any atomic increments.  <a href="#a7d13f167b7b993e5c5cabe560ac42f8d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">Int32&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#aca7e126ea9fce31b5ceb278e6b82c55e">Mezzanine::Threading::AtomicCompareAndSwap</a> (Int32 *VariableToChange, const Int32 &amp;OldValue, const Int32 &amp;NewValue)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a value.  <a href="#aca7e126ea9fce31b5ceb278e6b82c55e"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Simple thread safe ways to check and change a specified variable atomically. </p>
+<div class="textblock"><p>The implemenation of Simple thread safe ways to check and change a specified variable atomically. </p>
 
-<p>Definition in file <a class="el" href="atomiccas_8h_source.html">atomiccas.h</a>.</p>
+<p>Definition in file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -145,6 +139,6 @@ Functions</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 3 2012 22:06:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

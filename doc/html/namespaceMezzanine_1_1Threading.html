@@ -107,6 +107,8 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMezzanine_1_1Threading_1_1__thread__start__info.html">_thread_start_info</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Information to pass to the new thread (what to run).  <a href="structMezzanine_1_1Threading_1_1__thread__start__info.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html">AsynchronousWorkUnit</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1Barrier.html">Barrier</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A synchronization primitive that causes a predefined number of threads to all wait before continuing.  <a href="classMezzanine_1_1Threading_1_1Barrier.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html">DefaultThreadSpecificStorage</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Use this to change the default resource type.  <a href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html">DoubleBufferedResource</a></td></tr>
@@ -139,8 +141,10 @@ typedef <a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResourc
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A better default name for the Default Logger instance. <br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a6e0664b750836569d08b8b1fc0e1bca7">AtomicCompareAndSwap</a> (volatile <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;OldValue, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;NewValue)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a value.  <a href="#a6e0664b750836569d08b8b1fc0e1bca7"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d">AtomicAdd</a> (<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> Value)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments a value in a way guaranteed to not lose any atomic increments.  <a href="#a7d13f167b7b993e5c5cabe560ac42f8d"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#aca7e126ea9fce31b5ceb278e6b82c55e">AtomicCompareAndSwap</a> (<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;OldValue, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;NewValue)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a value.  <a href="#aca7e126ea9fce31b5ceb278e6b82c55e"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b25e77bc7d4377570b358c9bd8c6e04"></a><!-- doxytag: member="Mezzanine::Threading::DBRInvalid" ref="a2b25e77bc7d4377570b358c9bd8c6e04" args="" -->
@@ -156,14 +160,53 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 <div class="textblock"><p>This is where game specific threading algorithms and a minimalistic subset of the std threading library a held. </p>
 <p>this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread, std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are intended to be used in game code. </p>
 </div><hr/><h2>Function Documentation</h2>
-<a class="anchor" id="a6e0664b750836569d08b8b1fc0e1bca7"></a><!-- doxytag: member="Mezzanine::Threading::AtomicCompareAndSwap" ref="a6e0664b750836569d08b8b1fc0e1bca7" args="(volatile Int32 *VariableToChange, const Int32 &amp;OldValue, const Int32 &amp;NewValue)" -->
+<a class="anchor" id="a7d13f167b7b993e5c5cabe560ac42f8d"></a><!-- doxytag: member="Mezzanine::Threading::AtomicAdd" ref="a7d13f167b7b993e5c5cabe560ac42f8d" args="(Int32 *VariableToChange, Int32 Value)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> <a class="el" href="namespaceMezzanine_1_1Threading.html#a6e0664b750836569d08b8b1fc0e1bca7">Mezzanine::Threading::AtomicCompareAndSwap</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> <a class="el" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d">Mezzanine::Threading::AtomicAdd</a> </td>
           <td>(</td>
-          <td class="paramtype">volatile Int32 *&#160;</td>
+          <td class="paramtype">Int32 *&#160;</td>
+          <td class="paramname"><em>VariableToChange</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Int32&#160;</td>
+          <td class="paramname"><em>Value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Increments a value in a way guaranteed to not lose any atomic increments. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">VariableToChange</td><td>A pointer to the 32 bit integer to increment by the amount specified </td></tr>
+    <tr><td class="paramname">Value</td><td>The amount to increment the VariableToChange by. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The newly incremented value. This is not always *VariableToChange+Value. If another thread attempted and atomic operation on this at the same time the result could be the new value pointed to by VariableToChange plus Value. </dd></dl>
+
+<p>Definition at line <a class="el" href="atomicoperations_8cpp_source.html#l00063">63</a> of file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aca7e126ea9fce31b5ceb278e6b82c55e"></a><!-- doxytag: member="Mezzanine::Threading::AtomicCompareAndSwap" ref="aca7e126ea9fce31b5ceb278e6b82c55e" args="(Int32 *VariableToChange, const Int32 &amp;OldValue, const Int32 &amp;NewValue)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> <a class="el" href="namespaceMezzanine_1_1Threading.html#aca7e126ea9fce31b5ceb278e6b82c55e">Mezzanine::Threading::AtomicCompareAndSwap</a> </td>
+          <td>(</td>
+          <td class="paramtype">Int32 *&#160;</td>
           <td class="paramname"><em>VariableToChange</em>, </td>
         </tr>
         <tr>
@@ -189,7 +232,6 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 
 <p>Atomically Compares And Swaps a value. </p>
 <p>In such a way that this cannot be interupted by another thread this performs a number of steps. First, it compares the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue to the memory location VariableToChange points to. If they did not match, no work is performed except the dereferencing. In either case since VariableToChange has been derefenced the value stored before any exchange that might have occured is returned. </p>
-<dl class="note"><dt><b>Note:</b></dt><dd>volatile does not mean thread-safe. You should read your compiler's documentation and make sure it will behave as you expect. Despite any other meaning this function will always be thread-safe. </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">VariableToChange</td><td>A pointer to the value to compare and if it matches OldValue Atomically change. </td></tr>
@@ -200,7 +242,7 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>This always returns the value that was pointed to by VariableToChange immediately before this call. </dd></dl>
 
-<p>Definition at line <a class="el" href="atomiccas_8h_source.html#l00064">64</a> of file <a class="el" href="atomiccas_8h_source.html">atomiccas.h</a>.</p>
+<p>Definition at line <a class="el" href="atomicoperations_8cpp_source.html#l00053">53</a> of file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
 
 </div>
 </div>
@@ -240,6 +282,6 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 3 2012 22:06:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

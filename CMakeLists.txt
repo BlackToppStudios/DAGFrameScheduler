@@ -106,7 +106,8 @@ set(${PROJECT_NAME}_lib_headers
         "${RootProjectSourceDir}src/compilerthreadcompat.h" # For tight integration re-working this might be useful too.
 
         "${RootProjectSourceDir}src/asynchronousworkunit.h"
-        "${RootProjectSourceDir}src/atomiccas.h"
+        "${RootProjectSourceDir}src/barrier.h"
+        "${RootProjectSourceDir}src/atomicoperations.h"
         "${RootProjectSourceDir}src/doublebufferedresource.h"
         "${RootProjectSourceDir}src/framescheduler.h"
         "${RootProjectSourceDir}src/frameschedulerworkunits.h"
@@ -122,7 +123,9 @@ set(${PROJECT_NAME}_lib_headers
 
 # All the source files in the library
 set(${PROJECT_NAME}_lib_sources
-        "${RootProjectSourceDir}src/asynchronousworkunit.h"
+        "${RootProjectSourceDir}src/asynchronousworkunit.cpp"
+        "${RootProjectSourceDir}src/atomicoperations.cpp"
+        "${RootProjectSourceDir}src/barrier.cpp"
         "${RootProjectSourceDir}src/framescheduler.cpp"
         "${RootProjectSourceDir}src/frameschedulerworkunits.cpp"
         "${RootProjectSourceDir}src/monopoly.cpp"

@@ -66,7 +66,6 @@ namespace Mezzanine
             private:
                 //WorkUnit(const WorkUnit&) = delete;
                 //WorkUnit& operator=(const WorkUnit&) = delete;
-                //WorkUnit& operator=(const WorkUnit&) volatile = delete;
 
                 /// @brief Remove Copy constructor, Copying a work unit does not make sense, it breaks scheduling, made private.
                 WorkUnit(const WorkUnit&) {}
@@ -84,8 +83,7 @@ namespace Mezzanine
                 DefaultRollingAverage<Whole>::Type PerformanceLog;
 
                 /// @brief This controls do work with this after it has .
-                //volatile int32_t CurrentRunningState;
-                volatile Int32 CurrentRunningState;
+                Int32 CurrentRunningState;
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the dependents as in what WorkUnits must not start until this finishes.
@@ -138,6 +136,8 @@ namespace Mezzanine
                 /// @brief Drop any information about what work Units this one depends on.
                 virtual void ClearDependencies();
 
+                /// @brief Check if this WorkUnit could concievably run right now.
+                /// @return This returns true if all of this WorkUnits dependencies have completed execution and false otherwise.
                 virtual bool IsEveryDependencyComplete();
 
                 /////////////////////////////////////////////////////////////////////////////////////////////

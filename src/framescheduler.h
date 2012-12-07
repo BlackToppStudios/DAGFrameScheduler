@@ -191,11 +191,16 @@ namespace Mezzanine
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
                 virtual void AddWorkUnitAffinity(WorkUnit* MoreWork);
 
-                // @brief Remove a WorkUnit, and regain ownership of it
-                // @param LessWork a pointer to a WorkUnit that should no longer be scheduled.
-                // @warning This does not cleanup dependencies and can get you in trouble if other work units depend on the one removed
-                // virtual void RemoveWorkUnit(WorkUnit* LessWork);
+                /// @brief Remove a WorkUnit, and regain ownership of it
+                /// @param LessWork a pointer to a WorkUnit that should no longer be scheduled.
+                /// @details This is relative slow compared to adding or finding a working unit, this works in linear time relative to the number of WorkUnits in the scheduler.
+                /// @warning This does not cleanup dependencies and can get you in trouble if other work units depend on the one removed
+                virtual void RemoveWorkUnit(WorkUnit* LessWork);
 
+                /// @brief How many other WorkUnit instances must wait on this one.
+                /// @param Work The WorkUnit to get the Updated count of.
+                /// @param UsedCached If the cache is already up to date leaving this false, and not updating it can save significant time.
+                /// @return A Whole Number representing the amount of WorkUnit instances that cannot start until this finishes.
                 virtual Whole GetDependentCountOf(WorkUnit *Work, bool UsedCached=false);
 
                 /// @brief Gets the next available workunit for execution.
@@ -208,6 +213,8 @@ namespace Mezzanine
                 /// @return A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
                 virtual WorkUnit* GetNextWorkUnitAffinity();
 
+                /// @brief Is the work of the Frame Done?
+                /// @return This returns true if all the WorkUnit instances are complete, and false otherwise.
                 virtual bool AreAllWorkUnitsComplete();
 
                 /// @brief Get the amount of threads that will be used to execute WorkUnits a the start of the next frame.

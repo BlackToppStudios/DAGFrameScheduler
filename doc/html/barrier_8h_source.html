@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>atomiccas.h Source File</title>
+<title>barrier.h Source File</title>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -83,10 +83,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="headertitle">
-<div class="title">atomiccas.h</div>  </div>
+<div class="title">barrier.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="atomiccas_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.</span>
+<a href="barrier_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.</span>
 <a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2012 BlackTopp Studios Inc.</span>
 <a name="l00003"></a>00003 <span class="comment">/* This file is part of The DAGFrameScheduler.</span>
 <a name="l00004"></a>00004 <span class="comment"></span>
@@ -126,41 +126,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00038"></a>00038 <span class="comment">   Joseph Toppi - toppij@gmail.com</span>
 <a name="l00039"></a>00039 <span class="comment">   John Blackwood - makoenergy02@gmail.com</span>
 <a name="l00040"></a>00040 <span class="comment">*/</span>
-<a name="l00041"></a>00041 <span class="preprocessor">#ifndef _atomiccas_h</span>
-<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="preprocessor">#define _atomiccas_h</span>
+<a name="l00041"></a>00041 <span class="preprocessor">#ifndef _barrier_h</span>
+<a name="l00042"></a>00042 <span class="preprocessor"></span><span class="preprocessor">#define _barrier_h</span>
 <a name="l00043"></a>00043 <span class="preprocessor"></span>
 <a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired.">datatypes.h</a>&quot;</span>
-<a name="l00045"></a>00045 <span class="comment"></span>
-<a name="l00046"></a>00046 <span class="comment">/// @file</span>
-<a name="l00047"></a>00047 <span class="comment">/// @brief Simple thread safe ways to check and change a specified variable atomically.</span>
-<a name="l00048"></a>00048 <span class="comment"></span>
-<a name="l00049"></a>00049 <span class="keyword">namespace </span>Mezzanine
-<a name="l00050"></a>00050 {
-<a name="l00051"></a>00051     <span class="keyword">namespace </span>Threading
-<a name="l00052"></a>00052     {<span class="comment"></span>
-<a name="l00053"></a>00053 <span class="comment">        /// @brief Atomically Compares And Swaps a value.</span>
-<a name="l00054"></a>00054 <span class="comment">        /// @details In such a way that this cannot be interupted by another thread this performs a number of steps.</span>
-<a name="l00055"></a>00055 <span class="comment">        /// First, it compares the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue</span>
-<a name="l00056"></a>00056 <span class="comment">        /// to the memory location VariableToChange points to. If they did not match, no work is performed except the dereferencing.</span>
-<a name="l00057"></a>00057 <span class="comment">        /// In either case since VariableToChange has been derefenced the value stored before any exchange that might have</span>
-<a name="l00058"></a>00058 <span class="comment">        /// occured is returned.</span>
-<a name="l00059"></a>00059 <span class="comment">        /// @note volatile does not mean thread-safe. You should read your compiler&#39;s documentation and make sure it will behave as you expect. Despite any other meaning this function will always be thread-safe.</span>
-<a name="l00060"></a>00060 <span class="comment">        /// @param VariableToChange A pointer to the value to compare and if it matches OldValue Atomically change.</span>
-<a name="l00061"></a>00061 <span class="comment">        /// @param OldValue what is expected to be at the other end of VariableToChange</span>
-<a name="l00062"></a>00062 <span class="comment">        /// @param NewValue The value to be written to VariableToChange if at the time the actual CPU instruction is executed OldValue Matches *VariableToChange.</span>
-<a name="l00063"></a>00063 <span class="comment">        /// @return This always returns the value that was pointed to by VariableToChange immediately before this call.</span>
-<a name="l00064"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#a6e0664b750836569d08b8b1fc0e1bca7">00064</a> <span class="comment"></span>        <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#a6e0664b750836569d08b8b1fc0e1bca7" title="Atomically Compares And Swaps a value.">AtomicCompareAndSwap</a>(<span class="keyword">volatile</span> <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a>* VariableToChange, <span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a>&amp; OldValue, <span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a>&amp; NewValue)
-<a name="l00065"></a>00065         {
-<a name="l00066"></a>00066 <span class="preprocessor">            #if defined(_MEZZ_THREAD_WIN32_)</span>
-<a name="l00067"></a>00067 <span class="preprocessor"></span>                <span class="keywordflow">return</span> InterlockedCompareExchange((<span class="keyword">volatile</span> <span class="keywordtype">long</span>*)VariableToChange,NewValue,OldValue);
-<a name="l00068"></a>00068 <span class="preprocessor">            #else</span>
-<a name="l00069"></a>00069 <span class="preprocessor"></span>                <span class="keywordflow">return</span> __sync_val_compare_and_swap(VariableToChange,OldValue,NewValue);
-<a name="l00070"></a>00070 <span class="preprocessor">            #endif</span>
-<a name="l00071"></a>00071 <span class="preprocessor"></span>        }
-<a name="l00072"></a>00072     }
-<a name="l00073"></a>00073 }
-<a name="l00074"></a>00074 
-<a name="l00075"></a>00075 <span class="preprocessor">#endif</span>
+<a name="l00045"></a>00045 <span class="preprocessor">#include &quot;<a class="code" href="atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically.">atomicoperations.h</a>&quot;</span>
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047 <span class="comment"></span>
+<a name="l00048"></a>00048 <span class="comment">/// @file</span>
+<a name="l00049"></a>00049 <span class="comment">/// @brief The declaration of the @ref Mezzanine::Threading::Barrier Barrier synchronization primitive</span>
+<a name="l00050"></a>00050 <span class="comment"></span>
+<a name="l00051"></a>00051 <span class="keyword">namespace </span>Mezzanine
+<a name="l00052"></a>00052 {
+<a name="l00053"></a>00053     <span class="keyword">namespace </span>Threading
+<a name="l00054"></a>00054     {<span class="comment"></span>
+<a name="l00055"></a>00055 <span class="comment">        /// @brief A synchronization primitive that causes a predefined number of threads to all wait before continuing.</span>
+<a name="l00056"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html">00056</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing...">Barrier</a>
+<a name="l00057"></a>00057         {
+<a name="l00058"></a>00058             <span class="keyword">protected</span>:<span class="comment"></span>
+<a name="l00059"></a>00059 <span class="comment">                /// @brief The number of threads to have wait</span>
+<a name="l00060"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b">00060</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>;
+<a name="l00061"></a>00061 <span class="comment"></span>
+<a name="l00062"></a>00062 <span class="comment">                /// @brief The number of threads</span>
+<a name="l00063"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785">00063</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads.">ThreadCurrent</a>;
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00066"></a>00066 <span class="comment">                /// @brief Constructor</span>
+<a name="l00067"></a>00067 <span class="comment">                /// @param SynchThreadCount The amount of threads that this should wait for. If 0 is passed the behavior is undefined.</span>
+<a name="l00068"></a>00068 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing...">Barrier</a> (<a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> SynchThreadCount);
+<a name="l00069"></a>00069 <span class="comment"></span>
+<a name="l00070"></a>00070 <span class="comment">                /// @brief Wait until all threads reach this point.</span>
+<a name="l00071"></a>00071 <span class="comment">                /// @return The last thread to reach this point gets true, the others are return false.</span>
+<a name="l00072"></a>00072 <span class="comment"></span>                <span class="keywordtype">bool</span> Wait ();
+<a name="l00073"></a>00073 
+<a name="l00074"></a>00074         };
+<a name="l00075"></a>00075     }
+<a name="l00076"></a>00076 }
+<a name="l00077"></a>00077 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -177,6 +179,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 3 2012 22:06:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

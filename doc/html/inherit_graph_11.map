@@ -1,7 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="7,85,225,115"/>
-<area shape="rect" id="node3" href="$classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html" title="Mezzanine::Threading::AsynchronousWorkUnit" alt="" coords="275,5,579,35"/>
-<area shape="rect" id="node5" href="$classMezzanine_1_1Threading_1_1LogAggregator.html" title="Gather all the thread specific logs and commit them to the main log." alt="" coords="297,58,556,89"/>
-<area shape="rect" id="node7" href="$classMezzanine_1_1Threading_1_1LogBufferSwapper.html" title="Swaps all of the Logs so the Usable logs can be commited, and the usable commitable." alt="" coords="288,111,565,142"/>
-<area shape="rect" id="node9" href="$classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads." alt="" coords="288,165,565,195"/>
+<area shape="rect" id="node1" href="$classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double&#45;buffered and algorithm specific resources." alt="" coords="5,5,312,35"/>
 </map>

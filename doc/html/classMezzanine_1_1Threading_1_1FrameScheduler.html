@@ -124,10 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a normal <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> to this For scheduling.  <a href="#a54a5da1cd950bbc0652031c781c675c1"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a0324ac0c3d5b82c85c31dc62df0b5581">AddWorkUnitAffinity</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *MoreWork)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a normal <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> to this For scheduling.  <a href="#a0324ac0c3d5b82c85c31dc62df0b5581"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae02f5ee5a78466652c0740109e919573">AreAllWorkUnitsComplete</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the work of the Frame Done?  <a href="#ae02f5ee5a78466652c0740109e919573"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a93e8f9d384197837fcf8fc0f3c058a5c">DoOneFrame</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Do one frame worth of work.  <a href="#a93e8f9d384197837fcf8fc0f3c058a5c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab9a38e656343ce4d0206dd84f742c434"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetDependentCountOf" ref="ab9a38e656343ce4d0206dd84f742c434" args="(WorkUnit *Work, bool UsedCached=false)" -->
-virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><b>GetDependentCountOf</b> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *Work, bool UsedCached=false)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ab9a38e656343ce4d0206dd84f742c434">GetDependentCountOf</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *Work, bool UsedCached=false)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many other <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> instances must wait on this one.  <a href="#ab9a38e656343ce4d0206dd84f742c434"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3d2a83c6411e7c5686c68cfc982b8236">GetFrameCount</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current number of frames that have elapsed.  <a href="#a3d2a83c6411e7c5686c68cfc982b8236"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7af749e5eb3f5d53cc9b3fc122a03af6"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetFrameLength" ref="a7af749e5eb3f5d53cc9b3fc122a03af6" args="() const " -->
@@ -139,6 +141,8 @@ virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea4
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Just like <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a0e4e2774f5112075493f9bb0eb787538">GetNextWorkUnit</a> except that it searchs through and prioritizes work units with affinity.  <a href="#ab7941e0453a4340dc5dd2469e288a640"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a45299a4ebe34674b09c7b40ccccae8ce">GetThreadCount</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the amount of threads that will be used to execute WorkUnits a the start of the next frame.  <a href="#a45299a4ebe34674b09c7b40ccccae8ce"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aaf3ee46a5f2a123113084622f0b2c5ec">RemoveWorkUnit</a> (<a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *LessWork)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>, and regain ownership of it.  <a href="#aaf3ee46a5f2a123113084622f0b2c5ec"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af11e18b5ea39b77fee60c3a3d0e65bd4"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::ResetAllWorkUnits" ref="af11e18b5ea39b77fee60c3a3d0e65bd4" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af11e18b5ea39b77fee60c3a3d0e65bd4">ResetAllWorkUnits</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Take any steps required to prepare all owned WorkUnits for execution next frame. <br/></td></tr>
@@ -268,7 +272,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 </dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This must be constructed from the Main(only) thread for any features with thread affinity to work correctly. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00181">181</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00189">189</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -307,7 +311,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 </dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This must be constructed from the Main(only) thread for any features with thread affinity to work correctly. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00190">190</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00198">198</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -328,7 +332,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <p>Destructor. </p>
 <p>Deletes all std::fstream, <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>, <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads.">MonopolyWorkUnit</a> and <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a> objects that this was passed or created during its lifetime. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00199">199</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00207">207</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -356,7 +360,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00216">216</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00224">224</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -383,7 +387,28 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00219">219</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00227">227</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae02f5ee5a78466652c0740109e919573"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::AreAllWorkUnitsComplete" ref="ae02f5ee5a78466652c0740109e919573" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae02f5ee5a78466652c0740109e919573">Mezzanine::Threading::FrameScheduler::AreAllWorkUnitsComplete</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Is the work of the Frame Done? </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>This returns true if all the <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> instances are complete, and false otherwise. </dd></dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00296">296</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -405,7 +430,46 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <p>Every Monopoly will be executed once and each work unit will be executed once. </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>Do not call this on an unsorted set of WorkUnits. Use <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">FrameScheduler::SortWorkUnitsAll()</a> and <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> to sort WorkUnits after They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just the frames new WorkUnits are added. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00273">273</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00320">320</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ab9a38e656343ce4d0206dd84f742c434"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetDependentCountOf" ref="ab9a38e656343ce4d0206dd84f742c434" args="(WorkUnit *Work, bool UsedCached=false)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ab9a38e656343ce4d0206dd84f742c434">Mezzanine::Threading::FrameScheduler::GetDependentCountOf</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *&#160;</td>
+          <td class="paramname"><em>Work</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>UsedCached</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>How many other <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> instances must wait on this one. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Work</td><td>The <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> to get the Updated count of. </td></tr>
+    <tr><td class="paramname">UsedCached</td><td>If the cache is already up to date leaving this false, and not updating it can save significant time. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A Whole Number representing the amount of <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> instances that cannot start until this finishes. </dd></dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00258">258</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +490,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <p>Get the current number of frames that have elapsed. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the Frame Count. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00331">331</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00378">378</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -447,7 +511,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <p>Get the endpoint for the logs. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>An std:ostream reference which can be streame to commit log entries. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00100">100</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00108">108</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +534,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> that could be executed or a null pointer if that could not be acquired. This does not give ownership of that <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00237">237</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00273">273</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -492,7 +556,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00255">255</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00284">284</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -513,7 +577,36 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <p>Get the amount of threads that will be used to execute WorkUnits a the start of the next frame. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole with the current desired thread count. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00267">267</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00314">314</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf3ee46a5f2a123113084622f0b2c5ec"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::RemoveWorkUnit" ref="aaf3ee46a5f2a123113084622f0b2c5ec" args="(WorkUnit *LessWork)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aaf3ee46a5f2a123113084622f0b2c5ec">Mezzanine::Threading::FrameScheduler::RemoveWorkUnit</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> *&#160;</td>
+          <td class="paramname"><em>LessWork</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Remove a <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>, and regain ownership of it. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">LessWork</td><td>a pointer to a <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> that should no longer be scheduled.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>This is relative slow compared to adding or finding a working unit, this works in linear time relative to the number of WorkUnits in the scheduler. </p>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>This does not cleanup dependencies and can get you in trouble if other work units depend on the one removed </dd></dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00230">230</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -540,7 +633,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00345">345</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00392">392</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -571,7 +664,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
  Set this to 0 to never pause and run as fast as possible. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the Target frame rate. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00337">337</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00384">384</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -598,7 +691,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00270">270</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00317">317</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -626,7 +719,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 </dl>
 <p>See <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> for the appropriate times to use this. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00305">305</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00352">352</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -654,7 +747,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 </dl>
 <p>See <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> for the appropriate times to use this. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00316">316</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00363">363</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -683,7 +776,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <p>See <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> for the appropriate times to use this. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>make the contents of this a function to reduce code duplication </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00293">293</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00340">340</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -704,7 +797,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 <p>Wait until enough time has elapsed to allow each frame an equal amount of time in one second if as many frames as the target framerate are run. </p>
 <p>Wait 1/TargetFrame Seconds, minus time already run. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00131">131</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00139">139</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -820,6 +913,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>WorkUnit</b></td></t
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 3 2012 22:06:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

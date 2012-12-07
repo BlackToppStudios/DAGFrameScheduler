@@ -137,6 +137,8 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current RunningState of the thread.  <a href="#a6eb738f3409d67390ea0bfaad83e021a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#acc5f22f1abf1ee7459e4e901553920d3">GetSortingKey</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sorting metadata.  <a href="#acc5f22f1abf1ee7459e4e901553920d3"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ae47bd4e335193f3f3a0300fa7d2b3bc9">IsEveryDependencyComplete</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> could concievably run right now.  <a href="#ae47bd4e335193f3f3a0300fa7d2b3bc9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#afd5b17bae766f34f4c0547ddc7b106ca">operator()</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This tracks work unit metadata, then calls DoWork.  <a href="#afd5b17bae766f34f4c0547ddc7b106ca"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad059368c3456f3a810ea7b3260da9772"></a><!-- doxytag: member="Mezzanine::Threading::LogBufferSwapper::PrepareForNextFrame" ref="ad059368c3456f3a810ea7b3260da9772" args="()" -->
@@ -152,8 +154,8 @@ Protected Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Does any required work for <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ae7a1a2d040ee4b674b1f31ad6fb6a5bf" title="Does any required work for GetDependencyCount() and calls GetDependencyCount(WorkUnit*) on all depend...">GetDependencyCount()</a> and calls GetDependencyCount(WorkUnit*) on all dependency WorkUnits.  <a href="#ae7a1a2d040ee4b674b1f31ad6fb6a5bf"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad8bc3a094a4389b484ea298b8c22471b"></a><!-- doxytag: member="Mezzanine::Threading::LogBufferSwapper::CurrentRunningState" ref="ad8bc3a094a4389b484ea298b8c22471b" args="" -->
-volatile <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ad8bc3a094a4389b484ea298b8c22471b">CurrentRunningState</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad83b4e86efd1be74b759f955d90d23b9"></a><!-- doxytag: member="Mezzanine::Threading::LogBufferSwapper::CurrentRunningState" ref="ad83b4e86efd1be74b759f955d90d23b9" args="" -->
+<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ad83b4e86efd1be74b759f955d90d23b9">CurrentRunningState</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This controls do work with this after it has . <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4a5f83f2dc791ed2c729d6592a44557a"></a><!-- doxytag: member="Mezzanine::Threading::LogBufferSwapper::Dependencies" ref="a4a5f83f2dc791ed2c729d6592a44557a" args="" -->
 std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html">WorkUnit</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#a4a5f83f2dc791ed2c729d6592a44557a">Dependencies</a></td></tr>
@@ -322,7 +324,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>Get the internal rolling average for querying. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A const reference to the internal Rolling Average. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00176">176</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00179">179</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -343,7 +345,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>Retrieves the current RunningState of the thread. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A RunningState that indicates if the thread is running, started, etc... This information can be changed at any time and should be considered stale immediately after retrieval. </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00164">164</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00167">167</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -371,7 +373,28 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> suitable for sorting this workunit </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00196">196</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00199">199</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae47bd4e335193f3f3a0300fa7d2b3bc9"></a><!-- doxytag: member="Mezzanine::Threading::LogBufferSwapper::IsEveryDependencyComplete" ref="ae47bd4e335193f3f3a0300fa7d2b3bc9" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html#ae47bd4e335193f3f3a0300fa7d2b3bc9">Mezzanine::Threading::WorkUnit::IsEveryDependencyComplete</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual, inherited]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Check if this <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a> could concievably run right now. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>This returns true if all of this WorkUnits dependencies have completed execution and false otherwise. </dd></dl>
+
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00144">144</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -398,7 +421,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00179">179</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00182">182</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -425,7 +448,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00136">136</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00133">133</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +469,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 <p>Attempts to atomically start the work unit in the current thread. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise </dd></dl>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00149">149</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00156">156</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -470,6 +493,6 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnit.html
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 3 2012 22:06:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

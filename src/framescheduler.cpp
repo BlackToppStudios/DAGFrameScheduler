@@ -225,7 +225,35 @@ namespace Mezzanine
             { this->WorkUnitsMain.push_back(MoreWork->GetSortingKey(*this)); }
 
         void FrameScheduler::AddWorkUnitAffinity(WorkUnit* MoreWork)
-            { this->WorkUnitsAffinity.push_back(MoreWork->GetSortingKey(*this)); }
+        { this->WorkUnitsAffinity.push_back(MoreWork->GetSortingKey(*this)); }
+
+        void FrameScheduler::RemoveWorkUnit(WorkUnit *LessWork)
+        {
+            /*WorkUnitsAffinity.erase
+                        (
+                            std::remove(
+                                    WorkUnitsAffinity.begin(),
+                                    WorkUnitsAffinity.end(),
+                                    LessWork->GetSortingKey(*this)
+                                    )
+                        );
+            WorkUnitsMain.erase
+                        (
+                            std::remove(
+                                    WorkUnitsMain.begin(),
+                                    WorkUnitsMain.end(),
+                                    LessWork->GetSortingKey(*this)
+                                    )
+                        );
+            Monopolies.erase
+                        (
+                            std::remove(
+                                    Monopolies.begin(),
+                                    Monopolies.end(),
+                                    LessWork->GetSortingKey(*this)
+                                    )
+                        );
+        */}
 
         Whole FrameScheduler::GetDependentCountOf(WorkUnit* Work, bool UsedCached)
         {
