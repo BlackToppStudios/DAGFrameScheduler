@@ -16,9 +16,9 @@ This is licensed under the GPL v3 license as per the file 'LICENSE'.
 
 
  -- NEWS --
-	Dec 5, 2012
+	Dec 6, 2012
 		Removed all occurrences of volatile keyword.
-		
+		Added a Barrier synchronization class.
 
 	Dec 4, 2012
 		Fixed a scheduling issue which caused a thread to stall on a specific workunit if it had unment dependencies.
