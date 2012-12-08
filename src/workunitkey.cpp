@@ -51,7 +51,7 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        WorkUnitKey::WorkUnitKey(Whole Dependers_, Whole Time_, WorkUnit* WorkUnit_)
+        WorkUnitKey::WorkUnitKey(Whole Dependers_, Whole Time_, iWorkUnit* WorkUnit_)
             : Unit(WorkUnit_), Dependers(Dependers_), Time(Time_)
             {}
 

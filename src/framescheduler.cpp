@@ -72,7 +72,7 @@ namespace Mezzanine
         {
             DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
-            WorkUnit* CurrentUnit;
+            iWorkUnit* CurrentUnit;
             do
             {
                 while( (CurrentUnit = FS.GetNextWorkUnit()) ) /// @todo needs to skip ahead a unit instead of spinning
@@ -90,7 +90,7 @@ namespace Mezzanine
         {
             DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
-            WorkUnit* CurrentUnit;
+            iWorkUnit* CurrentUnit;
             do
             {
                 while( (CurrentUnit = FS.GetNextWorkUnitAffinity()) ) /// @todo needs to skip ahead a unit instead of spinning
@@ -170,20 +170,16 @@ namespace Mezzanine
             for(std::vector<WorkUnitKey>::const_iterator Iter=Units.begin(); Iter!=Units.end(); ++Iter)
             {
                 // For each Dependent of that Workunit
-                for(std::vector<WorkUnit*>::const_iterator DepIter=Iter->Unit->Dependencies.begin(); DepIter!=Iter->Unit->Dependencies.end(); ++DepIter)
-                {
-                    // Make a record of the reverse association
-                    DependentGraph[*DepIter].insert(Iter->Unit);
-                }
+                size_t Max = Iter->Unit->GetImmediateDependencyCount();
+                for(size_t Counter=0; Counter<Max; ++Counter)
+                    { DependentGraph[Iter->Unit->GetDependency(Counter)].insert(Iter->Unit); } // Make a record of the reverse association
             }
         }
 
         void FrameScheduler::UpdateWorkUnitKeys(std::vector<WorkUnitKey> &Units)
         {
             for(std::vector<WorkUnitKey>::iterator Iter=Units.begin(); Iter!=Units.end(); ++Iter)
-            {
-                *Iter = Iter->Unit->GetSortingKey(*this);
-            }
+                { *Iter = Iter->Unit->GetSortingKey(*this); }
         }
 
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
@@ -221,13 +217,13 @@ namespace Mezzanine
             DeleteThreads();
         }
 
-        void FrameScheduler::AddWorkUnit(WorkUnit* MoreWork)
+        void FrameScheduler::AddWorkUnit(iWorkUnit* MoreWork)
             { this->WorkUnitsMain.push_back(MoreWork->GetSortingKey(*this)); }
 
-        void FrameScheduler::AddWorkUnitAffinity(WorkUnit* MoreWork)
+        void FrameScheduler::AddWorkUnitAffinity(iWorkUnit* MoreWork)
         { this->WorkUnitsAffinity.push_back(MoreWork->GetSortingKey(*this)); }
 
-        void FrameScheduler::RemoveWorkUnit(WorkUnit *LessWork)
+        void FrameScheduler::RemoveWorkUnit(iWorkUnit *LessWork)
         {
             /*WorkUnitsAffinity.erase
                         (
@@ -255,12 +251,12 @@ namespace Mezzanine
                         );
         */}
 
-        Whole FrameScheduler::GetDependentCountOf(WorkUnit* Work, bool UsedCached)
+        Whole FrameScheduler::GetDependentCountOf(iWorkUnit* Work, bool UsedCached)
         {
             if(UsedCached)
                 { UpdateDependentGraph(); }
             Whole Results = DependentGraph[Work].size();
-            for(std::set<WorkUnit*>::iterator Iter=DependentGraph[Work].begin(); Iter!=DependentGraph[Work].end(); ++Iter)
+            for(std::set<iWorkUnit*>::iterator Iter=DependentGraph[Work].begin(); Iter!=DependentGraph[Work].end(); ++Iter)
             {
                 Results+=GetDependentCountOf(*Iter);
             }
@@ -270,7 +266,7 @@ namespace Mezzanine
         //void FrameScheduler::RemoveWorkUnit(WorkUnit* LessWork)
         //    { WorkUnitsMain.erase(LessWork->GetSortingKey()); }
 
-        WorkUnit* FrameScheduler::GetNextWorkUnit()
+        iWorkUnit* FrameScheduler::GetNextWorkUnit()
         {
             /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
@@ -281,7 +277,7 @@ namespace Mezzanine
             return 0;
         }
 
-        WorkUnit* FrameScheduler::GetNextWorkUnitAffinity()
+        iWorkUnit* FrameScheduler::GetNextWorkUnitAffinity()
         {
             /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
 

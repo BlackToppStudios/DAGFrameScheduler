@@ -59,7 +59,7 @@ namespace Mezzanine
     namespace Threading
     {
         class MonopolyWorkUnit;
-        class WorkUnit;
+        class iWorkUnit;
         class LogAggregator;
         class LogBufferSwapper;
         class FrameScheduler;
@@ -71,7 +71,7 @@ namespace Mezzanine
         {
             friend class LogAggregator;
             friend class LogBufferSwapper;
-            friend class WorkUnit; // for GetDependentCount(Framescheduler&)
+            //friend class iWorkUnit; // for GetDependentCount(Framescheduler&)
 
             protected:
                 /// @brief A collection of all the work units that are not Monopolies and do not have affinity for a given thread.
@@ -88,8 +88,8 @@ namespace Mezzanine
 
                 /// @brief A structure designed to minimalistically reprsent Dependency and Reverse Dependency Graphs in work units
                 typedef std::map<
-                                WorkUnit*,
-                                std::set<WorkUnit*>
+                                iWorkUnit*,
+                                std::set<iWorkUnit*>
                             > DependentGraphType;
 
                 /// @brief This structure allows reverse lookup of dependencies.
@@ -185,33 +185,33 @@ namespace Mezzanine
 
                 /// @brief Add a normal WorkUnit to this For scheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
-                virtual void AddWorkUnit(WorkUnit* MoreWork);
+                virtual void AddWorkUnit(iWorkUnit* MoreWork);
 
                 /// @brief Add a normal WorkUnit to this For scheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
-                virtual void AddWorkUnitAffinity(WorkUnit* MoreWork);
+                virtual void AddWorkUnitAffinity(iWorkUnit* MoreWork);
 
                 /// @brief Remove a WorkUnit, and regain ownership of it
                 /// @param LessWork a pointer to a WorkUnit that should no longer be scheduled.
                 /// @details This is relative slow compared to adding or finding a working unit, this works in linear time relative to the number of WorkUnits in the scheduler.
                 /// @warning This does not cleanup dependencies and can get you in trouble if other work units depend on the one removed
-                virtual void RemoveWorkUnit(WorkUnit* LessWork);
+                virtual void RemoveWorkUnit(iWorkUnit* LessWork);
 
                 /// @brief How many other WorkUnit instances must wait on this one.
                 /// @param Work The WorkUnit to get the Updated count of.
                 /// @param UsedCached If the cache is already up to date leaving this false, and not updating it can save significant time.
                 /// @return A Whole Number representing the amount of WorkUnit instances that cannot start until this finishes.
-                virtual Whole GetDependentCountOf(WorkUnit *Work, bool UsedCached=false);
+                virtual Whole GetDependentCountOf(iWorkUnit *Work, bool UsedCached=false);
 
                 /// @brief Gets the next available workunit for execution.
                 /// @details This finds the next available WorkUnit which has not started execution, has no dependencies that have
                 /// not complete, has the most WorkUnits Units that depend on it (has the highest runtime in the case of a tie).
                 /// @return A pointer to the WorkUnit that could be executed or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
-                virtual WorkUnit* GetNextWorkUnit();
+                virtual iWorkUnit* GetNextWorkUnit();
 
                 /// @brief Just like @ref GetNextWorkUnit except that it searchs through and prioritizes work units with affinity.
                 /// @return A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
-                virtual WorkUnit* GetNextWorkUnitAffinity();
+                virtual iWorkUnit* GetNextWorkUnitAffinity();
 
                 /// @brief Is the work of the Frame Done?
                 /// @return This returns true if all the WorkUnit instances are complete, and false otherwise.

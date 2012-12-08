@@ -56,7 +56,7 @@ namespace Mezzanine
 
         /// @brief A kind of workunit given exclusive runtime so it can consume time on multiple threads
         /// @details A FrameScheduler gives Monopolies special treatment and will allow them to run with on every thread.
-        class MEZZ_LIB MonopolyWorkUnit : public WorkUnit
+        class MEZZ_LIB MonopolyWorkUnit : public iWorkUnit
         {
             protected:
                 /// @brief The implementation of That WorkUnit Requires.

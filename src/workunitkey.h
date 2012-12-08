@@ -50,14 +50,14 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        class WorkUnit;
+        class iWorkUnit;
 
         /// @brief Stores data about a single work unit so that it can easily be sorted.
         class MEZZ_LIB WorkUnitKey
         {
             public:
 				/// @brief The WorkUnit this carries metadata for.
-				WorkUnit* Unit;
+				iWorkUnit* Unit;
                 
 				/// @brief This stores how many things must run after the target workunit.
                 /// @details This is most important sorting factor. In the Default algorithm
@@ -83,7 +83,7 @@ namespace Mezzanine
                 /// @param Dependers_ How many items depend on this, This needs to be calculated the same for all WorkUnitKeys
                 /// @param Time_ How long is this workunit expected to execute for, This needs to be calculated the same for all WorkUnitKeys
                 /// @param WorkUnit_ A pointer to the workunit in question.
-                WorkUnitKey(Whole Dependers_, Whole Time_, WorkUnit* WorkUnit_);
+                WorkUnitKey(Whole Dependers_, Whole Time_, iWorkUnit* WorkUnit_);
 
                 /// @brief Destructor
                 virtual ~WorkUnitKey();

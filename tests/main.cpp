@@ -196,7 +196,7 @@ void RandomTests()
 void Sizes()
 {
     cout << "Determining sizeof() important types that are used throughout:" << endl
-         << "WorkUnit: " << sizeof(WorkUnit) << endl
+         << "WorkUnit: " << sizeof(iWorkUnit) << endl
          << "WorkUnitKey: " << sizeof(WorkUnitKey) << endl
          << "DefaultRollingAverage<Whole>::Type: " << sizeof(DefaultRollingAverage<Whole>::Type) << endl
          << "WeightedRollingAverage<Whole,Whole>: " << sizeof(WeightedRollingAverage<Whole,Whole>) << endl
@@ -208,7 +208,7 @@ void Sizes()
          << "mutex: " << sizeof(mutex) << endl
          << "vector<Whole>: " << sizeof(vector<Whole>) << endl
          << "vector<WorkUnit*>: " << sizeof(vector<Whole*>) << endl
-         << "set<WorkUnit*>: " << sizeof(set<WorkUnit*>) << endl
+         << "set<WorkUnit*>: " << sizeof(set<iWorkUnit*>) << endl
          << "ostream*: " << sizeof(ostream*) << endl
          << "MaxInt: " << sizeof(MaxInt) << endl
          << "Whole: " << sizeof(Whole) << endl;
@@ -508,7 +508,7 @@ PreciseFloat MakePi(Mezzanine::Whole Length, Whole Spike = 0)
 /// @brief A samplework unit that calculates pi
 /// @brief Used in @ref WorkUnitTests and other tests that require actual cpu consumption
 /// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
-class PiMakerWorkUnit : public Mezzanine::Threading::WorkUnit
+class PiMakerWorkUnit : public Mezzanine::Threading::iWorkUnit
 {
     public:
         /// @brief How many iterations will we use when calculating Pi
@@ -758,7 +758,7 @@ void WorkUnitKeyTests()
     WorkUnitKey First(10,500,0);
     WorkUnitKey Second(5,600,0);
     WorkUnitKey Third(5,500,0);
-    WorkUnitKey Fourth(3,500,(WorkUnit*)1);
+    WorkUnitKey Fourth(3,500,(iWorkUnit*)1);
     WorkUnitKey Fifth(3,500,0);
 
     cout << "Second<First: " << (Second < First) << "\t Third<First: " << (Third < First) << "\t Fourth<First: " << (Fourth < First) << "\t Fifth<First: " << (Fifth < First) << endl;
@@ -828,7 +828,7 @@ void WorkUnitKeyTests()
 /// @brief A samplework unit that that just block the thread it is in
 /// @details Used in @ref FrameSchedulerGetNext and other tests
 /// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
-class PausesWorkUnit : public Mezzanine::Threading::WorkUnit
+class PausesWorkUnit : public Mezzanine::Threading::iWorkUnit
 {
     public:
         /// @brief How many milliseconds should this thread block for.
@@ -880,7 +880,7 @@ void FrameSchedulerGetNext()
     SchedulingTest1.AddWorkUnit(WorkUnitK4);
     SchedulingTest1.SortWorkUnitsMain();
 
-    WorkUnit* Counter = SchedulingTest1.GetNextWorkUnit();
+    iWorkUnit* Counter = SchedulingTest1.GetNextWorkUnit();
     cout << "Getting the WorkUnit Named " << ((PiMakerWorkUnit*)Counter)->Name << " and marking it as complete." << endl;
     ThrowOnFalse( ((PiMakerWorkUnit*)Counter)->Name == String("First"), "Getting the WorkUnit Named First" );
     Counter->operator()(Storage1);
@@ -1323,7 +1323,7 @@ void PerformanceFrames()
             { cout << "Single Test longer than three seconds, bailing from other performace tests" << endl; break; }
 
         //WorkUnit* WorkUnitTT2 = new PausesWorkUnit(0,"ForeverAlone");
-        WorkUnit* WorkUnitTT2 = new PiMakerWorkUnit(0,"ForeverAlone",false);
+        iWorkUnit* WorkUnitTT2 = new PiMakerWorkUnit(0,"ForeverAlone",false);
         TimingTest.AddWorkUnit(WorkUnitTT2);
         TimingTestStart = GetTimeStamp();
         for(Whole Counter=0; Counter<*Iter; ++Counter)
@@ -1337,9 +1337,9 @@ void PerformanceFrames()
             { cout << "Single Test longer than three seconds, bailing from other performace tests" << endl; break; }
 
         //WorkUnit* WorkUnitTT2A = new PausesWorkUnit(0,"ForeverAlone");
-        WorkUnit* WorkUnitTT2A = new PiMakerWorkUnit(0,"A",false);
-        WorkUnit* WorkUnitTT2B = new PiMakerWorkUnit(0,"B",false);
-        WorkUnit* WorkUnitTT2C = new PiMakerWorkUnit(0,"C",false);
+        iWorkUnit* WorkUnitTT2A = new PiMakerWorkUnit(0,"A",false);
+        iWorkUnit* WorkUnitTT2B = new PiMakerWorkUnit(0,"B",false);
+        iWorkUnit* WorkUnitTT2C = new PiMakerWorkUnit(0,"C",false);
         TimingTest.AddWorkUnit(WorkUnitTT2A);
         TimingTest.AddWorkUnit(WorkUnitTT2B);
         TimingTest.AddWorkUnit(WorkUnitTT2C);
@@ -1399,7 +1399,7 @@ void PerformanceSeconds()
         FrameScheduler TimingTest2(&LogCache,1);
         TimingTest2.SetFrameRate(0);
         //WorkUnit* WorkUnitTT2 = new PausesWorkUnit(0,"ForeverAlone");
-        WorkUnit* WorkUnitTT2 = new PiMakerWorkUnit(0,"ForeverAlone",false);
+        iWorkUnit* WorkUnitTT2 = new PiMakerWorkUnit(0,"ForeverAlone",false);
         TimingTest2.AddWorkUnit(WorkUnitTT2);
         TimingTestStart = GetTimeStamp();
         TimingTestEnd = TimingTestStart + *Iter;
@@ -1416,10 +1416,10 @@ void PerformanceSeconds()
         FrameScheduler TimingTest3(&LogCache,1);
         TimingTest3.SetFrameRate(0);
         //WorkUnit* WorkUnitTT2A = new PausesWorkUnit(0,"ForeverAlone");
-        WorkUnit* WorkUnitTT3 = new PiMakerWorkUnit(0,"ForeverAlone",false);
-        WorkUnit* WorkUnitTT2A = new PiMakerWorkUnit(0,"A",false);
-        WorkUnit* WorkUnitTT2B = new PiMakerWorkUnit(0,"B",false);
-        WorkUnit* WorkUnitTT2C = new PiMakerWorkUnit(0,"C",false);
+        iWorkUnit* WorkUnitTT3 = new PiMakerWorkUnit(0,"ForeverAlone",false);
+        iWorkUnit* WorkUnitTT2A = new PiMakerWorkUnit(0,"A",false);
+        iWorkUnit* WorkUnitTT2B = new PiMakerWorkUnit(0,"B",false);
+        iWorkUnit* WorkUnitTT2C = new PiMakerWorkUnit(0,"C",false);
         TimingTest3.AddWorkUnit(WorkUnitTT2A);
         TimingTest3.AddWorkUnit(WorkUnitTT2B);
         TimingTest3.AddWorkUnit(WorkUnitTT2C);
