@@ -55,7 +55,7 @@ namespace Mezzanine
         /// @brief Gather all the thread specific logs and commit them to the main log
         /// @details All the logs are double buffered. This reads from the commitable buffer
         /// which should otherwise be unused. This task was separated
-        class MEZZ_LIB LogAggregator : public iWorkUnit
+        class MEZZ_LIB LogAggregator : public DefaultWorkUnit
         {
             public:
                 /// @brief This does the actual work of log aggregation.
@@ -66,7 +66,7 @@ namespace Mezzanine
         /// @brief Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.
         /// @note If other doublebuffered resources are used then this or another work unit like it should be adjusted/created to swap those buffers.
         /// @details This needs to have every other workunit that uses the logger as a dependency. If you use the logger in a workunit,
-        class MEZZ_LIB LogBufferSwapper : public iWorkUnit
+        class MEZZ_LIB LogBufferSwapper : public DefaultWorkUnit
         {
             public:
                 /// @brief This does the swapping of buffers.

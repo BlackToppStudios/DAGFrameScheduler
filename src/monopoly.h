@@ -56,19 +56,9 @@ namespace Mezzanine
 
         /// @brief A kind of workunit given exclusive runtime so it can consume time on multiple threads
         /// @details A FrameScheduler gives Monopolies special treatment and will allow them to run with on every thread.
-        class MEZZ_LIB MonopolyWorkUnit : public iWorkUnit
+        class MEZZ_LIB MonopolyWorkUnit : public DefaultWorkUnit
         {
-            protected:
-                /// @brief The implementation of That WorkUnit Requires.
-                /// @details Because most WorkUnits are single threaded having access to thread specific resources
-                /// makes sense. Since a monopoly uses multiple threads, having access to any one group of thread specific
-                /// resource is non-senscial.
-                /// @param CurrentThreadStorage Even though this is not thread specific it is assumed that monopolies have the appropriate synchronization mechanisms to make use of the data in this in a thread safe way.
-                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
             public:
-                /// @brief Constructor, currently does nothing
-                MonopolyWorkUnit();
-
                 /// @brief Provides a hint to the monopoly as to how many threads it should use.
                 /// @param AmountToUse The amount of threads you would like the monopoly to consume.
                 virtual void UseThreads(Whole AmountToUse) = 0;
@@ -76,10 +66,6 @@ namespace Mezzanine
                 /// @brief Retrieves the Amount of threads that the monopoly will actually use.
                 /// @return A whole with the amount of thread to be used.
                 virtual Whole UsingThreadCount() = 0;
-
-                /// @brief This starts the work in the Monopoly.
-                /// @param CurrentFrameScheduler The frame scheduler currently managing the running threads, and provides access to thread specific resources.
-                virtual void DoWork(FrameScheduler& CurrentFrameScheduler) = 0;
 
                 /// @brief A virtual destructor, currently empty.
                 virtual ~MonopolyWorkUnit();

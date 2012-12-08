@@ -196,7 +196,8 @@ void RandomTests()
 void Sizes()
 {
     cout << "Determining sizeof() important types that are used throughout:" << endl
-         << "WorkUnit: " << sizeof(iWorkUnit) << endl
+         << "iWorkUnit: " << sizeof(iWorkUnit) << endl
+         << "DefaultWorkUnit: " << sizeof(DefaultWorkUnit) << endl
          << "WorkUnitKey: " << sizeof(WorkUnitKey) << endl
          << "DefaultRollingAverage<Whole>::Type: " << sizeof(DefaultRollingAverage<Whole>::Type) << endl
          << "WeightedRollingAverage<Whole,Whole>: " << sizeof(WeightedRollingAverage<Whole,Whole>) << endl
@@ -206,6 +207,7 @@ void Sizes()
          << "FrameScheduler: " << sizeof(FrameScheduler) << endl
          << "thread: " << sizeof(thread) << endl
          << "mutex: " << sizeof(mutex) << endl
+         << "Barrier: " << sizeof(Barrier) << endl
          << "vector<Whole>: " << sizeof(vector<Whole>) << endl
          << "vector<WorkUnit*>: " << sizeof(vector<Whole*>) << endl
          << "set<WorkUnit*>: " << sizeof(set<iWorkUnit*>) << endl
@@ -508,7 +510,7 @@ PreciseFloat MakePi(Mezzanine::Whole Length, Whole Spike = 0)
 /// @brief A samplework unit that calculates pi
 /// @brief Used in @ref WorkUnitTests and other tests that require actual cpu consumption
 /// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
-class PiMakerWorkUnit : public Mezzanine::Threading::iWorkUnit
+class PiMakerWorkUnit : public Mezzanine::Threading::DefaultWorkUnit
 {
     public:
         /// @brief How many iterations will we use when calculating Pi
@@ -635,7 +637,7 @@ struct PiMakerThreadData
 /// @brief PiMakerMonopoly Consume every thread for a brief period to calculate Pi.
 /// @details Used in @ref MonopolyTest
 /// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
-class PiMakerMonopoly : public Mezzanine::Threading::MonopolyWorkUnit
+class PiMakerMonopoly : public MonopolyWorkUnit
 {
     public:
         /// @brief How many iterations will we use when calculating Pi
@@ -674,9 +676,9 @@ class PiMakerMonopoly : public Mezzanine::Threading::MonopolyWorkUnit
 
         /// @brief Spawns several the amount of threads indicated by HowManyThreads then calculates Pi in each and logs teh results
         /// @param CurrentFrameScheduler
-        virtual void DoWork(FrameScheduler& CurrentFrameScheduler)
+        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
-            Scheduler = &CurrentFrameScheduler;
+            Scheduler = CurrentThreadStorage.GetFrameScheduler();
             vector<thread*> ThreadIndex;
             vector<PiMakerThreadData*> ThreadData;
             for (Whole Count=0; Count<HowManyThreads; ++Count)      // Pretend making all this Pi simulates everyone in a Bakery baking at at once as hard as they can
@@ -828,7 +830,7 @@ void WorkUnitKeyTests()
 /// @brief A samplework unit that that just block the thread it is in
 /// @details Used in @ref FrameSchedulerGetNext and other tests
 /// @warning Everything on these samples has a public access specifier, for production code that is poor form, encapsulate your stuff.
-class PausesWorkUnit : public Mezzanine::Threading::iWorkUnit
+class PausesWorkUnit : public DefaultWorkUnit
 {
     public:
         /// @brief How many milliseconds should this thread block for.

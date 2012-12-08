@@ -58,63 +58,48 @@ namespace Mezzanine
     namespace Threading
     {
         /////////////////////////////////////////////////////////////////////////////////////////////
+        // The Simple Stuff
+
+        DefaultWorkUnit::DefaultWorkUnit(const DefaultWorkUnit&)
+            {}
+
+        DefaultWorkUnit& DefaultWorkUnit::operator=(DefaultWorkUnit& Unused)
+            { return Unused; }
+
+        DefaultWorkUnit::DefaultWorkUnit() : CurrentRunningState(NotStarted)
+            {}
+
+        DefaultWorkUnit::~DefaultWorkUnit()
+            {}
+
+        /////////////////////////////////////////////////////////////////////////////////////////////
         // Work with the dependents as in what must not start until this finishes.
 
-        /*Whole WorkUnit::GetDependentCount(WorkUnit* Caller) const
-        {
-            #ifdef MEZZ_DEBUG
-            assert(this != Caller); // This will throw if the function is called a second time from the first calling Workunit. Since this should get called on every WorkUnit if the least dependent WorkUnits are called first this can finds all errors.
-            if (0==Caller)
-                { Caller=(WorkUnit*)this; }
-            #endif
-
-            Whole Results = Dependents.size();
-
-                { Results += (*Iter)->GetDependentCount(Caller); }
-            return Results;
-        }*/
-
-        Whole iWorkUnit::GetDependentCount(FrameScheduler &SchedulerToCount)
+        Whole DefaultWorkUnit::GetDependentCount(FrameScheduler &SchedulerToCount)
             { return SchedulerToCount.GetDependentCountOf(this); }
-
-        Whole iWorkUnit::GetDependencyCount() const
-        {
-            #ifdef MEZZ_DEBUG
-                return GetDependencyCount(0);
-            #else
-                return GetDependencyCount((WorkUnit*)this);
-            #endif
-        }
-
-        iWorkUnit* iWorkUnit::GetDependency(Whole Index) const
-            { return Dependencies.at(Index); }
-
-        Whole iWorkUnit::GetImmediateDependencyCount() const
-            { return Dependencies.size(); }
 
         /////////////////////////////////////////////////////////////////////////////////////////////
         // Work with the dependencies as in what must finish before we can run this work unit.
 
-        Whole iWorkUnit::GetDependencyCount(iWorkUnit* Caller) const
-        {
-            #ifdef MEZZ_DEBUG
-            assert(this != Caller); // see GetDependentCount(WorkUnit*)
-            if (0==Caller)
-                { Caller=(iWorkUnit*)this; }
-            #endif
+        iWorkUnit* DefaultWorkUnit::GetDependency(Whole Index) const
+            { return Dependencies.at(Index); }
 
+        Whole DefaultWorkUnit::GetImmediateDependencyCount() const
+            { return Dependencies.size(); }
+
+        Whole DefaultWorkUnit::GetDependencyCount() const
+        {
             Whole Results = Dependencies.size();
             for(std::vector<iWorkUnit*>::const_iterator Iter=Dependencies.begin(); Iter!=Dependencies.end(); ++Iter)
-                { Results += (*Iter)->GetDependencyCount(Caller); }
+                { Results += (*Iter)->GetDependencyCount(); }
             return Results;
+
         }
 
-
-
-        void iWorkUnit::AddDependency(iWorkUnit* NewDependency)
+        void DefaultWorkUnit::AddDependency(iWorkUnit* NewDependency)
             { Dependencies.push_back(NewDependency); }
 
-        void iWorkUnit::RemoveDependency(iWorkUnit* RemoveDependency)
+        void DefaultWorkUnit::RemoveDependency(iWorkUnit* RemoveDependency)
         {
             Dependencies.erase(
                         std::remove(Dependencies.begin(),Dependencies.end(),RemoveDependency),
@@ -122,10 +107,10 @@ namespace Mezzanine
                     );
         }
 
-        void iWorkUnit::ClearDependencies()
-        { Dependencies.clear(); }
+        void DefaultWorkUnit::ClearDependencies()
+            { Dependencies.clear(); }
 
-        bool iWorkUnit::IsEveryDependencyComplete()
+        bool DefaultWorkUnit::IsEveryDependencyComplete()
         {
             for (std::vector<iWorkUnit*>::iterator Iter = Dependencies.begin(); Iter!=Dependencies.end(); ++Iter)
             {
@@ -137,7 +122,7 @@ namespace Mezzanine
 
         /////////////////////////////////////////////////////////////////////////////////////////////
         // Work with the ownership and RunningState
-        RunningState iWorkUnit::TakeOwnerShip()
+        RunningState DefaultWorkUnit::TakeOwnerShip()
         {
             if(!IsEveryDependencyComplete())
                     { return NotStarted; }
@@ -148,22 +133,24 @@ namespace Mezzanine
             return NotStarted;
         }
 
-        RunningState iWorkUnit::GetRunningState() const
+        RunningState DefaultWorkUnit::GetRunningState() const
             { return (RunningState)CurrentRunningState; } // This only works because we set all of in RunningState to be unsigned.
 
-        void iWorkUnit::PrepareForNextFrame()
-        {
-            CurrentRunningState=NotStarted;
-
-        }
+        void DefaultWorkUnit::PrepareForNextFrame()
+            { CurrentRunningState=NotStarted; }
 
         /////////////////////////////////////////////////////////////////////////////////////////////
-        // Work with the preformance log
+        // Work with the performance log
+        Whole DefaultWorkUnit::GetPerformance() const
+            { return PerformanceLog.GetAverage(); }
 
-        RollingAverage<Whole>& iWorkUnit::GetPerformanceLog()
+        RollingAverage<Whole>& DefaultWorkUnit::GetPerformanceLog()
             { return PerformanceLog; }
 
-        void iWorkUnit::operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        // Deciding when to and doing the work
+
+        void DefaultWorkUnit::operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
             MaxInt Begin = Mezzanine::GetTimeStamp();
             #ifdef MEZZ_DEBUG
@@ -180,8 +167,12 @@ namespace Mezzanine
             #endif
         }
 
-        WorkUnitKey iWorkUnit::GetSortingKey(FrameScheduler& SchedulerToCount)
+        WorkUnitKey DefaultWorkUnit::GetSortingKey(FrameScheduler& SchedulerToCount)
             { return WorkUnitKey( this->GetDependentCount(SchedulerToCount), GetPerformanceLog().GetAverage(), this); }
+
+
+
+
 
 
     }

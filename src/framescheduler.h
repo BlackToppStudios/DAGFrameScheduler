@@ -71,7 +71,6 @@ namespace Mezzanine
         {
             friend class LogAggregator;
             friend class LogBufferSwapper;
-            //friend class iWorkUnit; // for GetDependentCount(Framescheduler&)
 
             protected:
                 /// @brief A collection of all the work units that are not Monopolies and do not have affinity for a given thread.

@@ -58,250 +58,184 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @brief Default implementation of WorkUnit. This represents on piece of work through time.
+        /// @brief Interface of a WorkUnit. This represents on piece of work through time.
+        /// @details This has no real substance, use the DefaultWorkUnit class is you
+        /// want to inherit from something ready for easy integration. Implement this
+        /// if you want to make heavy changes to the algorithm or maximize performance.
         class MEZZ_LIB iWorkUnit
         {
-            //friend class FrameScheduler;
+            public:
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                // Work with the dependents as in what WorkUnits must not start until this finishes.
 
-            private:
-                //WorkUnit(const WorkUnit&) = delete;
-                //WorkUnit& operator=(const WorkUnit&) = delete;
+                /// @brief This returns the count workunits that depend on this work unit.
+                /// @param SchedulerToCount The @ref FrameScheduler has a cache of this data, it is impossible to calculate without the complete list of WorkUnits on it either.
+                /// @details Because Dependents are not tracked this iterates over entry in the FrameScheduler it is passed
+                /// @return A Whole is returned containing the count.
+                virtual Whole GetDependentCount(FrameScheduler &SchedulerToCount) = 0;
 
-                /// @brief Remove Copy constructor, Copying a work unit does not make sense, it breaks scheduling, made private.
-                iWorkUnit(const iWorkUnit&) {}
-                /// @brief Assignment operator, Assignment on a WorkUnit Does Not make sense, it breaks scheduling, made private.
-                iWorkUnit& operator=(iWorkUnit& Unused) { return Unused; }
 
-            protected:
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                // Work with the dependencies as in what must finish before we can run this work unit.
+
+                /// @brief This is used to iterate of all the dependencies
+                /// @param Index The 0 based index of the dependency you are trying to retrieve. No ordering is guaranteed, just that counting from 0 to @ref GetImmediateDependencyCount() with access each iWorkUnit once.
+                /// @return A pointer to an iWorkUnit.
+                virtual iWorkUnit* GetDependency(Whole Index) const = 0;
+
+                /// @brief Get the amount of dependencies that directly count on this for access purposes.
+                /// @return The amount of accessable WorkUnit from this WorkUnits dependency list.
+                virtual Whole GetImmediateDependencyCount() const = 0;
+
+                /// @brief How many other WorkUnits does this one depend on?
+                /// @details This is what the @ref FrameScheduler uses to calculate the
+                /// sorting order of WorkUnits. In the default implmentation it counts
+                /// some units twice if they depend on this WorkUnit through Multiple
+                /// dependency chains.
+                /// @return A Whole containing the answer.
+                virtual Whole GetDependencyCount() const = 0;
+
+                /// @brief Force this WorkUnit to Start after another has completed.
+                /// @param NewDependency The WorkUnit that must start after this one has completed.
+                /// @warning Changing this outside the schedule, once the scheduler has started can cause undefined behavior.
+                virtual void AddDependency(iWorkUnit* NewDependency) = 0;
+
+                /// @brief Remove a dependency
+                /// @param RemoveDependency A pointer to the WorkUnit to remove as a dependency
+                virtual void RemoveDependency(iWorkUnit* RemoveDependency) = 0;
+
+                /// @brief Drop any information about what work Units this one depends on.
+                virtual void ClearDependencies() = 0;
+
+                /// @brief Check if this WorkUnit could concievably run right now.
+                /// @return This returns true if all of this WorkUnits dependencies have completed execution and false otherwise.
+                virtual bool IsEveryDependencyComplete() = 0;
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                // Work with the ownership and RunningState
+
+                /// @brief Attempts to atomically start the work unit in the current thread.
+                /// @return Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise
+                virtual RunningState TakeOwnerShip() = 0;
+
+                /// @brief Retrieves the current RunningState of the thread.
+                /// @return A RunningState that indicates if the thread is running, started, etc... This information can be changed at any time and should be considered stale immediately after retrieval.
+                virtual RunningState GetRunningState() const = 0;
+
+                /// @brief This resets the running state and takes any further action required to use the WorkUnit again.
+                virtual void PrepareForNextFrame() = 0;
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                // Work with the preformance log
+
+                /// @brief Get the internal rolling average for querying.
+                /// @return A whole that represents this WorkUnits Performance.
+                virtual Whole GetPerformance() const = 0;
+
+
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                // Deciding when to and doing the work
+
+                /// @brief This tracks work unit metadata, then calls DoWork
+                /// @param CurrentThreadStorage The @ref ThreadSpecificStorage that this WorkUnit will operate with when executing.
+                virtual void operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
+
+                /// @brief Get the sorting metadata.
+                /// @param SchedulerToCount This uses the metadata on the @ref FrameScheduler to generate the Dependency listing required.
+                /// @return A WorkUnitKey suitable for sorting this workunit
+                virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount) = 0;
+
+                /// @brief WorkUnits Must implement these to do the work
+                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
+
+                /// @brief Virtual destructor
+                virtual ~iWorkUnit(){}
+        };
+
+
+        /// @brief Default implementation of WorkUnit. This represents on piece of work through time.
+        class MEZZ_LIB DefaultWorkUnit : public iWorkUnit
+        {
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Data Members
-
+            protected:
                 /// @brief A collection of of workunits that must be complete before this one can start.
                 std::vector<iWorkUnit*> Dependencies;
 
                 /// @brief A rolling average of execution times.
                 DefaultRollingAverage<Whole>::Type PerformanceLog;
 
-                /// @brief This controls do work with this after it has .
+                /// @brief This controls do work with this after it has.
                 Int32 CurrentRunningState;
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
-                // Work with the dependents as in what WorkUnits must not start until this finishes.
+                // The Simple Stuff
+            private:
+                /// @brief Remove Copy constructor, Copying a work unit does not make sense, it breaks scheduling, made private.
+                DefaultWorkUnit(const DefaultWorkUnit&);
+
+                /// @brief Assignment operator, Assignment on a WorkUnit Does Not make sense, it breaks scheduling, made private.
+                DefaultWorkUnit& operator=(DefaultWorkUnit& Unused);
 
             public:
-                /// @brief This returns the count workunits that depend on this work unit.
-                /// @param SchedulerToCount The @ref FrameScheduler has a cache of this data, it is impossible to calculate without the complete list of WorkUnits on it either.
-                /// @details Because Dependents are not tracked this iterates over entry in the FrameScheduler it is passed
-                /// @return A Whole is returned containing the count.
+                /// @brief Simple constructor
+                DefaultWorkUnit();
+
+                /// @brief Virtual destructor, doesn't actually do much
+                virtual ~DefaultWorkUnit();
+
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                // Work with the dependents as in what must not start until this finishes.
+            public:
                 virtual Whole GetDependentCount(FrameScheduler &SchedulerToCount);
 
+                /////////////////////////////////////////////////////////////////////////////////////////////
+                // Work with the dependents as in what WorkUnits must not start until this finishes.
+            public:
                 virtual iWorkUnit* GetDependency(Whole Index) const;
 
                 virtual Whole GetImmediateDependencyCount() const;
 
-
-                /// @brief How many other WorkUnits does this one depend on?
-                /// @return A Whole containing the answer.
                 virtual Whole GetDependencyCount() const;
 
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                // Work with the dependencies as in what must finish before we can run this work unit.
-
-            protected:
-                /// @brief Does any required work for GetDependencyCount() and calls GetDependencyCount(WorkUnit*) on all dependency WorkUnits.
-                /// @param Caller The WorkUnit that initiated the query to allow breaking of cycles.
-                /// @return A partial count of dependencies unless this == Caller, then it returns a complete count.
-                Whole GetDependencyCount(iWorkUnit* Caller) const;
-
             public:
-
-
-                /// @brief Force this WorkUnit to Start after another has completed.
-                /// @param NewDependency The WorkUnit that must start after this one has completed.
-                /// @warning Changing this outside the schedule, once the scheduler has started can cause undefined behavior.
                 virtual void AddDependency(iWorkUnit* NewDependency);
 
-                /// @brief Remove a dependency
-                /// @param RemoveDependency A pointer to the WorkUnit to remove as a dependency
                 virtual void RemoveDependency(iWorkUnit* RemoveDependency);
 
-                /// @brief Drop any information about what work Units this one depends on.
                 virtual void ClearDependencies();
 
-                /// @brief Check if this WorkUnit could concievably run right now.
-                /// @return This returns true if all of this WorkUnits dependencies have completed execution and false otherwise.
                 virtual bool IsEveryDependencyComplete();
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the ownership and RunningState
-
-                /// @brief Attempts to atomically start the work unit in the current thread.
-                /// @return Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise
+            public:
                 virtual RunningState TakeOwnerShip();
 
-                /// @brief Retrieves the current RunningState of the thread.
-                /// @return A RunningState that indicates if the thread is running, started, etc... This information can be changed at any time and should be considered stale immediately after retrieval.
                 virtual RunningState GetRunningState() const;
 
-                /// @brief This resets the running state and takes any further action required to use the WorkUnit again.
                 virtual void PrepareForNextFrame();
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the preformance log
+            public:
+                virtual Whole GetPerformance() const;
 
                 /// @brief Get the internal rolling average for querying.
                 /// @return A const reference to the internal Rolling Average.
-                virtual RollingAverage<Whole> &GetPerformanceLog();
+                virtual RollingAverage<Whole>& GetPerformanceLog();
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Deciding when to and doing the work
-
-                /// @brief This tracks work unit metadata, then calls DoWork
-                /// @param CurrentThreadStorage The @ref ThreadSpecificStorage that this WorkUnit will operate with when executing.
+            public:
                 virtual void operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
 
-                /// @brief Get the sorting metadata.
-                /// @param SchedulerToCount This uses the metadata on the @ref FrameScheduler to generate the Dependency listing required.
-                /// @return A WorkUnitKey suitable for sorting this workunit
                 virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount);
 
-                /// @brief WorkUnits Must implement these to do the work
-                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
 
-                /// @brief Simple constructor
-                iWorkUnit() : CurrentRunningState(NotStarted)
-                {}
-
-                /// @brief Virtual destructor
-                virtual ~iWorkUnit(){}
         };
-
-        /*
-        /// @brief Default implementation of WorkUnit. This represents on piece of work through time.
-        class MEZZ_LIB DefaultWorkUnit : public iWorkUnit
-        {
-            friend class FrameScheduler;
-
-            private:
-                //WorkUnit(const WorkUnit&) = delete;
-                //WorkUnit& operator=(const WorkUnit&) = delete;
-
-                /// @brief Remove Copy constructor, Copying a work unit does not make sense, it breaks scheduling, made private.
-                DefaultWorkUnit(const DefaultWorkUnit&) {}
-                /// @brief Assignment operator, Assignment on a WorkUnit Does Not make sense, it breaks scheduling, made private.
-                DefaultWorkUnit& operator=(DefaultWorkUnit& Unused) { return Unused; }
-
-            protected:
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                // Data Members
-
-                /// @brief A collection of of workunits that must be complete before this one can start.
-                std::vector<DefaultWorkUnit*> Dependencies;
-
-                /// @brief A rolling average of execution times.
-                DefaultRollingAverage<Whole>::Type PerformanceLog;
-
-                /// @brief This controls do work with this after it has .
-                Int32 CurrentRunningState;
-
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                // Work with the dependents as in what WorkUnits must not start until this finishes.
-
-            public:
-                /// @brief This returns the count workunits that depend on this work unit.
-                /// @param SchedulerToCount The @ref FrameScheduler has a cache of this data, it is impossible to calculate without the complete list of WorkUnits on it either.
-                /// @details Because Dependents are not tracked this iterates over entry in the FrameScheduler it is passed
-                /// @return A Whole is returned containing the count.
-                virtual Whole GetDependentCount(FrameScheduler &SchedulerToCount);
-
-                // @brief Perform whatever tracking is required to have another workunit depend on this one.
-                // @param NewDependent The WorkUnit That Depends on this one.
-                // @details Increment the DependentCount. NewDependent Ignored in this niave implemention, but could be useful in derived versions.
-                //virtual void AddDependent(WorkUnit* NewDependent);
-
-                // @brief Perform whatever tracking is required to have another workunit no longer depend on this one.
-                // @details In this simple implementation decrement the DependentCount.
-                // @param RemoveDependent Removed from the list of Dependents.
-                // @todo Cleanup WorkUnit Dependency removal.
-                //virtual void RemoveDependent(WorkUnit* RemoveDependent);
-
-                // @brief Drop any information about what work Units depend on this one.
-                // @details Set dependent count to zero, but a derived implementation could do anything.
-                //virtual void ClearDependents();
-
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                // Work with the dependencies as in what must finish before we can run this work unit.
-
-            protected:
-                /// @brief Does any required work for GetDependencyCount() and calls GetDependencyCount(WorkUnit*) on all dependency WorkUnits.
-                /// @param Caller The WorkUnit that initiated the query to allow breaking of cycles.
-                /// @return A partial count of dependencies unless this == Caller, then it returns a complete count.
-                Whole GetDependencyCount(DefaultWorkUnit* Caller) const;
-
-            public:
-                /// @brief How many other WorkUnits does this one depend on?
-                /// @return A Whole containing the answer.
-                virtual Whole GetDependencyCount() const;
-
-                /// @brief Force this WorkUnit to Start after another has completed.
-                /// @param NewDependency The WorkUnit that must start after this one has completed.
-                /// @warning Changing this outside the schedule, once the scheduler has started can cause undefined behavior.
-                virtual void AddDependency(DefaultWorkUnit* NewDependency);
-
-                /// @brief Remove a dependency
-                /// @param RemoveDependency A pointer to the WorkUnit to remove as a dependency
-                virtual void RemoveDependency(DefaultWorkUnit* RemoveDependency);
-
-                /// @brief Drop any information about what work Units this one depends on.
-                virtual void ClearDependencies();
-
-                /// @brief Check if this WorkUnit could concievably run right now.
-                /// @return This returns true if all of this WorkUnits dependencies have completed execution and false otherwise.
-                virtual bool IsEveryDependencyComplete();
-
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                // Work with the ownership and RunningState
-
-                /// @brief Attempts to atomically start the work unit in the current thread.
-                /// @return Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise
-                virtual RunningState TakeOwnerShip();
-
-                /// @brief Retrieves the current RunningState of the thread.
-                /// @return A RunningState that indicates if the thread is running, started, etc... This information can be changed at any time and should be considered stale immediately after retrieval.
-                virtual RunningState GetRunningState() const;
-
-                /// @brief This resets the running state and takes any further action required to use the WorkUnit again.
-                virtual void PrepareForNextFrame();
-
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                // Work with the preformance log
-
-                /// @brief Get the internal rolling average for querying.
-                /// @return A const reference to the internal Rolling Average.
-                virtual RollingAverage<Whole> &GetPerformanceLog();
-
-                /////////////////////////////////////////////////////////////////////////////////////////////
-                // Deciding when to and doing the work
-
-                /// @brief This tracks work unit metadata, then calls DoWork
-                /// @param CurrentThreadStorage The @ref ThreadSpecificStorage that this WorkUnit will operate with when executing.
-                virtual void operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
-
-                /// @brief Get the sorting metadata.
-                /// @param SchedulerToCount This uses the metadata on the @ref FrameScheduler to generate the Dependency listing required.
-                /// @return A WorkUnitKey suitable for sorting this workunit
-                virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount);
-
-                /// @brief WorkUnits Must implement these to do the work
-                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
-
-                /// @brief Simple constructor
-                DefaultWorkUnit() : CurrentRunningState(NotStarted)
-                {}
-
-                /// @brief Virtual destructor
-                virtual ~DefaultWorkUnit(){}
-        };*/
 
 
 
