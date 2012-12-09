@@ -44,6 +44,7 @@
 /// @file
 /// @brief This is the file that code using this library should include. It includes all the required components.
 
+#include "asynchronousfileloadingworkunit.h"
 #include "asynchronousworkunit.h"
 #include "atomicoperations.h"
 #include "barrier.h"

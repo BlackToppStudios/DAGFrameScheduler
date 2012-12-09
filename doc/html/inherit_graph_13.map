@@ -1,3 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted." alt="" coords="5,5,248,35"/>
+<area shape="rect" id="node1" href="$classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double&#45;buffered and algorithm specific resources." alt="" coords="5,5,312,35"/>
 </map>

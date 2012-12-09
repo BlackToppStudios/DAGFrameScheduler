@@ -65,8 +65,6 @@ namespace Mezzanine
                 return false;
             }
         }
-
-
-    }
-}
+    } // \Threading namespace
+} // \Mezzanine namespace
 #endif

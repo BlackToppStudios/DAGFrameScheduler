@@ -115,7 +115,7 @@ typedef int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr><td class="memItemLeft" align="right" valign="top">typedef std::stringstream&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd">Logger</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">In case we ever replace the stringstream with another class, this will allow us to swap it out.  <a href="#ac0e305210456ef0132dc20c06aa292dd"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">typedef long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A large integer type suitable for compile time math and long term microseconf time keeping.  <a href="#ad7ab1b85229be184e16d96c505143f9b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A large integer type suitable for compile time math and long term microsecond time keeping.  <a href="#ad7ab1b85229be184e16d96c505143f9b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1a35eea04e090afa5803c92b8be71c67"></a><!-- doxytag: member="Mezzanine::String" ref="a1a35eea04e090afa5803c92b8be71c67" args="" -->
 typedef std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">String</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">String will provide most of the functionality of std::string but could be implemented in a variety of ways to optimize it. <br/></td></tr>
@@ -188,7 +188,7 @@ Functions</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>A large integer type suitable for compile time math and long term microseconf time keeping. </p>
+<p>A large integer type suitable for compile time math and long term microsecond time keeping. </p>
 <p>For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807. In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for 292 years. </p>
 
 <p>Definition at line <a class="el" href="datatypes_8h_source.html#l00109">109</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
@@ -213,7 +213,7 @@ Functions</h2></td></tr>
 <p>Task is not yet started this frame, this can change without notice. </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f"></a><!-- doxytag: member="Starting" ref="a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f" args="" -->Starting</em>&nbsp;</td><td>
-<p>Only used when a thread successfully attempts to gain ownership of a task. </p>
+<p>Only used when a thread successfully attempts to gain ownership of a task, or some other tasks successfully starts. </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8a31afc171358d68f4c28355838d8d0bea"></a><!-- doxytag: member="Running" ref="a087b86fe436e7ee3e22481c1ba1843a8a31afc171358d68f4c28355838d8d0bea" args="" -->Running</em>&nbsp;</td><td>
 <p>Task is running when the value was check, it could become Complete or Failed with no notice. </p>
@@ -222,7 +222,7 @@ Functions</h2></td></tr>
 <p>Thread has completed all work this from frame, will not change until this frame ends. </p>
 </td></tr>
 <tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8a12f28368b48ed21281f8f801e04117d0"></a><!-- doxytag: member="Failed" ref="a087b86fe436e7ee3e22481c1ba1843a8a12f28368b48ed21281f8f801e04117d0" args="" -->Failed</em>&nbsp;</td><td>
-<p>Indicates an abnormal termination of a Workunit, Likely the whole application will need to stop. </p>
+<p>Indicates an abnormal termination of a Workunit or other failure, Likely the whole application will need to stop. </p>
 </td></tr>
 </table>
 </dd>
@@ -314,6 +314,6 @@ Functions</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Dec 9 2012 12:23:11 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

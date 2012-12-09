@@ -1,3 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="12,86,161,117"/>
+<area shape="rect" id="node3" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit and helper classes and functions." alt="" coords="80,86,307,117"/>
+<area shape="rect" id="node7" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="269,166,419,197"/>
+<area shape="rect" id="node9" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually." alt="" coords="381,86,560,117"/>
+<area shape="rect" id="node5" href="$asynchronousfileloadingworkunit_8cpp.html" title="asynchronousfileloadingworkunit.cpp" alt="" coords="5,166,245,197"/>
 </map>

@@ -41,18 +41,16 @@
 #ifndef _asynchronousworkunit_cpp
 #define _asynchronousworkunit_cpp
 
-#include "monopoly.h"
+#include "asynchronousworkunit.h"
 
 /// @file
-/// @brief Contains the minimal implementation for the monopoly base class
+/// @brief Contains very little actually.
 
 namespace Mezzanine
 {
     namespace Threading
     {
 
-
-
-    }
-}
+    } // \Threading
+} // \Mezzanine
 #endif

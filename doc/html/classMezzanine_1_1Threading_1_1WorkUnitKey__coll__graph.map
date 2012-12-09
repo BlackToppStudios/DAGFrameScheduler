@@ -1,4 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node2" href="$classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="157,105,376,135"/>
-<area shape="rect" id="node7" href="$structMezzanine_1_1DefaultRollingAverage.html" title="Mezzanine::DefaultRollingAverage\&lt; Whole \&gt;" alt="" coords="120,6,413,37"/>
+<area shape="rect" id="node2" href="$classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time." alt="" coords="16,6,237,37"/>
 </map>

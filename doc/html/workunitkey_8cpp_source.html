@@ -139,7 +139,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00051"></a>00051 {
 <a name="l00052"></a>00052     <span class="keyword">namespace </span>Threading
 <a name="l00053"></a>00053     {
-<a name="l00054"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#ae014bd9db51842194c8a382190633b92">00054</a>         <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#ae014bd9db51842194c8a382190633b92" title="Constructor.">WorkUnitKey::WorkUnitKey</a>(<a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Dependers_, <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Time_, <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>* WorkUnit_)
+<a name="l00054"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#acdd7670db8bd9f8ba19a043a296eab85">00054</a>         <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#acdd7670db8bd9f8ba19a043a296eab85" title="Constructor.">WorkUnitKey::WorkUnitKey</a>(<a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Dependers_, <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Time_, <a class="code" href="classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time.">iWorkUnit</a>* WorkUnit_)
 <a name="l00055"></a>00055             : Unit(WorkUnit_), Dependers(Dependers_), Time(Time_)
 <a name="l00056"></a>00056             {}
 <a name="l00057"></a>00057 
@@ -155,7 +155,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00067"></a>00067                 <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f" title="Some representation of the time the target workunit takes to execute.">Time</a> &lt; rhs.<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f" title="Some representation of the time the target workunit takes to execute.">Time</a>)       <span class="comment">// reduce priority of faster workunits</span>
 <a name="l00068"></a>00068                     { <span class="keywordflow">return</span> <span class="keyword">true</span>; }
 <a name="l00069"></a>00069                 <span class="keywordflow">if</span> (this-&gt;<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f" title="Some representation of the time the target workunit takes to execute.">Time</a> == rhs.<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f" title="Some representation of the time the target workunit takes to execute.">Time</a>)
-<a name="l00070"></a>00070                     { <span class="keywordflow">return</span> this-&gt;<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a218950cdcb24fc8e656ae8ecdea27089" title="The WorkUnit this carries metadata for.">Unit</a> &lt; rhs.<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a218950cdcb24fc8e656ae8ecdea27089" title="The WorkUnit this carries metadata for.">Unit</a>; }
+<a name="l00070"></a>00070                     { <span class="keywordflow">return</span> this-&gt;<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a4645d10e28d7c3fdd7dd091aeb78f703" title="The WorkUnit this carries metadata for.">Unit</a> &lt; rhs.<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a4645d10e28d7c3fdd7dd091aeb78f703" title="The WorkUnit this carries metadata for.">Unit</a>; }
 <a name="l00071"></a>00071             }
 <a name="l00072"></a>00072             <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00073"></a>00073 
@@ -187,6 +187,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Dec 9 2012 12:23:11 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

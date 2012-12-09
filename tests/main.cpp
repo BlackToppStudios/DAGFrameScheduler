@@ -81,7 +81,7 @@ void Usage(String Executable, TestGroup& Tests)
 {
     cout << "Usage:" << endl << endl;
     cout << "\t" << Executable << " [testname1] [testname2] [testname3] ..." << endl << endl;
-    cout << "If no tests are provide then every test will be run. The test names are not case sensitive. Here is a listing of test names: " << endl;
+    cout << "If no tests are provided then every test will be run. The test names are not case sensitive. Here is a listing of test names: " << endl;
 
     Whole ColumnWidth=25;
     Whole ColumnCount=3;
@@ -1643,8 +1643,68 @@ void BarrierTest()
     ThrowOnFalse(20==BarrierData2[1], "This thread should have copied 20");
     ThrowOnFalse(30==BarrierData2[2], "This thread should have copied 30");
     ThrowOnFalse(40==BarrierData2[3], "This thread should have copied 40");
-
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+// Testing Asynchronous Workunit synchronization primitive
+
+/// @brief The 'async' Test. A smoke test for the monopoly
+void Async()
+{
+    cout << "Creating three files that might take up to 5 seconds to write." << endl;
+    MaxInt MaxTime = 5000000;
+    Whole MaxFileWrites = 1000000;
+    Whole CurrentCount = 0;
+    MaxInt TimeStarted = GetTimeStamp();
+
+    vector<String> Files;
+    Files.push_back(String("File1.txt"));
+    Files.push_back(String("File2.txt"));
+    Files.push_back(String("File3.txt"));
+
+    ofstream File1a(Files[0].c_str());
+    ofstream File2a(Files[1].c_str());
+    ofstream File3a(Files[2].c_str());
+    while(GetTimeStamp()<TimeStarted+MaxTime && CurrentCount<MaxFileWrites)
+    {
+        File1a.write("Packets1Packets2Packets3", 24);
+        File2a.write("01", 2);
+        File3a.write("-", 1);
+    }
+    File1a.close();
+    File2a.close();
+    File3a.close();
+    cout << "Creating file took " << GetTimeStamp()-TimeStarted << " microseconds " << endl;
+    cout << "Creating an AsynchronousFileLoadWorkUnit to load the contents of these files." << endl;
+    AsynchronousFileLoadWorkUnit Testable;
+    Testable.BeginLoading(Files);
+
+    FrameScheduler Scheduler1(&cout,2);
+    DefaultThreadSpecificStorage::Type AResource(&Scheduler1);
+    TimeStarted = GetTimeStamp();
+    while(Complete!=Testable.IsWorkDone())
+    {
+        Testable.DoWork(AResource);
+        ThrowOnFalse(GetTimeStamp()<TimeStarted+MaxTime*5,"Reading the file took more than 5 times as long writing the files");
+    }
+    cout << "Reading file took " << GetTimeStamp()-TimeStarted << " microseconds " << endl;
+
+    cout << "The files have been loaded performing a basic consistency check." << endl;
+    ThrowOnFalse(Testable.GetFile(0)->Size>0,"First file is too short");
+    ThrowOnFalse(Testable.GetFile(0)->Data[0]=='P' ,"First file is wrong");
+    ThrowOnFalse(Testable.GetFile(0)->Size>0,"Second file is too short");
+    ThrowOnFalse(Testable.GetFile(1)->Data[0]=='0' ,"Second file is wrong");
+    ThrowOnFalse(Testable.GetFile(0)->Size>0,"Third file is too short");
+    ThrowOnFalse(Testable.GetFile(2)->Data[0]=='-' ,"Third file is wrong");
+
+    ofstream File1b(Files[0].c_str());
+    ofstream File2b(Files[1].c_str());
+    ofstream File3b(Files[2].c_str());
+    File1b.close();
+    File2b.close();
+    File3b.close();
+}
+
 
 
 
@@ -1685,7 +1745,7 @@ int main (int argc, char** argv)
     AllTheTests["performanceseconds"]=PerformanceSeconds;
     AllTheTests["threadaffinity"]=ThreadAffinity;
     AllTheTests["barrier"]=BarrierTest;
-    //AllTheTests["basicthreading"]=BasicThreading;
+    AllTheTests["async"]=Async;
     //AllTheTests["basicthreading"]=BasicThreading;
     //AllTheTests["basicthreading"]=BasicThreading;
     //AllTheTests["basicthreading"]=BasicThreading;

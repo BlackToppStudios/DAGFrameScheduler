@@ -105,6 +105,7 @@ set(${PROJECT_NAME}_lib_headers
         "${RootProjectSourceDir}src/datatypes.h"            # If integrating tightly into another project re-implementing this will allow for easier binary compatibility.
         "${RootProjectSourceDir}src/compilerthreadcompat.h" # For tight integration re-working this might be useful too.
 
+        "${RootProjectSourceDir}src/asynchronousfileloadingworkunit.h"
         "${RootProjectSourceDir}src/asynchronousworkunit.h"
         "${RootProjectSourceDir}src/barrier.h"
         "${RootProjectSourceDir}src/atomicoperations.h"
@@ -123,6 +124,7 @@ set(${PROJECT_NAME}_lib_headers
 
 # All the source files in the library
 set(${PROJECT_NAME}_lib_sources
+        "${RootProjectSourceDir}src/asynchronousfileloadingworkunit.cpp"
         "${RootProjectSourceDir}src/asynchronousworkunit.cpp"
         "${RootProjectSourceDir}src/atomicoperations.cpp"
         "${RootProjectSourceDir}src/barrier.cpp"

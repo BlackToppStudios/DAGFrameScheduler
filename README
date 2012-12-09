@@ -16,6 +16,9 @@ This is licensed under the GPL v3 license as per the file 'LICENSE'.
 
 
  -- NEWS --
+	Dec 9, 2012
+		Added an example Asynchronous File loading workunit that seems to perform near the peak capacity of the hardware I tested it on. Also a little bit of documentation cleanup.
+
 	Dec 7, 2012
 		Removed friendships between WorkUnit and FrameScheduler (Some core algorithm classes keep this though).
 		Separated the WorkUnits Implementation from its interface. I did not do this with the other work units, it seems that this will satisfy most customization needs along with changing the inheritance of the other workunits.

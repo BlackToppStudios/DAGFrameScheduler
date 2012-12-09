@@ -186,15 +186,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00098"></a><a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">00098</a> <span class="comment"></span>    <span class="keyword">typedef</span> std::string <a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67" title="String will provide most of the functionality of std::string but could be implemented in a variety of...">String</a>;
 <a name="l00099"></a>00099 
 <a name="l00100"></a>00100 <span class="comment"></span>
-<a name="l00101"></a>00101 <span class="comment">    /// @brief A large integer type suitable for compile time math and long term microseconf time keeping.</span>
+<a name="l00101"></a>00101 <span class="comment">    /// @brief A large integer type suitable for compile time math and long term microsecond time keeping.</span>
 <a name="l00102"></a>00102 <span class="comment">    /// @details For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807.</span>
 <a name="l00103"></a>00103 <span class="comment">    /// In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between</span>
 <a name="l00104"></a>00104 <span class="comment">    /// 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for</span>
 <a name="l00105"></a>00105 <span class="comment">    /// 292 years.</span>
 <a name="l00106"></a>00106 <span class="comment"></span><span class="preprocessor">    #ifdef _MEZZ_CPP11_PARTIAL_</span>
-<a name="l00107"></a>00107 <span class="preprocessor"></span>        <span class="keyword">typedef</span> intmax_t  <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microseconf time keeping...">MaxInt</a>;
+<a name="l00107"></a>00107 <span class="preprocessor"></span>        <span class="keyword">typedef</span> intmax_t  <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a>;
 <a name="l00108"></a>00108 <span class="preprocessor">    #else</span>
-<a name="l00109"></a><a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">00109</a> <span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microseconf time keeping...">MaxInt</a>;
+<a name="l00109"></a><a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">00109</a> <span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a>;
 <a name="l00110"></a>00110 <span class="preprocessor">    #endif</span>
 <a name="l00111"></a>00111 <span class="preprocessor"></span><span class="comment"></span>
 <a name="l00112"></a>00112 <span class="comment">    /// @brief In case we ever replace the stringstream with another class, this will allow us to swap it out.</span>
@@ -219,6 +219,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Dec 9 2012 12:23:10 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

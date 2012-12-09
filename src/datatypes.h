@@ -98,7 +98,7 @@ namespace Mezzanine
     typedef std::string String;
 
 
-    /// @brief A large integer type suitable for compile time math and long term microseconf time keeping.
+    /// @brief A large integer type suitable for compile time math and long term microsecond time keeping.
     /// @details For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807.
     /// In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between
     /// 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for

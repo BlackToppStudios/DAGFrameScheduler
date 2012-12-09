@@ -48,9 +48,9 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node2 -->
 <g id="node3" class="node"><title>Node2</title>
-<a xlink:href="monopoly_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread.">
-<polygon fill="white" stroke="black" points="421,-421 421,-443 489,-443 489,-421 421,-421"/>
-<text text-anchor="middle" x="455" y="-430" font-family="FreeSans" font-size="10.00">monopoly.h</text>
+<a xlink:href="asynchronousworkunit_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu...">
+<polygon fill="white" stroke="black" points="393.5,-421 393.5,-443 516.5,-443 516.5,-421 393.5,-421"/>
+<text text-anchor="middle" x="455" y="-430" font-family="FreeSans" font-size="10.00">asynchronousworkunit.h</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
@@ -67,7 +67,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge4" class="edge"><title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M420.801,-430.345C314.986,-424.301 0,-399.004 0,-312 0,-312 0,-312 0,-252 0,-211.186 21.9433,-200.9 57,-180 94.8624,-157.427 218.342,-142.58 285.509,-135.961"/>
+<path fill="none" stroke="midnightblue" d="M393.163,-428.606C268.758,-420.082 0,-392.367 0,-312 0,-312 0,-312 0,-252 0,-211.186 21.9433,-200.9 57,-180 94.8624,-157.427 218.342,-142.58 285.509,-135.961"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="286.167,-139.414 295.784,-134.97 285.494,-132.447 286.167,-139.414"/>
 </g>
 <!-- Node11 -->
@@ -79,7 +79,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node2&#45;&gt;Node11 -->
 <g id="edge20" class="edge"><title>Node2&#45;&gt;Node11</title>
-<path fill="none" stroke="midnightblue" d="M489.285,-425.333C538.965,-413.798 630.236,-385.216 678,-324 689.187,-309.662 692.569,-288.991 693.368,-273.473"/>
+<path fill="none" stroke="midnightblue" d="M506.735,-420.978C558.178,-407.242 635.396,-378.602 678,-324 689.187,-309.662 692.569,-288.991 693.368,-273.473"/>
 <polygon fill="midnightblue" stroke="midnightblue" points="696.872,-273.314 693.568,-263.248 689.873,-273.177 696.872,-273.314"/>
 </g>
 <!-- Node15 -->

@@ -1,4 +1,52 @@
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousworkunit.h:59: warning: Member IsWorkDone()=0 (function) of class Mezzanine::Threading::AsynchronousWorkUnit is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:257: warning: Member UpdateDependentGraph() (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:150: warning: Member UpdateDependentGraph(const std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
-/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:151: warning: Member UpdateWorkUnitKeys(std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:57: Found \endcond command without matching \cond
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:83: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:53: warning: Found unknown command `\cond'
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:134: warning: unable to resolve reference to `GetFile(whole)' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:142: warning: unable to resolve reference to `RunningState::Complete' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:146: warning: unable to resolve reference to `RunningState::Starting' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:161: warning: unable to resolve reference to `GetFile(whole)' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:161: warning: argument 'Filename' of command @param is not found in the argument list of Mezzanine::Threading::AsynchronousFileLoadWorkUnit::GetFile(String FileName)
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:161: warning: The following parameters of Mezzanine::Threading::AsynchronousFileLoadWorkUnit::GetFile(String FileName) are not documented:
+  parameter 'FileName'
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:152: warning: unable to resolve reference to `RunningState::NotStarted' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:153: warning: unable to resolve reference to `RunningState::Starting' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:154: warning: unable to resolve reference to `RunningState::Running' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:155: warning: unable to resolve reference to `RunningState::Complete' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:156: warning: unable to resolve reference to `RunningState::Failed' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/doublebufferedresource.h:67: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:256: warning: Member UpdateDependentGraph() (function) of class Mezzanine::Threading::FrameScheduler is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:149: warning: Member UpdateDependentGraph(const std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:150: warning: Member UpdateWorkUnitKeys(std::vector< WorkUnitKey > &Units) (function) of class Mezzanine::Threading::FrameScheduler is not documented.
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:83: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:83: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:83: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:77: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/framescheduler.h:78: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:81: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:94: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:95: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:104: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:106: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:108: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:109: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:110: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:166: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:167: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:168: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:210: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:211: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:212: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit::AddDependency()' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:228: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:233: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:234: warning: unable to resolve reference to `Mezzanine::Threading::AsynchronousWorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:242: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:243: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:248: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:251: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:256: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:261: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:263: warning: unable to resolve reference to `Mezzanine::Threading::AsynchronousWorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:266: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:272: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:274: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command
+/home/sqeaky/Projects/ThreadTest/DAGFrameScheduler/src/dagframescheduler.h:280: warning: unable to resolve reference to `Mezzanine::Threading::WorkUnit' for \ref command

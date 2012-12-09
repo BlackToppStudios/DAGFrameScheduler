@@ -46,24 +46,21 @@
 #include "workunit.h"
 
 /// @file
-/// @brief Contains an interface for a kind of WorkUnit that loads or writes a
+/// @brief Contains an interface for a kind of WorkUnit that loads or does other work even when the frame scheduler is paused.
 
 namespace Mezzanine
 {
     namespace Threading
     {
-        /// @todo Create this and document it.
+        /// @brief The interface for a WorkUnit that will keep running when the rest of the scheduler is paused.
         class MEZZ_LIB iAsynchronousWorkUnit : public DefaultWorkUnit
         {
             public:
-                virtual bool IsWorkDone() = 0;
-
-                //virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
+                /// @brief This will atomically allow any thread to check if this WorkUnit has completed its work.
+                /// @return This returns true if complete and false otherwise.
+                virtual RunningState IsWorkDone() = 0;
         };
 
-
-
-
-    }
-}
+    } // \Threading
+}// \Mezzanine
 #endif

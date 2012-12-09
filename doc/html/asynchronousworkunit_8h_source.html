@@ -134,25 +134,24 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00046"></a>00046 <span class="preprocessor">#include &quot;<a class="code" href="workunit_8h.html" title="This file has the defintion of the workunit.">workunit.h</a>&quot;</span>
 <a name="l00047"></a>00047 <span class="comment"></span>
 <a name="l00048"></a>00048 <span class="comment">/// @file</span>
-<a name="l00049"></a>00049 <span class="comment">/// @brief Contains an interface for a kind of WorkUnit that loads or writes a</span>
+<a name="l00049"></a>00049 <span class="comment">/// @brief Contains an interface for a kind of WorkUnit that loads or does other work even when the frame scheduler is paused.</span>
 <a name="l00050"></a>00050 <span class="comment"></span>
 <a name="l00051"></a>00051 <span class="keyword">namespace </span>Mezzanine
 <a name="l00052"></a>00052 {
 <a name="l00053"></a>00053     <span class="keyword">namespace </span>Threading
 <a name="l00054"></a>00054     {<span class="comment"></span>
-<a name="l00055"></a>00055 <span class="comment">        /// @todo Create this and document it.</span>
-<a name="l00056"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html">00056</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousWorkUnit.html">AsynchronousWorkUnit</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">WorkUnit</a>
+<a name="l00055"></a>00055 <span class="comment">        /// @brief The interface for a WorkUnit that will keep running when the rest of the scheduler is paused.</span>
+<a name="l00056"></a><a class="code" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html">00056</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html" title="The interface for a WorkUnit that will keep running when the rest of the scheduler is paused...">iAsynchronousWorkUnit</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">DefaultWorkUnit</a>
 <a name="l00057"></a>00057         {
-<a name="l00058"></a>00058             <span class="keyword">public</span>:
-<a name="l00059"></a>00059                 <span class="keyword">virtual</span> <span class="keywordtype">bool</span> IsWorkDone() = 0;
-<a name="l00060"></a>00060 
-<a name="l00061"></a>00061                 <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage) = 0;
-<a name="l00062"></a>00062 
+<a name="l00058"></a>00058             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00059"></a>00059 <span class="comment">                /// @brief This will atomically allow any thread to check if this WorkUnit has completed its work.</span>
+<a name="l00060"></a>00060 <span class="comment">                /// @return This returns true if complete and false otherwise.</span>
+<a name="l00061"></a>00061 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> IsWorkDone() = 0;
+<a name="l00062"></a>00062         };
 <a name="l00063"></a>00063 
-<a name="l00064"></a>00064         };
-<a name="l00065"></a>00065     }
-<a name="l00066"></a>00066 }
-<a name="l00067"></a>00067 <span class="preprocessor">#endif</span>
+<a name="l00064"></a>00064     } <span class="comment">// \Threading</span>
+<a name="l00065"></a>00065 }<span class="comment">// \Mezzanine</span>
+<a name="l00066"></a>00066 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -169,6 +168,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 6 2012 19:21:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Dec 9 2012 12:23:10 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>
