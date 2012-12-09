@@ -55,6 +55,7 @@
 #include <map>
 #include <algorithm>
 #include <cctype>
+#include <iomanip>
 
 #include "pugixml.h" // Not needed for regular operation of the library, just needed for tests.
 
@@ -1105,6 +1106,20 @@ ostream& operator<< (ostream& out, RestartMetric Lhs)
     return out;
 }
 
+/// @brief Converts anything streamable to anything streamable Mezzanine::String
+/// @details Used in @ref ThreadRestart
+/// @param Datum the item to convert
+/// @return a string containing the lexographically casted data
+template <typename To, typename From>
+To ToWhatever(From Datum)
+{
+    stringstream Converter;
+    Converter << Datum;
+    To Results;
+    Converter >> Results;
+    return Results;
+}
+
 /// @brief The 'threadrestart' Test. A smoke test for the monopoly
 void ThreadRestart()
 {
@@ -1199,10 +1214,13 @@ void ThreadRestart()
             }
         }
 
-        cout << "Was A complete before B started: " << (AEnd<=BStart) << endl; // This relies  on lexigraphical ordering matching numeric ordering
-        ThrowOnFalse(AEnd<=BStart,"Was A complete before B started");
-        cout << "Was A complete before C started: " << (AEnd<=CStart) << endl; // if it doesn't then these numbers need to be converted.
-        ThrowOnFalse(AEnd<=CStart,"Was A complete before C started");
+        cout << "The timer cannot resolve times less then: " << GetTimeStampResolution() << endl;
+        cout << "Was A complete before B started: " << (ToWhatever<MaxInt>(AEnd)<=ToWhatever<MaxInt>(BStart)+GetTimeStampResolution()) << endl;
+        cout << "Was A complete before B started if the clock resolution could cause error: " << (ToWhatever<MaxInt>(AEnd)<=(ToWhatever<MaxInt>(BStart)+GetTimeStampResolution())) << endl;
+        ThrowOnFalse((ToWhatever<MaxInt>(AEnd)<=(ToWhatever<MaxInt>(BStart)+GetTimeStampResolution())),"Was A complete before B started");
+        cout << "Was A complete before C started: " << (ToWhatever<MaxInt>(AEnd)<=ToWhatever<MaxInt>(CStart)) << endl;
+        cout << "Was A complete before C started if the clock resolution could cause error: " << (ToWhatever<MaxInt>(AEnd)<=(ToWhatever<MaxInt>(CStart)+GetTimeStampResolution())) << endl;
+        ThrowOnFalse((ToWhatever<MaxInt>(AEnd)<=(ToWhatever<MaxInt>(CStart)+GetTimeStampResolution())),"Was A complete before C started");
         cout << "Were B and C run in different threads: " << (BThread!=CThread) << endl;
         ThrowOnFalse(BThread!=CThread,"Were B and C run in different threads");
     #else
@@ -1648,12 +1666,36 @@ void BarrierTest()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // Testing Asynchronous Workunit synchronization primitive
 
+/// @brief Create a string suitable for output that converts IO in bytes and time in  microseconds to easily human readable text
+String GetPerfString(double IOSize, double Duration)
+{
+    stringstream Maker;
+    Maker << fixed << showpoint << setprecision(2);
+    vector<String> Terms;
+    Terms.push_back(" Bytes/sec");
+    Terms.push_back(" KB/sec");
+    Terms.push_back(" MB/sec");
+    Terms.push_back(" GB/sec");
+    Terms.push_back(" TB/sec");
+    Whole WhichTerm = 0;
+
+    IOSize = IOSize/Duration * double(1000000); // convert to bytes/sec
+
+    while(1024<IOSize && 4!=WhichTerm)
+    {
+        WhichTerm++;
+        IOSize/=1024;
+    }
+    Maker << IOSize << Terms[WhichTerm];
+    return Maker.str();
+}
+
 /// @brief The 'async' Test. A smoke test for the monopoly
 void Async()
 {
-    cout << "Creating three files that might take up to 5 seconds to write." << endl;
-    MaxInt MaxTime = 5000000;
-    Whole MaxFileWrites = 1000000;
+    cout << "Creating three files that might take up to a whole seconds to write." << endl;
+    MaxInt MaxTime = 1000000;
+    Whole MaxFileWrites = 100000;
     Whole CurrentCount = 0;
     MaxInt TimeStarted = GetTimeStamp();
 
@@ -1667,14 +1709,21 @@ void Async()
     ofstream File3a(Files[2].c_str());
     while(GetTimeStamp()<TimeStarted+MaxTime && CurrentCount<MaxFileWrites)
     {
+        CurrentCount++;
         File1a.write("Packets1Packets2Packets3", 24);
         File2a.write("01", 2);
         File3a.write("-", 1);
     }
+    Whole Duration = GetTimeStamp()-TimeStarted;
+    Whole WriteSize = 27*CurrentCount;
+    String PerfString(GetPerfString(WriteSize,Duration));
     File1a.close();
     File2a.close();
     File3a.close();
-    cout << "Creating file took " << GetTimeStamp()-TimeStarted << " microseconds " << endl;
+    cout << fixed << showpoint << setprecision(2);
+    cout << "Creating files took " << Duration << " microseconds " << endl;
+    cout << "A total of " << WriteSize << " Bytes were written or " << PerfString << endl;
+
     cout << "Creating an AsynchronousFileLoadWorkUnit to load the contents of these files." << endl;
     AsynchronousFileLoadWorkUnit Testable;
     Testable.BeginLoading(Files);
@@ -1685,17 +1734,24 @@ void Async()
     while(Complete!=Testable.IsWorkDone())
     {
         Testable.DoWork(AResource);
-        ThrowOnFalse(GetTimeStamp()<TimeStarted+MaxTime*5,"Reading the file took more than 5 times as long writing the files");
+        ThrowOnFalse(GetTimeStamp()<TimeStarted+MaxTime*20,"Reading the file took more than 20 times as long writing the files");
     }
-    cout << "Reading file took " << GetTimeStamp()-TimeStarted << " microseconds " << endl;
+    Duration = GetTimeStamp()-TimeStarted;
+    Whole ReadSize = Testable.GetFile(0)->Size+Testable.GetFile(1)->Size+Testable.GetFile(2)->Size;
+    PerfString = GetPerfString(ReadSize,Duration);
+    cout << "Reading file took " << Duration << " microseconds " << endl;
+    cout << "A total of " << ReadSize << " Bytes were read or " << PerfString << endl;
 
-    cout << "The files have been loaded performing a basic consistency check." << endl;
+
+    cout << "The files have been loaded. performing a basic consistency check." << endl;
+    ThrowOnFalse( ReadSize == WriteSize  ,"Wrote and Read different amounts, what is going on");
     ThrowOnFalse(Testable.GetFile(0)->Size>0,"First file is too short");
     ThrowOnFalse(Testable.GetFile(0)->Data[0]=='P' ,"First file is wrong");
-    ThrowOnFalse(Testable.GetFile(0)->Size>0,"Second file is too short");
+    ThrowOnFalse(Testable.GetFile(1)->Size>0,"Second file is too short");
     ThrowOnFalse(Testable.GetFile(1)->Data[0]=='0' ,"Second file is wrong");
-    ThrowOnFalse(Testable.GetFile(0)->Size>0,"Third file is too short");
+    ThrowOnFalse(Testable.GetFile(2)->Size>0,"Third file is too short");
     ThrowOnFalse(Testable.GetFile(2)->Data[0]=='-' ,"Third file is wrong");
+    cout << "Files seem at least superficially consistent, trunctating files on disk to conserve space." << endl;
 
     ofstream File1b(Files[0].c_str());
     ofstream File2b(Files[1].c_str());

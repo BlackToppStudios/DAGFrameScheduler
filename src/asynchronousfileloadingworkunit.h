@@ -57,7 +57,7 @@ namespace Mezzanine
         /// @endcond
 
         /// @brief A simple in memory representation of a file in memory.
-        class RawFile
+        class MEZZ_LIB RawFile
         {                
             public:
                 /// @brief How big is the File in bytes?

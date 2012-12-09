@@ -225,7 +225,7 @@ namespace Mezzanine
 
         void FrameScheduler::RemoveWorkUnit(iWorkUnit *LessWork)
         {
-            /*WorkUnitsAffinity.erase
+            WorkUnitsAffinity.erase
                         (
                             std::remove(
                                     WorkUnitsAffinity.begin(),
@@ -233,7 +233,7 @@ namespace Mezzanine
                                     LessWork->GetSortingKey(*this)
                                     )
                         );
-            WorkUnitsMain.erase
+           WorkUnitsMain.erase
                         (
                             std::remove(
                                     WorkUnitsMain.begin(),
@@ -241,15 +241,15 @@ namespace Mezzanine
                                     LessWork->GetSortingKey(*this)
                                     )
                         );
-            Monopolies.erase
+           Monopolies.erase
                         (
                             std::remove(
                                     Monopolies.begin(),
                                     Monopolies.end(),
-                                    LessWork->GetSortingKey(*this)
+                                    LessWork
                                     )
                         );
-        */}
+        }
 
         Whole FrameScheduler::GetDependentCountOf(iWorkUnit* Work, bool UsedCached)
         {

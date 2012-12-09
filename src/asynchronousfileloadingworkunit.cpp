@@ -71,7 +71,7 @@ namespace Mezzanine
                 std::ifstream File(CurrentFileName->c_str(), std::ios::binary | std::ios::ate);
                 if (File)
                 {
-                    Whole FileLength = File.tellg();
+                    MaxInt FileLength = File.tellg();
                     File.seekg(0,std::ios::beg);
 
                     RawFile* Loading;

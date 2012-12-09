@@ -80,6 +80,9 @@ namespace Mezzanine
             }
             */
         }
+
+        bool WorkUnitKey::operator ==(const WorkUnitKey &rhs) const
+            { return Unit == rhs.Unit; }
     }
 }
 #endif

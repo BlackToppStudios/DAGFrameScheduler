@@ -11,13 +11,15 @@ This is licensed under the GPL v3 license as per the file 'LICENSE'.
 	The contents of the 'tests' folder are required only for verifying the library works.
 
 	The 'doc' folder contains further licensing details, technical documentation and notes BTS developers may a have left.
-	Technical docs derived from the source code is located in 'doc/html', see 'index.html'
+	Technical docs derived from the source code are located in 'doc/html', see 'index.html'
 	The Doxygen configuration resides in 'doc/doxyfiles'
 
 
  -- NEWS --
 	Dec 9, 2012
 		Added an example Asynchronous File loading workunit that seems to perform near the peak capacity of the hardware I tested it on. Also a little bit of documentation cleanup.
+		I fixed an issue with removing workunits from the framescheduler, but this functionality currently has no test.
+		Again, I compile one multiple compilers (gcc, mingw, vs2010) ensuring that all tests pass and no warnings are produced.
 
 	Dec 7, 2012
 		Removed friendships between WorkUnit and FrameScheduler (Some core algorithm classes keep this though).

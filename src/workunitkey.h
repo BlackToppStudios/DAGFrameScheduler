@@ -102,6 +102,11 @@ namespace Mezzanine
                 /// identically.
                 /// @return True if the left hand WorkUnit should be prioritized ahead of the right hand work unit.
                 virtual bool operator< (const WorkUnitKey& rhs ) const;
+
+                /// @brief Does this key point to the Same work unit as another?
+                /// @param rhs The other key
+                /// @return true If the both keys are for the same unit, other parameters are ignored.
+                virtual bool operator== (const WorkUnitKey& rhs ) const;
         };
 		
 		
