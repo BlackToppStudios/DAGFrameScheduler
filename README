@@ -16,6 +16,11 @@ This is licensed under the GPL v3 license as per the file 'LICENSE'.
 
 
  -- NEWS --
+	Dec 13, 2012
+		I reimplemented parts of the algorithm allowing for the creation of an option that enables or disables thread creation each frame. This uses two Barriers to performs synchronizations twice during the a frame. In theory on systems with atomic operations this should be faster, and on system without it should be slower, but my testing has not been so conlusive.
+		Grouped CMake Options.
+		Updated doxygen docs. I also added somerandom scriblings and notes I have written to the docs folder.
+
 	Dec 9, 2012
 		Added an example Asynchronous File loading workunit that seems to perform near the peak capacity of the hardware I tested it on. Also a little bit of documentation cleanup.
 		I fixed an issue with removing workunits from the framescheduler, but this functionality currently has no test.
