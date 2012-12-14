@@ -138,24 +138,28 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00050"></a>00050 {
 <a name="l00051"></a>00051     <span class="keyword">namespace </span>Threading
 <a name="l00052"></a>00052     {
-<a name="l00053"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a74b2bd31737f65fcaddd90c8fa12cc33">00053</a>         <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a74b2bd31737f65fcaddd90c8fa12cc33" title="Constructor.">Barrier::Barrier</a> (<a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> SynchThreadCount) : ThreadGoal (SynchThreadCount), ThreadCurrent (0) {}
+<a name="l00053"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a74b2bd31737f65fcaddd90c8fa12cc33">00053</a>         <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a74b2bd31737f65fcaddd90c8fa12cc33" title="Constructor.">Barrier::Barrier</a> (<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> SynchThreadCount) : ThreadGoal (SynchThreadCount), ThreadCurrent (0) {}
 <a name="l00054"></a>00054 
-<a name="l00055"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a40e63340ba02ffabb45f34a0f891cc02">00055</a>         <span class="keywordtype">bool</span> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a40e63340ba02ffabb45f34a0f891cc02" title="Wait until all threads reach this point.">Barrier::Wait</a>()
+<a name="l00055"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a40e63340ba02ffabb45f34a0f891cc02">00055</a>         <span class="keywordtype">bool</span> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a40e63340ba02ffabb45f34a0f891cc02" title="Wait until the specified number of threads reach this point.">Barrier::Wait</a>()
 <a name="l00056"></a>00056         {
-<a name="l00057"></a>00057             <span class="keywordflow">if</span> (<a class="code" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d" title="Increments a value in a way guaranteed to not lose any atomic increments.">AtomicAdd</a>(&amp;<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads.">ThreadCurrent</a>,1) == <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>)
+<a name="l00057"></a>00057             <span class="keywordflow">if</span> (<a class="code" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d" title="Increments a value in a way guaranteed to not lose any atomic increments.">AtomicAdd</a>(&amp;<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads currently waiting.">ThreadCurrent</a>,1) == <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>)
 <a name="l00058"></a>00058             {
-<a name="l00059"></a>00059                 <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads.">ThreadCurrent</a> = 0;
+<a name="l00059"></a>00059                 <span class="keywordflow">while</span>(0!=<a class="code" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b" title="Atomically Compares And Swaps a 32 bit value.">AtomicCompareAndSwap32</a>(&amp;<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads currently waiting.">ThreadCurrent</a>,<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>,0));
 <a name="l00060"></a>00060                 <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00061"></a>00061             }
 <a name="l00062"></a>00062             <span class="keywordflow">else</span>
 <a name="l00063"></a>00063             {
-<a name="l00064"></a>00064                 <span class="keywordflow">while</span> (<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads.">ThreadCurrent</a> != <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a> &amp;&amp; <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads.">ThreadCurrent</a>!=0); <span class="comment">// intentionally spinning</span>
-<a name="l00065"></a>00065                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00066"></a>00066             }
-<a name="l00067"></a>00067         }
-<a name="l00068"></a>00068     } <span class="comment">// \Threading namespace</span>
-<a name="l00069"></a>00069 } <span class="comment">// \Mezzanine namespace</span>
-<a name="l00070"></a>00070 <span class="preprocessor">#endif</span>
+<a name="l00064"></a>00064                 <span class="keywordflow">while</span> (<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads currently waiting.">ThreadCurrent</a> &lt; <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a> &amp;&amp; <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads currently waiting.">ThreadCurrent</a> != 0); <span class="comment">// intentionally spinning</span>
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066                 <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00067"></a>00067             }
+<a name="l00068"></a>00068         }
+<a name="l00069"></a>00069 
+<a name="l00070"></a><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a077153111c459ddb9703fa5898f69a1f">00070</a>         <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a077153111c459ddb9703fa5898f69a1f" title="Set the Thread count Atomically.">Barrier::SetThreadSyncCount</a>(<a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> NewCount)
+<a name="l00071"></a>00071             { <span class="keywordflow">while</span>(<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>!=<a class="code" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b" title="Atomically Compares And Swaps a 32 bit value.">AtomicCompareAndSwap32</a>(&amp;<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>,<a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>,NewCount)); }
+<a name="l00072"></a>00072     } <span class="comment">// \Threading namespace</span>
+<a name="l00073"></a>00073 } <span class="comment">// \Mezzanine namespace</span>
+<a name="l00074"></a>00074 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -172,6 +176,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 9 2012 12:23:10 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 13 2012 22:57:18 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

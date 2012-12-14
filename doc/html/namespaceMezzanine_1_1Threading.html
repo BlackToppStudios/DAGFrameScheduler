@@ -133,11 +133,11 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1mutex.html">mutex</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A cross-platform abstraction of the OS's mutex.  <a href="classMezzanine_1_1Threading_1_1mutex.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html">RawFile</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple in memory representation of a file in memory.  <a href="classMezzanine_1_1Threading_1_1RawFile.html#details">More...</a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A simple in memory representation of a file.  <a href="classMezzanine_1_1Threading_1_1RawFile.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1thread.html">thread</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A small wrapper around the system thread.  <a href="classMezzanine_1_1Threading_1_1thread.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A threadspecific collection of double-buffered and algorithm specific resources.  <a href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#details">More...</a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A thread specific collection of double-buffered and algorithm specific resources.  <a href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores data about a single work unit so that it can easily be sorted.  <a href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
@@ -150,20 +150,18 @@ typedef <a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResourc
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d">AtomicAdd</a> (<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> Value)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments a value in a way guaranteed to not lose any atomic increments.  <a href="#a7d13f167b7b993e5c5cabe560ac42f8d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#aca7e126ea9fce31b5ceb278e6b82c55e">AtomicCompareAndSwap</a> (<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;OldValue, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;NewValue)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a value.  <a href="#aca7e126ea9fce31b5ceb278e6b82c55e"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c">ThreadLoading</a> (void *WU)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An Internal helper function for the <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">AsynchronousFileLoadWorkUnit</a>.  <a href="#ad1ce7d1f48645a637bd5ffd8c692279c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b">AtomicCompareAndSwap32</a> (<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;OldValue, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;NewValue)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a 32 bit value.  <a href="#a176b8e4ae356f3bfb7630c4819fa021b"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b25e77bc7d4377570b358c9bd8c6e04"></a><!-- doxytag: member="Mezzanine::Threading::DBRInvalid" ref="a2b25e77bc7d4377570b358c9bd8c6e04" args="" -->
-static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a2b25e77bc7d4377570b358c9bd8c6e04">DBRInvalid</a> = 10000000</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Double buffered resources are identified by Wholes which are their type ID, This number identifies an invalid entry. <br/></td></tr>
+static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a2b25e77bc7d4377570b358c9bd8c6e04">DBRInvalid</a> = 10000000</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Double buffered resources are identified by a <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> which is their type ID, This number identifies an invalid entry. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abc50da1ff1d766b8f17d2f177146ce7f"></a><!-- doxytag: member="Mezzanine::Threading::DBRLogger" ref="abc50da1ff1d766b8f17d2f177146ce7f" args="" -->
-static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f">DBRLogger</a> = 0</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Double buffered resources are identified by Wholes which are their type ID, This number identifies logging. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a">DBRUser</a> = 1</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Double buffered resources are identified by Wholes which are their type ID, All System Type IDs will be less than this ammount.  <a href="#a9364be5ef71a75a55dc01302ec5be41a"></a><br/></td></tr>
+static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f">DBRLogger</a> = 0</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Double buffered resources are identified by a <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> which is their type ID, This number identifies logging. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a">DBRUser</a> = 1</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Double buffered resources are identified by a <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> which is their type ID, All System Type IDs will be less than this amount.  <a href="#a9364be5ef71a75a55dc01302ec5be41a"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This is where game specific threading algorithms and a minimalistic subset of the std threading library a held. </p>
@@ -204,16 +202,16 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The newly incremented value. This is not always *VariableToChange+Value. If another thread attempted and atomic operation on this at the same time the result could be the new value pointed to by VariableToChange plus Value. </dd></dl>
 
-<p>Definition at line <a class="el" href="atomicoperations_8cpp_source.html#l00065">65</a> of file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
+<p>Definition at line <a class="el" href="atomicoperations_8cpp_source.html#l00072">72</a> of file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="aca7e126ea9fce31b5ceb278e6b82c55e"></a><!-- doxytag: member="Mezzanine::Threading::AtomicCompareAndSwap" ref="aca7e126ea9fce31b5ceb278e6b82c55e" args="(Int32 *VariableToChange, const Int32 &amp;OldValue, const Int32 &amp;NewValue)" -->
+<a class="anchor" id="a176b8e4ae356f3bfb7630c4819fa021b"></a><!-- doxytag: member="Mezzanine::Threading::AtomicCompareAndSwap32" ref="a176b8e4ae356f3bfb7630c4819fa021b" args="(Int32 *VariableToChange, const Int32 &amp;OldValue, const Int32 &amp;NewValue)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> <a class="el" href="namespaceMezzanine_1_1Threading.html#aca7e126ea9fce31b5ceb278e6b82c55e">Mezzanine::Threading::AtomicCompareAndSwap</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> <a class="el" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b">Mezzanine::Threading::AtomicCompareAndSwap32</a> </td>
           <td>(</td>
           <td class="paramtype">Int32 *&#160;</td>
           <td class="paramname"><em>VariableToChange</em>, </td>
@@ -239,7 +237,7 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </div>
 <div class="memdoc">
 
-<p>Atomically Compares And Swaps a value. </p>
+<p>Atomically Compares And Swaps a 32 bit value. </p>
 <p>In such a way that this cannot be interupted by another thread this performs a number of steps. First, it compares the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue to the memory location VariableToChange points to. If they did not match, no work is performed except the dereferencing. In either case since VariableToChange has been derefenced the value stored before any exchange that might have occured is returned. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
@@ -251,33 +249,7 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>This always returns the value that was pointed to by VariableToChange immediately before this call. </dd></dl>
 
-<p>Definition at line <a class="el" href="atomicoperations_8cpp_source.html#l00055">55</a> of file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="ad1ce7d1f48645a637bd5ffd8c692279c"></a><!-- doxytag: member="Mezzanine::Threading::ThreadLoading" ref="ad1ce7d1f48645a637bd5ffd8c692279c" args="(void *WU)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void <a class="el" href="namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c">Mezzanine::Threading::ThreadLoading</a> </td>
-          <td>(</td>
-          <td class="paramtype">void *&#160;</td>
-          <td class="paramname"><em>WU</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>An Internal helper function for the <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">AsynchronousFileLoadWorkUnit</a>. </p>
-<p>0 </p>
-<dl class="params"><dt><b>Parameters:</b></dt><dd>
-  <table class="params">
-    <tr><td class="paramname">WU</td><td>a pointer to the data the the help function needs. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Definition at line <a class="el" href="atomicoperations_8cpp_source.html#l00053">53</a> of file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
 
 </div>
 </div>
@@ -287,13 +259,13 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a">Mezzanine::Threading::DBRUser</a> = 1<code> [static]</code></td>
+          <td class="memname">const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a">Mezzanine::Threading::DBRUser</a> = 1<code> [static]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Double buffered resources are identified by Wholes which are their type ID, All System Type IDs will be less than this ammount. </p>
+<p>Double buffered resources are identified by a <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> which is their type ID, All System Type IDs will be less than this amount. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>Do not use the value of this directly, it is subject to change. In code using this, use: <div class="fragment"><pre class="fragment"> <span class="keyword">const</span> <span class="keyword">static</span> whole FreshDBRType = BDRUser+YourValue; 
 </pre></div> </dd></dl>
 
@@ -317,6 +289,6 @@ static const <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 9 2012 12:23:11 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 13 2012 22:57:18 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

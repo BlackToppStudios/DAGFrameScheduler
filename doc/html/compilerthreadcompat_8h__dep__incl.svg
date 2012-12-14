@@ -197,7 +197,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node21 -->
 <g id="node62" class="node"><title>Node21</title>
-<a xlink:href="atomicoperations_8cpp.html" target="_top" xlink:title="The implemenation of Simple thread safe ways to check and change a specified variable atomically...">
+<a xlink:href="atomicoperations_8cpp.html" target="_top" xlink:title="The implementation of simple thread safe ways to check and change a specified variable atomically...">
 <polygon fill="white" stroke="black" points="1156.68,-361 1156.68,-383 1268.68,-383 1268.68,-361 1156.68,-361"/>
 <text text-anchor="middle" x="1212.68" y="-370" font-family="FreeSans" font-size="10.00">atomicoperations.cpp</text>
 </a>
@@ -257,7 +257,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node4 -->
 <g id="node7" class="node"><title>Node4</title>
-<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit and helper classes and functions.">
+<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro...">
 <polygon fill="white" stroke="black" points="29.6808,-61 29.6808,-83 199.681,-83 199.681,-61 29.6808,-61"/>
 <text text-anchor="middle" x="114.681" y="-70" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.h</text>
 </a>
@@ -286,7 +286,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node5 -->
 <g id="node9" class="node"><title>Node5</title>
-<a xlink:href="asynchronousfileloadingworkunit_8cpp.html" target="_top" xlink:title="asynchronousfileloadingworkunit.cpp">
+<a xlink:href="asynchronousfileloadingworkunit_8cpp.html" target="_top" xlink:title="The implemtation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchr...">
 <polygon fill="white" stroke="black" points="24.6808,-1 24.6808,-23 204.681,-23 204.681,-1 24.6808,-1"/>
 <text text-anchor="middle" x="114.681" y="-10" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.cpp</text>
 </a>

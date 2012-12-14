@@ -56,15 +56,19 @@ namespace Mezzanine
         {
             if (AtomicAdd(&ThreadCurrent,1) == ThreadGoal)
             {
-                ThreadCurrent = 0;
+                while(0!=AtomicCompareAndSwap32(&ThreadCurrent,ThreadGoal,0));
                 return true;
             }
             else
             {
-                while (ThreadCurrent != ThreadGoal && ThreadCurrent!=0); // intentionally spinning
+                while (ThreadCurrent < ThreadGoal && ThreadCurrent != 0); // intentionally spinning
+
                 return false;
             }
         }
+
+        void Barrier::SetThreadSyncCount(Int32 NewCount)
+            { while(ThreadGoal!=AtomicCompareAndSwap32(&ThreadGoal,ThreadGoal,NewCount)); }
     } // \Threading namespace
 } // \Mezzanine namespace
 #endif

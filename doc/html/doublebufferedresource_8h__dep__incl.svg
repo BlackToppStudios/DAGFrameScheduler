@@ -132,7 +132,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node3 -->
 <g id="node5" class="node"><title>Node3</title>
-<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit and helper classes and functions.">
+<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro...">
 <polygon fill="white" stroke="black" points="29.5831,-61 29.5831,-83 199.583,-83 199.583,-61 29.5831,-61"/>
 <text text-anchor="middle" x="114.583" y="-70" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.h</text>
 </a>
@@ -161,7 +161,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node4 -->
 <g id="node7" class="node"><title>Node4</title>
-<a xlink:href="asynchronousfileloadingworkunit_8cpp.html" target="_top" xlink:title="asynchronousfileloadingworkunit.cpp">
+<a xlink:href="asynchronousfileloadingworkunit_8cpp.html" target="_top" xlink:title="The implemtation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchr...">
 <polygon fill="white" stroke="black" points="24.5831,-1 24.5831,-23 204.583,-23 204.583,-1 24.5831,-1"/>
 <text text-anchor="middle" x="114.583" y="-10" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.cpp</text>
 </a>

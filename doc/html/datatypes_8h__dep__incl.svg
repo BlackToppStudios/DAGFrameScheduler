@@ -156,7 +156,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node20 -->
 <g id="node60" class="node"><title>Node20</title>
-<a xlink:href="atomicoperations_8cpp.html" target="_top" xlink:title="The implemenation of Simple thread safe ways to check and change a specified variable atomically...">
+<a xlink:href="atomicoperations_8cpp.html" target="_top" xlink:title="The implementation of simple thread safe ways to check and change a specified variable atomically...">
 <polygon fill="white" stroke="black" points="1205,-361 1205,-383 1317,-383 1317,-361 1205,-361"/>
 <text text-anchor="middle" x="1261" y="-370" font-family="FreeSans" font-size="10.00">atomicoperations.cpp</text>
 </a>
@@ -216,7 +216,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node3 -->
 <g id="node5" class="node"><title>Node3</title>
-<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit and helper classes and functions.">
+<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro...">
 <polygon fill="white" stroke="black" points="5,-61 5,-83 175,-83 175,-61 5,-61"/>
 <text text-anchor="middle" x="90" y="-70" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.h</text>
 </a>
@@ -245,7 +245,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node4 -->
 <g id="node7" class="node"><title>Node4</title>
-<a xlink:href="asynchronousfileloadingworkunit_8cpp.html" target="_top" xlink:title="asynchronousfileloadingworkunit.cpp">
+<a xlink:href="asynchronousfileloadingworkunit_8cpp.html" target="_top" xlink:title="The implemtation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchr...">
 <polygon fill="white" stroke="black" points="0,-1 0,-23 180,-23 180,-1 0,-1"/>
 <text text-anchor="middle" x="90" y="-10" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.cpp</text>
 </a>

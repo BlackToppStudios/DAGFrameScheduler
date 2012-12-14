@@ -91,9 +91,9 @@ namespace Mezzanine
 
 
     /// @brief Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most efficient unsigned type for math.
-    typedef uint32_t Whole;
+    typedef unsigned int Whole;
     /// @brief Integer is a signed integer. In general it will be the most efficient signed type for math.
-    typedef int32_t Integer;
+    typedef int Integer;
     /// @brief String will provide most of the functionality of std::string but could be implemented in a variety of ways to optimize it.
     typedef std::string String;
 

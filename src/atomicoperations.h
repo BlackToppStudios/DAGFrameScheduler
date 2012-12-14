@@ -50,7 +50,7 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @brief Atomically Compares And Swaps a value.
+        /// @brief Atomically Compares And Swaps a 32 bit value.
         /// @details In such a way that this cannot be interupted by another thread this performs a number of steps.
         /// First, it compares the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue
         /// to the memory location VariableToChange points to. If they did not match, no work is performed except the dereferencing.
@@ -60,8 +60,20 @@ namespace Mezzanine
         /// @param OldValue what is expected to be at the other end of VariableToChange
         /// @param NewValue The value to be written to VariableToChange if at the time the actual CPU instruction is executed OldValue Matches *VariableToChange.
         /// @return This always returns the value that was pointed to by VariableToChange immediately before this call.
-        Int32 MEZZ_LIB AtomicCompareAndSwap(Int32* VariableToChange, const Int32& OldValue, const Int32& NewValue);
-
+        Int32 MEZZ_LIB AtomicCompareAndSwap32(Int32* VariableToChange, const Int32& OldValue, const Int32& NewValue);
+/*
+        // @brief Atomically Compares And Swaps a 64 bit value.
+        // @details In such a way that this cannot be interupted by another thread this performs a number of steps.
+        // First, it compares the dereferenced value VariableToChange to OldValue. Then if they match it writes NewValue
+        // to the memory location VariableToChange points to. If they did not match, no work is performed except the dereferencing.
+        // In either case since VariableToChange has been derefenced the value stored before any exchange that might have
+        // occured is returned.
+        // @param VariableToChange A pointer to the value to compare and if it matches OldValue Atomically change.
+        // @param OldValue what is expected to be at the other end of VariableToChange
+        // @param NewValue The value to be written to VariableToChange if at the time the actual CPU instruction is executed OldValue Matches *VariableToChange.
+        // @return This always returns the value that was pointed to by VariableToChange immediately before this call.
+        Int64 MEZZ_LIB AtomicCompareAndSwap64(Int64* VariableToChange, const Int64& OldValue, const Int64& NewValue);
+*/
         /// @brief Increments a value in a way guaranteed to not lose any atomic increments.
         /// @param VariableToChange A pointer to the 32 bit integer to increment by the amount specified
         /// @param Value The amount to increment the VariableToChange by.

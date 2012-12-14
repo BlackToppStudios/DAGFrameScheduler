@@ -125,10 +125,10 @@ namespace Mezzanine
         RunningState DefaultWorkUnit::TakeOwnerShip()
         {
             if(!IsEveryDependencyComplete())
-                    { return NotStarted; }
+                { return NotStarted; }
 
-            if(NotStarted ==  AtomicCompareAndSwap(&CurrentRunningState, NotStarted, Running) )
-                { return Starting;} // This is the only place a starting should be generated, and it is never placed in CurrentRunningState
+            if(NotStarted ==  AtomicCompareAndSwap32(&CurrentRunningState, NotStarted, Running) )
+                { return Starting; } // This is the only place a starting should be generated, and it is never placed in CurrentRunningState
 
             return NotStarted;
         }
@@ -137,6 +137,7 @@ namespace Mezzanine
             { return (RunningState)CurrentRunningState; } // This only works because we set all of in RunningState to be unsigned.
 
         void DefaultWorkUnit::PrepareForNextFrame()
+            //{ while(CurrentRunningState!=AtomicCompareAndSwap(&CurrentRunningState,CurrentRunningState,NotStarted)); }
             { CurrentRunningState=NotStarted; }
 
         /////////////////////////////////////////////////////////////////////////////////////////////

@@ -57,7 +57,7 @@ namespace Mezzanine
         {
             public:
                 /// @brief This will atomically allow any thread to check if this WorkUnit has completed its work.
-                /// @return This returns true if complete and false otherwise.
+                /// @return This returns a @ref RunningState indicating the current status of the asynchronous work.
                 virtual RunningState IsWorkDone() = 0;
         };
 

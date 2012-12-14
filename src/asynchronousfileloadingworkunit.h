@@ -44,36 +44,37 @@
 #include "asynchronousworkunit.h"
 
 /// @file
-/// @brief The declaration of the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit" and helper classes and functions.
-
+/// @brief The declaration of the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit" a workunit that loads a listing of files asynchronously.
 namespace Mezzanine
 {
     namespace Threading
     {
         /// @cond 0
+
         /// @brief An Internal helper function for the @ref AsynchronousFileLoadWorkUnit
-        /// @param WU a pointer to the data the the help function needs.
+        /// @details there is a 1 to 1 relationship between this function and its associated @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit".
+        /// This is the function run in another thread to allow loading asynchrously.
+        /// @param WU A pointer to the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit" that is goes t
         void ThreadLoading(void* WU);
+
         /// @endcond
 
-        /// @brief A simple in memory representation of a file in memory.
+        /// @brief A simple in memory representation of a file.
         class MEZZ_LIB RawFile
         {                
             public:
-                /// @brief How big is the File in bytes?
+                /// @brief How big is the file in bytes?
                 MaxInt Size;
 
                 /// @brief A pointer to a block of memory as it was loaded raw from the file.
                 UInt8* Data;
 
                 /// @brief Constructor
-                /// @details Allocates space of the passed in size. In the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit"
+                /// @details Allocates space of the amount passed. In the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit"
                 /// this is the size of the file to be loaded.
                 /// @param Size_ The size of the buffer to allocate.
                 RawFile(MaxInt Size_) : Size(Size_)
-                {
-                    Data = new UInt8[Size_];
-                }
+                    { Data = new UInt8[Size_]; }
 
                 /// @brief De-allocates the memory for the file, this make deleting Data a bad idea.
                 ~RawFile()
@@ -93,7 +94,7 @@ namespace Mezzanine
 
         /// @brief This is intended to load files asynchronously and continue doing so whether or not other the @ref FrameScheduler is running or paused.
         /// @details The goal is to trigger lower level mechanisms to use DMA to load directly without CPU intervention. In some operating systems this
-        /// is handled in the standard library, and in others special mechanisms must be used to make this happen. The current state of this allows
+        /// is handled in the standard library, and in otherS special mechanisms must be used to make this happen. The current state of this allows
         /// testing to determine how good automatic mechanisms work.
         class MEZZ_LIB AsynchronousFileLoadWorkUnit : public iAsynchronousWorkUnit
         {
@@ -106,7 +107,7 @@ namespace Mezzanine
                 /// @brief The names of the files this batch of loading will retrieve
                 std::vector<String> Filenames;
 
-                /// @brief Used to make referencing the the type of @ref FilesRaw easier
+                /// @brief Used to make referencing the the type of @ref FilesRaw easier.
                 typedef std::vector<
                             RawFile*
                         > RawFileContainer;
@@ -130,7 +131,7 @@ namespace Mezzanine
                 /// @brief Begin loading a list of files based on their names.
                 /// @param Filenames_ A vector of Strings that correspond to either relative or absolute filenames that will be loaded.
                 /// @details When the file is loaded its contents are place in a @ref RawFile and can be retrieved with @ref GetFile(String)
-                /// or @ref GetFile(whole) member functions.
+                /// or @ref GetFile(Whole) member functions.
                 /// @n @n
                 /// This starts by clearing the previous list of loaded files. If that list has not been deleted then
                 /// this will cause a memory leak. Use @ref DeleteLoadedFiles to clear this list or copy all the pointers elsewhere before
@@ -138,11 +139,11 @@ namespace Mezzanine
                 /// the last call of this method.
                 /// @n @n
                 /// If this is called while it is loading files the behavior is undefined, most likely it will crash or fail silently, either
-                /// way no good can come from it. Use @ref IsWorkDone to see if the work is @ref RunningState::Complete "Complete". If the work is complete
+                /// way no good can come from it. Use @ref IsWorkDone to see if the work is @ref Complete "Complete". If the work is complete
                 /// then this can be called after any call to this class's @ref DoWork member function.
                 /// @warning This can leak memory if not used in conjuction with memory management or @ref DeleteLoadedFiles and read the details.
                 /// @warning This can fail in horrible ways if called twice without waiting for the first call to finish, use @ref IsWorkDone and read the details.
-                /// @return This returns @ref RunningState::Starting "Starting" when loading is successful started and who knows what it returns if it fails, likely a segfault or gpf.
+                /// @return This returns @ref Starting "Starting" when loading is successful started and who knows what it returns if it fails, likely a segfault or GPF.
                 RunningState BeginLoading(std::vector<String> Filenames_);
 
                 /// @brief This checks if Asynchronous loading thread has completed and if so it cleans up that threads resources.
@@ -150,27 +151,27 @@ namespace Mezzanine
 
                 /// @brief Get the @ref RunningState of the file loading
                 /// @details This can return any @ref RunningState and the meaning applies to the current state of the files being loaded.
-                ///     - @ref RunningState::NotStarted "NotStarted" - Either @ref BeginLoading has not been called or it has been called and has not progressed to the point where it sets this. Not usefu for making logical decisions without knowledge of how many times @ref BeginLoading has been called.
-                ///     - @ref RunningState::Starting "Starting" - This is returned from @ref BeginLoading is success conditions, and is never returned from this.
-                ///     - @ref RunningState::Running "Running" - This means that the loading thread has started but not yet completed.
-                ///     - @ref RunningState::Complete "Complete" - The loading thread has completed its work, and new loading can definitely begin after the next call to @ref DoWork method.
-                ///     - @ref RunningState::Failed "Failed" - If somekind of recoverable error occured, this will be returned, there are no guarantees about the state of the loaded files.
+                ///     - @ref NotStarted "NotStarted" - Either @ref BeginLoading has not been called or it has been called and has not progressed to the point where it sets this. Not usefu for making logical decisions without knowledge of how many times @ref BeginLoading has been called.
+                ///     - @ref Starting "Starting" - This is returned from @ref BeginLoading is success conditions, and is never returned from this.
+                ///     - @ref Running "Running" - This means that the loading thread has started but not yet completed.
+                ///     - @ref Complete "Complete" - The loading thread has completed its work, and new loading can definitely begin after the next call to @ref DoWork method.
+                ///     - @ref Failed "Failed" - If somekind of recoverable error occured, this will be returned, there are no guarantees about the state of the loaded files.
                 /// @return The running state as of the time of this call, though it is subjecct to immediate thread unsafe change.
                 virtual RunningState IsWorkDone();
 
                 /// @brief Get a loaded @ref RawFile in linear time.
-                /// @details This searches the list of files names to determine the index of the filename then calls @ref GetFile(whole)
-                /// @param Filename the file to retrieve.
+                /// @details This searches the list of files names to determine the index of the filename then calls @ref GetFile(Whole) "GetFile(Whole)".
+                /// @param FileName the file to retrieve.
                 /// @return A pointer to a @ref RawFile or 0 if it cannot be retrieved for any reason.
                 RawFile* GetFile(String FileName);
 
                 /// @brief Retrieve a pointer to file contents in constant time.
-                /// @param Index The index of the File Name when it was passed into @ref BeginLoading
+                /// @param Index The index of the File Name when it was passed into @ref BeginLoading "BeginLoading".
                 /// @return This returns a null pointer if the correct @ref RawFile cannot be retrieved, otherwise a pointer to the @ref RawFile with index corresponing to the index of a passed in filename is returned.
-                /// @warning Do no call this before @ref IsWorkDone() indicates that the work is @ref Complete . These memory addresses are subject to change until all loading is complete.
+                /// @warning Do no call this before @ref IsWorkDone() indicates that the work is @ref Complete "Complete". These memory addresses are subject to change until all loading is complete.
                 RawFile* GetFile(Whole Index);
 
-                /// @brief This deletes all the loaded files from the last call of @ref BeginLoading .
+                /// @brief This deletes all the loaded files from the last call of @ref BeginLoading "BeginLoading" .
                 void DeleteLoadedFiles();
         };
     } // \Threading

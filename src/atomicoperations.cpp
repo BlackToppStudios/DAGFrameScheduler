@@ -44,15 +44,13 @@
 #include "datatypes.h"
 
 /// @file
-/// @brief The implemenation of Simple thread safe ways to check and change a specified variable atomically.
+/// @brief The implementation of simple thread safe ways to check and change a specified variable atomically.
 
 namespace Mezzanine
 {
     namespace Threading
     {
-
-
-        Int32 AtomicCompareAndSwap(Int32* VariableToChange, const Int32& OldValue, const Int32& NewValue)
+        Int32 AtomicCompareAndSwap32(Int32* VariableToChange, const Int32& OldValue, const Int32& NewValue)
         {
             #ifdef _MEZZ_THREAD_WIN32_
                 return InterlockedCompareExchange((long*)VariableToChange,NewValue,OldValue);
@@ -60,10 +58,21 @@ namespace Mezzanine
                 return __sync_val_compare_and_swap(VariableToChange,OldValue,NewValue);
             #endif
         }
-
-
+/*
+        // This does not appear to be supported on winxp
+        Int64 AtomicCompareAndSwap64(Int64* VariableToChange, const Int64& OldValue, const Int64& NewValue)
+        {
+            #ifdef _MEZZ_THREAD_WIN32_
+                return InterlockedCompareExchange64((long long*)VariableToChange,NewValue,OldValue);
+            #else
+                return __sync_val_compare_and_swap(VariableToChange,OldValue,NewValue);
+            #endif
+        }
+*/
         Int32 AtomicAdd(Int32* VariableToChange, Int32 Value)
         {
+            //while (*VariableToChange!=AtomicCompareAndSwap(VariableToChange,*VariableToChange,*VariableToChange+Value));
+            //return *VariableToChange;
             #ifdef _MEZZ_THREAD_WIN32_
                 return InterlockedExchangeAdd((long*)VariableToChange, Value);
             #else

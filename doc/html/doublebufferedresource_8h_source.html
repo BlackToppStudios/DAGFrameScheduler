@@ -142,20 +142,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00054"></a>00054 {
 <a name="l00055"></a>00055     <span class="keyword">namespace </span>Threading
 <a name="l00056"></a>00056     {<span class="comment"></span>
-<a name="l00057"></a>00057 <span class="comment">        /// @brief Double buffered resources are identified by Wholes which are their type ID, This number identifies an invalid entry.</span>
-<a name="l00058"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#a2b25e77bc7d4377570b358c9bd8c6e04">00058</a> <span class="comment"></span>        <span class="keyword">const</span> <span class="keyword">static</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#a2b25e77bc7d4377570b358c9bd8c6e04" title="Double buffered resources are identified by Wholes which are their type ID, This number identifies an...">DBRInvalid</a> = 10000000;
+<a name="l00057"></a>00057 <span class="comment">        /// @brief Double buffered resources are identified by a @ref Whole which is their type ID, This number identifies an invalid entry.</span>
+<a name="l00058"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#a2b25e77bc7d4377570b358c9bd8c6e04">00058</a> <span class="comment"></span>        <span class="keyword">const</span> <span class="keyword">static</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#a2b25e77bc7d4377570b358c9bd8c6e04" title="Double buffered resources are identified by a Whole which is their type ID, This number identifies an...">DBRInvalid</a> = 10000000;
 <a name="l00059"></a>00059 <span class="comment"></span>
-<a name="l00060"></a>00060 <span class="comment">        /// @brief Double buffered resources are identified by Wholes which are their type ID, This number identifies logging.</span>
-<a name="l00061"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f">00061</a> <span class="comment"></span>        <span class="keyword">const</span> <span class="keyword">static</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f" title="Double buffered resources are identified by Wholes which are their type ID, This number identifies lo...">DBRLogger</a> = 0;
+<a name="l00060"></a>00060 <span class="comment">        /// @brief Double buffered resources are identified by a @ref Whole which is their type ID, This number identifies logging.</span>
+<a name="l00061"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f">00061</a> <span class="comment"></span>        <span class="keyword">const</span> <span class="keyword">static</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f" title="Double buffered resources are identified by a Whole which is their type ID, This number identifies lo...">DBRLogger</a> = 0;
 <a name="l00062"></a>00062 <span class="comment"></span>
-<a name="l00063"></a>00063 <span class="comment">        /// @brief Double buffered resources are identified by Wholes which are their type ID, All System Type IDs will be less than this ammount.</span>
+<a name="l00063"></a>00063 <span class="comment">        /// @brief Double buffered resources are identified by a @ref Whole which is their type ID, All System Type IDs will be less than this amount.</span>
 <a name="l00064"></a>00064 <span class="comment">        /// @note Do not use the value of this directly, it is subject to change. In code using this, use: @code const static whole FreshDBRType = BDRUser+YourValue; @endcode</span>
-<a name="l00065"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a">00065</a> <span class="comment"></span>        <span class="keyword">const</span> <span class="keyword">static</span> <a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a" title="Double buffered resources are identified by Wholes which are their type ID, All System Type IDs will ...">DBRUser</a> = 1;
+<a name="l00065"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a">00065</a> <span class="comment"></span>        <span class="keyword">const</span> <span class="keyword">static</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#a9364be5ef71a75a55dc01302ec5be41a" title="Double buffered resources are identified by a Whole which is their type ID, All System Type IDs will ...">DBRUser</a> = 1;
 <a name="l00066"></a>00066 <span class="comment"></span>
 <a name="l00067"></a>00067 <span class="comment">        /// @brief A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanisms.</span>
-<a name="l00068"></a>00068 <span class="comment">        /// @details It is intended for a @ref Mezzanine::Threading::WorkUnit &quot;WorkUnit&quot; like the</span>
+<a name="l00068"></a>00068 <span class="comment">        /// @details It is intended for a @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; like the</span>
 <a name="l00069"></a>00069 <span class="comment">        /// @ref Mezzanine::Threading::LogBufferSwapper &quot;LogBufferSwapper&quot; that just swaps buffers. This work unit should be</span>
-<a name="l00070"></a>00070 <span class="comment">        /// configured depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict</span>
+<a name="l00070"></a>00070 <span class="comment">        /// configured to depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict</span>
 <a name="l00071"></a>00071 <span class="comment">        /// with any other double buffered resources).</span>
 <a name="l00072"></a>00072 <span class="comment"></span>        <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;
 <a name="l00073"></a><a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html">00073</a>         <span class="keyword">class </span><a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedResource</a>
@@ -189,7 +189,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00101"></a>00101 <span class="comment">                /// @brief A constructor that takes ownership of the the resources passed.</span>
 <a name="l00102"></a>00102 <span class="comment">                /// @param Current This will be used as the first resource for threads to use.</span>
 <a name="l00103"></a>00103 <span class="comment">                /// @param Buffer This will wait for the other thread</span>
-<a name="l00104"></a><a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a3b8495b0cf2dc75678de681deccdccf9">00104</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a2047b7dee35eef0c761c43cb03a20929" title="A Constructor that creates default versions of the resources.">DoubleBufferedResource</a>(T* Current, T* Buffer)
+<a name="l00104"></a><a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a3b8495b0cf2dc75678de681deccdccf9">00104</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a2047b7dee35eef0c761c43cb03a20929" title="A Constructor that creates default versions of the resources.">DoubleBufferedResource</a>(T* Current, T* Buffer) : ResourceA(Current), ResourceB(Buffer)
 <a name="l00105"></a>00105                     {}
 <a name="l00106"></a>00106 <span class="comment"></span>
 <a name="l00107"></a>00107 <span class="comment">                /// @brief Make the buffered resource the active and vice versa.</span>
@@ -224,76 +224,73 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00136"></a>00136                 }
 <a name="l00137"></a>00137         };
 <a name="l00138"></a>00138 
-<a name="l00139"></a>00139         <span class="comment">// @brief DoubleBufferedResources has a default instantiation to be used for logging.</span>
-<a name="l00140"></a>00140         <span class="comment">//template class DoubleBufferedResource&lt;std::stringstream&gt;;</span>
-<a name="l00141"></a>00141         <span class="comment">// As much as I like having the explicit declaration some compilers (Mac OSX gcc 4.2.1) decide to allocate resources here and that usually results in duplicate symbols during linking</span>
-<a name="l00142"></a>00142 <span class="comment"></span>
-<a name="l00143"></a>00143 <span class="comment">        /// @brief A better default name for the Default Logger instance.</span>
-<a name="l00144"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#af29e296febda9ded4f29ae72a9d37f31">00144</a> <span class="comment"></span>        <span class="keyword">typedef</span> <a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedResource&lt;std::stringstream&gt;</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#af29e296febda9ded4f29ae72a9d37f31" title="A better default name for the Default Logger instance.">DoubleBufferedLogger</a>;
-<a name="l00145"></a>00145 
-<a name="l00146"></a>00146         <span class="comment">// forward declarations</span>
-<a name="l00147"></a>00147         <span class="keyword">class </span><a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>;
-<a name="l00148"></a>00148 <span class="comment"></span>
-<a name="l00149"></a>00149 <span class="comment">        /// @brief A threadspecific collection of double-buffered and algorithm specific resources.</span>
-<a name="l00150"></a>00150 <span class="comment">        /// @details This class is intended to be expanded with derived class if it is to return extra resource types</span>
-<a name="l00151"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">00151</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>
-<a name="l00152"></a>00152         {
-<a name="l00153"></a>00153             <span class="keyword">private</span>:<span class="comment"></span>
-<a name="l00154"></a>00154 <span class="comment">                /// @brief Stores the pounters to the thread local resources.</span>
-<a name="l00155"></a>00155 <span class="comment"></span>                std::vector&lt;ConvertiblePointer&gt; ThreadResources;
-<a name="l00156"></a>00156 <span class="comment"></span>
-<a name="l00157"></a>00157 <span class="comment">                /// @brief A pointer to the FrameScheduler that this belongs to.</span>
-<a name="l00158"></a>00158 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>* Scheduler;
-<a name="l00159"></a>00159 
-<a name="l00160"></a>00160             <span class="keyword">public</span>:<span class="comment"></span>
-<a name="l00161"></a>00161 <span class="comment">                /// @brief A constructor that automatically creates the resources it supports</span>
-<a name="l00162"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a62bae0dcb2f299d187dbe156a04f8af5">00162</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>(<a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>* Scheduler_) :
-<a name="l00163"></a>00163                     Scheduler(Scheduler_)
-<a name="l00164"></a>00164                 {
-<a name="l00165"></a>00165                     this-&gt;ThreadResources.push_back((<a class="code" href="namespaceMezzanine.html#a07cdc0ed7dd61212948bc2fcb2b1c129" title="A type that any pointer can be converted to and back from, and insures after the conversion back it w...">ConvertiblePointer</a>)<span class="keyword">new</span> <a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedLogger</a>);  <span class="comment">// must comes first so it lands in spot 0</span>
-<a name="l00166"></a>00166                 }
-<a name="l00167"></a>00167 <span class="comment"></span>
-<a name="l00168"></a>00168 <span class="comment">                /// @brief Get a Specific kind of double buffered resource.</span>
-<a name="l00169"></a>00169 <span class="comment">                /// @param ResourceID The ID the resource provided.</span>
-<a name="l00170"></a>00170 <span class="comment">                /// @return A reference to the resource if it exists, or undefined behavior and maybe an exception if it doesn&#39;t.</span>
-<a name="l00171"></a>00171 <span class="comment"></span>                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> DBR&gt;
-<a name="l00172"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493">00172</a>                 DBR&amp; GetResource(<a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> ResourceID)
-<a name="l00173"></a>00173                     { <span class="keywordflow">return</span> *((DBR*)(this-&gt;ThreadResources[ResourceID])); }
-<a name="l00174"></a>00174 <span class="comment"></span>
-<a name="l00175"></a>00175 <span class="comment">                /// @brief Get the usable logger for this thread specific resource</span>
-<a name="l00176"></a>00176 <span class="comment">                /// @return a reference to the logger.</span>
-<a name="l00177"></a>00177 <span class="comment">                /// @note A function like this should be provide for any other resources added to derived versions of this class. This encourages getting resources for this thread, and not providing a method to get the commitable resource gently discourages doing it unless its really required.</span>
-<a name="l00178"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a947c267feef339a148c215bdbf7692b8">00178</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd" title="In case we ever replace the stringstream with another class, this will allow us to swap it out...">Logger</a>&amp; GetUsableLogger()
-<a name="l00179"></a>00179                     { <span class="keywordflow">return</span> GetResource&lt;DoubleBufferedLogger&gt;(<a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f" title="Double buffered resources are identified by Wholes which are their type ID, This number identifies lo...">DBRLogger</a>).GetUsable(); }
-<a name="l00180"></a>00180 <span class="comment"></span>
-<a name="l00181"></a>00181 <span class="comment">                /// @brief Get a pointer to the FrameScheduler that owns this resource.</span>
-<a name="l00182"></a>00182 <span class="comment">                /// @details This is not required very often by application code, but is used</span>
-<a name="l00183"></a>00183 <span class="comment">                /// in places in the Scheduler library. This is primarily used to gain access</span>
-<a name="l00184"></a>00184 <span class="comment">                /// to commitable parts of double buffered resources. This pointer does not</span>
-<a name="l00185"></a>00185 <span class="comment">                /// confer ownership.</span>
-<a name="l00186"></a>00186 <span class="comment">                /// @return A pointer to the FrameScheduler that owns this resource.</span>
-<a name="l00187"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a613ddf6ec3fdd5fbc5295479237a883a">00187</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>* GetFrameScheduler()
-<a name="l00188"></a>00188                     { <span class="keywordflow">return</span> Scheduler; }
-<a name="l00189"></a>00189 <span class="comment"></span>
-<a name="l00190"></a>00190 <span class="comment">                /// @brief Deletes all the resources.</span>
-<a name="l00191"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#ac2a2a2f4b4ee086944f04057df016d46">00191</a> <span class="comment"></span>                <span class="keyword">virtual</span> ~<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>()
-<a name="l00192"></a>00192                 {
-<a name="l00193"></a>00193                     <span class="keyword">delete</span> (<a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedLogger</a>*)this-&gt;ThreadResources[<a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f" title="Double buffered resources are identified by Wholes which are their type ID, This number identifies lo...">DBRLogger</a>]; <span class="comment">// Items must wind up in the correct spot in the vector for this to work. Be careful to get the order right if you overload this.</span>
-<a name="l00194"></a>00194                 }
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196         };
-<a name="l00197"></a>00197 <span class="comment"></span>
-<a name="l00198"></a>00198 <span class="comment">        /// @brief Use this to change the default resource type.</span>
-<a name="l00199"></a>00199 <span class="comment">        /// @details use &quot;DefaultThreadSpecificStorage::Type&quot; as Type to instantiate an instance of whatever type this is.</span>
-<a name="l00200"></a><a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html">00200</a> <span class="comment"></span>        <span class="keyword">struct </span><a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html" title="Use this to change the default resource type.">DefaultThreadSpecificStorage</a>
-<a name="l00201"></a>00201         {<span class="comment"></span>
-<a name="l00202"></a>00202 <span class="comment">            /// @brief A single point at which all the thread specific resources can be changed.</span>
-<a name="l00203"></a><a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">00203</a> <span class="comment"></span>            <span class="keyword">typedef</span> <a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a> <a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab" title="A single point at which all the thread specific resources can be changed.">Type</a>;
-<a name="l00204"></a>00204         };
-<a name="l00205"></a>00205 
-<a name="l00206"></a>00206     }
-<a name="l00207"></a>00207 }
-<a name="l00208"></a>00208 <span class="preprocessor">#endif</span>
+<a name="l00139"></a>00139 <span class="comment"></span>
+<a name="l00140"></a>00140 <span class="comment">        /// @brief A better default name for the Default Logger instance.</span>
+<a name="l00141"></a><a class="code" href="namespaceMezzanine_1_1Threading.html#af29e296febda9ded4f29ae72a9d37f31">00141</a> <span class="comment"></span>        <span class="keyword">typedef</span> <a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedResource&lt;std::stringstream&gt;</a> <a class="code" href="namespaceMezzanine_1_1Threading.html#af29e296febda9ded4f29ae72a9d37f31" title="A better default name for the Default Logger instance.">DoubleBufferedLogger</a>;
+<a name="l00142"></a>00142 
+<a name="l00143"></a>00143         <span class="comment">// forward declarations</span>
+<a name="l00144"></a>00144         <span class="keyword">class </span><a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>;
+<a name="l00145"></a>00145 <span class="comment"></span>
+<a name="l00146"></a>00146 <span class="comment">        /// @brief A thread specific collection of double-buffered and algorithm specific resources.</span>
+<a name="l00147"></a>00147 <span class="comment">        /// @details This class is intended to be expanded via derived classes if it is to return extra resource types</span>
+<a name="l00148"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">00148</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>
+<a name="l00149"></a>00149         {
+<a name="l00150"></a>00150             <span class="keyword">private</span>:<span class="comment"></span>
+<a name="l00151"></a>00151 <span class="comment">                /// @brief Stores the pounters to the thread local resources.</span>
+<a name="l00152"></a>00152 <span class="comment"></span>                std::vector&lt;ConvertiblePointer&gt; ThreadResources;
+<a name="l00153"></a>00153 <span class="comment"></span>
+<a name="l00154"></a>00154 <span class="comment">                /// @brief A pointer to the FrameScheduler that this belongs to.</span>
+<a name="l00155"></a>00155 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>* Scheduler;
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00158"></a>00158 <span class="comment">                /// @brief A constructor that automatically creates the resources it supports</span>
+<a name="l00159"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a62bae0dcb2f299d187dbe156a04f8af5">00159</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>(<a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>* Scheduler_) :
+<a name="l00160"></a>00160                     Scheduler(Scheduler_)
+<a name="l00161"></a>00161                 {
+<a name="l00162"></a>00162                     this-&gt;ThreadResources.push_back((<a class="code" href="namespaceMezzanine.html#a07cdc0ed7dd61212948bc2fcb2b1c129" title="A type that any pointer can be converted to and back from, and insures after the conversion back it w...">ConvertiblePointer</a>)<span class="keyword">new</span> <a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedLogger</a>);  <span class="comment">// must comes first so it lands in spot 0</span>
+<a name="l00163"></a>00163                 }
+<a name="l00164"></a>00164 <span class="comment"></span>
+<a name="l00165"></a>00165 <span class="comment">                /// @brief Get a Specific kind of double buffered resource.</span>
+<a name="l00166"></a>00166 <span class="comment">                /// @param ResourceID The ID the resource provided.</span>
+<a name="l00167"></a>00167 <span class="comment">                /// @return A reference to the resource if it exists, or undefined behavior and maybe an exception if it doesn&#39;t.</span>
+<a name="l00168"></a>00168 <span class="comment"></span>                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> DBR&gt;
+<a name="l00169"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493">00169</a>                 DBR&amp; GetResource(<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> ResourceID)
+<a name="l00170"></a>00170                     { <span class="keywordflow">return</span> *((DBR*)(this-&gt;ThreadResources[ResourceID])); }
+<a name="l00171"></a>00171 <span class="comment"></span>
+<a name="l00172"></a>00172 <span class="comment">                /// @brief Get the usable logger for this thread specific resource</span>
+<a name="l00173"></a>00173 <span class="comment">                /// @return A reference to the logger.</span>
+<a name="l00174"></a>00174 <span class="comment">                /// @note A function like this should be provided for any other resources added to derived versions of this class. This encourages getting resources for this thread, and not providing a method to get the commitable resource gently discourages doing it unless its really required.</span>
+<a name="l00175"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a947c267feef339a148c215bdbf7692b8">00175</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd" title="In case we ever replace the stringstream with another class, this will allow us to swap it out...">Logger</a>&amp; GetUsableLogger()
+<a name="l00176"></a>00176                     { <span class="keywordflow">return</span> GetResource&lt;DoubleBufferedLogger&gt;(<a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f" title="Double buffered resources are identified by a Whole which is their type ID, This number identifies lo...">DBRLogger</a>).GetUsable(); }
+<a name="l00177"></a>00177 <span class="comment"></span>
+<a name="l00178"></a>00178 <span class="comment">                /// @brief Get a pointer to the FrameScheduler that owns this resource.</span>
+<a name="l00179"></a>00179 <span class="comment">                /// @details This is not required very often by application code, but is used</span>
+<a name="l00180"></a>00180 <span class="comment">                /// in places in this scheduler library. This is primarily used to gain access</span>
+<a name="l00181"></a>00181 <span class="comment">                /// to commitable parts of double buffered resources. This pointer does not</span>
+<a name="l00182"></a>00182 <span class="comment">                /// confer ownership.</span>
+<a name="l00183"></a>00183 <span class="comment">                /// @return A pointer to the FrameScheduler that owns this resource.</span>
+<a name="l00184"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a613ddf6ec3fdd5fbc5295479237a883a">00184</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>* GetFrameScheduler()
+<a name="l00185"></a>00185                     { <span class="keywordflow">return</span> Scheduler; }
+<a name="l00186"></a>00186 <span class="comment"></span>
+<a name="l00187"></a>00187 <span class="comment">                /// @brief Deletes all the resources.</span>
+<a name="l00188"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#ac2a2a2f4b4ee086944f04057df016d46">00188</a> <span class="comment"></span>                <span class="keyword">virtual</span> ~<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a>()
+<a name="l00189"></a>00189                 {
+<a name="l00190"></a>00190                     <span class="keyword">delete</span> (<a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedLogger</a>*)this-&gt;ThreadResources[<a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f" title="Double buffered resources are identified by a Whole which is their type ID, This number identifies lo...">DBRLogger</a>]; <span class="comment">// Items must wind up in the correct spot in the vector for this to work. Be careful to get the order right if you overload this.</span>
+<a name="l00191"></a>00191                 }
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193         };
+<a name="l00194"></a>00194 <span class="comment"></span>
+<a name="l00195"></a>00195 <span class="comment">        /// @brief Use this to change the default resource type.</span>
+<a name="l00196"></a>00196 <span class="comment">        /// @details use &quot;DefaultThreadSpecificStorage::Type&quot; as Type to instantiate an instance of whatever type this is.</span>
+<a name="l00197"></a><a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html">00197</a> <span class="comment"></span>        <span class="keyword">struct </span><a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html" title="Use this to change the default resource type.">DefaultThreadSpecificStorage</a>
+<a name="l00198"></a>00198         {<span class="comment"></span>
+<a name="l00199"></a>00199 <span class="comment">            /// @brief A single point at which all the thread specific resources can be changed.</span>
+<a name="l00200"></a><a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">00200</a> <span class="comment"></span>            <span class="keyword">typedef</span> <a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a> <a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab" title="A single point at which all the thread specific resources can be changed.">Type</a>;
+<a name="l00201"></a>00201         };
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203     }
+<a name="l00204"></a>00204 }
+<a name="l00205"></a>00205 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -310,6 +307,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 9 2012 12:23:10 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 13 2012 22:57:18 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

@@ -56,20 +56,24 @@ namespace Mezzanine
         class MEZZ_LIB Barrier
         {
             protected:
-                /// @brief The number of threads to have wait
+                /// @brief The number of threads to have wait.
                 Int32 ThreadGoal;
 
-                /// @brief The number of threads
+                /// @brief The number of threads currently waiting.
                 Int32 ThreadCurrent;
 
             public:
                 /// @brief Constructor
-                /// @param SynchThreadCount The amount of threads that this should wait for. If 0 is passed the behavior is undefined.
+                /// @param SynchThreadCount The amount of threads that this should wait for. If 0 is passed all threads waiting advance.
                 Barrier (Whole SynchThreadCount);
 
-                /// @brief Wait until all threads reach this point.
-                /// @return The last thread to reach this point gets true, the others are return false.
+                /// @brief Wait until the specified number of threads reach this point.
+                /// @return The last thread to reach this point gets true, the others are returned false.
                 bool Wait ();
+
+                /// @brief Set the Thread count Atomically
+                /// @param NewCount The new amounf threads to sync
+                void SetThreadSyncCount(Int32 NewCount);
 
         };
     }

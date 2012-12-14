@@ -48,7 +48,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node2 -->
 <g id="node3" class="node"><title>Node2</title>
-<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit and helper classes and functions.">
+<a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro...">
 <polygon fill="white" stroke="black" points="370,-481 370,-503 540,-503 540,-481 370,-481"/>
 <text text-anchor="middle" x="455" y="-490" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.h</text>
 </a>

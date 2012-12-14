@@ -83,7 +83,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node5 -->
 <g id="node8" class="node"><title>Node5</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" target="_top" xlink:title="A threadspecific collection of double&#45;buffered and algorithm specific resources.">
+<a xlink:href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" target="_top" xlink:title="A thread specific collection of double&#45;buffered and algorithm specific resources.">
 <polygon fill="white" stroke="black" points="990,-186 990,-208 1220,-208 1220,-186 990,-186"/>
 <text text-anchor="middle" x="1105" y="-195" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::ThreadSpecificStorage</text>
 </a>

@@ -56,6 +56,8 @@
 #include <algorithm>
 #include <cctype>
 #include <iomanip>
+#include <limits>
+#include <numeric>
 
 #include "pugixml.h" // Not needed for regular operation of the library, just needed for tests.
 
@@ -212,6 +214,7 @@ void Sizes()
          << "vector<Whole>: " << sizeof(vector<Whole>) << endl
          << "vector<WorkUnit*>: " << sizeof(vector<Whole*>) << endl
          << "set<WorkUnit*>: " << sizeof(set<iWorkUnit*>) << endl
+         << "std::vector<WorkUnitKey>::reverse_iterator: " << sizeof(std::vector<WorkUnitKey>::reverse_iterator) << endl
          << "ostream*: " << sizeof(ostream*) << endl
          << "MaxInt: " << sizeof(MaxInt) << endl
          << "Whole: " << sizeof(Whole) << endl;
@@ -225,6 +228,20 @@ void Untestable()
          << "The current time in microseconds GetTimeStamp(): " << GetTimeStamp() << endl
          << "What is the smallest amount of time the clock can measure in microseconds GetTimeStampResolution(): " << GetTimeStampResolution() << endl
          << "Current Logical Processor Count GetCPUCount(): " << GetCPUCount() << endl
+         << "|Currently Compiled Threading model: "
+        #ifdef MEZZ_USEBARRIERSEACHFRAME
+            << "Barriers used to absolutely minimize thread creation." << endl
+        #else
+            << "Threads created and joined each frame." << endl
+        #endif
+            << "|Compilation Type: "
+        #ifdef MEZZ_DEBUG
+            << "Debug." << endl
+        #else
+            << "Release." << endl
+        #endif
+
+
 //         << "Cache size available before using RAM GetCacheSize(): " << GetCacheSize() << endl;
 //         << "Size of one entry in the fastest cache GetCachelineSize(): " << GetCachelineSize() << endl;
             ;
@@ -985,6 +1002,13 @@ set<String> CheckSchedulerLog(Mezzanine::Logger& Log, Whole TargetThreadCount_, 
         ThreadCount++;
         LogCommit = LogCommit.next_sibling("Thread");
     }
+    cout << "Log inspection results: " << endl
+         << "\t Found " << ThreadCount << " threads, expected " << TargetThreadCount_ << "." << endl
+         << "\t Found " << WorkUnitNames.size() << " total WorkUnits run with " << WorkUnitCount << " different names and expected " << WorkUnitCount_ << "." << endl
+         << "WorkUnit Names:" << endl;
+    //sort(WorkUnitNames.begin(),WorkUnitNames.end());
+    for(set<String>::iterator Iter=WorkUnitNames.begin(); Iter!=WorkUnitNames.end(); Iter++)
+        { cout << *Iter << "\t"; }
     ThrowOnFalse(ThreadCount==TargetThreadCount_, "Thread count wrong");
     ThrowOnFalse(WorkUnitCount_==WorkUnitNames.size(),"Wrong number of Unique WorkUnit Names");
     ThrowOnFalse(WorkUnitCount_==WorkUnitCount,"Wrong number of WorkUnit Names");
@@ -1027,9 +1051,10 @@ void ThreadCreate()
     ThreadCreationTest1.DoOneFrame();
     Swapper2(SwapResource2);
     Agg2(SwapResource2);
-    CheckSchedulerLog(LogCache,1,4);
-    cout << "It ran correctly. Emitting log." << endl;
+    cout << "Emitting log:" << endl;
     cout << LogCache.str() << endl;
+    CheckSchedulerLog(LogCache,1,4);
+    cout << "It ran correctly." << endl;
     LogCache.str("");
 
     ThreadCreationTest1.SetThreadCount(2);
@@ -1038,9 +1063,10 @@ void ThreadCreate()
     ThreadCreationTest1.DoOneFrame();
     Swapper2(SwapResource2);
     Agg2(SwapResource2);
-    CheckSchedulerLog(LogCache,2,4);
-    cout << "It ran correctly. Emitting log." << endl;
+    cout << "Emitting log:" << endl;
     cout << LogCache.str() << endl;
+    CheckSchedulerLog(LogCache,2,4);
+    cout << "It ran correctly." << endl;
     LogCache.str("");
 
     ThreadCreationTest1.SetThreadCount(3);
@@ -1049,9 +1075,10 @@ void ThreadCreate()
     ThreadCreationTest1.DoOneFrame();
     Swapper2(SwapResource2);
     Agg2(SwapResource2);
-    CheckSchedulerLog(LogCache,3,4);
-    cout << "It ran correctly. Emitting log." << endl;
+    cout << "Emitting log:" << endl;
     cout << LogCache.str() << endl;
+    CheckSchedulerLog(LogCache,3,4);
+    cout << "It ran correctly." << endl;
     LogCache.str("");
 
     ThreadCreationTest1.SetThreadCount(4);
@@ -1060,11 +1087,13 @@ void ThreadCreate()
     ThreadCreationTest1.DoOneFrame();
     Swapper2(SwapResource2);
     Agg2(SwapResource2);
-    CheckSchedulerLog(LogCache,4,4);
-    cout << "It ran correctly. Emitting log." << endl;
+    cout << "Emitting log:" << endl;
     cout << LogCache.str() << endl;
+    CheckSchedulerLog(LogCache,4,4);
+    cout << "It ran correctly." << endl;
     LogCache.str("");
 
+    //Whole Work = 8;
     Whole Work = 1000;
     cout << endl << "Leaving thread count alone and adding " << Work << " WorkUnits to the test scheduler" << endl;
     cout << "Running One Frame." << endl;
@@ -1073,6 +1102,8 @@ void ThreadCreate()
     ThreadCreationTest1.DoOneFrame();
     Swapper2(SwapResource2);
     Agg2(SwapResource2);
+    //CheckSchedulerLog(LogCache,4,12);
+    //cout << LogCache.str() << endl;
     CheckSchedulerLog(LogCache,4,1004);
     cout << "It ran correctly." << endl;
     LogCache.str("");
@@ -1236,7 +1267,7 @@ void ThreadRestart()
 /// @brief The 'timing' Test. A smoke test for the monopoly
 void Timing()
 {
-    cout << "Creating a few Schedulers with only one work unit and testing a variety of framerates timing accuracies." << endl;
+    cout << "Creating a few Schedulers with work units and testing a variety of framerates timing accuracies." << endl;
     vector<Whole> Rates;
     Rates.push_back(10);
     Rates.push_back(25);
@@ -1276,7 +1307,7 @@ void Timing()
 /// @brief The 'performanceframes' Test. A smoke test for the monopoly
 void PerformanceFrames()
 {
-    cout << "Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: " << endl;
+    cout << "|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: " << endl;
     vector<Whole> Durations;
     Durations.push_back(10);
     Durations.push_back(25);
@@ -1323,7 +1354,17 @@ void PerformanceFrames()
     Durations.push_back(10000000);
     Durations.push_back(100000000);
 
-    BufferedRollingAverage<Whole> PerformanceTotals(Durations.size()*2); // happens to be skewed to later test results, just in case they all don't finish
+    Whole EmptyMaxFR = 0;
+    Whole EmptyMinFR = std::numeric_limits<Whole>::max();
+    std::vector<Whole> EmptyResults;
+
+    Whole OneMaxFR = 0;
+    Whole OneMinFR = std::numeric_limits<Whole>::max();
+    std::vector<Whole> OneResults;
+
+    Whole ChainMaxFR = 0;
+    Whole ChainMinFR = std::numeric_limits<Whole>::max();
+    std::vector<Whole> ChainResults;
 
     for(vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
     {
@@ -1338,7 +1379,11 @@ void PerformanceFrames()
         Whole TestLength = TimingTestEnd-TimingTestStart;
         Whole FrameRate = double(*Iter)/(double(TestLength)/double(1000000));
         cout << "  " << *Iter << " Empty Frames took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
-        PerformanceTotals.Insert(FrameRate);
+        if(FrameRate>EmptyMaxFR)
+            { EmptyMaxFR = FrameRate; }
+        if(FrameRate<EmptyMinFR)
+            { EmptyMinFR = FrameRate; }
+        EmptyResults.push_back(FrameRate);
         if(3000000<TestLength)
             { cout << "Single Test longer than three seconds, bailing from other performace tests" << endl; break; }
 
@@ -1352,7 +1397,11 @@ void PerformanceFrames()
         TestLength = TimingTestEnd-TimingTestStart;
         FrameRate = double(*Iter)/(double(TestLength)/double(1000000));
         cout << "  " << *Iter << " Single WorkUnit Frames took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
-        PerformanceTotals.Insert(FrameRate);
+        if(FrameRate>OneMaxFR)
+            { OneMaxFR = FrameRate; }
+        if(FrameRate<OneMinFR)
+            { OneMinFR = FrameRate; }
+        OneResults.push_back(FrameRate);
         if(3000000<TestLength)
             { cout << "Single Test longer than three seconds, bailing from other performace tests" << endl; break; }
 
@@ -1373,19 +1422,62 @@ void PerformanceFrames()
         TestLength = TimingTestEnd-TimingTestStart;
         FrameRate = double(*Iter)/(double(TestLength)/double(1000000));
         cout << "  " << *Iter << " Frames with the previous and an extra dependency set (A->B->C) took " << TestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
-        PerformanceTotals.Insert(FrameRate);
+        if(FrameRate>ChainMaxFR)
+            { ChainMaxFR = FrameRate; }
+        if(FrameRate<ChainMinFR)
+            { ChainMinFR = FrameRate; }
+        ChainResults.push_back(FrameRate);
         if(3000000<TestLength)
             { cout << "Single Test longer than three seconds, bailing from other performance tests" << endl; break; }
         cout << endl;
     }
-    cout << "Average FrameRate: " << PerformanceTotals.GetAverage() << endl;
+
+    std::vector<String> Output;
+    Output.push_back("|");
+    Output.push_back("Min");
+    Output.push_back("Mean");
+    Output.push_back("Max");
+    Output.push_back("|Empty");
+    Output.push_back(ToString(EmptyMinFR));
+    Output.push_back(ToString(std::accumulate<>(EmptyResults.begin(),EmptyResults.end(),0)/EmptyResults.size()));
+    Output.push_back(ToString(EmptyMaxFR));
+    Output.push_back("|One");
+    Output.push_back(ToString(OneMinFR));
+    Output.push_back(ToString(std::accumulate<>(OneResults.begin(),OneResults.end(),0)/OneResults.size()));
+    Output.push_back(ToString(OneMaxFR));
+    Output.push_back("|Chain");
+    Output.push_back(ToString(ChainMinFR));
+    Output.push_back(ToString(std::accumulate<>(ChainResults.begin(),ChainResults.end(),0)/ChainResults.size()));
+    Output.push_back(ToString(ChainMaxFR));
+
+    cout << "Scheduler timings for X frames in any time:" << endl;
+
+    Whole ColumnWidth=14;
+    Whole ColumnCount=4;
+    Whole WhichColumn=0;
+    String CurrentOutput;
+    for(std::vector<String>::iterator Iter=Output.begin(); Iter!=Output.end(); ++Iter)
+    {
+        if(!(WhichColumn % ColumnCount))
+        {
+            WhichColumn=0;
+            cout << endl << "  ";
+        }
+        WhichColumn++;
+
+
+        for(CurrentOutput = *Iter; CurrentOutput.size()<ColumnWidth; CurrentOutput += " ") {}
+        cout << CurrentOutput;
+    }
+    cout << endl << endl;
+
 }
 
 //PerformanceSeconds
 /// @brief The 'performanceseconds' Test. A smoke test for the monopoly
 void PerformanceSeconds()
 {
-    cout << "Testing the FrameScheduler setup with a framrate of 0 to see max performance over fixed length of time: " << endl;
+    cout << "|Testing the FrameScheduler setup with a framerate of 0 to see max performance over fixed length of time: " << endl;
     vector<Whole> Durations;
     Durations.push_back(10);
     Durations.push_back(100);
@@ -1395,7 +1487,17 @@ void PerformanceSeconds()
     Durations.push_back(1000000); // one second
     Durations.push_back(10000000);
 
-    BufferedRollingAverage<Whole> PerformanceTotals(Durations.size()*2); // happens to be skewed to later test results, just in case they all don't finish
+    Whole EmptyMaxFR = 0;
+    Whole EmptyMinFR = std::numeric_limits<Whole>::max();
+    std::vector<Whole> EmptyResults;
+
+    Whole OneMaxFR = 0;
+    Whole OneMinFR = std::numeric_limits<Whole>::max();
+    std::vector<Whole> OneResults;
+
+    Whole ChainMaxFR = 0;
+    Whole ChainMinFR = std::numeric_limits<Whole>::max();
+    std::vector<Whole> ChainResults;
 
     for(vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
     {
@@ -1407,14 +1509,18 @@ void PerformanceSeconds()
         MaxInt TimingTestEnd = TimingTestStart + *Iter;
         while(GetTimeStamp()<TimingTestEnd)
             { TimingTest1.DoOneFrame(); }
-        Whole FrameCount = TimingTest1.GetFrameCount();
         TimingTestEnd = GetTimeStamp();
+        Whole FrameCount = TimingTest1.GetFrameCount();
         Whole TimingTestLength = TimingTestEnd-TimingTestStart;
         Whole FrameRate = 0;
         if(FrameCount)
             { FrameRate = double(FrameCount) / (double(TimingTestLength)/double(1000000))  ; }
         cout << "  " << FrameCount << " Empty Frames took " << TimingTestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
-        PerformanceTotals.Insert(FrameRate);
+        if(FrameRate>EmptyMaxFR)
+            { EmptyMaxFR = FrameRate; }
+        if(FrameRate<EmptyMinFR)
+            { EmptyMinFR = FrameRate; }
+        EmptyResults.push_back(FrameRate);
 
         FrameScheduler TimingTest2(&LogCache,1);
         TimingTest2.SetFrameRate(0);
@@ -1426,12 +1532,17 @@ void PerformanceSeconds()
         while(GetTimeStamp()<TimingTestEnd)
             { TimingTest1.DoOneFrame(); }
         TimingTestEnd = GetTimeStamp();
+        FrameCount = TimingTest1.GetFrameCount();
         TimingTestLength = TimingTestEnd-TimingTestStart;
         FrameRate = 0;
         if(FrameCount)
             { FrameRate = double(FrameCount) / (double(TimingTestLength)/double(1000000))  ; }
         cout << "  " << FrameCount << " Single WorkUnit Frames took " << TimingTestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
-        PerformanceTotals.Insert(FrameRate);
+        if(FrameRate>OneMaxFR)
+            { OneMaxFR = FrameRate; }
+        if(FrameRate<OneMinFR)
+            { OneMinFR = FrameRate; }
+        OneResults.push_back(FrameRate);
 
         FrameScheduler TimingTest3(&LogCache,1);
         TimingTest3.SetFrameRate(0);
@@ -1453,15 +1564,58 @@ void PerformanceSeconds()
         while(GetTimeStamp()<TimingTestEnd)
             { TimingTest1.DoOneFrame(); }
         TimingTestEnd = GetTimeStamp();
+        FrameCount = TimingTest1.GetFrameCount();
         TimingTestLength = TimingTestEnd-TimingTestStart;
         FrameRate = 0;
         if(FrameCount)
             { FrameRate = double(FrameCount) / (double(TimingTestLength)/double(1000000))  ; }
         cout << "  " << FrameCount << " Frames with the previous and an extra dependency set (A->B->C) took " << TimingTestLength << " microseconds to run, which is " << FrameRate << " frames per second." << endl;
-        PerformanceTotals.Insert(FrameRate);
+        if(FrameRate>ChainMaxFR)
+            { ChainMaxFR = FrameRate; }
+        if(FrameRate<ChainMinFR)
+            { ChainMinFR = FrameRate; }
+        ChainResults.push_back(FrameRate);
         cout << endl;
     }
-    cout << "Average FrameRate: " << PerformanceTotals.GetAverage() << endl;
+    std::vector<String> Output;
+    Output.push_back("|");
+    Output.push_back("Min");
+    Output.push_back("Mean");
+    Output.push_back("Max");
+    Output.push_back("|Empty");
+    Output.push_back(ToString(EmptyMinFR));
+    Output.push_back(ToString(std::accumulate<>(EmptyResults.begin(),EmptyResults.end(),0)/EmptyResults.size()));
+    Output.push_back(ToString(EmptyMaxFR));
+    Output.push_back("|One");
+    Output.push_back(ToString(OneMinFR));
+    Output.push_back(ToString(std::accumulate<>(OneResults.begin(),OneResults.end(),0)/OneResults.size()));
+    Output.push_back(ToString(OneMaxFR));
+    Output.push_back("|Chain");
+    Output.push_back(ToString(ChainMinFR));
+    Output.push_back(ToString(std::accumulate<>(ChainResults.begin(),ChainResults.end(),0)/ChainResults.size()));
+    Output.push_back(ToString(ChainMaxFR));
+
+
+    cout << "Scheduler timings for X frames in any time:" << endl;
+
+    Whole ColumnWidth=14;
+    Whole ColumnCount=4;
+    Whole WhichColumn=0;
+    String CurrentOutput;
+    for(std::vector<String>::iterator Iter=Output.begin(); Iter!=Output.end(); ++Iter)
+    {
+        if(!(WhichColumn % ColumnCount))
+        {
+            WhichColumn=0;
+            cout << endl << "  ";
+        }
+        WhichColumn++;
+
+
+        for(CurrentOutput = *Iter; CurrentOutput.size()<ColumnWidth; CurrentOutput += " ") {}
+        cout << CurrentOutput;
+    }
+    cout << endl << endl;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////

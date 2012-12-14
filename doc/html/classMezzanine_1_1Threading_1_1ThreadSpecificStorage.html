@@ -93,7 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <!-- doxytag: class="Mezzanine::Threading::ThreadSpecificStorage" -->
-<p>A threadspecific collection of double-buffered and algorithm specific resources.  
+<p>A thread specific collection of double-buffered and algorithm specific resources.  
  <a href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>&gt;</code></p>
@@ -111,16 +111,16 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a613ddf6ec3fdd5fbc5295479237a883a">GetFrameScheduler</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> that owns this resource.  <a href="#a613ddf6ec3fdd5fbc5295479237a883a"></a><br/></td></tr>
 <tr><td class="memTemplParams" colspan="2">template&lt;typename DBR &gt; </td></tr>
-<tr><td class="memTemplItemLeft" align="right" valign="top">DBR &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493">GetResource</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> ResourceID)</td></tr>
+<tr><td class="memTemplItemLeft" align="right" valign="top">DBR &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493">GetResource</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> ResourceID)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a Specific kind of double buffered resource.  <a href="#a6cdaad6b28d0a207f26a65041f0b8493"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a947c267feef339a148c215bdbf7692b8">GetUsableLogger</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the usable logger for this thread specific resource.  <a href="#a947c267feef339a148c215bdbf7692b8"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>A threadspecific collection of double-buffered and algorithm specific resources. </p>
-<p>This class is intended to be expanded with derived class if it is to return extra resource types </p>
+<div class="textblock"><p>A thread specific collection of double-buffered and algorithm specific resources. </p>
+<p>This class is intended to be expanded via derived classes if it is to return extra resource types </p>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00151">151</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00148">148</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a613ddf6ec3fdd5fbc5295479237a883a"></a><!-- doxytag: member="Mezzanine::Threading::ThreadSpecificStorage::GetFrameScheduler" ref="a613ddf6ec3fdd5fbc5295479237a883a" args="()" -->
 <div class="memitem">
@@ -137,10 +137,10 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <div class="memdoc">
 
 <p>Get a pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> that owns this resource. </p>
-<p>This is not required very often by application code, but is used in places in the Scheduler library. This is primarily used to gain access to commitable parts of double buffered resources. This pointer does not confer ownership. </p>
+<p>This is not required very often by application code, but is used in places in this scheduler library. This is primarily used to gain access to commitable parts of double buffered resources. This pointer does not confer ownership. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> that owns this resource. </dd></dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00187">187</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00184">184</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -153,7 +153,7 @@ template&lt;typename DBR &gt; </div>
         <tr>
           <td class="memname">DBR&amp; <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493">Mezzanine::Threading::ThreadSpecificStorage::GetResource</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td>
           <td class="paramname"><em>ResourceID</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
@@ -170,7 +170,7 @@ template&lt;typename DBR &gt; </div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the resource if it exists, or undefined behavior and maybe an exception if it doesn't. </dd></dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00172">172</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00169">169</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -189,10 +189,10 @@ template&lt;typename DBR &gt; </div>
 <div class="memdoc">
 
 <p>Get the usable logger for this thread specific resource. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>a reference to the logger. </dd></dl>
-<dl class="note"><dt><b>Note:</b></dt><dd>A function like this should be provide for any other resources added to derived versions of this class. This encourages getting resources for this thread, and not providing a method to get the commitable resource gently discourages doing it unless its really required. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A reference to the logger. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>A function like this should be provided for any other resources added to derived versions of this class. This encourages getting resources for this thread, and not providing a method to get the commitable resource gently discourages doing it unless its really required. </dd></dl>
 
-<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00178">178</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
+<p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00175">175</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 
 </div>
 </div>
@@ -215,6 +215,6 @@ template&lt;typename DBR &gt; </div>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 9 2012 12:23:11 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 13 2012 22:57:19 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

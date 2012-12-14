@@ -46,6 +46,10 @@
 #include "thread.h"
 #include "workunitkey.h"
 #include "systemcalls.h"
+#ifdef MEZZ_USEBARRIERSEACHFRAME
+    #include "barrier.h"
+#endif
+
 
 #include <map>
 #include <set>
@@ -75,13 +79,13 @@ namespace Mezzanine
             protected:
                 /// @brief A collection of all the work units that are not Monopolies and do not have affinity for a given thread.
                 /// @details This stores a sorted listing(currently a vector) of @ref Mezzanine::Threading::WorkUnitKey "WorkUnitKey" instances.
-                /// These include just the metadata required for sorting @ref Mezzanine::Threading::WorkUnit "WorkUnit"s. Higher priority
-                /// @ref Mezzanine::Threading::WorkUnit "WorkUnit"s are higher/later in the collection. This is list is sorted by calls
+                /// These include just the metadata required for sorting @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s. Higher priority
+                /// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s are higher/later in the collection. This is list is sorted by calls
                 /// to @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsMain "SortWorkUnitsMain" or @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAll "SortWorkUnitsAll".
                 std::vector<WorkUnitKey> WorkUnitsMain;
 
-                /// @brief A collection of @ref Mezzanine::Threading::WorkUnit "WorkUnit"s that must be run on the main thread.
-                /// @details This is very similar to @ref WorkUnitsMain except that the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
+                /// @brief A collection of @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s that must be run on the main thread.
+                /// @details This is very similar to @ref WorkUnitsMain except that the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s
                 /// are only run in the main thread and are sorted by calls to @ref SortWorkUnitsAll or @ref SortWorkUnitsAffinity .
                 std::vector<WorkUnitKey> WorkUnitsAffinity;
 
@@ -113,6 +117,18 @@ namespace Mezzanine
                 /// @brief What time did the current Frame Start at.
                 MaxInt CurrentFrameStart;
 
+                #ifdef MEZZ_USEBARRIERSEACHFRAME
+            public:
+                /// @brief Used to synchronize the starting an stopping of all threads.
+                Barrier StartFrameSync;
+
+                Barrier EndFrameSync;
+
+                /// @brief When using barriers instead of thread creation for synchronization this is what tells the threads to end.
+                Int32 LastFrame;
+            protected:
+                #endif
+
                 /// @brief How many threads with this try to execute with in the next frame.
                 Whole CurrentThreadCount;
 
@@ -137,6 +153,8 @@ namespace Mezzanine
 
                 /// @brief Used when completing the work of a frame, to cleaning end the execution of the threads.
                 void JoinAllThreads();
+
+                void CleanUpThreads();
 
                 /// @brief Simply iterates over and deletes everything in Threads.
                 void DeleteThreads();
@@ -231,6 +249,10 @@ namespace Mezzanine
                 /// new WorkUnits are added.
                 virtual void DoOneFrame();
 
+                virtual void RunFramePreliminaryWork();
+                virtual void RunAllMonopolies();
+                virtual void RunMainThreadWork();
+
                 /// @brief Take any steps required to prepare all owned WorkUnits for execution next frame.
                 virtual void ResetAllWorkUnits();
 
@@ -275,8 +297,6 @@ namespace Mezzanine
                 /// @brief Set the Desired length of a frame in microseconds.
                 /// @param FrameLength The desired minimum length of the frame. Use 0 for no pause.
                 void SetFrameLength(Whole FrameLength);
-
-
         };
     }
 

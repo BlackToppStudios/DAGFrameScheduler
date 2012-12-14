@@ -73,15 +73,28 @@ namespace Mezzanine
             DefaultThreadSpecificStorage::Type& Storage = *((DefaultThreadSpecificStorage::Type*)ThreadStorage);
             FrameScheduler& FS = *(Storage.GetFrameScheduler());
             iWorkUnit* CurrentUnit;
-            do
+
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+            while(!FS.LastFrame)
             {
-                while( (CurrentUnit = FS.GetNextWorkUnit()) ) /// @todo needs to skip ahead a unit instead of spinning
+                FS.StartFrameSync.Wait(); // Syncs with Main thread in CreateThreads()
+                if(FS.LastFrame)
+                    { break; }
+            #endif
+
+                do
                 {
-                    if(Starting==CurrentUnit->TakeOwnerShip())
-                        { CurrentUnit->operator()(Storage); }
-                }
+                    while( (CurrentUnit = FS.GetNextWorkUnit()) ) /// @todo needs to skip ahead a unit instead of spinning
+                    {
+                        if(Starting==CurrentUnit->TakeOwnerShip())
+                            { CurrentUnit->operator()(Storage); }
+                    }
+                } while(!FS.AreAllWorkUnitsComplete());
+
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+                FS.EndFrameSync.Wait(); // Syncs with Main thread in JoinAllThreads()
             }
-            while(!FS.AreAllWorkUnitsComplete());
+            #endif
         }
 
         /// @brief This is the function that the main thread rungs.
@@ -101,7 +114,6 @@ namespace Mezzanine
             }
             while(!FS.AreAllWorkUnitsComplete());
         }
-
         /// @endcond
 
         // Protected Methods
@@ -110,17 +122,34 @@ namespace Mezzanine
 
         void FrameScheduler::CreateThreads()
         {
-            for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
-            {
-                if(Count+1>Resources.size())
-                    { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
-                Threads.push_back(new thread(ThreadWork, Resources[Count]));
-            }
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+                StartFrameSync.SetThreadSyncCount(CurrentThreadCount);
+                EndFrameSync.SetThreadSyncCount(CurrentThreadCount);
+                for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
+                {
+                    if(Count+1>Resources.size())
+                    {
+                        Resources.push_back(new DefaultThreadSpecificStorage::Type(this));
+                        Threads.push_back(new thread(ThreadWork, Resources[Count]));
+                    }
+                }
+                StartFrameSync.Wait();
+            #else
+                for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
+                {
+                    if(Count+1>Resources.size())
+                        { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
+                    Threads.push_back(new thread(ThreadWork, Resources[Count]));
+                }
+            #endif
             // Add the check for trying a different amount of frames here
         }
 
         void FrameScheduler::JoinAllThreads()
         {
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+            EndFrameSync.Wait();
+            #else
             for(std::vector<thread*>::iterator Iter=Threads.begin(); Iter!=Threads.end(); ++Iter)
             {
                 (*Iter)->join();
@@ -128,6 +157,18 @@ namespace Mezzanine
             }
             Threads.clear();
             Threads.reserve(CurrentThreadCount);
+            #endif
+        }
+
+        void FrameScheduler::CleanUpThreads()
+        {
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+            while(1!=AtomicCompareAndSwap32(&LastFrame,LastFrame,1));
+            StartFrameSync.SetThreadSyncCount(0);
+            EndFrameSync.SetThreadSyncCount(0); // Handle situations where Threads have not been created yet
+            #else
+            JoinAllThreads();
+            #endif
         }
 
         void FrameScheduler::DeleteThreads()
@@ -138,6 +179,7 @@ namespace Mezzanine
 
         void FrameScheduler::WaitUntilNextThread()
         {
+            FrameCount++;
             if(TargetFrameLength)
             {
                 /*Whole TargetFrameEnd = 1000000/TargetFrameRate + CurrentFrameStart;  // original Timing algorithm is usually about 8 milliseconds longer than 60 seconds on Sqeaky's workstation Mercury
@@ -185,6 +227,11 @@ namespace Mezzanine
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
             CurrentFrameStart(0),
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+            StartFrameSync(StartingThreadCount),
+            EndFrameSync(StartingThreadCount),
+            LastFrame(0),
+            #endif
 			CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
             TimingCostAllowance(0),
@@ -194,6 +241,11 @@ namespace Mezzanine
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
             CurrentFrameStart(0),
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+            StartFrameSync(StartingThreadCount),
+            EndFrameSync(StartingThreadCount),
+            LastFrame(0),
+            #endif
             CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
             TimingCostAllowance(0),
@@ -201,8 +253,9 @@ namespace Mezzanine
         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
         FrameScheduler::~FrameScheduler()
-        {
-            //StopScheduler();
+        {            
+            CleanUpThreads();
+
             if(LoggingToAnOwnedFileStream)
             {
                 ((std::fstream*)LogDestination)->close();
@@ -315,20 +368,32 @@ namespace Mezzanine
 
         void FrameScheduler::DoOneFrame()
         {
-            CurrentFrameStart=GetTimeStamp();
-            for(std::vector<MonopolyWorkUnit*>::iterator Iter = Monopolies.begin(); Iter!=Monopolies.end(); ++Iter)
-                { (*Iter)->operator()(*(Resources.at(0))); }
+            RunFramePreliminaryWork();
+            RunAllMonopolies();
             CreateThreads();
-            ThreadWorkAffinity(Resources[0]); // Do work in this thread and get the units with affinity
-            // run the thing to fixup workunit sorting
+            RunMainThreadWork();
             JoinAllThreads();
-            FrameCount++;
             ResetAllWorkUnits();
             WaitUntilNextThread();
         }
 
+        void FrameScheduler::RunFramePreliminaryWork()
+            { CurrentFrameStart=GetTimeStamp(); }
+
+        void FrameScheduler::RunAllMonopolies()
+        {
+            for(std::vector<MonopolyWorkUnit*>::iterator Iter = Monopolies.begin(); Iter!=Monopolies.end(); ++Iter)
+                { (*Iter)->operator()(*(Resources.at(0))); }
+        }
+
+        void FrameScheduler::RunMainThreadWork()
+        {
+            ThreadWorkAffinity(Resources[0]); // Do work in this thread and get the units with affinity
+        }
+
         void FrameScheduler::ResetAllWorkUnits()
         {
+            /// @todo could be replace with a parallel for, or a monopoly
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
                 { Iter->Unit->PrepareForNextFrame(); }
         }

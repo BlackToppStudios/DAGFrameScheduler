@@ -1,0 +1,78 @@
+
+Tested with dynamic library
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        133333        2248205       2686315       
+  |One          27322         239067        285442        
+  |Chain        20202         66973         77391         
+|Currently Compiled Threading model: Threads created and joined each frame.
+|Compilation Type: Debug.
+
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        833333        12372033      16410737      
+  |One          49261         904437        1160862       
+  |Chain        58207         232188        279441        
+|Currently Compiled Threading model: Threads created and joined each frame.
+|Compilation Type: Release.
+
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        192307        2130568       2556237       
+  |One          26881         236070        287081        
+  |Chain        19531         63904         74225         
+|Currently Compiled Threading model: Barriers used to absolutely minimize thread creation.
+|Compilation Type: Debug.
+
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        666666        6971633       8555539       
+  |One          66225         845690        1039230       
+  |Chain        68027         225542        272916        
+|Currently Compiled Threading model: Barriers used to absolutely minimize thread creation.
+|Compilation Type: Release.
+
+
+Static library
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        483870        2347985       2775176       
+  |One          46728         272604        328299        
+  |Chain        14846         72326         86198         
+|Currently Compiled Threading model: Threads created and joined each frame.
+|Compilation Type: Debug.
+
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        769230        15011589      19800019      
+  |One          49261         868180        1153402       
+  |Chain        33333         226276        291055        
+|Currently Compiled Threading model: Threads created and joined each frame.
+|Compilation Type: Release.
+
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        476190        2377052       2674798       
+  |One          45248         286707        323101        
+  |Chain        16949         76465         85227         
+|Currently Compiled Threading model: Barriers used to absolutely minimize thread creation.
+|Compilation Type: Debug.
+
+
+|Testing the FrameScheduler with a framrate of 0 to see max performance in a fixed number of frames: 
+  |             Min           Mean          Max           
+  |Empty        1111111       7329675       8844339       
+  |One          71428         930352        1131541       
+  |Chain        70921         255567        304645        
+|Currently Compiled Threading model: Barriers used to absolutely minimize thread creation.
+|Compilation Type: Release.
+
+
+

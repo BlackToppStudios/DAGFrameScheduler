@@ -102,7 +102,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1iWorkUnit__inherit__graph.svg" width="100%" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1iWorkUnit__inherit__graph.svg" width="100%" height="190"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classMezzanine_1_1Threading_1_1iWorkUnit-members.html">List of all members.</a></p>
@@ -120,15 +121,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ac07631b2aa961e4c226d0753e3d2b0"></a><!-- doxytag: member="Mezzanine::Threading::iWorkUnit::DoWork" ref="a9ac07631b2aa961e4c226d0753e3d2b0" args="(DefaultThreadSpecificStorage::Type &amp;CurrentThreadStorage)=0" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a9ac07631b2aa961e4c226d0753e3d2b0">DoWork</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">WorkUnits Must implement these to do the work. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a67c37ec646271389867f3906dcbe69a3">GetDependency</a> (<a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> Index) const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a67c37ec646271389867f3906dcbe69a3">GetDependency</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> Index) const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is used to iterate of all the dependencies.  <a href="#a67c37ec646271389867f3906dcbe69a3"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac3818e042720b1f1c07cba381e8f4986">GetDependencyCount</a> () const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac3818e042720b1f1c07cba381e8f4986">GetDependencyCount</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many other WorkUnits does this one depend on?  <a href="#ac3818e042720b1f1c07cba381e8f4986"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a316284547c9222ae0410fce75366c992">GetDependentCount</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a316284547c9222ae0410fce75366c992">GetDependentCount</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This returns the count workunits that depend on this work unit.  <a href="#a316284547c9222ae0410fce75366c992"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac077dd37376f8db9aec525729c2e9b55">GetImmediateDependencyCount</a> () const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac077dd37376f8db9aec525729c2e9b55">GetImmediateDependencyCount</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the amount of dependencies that directly count on this for access purposes.  <a href="#ac077dd37376f8db9aec525729c2e9b55"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#af6b64d2346a14490c4ad52002d385b75">GetPerformance</a> () const =0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#af6b64d2346a14490c4ad52002d385b75">GetPerformance</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the internal rolling average for querying.  <a href="#af6b64d2346a14490c4ad52002d385b75"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a50584bcb28f98f249540649cda7181a6">GetRunningState</a> () const =0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current RunningState of the thread.  <a href="#a50584bcb28f98f249540649cda7181a6"></a><br/></td></tr>
@@ -187,7 +188,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
         <tr>
           <td class="memname">virtual <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>* <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a67c37ec646271389867f3906dcbe69a3">Mezzanine::Threading::iWorkUnit::GetDependency</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td>
           <td class="paramname"><em>Index</em></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
         </tr>
@@ -213,7 +214,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac3818e042720b1f1c07cba381e8f4986">Mezzanine::Threading::iWorkUnit::GetDependencyCount</a> </td>
+          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac3818e042720b1f1c07cba381e8f4986">Mezzanine::Threading::iWorkUnit::GetDependencyCount</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
@@ -235,7 +236,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a316284547c9222ae0410fce75366c992">Mezzanine::Threading::iWorkUnit::GetDependentCount</a> </td>
+          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a316284547c9222ae0410fce75366c992">Mezzanine::Threading::iWorkUnit::GetDependentCount</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;&#160;</td>
           <td class="paramname"><em>SchedulerToCount</em></td><td>)</td>
@@ -264,7 +265,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac077dd37376f8db9aec525729c2e9b55">Mezzanine::Threading::iWorkUnit::GetImmediateDependencyCount</a> </td>
+          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac077dd37376f8db9aec525729c2e9b55">Mezzanine::Threading::iWorkUnit::GetImmediateDependencyCount</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
@@ -285,7 +286,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#af6b64d2346a14490c4ad52002d385b75">Mezzanine::Threading::iWorkUnit::GetPerformance</a> </td>
+          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#af6b64d2346a14490c4ad52002d385b75">Mezzanine::Threading::iWorkUnit::GetPerformance</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const<code> [pure virtual]</code></td>
@@ -465,6 +466,6 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 9 2012 12:23:11 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 13 2012 22:57:19 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

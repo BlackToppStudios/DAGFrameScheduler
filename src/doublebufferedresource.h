@@ -54,20 +54,20 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @brief Double buffered resources are identified by Wholes which are their type ID, This number identifies an invalid entry.
+        /// @brief Double buffered resources are identified by a @ref Whole which is their type ID, This number identifies an invalid entry.
         const static Whole DBRInvalid = 10000000;
 
-        /// @brief Double buffered resources are identified by Wholes which are their type ID, This number identifies logging.
+        /// @brief Double buffered resources are identified by a @ref Whole which is their type ID, This number identifies logging.
         const static Whole DBRLogger = 0;
 
-        /// @brief Double buffered resources are identified by Wholes which are their type ID, All System Type IDs will be less than this ammount.
+        /// @brief Double buffered resources are identified by a @ref Whole which is their type ID, All System Type IDs will be less than this amount.
         /// @note Do not use the value of this directly, it is subject to change. In code using this, use: @code const static whole FreshDBRType = BDRUser+YourValue; @endcode
         const static Whole DBRUser = 1;
 
         /// @brief A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanisms.
-        /// @details It is intended for a @ref Mezzanine::Threading::WorkUnit "WorkUnit" like the
+        /// @details It is intended for a @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" like the
         /// @ref Mezzanine::Threading::LogBufferSwapper "LogBufferSwapper" that just swaps buffers. This work unit should be
-        /// configured depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict
+        /// configured to depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict
         /// with any other double buffered resources).
         template<typename T>
         class DoubleBufferedResource
@@ -101,7 +101,7 @@ namespace Mezzanine
                 /// @brief A constructor that takes ownership of the the resources passed.
                 /// @param Current This will be used as the first resource for threads to use.
                 /// @param Buffer This will wait for the other thread
-                DoubleBufferedResource(T* Current, T* Buffer)
+                DoubleBufferedResource(T* Current, T* Buffer) : ResourceA(Current), ResourceB(Buffer)
                     {}
 
                 /// @brief Make the buffered resource the active and vice versa.
@@ -136,9 +136,6 @@ namespace Mezzanine
                 }
         };
 
-        // @brief DoubleBufferedResources has a default instantiation to be used for logging.
-        //template class DoubleBufferedResource<std::stringstream>;
-        // As much as I like having the explicit declaration some compilers (Mac OSX gcc 4.2.1) decide to allocate resources here and that usually results in duplicate symbols during linking
 
         /// @brief A better default name for the Default Logger instance.
         typedef DoubleBufferedResource<std::stringstream> DoubleBufferedLogger;
@@ -146,8 +143,8 @@ namespace Mezzanine
         // forward declarations
         class FrameScheduler;
 
-        /// @brief A threadspecific collection of double-buffered and algorithm specific resources.
-        /// @details This class is intended to be expanded with derived class if it is to return extra resource types
+        /// @brief A thread specific collection of double-buffered and algorithm specific resources.
+        /// @details This class is intended to be expanded via derived classes if it is to return extra resource types
         class MEZZ_LIB ThreadSpecificStorage
         {
             private:
@@ -173,14 +170,14 @@ namespace Mezzanine
                     { return *((DBR*)(this->ThreadResources[ResourceID])); }
 
                 /// @brief Get the usable logger for this thread specific resource
-                /// @return a reference to the logger.
-                /// @note A function like this should be provide for any other resources added to derived versions of this class. This encourages getting resources for this thread, and not providing a method to get the commitable resource gently discourages doing it unless its really required.
+                /// @return A reference to the logger.
+                /// @note A function like this should be provided for any other resources added to derived versions of this class. This encourages getting resources for this thread, and not providing a method to get the commitable resource gently discourages doing it unless its really required.
                 Logger& GetUsableLogger()
                     { return GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable(); }
 
                 /// @brief Get a pointer to the FrameScheduler that owns this resource.
                 /// @details This is not required very often by application code, but is used
-                /// in places in the Scheduler library. This is primarily used to gain access
+                /// in places in this scheduler library. This is primarily used to gain access
                 /// to commitable parts of double buffered resources. This pointer does not
                 /// confer ownership.
                 /// @return A pointer to the FrameScheduler that owns this resource.

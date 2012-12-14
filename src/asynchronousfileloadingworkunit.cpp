@@ -47,7 +47,7 @@
 #include <iterator>
 
 /// @file
-/// @brief
+/// @brief The implemtation of the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit" a workunit that loads a listing of files asynchronously.
 
 namespace Mezzanine
 {
@@ -63,7 +63,7 @@ namespace Mezzanine
             try{
                 Unit.FilesRaw.reserve(Unit.Filenames.size());
             }catch (std::exception&){
-                while(Unit.Status!=AtomicCompareAndSwap(&(Unit.Status), Unit.Status, Failed));
+                while(Unit.Status!=AtomicCompareAndSwap32(&(Unit.Status), Unit.Status, Failed));
                 return;
             }
             for(std::vector<String>::iterator CurrentFileName = Unit.Filenames.begin(); CurrentFileName!=Unit.Filenames.end(); CurrentFileName++)
@@ -78,19 +78,19 @@ namespace Mezzanine
                     try{
                         Loading = new RawFile(FileLength);
                     }catch (std::exception&){
-                        while(Unit.Status!=AtomicCompareAndSwap(&(Unit.Status), Unit.Status, Failed));
+                        while(Unit.Status!=AtomicCompareAndSwap32(&(Unit.Status), Unit.Status, Failed));
                         return;
                     }
 
                     File.read((char*)Loading->Data, FileLength);
                     Unit.FilesRaw.push_back(Loading);
                 }else{
-                    while(Unit.Status!=AtomicCompareAndSwap(&(Unit.Status), Unit.Status, Failed));
+                    while(Unit.Status!=AtomicCompareAndSwap32(&(Unit.Status), Unit.Status, Failed));
                     break;
                 }
 
             }
-            while(Unit.Status!=AtomicCompareAndSwap(&(Unit.Status), Unit.Status, Complete));
+            while(Unit.Status!=AtomicCompareAndSwap32(&(Unit.Status), Unit.Status, Complete));
         }
         /// @endcond
 
@@ -104,7 +104,7 @@ namespace Mezzanine
 
         RunningState AsynchronousFileLoadWorkUnit::BeginLoading(std::vector<String> Filenames_)
         {
-            if(Running!=AtomicCompareAndSwap(&Status, Status, Running))
+            if(Running!=AtomicCompareAndSwap32(&Status, Status, Running))
             {
                 //DeleteLoadedFiles();
                 FilesRaw.clear();

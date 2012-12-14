@@ -79,7 +79,7 @@
 /// developers have come to fear, loathe or misunderstand. Mutexes, threads, memory fences, thread_local
 /// storage, atomic variables, and all the pitfalls that come with them are replaced by a small set of
 /// of primitives that provide all the required sophistication a typical multi-threaded application
-/// requires. It does this using a new kind of @ref Mezzanine::Threading::WorkUnit "WorkUnit",
+/// requires. It does this using a new kind of @ref Mezzanine::Threading::iWorkUnit "iWorkUnit",
 /// @ref Mezzanine::Threading::DoubleBufferedResource "Double Buffering", A strong concept of
 /// Dependencies and a @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" that uses heuristics
 /// to decide how to run it all without exposing needless complexity to the application developer.
@@ -92,23 +92,23 @@
 /// With this algorithm very few if any
 /// calls will need to be made to the underlying system for synchronization in the actual work to be performed.
 /// Instead, this library will provide limited
-/// deterministic ordering of @ref Mezzanine::Threading::WorkUnit "WorkUnit" execution through a dependency
-/// feature. Having the knowledge that one @ref Mezzanine::Threading::WorkUnit "WorkUnit" will complete after
+/// deterministic ordering of @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" execution through a dependency
+/// feature. Having the knowledge that one @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" will complete after
 /// another allows for resources to be used without using expensive and complex synchronization mechansisms
 /// like @ref Mezzanine::Threading::mutex "mutexes", semaphores, or even an
-/// @ref Mezzanine::Threading::AtomicCompareAndSwap "Atomic Compare And Swap". These primitives are provided
+/// @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic Compare And Swap". These primitives are provided
 /// to allow use of this library in advanced ways for developers who are already familiar with
 /// multithreaded systems.
 /// @n @n
 /// The internal work queue is not changed while a frame is executing. Because it is only read, each
 /// thread can pick its own work. Synchronization still needs to occur, but it has been moved onto each
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" it is manages this with atomic CPU operations. Like this,
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" it is manages this with atomic CPU operations. Like this,
 /// contention is less frequent, occurring only when threads simultaneously attempt to start the same
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit", and it consumes far less time because atomic operations
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit", and it consumes far less time because atomic operations
 /// are CPU instructions instead of Operating System calls. This is managed by the library, so individual
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit"s do not need to worry synchronization beyond telling
-/// each @ref Mezzanine::Threading::WorkUnit "WorkUnit" about its data dependencies and making sure
-/// all the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s added to a
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s do not need to worry synchronization beyond telling
+/// each @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" about its data dependencies and making sure
+/// all the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s added to a
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler".
 ///
 /// @section broken_sec Broken Algorithms
@@ -164,9 +164,9 @@
 /// @image rtf Unplanned.png "Unplanned Threaded Execution - Fig 2."
 /// @n @n
 /// The DAGFrameScheduler is carefully planned and completely avoids costly synchronization
-/// mechanisms in favor of less costly minimalistic ones. Marking one @ref Mezzanine::Threading::WorkUnit "WorkUnit"
-/// as dependent on another allows the reordering of @ref Mezzanine::Threading::WorkUnit "WorkUnits" so that
-/// some @ref Mezzanine::Threading::WorkUnit "WorkUnit" can be executed with no thread waiting or blocking.
+/// mechanisms in favor of less costly minimalistic ones. Marking one @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"
+/// as dependent on another allows the reordering of @ref Mezzanine::Threading::iWorkUnit "iWorkUnits" so that
+/// some @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" can be executed with no thread waiting or blocking.
 /// @n @n
 /// @subsubsection broken_TaskPerThread One Task Per Thread
 /// A common example of poor planning is the creation of one thread for each task in a game. Despite
@@ -208,9 +208,9 @@
 /// but common work queues do not provide good guarantees in this regard.
 /// @n @n
 /// The DAGFrameScheduler was explicitly designed to provide exactly this guarantee. If the
-/// physics @ref Mezzanine::Threading::WorkUnit "WorkUnit" is added to the graphics
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" with
-/// @ref Mezzanine::Threading::WorkUnit::AddDependency() "AddDependency(WorkUnit*)" then it will
+/// physics @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" is added to the graphics
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" with
+/// @ref Mezzanine::Threading::iWorkUnit::AddDependency() "AddDependency(WorkUnit*)" then it will
 /// always be run before the graphics workunit in a given frame. The drawback of this is that it
 /// is more difficult to make runtime creation of workunits (It is possible but it cannot be done
 /// during any frame execution), but completely removes the locking
@@ -226,59 +226,58 @@
 /// Because all the entries in this will have a definite location somewhere between the beginning
 /// and end, and will never circle around back to an earlier point this is called an acyclic graph.
 /// @n @n
-/// For scheduling concerns, there are 3 kinds of @ref Mezzanine::Threading::WorkUnit "WorkUnit"s.
+/// For scheduling concerns, there are 3 kinds of @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s.
 /// All @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are expected to monopolize cpu
 /// resources at the beginning of each frame. This is ideal when working with other systems, for
 /// example a phsyics system like Bullet3D. If the calls to a physics system are wrapped in a
 /// @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit" then it will be given full
-/// opportunity to run before the @ref Mezzanine::Threading::WorkUnit "WorkUnit"s and
-/// @ref Mezzanine::Threading::AsynchronousWorkUnit "AsynchronousWorkUnit"s are run.
-/// @warning AsynchronousWorkUnit and Work Unit affinity are not completely implemented at this point
+/// opportunity to run before the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s and
+/// @ref Mezzanine::Threading::iAsynchronousWorkUnit "iAsynchronousWorkUnit"s are run.
 /// in time. The automatic thread adjusting hueristic is also not complete.
 ///
 /// Once all the @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are done then the
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" class instance spawns or activates
 /// a number of threads based on a simple heuristic. Each thread queries the
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for the next piece of work that has
-/// the most @ref Mezzanine::Threading::WorkUnit "WorkUnit"s that depend on it, and in the case of
-/// a tie the @ref Mezzanine::Threading::WorkUnit "WorkUnit" that takes the longest to execute.
+/// the most @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s that depend on it, and in the case of
+/// a tie the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" that takes the longest to execute.
 /// Execution length rather than brevity is preferred because it helps keep each thread's execution
 /// time consistently short (I will add a few more pictures to describe this clearly).
 /// @n @n
 /// Some work must be run on specific threads, such as calls to underlying devices (for example,
-/// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::WorkUnit "WorkUnit"s
+/// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s
 /// are put into a different listing where only the main thread will attempt to execute them. Other
 /// than running these, and running these first, the behavior of the main thread is very similar to
-/// other threads. Once a @ref Mezzanine::Threading::WorkUnit "WorkUnit" has been completed the
+/// other threads. Once a @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" has been completed the
 /// thread will query the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for more work.
 /// Because the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" is never modified during
 /// a frame there is no need for synchronization with it specifically, this avoids a key point of
 /// contention that reduces scaling. Instead the synchronization is performed with each
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" and is an
-/// @ref Mezzanine::Threading::AtomicCompareAndSwap "Atomic Compare And Swap" operation to maximize
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" and is an
+/// @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic Compare And Swap" operation to maximize
 /// performance.
 /// @n @n
 /// Even much of the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler"'s work is performed
-/// in @ref Mezzanine::Threading::WorkUnit "WorkUnit"s, such as log aggregation and certain functions
+/// in @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s, such as log aggregation and certain functions
 /// that must be performed each frame.
-/// @ref Mezzanine::Threading::AsynchronousWorkUnit "AsynchronousWorkUnit"s continue to run in a thread
+/// @ref Mezzanine::Threading::iAsynchronousWorkUnit "iAsynchronousWorkUnit"s continue to run in a thread
 /// beyond normal scheduling and are intended to will consume fewer CPU resources and more IO resources.
 /// For example loading a large file or listening for network traffic. These will be normal
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit"s in most regards and will check on the asynchronous
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s in most regards and will check on the asynchronous
 /// tasks they manage each frame when they run as a normally scheduled.
 /// @n @n
 /// If a thread should run out of work because all the work is completed the frame will pause until it
 /// should start the next frame. This pause length is calulated using a runtime configurable value on
 /// the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler". If a thread has checked every
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" and some are still not executing, but could not
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" and some are still not executing, but could not
 /// be started because of incomplete dependencies the thread will simply iterate over every
-/// @ref Mezzanine::Threading::WorkUnit "WorkUnit" in the
+/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" in the
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" until the dependencies of one are
 /// met and allows one to be executed. This implicitly guarantees that at least one thread will
 /// always do work, and if dependencies chains are kept short then it is more likely that several
 /// threads will advance.
 /// @n @n
-/// The @ref Mezzanine::Threading::WorkUnit "WorkUnit" classes are designed to be inherited from
+/// The @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" classes are designed to be inherited from
 /// and inserted into a @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" which will
 /// manage their lifetime and execute them when requested via
 /// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() "FrameScheduler::DoOneFrame()".

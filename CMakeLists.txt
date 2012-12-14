@@ -67,14 +67,18 @@ Message(STATUS "Creating an executable called: ${TestsName}")
 # Options
 
 # Allow the developer to select if Dynamic or Static libraries are built
-option(BuildSharedLib "Build Shared Library" OFF)
-
+option(Mezz_BuildSharedLib "Build Shared Library" OFF)
 set(LibType STATIC)
-if (BuildSharedLib)
+if (Mezz_BuildSharedLib)
     set(LibType SHARED)
-endif (BuildSharedLib)
+endif (Mezz_BuildSharedLib)
 
-
+# Allow the developer to select if New thread should be created each frame or if an atomic barrier should be used to synchronized threads.
+option(Mezz_MinimizeThreadsEachFrame "Used atomics to minimize thread creation" OFF)
+set(MinimizeThreads THREADSEACHFRAME)
+if (Mezz_MinimizeThreadsEachFrame)
+    set(MinimizeThreads MINTHREADS)
+endif (Mezz_MinimizeThreadsEachFrame)
 
 # todo add options
 # An option that will turn off all of the threading header and use std::classes via typedefs instead.
@@ -82,6 +86,8 @@ endif (BuildSharedLib)
 # An option that will turn off the mutex class and use std::classes via typedefs instead.
 # An option that will turn off the lock_guard class and use std::classes via typedefs instead.
 # an option that will turn of mutexes and std::atomic_flag where possible instead.
+
+
 
 if(MSVC)
   # Force to always compile with W4
@@ -162,7 +168,7 @@ find_package(Threads)
 add_library(${LibName} ${LibType} ${${PROJECT_NAME}_lib_headers} ${${PROJECT_NAME}_lib_sources} )
 target_link_libraries(${LibName} ${CMAKE_THREAD_LIBS_INIT})
 
-add_definitions(-D_MEZZ_${LibType}_BUILD_)
+add_definitions(-D_MEZZ_${LibType}_BUILD_  -D_MEZZ_${MinimizeThreads}_)
 
 
 # A basic executable that will define some tests to prove this works (at least in the small scale)

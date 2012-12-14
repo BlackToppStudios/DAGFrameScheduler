@@ -132,138 +132,139 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044 <span class="preprocessor">#include &quot;<a class="code" href="asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu...">asynchronousworkunit.h</a>&quot;</span>
 <a name="l00045"></a>00045 <span class="comment"></span>
 <a name="l00046"></a>00046 <span class="comment">/// @file</span>
-<a name="l00047"></a>00047 <span class="comment">/// @brief The declaration of the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit &quot;AsynchronousFileLoadWorkUnit&quot; and helper classes and functions.</span>
-<a name="l00048"></a>00048 <span class="comment"></span>
-<a name="l00049"></a>00049 <span class="keyword">namespace </span>Mezzanine
-<a name="l00050"></a>00050 {
-<a name="l00051"></a>00051     <span class="keyword">namespace </span>Threading
-<a name="l00052"></a>00052     {<span class="comment"></span>
-<a name="l00053"></a>00053 <span class="comment">        /// @cond 0</span>
+<a name="l00047"></a>00047 <span class="comment">/// @brief The declaration of the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit &quot;AsynchronousFileLoadWorkUnit&quot; a workunit that loads a listing of files asynchronously.</span>
+<a name="l00048"></a>00048 <span class="comment"></span><span class="keyword">namespace </span>Mezzanine
+<a name="l00049"></a>00049 {
+<a name="l00050"></a>00050     <span class="keyword">namespace </span>Threading
+<a name="l00051"></a>00051     {<span class="comment"></span>
+<a name="l00052"></a>00052 <span class="comment">        /// @cond 0</span>
+<a name="l00053"></a>00053 <span class="comment"></span><span class="comment"></span>
 <a name="l00054"></a>00054 <span class="comment">        /// @brief An Internal helper function for the @ref AsynchronousFileLoadWorkUnit</span>
-<a name="l00055"></a>00055 <span class="comment">        /// @param WU a pointer to the data the the help function needs.</span>
-<a name="l00056"></a>00056 <span class="comment"></span>        <span class="keywordtype">void</span> <a class="code" href="namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c" title="An Internal helper function for the AsynchronousFileLoadWorkUnit.">ThreadLoading</a>(<span class="keywordtype">void</span>* WU);<span class="comment"></span>
-<a name="l00057"></a>00057 <span class="comment">        /// @endcond</span>
-<a name="l00058"></a>00058 <span class="comment"></span><span class="comment"></span>
-<a name="l00059"></a>00059 <span class="comment">        /// @brief A simple in memory representation of a file in memory.</span>
-<a name="l00060"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html">00060</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file in memory.">RawFile</a>
-<a name="l00061"></a>00061         {                
-<a name="l00062"></a>00062             <span class="keyword">public</span>:<span class="comment"></span>
-<a name="l00063"></a>00063 <span class="comment">                /// @brief How big is the File in bytes?</span>
-<a name="l00064"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#a0571e4d9b35abbc5713348b6bf0735d0">00064</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a> <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#a0571e4d9b35abbc5713348b6bf0735d0" title="How big is the File in bytes?">Size</a>;
-<a name="l00065"></a>00065 <span class="comment"></span>
-<a name="l00066"></a>00066 <span class="comment">                /// @brief A pointer to a block of memory as it was loaded raw from the file.</span>
-<a name="l00067"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ab771fdd617ed0e93ddc0fe2b9e1d8d47">00067</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#aa5f38583d9025e05fa33d6e32e97b457" title="An 8-bit unsigned integer.">UInt8</a>* <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ab771fdd617ed0e93ddc0fe2b9e1d8d47" title="A pointer to a block of memory as it was loaded raw from the file.">Data</a>;
+<a name="l00055"></a>00055 <span class="comment">        /// @details there is a 1 to 1 relationship between this function and its associated @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit &quot;AsynchronousFileLoadWorkUnit&quot;.</span>
+<a name="l00056"></a>00056 <span class="comment">        /// This is the function run in another thread to allow loading asynchrously.</span>
+<a name="l00057"></a>00057 <span class="comment">        /// @param WU A pointer to the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit &quot;AsynchronousFileLoadWorkUnit&quot; that is goes t</span>
+<a name="l00058"></a>00058 <span class="comment"></span>        <span class="keywordtype">void</span> ThreadLoading(<span class="keywordtype">void</span>* WU);
+<a name="l00059"></a>00059 <span class="comment"></span>
+<a name="l00060"></a>00060 <span class="comment">        /// @endcond</span>
+<a name="l00061"></a>00061 <span class="comment"></span><span class="comment"></span>
+<a name="l00062"></a>00062 <span class="comment">        /// @brief A simple in memory representation of a file.</span>
+<a name="l00063"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html">00063</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>
+<a name="l00064"></a>00064         {                
+<a name="l00065"></a>00065             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00066"></a>00066 <span class="comment">                /// @brief How big is the file in bytes?</span>
+<a name="l00067"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#a0571e4d9b35abbc5713348b6bf0735d0">00067</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a> <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#a0571e4d9b35abbc5713348b6bf0735d0" title="How big is the file in bytes?">Size</a>;
 <a name="l00068"></a>00068 <span class="comment"></span>
-<a name="l00069"></a>00069 <span class="comment">                /// @brief Constructor</span>
-<a name="l00070"></a>00070 <span class="comment">                /// @details Allocates space of the passed in size. In the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit &quot;AsynchronousFileLoadWorkUnit&quot;</span>
-<a name="l00071"></a>00071 <span class="comment">                /// this is the size of the file to be loaded.</span>
-<a name="l00072"></a>00072 <span class="comment">                /// @param Size_ The size of the buffer to allocate.</span>
-<a name="l00073"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8">00073</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8" title="Constructor.">RawFile</a>(<a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a> Size_) : <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#a0571e4d9b35abbc5713348b6bf0735d0" title="How big is the File in bytes?">Size</a>(Size_)
-<a name="l00074"></a>00074                 {
-<a name="l00075"></a>00075                     <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ab771fdd617ed0e93ddc0fe2b9e1d8d47" title="A pointer to a block of memory as it was loaded raw from the file.">Data</a> = <span class="keyword">new</span> <a class="code" href="namespaceMezzanine.html#aa5f38583d9025e05fa33d6e32e97b457" title="An 8-bit unsigned integer.">UInt8</a>[Size_];
-<a name="l00076"></a>00076                 }
-<a name="l00077"></a>00077 <span class="comment"></span>
-<a name="l00078"></a>00078 <span class="comment">                /// @brief De-allocates the memory for the file, this make deleting Data a bad idea.</span>
-<a name="l00079"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ae225a8eb5d0080c5baa180bbe6a00276">00079</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ae225a8eb5d0080c5baa180bbe6a00276" title="De-allocates the memory for the file, this make deleting Data a bad idea.">~RawFile</a>()
-<a name="l00080"></a>00080                 {
-<a name="l00081"></a>00081                     <span class="keywordflow">if</span>(<a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ab771fdd617ed0e93ddc0fe2b9e1d8d47" title="A pointer to a block of memory as it was loaded raw from the file.">Data</a>)
-<a name="l00082"></a>00082                         { <span class="keyword">delete</span>[] <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ab771fdd617ed0e93ddc0fe2b9e1d8d47" title="A pointer to a block of memory as it was loaded raw from the file.">Data</a>; }
-<a name="l00083"></a>00083                 }
-<a name="l00084"></a>00084 
-<a name="l00085"></a>00085             <span class="keyword">private</span>:<span class="comment"></span>
-<a name="l00086"></a>00086 <span class="comment">                /// @brief Copying this class is a bad idea, private copy constructor</span>
-<a name="l00087"></a>00087 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8" title="Constructor.">RawFile</a>(<a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file in memory.">RawFile</a>&amp;) {}
-<a name="l00088"></a>00088 <span class="comment"></span>
-<a name="l00089"></a>00089 <span class="comment">                /// @brief Assigning this class is bad, private operator=.</span>
-<a name="l00090"></a>00090 <span class="comment">                /// @param unused Like it says it is unused in any real sense, it is returned to prevent compiler warnings.</span>
-<a name="l00091"></a>00091 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8" title="Constructor.">RawFile</a>&amp; operator=(<a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8" title="Constructor.">RawFile</a>&amp; unused) { <span class="keywordflow">return</span> unused; }
-<a name="l00092"></a>00092         };
-<a name="l00093"></a>00093 <span class="comment"></span>
-<a name="l00094"></a>00094 <span class="comment">        /// @brief This is intended to load files asynchronously and continue doing so whether or not other the @ref FrameScheduler is running or paused.</span>
-<a name="l00095"></a>00095 <span class="comment">        /// @details The goal is to trigger lower level mechanisms to use DMA to load directly without CPU intervention. In some operating systems this</span>
-<a name="l00096"></a>00096 <span class="comment">        /// is handled in the standard library, and in others special mechanisms must be used to make this happen. The current state of this allows</span>
-<a name="l00097"></a>00097 <span class="comment">        /// testing to determine how good automatic mechanisms work.</span>
-<a name="l00098"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">00098</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html" title="The interface for a WorkUnit that will keep running when the rest of the scheduler is paused...">iAsynchronousWorkUnit</a>
-<a name="l00099"></a>00099         {<span class="comment"></span>
-<a name="l00100"></a>00100 <span class="comment">            /// @cond 0</span>
-<a name="l00101"></a>00101 <span class="comment"></span>            <span class="comment">// If only there was a way to pass member function to the thread constructor</span>
-<a name="l00102"></a>00102             <span class="keyword">friend</span> <span class="keywordtype">void</span> <a class="code" href="namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c" title="An Internal helper function for the AsynchronousFileLoadWorkUnit.">ThreadLoading</a>(<span class="keywordtype">void</span>* WU);<span class="comment"></span>
-<a name="l00103"></a>00103 <span class="comment">            /// @endcond</span>
-<a name="l00104"></a>00104 <span class="comment"></span>
-<a name="l00105"></a>00105             <span class="keyword">protected</span>:<span class="comment"></span>
-<a name="l00106"></a>00106 <span class="comment">                /// @brief The names of the files this batch of loading will retrieve</span>
-<a name="l00107"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a22ebc4c42abf9961e780c0d6c2d7038a">00107</a> <span class="comment"></span>                std::vector&lt;String&gt; <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a22ebc4c42abf9961e780c0d6c2d7038a" title="The names of the files this batch of loading will retrieve.">Filenames</a>;
-<a name="l00108"></a>00108 <span class="comment"></span>
-<a name="l00109"></a>00109 <span class="comment">                /// @brief Used to make referencing the the type of @ref FilesRaw easier</span>
-<a name="l00110"></a>00110 <span class="comment"></span>                <span class="keyword">typedef</span> std::vector&lt;
-<a name="l00111"></a>00111                             <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file in memory.">RawFile</a>*
-<a name="l00112"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0c17d332bee02a03076b635a5d29fc8c">00112</a>                         &gt; <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0c17d332bee02a03076b635a5d29fc8c" title="Used to make referencing the the type of FilesRaw easier.">RawFileContainer</a>;
-<a name="l00113"></a>00113 <span class="comment"></span>
-<a name="l00114"></a>00114 <span class="comment">                /// @brief The contents of the files once they have been loaded. No partials files will exists here, either the whole file is added or nothing is added.</span>
-<a name="l00115"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a080568934399e6bdd97b369d37c31c66">00115</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0c17d332bee02a03076b635a5d29fc8c" title="Used to make referencing the the type of FilesRaw easier.">RawFileContainer</a> <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a080568934399e6bdd97b369d37c31c66" title="The contents of the files once they have been loaded. No partials files will exists here...">FilesRaw</a>;
-<a name="l00116"></a>00116 <span class="comment"></span>
-<a name="l00117"></a>00117 <span class="comment">                /// @brief This is either 0 or the other thread that is loading.</span>
-<a name="l00118"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a8855a6cd0d28905e32e43f0d51c61dd5">00118</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1thread.html" title="A small wrapper around the system thread.">thread</a>* <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a8855a6cd0d28905e32e43f0d51c61dd5" title="This is either 0 or the other thread that is loading.">LoadingThread</a>;
-<a name="l00119"></a>00119 <span class="comment"></span>
-<a name="l00120"></a>00120 <span class="comment">                /// @brief This stores the current RunningState.</span>
-<a name="l00121"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0d04c16c9715f662d128822a14cf6358">00121</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0d04c16c9715f662d128822a14cf6358" title="This stores the current RunningState.">Status</a>;
-<a name="l00122"></a>00122 
-<a name="l00123"></a>00123             <span class="keyword">public</span>:<span class="comment"></span>
-<a name="l00124"></a>00124 <span class="comment">                /// @brief Default constructor.</span>
-<a name="l00125"></a>00125 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a>();
-<a name="l00126"></a>00126 <span class="comment"></span>
-<a name="l00127"></a>00127 <span class="comment">                /// @brief Destructor, deletes all loaded files.</span>
-<a name="l00128"></a>00128 <span class="comment"></span>                <span class="keyword">virtual</span> ~<a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a>();
-<a name="l00129"></a>00129 <span class="comment"></span>
-<a name="l00130"></a>00130 <span class="comment">                /// @brief Begin loading a list of files based on their names.</span>
-<a name="l00131"></a>00131 <span class="comment">                /// @param Filenames_ A vector of Strings that correspond to either relative or absolute filenames that will be loaded.</span>
-<a name="l00132"></a>00132 <span class="comment">                /// @details When the file is loaded its contents are place in a @ref RawFile and can be retrieved with @ref GetFile(String)</span>
-<a name="l00133"></a>00133 <span class="comment">                /// or @ref GetFile(whole) member functions.</span>
-<a name="l00134"></a>00134 <span class="comment">                /// @n @n</span>
-<a name="l00135"></a>00135 <span class="comment">                /// This starts by clearing the previous list of loaded files. If that list has not been deleted then</span>
-<a name="l00136"></a>00136 <span class="comment">                /// this will cause a memory leak. Use @ref DeleteLoadedFiles to clear this list or copy all the pointers elsewhere before</span>
-<a name="l00137"></a>00137 <span class="comment">                /// calling this and delete them manually at your convience. When this work unit is destroyed it deletes any loaded files from</span>
-<a name="l00138"></a>00138 <span class="comment">                /// the last call of this method.</span>
-<a name="l00139"></a>00139 <span class="comment">                /// @n @n</span>
-<a name="l00140"></a>00140 <span class="comment">                /// If this is called while it is loading files the behavior is undefined, most likely it will crash or fail silently, either</span>
-<a name="l00141"></a>00141 <span class="comment">                /// way no good can come from it. Use @ref IsWorkDone to see if the work is @ref RunningState::Complete &quot;Complete&quot;. If the work is complete</span>
-<a name="l00142"></a>00142 <span class="comment">                /// then this can be called after any call to this class&#39;s @ref DoWork member function.</span>
-<a name="l00143"></a>00143 <span class="comment">                /// @warning This can leak memory if not used in conjuction with memory management or @ref DeleteLoadedFiles and read the details.</span>
-<a name="l00144"></a>00144 <span class="comment">                /// @warning This can fail in horrible ways if called twice without waiting for the first call to finish, use @ref IsWorkDone and read the details.</span>
-<a name="l00145"></a>00145 <span class="comment">                /// @return This returns @ref RunningState::Starting &quot;Starting&quot; when loading is successful started and who knows what it returns if it fails, likely a segfault or gpf.</span>
-<a name="l00146"></a>00146 <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> BeginLoading(std::vector&lt;String&gt; Filenames_);
-<a name="l00147"></a>00147 <span class="comment"></span>
-<a name="l00148"></a>00148 <span class="comment">                /// @brief This checks if Asynchronous loading thread has completed and if so it cleans up that threads resources.</span>
-<a name="l00149"></a>00149 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A threadspecific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp;);
-<a name="l00150"></a>00150 <span class="comment"></span>
-<a name="l00151"></a>00151 <span class="comment">                /// @brief Get the @ref RunningState of the file loading</span>
-<a name="l00152"></a>00152 <span class="comment">                /// @details This can return any @ref RunningState and the meaning applies to the current state of the files being loaded.</span>
-<a name="l00153"></a>00153 <span class="comment">                ///     - @ref RunningState::NotStarted &quot;NotStarted&quot; - Either @ref BeginLoading has not been called or it has been called and has not progressed to the point where it sets this. Not usefu for making logical decisions without knowledge of how many times @ref BeginLoading has been called.</span>
-<a name="l00154"></a>00154 <span class="comment">                ///     - @ref RunningState::Starting &quot;Starting&quot; - This is returned from @ref BeginLoading is success conditions, and is never returned from this.</span>
-<a name="l00155"></a>00155 <span class="comment">                ///     - @ref RunningState::Running &quot;Running&quot; - This means that the loading thread has started but not yet completed.</span>
-<a name="l00156"></a>00156 <span class="comment">                ///     - @ref RunningState::Complete &quot;Complete&quot; - The loading thread has completed its work, and new loading can definitely begin after the next call to @ref DoWork method.</span>
-<a name="l00157"></a>00157 <span class="comment">                ///     - @ref RunningState::Failed &quot;Failed&quot; - If somekind of recoverable error occured, this will be returned, there are no guarantees about the state of the loaded files.</span>
-<a name="l00158"></a>00158 <span class="comment">                /// @return The running state as of the time of this call, though it is subjecct to immediate thread unsafe change.</span>
-<a name="l00159"></a>00159 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> IsWorkDone();
-<a name="l00160"></a>00160 <span class="comment"></span>
-<a name="l00161"></a>00161 <span class="comment">                /// @brief Get a loaded @ref RawFile in linear time.</span>
-<a name="l00162"></a>00162 <span class="comment">                /// @details This searches the list of files names to determine the index of the filename then calls @ref GetFile(whole)</span>
-<a name="l00163"></a>00163 <span class="comment">                /// @param Filename the file to retrieve.</span>
-<a name="l00164"></a>00164 <span class="comment">                /// @return A pointer to a @ref RawFile or 0 if it cannot be retrieved for any reason.</span>
-<a name="l00165"></a>00165 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file in memory.">RawFile</a>* GetFile(<a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67" title="String will provide most of the functionality of std::string but could be implemented in a variety of...">String</a> FileName);
-<a name="l00166"></a>00166 <span class="comment"></span>
-<a name="l00167"></a>00167 <span class="comment">                /// @brief Retrieve a pointer to file contents in constant time.</span>
-<a name="l00168"></a>00168 <span class="comment">                /// @param Index The index of the File Name when it was passed into @ref BeginLoading</span>
-<a name="l00169"></a>00169 <span class="comment">                /// @return This returns a null pointer if the correct @ref RawFile cannot be retrieved, otherwise a pointer to the @ref RawFile with index corresponing to the index of a passed in filename is returned.</span>
-<a name="l00170"></a>00170 <span class="comment">                /// @warning Do no call this before @ref IsWorkDone() indicates that the work is @ref Complete . These memory addresses are subject to change until all loading is complete.</span>
-<a name="l00171"></a>00171 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file in memory.">RawFile</a>* GetFile(<a class="code" href="namespaceMezzanine.html#a8587f66a3d0a1da2ee9236d7ea492591" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Index);
-<a name="l00172"></a>00172 <span class="comment"></span>
-<a name="l00173"></a>00173 <span class="comment">                /// @brief This deletes all the loaded files from the last call of @ref BeginLoading .</span>
-<a name="l00174"></a>00174 <span class="comment"></span>                <span class="keywordtype">void</span> DeleteLoadedFiles();
-<a name="l00175"></a>00175         };
-<a name="l00176"></a>00176     } <span class="comment">// \Threading</span>
-<a name="l00177"></a>00177 }<span class="comment">// \Mezzanine</span>
-<a name="l00178"></a>00178 <span class="preprocessor">#endif</span>
+<a name="l00069"></a>00069 <span class="comment">                /// @brief A pointer to a block of memory as it was loaded raw from the file.</span>
+<a name="l00070"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ab771fdd617ed0e93ddc0fe2b9e1d8d47">00070</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#aa5f38583d9025e05fa33d6e32e97b457" title="An 8-bit unsigned integer.">UInt8</a>* <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ab771fdd617ed0e93ddc0fe2b9e1d8d47" title="A pointer to a block of memory as it was loaded raw from the file.">Data</a>;
+<a name="l00071"></a>00071 <span class="comment"></span>
+<a name="l00072"></a>00072 <span class="comment">                /// @brief Constructor</span>
+<a name="l00073"></a>00073 <span class="comment">                /// @details Allocates space of the amount passed. In the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit &quot;AsynchronousFileLoadWorkUnit&quot;</span>
+<a name="l00074"></a>00074 <span class="comment">                /// this is the size of the file to be loaded.</span>
+<a name="l00075"></a>00075 <span class="comment">                /// @param Size_ The size of the buffer to allocate.</span>
+<a name="l00076"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8">00076</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>(<a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a> Size_) : Size(Size_)
+<a name="l00077"></a>00077                     { Data = <span class="keyword">new</span> <a class="code" href="namespaceMezzanine.html#aa5f38583d9025e05fa33d6e32e97b457" title="An 8-bit unsigned integer.">UInt8</a>[Size_]; }
+<a name="l00078"></a>00078 <span class="comment"></span>
+<a name="l00079"></a>00079 <span class="comment">                /// @brief De-allocates the memory for the file, this make deleting Data a bad idea.</span>
+<a name="l00080"></a><a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html#ae225a8eb5d0080c5baa180bbe6a00276">00080</a> <span class="comment"></span>                ~<a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>()
+<a name="l00081"></a>00081                 {
+<a name="l00082"></a>00082                     <span class="keywordflow">if</span>(Data)
+<a name="l00083"></a>00083                         { <span class="keyword">delete</span>[] Data; }
+<a name="l00084"></a>00084                 }
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086             <span class="keyword">private</span>:<span class="comment"></span>
+<a name="l00087"></a>00087 <span class="comment">                /// @brief Copying this class is a bad idea, private copy constructor</span>
+<a name="l00088"></a>00088 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>(<a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>&amp;) {}
+<a name="l00089"></a>00089 <span class="comment"></span>
+<a name="l00090"></a>00090 <span class="comment">                /// @brief Assigning this class is bad, private operator=.</span>
+<a name="l00091"></a>00091 <span class="comment">                /// @param unused Like it says it is unused in any real sense, it is returned to prevent compiler warnings.</span>
+<a name="l00092"></a>00092 <span class="comment"></span>                RawFile&amp; operator=(RawFile&amp; unused) { <span class="keywordflow">return</span> unused; }
+<a name="l00093"></a>00093         };
+<a name="l00094"></a>00094 <span class="comment"></span>
+<a name="l00095"></a>00095 <span class="comment">        /// @brief This is intended to load files asynchronously and continue doing so whether or not other the @ref FrameScheduler is running or paused.</span>
+<a name="l00096"></a>00096 <span class="comment">        /// @details The goal is to trigger lower level mechanisms to use DMA to load directly without CPU intervention. In some operating systems this</span>
+<a name="l00097"></a>00097 <span class="comment">        /// is handled in the standard library, and in otherS special mechanisms must be used to make this happen. The current state of this allows</span>
+<a name="l00098"></a>00098 <span class="comment">        /// testing to determine how good automatic mechanisms work.</span>
+<a name="l00099"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">00099</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html" title="The interface for a WorkUnit that will keep running when the rest of the scheduler is paused...">iAsynchronousWorkUnit</a>
+<a name="l00100"></a>00100         {<span class="comment"></span>
+<a name="l00101"></a>00101 <span class="comment">            /// @cond 0</span>
+<a name="l00102"></a>00102 <span class="comment"></span>            <span class="comment">// If only there was a way to pass member function to the thread constructor</span>
+<a name="l00103"></a>00103             <span class="keyword">friend</span> <span class="keywordtype">void</span> ThreadLoading(<span class="keywordtype">void</span>* WU);<span class="comment"></span>
+<a name="l00104"></a>00104 <span class="comment">            /// @endcond</span>
+<a name="l00105"></a>00105 <span class="comment"></span>
+<a name="l00106"></a>00106             <span class="keyword">protected</span>:<span class="comment"></span>
+<a name="l00107"></a>00107 <span class="comment">                /// @brief The names of the files this batch of loading will retrieve</span>
+<a name="l00108"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a22ebc4c42abf9961e780c0d6c2d7038a">00108</a> <span class="comment"></span>                std::vector&lt;String&gt; <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a22ebc4c42abf9961e780c0d6c2d7038a" title="The names of the files this batch of loading will retrieve.">Filenames</a>;
+<a name="l00109"></a>00109 <span class="comment"></span>
+<a name="l00110"></a>00110 <span class="comment">                /// @brief Used to make referencing the the type of @ref FilesRaw easier.</span>
+<a name="l00111"></a>00111 <span class="comment"></span>                <span class="keyword">typedef</span> std::vector&lt;
+<a name="l00112"></a>00112                             <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>*
+<a name="l00113"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0c17d332bee02a03076b635a5d29fc8c">00113</a>                         &gt; <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0c17d332bee02a03076b635a5d29fc8c" title="Used to make referencing the the type of FilesRaw easier.">RawFileContainer</a>;
+<a name="l00114"></a>00114 <span class="comment"></span>
+<a name="l00115"></a>00115 <span class="comment">                /// @brief The contents of the files once they have been loaded. No partials files will exists here, either the whole file is added or nothing is added.</span>
+<a name="l00116"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a080568934399e6bdd97b369d37c31c66">00116</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0c17d332bee02a03076b635a5d29fc8c" title="Used to make referencing the the type of FilesRaw easier.">RawFileContainer</a> <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a080568934399e6bdd97b369d37c31c66" title="The contents of the files once they have been loaded. No partials files will exists here...">FilesRaw</a>;
+<a name="l00117"></a>00117 <span class="comment"></span>
+<a name="l00118"></a>00118 <span class="comment">                /// @brief This is either 0 or the other thread that is loading.</span>
+<a name="l00119"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a8855a6cd0d28905e32e43f0d51c61dd5">00119</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1thread.html" title="A small wrapper around the system thread.">thread</a>* <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a8855a6cd0d28905e32e43f0d51c61dd5" title="This is either 0 or the other thread that is loading.">LoadingThread</a>;
+<a name="l00120"></a>00120 <span class="comment"></span>
+<a name="l00121"></a>00121 <span class="comment">                /// @brief This stores the current RunningState.</span>
+<a name="l00122"></a><a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0d04c16c9715f662d128822a14cf6358">00122</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0d04c16c9715f662d128822a14cf6358" title="This stores the current RunningState.">Status</a>;
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00125"></a>00125 <span class="comment">                /// @brief Default constructor.</span>
+<a name="l00126"></a>00126 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a>();
+<a name="l00127"></a>00127 <span class="comment"></span>
+<a name="l00128"></a>00128 <span class="comment">                /// @brief Destructor, deletes all loaded files.</span>
+<a name="l00129"></a>00129 <span class="comment"></span>                <span class="keyword">virtual</span> ~<a class="code" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a>();
+<a name="l00130"></a>00130 <span class="comment"></span>
+<a name="l00131"></a>00131 <span class="comment">                /// @brief Begin loading a list of files based on their names.</span>
+<a name="l00132"></a>00132 <span class="comment">                /// @param Filenames_ A vector of Strings that correspond to either relative or absolute filenames that will be loaded.</span>
+<a name="l00133"></a>00133 <span class="comment">                /// @details When the file is loaded its contents are place in a @ref RawFile and can be retrieved with @ref GetFile(String)</span>
+<a name="l00134"></a>00134 <span class="comment">                /// or @ref GetFile(Whole) member functions.</span>
+<a name="l00135"></a>00135 <span class="comment">                /// @n @n</span>
+<a name="l00136"></a>00136 <span class="comment">                /// This starts by clearing the previous list of loaded files. If that list has not been deleted then</span>
+<a name="l00137"></a>00137 <span class="comment">                /// this will cause a memory leak. Use @ref DeleteLoadedFiles to clear this list or copy all the pointers elsewhere before</span>
+<a name="l00138"></a>00138 <span class="comment">                /// calling this and delete them manually at your convience. When this work unit is destroyed it deletes any loaded files from</span>
+<a name="l00139"></a>00139 <span class="comment">                /// the last call of this method.</span>
+<a name="l00140"></a>00140 <span class="comment">                /// @n @n</span>
+<a name="l00141"></a>00141 <span class="comment">                /// If this is called while it is loading files the behavior is undefined, most likely it will crash or fail silently, either</span>
+<a name="l00142"></a>00142 <span class="comment">                /// way no good can come from it. Use @ref IsWorkDone to see if the work is @ref Complete &quot;Complete&quot;. If the work is complete</span>
+<a name="l00143"></a>00143 <span class="comment">                /// then this can be called after any call to this class&#39;s @ref DoWork member function.</span>
+<a name="l00144"></a>00144 <span class="comment">                /// @warning This can leak memory if not used in conjuction with memory management or @ref DeleteLoadedFiles and read the details.</span>
+<a name="l00145"></a>00145 <span class="comment">                /// @warning This can fail in horrible ways if called twice without waiting for the first call to finish, use @ref IsWorkDone and read the details.</span>
+<a name="l00146"></a>00146 <span class="comment">                /// @return This returns @ref Starting &quot;Starting&quot; when loading is successful started and who knows what it returns if it fails, likely a segfault or GPF.</span>
+<a name="l00147"></a>00147 <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> BeginLoading(std::vector&lt;String&gt; Filenames_);
+<a name="l00148"></a>00148 <span class="comment"></span>
+<a name="l00149"></a>00149 <span class="comment">                /// @brief This checks if Asynchronous loading thread has completed and if so it cleans up that threads resources.</span>
+<a name="l00150"></a>00150 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp;);
+<a name="l00151"></a>00151 <span class="comment"></span>
+<a name="l00152"></a>00152 <span class="comment">                /// @brief Get the @ref RunningState of the file loading</span>
+<a name="l00153"></a>00153 <span class="comment">                /// @details This can return any @ref RunningState and the meaning applies to the current state of the files being loaded.</span>
+<a name="l00154"></a>00154 <span class="comment">                ///     - @ref NotStarted &quot;NotStarted&quot; - Either @ref BeginLoading has not been called or it has been called and has not progressed to the point where it sets this. Not usefu for making logical decisions without knowledge of how many times @ref BeginLoading has been called.</span>
+<a name="l00155"></a>00155 <span class="comment">                ///     - @ref Starting &quot;Starting&quot; - This is returned from @ref BeginLoading is success conditions, and is never returned from this.</span>
+<a name="l00156"></a>00156 <span class="comment">                ///     - @ref Running &quot;Running&quot; - This means that the loading thread has started but not yet completed.</span>
+<a name="l00157"></a>00157 <span class="comment">                ///     - @ref Complete &quot;Complete&quot; - The loading thread has completed its work, and new loading can definitely begin after the next call to @ref DoWork method.</span>
+<a name="l00158"></a>00158 <span class="comment">                ///     - @ref Failed &quot;Failed&quot; - If somekind of recoverable error occured, this will be returned, there are no guarantees about the state of the loaded files.</span>
+<a name="l00159"></a>00159 <span class="comment">                /// @return The running state as of the time of this call, though it is subjecct to immediate thread unsafe change.</span>
+<a name="l00160"></a>00160 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8" title="Used to track whether a thread has started, completed, etc...">RunningState</a> IsWorkDone();
+<a name="l00161"></a>00161 <span class="comment"></span>
+<a name="l00162"></a>00162 <span class="comment">                /// @brief Get a loaded @ref RawFile in linear time.</span>
+<a name="l00163"></a>00163 <span class="comment">                /// @details This searches the list of files names to determine the index of the filename then calls @ref GetFile(Whole) &quot;GetFile(Whole)&quot;.</span>
+<a name="l00164"></a>00164 <span class="comment">                /// @param FileName the file to retrieve.</span>
+<a name="l00165"></a>00165 <span class="comment">                /// @return A pointer to a @ref RawFile or 0 if it cannot be retrieved for any reason.</span>
+<a name="l00166"></a>00166 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>* GetFile(<a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67" title="String will provide most of the functionality of std::string but could be implemented in a variety of...">String</a> FileName);
+<a name="l00167"></a>00167 <span class="comment"></span>
+<a name="l00168"></a>00168 <span class="comment">                /// @brief Retrieve a pointer to file contents in constant time.</span>
+<a name="l00169"></a>00169 <span class="comment">                /// @param Index The index of the File Name when it was passed into @ref BeginLoading &quot;BeginLoading&quot;.</span>
+<a name="l00170"></a>00170 <span class="comment">                /// @return This returns a null pointer if the correct @ref RawFile cannot be retrieved, otherwise a pointer to the @ref RawFile with index corresponing to the index of a passed in filename is returned.</span>
+<a name="l00171"></a>00171 <span class="comment">                /// @warning Do no call this before @ref IsWorkDone() indicates that the work is @ref Complete &quot;Complete&quot;. These memory addresses are subject to change until all loading is complete.</span>
+<a name="l00172"></a>00172 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1RawFile.html" title="A simple in memory representation of a file.">RawFile</a>* GetFile(<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Index);
+<a name="l00173"></a>00173 <span class="comment"></span>
+<a name="l00174"></a>00174 <span class="comment">                /// @brief This deletes all the loaded files from the last call of @ref BeginLoading &quot;BeginLoading&quot; .</span>
+<a name="l00175"></a>00175 <span class="comment"></span>                <span class="keywordtype">void</span> DeleteLoadedFiles();
+<a name="l00176"></a>00176         };
+<a name="l00177"></a>00177     } <span class="comment">// \Threading</span>
+<a name="l00178"></a>00178 }<span class="comment">// \Mezzanine</span>
+<a name="l00179"></a>00179 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -280,6 +281,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 9 2012 12:23:10 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Thu Dec 13 2012 22:57:18 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

@@ -125,7 +125,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node8 -->
 <g id="node15" class="node"><title>Node8</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1RawFile.html" target="_top" xlink:title="A simple in memory representation of a file in memory.">
+<a xlink:href="classMezzanine_1_1Threading_1_1RawFile.html" target="_top" xlink:title="A simple in memory representation of a file.">
 <polygon fill="white" stroke="black" points="604,-80 604,-102 766,-102 766,-80 604,-80"/>
 <text text-anchor="middle" x="685" y="-89" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::RawFile</text>
 </a>

@@ -82,7 +82,7 @@
     /// @brief Defined if the platform could be detected adequately enough to allow thread creation.
     #define _MEZZ_PLATFORM_DEFINED_
 
-    #if defined(_MEZZ_THREAD_WIN32_)
+    #ifdef _MEZZ_THREAD_WIN32_
         #ifdef _MSC_VER
             #pragma warning( disable : 4251) // Disable the dll import/export warnings on items that are set correctly.
             #pragma warning( disable : 4244) // Disable the double to float conversions, they are in their by design to minimize floating point rounding during intermediate calculations.
@@ -104,6 +104,7 @@
         #include <unistd.h>
     #endif
 
+/* // Currently C++11 disabled because it is never used.
     // Do we have a fully featured C++11 compiler?
     #if (__cplusplus > 199711L) || (defined(__STDCXX_VERSION__) && (__STDCXX_VERSION__ >= 201001L))
         /// @def _MEZZ_CPP11_
@@ -119,6 +120,7 @@
         /// @hideinitializer
         #define _MEZZ_CPP11_PARTIAL_
     #endif
+*/
 
     /// @def MEZZ_LIB
     /// @brief Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if/when it is needed.
@@ -150,5 +152,10 @@
         #endif
     #endif
 
+    #ifdef _MEZZ_MINTHREADS_
+       #define MEZZ_USEBARRIERSEACHFRAME
+    #else
+        // Presumably _MEZZ_THREADSEACHFRAME_ is defined an no actions are required.
+    #endif
 
-#endif
+#endif // include guard

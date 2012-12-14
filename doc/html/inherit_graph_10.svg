@@ -11,7 +11,7 @@
 <polygon fill="white" stroke="white" points="-4,5 -4,-26 167,-26 167,5 -4,5"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1RawFile.html" target="_top" xlink:title="A simple in memory representation of a file in memory.">
+<a xlink:href="classMezzanine_1_1Threading_1_1RawFile.html" target="_top" xlink:title="A simple in memory representation of a file.">
 <polygon fill="white" stroke="black" points="0,-0 0,-22 162,-22 162,-0 0,-0"/>
 <text text-anchor="middle" x="81" y="-9" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::RawFile</text>
 </a>
