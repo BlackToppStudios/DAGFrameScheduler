@@ -80,94 +80,22 @@ namespace Mezzanine
     namespace Threading
     {
         /// @brief A cross-platform abstraction of the OS's mutex
-        class MEZZ_LIB mutex
+        class MEZZ_LIB Mutex
         {
-            public:
-                ///@brief Constructor, creates an unlocked mutex
-                mutex()
-                #if defined(_MEZZ_THREAD_WIN32_)
-                    : mAlreadyLocked(false)
-                #endif
-                {
-                #if defined(_MEZZ_THREAD_WIN32_)
-                    InitializeCriticalSection(&mHandle);
-                #else
-                    pthread_mutex_init(&mHandle, NULL);
-                #endif
-                }
-
-                ///@brief Destructor.
-                ~mutex()
-                {
-                #if defined(_MEZZ_THREAD_WIN32_)
-                    DeleteCriticalSection(&mHandle);
-                #else
-                    pthread_mutex_destroy(&mHandle);
-                #endif
-                }
-
-                /// @brief Lock the mutex.
-                /// @details The method will block the calling thread until a lock on the mutex can
-                /// be obtained. The mutex remains locked until @c unlock() is called.
-                /// @see lock_guard
-                inline void lock()
-                {
-                #if defined(_MEZZ_THREAD_WIN32_)
-                    EnterCriticalSection(&mHandle);
-                    while(mAlreadyLocked) Sleep(1000); // Simulate deadlock...
-                    mAlreadyLocked = true;
-                #else
-                    pthread_mutex_lock(&mHandle);
-                #endif
-                }
-
-                /// @brief Try to lock the mutex.
-                /// @details The method will try to lock the mutex. If it fails, the function will
-                /// return immediately (non-blocking).
-                /// @return @c true if the lock was acquired, or @c false if the lock could
-                /// not be acquired.
-                inline bool try_lock()
-                {
-                #if defined(_MEZZ_THREAD_WIN32_)
-                    bool ret = (TryEnterCriticalSection(&mHandle) ? true : false);
-                    if(ret && mAlreadyLocked)
-                    {
-                        LeaveCriticalSection(&mHandle);
-                        ret = false;
-                    }
-                    return ret;
-                #else
-                    return (pthread_mutex_trylock(&mHandle) == 0) ? true : false;
-                #endif
-                }
-
-                /// @brief Unlock the mutex.
-                /// @details If any threads are waiting for the lock on this mutex, one of them will
-                /// be unblocked.
-                inline void unlock()
-                {
-                #if defined(_MEZZ_THREAD_WIN32_)
-                    mAlreadyLocked = false;
-                    LeaveCriticalSection(&mHandle);
-                #else
-                    pthread_mutex_unlock(&mHandle);
-                #endif
-                }
-
             private:
 
                 /// @brief Deleted assignment operator
                 #ifdef _MEZZ_CPP11_PARTIAL_
-                    mutex& operator=(const mutex&) = delete;
+                    Mutex& operator=(const Mutex&) = delete;
                 #else
-                    mutex& operator=(const mutex&);
+                    Mutex& operator=(const Mutex&);
                 #endif
 
                 /// @brief Deleted assignment operator copy constructor
                 #ifdef _MEZZ_CPP11_PARTIAL_
-                    mutex(const mutex&) = delete;
+                    Mutex(const Mutex&) = delete;
                 #else
-                    mutex(const mutex&);
+                    Mutex(const Mutex&);
                 #endif
 
                 /// @var mHandle
@@ -178,6 +106,32 @@ namespace Mezzanine
                 #else
                     pthread_mutex_t mHandle;
                 #endif
+
+
+            public:
+                ///@brief Constructor, creates an unlocked mutex
+                Mutex();
+
+                ///@brief Destructor.
+                ~Mutex();
+
+                /// @brief Lock the mutex.
+                /// @details The method will block the calling thread until a lock on the mutex can
+                /// be obtained. The mutex remains locked until @c unlock() is called.
+                /// @see lock_guard
+                void Lock();
+
+                /// @brief Try to lock the mutex.
+                /// @details The method will try to lock the mutex. If it fails, the function will
+                /// return immediately (non-blocking).
+                /// @return @c true if the lock was acquired, or @c false if the lock could
+                /// not be acquired.
+                bool TryLock();
+
+                /// @brief Unlock the mutex.
+                /// @details If any threads are waiting for the lock on this mutex, one of them will
+                /// be unblocked.
+                void Unlock();
         };
 
         /// @brief Lock guard class.
@@ -197,7 +151,7 @@ namespace Mezzanine
         template <class T>
         class lock_guard {
             public:
-                /// @brief This allows other code to use the type of this mutex in a type-safe way
+                /// @brief This allows other code to use the type of this mutex in a more safe way
                 typedef T mutex_type;
 
                 // @brief Empty Constructor
@@ -208,14 +162,14 @@ namespace Mezzanine
                 explicit lock_guard(mutex_type &aMutex)
                 {
                     mMutex = &aMutex;
-                    mMutex->lock();
+                    mMutex->Lock();
                 }
 
                 /// @brief The destructor unlocks the mutex.
                 ~lock_guard()
                 {
                     if(mMutex)
-                        mMutex->unlock();
+                        mMutex->Unlock();
                 }
 
             private:

@@ -116,7 +116,7 @@ namespace Mezzanine
                 RawFileContainer FilesRaw;
 
                 /// @brief This is either 0 or the other thread that is loading.
-                thread* LoadingThread;
+                Thread* LoadingThread;
 
                 /// @brief This stores the current RunningState.
                 Int32 Status;

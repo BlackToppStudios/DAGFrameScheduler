@@ -84,7 +84,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node15 -->
 <g id="node33" class="node"><title>Node15</title>
-<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the workunit.">
+<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit.">
 <polygon fill="white" stroke="black" points="739.5,-121 739.5,-143 810.5,-143 810.5,-121 739.5,-121"/>
 <text text-anchor="middle" x="775" y="-130" font-family="FreeSans" font-size="10.00">workunit.cpp</text>
 </a>
@@ -96,7 +96,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node17 -->
 <g id="node43" class="node"><title>Node17</title>
-<a xlink:href="systemcalls_8cpp.html" target="_top" xlink:title="This file defines some time&#45;tracking functions.">
+<a xlink:href="systemcalls_8cpp.html" target="_top" xlink:title="This file defines some platform specifc functions.">
 <polygon fill="white" stroke="black" points="453,-301 453,-323 541,-323 541,-301 453,-301"/>
 <text text-anchor="middle" x="497" y="-310" font-family="FreeSans" font-size="10.00">systemcalls.cpp</text>
 </a>
@@ -113,7 +113,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node4 -->
 <g id="node7" class="node"><title>Node4</title>
-<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the defintion of the workunit.">
+<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit.">
 <polygon fill="white" stroke="black" points="336.5,-181 336.5,-203 397.5,-203 397.5,-181 336.5,-181"/>
 <text text-anchor="middle" x="367" y="-190" font-family="FreeSans" font-size="10.00">workunit.h</text>
 </a>

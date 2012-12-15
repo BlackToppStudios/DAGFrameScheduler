@@ -82,8 +82,10 @@ namespace Mezzanine
         /// @brief A small wrapper around the system thread
         /// @details in general game code should not be creating this if they are using the
         /// DAG Frame Scheduler, as it tries to maintain control over the threads created
-        /// by a game.
-        class MEZZ_LIB thread
+        /// by a game. This tries to keep the names the same as the standard thread, and might
+        /// at some point be replace by some template machinery that wraps the minor difference
+        /// that currently exist.
+        class MEZZ_LIB Thread
         {
             public:
             /// @typedef native_handle_type
@@ -100,7 +102,7 @@ namespace Mezzanine
                 /// @brief Default constructor.
                 /// @details Construct a @c thread object without an associated thread of execution
                 /// (i.e. non-joinable).
-                thread() : mHandle(0), mNotAThread(true)
+                Thread() : mHandle(0), mNotAThread(true)
             #if defined(_MEZZ_WIN32_)
                 , mWin32ThreadID(0)
             #endif
@@ -110,7 +112,7 @@ namespace Mezzanine
                 /// @note may work in templates that do not attempt to pass values to threads, but not standard conformant.
                 /// @param[in] aFunction A function pointer to a function of type:
                 ///          @code void fun(void * arg) @endcode
-                explicit thread(void (*aFunction)(void *));
+                explicit Thread(void (*aFunction)(void *));
 
                 /// @brief Thread starting constructor.
                 /// @details Construct a @c thread object with a new thread of execution.
@@ -120,13 +122,13 @@ namespace Mezzanine
                 /// @note This constructor is not fully compatible with the standard C++
                 /// thread class. It is more similar to the pthread_create() (POSIX) and
                 /// CreateThread() (Windows) functions.
-                thread(void (*aFunction)(void *), void * aArg);
+                Thread(void (*aFunction)(void *), void * aArg);
 
                 /// @brief Destructor.
                 /// @note If the thread is joinable upon destruction, @c std::terminate()
                 /// will be called, which terminates the process. It is always wise to do
                 /// @c join() before deleting a thread object.
-                ~thread();
+                ~Thread();
 
                 /// @brief Wait for the thread to finish (join execution flows).
                 /// @details After calling @c join(), the thread object is no longer associated with
@@ -166,26 +168,25 @@ namespace Mezzanine
             private:
                 /// @brief Deleted assignment operator
                 #ifdef _MEZZ_CPP11_PARTIAL_
-                    thread& operator=(const thread&) = delete;
+                    Thread& operator=(const Thread&) = delete;
                 #else
-                    thread& operator=(const thread&);
+                    Thread& operator=(const Thread&);
                 #endif
 
                 /// @brief Deleted assignment operator copy constructor
                 #ifdef _MEZZ_CPP11_PARTIAL_
-                    thread(const thread&) = delete;
+                    Thread(const Thread&) = delete;
                 #else
-                    thread(const thread&);
+                    Thread(const Thread&);
                 #endif
 
 
                 native_handle_type mHandle;   ///< Thread handle.
-                mutable mutex mDataMutex;     ///< Serializer for access to the thread private data.
+                mutable Mutex mDataMutex;     ///< Serializer for access to the thread private data.
                 bool mNotAThread;             ///< True if this object is not a thread of execution.
             #if defined(_MEZZ_THREAD_WIN32_)
                 unsigned int mWin32ThreadID;  ///< Unique thread ID (filled out by _beginthreadex).
             #endif
-
 
             #if defined(_MEZZ_THREAD_WIN32_)
                 /// @brief This is the internal thread wrapper function.
@@ -198,7 +199,7 @@ namespace Mezzanine
 
         /// @brief The thread ID is a unique identifier for each thread.
         /// @see thread::get_id()
-        class MEZZ_LIB thread::id
+        class MEZZ_LIB Thread::id
         {
             public:
                 /// @brief Default constructor.
@@ -289,7 +290,7 @@ namespace Mezzanine
         {
             /// @brief Return the thread ID of the calling thread.
             /// @return A thread::id unique to this thread.
-            thread::id MEZZ_LIB get_id();
+            Thread::id MEZZ_LIB get_id();
 
             /// @brief Yield execution to another thread.
             /// @details Offers the operating system the opportunity to schedule another thread

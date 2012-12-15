@@ -208,8 +208,8 @@ void Sizes()
          << "WorkUnitMonpoly: " << sizeof(MonopolyWorkUnit) << endl
          << "DefaultThreadSpecificStorage::Type: " << sizeof(DefaultThreadSpecificStorage::Type) << endl
          << "FrameScheduler: " << sizeof(FrameScheduler) << endl
-         << "thread: " << sizeof(thread) << endl
-         << "mutex: " << sizeof(mutex) << endl
+         << "thread: " << sizeof(Thread) << endl
+         << "mutex: " << sizeof(Mutex) << endl
          << "Barrier: " << sizeof(Barrier) << endl
          << "vector<Whole>: " << sizeof(vector<Whole>) << endl
          << "vector<WorkUnit*>: " << sizeof(vector<Whole*>) << endl
@@ -265,7 +265,7 @@ void BasicThreading()
     cout << "This Threads id: " <<  Mezzanine::Threading::this_thread::get_id() << endl;
 
     cout << "Creating a thread with identifier T1 and unkown id." << endl;
-    Mezzanine::Threading::thread T1(PrintHello);
+    Mezzanine::Threading::Thread T1(PrintHello);
     cout << "T1 should have an id of: " << T1.get_id() << endl;
 
     cout << "Is T1 joinable: " << T1.joinable() << endl;
@@ -281,18 +281,18 @@ void BasicThreading()
 }
 
 /// @brief Used in @ref BasicMutex
-static Mezzanine::Threading::thread::id ThreadIDTest=0;
+static Mezzanine::Threading::Thread::id ThreadIDTest=0;
 /// @brief Used in @ref BasicMutex
-static Mezzanine::Threading::mutex ThreadIDLock;
+static Mezzanine::Threading::Mutex ThreadIDLock;
 /// @brief Used in @ref BasicMutex
 void PutIdInGlobal(void*)
 {
     cout << "Thread T2 trying to lock mutex ThreadIDLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadIDLock.lock();
+    ThreadIDLock.Lock();
     cout << "Thread T2 locked mutex: " << endl;
     ThreadIDTest = Mezzanine::Threading::this_thread::get_id();
     cout << "Thread T2 work complete unlocking mutex: " << endl;
-    ThreadIDLock.unlock();
+    ThreadIDLock.Unlock();
 }
 
 /// @brief The 'basicmutex' Test.
@@ -302,21 +302,21 @@ void BasicMutex()
 {
     cout << "Testing basic mutex functionality" << endl;
     cout << "Locking ThreadIDLock in thread: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadIDLock.lock();
+    ThreadIDLock.Lock();
 
     cout << "Creating a thread with identifier T2 and unkown id." << endl;
-    Mezzanine::Threading::thread T2(PutIdInGlobal);
+    Mezzanine::Threading::Thread T2(PutIdInGlobal);
 
     cout << "Storing T2's id: " << T2.get_id() << endl;
     cout << "Unlocking ThreadIDLock from main and sleeping for 300 ms." << endl;
-    Mezzanine::Threading::thread::id T2id = T2.get_id();
-    ThreadIDLock.unlock();
+    Mezzanine::Threading::Thread::id T2id = T2.get_id();
+    ThreadIDLock.Unlock();
     Mezzanine::Threading::this_thread::sleep_for(300000);
 
-    ThreadIDLock.lock();
+    ThreadIDLock.Lock();
     cout << "Does the thread report the same ID as we gathered: " << (ThreadIDTest == T2id) << endl;
     ThrowOnFalse(ThreadIDTest == T2id,"Does the thread report the same ID as we gathered");
-    ThreadIDLock.unlock();
+    ThreadIDLock.Unlock();
 
     cout << "Joining T2" << endl;
     T2.join();
@@ -325,17 +325,17 @@ void BasicMutex()
 /// @brief Used in @ref BasicThreadingPassing
 static Mezzanine::Integer ThreadPassTest=0;
 /// @brief Used in @ref BasicThreadingPassing
-static Mezzanine::Threading::mutex ThreadPassLock;
+static Mezzanine::Threading::Mutex ThreadPassLock;
 /// @brief Used in @ref BasicThreadingPassing
 /// @param Value The functionality being tested is that is passed correctly
 void SquareInThread(void* Value)
 {
     cout << "Thread T3 waiting for lock on mutex ThreadPassLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadPassLock.lock();
+    ThreadPassLock.Lock();
     cout << "Thread T3 locked mutex: " << endl;
     ThreadPassTest = *(Mezzanine::Integer*)Value * *(Mezzanine::Integer*)Value;
     cout << "Thread T3 work complete unlocking mutex: " << endl;
-    ThreadPassLock.unlock();
+    ThreadPassLock.Unlock();
 }
 
 /// @brief The 'basicthreadingpassing' Test.
@@ -345,22 +345,22 @@ void BasicThreadingPassing()
 {
     cout << "Testing passing to thread functionality" << endl;
     cout << "Locking ThreadPassLock in thread: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThreadPassLock.lock();
+    ThreadPassLock.Lock();
 
     cout << "Creating a thread with identifier T3 and unkown id." << endl;
     Mezzanine::Integer Value = 9;
     cout << "Passing " << Value << " into thread T3." << endl;
-    Mezzanine::Threading::thread T3(SquareInThread, &Value);
+    Mezzanine::Threading::Thread T3(SquareInThread, &Value);
 
     cout << "Unlocking ThreadPassLock from main and sleeping for 300 ms." << endl;
-    ThreadPassLock.unlock();
+    ThreadPassLock.Unlock();
     Mezzanine::Threading::this_thread::sleep_for(300000);
 
-    ThreadPassLock.lock();
+    ThreadPassLock.Lock();
     cout << "Thread gives us: " << ThreadPassTest << endl;
     cout << "Does the thread give us the square of what we passed it: " << (Value*Value == ThreadPassTest) << endl;
     ThrowOnFalse(Value*Value == ThreadPassTest,"Does the thread give us the square of what we passed it");
-    ThreadPassLock.unlock();
+    ThreadPassLock.Unlock();
 
     cout << "Joining T3" << endl;
     T3.join();
@@ -369,17 +369,17 @@ void BasicThreadingPassing()
 /// @brief Used in @ref BasicMutexTry
 static Mezzanine::Integer TryLockTest=0;
 /// @brief Used in @ref BasicMutexTry
-static Mezzanine::Threading::mutex TryLock;
+static Mezzanine::Threading::Mutex TryLock;
 /// @brief Used in @ref BasicMutexTry
 /// @param Value This is the a value passed into the thread to confirm that it works
 void TryToSquareInThread(void* Value)
 {
     cout << "Thread T4 trying to lock mutex ThreadPassLock, thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    if (TryLock.try_lock())
+    if (TryLock.TryLock())
     {
         cout << "Thread T4 locked mutex, Squaring the value " << endl;
         TryLockTest = *(Mezzanine::Integer*)Value * *(Mezzanine::Integer*)Value;
-        TryLock.unlock();
+        TryLock.Unlock();
     }else{
         cout << "Thread T4 could not acquire lock, no work done" << endl;
     }
@@ -393,13 +393,13 @@ void BasicMutexTry()
    cout << "Testing Mutex try_lock()" << endl;
 
     cout << "Locking TryLock in main thread with id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-    ThrowOnFalse(TryLock.try_lock(),"Locking TryLock in main thread");
+    ThrowOnFalse(TryLock.TryLock(),"Locking TryLock in main thread");
 
     Mezzanine::Integer Value = 9;
     cout << "Creating a thread with identifier T4 and unkown id." << endl;
     cout << "Passing " << Value << " into thread T4, and assigning to output and waiting 200ms." << endl;
     TryLockTest = Value;
-    Mezzanine::Threading::thread T4(TryToSquareInThread, &Value);
+    Mezzanine::Threading::Thread T4(TryToSquareInThread, &Value);
 
     Mezzanine::Threading::this_thread::sleep_for(300000);
 
@@ -407,7 +407,7 @@ void BasicMutexTry()
     T4.join();
 
     cout << "Unlocking TryLock." << endl;
-    TryLock.unlock();
+    TryLock.Unlock();
     cout << "Value from thread's return point is " << TryLockTest << " it should be " << Value << " if it wasn't able to get mutex" << endl;
     cout << "Did T4 not get the mutex and proceed past mutex as expected: " << (TryLockTest == Value) << endl;
     ThrowOnFalse(TryLockTest == Value,"Did T4 not get the mutex and proceed past mutex as expected");
@@ -697,13 +697,13 @@ class PiMakerMonopoly : public MonopolyWorkUnit
         virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
             Scheduler = CurrentThreadStorage.GetFrameScheduler();
-            vector<thread*> ThreadIndex;
+            vector<Thread*> ThreadIndex;
             vector<PiMakerThreadData*> ThreadData;
             for (Whole Count=0; Count<HowManyThreads; ++Count)      // Pretend making all this Pi simulates everyone in a Bakery baking at at once as hard as they can
             {
                 PiMakerThreadData* Data = new PiMakerThreadData(this);
                 ThreadData.push_back( Data );
-                ThreadIndex.push_back( new Mezzanine::Threading::thread (PiMakerMonopolyHelper, Data) );
+                ThreadIndex.push_back( new Mezzanine::Threading::Thread (PiMakerMonopolyHelper, Data) );
             }
             for (Whole Count=0; Count<HowManyThreads; ++Count)
             {
@@ -1802,10 +1802,10 @@ void BarrierTest()
     BarrierData2.push_back(0);
     BarrierData2.push_back(0);
 
-    Mezzanine::Threading::thread T1(BarrierTestHelper,&One);
-    Mezzanine::Threading::thread T2(BarrierTestHelper,&Two);
-    Mezzanine::Threading::thread T3(BarrierTestHelper,&Three);
-    Mezzanine::Threading::thread T4(BarrierTestHelper,&Four);
+    Mezzanine::Threading::Thread T1(BarrierTestHelper,&One);
+    Mezzanine::Threading::Thread T2(BarrierTestHelper,&Two);
+    Mezzanine::Threading::Thread T3(BarrierTestHelper,&Three);
+    Mezzanine::Threading::Thread T4(BarrierTestHelper,&Four);
     T1.join();
     T2.join();
     T3.join();

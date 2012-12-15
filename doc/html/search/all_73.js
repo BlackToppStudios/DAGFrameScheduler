@@ -9,6 +9,7 @@ var searchData=
   ['sortworkunitsaffinity',['SortWorkUnitsAffinity',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a80628895bdad74d03e5ac3b247e58741',1,'Mezzanine::Threading::FrameScheduler']]],
   ['sortworkunitsall',['SortWorkUnitsAll',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249',1,'Mezzanine::Threading::FrameScheduler']]],
   ['sortworkunitsmain',['SortWorkUnitsMain',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a9f2e92ae7cbd9e4179da6aa895d766fe',1,'Mezzanine::Threading::FrameScheduler']]],
+  ['startframesync',['StartFrameSync',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a2de903c082808da70dbf6f8420f45e86',1,'Mezzanine::Threading::FrameScheduler']]],
   ['starting',['Starting',['../namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f',1,'Mezzanine']]],
   ['status',['Status',['../classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a0d04c16c9715f662d128822a14cf6358',1,'Mezzanine::Threading::AsynchronousFileLoadWorkUnit']]],
   ['string',['String',['../namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67',1,'Mezzanine']]],

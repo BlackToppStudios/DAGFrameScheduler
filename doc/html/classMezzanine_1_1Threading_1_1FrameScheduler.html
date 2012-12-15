@@ -88,6 +88,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-types">Protected Types</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
@@ -106,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1FrameScheduler__coll__graph.svg" width="100%" height="318"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1FrameScheduler__coll__graph.svg" width="100%" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
@@ -115,25 +116,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a34ed4a9fd82b7f40af5d288462dc1754">FrameScheduler</a> (std::fstream *_LogDestination=new std::fstream(&quot;Log.txt&quot;, std::ios::out|std::ios::app), <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> StartingThreadCount=<a class="el" href="namespaceMezzanine.html#afc972295dbb71a9a6c2f57d5290caf46">GetCPUCount</a>())</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Framescheduler, that owns a filestream for logging.  <a href="#a34ed4a9fd82b7f40af5d288462dc1754"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Framescheduler that owns a filestream for logging.  <a href="#a34ed4a9fd82b7f40af5d288462dc1754"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa216416f31cab79eb433f4d76d48fe13">FrameScheduler</a> (std::ostream *_LogDestination, <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> StartingThreadCount=<a class="el" href="namespaceMezzanine.html#afc972295dbb71a9a6c2f57d5290caf46">GetCPUCount</a>())</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a Framescheduler, that logs to an unowned stream.  <a href="#aa216416f31cab79eb433f4d76d48fe13"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a1045e9a709d7366dded6cc670d474491">~FrameScheduler</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#a1045e9a709d7366dded6cc670d474491"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ade0d8966dff2c1fb2a87214a8069abf9">AddWorkUnit</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *MoreWork)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a normal WorkUnit to this For scheduling.  <a href="#ade0d8966dff2c1fb2a87214a8069abf9"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a normal <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> to this For fcheduling.  <a href="#ade0d8966dff2c1fb2a87214a8069abf9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9b910ace4574464bd2a5c7741a0d729c">AddWorkUnitAffinity</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *MoreWork)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a normal WorkUnit to this For scheduling.  <a href="#a9b910ace4574464bd2a5c7741a0d729c"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a normal <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> to this For scheduling.  <a href="#a9b910ace4574464bd2a5c7741a0d729c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#abdc9197afda420e075dc35e585c138fe">AddWorkUnitMonopoly</a> (<a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> *MoreWork)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> for execution at the beginning of the frame.  <a href="#abdc9197afda420e075dc35e585c138fe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae02f5ee5a78466652c0740109e919573">AreAllWorkUnitsComplete</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Is the work of the Frame Done?  <a href="#ae02f5ee5a78466652c0740109e919573"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e">CreateThreads</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the 3rd step (of 7) in a frame.  <a href="#aa2cc09939a4779cbb6c0affcb0b1431e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a93e8f9d384197837fcf8fc0f3c058a5c">DoOneFrame</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Do one frame worth of work.  <a href="#a93e8f9d384197837fcf8fc0f3c058a5c"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac70442ea5d71fcd1a9ff326c8519cd7f">GetDependentCountOf</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *Work, bool UsedCached=false)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many other WorkUnit instances must wait on this one.  <a href="#ac70442ea5d71fcd1a9ff326c8519cd7f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3d2a83c6411e7c5686c68cfc982b8236">GetFrameCount</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#acdd48a3537a712b752ef6c44c94ae0cc">GetCurrentFrameStart</a> () const </td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">When did this frame start?  <a href="#acdd48a3537a712b752ef6c44c94ae0cc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#adb40c934bc679ccf069af19d9dec32df">GetDependentCountOf</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *Work, bool UsedCachedDepedentGraph=false)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many other WorkUnit instances must wait on this one.  <a href="#adb40c934bc679ccf069af19d9dec32df"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3d2a83c6411e7c5686c68cfc982b8236">GetFrameCount</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current number of frames that have elapsed.  <a href="#a3d2a83c6411e7c5686c68cfc982b8236"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7af749e5eb3f5d53cc9b3fc122a03af6"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetFrameLength" ref="a7af749e5eb3f5d53cc9b3fc122a03af6" args="() const " -->
-<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a7af749e5eb3f5d53cc9b3fc122a03af6">GetFrameLength</a> () const </td></tr>
+virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a7af749e5eb3f5d53cc9b3fc122a03af6">GetFrameLength</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the desired length of a a frame. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4b969aa874a74fa503518d5e0b3a3bc">GetNextWorkUnit</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the next available workunit for execution.  <a href="#ad4b969aa874a74fa503518d5e0b3a3bc"></a><br/></td></tr>
@@ -141,57 +148,65 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Just like <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4b969aa874a74fa503518d5e0b3a3bc">GetNextWorkUnit</a> except that it searchs through and prioritizes work units with affinity.  <a href="#a63ecabada780522819ca611399e806c6"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a45299a4ebe34674b09c7b40ccccae8ce">GetThreadCount</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the amount of threads that will be used to execute WorkUnits a the start of the next frame.  <a href="#a45299a4ebe34674b09c7b40ccccae8ce"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a96d872719e50177ac5028c43bf68de21">JoinAllThreads</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the 5th step (of 7) in a frame.  <a href="#a96d872719e50177ac5028c43bf68de21"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae3d34cfcbafae9a60f43b0b6f81aabbe">RemoveWorkUnit</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *LessWork)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a WorkUnit, and regain ownership of it.  <a href="#ae3d34cfcbafae9a60f43b0b6f81aabbe"></a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a WorkUnit, and caller regains ownership of it.  <a href="#ae3d34cfcbafae9a60f43b0b6f81aabbe"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af11e18b5ea39b77fee60c3a3d0e65bd4">ResetAllWorkUnits</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Take any steps required to prepare all owned WorkUnits for execution next frame.  <a href="#af11e18b5ea39b77fee60c3a3d0e65bd4"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac8dfbc810d2d24bf4c5ba4bec6c08b5c"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::RunAllMonopolies" ref="ac8dfbc810d2d24bf4c5ba4bec6c08b5c" args="()" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>RunAllMonopolies</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4a987e5e743f49055f568876350792a4"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::RunFramePreliminaryWork" ref="a4a987e5e743f49055f568876350792a4" args="()" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>RunFramePreliminaryWork</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27b7bda2596fbbf669143688398f1fa5"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::RunMainThreadWork" ref="a27b7bda2596fbbf669143688398f1fa5" args="()" -->
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>RunMainThreadWork</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8e0872f75c8fecf19c452a478ea6234">SetFrameLength</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> FrameLength)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the 6th step (of 7) in a frame.  <a href="#af11e18b5ea39b77fee60c3a3d0e65bd4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8dfbc810d2d24bf4c5ba4bec6c08b5c">RunAllMonopolies</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the 2nd step (of 7) in a frame.  <a href="#ac8dfbc810d2d24bf4c5ba4bec6c08b5c"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4a987e5e743f49055f568876350792a4">RunFramePreliminaryWork</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the 1st step (of 7) in a frame.  <a href="#a4a987e5e743f49055f568876350792a4"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5">RunMainThreadWork</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the 4th step (of 7) in a frame.  <a href="#a27b7bda2596fbbf669143688398f1fa5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8e0872f75c8fecf19c452a478ea6234">SetFrameLength</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> FrameLength)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Desired length of a frame in microseconds.  <a href="#ac8e0872f75c8fecf19c452a478ea6234"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">SetFrameRate</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> FrameRate)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">SetFrameRate</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> FrameRate)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the desired Frate rate.  <a href="#a4f018d5cd5f64a25dddd274068177add"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a810bda1947bafd31168e02d391b709ad">SetThreadCount</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> NewThreadCount)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the amount of thread to use.  <a href="#a810bda1947bafd31168e02d391b709ad"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a80628895bdad74d03e5ac3b247e58741">SortWorkUnitsAffinity</a> (bool UpdateDependentGraph_=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a80628895bdad74d03e5ac3b247e58741">SortWorkUnitsAffinity</a> (bool UpdateDependentGraph_=true)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.  <a href="#a80628895bdad74d03e5ac3b247e58741"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">SortWorkUnitsAll</a> (bool UpdateDependentGraph_=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">SortWorkUnitsAll</a> (bool UpdateDependentGraph_=true)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort all the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.  <a href="#a518ad64baf64d3dde2819aa580055249"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9f2e92ae7cbd9e4179da6aa895d766fe">SortWorkUnitsMain</a> (bool UpdateDependentGraph_=true)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9f2e92ae7cbd9e4179da6aa895d766fe">SortWorkUnitsMain</a> (bool UpdateDependentGraph_=true)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sort the the main pool of WorkUnits to allow them to be used more efficiently in the next frame executed.  <a href="#a9f2e92ae7cbd9e4179da6aa895d766fe"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aabdf0812101f82b466affd6f67524226"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::UpdateDependentGraph" ref="aabdf0812101f82b466affd6f67524226" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateDependentGraph</b> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aabdf0812101f82b466affd6f67524226">UpdateDependentGraph</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a reverse depedent graph that can be used for sorting <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s to optimize execution each frame.  <a href="#aabdf0812101f82b466affd6f67524226"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac59d45091a7758912f9e7c7871c7c5d9">WaitUntilNextThread</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is the final step (of 7) in a frame.  <a href="#ac59d45091a7758912f9e7c7871c7c5d9"></a><br/></td></tr>
+<tr><td colspan="2"><h2><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4455ca06523e2c66662e0db1ad01c344"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::EndFrameSync" ref="a4455ca06523e2c66662e0db1ad01c344" args="" -->
+<a class="el" href="classMezzanine_1_1Threading_1_1Barrier.html">Barrier</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4455ca06523e2c66662e0db1ad01c344">EndFrameSync</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to synchronize the starting an stopping of all threads after work is done before the frame ends. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e39e9398299781251e9acfd0049560a"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::LastFrame" ref="a9e39e9398299781251e9acfd0049560a" args="" -->
+<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9e39e9398299781251e9acfd0049560a">LastFrame</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">When using barriers instead of thread creation for synchronization this is what tells the threads to end. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2de903c082808da70dbf6f8420f45e86"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::StartFrameSync" ref="a2de903c082808da70dbf6f8420f45e86" args="" -->
+<a class="el" href="classMezzanine_1_1Threading_1_1Barrier.html">Barrier</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a2de903c082808da70dbf6f8420f45e86">StartFrameSync</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to synchronize the starting an stopping of all threads before the frame starts. <br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-types"></a>
 Protected Types</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af4a05091447afb8186d6fe46878d3de6"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::DependentGraphType" ref="af4a05091447afb8186d6fe46878d3de6" args="" -->
 typedef std::map&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> <br class="typebreak"/>
 *, std::set&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af4a05091447afb8186d6fe46878d3de6">DependentGraphType</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure designed to minimalistically reprsent Dependency and Reverse Dependency Graphs in work units. <br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A structure designed to minimalistically represent Dependency and Reverse Dependency Graphs in work units. <br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abdce245f524a924465319eac717ade6b"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::CleanUpThreads" ref="abdce245f524a924465319eac717ade6b" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>CleanUpThreads</b> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa2cc09939a4779cbb6c0affcb0b1431e"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::CreateThreads" ref="aa2cc09939a4779cbb6c0affcb0b1431e" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e">CreateThreads</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Create more threads if they are required. <br/></td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#abdce245f524a924465319eac717ade6b">CleanUpThreads</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used in destruction to tear down threads. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57da35b4670733d62dfd7baaf3af3c90"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::DeleteThreads" ref="a57da35b4670733d62dfd7baaf3af3c90" args="()" -->
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a57da35b4670733d62dfd7baaf3af3c90">DeleteThreads</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Simply iterates over and deletes everything in Threads. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad10391522f786d4b5644362aa5e75897">GetLog</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the endpoint for the logs.  <a href="#ad10391522f786d4b5644362aa5e75897"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a96d872719e50177ac5028c43bf68de21"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::JoinAllThreads" ref="a96d872719e50177ac5028c43bf68de21" args="()" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a96d872719e50177ac5028c43bf68de21">JoinAllThreads</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used when completing the work of a frame, to cleaning end the execution of the threads. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba3be4eae7e87a5021fc33c2edefaa04"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::UpdateDependentGraph" ref="aba3be4eae7e87a5021fc33c2edefaa04" args="(const std::vector&lt; WorkUnitKey &gt; &amp;Units)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateDependentGraph</b> (const std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt; &amp;Units)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1743f13fdd9ef1445495ab0e24025765"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::UpdateWorkUnitKeys" ref="a1743f13fdd9ef1445495ab0e24025765" args="(std::vector&lt; WorkUnitKey &gt; &amp;Units)" -->
-void&#160;</td><td class="memItemRight" valign="bottom"><b>UpdateWorkUnitKeys</b> (std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt; &amp;Units)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac59d45091a7758912f9e7c7871c7c5d9">WaitUntilNextThread</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait until enough time has elapsed to allow each frame an equal amount of time in one second if as many frames as the target framerate are run.  <a href="#ac59d45091a7758912f9e7c7871c7c5d9"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aba3be4eae7e87a5021fc33c2edefaa04">UpdateDependentGraph</a> (const std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt; &amp;Units)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the dependencies of the <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s in the passed containter to the the internal reverse dependency graph.  <a href="#aba3be4eae7e87a5021fc33c2edefaa04"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a1743f13fdd9ef1445495ab0e24025765">UpdateWorkUnitKeys</a> (std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt; &amp;Units)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Iterate over the passed container of <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>s and refresh them with the correct data from their respective <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s.  <a href="#a1743f13fdd9ef1445495ab0e24025765"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2c2540f09e443e7d9f8bd2ed48354f93"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::CurrentFrameStart" ref="a2c2540f09e443e7d9f8bd2ed48354f93" args="" -->
@@ -199,32 +214,31 @@ Protected Attributes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">What time did the current Frame Start at. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a57b119db75cf6fbde2fbfccf60700d41"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::CurrentThreadCount" ref="a57b119db75cf6fbde2fbfccf60700d41" args="" -->
 <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a57b119db75cf6fbde2fbfccf60700d41">CurrentThreadCount</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many threads with this try to execute with in the next frame. <br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">How many threads will this try to execute with in the next frame. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af4a05091447afb8186d6fe46878d3de6">DependentGraphType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This structure allows reverse lookup of dependencies.  <a href="#a3480908d1f06458466b312857570e3cf"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad4d36e8edc6bb1a6a41fe7d8663648a8"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::FrameCount" ref="ad4d36e8edc6bb1a6a41fe7d8663648a8" args="" -->
-<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4d36e8edc6bb1a6a41fe7d8663648a8">FrameCount</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to store a count of frames from the begining of game execution. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4d36e8edc6bb1a6a41fe7d8663648a8">FrameCount</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to store a count of frames from the begining of game execution.  <a href="#ad4d36e8edc6bb1a6a41fe7d8663648a8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4991c125aa7248299c972ed03f4761dd"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::LogDestination" ref="a4991c125aa7248299c972ed03f4761dd" args="" -->
 std::ostream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4991c125aa7248299c972ed03f4761dd">LogDestination</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">When the logs are aggregated, this is where they are sent. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a19c6d385c64e59726136e8a0ef3f3680"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::LoggingToAnOwnedFileStream" ref="a19c6d385c64e59726136e8a0ef3f3680" args="" -->
 bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a19c6d385c64e59726136e8a0ef3f3680">LoggingToAnOwnedFileStream</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Set based on which constructor is called, and only used during destruction. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a60313dceefc4de90fe2cd9f1d3992569"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::Monopolies" ref="a60313dceefc4de90fe2cd9f1d3992569" args="" -->
-std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a60313dceefc4de90fe2cd9f1d3992569">Monopolies</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of all the monopolies this scheduler must run and keep ownership of. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector<br class="typebreak"/>
 &lt; <a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4c5adabd75af9115c207f8c2f34866e8">Resources</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This maintains ownership of all the thread specific resources.  <a href="#a4c5adabd75af9115c207f8c2f34866e8"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a7001be079381b43292fdcf1089fd81d7"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::TargetFrameLength" ref="a7001be079381b43292fdcf1089fd81d7" args="" -->
 <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a7001be079381b43292fdcf1089fd81d7">TargetFrameLength</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">The Maximum frame rate this algorithm should run at. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1thread.html">thread</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a038d4cf03d50e60b38e5e4ef4a8d0209">Threads</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A way to track an arbitrary number of threads.  <a href="#a038d4cf03d50e60b38e5e4ef4a8d0209"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1Thread.html">Thread</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aaff58e33e8837a2aad9391a9d6a0dc84">Threads</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A way to track an arbitrary number of threads.  <a href="#aaff58e33e8837a2aad9391a9d6a0dc84"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae1494801b8b8c6f041d19abd9a332e46"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::TimingCostAllowance" ref="ae1494801b8b8c6f041d19abd9a332e46" args="" -->
 <a class="el" href="namespaceMezzanine.html#ad03e394cd98434cc30bc665e8f2ba30f">Integer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae1494801b8b8c6f041d19abd9a332e46">TimingCostAllowance</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">To prevent frame time drift this many microseconds is subtracted from the wait period to allow time for calculations. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a794eea3f815618c891e673f59747ffa8"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::WorkUnitMonopolies" ref="a794eea3f815618c891e673f59747ffa8" args="" -->
+std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a794eea3f815618c891e673f59747ffa8">WorkUnitMonopolies</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of all the monopolies this scheduler must run and keep ownership of. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a83bf2421d69556aa4d1a2efc6f88290d">WorkUnitsAffinity</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A collection of <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s that must be run on the main thread.  <a href="#a83bf2421d69556aa4d1a2efc6f88290d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af5c99359d324eb79b9080464b32be098">WorkUnitsMain</a></td></tr>
@@ -267,7 +281,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 <div class="memdoc">
 
-<p>Create a Framescheduler, that owns a filestream for logging. </p>
+<p>Create a Framescheduler that owns a filestream for logging. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">_LogDestination</td><td>An fstream that will be closed and deleted when this framescheduler is destroyed. Defaults to a new Filestream Logging to 'Log.txt'. </td></tr>
@@ -277,7 +291,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This must be constructed from the Main(only) thread for any features with thread affinity to work correctly. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00227">227</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00161">161</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -316,7 +330,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </dl>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This must be constructed from the Main(only) thread for any features with thread affinity to work correctly. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00241">241</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00175">175</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -337,7 +351,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>Destructor. </p>
 <p>Deletes all std::fstream, WorkUnit, <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads.">MonopolyWorkUnit</a> and <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a> objects that this was passed or created during its lifetime. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00255">255</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00189">189</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -357,7 +371,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 <div class="memdoc">
 
-<p>Add a normal WorkUnit to this For scheduling. </p>
+<p>Add a normal <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> to this For fcheduling. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">MoreWork</td><td>A pointer the the WorkUnit, that the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> will take ownership of, and schedule for work. </td></tr>
@@ -365,7 +379,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00273">273</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00209">209</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -384,7 +398,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 <div class="memdoc">
 
-<p>Add a normal WorkUnit to this For scheduling. </p>
+<p>Add a normal <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> to this For scheduling. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">MoreWork</td><td>A pointer the the WorkUnit, that the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> will take ownership of, and schedule for work. </td></tr>
@@ -392,7 +406,34 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00276">276</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00212">212</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abdc9197afda420e075dc35e585c138fe"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::AddWorkUnitMonopoly" ref="abdc9197afda420e075dc35e585c138fe" args="(MonopolyWorkUnit *MoreWork)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#abdc9197afda420e075dc35e585c138fe">Mezzanine::Threading::FrameScheduler::AddWorkUnitMonopoly</a> </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> *&#160;</td>
+          <td class="paramname"><em>MoreWork</em></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Add a <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> for execution at the beginning of the frame. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">MoreWork</td><td>A pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> to add. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00215">215</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -413,7 +454,31 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>Is the work of the Frame Done? </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>This returns true if all the WorkUnit instances are complete, and false otherwise. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00345">345</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00312">312</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aa2cc09939a4779cbb6c0affcb0b1431e"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::CreateThreads" ref="aa2cc09939a4779cbb6c0affcb0b1431e" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e">Mezzanine::Threading::FrameScheduler::CreateThreads</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This is the 3rd step (of 7) in a frame. </p>
+<p>This starts all the threads on their work. Until <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a96d872719e50177ac5028c43bf68de21">JoinAllThreads()</a> is called some thread may still be working. This thread starts the man <a class="el" href="index.html#algorithm_sec">scheduling algorithm</a> working on every thread except the calling thread. This call does not block and tends to return very quickly. <br/>
+ <br/>
+ This checks the amount of threads as set by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8e0872f75c8fecf19c452a478ea6234">SetFrameLength(Whole)</a>. It creates any <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a> instances required and creates threads if they are required. If the build option <a class="el" href="compilerthreadcompat_8h.html#a922f06bad05fd18425c1c933801686d3">MEZZ_USEBARRIERSEACHFRAME</a> Mezz_MinimizeThreadsEachFrame was enabled then this will reuse threads from previous frames, otherwise this will re-use thread specific resources and create a new set of threads. Re-use of threads is synchronized with the <a class="el" href="classMezzanine_1_1Threading_1_1Barrier.html">Barrier</a> StartFrameSync member variable. It is unclear, and likely platform specific, which option has better performance characteristics. </p>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>While this is running any changes to the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> be made with an atomic operation like the <a class="el" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b">AtomicCompareAndSwap32</a> or <a class="el" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d">AtomicAdd</a>. Any other threads <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a> or workunit may be accessed as long as they are protected by some kind of synchronization mechanism. </dd></dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00389">389</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -432,19 +497,51 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <div class="memdoc">
 
 <p>Do one frame worth of work. </p>
-<p>Every Monopoly will be executed once and each work unit will be executed once. </p>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Do not call this on an unsorted set of WorkUnits. Use <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">FrameScheduler::SortWorkUnitsAll()</a> and <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> to sort WorkUnits after They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just the frames new WorkUnits are added. </dd></dl>
+<p>This just calls the following functions in the order presented: </p>
+<div class="fragment"><pre class="fragment"> <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a93e8f9d384197837fcf8fc0f3c058a5c" title="Do one frame worth of work.">FrameScheduler::DoOneFrame</a>()
+ {
+   <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4a987e5e743f49055f568876350792a4" title="This is the 1st step (of 7) in a frame.">RunFramePreliminaryWork</a>();
+   <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8dfbc810d2d24bf4c5ba4bec6c08b5c" title="This is the 2nd step (of 7) in a frame.">RunAllMonopolies</a>();
+   <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e" title="This is the 3rd step (of 7) in a frame.">CreateThreads</a>();
+   <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5" title="This is the 4th step (of 7) in a frame.">RunMainThreadWork</a>();
+   <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a96d872719e50177ac5028c43bf68de21" title="This is the 5th step (of 7) in a frame.">JoinAllThreads</a>();
+   <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af11e18b5ea39b77fee60c3a3d0e65bd4" title="This is the 6th step (of 7) in a frame.">ResetAllWorkUnits</a>();
+   <a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac59d45091a7758912f9e7c7871c7c5d9" title="This is the final step (of 7) in a frame.">WaitUntilNextThread</a>();
+ }
+</pre></div><p> This can be replaced calling these functions in this order. You can add any other calls you like between the various stages. This can be done to allow maximum integration with existing projects. It can also be used to prevent a giant migration and replace it with a piecemeal upgrade. </p>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Do not call this on an unsorted set of WorkUnits. Use <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">FrameScheduler::SortWorkUnitsAll()</a> and the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> to sort WorkUnits after They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just after any new work units are added or removed (except Monopolies). </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00369">369</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="ac70442ea5d71fcd1a9ff326c8519cd7f"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetDependentCountOf" ref="ac70442ea5d71fcd1a9ff326c8519cd7f" args="(iWorkUnit *Work, bool UsedCached=false)" -->
+<a class="anchor" id="acdd48a3537a712b752ef6c44c94ae0cc"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetCurrentFrameStart" ref="acdd48a3537a712b752ef6c44c94ae0cc" args="() const " -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac70442ea5d71fcd1a9ff326c8519cd7f">Mezzanine::Threading::FrameScheduler::GetDependentCountOf</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a> <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#acdd48a3537a712b752ef6c44c94ae0cc">Mezzanine::Threading::FrameScheduler::GetCurrentFrameStart</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const<code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>When did this frame start? </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A MaxInt with the timestamp corresponding to when this frame started. </dd></dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00363">363</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adb40c934bc679ccf069af19d9dec32df"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::GetDependentCountOf" ref="adb40c934bc679ccf069af19d9dec32df" args="(iWorkUnit *Work, bool UsedCachedDepedentGraph=false)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#adb40c934bc679ccf069af19d9dec32df">Mezzanine::Threading::FrameScheduler::GetDependentCountOf</a> </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *&#160;</td>
           <td class="paramname"><em>Work</em>, </td>
@@ -453,7 +550,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>UsedCached</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>UsedCachedDepedentGraph</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -468,13 +565,13 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">Work</td><td>The WorkUnit to get the Updated count of. </td></tr>
-    <tr><td class="paramname">UsedCached</td><td>If the cache is already up to date leaving this false, and not updating it can save significant time. </td></tr>
+    <tr><td class="paramname">UsedCachedDepedentGraph</td><td>If the cache is already up to date leaving this false, and not updating it can save significant time. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole Number representing the amount of WorkUnit instances that cannot start until this finishes. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00307">307</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00277">277</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -486,7 +583,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td class="memname"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3d2a83c6411e7c5686c68cfc982b8236">Mezzanine::Threading::FrameScheduler::GetFrameCount</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td> const<code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -495,7 +592,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>Get the current number of frames that have elapsed. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the Frame Count. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00439">439</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00340">340</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -516,7 +613,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>Get the endpoint for the logs. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>An std:ostream reference which can be streame to commit log entries. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00120">120</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00121">121</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -539,7 +636,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the WorkUnit that could be executed or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00322">322</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00289">289</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -561,7 +658,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit. </dd></dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00333">333</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00300">300</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -582,7 +679,28 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>Get the amount of threads that will be used to execute WorkUnits a the start of the next frame. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole with the current desired thread count. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00363">363</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00357">357</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a96d872719e50177ac5028c43bf68de21"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::JoinAllThreads" ref="a96d872719e50177ac5028c43bf68de21" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a96d872719e50177ac5028c43bf68de21">Mezzanine::Threading::FrameScheduler::JoinAllThreads</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This is the 5th step (of 7) in a frame. </p>
+<p>Used when completing the work of a frame, to cleaning end the execution of the threads. This function will only return when all the work started by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e">CreateThreads()</a> and <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5">RunMainThreadWork()</a> have completed. This call blocks until all threads executing. If a thread takes too long then this simply waits for it to finish. No attempt is made to timeout or interupt a work unit before it finishes. </p>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00419">419</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -601,7 +719,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 <div class="memdoc">
 
-<p>Remove a WorkUnit, and regain ownership of it. </p>
+<p>Remove a WorkUnit, and caller regains ownership of it. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">LessWork</td><td>a pointer to a WorkUnit that should no longer be scheduled.</td></tr>
@@ -611,7 +729,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>This is relative slow compared to adding or finding a working unit, this works in linear time relative to the number of WorkUnits in the scheduler. </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This does not cleanup dependencies and can get you in trouble if other work units depend on the one removed </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00279">279</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00246">246</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -629,10 +747,74 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 <div class="memdoc">
 
-<p>Take any steps required to prepare all owned WorkUnits for execution next frame. </p>
+<p>This is the 6th step (of 7) in a frame. </p>
+<p>Take any steps required to prepare all owned WorkUnits for execution next frame. This usually includes reseting all the work units running state to <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70">NotStarted</a>. This can cause work units to be executed multiple times if a thread is still executing. </p>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>could be replace with a parallel for, or a monopoly </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00394">394</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00434">434</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac8dfbc810d2d24bf4c5ba4bec6c08b5c"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::RunAllMonopolies" ref="ac8dfbc810d2d24bf4c5ba4bec6c08b5c" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8dfbc810d2d24bf4c5ba4bec6c08b5c">Mezzanine::Threading::FrameScheduler::RunAllMonopolies</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This is the 2nd step (of 7) in a frame. </p>
+<p>This Iterates over the listing of <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a>s and executes each one in the order it was added. This should be considered as consuming all available CPU time until it returns. This call blocks until execution of monopolies is complete. </p>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00383">383</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4a987e5e743f49055f568876350792a4"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::RunFramePreliminaryWork" ref="a4a987e5e743f49055f568876350792a4" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4a987e5e743f49055f568876350792a4">Mezzanine::Threading::FrameScheduler::RunFramePreliminaryWork</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This is the 1st step (of 7) in a frame. </p>
+<p>This captures the frame start time for use in later metrics. This time can retrieved with <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#acdd48a3537a712b752ef6c44c94ae0cc">GetCurrentFrameStart()</a>. Other functionality may be added later. </p>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00380">380</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a27b7bda2596fbbf669143688398f1fa5"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::RunMainThreadWork" ref="a27b7bda2596fbbf669143688398f1fa5" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5">Mezzanine::Threading::FrameScheduler::RunMainThreadWork</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This is the 4th step (of 7) in a frame. </p>
+<p>This runs the main portion of the <a class="el" href="index.html#algorithm_sec">scheduling algorithm</a> on the main thread. This call blocks until the execution of all workunits with main thread affinity are complete and all other work units have at least started. This could return and other threads could still be working. </p>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00414">414</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -645,7 +827,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td>
           <td class="paramname"><em>FrameLength</em></td><td>)</td>
-          <td></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -659,7 +841,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00453">453</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00354">354</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -672,7 +854,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td>(</td>
           <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td>
           <td class="paramname"><em>FrameRate</em></td><td>)</td>
-          <td></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -690,7 +872,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
  Set this to 0 to never pause and run as fast as possible. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole containing the Target frame rate. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00445">445</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00346">346</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -716,8 +898,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
   </table>
   </dd>
 </dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>Currently the thread count cannot be reduced if Mezz_MinimizeThreadsEachFrame is selected in cmake configuration. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00366">366</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00360">360</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -730,7 +913,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>UpdateDependentGraph_</em> = <code>true</code></td><td>)</td>
-          <td></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -745,7 +928,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </dl>
 <p>See <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> for the appropriate times to use this. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00413">413</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00229">229</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +941,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>UpdateDependentGraph_</em> = <code>true</code></td><td>)</td>
-          <td></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -773,7 +956,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </dl>
 <p>See <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> for the appropriate times to use this. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00424">424</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00240">240</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -786,7 +969,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td>(</td>
           <td class="paramtype">bool&#160;</td>
           <td class="paramname"><em>UpdateDependentGraph_</em> = <code>true</code></td><td>)</td>
-          <td></td>
+          <td><code> [virtual]</code></td>
         </tr>
       </table>
 </div>
@@ -800,9 +983,83 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
   </dd>
 </dl>
 <p>See <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf">DependentGraph</a> for the appropriate times to use this. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>make the contents of this a function to reduce code duplication </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00401">401</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00218">218</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aba3be4eae7e87a5021fc33c2edefaa04"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::UpdateDependentGraph" ref="aba3be4eae7e87a5021fc33c2edefaa04" args="(const std::vector&lt; WorkUnitKey &gt; &amp;Units)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aba3be4eae7e87a5021fc33c2edefaa04">Mezzanine::Threading::FrameScheduler::UpdateDependentGraph</a> </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Units</em></td><td>)</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Adds the dependencies of the <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s in the passed containter to the the internal reverse dependency graph. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Units</td><td>The container to examine for dependency relationships. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00141">141</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aabdf0812101f82b466affd6f67524226"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::UpdateDependentGraph" ref="aabdf0812101f82b466affd6f67524226" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aba3be4eae7e87a5021fc33c2edefaa04">Mezzanine::Threading::FrameScheduler::UpdateDependentGraph</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td><code> [virtual]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Create a reverse depedent graph that can be used for sorting <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s to optimize execution each frame. </p>
+<p>This can be called automatically from any of several places that make sense by passing a boolean true value. These place include create a <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> or Sorting the work units in a framescheduler. </p>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00330">330</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1743f13fdd9ef1445495ab0e24025765"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::UpdateWorkUnitKeys" ref="a1743f13fdd9ef1445495ab0e24025765" args="(std::vector&lt; WorkUnitKey &gt; &amp;Units)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a1743f13fdd9ef1445495ab0e24025765">Mezzanine::Threading::FrameScheduler::UpdateWorkUnitKeys</a> </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>Units</em></td><td>)</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Iterate over the passed container of <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>s and refresh them with the correct data from their respective <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Units</td><td>The container to examine for <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> metadata. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00153">153</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -814,16 +1071,18 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
           <td class="memname">void <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac59d45091a7758912f9e7c7871c7c5d9">Mezzanine::Threading::FrameScheduler::WaitUntilNextThread</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td><code> [protected]</code></td>
+          <td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Wait until enough time has elapsed to allow each frame an equal amount of time in one second if as many frames as the target framerate are run. </p>
-<p>Wait 1/TargetFrame Seconds, minus time already run. </p>
+<p>This is the final step (of 7) in a frame. </p>
+<p>Wait until this frame has consumed its fair share of a second. This uses the value passed in <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">SetFrameRate(Whole)</a> to determine what portion of a second each frame should use. If a frame took too long to execute this calculates that and returns. <br/>
+ <br/>
+ Wait 1/TargetFrame Seconds, minus time already run. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00180">180</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00441">441</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
 </div>
 </div>
@@ -840,10 +1099,29 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <div class="memdoc">
 
 <p>This structure allows reverse lookup of dependencies. </p>
-<p>This is is a key part of the workunit sorting algorithm. This is calculated </p>
+<p>This is is a key part of the workunit sorting algorithm. This is calculated during calls to generate <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>s, </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd></dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>write this warning, it is important, but not easy to lay out. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00101">101</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00107">107</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad4d36e8edc6bb1a6a41fe7d8663648a8"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::FrameCount" ref="ad4d36e8edc6bb1a6a41fe7d8663648a8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4d36e8edc6bb1a6a41fe7d8663648a8">Mezzanine::Threading::FrameScheduler::FrameCount</a><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Used to store a count of frames from the begining of game execution. </p>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>At 60 Frames per second this loops in 2 years, 3 months, 6 days and around 18 hours, this may not be suitable for high uptime servers. Using a MaxInt fixes this. </dd></dl>
+
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00144">144</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
 </div>
 </div>
@@ -861,25 +1139,25 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>This maintains ownership of all the thread specific resources. </p>
 <dl class="note"><dt><b>Note:</b></dt><dd>There should be the same amount of more these than entries in the Threads vector. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00105">105</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00111">111</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
 </div>
 </div>
-<a class="anchor" id="a038d4cf03d50e60b38e5e4ef4a8d0209"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::Threads" ref="a038d4cf03d50e60b38e5e4ef4a8d0209" args="" -->
+<a class="anchor" id="aaff58e33e8837a2aad9391a9d6a0dc84"></a><!-- doxytag: member="Mezzanine::Threading::FrameScheduler::Threads" ref="aaff58e33e8837a2aad9391a9d6a0dc84" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classMezzanine_1_1Threading_1_1thread.html">thread</a>*&gt; <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a038d4cf03d50e60b38e5e4ef4a8d0209">Mezzanine::Threading::FrameScheduler::Threads</a><code> [protected]</code></td>
+          <td class="memname">std::vector&lt;<a class="el" href="classMezzanine_1_1Threading_1_1Thread.html">Thread</a>*&gt; <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aaff58e33e8837a2aad9391a9d6a0dc84">Mezzanine::Threading::FrameScheduler::Threads</a><code> [protected]</code></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
 <p>A way to track an arbitrary number of threads. </p>
-<dl class="note"><dt><b>Note:</b></dt><dd>There should never be more of these than Resources, and if there are more at the beginning of a frame the resources will be created in <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e" title="Create more threads if they are required.">CreateThreads()</a>. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>There should never be more of these than Resources, and if there are more at the beginning of a frame the resources will be created in <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e" title="This is the 3rd step (of 7) in a frame.">CreateThreads()</a>. </dd></dl>
 
-<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00109">109</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00115">115</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
 </div>
 </div>
@@ -897,7 +1175,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>A collection of <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s that must be run on the main thread. </p>
 <p>This is very similar to <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af5c99359d324eb79b9080464b32be098">WorkUnitsMain</a> except that the <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s are only run in the main thread and are sorted by calls to <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">SortWorkUnitsAll</a> or <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a80628895bdad74d03e5ac3b247e58741">SortWorkUnitsAffinity</a> . </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00090">90</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00094">94</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
 </div>
 </div>
@@ -913,9 +1191,9 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <div class="memdoc">
 
 <p>A collection of all the work units that are not Monopolies and do not have affinity for a given thread. </p>
-<p>This stores a sorted listing(currently a vector) of <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> instances. These include just the metadata required for sorting <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s. Higher priority <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s are higher/later in the collection. This is list is sorted by calls to <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9f2e92ae7cbd9e4179da6aa895d766fe">SortWorkUnitsMain</a> or <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">SortWorkUnitsAll</a>. </p>
+<p>This stores a sorted listing(currently a vector) of <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a> instances. These include just the metadata required for sorting <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s. Higher priority <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a>s are higher/later in the collection. This list is sorted by calls to <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9f2e92ae7cbd9e4179da6aa895d766fe">SortWorkUnitsMain</a> or <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a518ad64baf64d3dde2819aa580055249">SortWorkUnitsAll</a>. </p>
 
-<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00085">85</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
+<p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00089">89</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
 </div>
 </div>
@@ -939,6 +1217,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 13 2012 22:57:19 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sat Dec 15 2012 00:27:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

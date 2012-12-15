@@ -43,32 +43,32 @@ var sectionId = 'dynsection-1';
 <polygon fill="white" stroke="white" points="-4,5 -4,-388 970,-388 970,5 -4,5"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<polygon fill="#bfbfbf" stroke="black" points="198.5,-361 198.5,-383 249.5,-383 249.5,-361 198.5,-361"/>
-<text text-anchor="middle" x="224" y="-370" font-family="FreeSans" font-size="10.00">mutex.h</text>
+<polygon fill="#bfbfbf" stroke="black" points="294.5,-361 294.5,-383 345.5,-383 345.5,-361 294.5,-361"/>
+<text text-anchor="middle" x="320" y="-370" font-family="FreeSans" font-size="10.00">mutex.h</text>
 </g>
 <!-- Node2 -->
 <g id="node3" class="node"><title>Node2</title>
 <a xlink:href="thread_8h.html" target="_top" xlink:title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks...">
-<polygon fill="white" stroke="black" points="197.5,-301 197.5,-323 250.5,-323 250.5,-301 197.5,-301"/>
-<text text-anchor="middle" x="224" y="-310" font-family="FreeSans" font-size="10.00">thread.h</text>
+<polygon fill="white" stroke="black" points="245.5,-301 245.5,-323 298.5,-323 298.5,-301 245.5,-301"/>
+<text text-anchor="middle" x="272" y="-310" font-family="FreeSans" font-size="10.00">thread.h</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge2" class="edge"><title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M224,-350.918C224,-341.639 224,-331.108 224,-323.343"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="220.5,-350.995 224,-360.995 227.5,-350.995 220.5,-350.995"/>
+<path fill="none" stroke="midnightblue" d="M304.81,-353.013C297.006,-343.258 287.759,-331.699 281.074,-323.343"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="302.216,-355.373 311.196,-360.995 307.682,-351 302.216,-355.373"/>
 </g>
 <!-- Node4 -->
 <g id="node7" class="node"><title>Node4</title>
-<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the defintion of the workunit.">
+<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit.">
 <polygon fill="white" stroke="black" points="338.5,-181 338.5,-203 399.5,-203 399.5,-181 338.5,-181"/>
 <text text-anchor="middle" x="369" y="-190" font-family="FreeSans" font-size="10.00">workunit.h</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node4 -->
-<g id="edge50" class="edge"><title>Node1&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M247.101,-354.498C271.934,-334.732 311.298,-300.531 337,-264 350.775,-244.422 360.67,-217.965 365.553,-203.183"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="244.683,-351.946 238.969,-360.867 249,-357.456 244.683,-351.946"/>
+<g id="edge52" class="edge"><title>Node1&#45;&gt;Node4</title>
+<path fill="none" stroke="midnightblue" d="M325.812,-350.65C336.273,-312.221 357.928,-232.672 365.936,-203.256"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="322.315,-350.172 323.065,-360.74 329.069,-352.011 322.315,-350.172"/>
 </g>
 <!-- Node8 -->
 <g id="node15" class="node"><title>Node8</title>
@@ -79,8 +79,20 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node1&#45;&gt;Node8 -->
 <g id="edge48" class="edge"><title>Node1&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M188.356,-369.058C125.145,-361.681 0,-336.418 0,-252 0,-252 0,-252 0,-132 0,-59.2236 95.0895,-30.1723 158.792,-18.8756"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="187.987,-372.538 198.304,-370.13 188.737,-365.578 187.987,-372.538"/>
+<path fill="none" stroke="midnightblue" d="M284.316,-366.407C200.869,-352.323 0,-312.172 0,-252 0,-252 0,-252 0,-132 0,-59.2236 95.0895,-30.1723 158.792,-18.8756"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="283.916,-369.888 294.354,-368.07 285.061,-362.982 283.916,-369.888"/>
+</g>
+<!-- Node17 -->
+<g id="node42" class="node"><title>Node17</title>
+<a xlink:href="mutex_8cpp.html" target="_top" xlink:title="Contains the implementation for the Mezzanine::Threading::Mutex Mutex synchronization object...">
+<polygon fill="white" stroke="black" points="397,-301 397,-323 459,-323 459,-301 397,-301"/>
+<text text-anchor="middle" x="428" y="-310" font-family="FreeSans" font-size="10.00">mutex.cpp</text>
+</a>
+</g>
+<!-- Node1&#45;&gt;Node17 -->
+<g id="edge50" class="edge"><title>Node1&#45;&gt;Node17</title>
+<path fill="none" stroke="midnightblue" d="M348.77,-356.017C367.446,-345.641 391.315,-332.381 407.951,-323.138"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="346.851,-353.079 339.809,-360.995 350.25,-359.198 346.851,-353.079"/>
 </g>
 <!-- Node3 -->
 <g id="node5" class="node"><title>Node3</title>
@@ -91,18 +103,18 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge4" class="edge"><title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M208.81,-293.013C201.006,-283.258 191.759,-271.699 185.074,-263.343"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="206.216,-295.373 215.196,-300.995 211.682,-291 206.216,-295.373"/>
+<path fill="none" stroke="midnightblue" d="M245.742,-295.589C229.246,-285.279 208.406,-272.254 193.821,-263.138"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="244.057,-298.663 254.392,-300.995 247.767,-292.727 244.057,-298.663"/>
 </g>
 <!-- Node2&#45;&gt;Node4 -->
 <g id="edge46" class="edge"><title>Node2&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M260.235,-296.348C276.982,-288.121 296.537,-277.031 312,-264 333.579,-245.815 352.566,-218.358 362.231,-203.143"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="258.281,-293.401 250.751,-300.854 261.285,-299.724 258.281,-293.401"/>
+<path fill="none" stroke="midnightblue" d="M288.135,-292.862C295.469,-284.106 304.226,-273.571 312,-264 329.289,-242.715 349.077,-217.53 360.201,-203.294"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="285.369,-290.714 281.618,-300.623 290.729,-295.216 285.369,-290.714"/>
 </g>
 <!-- Node2&#45;&gt;Node8 -->
 <g id="edge42" class="edge"><title>Node2&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M187.424,-305.485C133.247,-293.493 38,-262.399 38,-192 38,-192 38,-192 38,-132 38,-70.1859 112.872,-38.0175 165.225,-23.08"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="186.845,-308.94 197.351,-307.571 188.284,-302.089 186.845,-308.94"/>
+<path fill="none" stroke="midnightblue" d="M235.172,-309.66C169.272,-303.266 38,-279.541 38,-192 38,-192 38,-192 38,-132 38,-70.1859 112.872,-38.0175 165.225,-23.08"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="234.887,-313.149 245.157,-310.545 235.505,-306.176 234.887,-313.149"/>
 </g>
 <!-- Node16 -->
 <g id="node38" class="node"><title>Node16</title>
@@ -113,8 +125,8 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node2&#45;&gt;Node16 -->
 <g id="edge44" class="edge"><title>Node2&#45;&gt;Node16</title>
-<path fill="none" stroke="midnightblue" d="M239.19,-293.013C246.994,-283.258 256.241,-271.699 262.926,-263.343"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="236.318,-291 232.804,-300.995 241.784,-295.373 236.318,-291"/>
+<path fill="none" stroke="midnightblue" d="M272,-290.918C272,-281.639 272,-271.108 272,-263.343"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="268.5,-290.995 272,-300.995 275.5,-290.995 268.5,-290.995"/>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge6" class="edge"><title>Node3&#45;&gt;Node4</title>
@@ -181,7 +193,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node15 -->
 <g id="node33" class="node"><title>Node15</title>
-<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the workunit.">
+<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit.">
 <polygon fill="white" stroke="black" points="338.5,-121 338.5,-143 409.5,-143 409.5,-121 338.5,-121"/>
 <text text-anchor="middle" x="374" y="-130" font-family="FreeSans" font-size="10.00">workunit.cpp</text>
 </a>

@@ -95,7 +95,7 @@
 /// deterministic ordering of @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" execution through a dependency
 /// feature. Having the knowledge that one @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" will complete after
 /// another allows for resources to be used without using expensive and complex synchronization mechansisms
-/// like @ref Mezzanine::Threading::mutex "mutexes", semaphores, or even an
+/// like @ref Mezzanine::Threading::Mutex "mutexes", semaphores, or even an
 /// @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic Compare And Swap". These primitives are provided
 /// to allow use of this library in advanced ways for developers who are already familiar with
 /// multithreaded systems.

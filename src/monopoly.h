@@ -55,7 +55,7 @@ namespace Mezzanine
         class FrameScheduler;
 
         /// @brief A kind of workunit given exclusive runtime so it can consume time on multiple threads
-        /// @details A FrameScheduler gives Monopolies special treatment and will allow them to run with on every thread.
+        /// @details A @ref FrameScheduler executes monopolies before other and will allow them to run with on every thread.
         class MEZZ_LIB MonopolyWorkUnit : public DefaultWorkUnit
         {
             public:
@@ -64,6 +64,8 @@ namespace Mezzanine
                 virtual void UseThreads(Whole AmountToUse) = 0;
 
                 /// @brief Retrieves the Amount of threads that the monopoly will actually use.
+                /// @details The monopoly is free to ignore any value passed @ref UseThreads(Whole) and
+                /// use any many of heuristic or threading model instead.
                 /// @return A whole with the amount of thread to be used.
                 virtual Whole UsingThreadCount() = 0;
 

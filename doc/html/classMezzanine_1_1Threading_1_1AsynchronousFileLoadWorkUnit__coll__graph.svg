@@ -43,8 +43,8 @@ var sectionId = 'dynsection-1';
 <polygon fill="white" stroke="white" points="-4,5 -4,-168 1479,-168 1479,5 -4,5"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<polygon fill="#bfbfbf" stroke="black" points="1206,-59 1206,-81 1474,-81 1474,-59 1206,-59"/>
-<text text-anchor="middle" x="1340" y="-68" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::AsynchronousFileLoadWorkUnit</text>
+<polygon fill="#bfbfbf" stroke="black" points="1206,-60 1206,-82 1474,-82 1474,-60 1206,-60"/>
+<text text-anchor="middle" x="1340" y="-69" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::AsynchronousFileLoadWorkUnit</text>
 </g>
 <!-- Node2 -->
 <g id="node2" class="node"><title>Node2</title>
@@ -55,8 +55,8 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node2&#45;&gt;Node1 -->
 <g id="edge2" class="edge"><title>Node2&#45;&gt;Node1</title>
-<path fill="none" stroke="midnightblue" d="M1075.11,-118.521C1110.57,-113.515 1151.21,-107.413 1188,-101 1221.96,-95.0809 1259.96,-87.3309 1289.47,-81.0607"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="1074.19,-115.116 1064.77,-119.971 1075.16,-122.048 1074.19,-115.116"/>
+<path fill="none" stroke="midnightblue" d="M1078.43,-118.617C1113.09,-113.877 1152.36,-108.125 1188,-102 1222.11,-96.1385 1260.27,-88.3507 1289.83,-82.0473"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="1077.75,-115.177 1068.31,-119.99 1078.69,-122.114 1077.75,-115.177"/>
 </g>
 <!-- Node3 -->
 <g id="node4" class="node"><title>Node3</title>
@@ -114,40 +114,40 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node7 -->
 <g id="node13" class="node"><title>Node7</title>
-<polygon fill="white" stroke="#bfbfbf" points="918.5,-80 918.5,-102 1043.5,-102 1043.5,-80 918.5,-80"/>
-<text text-anchor="middle" x="981" y="-89" font-family="FreeSans" font-size="10.00">std::vector&lt; RawFile * &gt;</text>
+<a xlink:href="classMezzanine_1_1Threading_1_1Thread.html" target="_top" xlink:title="A small wrapper around the system thread.">
+<polygon fill="white" stroke="black" points="901.5,-80 901.5,-102 1060.5,-102 1060.5,-80 901.5,-80"/>
+<text text-anchor="middle" x="981" y="-89" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::Thread</text>
+</a>
 </g>
 <!-- Node7&#45;&gt;Node1 -->
 <g id="edge14" class="edge"><title>Node7&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1053.76,-86.7439C1097.38,-84.1925 1154.2,-80.8686 1205.71,-77.8556"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1053.31,-83.264 1043.53,-87.3421 1053.72,-90.2521 1053.31,-83.264"/>
-<text text-anchor="middle" x="1151" y="-88" font-family="FreeSans" font-size="10.00"> FilesRaw</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1070.87,-85.9935C1111.69,-83.7192 1160.83,-80.9814 1205.89,-78.471"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1070.46,-82.5104 1060.67,-86.5614 1070.85,-89.4996 1070.46,-82.5104"/>
+<text text-anchor="middle" x="1151" y="-89" font-family="FreeSans" font-size="10.00"> LoadingThread</text>
 </g>
 <!-- Node8 -->
 <g id="node15" class="node"><title>Node8</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1RawFile.html" target="_top" xlink:title="A simple in memory representation of a file.">
-<polygon fill="white" stroke="black" points="604,-80 604,-102 766,-102 766,-80 604,-80"/>
-<text text-anchor="middle" x="685" y="-89" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::RawFile</text>
-</a>
+<polygon fill="white" stroke="#bfbfbf" points="918.5,-40 918.5,-62 1043.5,-62 1043.5,-40 918.5,-40"/>
+<text text-anchor="middle" x="981" y="-49" font-family="FreeSans" font-size="10.00">std::vector&lt; RawFile * &gt;</text>
 </g>
-<!-- Node8&#45;&gt;Node7 -->
-<g id="edge16" class="edge"><title>Node8&#45;&gt;Node7</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M776.549,-91C822.519,-91 877.036,-91 918.209,-91"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="776.275,-87.5001 766.275,-91 776.275,-94.5001 776.275,-87.5001"/>
-<text text-anchor="middle" x="825" y="-96" font-family="FreeSans" font-size="10.00"> elements</text>
+<!-- Node8&#45;&gt;Node1 -->
+<g id="edge16" class="edge"><title>Node8&#45;&gt;Node1</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1053.63,-54.7519C1093.33,-56.83 1143.38,-59.4933 1188,-62 1193.81,-62.3262 1199.74,-62.6628 1205.73,-63.0056"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1053.68,-51.2496 1043.51,-54.223 1053.31,-58.2401 1053.68,-51.2496"/>
+<text text-anchor="middle" x="1151" y="-67" font-family="FreeSans" font-size="10.00"> FilesRaw</text>
 </g>
 <!-- Node9 -->
 <g id="node17" class="node"><title>Node9</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1thread.html" target="_top" xlink:title="A small wrapper around the system thread.">
-<polygon fill="white" stroke="black" points="904,-40 904,-62 1058,-62 1058,-40 904,-40"/>
-<text text-anchor="middle" x="981" y="-49" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::thread</text>
+<a xlink:href="classMezzanine_1_1Threading_1_1RawFile.html" target="_top" xlink:title="A simple in memory representation of a file.">
+<polygon fill="white" stroke="black" points="604,-40 604,-62 766,-62 766,-40 604,-40"/>
+<text text-anchor="middle" x="685" y="-49" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::RawFile</text>
 </a>
 </g>
-<!-- Node9&#45;&gt;Node1 -->
-<g id="edge18" class="edge"><title>Node9&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1068.46,-49.8771C1105.38,-49.9133 1148.82,-50.6256 1188,-53 1209.87,-54.325 1233.43,-56.5615 1255.31,-58.9845"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1068.23,-46.3771 1058.23,-49.8839 1068.23,-53.3771 1068.23,-46.3771"/>
-<text text-anchor="middle" x="1151" y="-58" font-family="FreeSans" font-size="10.00"> LoadingThread</text>
+<!-- Node9&#45;&gt;Node8 -->
+<g id="edge18" class="edge"><title>Node9&#45;&gt;Node8</title>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M776.549,-51C822.519,-51 877.036,-51 918.209,-51"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="776.275,-47.5001 766.275,-51 776.275,-54.5001 776.275,-47.5001"/>
+<text text-anchor="middle" x="825" y="-56" font-family="FreeSans" font-size="10.00"> elements</text>
 </g>
 <!-- Node10 -->
 <g id="node19" class="node"><title>Node10</title>
@@ -156,9 +156,9 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node10&#45;&gt;Node1 -->
 <g id="edge20" class="edge"><title>Node10&#45;&gt;Node1</title>
-<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1045.02,-15.5948C1086.08,-19.0849 1140.41,-24.7161 1188,-33 1226.8,-39.753 1270.41,-50.7263 1300.93,-58.9727"/>
-<polygon fill="#9a32cd" stroke="#9a32cd" points="1045.14,-12.0925 1034.88,-14.7533 1044.56,-19.0685 1045.14,-12.0925"/>
-<text text-anchor="middle" x="1151" y="-38" font-family="FreeSans" font-size="10.00"> Filenames</text>
+<path fill="none" stroke="#9a32cd" stroke-dasharray="5,2" d="M1044.88,-18.9091C1085.87,-24.2416 1140.19,-31.7843 1188,-40 1222.11,-45.8615 1260.27,-53.6493 1289.83,-59.9527"/>
+<polygon fill="#9a32cd" stroke="#9a32cd" points="1045.12,-15.4114 1034.75,-17.6019 1044.22,-22.3537 1045.12,-15.4114"/>
+<text text-anchor="middle" x="1151" y="-45" font-family="FreeSans" font-size="10.00"> Filenames</text>
 </g>
 <!-- Node11 -->
 <g id="node21" class="node"><title>Node11</title>

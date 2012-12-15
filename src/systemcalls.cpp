@@ -42,7 +42,7 @@
 #define _systemcalls_cpp
 
 /// @file
-/// @brief This file defines some time-tracking functions
+/// @brief This file defines some platform specifc functions
 
 
 #include "datatypes.h"

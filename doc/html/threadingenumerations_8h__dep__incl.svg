@@ -60,7 +60,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node3 -->
 <g id="node5" class="node"><title>Node3</title>
-<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the defintion of the workunit.">
+<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit.">
 <polygon fill="white" stroke="black" points="324.97,-181 324.97,-203 385.97,-203 385.97,-181 324.97,-181"/>
 <text text-anchor="middle" x="355.47" y="-190" font-family="FreeSans" font-size="10.00">workunit.h</text>
 </a>
@@ -113,7 +113,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node13 -->
 <g id="node30" class="node"><title>Node13</title>
-<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the workunit.">
+<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit.">
 <polygon fill="white" stroke="black" points="363.97,-121 363.97,-143 434.97,-143 434.97,-121 363.97,-121"/>
 <text text-anchor="middle" x="399.47" y="-130" font-family="FreeSans" font-size="10.00">workunit.cpp</text>
 </a>

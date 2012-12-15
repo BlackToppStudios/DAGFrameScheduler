@@ -176,7 +176,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A kind of workunit given exclusive runtime so it can consume time on multiple threads. </p>
-<p>A <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> gives Monopolies special treatment and will allow them to run with on every thread. </p>
+<p>A <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> executes monopolies before other and will allow them to run with on every thread. </p>
 
 <p>Definition at line <a class="el" href="monopoly_8h_source.html#l00059">59</a> of file <a class="el" href="monopoly_8h_source.html">monopoly.h</a>.</p>
 </div><hr/><h2>Member Function Documentation</h2>
@@ -559,6 +559,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 <div class="memdoc">
 
 <p>Retrieves the Amount of threads that the monopoly will actually use. </p>
+<p>The monopoly is free to ignore any value passed <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a06d894d34c90b428ccce8ad12a3e6981">UseThreads(Whole)</a> and use any many of heuristic or threading model instead. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A whole with the amount of thread to be used. </dd></dl>
 
 </div>
@@ -583,6 +584,6 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 13 2012 22:57:19 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sat Dec 15 2012 00:27:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

@@ -42,7 +42,7 @@
 #define _workunit_cpp
 
 /// @file
-/// @brief This file has the implementation of the workunit.
+/// @brief This file has the implementation of the @ref Mezzanine::Threading::DefaultWorkUnit.
 
 #include "workunit.h"
 #include "systemcalls.h"

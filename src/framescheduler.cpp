@@ -116,49 +116,10 @@ namespace Mezzanine
         }
         /// @endcond
 
+        ////////////////////////////////////////////////////////////////////////////////
         // Protected Methods
         std::ostream& FrameScheduler::GetLog()
             { return *LogDestination; }
-
-        void FrameScheduler::CreateThreads()
-        {
-            #ifdef MEZZ_USEBARRIERSEACHFRAME
-                StartFrameSync.SetThreadSyncCount(CurrentThreadCount);
-                EndFrameSync.SetThreadSyncCount(CurrentThreadCount);
-                for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
-                {
-                    if(Count+1>Resources.size())
-                    {
-                        Resources.push_back(new DefaultThreadSpecificStorage::Type(this));
-                        Threads.push_back(new thread(ThreadWork, Resources[Count]));
-                    }
-                }
-                StartFrameSync.Wait();
-            #else
-                for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
-                {
-                    if(Count+1>Resources.size())
-                        { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
-                    Threads.push_back(new thread(ThreadWork, Resources[Count]));
-                }
-            #endif
-            // Add the check for trying a different amount of frames here
-        }
-
-        void FrameScheduler::JoinAllThreads()
-        {
-            #ifdef MEZZ_USEBARRIERSEACHFRAME
-            EndFrameSync.Wait();
-            #else
-            for(std::vector<thread*>::iterator Iter=Threads.begin(); Iter!=Threads.end(); ++Iter)
-            {
-                (*Iter)->join();
-                delete *Iter;
-            }
-            Threads.clear();
-            Threads.reserve(CurrentThreadCount);
-            #endif
-        }
 
         void FrameScheduler::CleanUpThreads()
         {
@@ -173,37 +134,8 @@ namespace Mezzanine
 
         void FrameScheduler::DeleteThreads()
         {
-            for(std::vector<thread*>::iterator Iter = Threads.begin(); Iter!=Threads.end(); ++Iter)
+            for(std::vector<Thread*>::iterator Iter = Threads.begin(); Iter!=Threads.end(); ++Iter)
                 { delete *Iter; }
-        }
-
-        void FrameScheduler::WaitUntilNextThread()
-        {
-            FrameCount++;
-            if(TargetFrameLength)
-            {
-                /*Whole TargetFrameEnd = 1000000/TargetFrameRate + CurrentFrameStart;  // original Timing algorithm is usually about 8 milliseconds longer than 60 seconds on Sqeaky's workstation Mercury
-                Whole WaitTime = TargetFrameEnd - GetTimeStamp();
-                if(WaitTime>1000000)
-                    { WaitTime = 0; }
-                Mezzanine::Threading::this_thread::sleep_for( WaitTime );*/
-                /*Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;         //Second algorithm works great in debug but it is not
-                Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) - TimingCostAllowance;
-                if(WaitTime>1000000)
-                    { WaitTime = 0; }
-                Mezzanine::Threading::this_thread::sleep_for( WaitTime );
-                MaxInt AdjustmentTime = GetTimeStamp();
-                if(AdjustmentTime<TargetFrameEnd-TimingCostAllowanceGap)
-                    { TimingCostAllowance-=(TargetFrameEnd-AdjustmentTime)/2; }
-                if(AdjustmentTime>TargetFrameEnd)
-                    { TimingCostAllowance+=(AdjustmentTime-TargetFrameEnd)/2; }*/
-                Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
-                Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) + TimingCostAllowance;
-                if(WaitTime>1000000)
-                    { WaitTime = 0; }
-                Mezzanine::Threading::this_thread::sleep_for( WaitTime );
-                TimingCostAllowance -= (GetTimeStamp()-TargetFrameEnd);
-            }
         }
 
         void FrameScheduler::UpdateDependentGraph(const std::vector<WorkUnitKey>& Units)
@@ -224,6 +156,8 @@ namespace Mezzanine
                 { *Iter = Iter->Unit->GetSortingKey(*this); }
         }
 
+        ////////////////////////////////////////////////////////////////////////////////
+        // Construction and Destruction
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
             CurrentFrameStart(0),
@@ -263,18 +197,51 @@ namespace Mezzanine
             }
             for(std::vector<WorkUnitKey>::iterator Iter=WorkUnitsMain.begin(); Iter!=WorkUnitsMain.end(); ++Iter)
                 { delete Iter->Unit; }
-            for(std::vector<MonopolyWorkUnit*>::iterator Iter = Monopolies.begin(); Iter!=Monopolies.end(); ++Iter)
+            for(std::vector<MonopolyWorkUnit*>::iterator Iter = WorkUnitMonopolies.begin(); Iter!=WorkUnitMonopolies.end(); ++Iter)
                 { delete *Iter; }
             for(std::vector<DefaultThreadSpecificStorage::Type*>::iterator Iter = Resources.begin(); Iter!=Resources.end(); ++Iter)
                 { delete *Iter; }
             DeleteThreads();
         }
 
+        ////////////////////////////////////////////////////////////////////////////////
+        // WorkUnit management
         void FrameScheduler::AddWorkUnit(iWorkUnit* MoreWork)
             { this->WorkUnitsMain.push_back(MoreWork->GetSortingKey(*this)); }
 
         void FrameScheduler::AddWorkUnitAffinity(iWorkUnit* MoreWork)
-        { this->WorkUnitsAffinity.push_back(MoreWork->GetSortingKey(*this)); }
+            { this->WorkUnitsAffinity.push_back(MoreWork->GetSortingKey(*this)); }
+
+        void FrameScheduler::AddWorkUnitMonopoly(MonopolyWorkUnit* MoreWork)
+            { this->WorkUnitMonopolies.push_back(MoreWork); }
+
+        void FrameScheduler::SortWorkUnitsMain(bool UpdateDependentGraph_)
+        {
+            if(UpdateDependentGraph_)
+                { UpdateDependentGraph(); }
+            if(WorkUnitsMain.size())
+            {
+                UpdateWorkUnitKeys(WorkUnitsMain);
+                std::sort(WorkUnitsMain.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+            }
+        }
+
+        void FrameScheduler::SortWorkUnitsAffinity(bool UpdateDependentGraph_)
+        {
+            if(UpdateDependentGraph_)
+                { UpdateDependentGraph(); }
+            if(WorkUnitsAffinity.size())
+            {
+                UpdateWorkUnitKeys(WorkUnitsAffinity);
+                std::sort(WorkUnitsAffinity.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
+            }
+        }
+
+        void FrameScheduler::SortWorkUnitsAll(bool UpdateDependentGraph_)
+        {
+            SortWorkUnitsAffinity(UpdateDependentGraph_);
+            SortWorkUnitsMain(false);
+        }
 
         void FrameScheduler::RemoveWorkUnit(iWorkUnit *LessWork)
         {
@@ -294,19 +261,22 @@ namespace Mezzanine
                                     LessWork->GetSortingKey(*this)
                                     )
                         );
-           Monopolies.erase
+           WorkUnitMonopolies.erase
                         (
                             std::remove(
-                                    Monopolies.begin(),
-                                    Monopolies.end(),
+                                    WorkUnitMonopolies.begin(),
+                                    WorkUnitMonopolies.end(),
                                     LessWork
                                     )
                         );
         }
 
-        Whole FrameScheduler::GetDependentCountOf(iWorkUnit* Work, bool UsedCached)
+        ////////////////////////////////////////////////////////////////////////////////
+        // Algorithm essentials
+
+        Whole FrameScheduler::GetDependentCountOf(iWorkUnit* Work, bool UsedCachedDepedentGraph)
         {
-            if(UsedCached)
+            if(UsedCachedDepedentGraph)
                 { UpdateDependentGraph(); }
             Whole Results = DependentGraph[Work].size();
             for(std::set<iWorkUnit*>::iterator Iter=DependentGraph[Work].begin(); Iter!=DependentGraph[Work].end(); ++Iter)
@@ -315,9 +285,6 @@ namespace Mezzanine
             }
             return Results;
         }
-
-        //void FrameScheduler::RemoveWorkUnit(WorkUnit* LessWork)
-        //    { WorkUnitsMain.erase(LessWork->GetSortingKey()); }
 
         iWorkUnit* FrameScheduler::GetNextWorkUnit()
         {
@@ -360,81 +327,15 @@ namespace Mezzanine
             return true;
         }
 
-        Whole FrameScheduler::GetThreadCount()
-            { return CurrentThreadCount; }
-
-        void FrameScheduler::SetThreadCount(Whole NewThreadCount)
-            { CurrentThreadCount=NewThreadCount; }
-
-        void FrameScheduler::DoOneFrame()
-        {
-            RunFramePreliminaryWork();
-            RunAllMonopolies();
-            CreateThreads();
-            RunMainThreadWork();
-            JoinAllThreads();
-            ResetAllWorkUnits();
-            WaitUntilNextThread();
-        }
-
-        void FrameScheduler::RunFramePreliminaryWork()
-            { CurrentFrameStart=GetTimeStamp(); }
-
-        void FrameScheduler::RunAllMonopolies()
-        {
-            for(std::vector<MonopolyWorkUnit*>::iterator Iter = Monopolies.begin(); Iter!=Monopolies.end(); ++Iter)
-                { (*Iter)->operator()(*(Resources.at(0))); }
-        }
-
-        void FrameScheduler::RunMainThreadWork()
-        {
-            ThreadWorkAffinity(Resources[0]); // Do work in this thread and get the units with affinity
-        }
-
-        void FrameScheduler::ResetAllWorkUnits()
-        {
-            /// @todo could be replace with a parallel for, or a monopoly
-            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
-                { Iter->Unit->PrepareForNextFrame(); }
-        }
-
-        void FrameScheduler::SortWorkUnitsMain(bool UpdateDependentGraph_)
-        {
-            /// @todo make the contents of this a function to reduce code duplication
-            if(WorkUnitsMain.size())
-            {
-                if(UpdateDependentGraph_)
-                    { UpdateDependentGraph(); }
-                UpdateWorkUnitKeys(WorkUnitsMain);
-                std::sort(WorkUnitsMain.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
-            }
-        }
-
-        void FrameScheduler::SortWorkUnitsAffinity(bool UpdateDependentGraph_)
-        {
-            if(WorkUnitsAffinity.size())
-            {
-                if(UpdateDependentGraph_)
-                    { UpdateDependentGraph(); }
-                UpdateWorkUnitKeys(WorkUnitsAffinity);
-                std::sort(WorkUnitsAffinity.begin(),WorkUnitsMain.end(),std::less<WorkUnitKey>() );
-            }
-        }
-
-        void FrameScheduler::SortWorkUnitsAll(bool UpdateDependentGraph_)
-        {
-            if(UpdateDependentGraph_)
-                { UpdateDependentGraph(); }
-            SortWorkUnitsAffinity(false);
-            SortWorkUnitsMain(false);
-        }
-
         void FrameScheduler::UpdateDependentGraph()
         {
             DependentGraph.clear();
             UpdateDependentGraph(WorkUnitsMain);
             UpdateDependentGraph(WorkUnitsAffinity);
         }
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Algorithm Configuration and Introspection
 
         Whole FrameScheduler::GetFrameCount() const
             { return FrameCount; }
@@ -453,8 +354,120 @@ namespace Mezzanine
         void FrameScheduler::SetFrameLength(Whole FrameLength)
             { TargetFrameLength = FrameLength; }
 
-    }
-}
+        Whole FrameScheduler::GetThreadCount()
+            { return CurrentThreadCount; }
+
+        void FrameScheduler::SetThreadCount(Whole NewThreadCount)
+        { CurrentThreadCount=NewThreadCount; }
+
+        MaxInt FrameScheduler::GetCurrentFrameStart() const
+            { return CurrentFrameStart; }
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Executing a Frame
+
+        void FrameScheduler::DoOneFrame()
+        {
+            RunFramePreliminaryWork();
+            RunAllMonopolies();
+            CreateThreads();
+            RunMainThreadWork();
+            JoinAllThreads();
+            ResetAllWorkUnits();
+            WaitUntilNextThread();
+        }
+
+        void FrameScheduler::RunFramePreliminaryWork()
+            { CurrentFrameStart=GetTimeStamp(); }
+
+        void FrameScheduler::RunAllMonopolies()
+        {
+            for(std::vector<MonopolyWorkUnit*>::iterator Iter = WorkUnitMonopolies.begin(); Iter!=WorkUnitMonopolies.end(); ++Iter)
+                { (*Iter)->operator()(*(Resources.at(0))); }
+        }
+
+        void FrameScheduler::CreateThreads()
+        {
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+                StartFrameSync.SetThreadSyncCount(CurrentThreadCount);
+                EndFrameSync.SetThreadSyncCount(CurrentThreadCount);
+                for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
+                {
+                    if(Count+1>Resources.size())
+                    {
+                        Resources.push_back(new DefaultThreadSpecificStorage::Type(this));
+                        Threads.push_back(new thread(ThreadWork, Resources[Count]));
+                    }
+                }
+                StartFrameSync.Wait();
+            #else
+                for(Whole Count = 1; Count<CurrentThreadCount; ++Count)
+                {
+                    if(Count+1>Resources.size())
+                        { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
+                    Threads.push_back(new Thread(ThreadWork, Resources[Count]));
+                }
+            #endif
+            // Add the check for trying a different amount of frames here
+        }
+
+        void FrameScheduler::RunMainThreadWork()
+        {
+            ThreadWorkAffinity(Resources[0]); // Do work in this thread and get the units with affinity
+        }
+
+        void FrameScheduler::JoinAllThreads()
+        {
+            #ifdef MEZZ_USEBARRIERSEACHFRAME
+            EndFrameSync.Wait();
+            #else
+            for(std::vector<Thread*>::iterator Iter=Threads.begin(); Iter!=Threads.end(); ++Iter)
+            {
+                (*Iter)->join();
+                delete *Iter;
+            }
+            Threads.clear();
+            Threads.reserve(CurrentThreadCount);
+            #endif
+        }
+
+        void FrameScheduler::ResetAllWorkUnits()
+        {
+            /// @todo could be replace with a parallel for, or a monopoly
+            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
+                { Iter->Unit->PrepareForNextFrame(); }
+        }
+
+        void FrameScheduler::WaitUntilNextThread()
+        {
+            FrameCount++;
+            if(TargetFrameLength)
+            {
+                /*Whole TargetFrameEnd = 1000000/TargetFrameRate + CurrentFrameStart;  // original Timing algorithm is usually about 8 milliseconds longer than 60 seconds on Sqeaky's workstation Mercury
+                Whole WaitTime = TargetFrameEnd - GetTimeStamp();
+                if(WaitTime>1000000)
+                    { WaitTime = 0; }
+                Mezzanine::Threading::this_thread::sleep_for( WaitTime );*/
+                /*Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;         //Second algorithm works great in debug but it is not
+                Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) - TimingCostAllowance;
+                if(WaitTime>1000000)
+                    { WaitTime = 0; }
+                Mezzanine::Threading::this_thread::sleep_for( WaitTime );
+                MaxInt AdjustmentTime = GetTimeStamp();
+                if(AdjustmentTime<TargetFrameEnd-TimingCostAllowanceGap)
+                    { TimingCostAllowance-=(TargetFrameEnd-AdjustmentTime)/2; }
+                if(AdjustmentTime>TargetFrameEnd)
+                    { TimingCostAllowance+=(AdjustmentTime-TargetFrameEnd)/2; }*/
+                Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
+                Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) + TimingCostAllowance;
+                if(WaitTime>1000000)
+                    { WaitTime = 0; }
+                Mezzanine::Threading::this_thread::sleep_for( WaitTime );
+                TimingCostAllowance -= (GetTimeStamp()-TargetFrameEnd);
+            }
+        }
+    } // \Threading
+}// \Mezanine
 
 
 #endif

@@ -1,15 +1,17 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="499,86,725,117"/>
-<area shape="rect" id="node5" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="531,166,693,197"/>
-<area shape="rect" id="node7" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="400,566,491,597"/>
-<area shape="rect" id="node23" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="843,406,1016,437"/>
-<area shape="rect" id="node32" href="$workunit_8h.html" title="This file has the defintion of the workunit." alt="" coords="572,246,652,277"/>
-<area shape="rect" id="node9" href="$compilerthreadcompat_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="595,646,760,677"/>
-<area shape="rect" id="node35" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="396,326,521,357"/>
-<area shape="rect" id="node39" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="547,406,616,437"/>
-<area shape="rect" id="node45" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="715,566,781,597"/>
-<area shape="rect" id="node52" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="93,406,195,437"/>
-<area shape="rect" id="node63" href="$rollingaverage_8h.html" title="This Store the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="640,406,757,437"/>
-<area shape="rect" id="node67" href="$threadingenumerations_8h.html" title="Any enumerations the threading library requires are all declared here." alt="" coords="729,326,897,357"/>
-<area shape="rect" id="node42" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="395,486,496,517"/>
+<area shape="rect" id="node3" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="157,86,384,117"/>
+<area shape="rect" id="node5" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="189,166,352,197"/>
+<area shape="rect" id="node7" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="645,566,736,597"/>
+<area shape="rect" id="node23" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="184,406,357,437"/>
+<area shape="rect" id="node32" href="$workunit_8h.html" title="This file has the definition of the workunit." alt="" coords="639,246,719,277"/>
+<area shape="rect" id="node9" href="$compilerthreadcompat_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="939,646,1104,677"/>
+<area shape="rect" id="node35" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="616,326,741,357"/>
+<area shape="rect" id="node39" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1029,406,1099,437"/>
+<area shape="rect" id="node45" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="988,566,1055,597"/>
+<area shape="rect" id="node52" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="904,406,1005,437"/>
+<area shape="rect" id="node69" href="$rollingaverage_8h.html" title="This stores the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="43,406,160,437"/>
+<area shape="rect" id="node73" href="$threadingenumerations_8h.html" title="Any enumerations the threading library requires are all declared here." alt="" coords="816,326,984,357"/>
+<area shape="rect" id="node42" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="883,486,984,517"/>
+<area shape="rect" id="node56" href="$barrier_8h.html" title="The declaration of the Mezzanine::Threading::Barrier Barrier synchronization primitive." alt="" coords="760,406,829,437"/>
+<area shape="rect" id="node59" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="624,486,757,517"/>
 </map>

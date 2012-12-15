@@ -45,7 +45,7 @@
 
 
 /// @file
-/// @brief This file declares the functionality of the metadata used to sort workunits.
+/// @brief This file declares the functionality of the metadata used to sort the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s.
 
 namespace Mezzanine
 {

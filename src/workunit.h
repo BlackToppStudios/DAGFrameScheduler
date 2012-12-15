@@ -52,7 +52,7 @@
 #include <vector>
 
 /// @file
-/// @brief This file has the defintion of the workunit.
+/// @brief This file has the definition of the workunit.
 
 namespace Mezzanine
 {

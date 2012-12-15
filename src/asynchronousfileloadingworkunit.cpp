@@ -109,7 +109,7 @@ namespace Mezzanine
                 //DeleteLoadedFiles();
                 FilesRaw.clear();
                 Filenames = Filenames_;
-                LoadingThread = new thread(ThreadLoading, this);
+                LoadingThread = new Thread(ThreadLoading, this);
                 return Starting;
             }else{
                 //throw?

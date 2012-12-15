@@ -17,7 +17,7 @@ var searchData=
   ['dependentgraph',['DependentGraph',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a3480908d1f06458466b312857570e3cf',1,'Mezzanine::Threading::FrameScheduler']]],
   ['dependentgraphtype',['DependentGraphType',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#af4a05091447afb8186d6fe46878d3de6',1,'Mezzanine::Threading::FrameScheduler']]],
   ['dependers',['Dependers',['../classMezzanine_1_1Threading_1_1WorkUnitKey.html#aaa1dc5448044054cd8c775416e710f4b',1,'Mezzanine::Threading::WorkUnitKey']]],
-  ['detach',['detach',['../classMezzanine_1_1Threading_1_1thread.html#aafeef5d40eea1e03aef1c7aeb302a103',1,'Mezzanine::Threading::thread']]],
+  ['detach',['detach',['../classMezzanine_1_1Threading_1_1Thread.html#ae2bd84e420ce68d503b07947987d44c9',1,'Mezzanine::Threading::Thread']]],
   ['dooneframe',['DoOneFrame',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a93e8f9d384197837fcf8fc0f3c058a5c',1,'Mezzanine::Threading::FrameScheduler']]],
   ['doublebufferedlogger',['DoubleBufferedLogger',['../namespaceMezzanine_1_1Threading.html#af29e296febda9ded4f29ae72a9d37f31',1,'Mezzanine::Threading']]],
   ['doublebufferedresource',['DoubleBufferedResource',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html',1,'Mezzanine::Threading']]],

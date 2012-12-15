@@ -12,6 +12,7 @@ var searchData=
   ['workunitkey',['WorkUnitKey',['../classMezzanine_1_1Threading_1_1WorkUnitKey.html#acdd7670db8bd9f8ba19a043a296eab85',1,'Mezzanine::Threading::WorkUnitKey']]],
   ['workunitkey_2ecpp',['workunitkey.cpp',['../workunitkey_8cpp.html',1,'']]],
   ['workunitkey_2eh',['workunitkey.h',['../workunitkey_8h.html',1,'']]],
+  ['workunitmonopolies',['WorkUnitMonopolies',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a794eea3f815618c891e673f59747ffa8',1,'Mezzanine::Threading::FrameScheduler']]],
   ['workunitsaffinity',['WorkUnitsAffinity',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a83bf2421d69556aa4d1a2efc6f88290d',1,'Mezzanine::Threading::FrameScheduler']]],
   ['workunitsmain',['WorkUnitsMain',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#af5c99359d324eb79b9080464b32be098',1,'Mezzanine::Threading::FrameScheduler']]]
 ];

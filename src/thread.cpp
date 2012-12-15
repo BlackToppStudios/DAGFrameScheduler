@@ -95,16 +95,16 @@ namespace Mezzanine
         /// @param aHandle An OS specific handle that will be used to lookup the thread::id
         /// @return The Corresponding thread::id
         /// @todo Investigate if this is a point of contention in the algorithm and try to remove it if possible
-        static thread::id _pthread_t_to_ID(const pthread_t &aHandle)
+        static Thread::id _pthread_t_to_ID(const pthread_t &aHandle)
         {
-          static mutex idMapLock;
+          static Mutex idMapLock;
           static std::map<pthread_t, unsigned long int> idMap;
           static unsigned long int idCount(1);
 
-          lock_guard<mutex> guard(idMapLock);
+          lock_guard<Mutex> guard(idMapLock);
           if(idMap.find(aHandle) == idMap.end())
             idMap[aHandle] = idCount ++;
-          return thread::id(idMap[aHandle]);
+          return Thread::id(idMap[aHandle]);
         }
         #endif // _MEZZ_POSIX_
         /// @endcond
@@ -117,14 +117,14 @@ namespace Mezzanine
         struct _thread_start_info {
           void (*mFunction)(void *); ///< Pointer to the function to be executed.
           void * mArg;               ///< Function argument for the thread function.
-          thread * mThread;          ///< Pointer to the thread object.
+          Thread * mThread;          ///< Pointer to the thread object.
         };
 
         // Thread wrapper function.
         #if defined(_MEZZ_THREAD_WIN32_)
         unsigned WINAPI thread::wrapper_function(void * aArg)
         #elif defined(_MEZZ_THREAD_POSIX_)
-        void * thread::wrapper_function(void * aArg)
+        void * Thread::wrapper_function(void * aArg)
         #endif
         {
           // Get thread startup information
@@ -143,7 +143,7 @@ namespace Mezzanine
           }
 
           // The thread is no longer executing
-          lock_guard<mutex> guard(ti->mThread->mDataMutex);
+          lock_guard<Mutex> guard(ti->mThread->mDataMutex);
           ti->mThread->mNotAThread = true;
 
           // The thread is responsible for freeing the startup information
@@ -152,10 +152,10 @@ namespace Mezzanine
           return 0;
         }
 
-        thread::thread(void (*aFunction)(void *))
+        Thread::Thread(void (*aFunction)(void *))
         {
             // Serialize access to this thread structure
-            lock_guard<mutex> guard(mDataMutex);
+            lock_guard<Mutex> guard(mDataMutex);
 
             // Fill out the thread startup information (passed to the thread wrapper,
             // which will eventually free it)
@@ -183,10 +183,10 @@ namespace Mezzanine
             }
         }
 
-        thread::thread(void (*aFunction)(void *), void * aArg)
+        Thread::Thread(void (*aFunction)(void *), void * aArg)
         {
             // Serialize access to this thread structure
-            lock_guard<mutex> guard(mDataMutex);
+            lock_guard<Mutex> guard(mDataMutex);
 
             // Fill out the thread startup information (passed to the thread wrapper,
             // which will eventually free it)
@@ -214,13 +214,13 @@ namespace Mezzanine
             }
         }
 
-        thread::~thread()
+        Thread::~Thread()
         {
             if(joinable())
                 std::terminate(); // prevents undefined behavior, and hopefully helps identifies bugs early
         }
 
-        void thread::join()
+        void Thread::join()
         {
             if(joinable())
             {
@@ -233,17 +233,17 @@ namespace Mezzanine
             }
         }
 
-        bool thread::joinable() const
+        bool Thread::joinable() const
         {
-          mDataMutex.lock();
+          mDataMutex.Lock();
           bool result = !mNotAThread;
-          mDataMutex.unlock();
+          mDataMutex.Unlock();
           return result;
         }
 
-        void thread::detach()
+        void Thread::detach()
         {
-          mDataMutex.lock();
+          mDataMutex.Lock();
           if(!mNotAThread)
           {
         #if defined(_MEZZ_THREAD_WIN32_)
@@ -253,10 +253,10 @@ namespace Mezzanine
         #endif
             mNotAThread = true;
           }
-          mDataMutex.unlock();
+          mDataMutex.Unlock();
         }
 
-        thread::id thread::get_id() const
+        Thread::id Thread::get_id() const
         {
           if(!joinable())
             return id();
@@ -267,7 +267,7 @@ namespace Mezzanine
         #endif
         }
 
-        unsigned thread::hardware_concurrency()
+        unsigned Thread::hardware_concurrency()
         {
         #if defined(_MEZZ_THREAD_WIN32_)
           SYSTEM_INFO si;
@@ -289,7 +289,7 @@ namespace Mezzanine
         // this_thread
         //------------------------------------------------------------------------------
 
-        thread::id this_thread::get_id()
+        Thread::id this_thread::get_id()
         {
         #if defined(_MEZZ_THREAD_WIN32_)
           return thread::id((unsigned long int) GetCurrentThreadId());

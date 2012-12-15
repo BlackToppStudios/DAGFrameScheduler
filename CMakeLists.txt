@@ -137,6 +137,7 @@ set(${PROJECT_NAME}_lib_sources
         "${RootProjectSourceDir}src/framescheduler.cpp"
         "${RootProjectSourceDir}src/frameschedulerworkunits.cpp"
         "${RootProjectSourceDir}src/monopoly.cpp"
+        "${RootProjectSourceDir}src/mutex.cpp"
         "${RootProjectSourceDir}src/rollingaverage.cpp"
         "${RootProjectSourceDir}src/systemcalls.cpp"
         "${RootProjectSourceDir}src/thread.cpp"

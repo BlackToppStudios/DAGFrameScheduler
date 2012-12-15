@@ -42,7 +42,7 @@
 #define _rollingaverage_h
 
 /// @file
-/// @brief This Store the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage
+/// @brief This stores the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage
 
 #include <vector>
 
@@ -50,7 +50,7 @@
 
 namespace Mezzanine
 {
-    /// @brief The interface for rolling averages used in the mezzanine, and threading library.
+    /// @brief The interface for rolling averages used in the Mezzanine, and threading library.
     template <typename RecordType> class RollingAverage
     {
         public:

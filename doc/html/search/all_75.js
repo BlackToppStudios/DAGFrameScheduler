@@ -5,7 +5,9 @@ var searchData=
   ['uint64',['UInt64',['../namespaceMezzanine.html#ac690bcdbbe92a684875c5e8b16a33097',1,'Mezzanine']]],
   ['uint8',['UInt8',['../namespaceMezzanine.html#aa5f38583d9025e05fa33d6e32e97b457',1,'Mezzanine']]],
   ['unit',['Unit',['../classMezzanine_1_1Threading_1_1WorkUnitKey.html#a4645d10e28d7c3fdd7dd091aeb78f703',1,'Mezzanine::Threading::WorkUnitKey']]],
-  ['unlock',['unlock',['../classMezzanine_1_1Threading_1_1mutex.html#acbf53601e76acebc1cab9bd37fbf2ee6',1,'Mezzanine::Threading::mutex']]],
+  ['unlock',['Unlock',['../classMezzanine_1_1Threading_1_1Mutex.html#a246134ca86c84c891fc6094f2f8b0344',1,'Mezzanine::Threading::Mutex']]],
+  ['updatedependentgraph',['UpdateDependentGraph',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#aba3be4eae7e87a5021fc33c2edefaa04',1,'Mezzanine::Threading::FrameScheduler::UpdateDependentGraph(const std::vector&lt; WorkUnitKey &gt; &amp;Units)'],['../classMezzanine_1_1Threading_1_1FrameScheduler.html#aabdf0812101f82b466affd6f67524226',1,'Mezzanine::Threading::FrameScheduler::UpdateDependentGraph()']]],
+  ['updateworkunitkeys',['UpdateWorkUnitKeys',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a1743f13fdd9ef1445495ab0e24025765',1,'Mezzanine::Threading::FrameScheduler']]],
   ['usethreads',['UseThreads',['../classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#a06d894d34c90b428ccce8ad12a3e6981',1,'Mezzanine::Threading::MonopolyWorkUnit']]],
   ['usingthreadcount',['UsingThreadCount',['../classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#ad2976e455cb5da35c66f8120512b7970',1,'Mezzanine::Threading::MonopolyWorkUnit']]]
 ];

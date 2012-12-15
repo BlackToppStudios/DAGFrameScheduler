@@ -72,9 +72,11 @@
         /// @def _MEZZ_THREAD_WIN32_
         /// @brief Defined if this is running on windows
         #define _MEZZ_THREAD_WIN32_
+        /// @details if this is not defined, then most likely _MEZZ_THREAD_POSIX_ is.
     #else
         /// @def _MEZZ_THREAD_POSIX_
         /// @brief Defined if this is running on Linux, Mac OS X, Android, or any other sane platform.
+        /// @details if this is not defined, then most likely _MEZZ_THREAD_WIN32_ is.
         #define _MEZZ_THREAD_POSIX_
     #endif
 
@@ -125,7 +127,7 @@
     /// @def MEZZ_LIB
     /// @brief Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if/when it is needed.
     /// @details _MEZZ_STATIC_BUILD_ is defined by the cmake build system if a static library is being compiled. If required a _MEZZ_SHARED_BUILD_ is
-    /// defined if the current build is creating a shared library.
+    /// defined if the current build is creating a shared library. This is controlled by the build system (usually CMake) option Mezz_BuildSharedLib.
     #ifdef _MEZZ_THREAD_WIN32_
         #ifndef _MEZZ_STATIC_BUILD_
             #ifdef DAGFrameScheduler_EXPORTS
@@ -142,20 +144,20 @@
 
     /// @def MEZZ_DEBUG
     /// @brief Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if when it is needed.
-    #ifdef _DEBUG //VS Defines this if debug
-        #define MEZZ_DEBUG
-    #else
+    #define MEZZ_DEBUG
+    #ifndef _DEBUG //VS Defines this if debug
         #ifdef NDEBUG // GCC/Mingw define this if not debug
-            // We're in RELEASE mode.
-        #else
-            #define MEZZ_DEBUG
+            #undef MEZZ_DEBUG
         #endif
     #endif
 
-    #ifdef _MEZZ_MINTHREADS_
-       #define MEZZ_USEBARRIERSEACHFRAME
-    #else
-        // Presumably _MEZZ_THREADSEACHFRAME_ is defined an no actions are required.
+    /// @def MEZZ_USEBARRIERSEACHFRAME
+    /// @brief This is used to configure whether to re-create threads each frame of or synchronize.
+    /// @details Any synchronization will be done with atomic @ref Mezzanine::Threading::Barrier "Barrier". This is
+    /// controlled by the CMake (or other build system) option Mezz_MinimizeThreadsEachFrame.
+    #define MEZZ_USEBARRIERSEACHFRAME
+    #ifndef _MEZZ_MINTHREADS_
+        #undef MEZZ_USEBARRIERSEACHFRAME
     #endif
 
 #endif // include guard

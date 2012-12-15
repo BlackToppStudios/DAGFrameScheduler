@@ -1,5 +1,5 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classMezzanine_1_1RollingAverage.html" title="The interface for rolling averages used in the mezzanine, and threading library." alt="" coords="7,31,295,62"/>
+<area shape="rect" id="node1" href="$classMezzanine_1_1RollingAverage.html" title="The interface for rolling averages used in the Mezzanine, and threading library." alt="" coords="7,31,295,62"/>
 <area shape="rect" id="node3" href="$classMezzanine_1_1BufferedRollingAverage.html" title="A RollingAverage that stores a copy of each record. and does the math when queried." alt="" coords="383,5,721,35"/>
 <area shape="rect" id="node5" href="$classMezzanine_1_1WeightedRollingAverage.html" title="A weighted average that does math with every insertion and stores nothing." alt="" coords="345,58,759,89"/>
 </map>

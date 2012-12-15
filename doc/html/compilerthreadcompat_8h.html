@@ -119,20 +119,39 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5bb9db1007992ddf82788a528b397225"></a><!-- doxytag: member="compilerthreadcompat.h::_MEZZ_PLATFORM_DEFINED_" ref="a5bb9db1007992ddf82788a528b397225" args="" -->
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a5bb9db1007992ddf82788a528b397225">_MEZZ_PLATFORM_DEFINED_</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defined if the platform could be detected adequately enough to allow thread creation. <br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af2a7603e57df066520c2ddd6bdd14be5"></a><!-- doxytag: member="compilerthreadcompat.h::_MEZZ_THREAD_POSIX_" ref="af2a7603e57df066520c2ddd6bdd14be5" args="" -->
-#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#af2a7603e57df066520c2ddd6bdd14be5">_MEZZ_THREAD_POSIX_</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defined if this is running on Linux, Mac OS X, Android, or any other sane platform. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#af2a7603e57df066520c2ddd6bdd14be5">_MEZZ_THREAD_POSIX_</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Defined if this is running on Linux, Mac OS X, Android, or any other sane platform.  <a href="#af2a7603e57df066520c2ddd6bdd14be5"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a71ff5bc7f0f85f601fab126a57a41998"></a><!-- doxytag: member="compilerthreadcompat.h::MEZZ_DEBUG" ref="a71ff5bc7f0f85f601fab126a57a41998" args="" -->
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a71ff5bc7f0f85f601fab126a57a41998">MEZZ_DEBUG</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if when it is needed. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc">MEZZ_LIB</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if/when it is needed.  <a href="#a455f91aab9e6a1cf4286f5cdfa74c7bc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a922f06bad05fd18425c1c933801686d3">MEZZ_USEBARRIERSEACHFRAME</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is used to configure whether to re-create threads each frame of or synchronize.  <a href="#a922f06bad05fd18425c1c933801686d3"></a><br/></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This file determines what features are offered by the compiler that this library can take advantage of. </p>
 
 <p>Definition in file <a class="el" href="compilerthreadcompat_8h_source.html">compilerthreadcompat.h</a>.</p>
 </div><hr/><h2>Define Documentation</h2>
+<a class="anchor" id="af2a7603e57df066520c2ddd6bdd14be5"></a><!-- doxytag: member="compilerthreadcompat.h::_MEZZ_THREAD_POSIX_" ref="af2a7603e57df066520c2ddd6bdd14be5" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="compilerthreadcompat_8h.html#af2a7603e57df066520c2ddd6bdd14be5">_MEZZ_THREAD_POSIX_</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Defined if this is running on Linux, Mac OS X, Android, or any other sane platform. </p>
+<p>if this is not defined, then most likely _MEZZ_THREAD_WIN32_ is. </p>
+
+<p>Definition at line <a class="el" href="compilerthreadcompat_8h_source.html#l00080">80</a> of file <a class="el" href="compilerthreadcompat_8h_source.html">compilerthreadcompat.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a455f91aab9e6a1cf4286f5cdfa74c7bc"></a><!-- doxytag: member="compilerthreadcompat.h::MEZZ_LIB" ref="a455f91aab9e6a1cf4286f5cdfa74c7bc" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -145,9 +164,27 @@ Defines</h2></td></tr>
 <div class="memdoc">
 
 <p>Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if/when it is needed. </p>
-<p>_MEZZ_STATIC_BUILD_ is defined by the cmake build system if a static library is being compiled. If required a _MEZZ_SHARED_BUILD_ is defined if the current build is creating a shared library. </p>
+<p>_MEZZ_STATIC_BUILD_ is defined by the cmake build system if a static library is being compiled. If required a _MEZZ_SHARED_BUILD_ is defined if the current build is creating a shared library. This is controlled by the build system (usually CMake) option Mezz_BuildSharedLib. </p>
 
-<p>Definition at line <a class="el" href="compilerthreadcompat_8h_source.html#l00140">140</a> of file <a class="el" href="compilerthreadcompat_8h_source.html">compilerthreadcompat.h</a>.</p>
+<p>Definition at line <a class="el" href="compilerthreadcompat_8h_source.html#l00142">142</a> of file <a class="el" href="compilerthreadcompat_8h_source.html">compilerthreadcompat.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a922f06bad05fd18425c1c933801686d3"></a><!-- doxytag: member="compilerthreadcompat.h::MEZZ_USEBARRIERSEACHFRAME" ref="a922f06bad05fd18425c1c933801686d3" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="compilerthreadcompat_8h.html#a922f06bad05fd18425c1c933801686d3">MEZZ_USEBARRIERSEACHFRAME</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This is used to configure whether to re-create threads each frame of or synchronize. </p>
+<p>Any synchronization will be done with atomic <a class="el" href="classMezzanine_1_1Threading_1_1Barrier.html">Barrier</a>. This is controlled by the CMake (or other build system) option Mezz_MinimizeThreadsEachFrame. </p>
+
+<p>Definition at line <a class="el" href="compilerthreadcompat_8h_source.html#l00158">158</a> of file <a class="el" href="compilerthreadcompat_8h_source.html">compilerthreadcompat.h</a>.</p>
 
 </div>
 </div>
@@ -167,6 +204,6 @@ Defines</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Dec 13 2012 22:57:18 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sat Dec 15 2012 00:27:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

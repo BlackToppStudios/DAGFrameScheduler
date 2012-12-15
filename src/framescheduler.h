@@ -77,10 +77,14 @@ namespace Mezzanine
             friend class LogBufferSwapper;
 
             protected:
+
+            ////////////////////////////////////////////////////////////////////////////////
+            // Data Members
+
                 /// @brief A collection of all the work units that are not Monopolies and do not have affinity for a given thread.
                 /// @details This stores a sorted listing(currently a vector) of @ref Mezzanine::Threading::WorkUnitKey "WorkUnitKey" instances.
                 /// These include just the metadata required for sorting @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s. Higher priority
-                /// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s are higher/later in the collection. This is list is sorted by calls
+                /// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s are higher/later in the collection. This list is sorted by calls
                 /// to @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsMain "SortWorkUnitsMain" or @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAll "SortWorkUnitsAll".
                 std::vector<WorkUnitKey> WorkUnitsMain;
 
@@ -89,15 +93,17 @@ namespace Mezzanine
                 /// are only run in the main thread and are sorted by calls to @ref SortWorkUnitsAll or @ref SortWorkUnitsAffinity .
                 std::vector<WorkUnitKey> WorkUnitsAffinity;
 
-                /// @brief A structure designed to minimalistically reprsent Dependency and Reverse Dependency Graphs in work units
+                /// @brief A structure designed to minimalistically represent Dependency and Reverse Dependency Graphs in work units
                 typedef std::map<
                                 iWorkUnit*,
                                 std::set<iWorkUnit*>
                             > DependentGraphType;
 
                 /// @brief This structure allows reverse lookup of dependencies.
-                /// @details This is is a key part of the workunit sorting algorithm. This is calculated
+                /// @details This is is a key part of the workunit sorting algorithm. This is calculated during calls to generate
+                /// @ref Mezzanine::Threading::WorkUnitKey "WorkUnitKey"s,
                 /// @warning
+                /// @todo write this warning, it is important, but not easy to lay out.
                 DependentGraphType DependentGraph;
 
                 /// @brief This maintains ownership of all the thread specific resources.
@@ -106,10 +112,10 @@ namespace Mezzanine
 
                 /// @brief A way to track an arbitrary number of threads.
                 /// @note There should never be more of these than Resources, and if there are more at the beginning of a frame the resources will be created in CreateThreads().
-                std::vector<thread*> Threads;
+                std::vector<Thread*> Threads;
 
                 /// @brief A collection of all the monopolies this scheduler must run and keep ownership of.
-                std::vector<MonopolyWorkUnit*> Monopolies;
+                std::vector<MonopolyWorkUnit*> WorkUnitMonopolies;
 
                 /// @brief When the logs are aggregated, this is where they are sent
                 std::ostream* LogDestination;
@@ -119,9 +125,10 @@ namespace Mezzanine
 
                 #ifdef MEZZ_USEBARRIERSEACHFRAME
             public:
-                /// @brief Used to synchronize the starting an stopping of all threads.
+                /// @brief Used to synchronize the starting an stopping of all threads before the frame starts
                 Barrier StartFrameSync;
 
+                /// @brief Used to synchronize the starting an stopping of all threads after work is done before the frame ends.
                 Barrier EndFrameSync;
 
                 /// @brief When using barriers instead of thread creation for synchronization this is what tells the threads to end.
@@ -129,10 +136,11 @@ namespace Mezzanine
             protected:
                 #endif
 
-                /// @brief How many threads with this try to execute with in the next frame.
+                /// @brief How many threads will this try to execute with in the next frame.
                 Whole CurrentThreadCount;
 
                 /// @brief Used to store a count of frames from the begining of game execution.
+                /// @warning At 60 Frames per second this loops in 2 years, 3 months, 6 days and around 18 hours, this may not be suitable for high uptime servers. Using a MaxInt fixes this.
                 Whole FrameCount;
 
                 /// @brief The Maximum frame rate this algorithm should run at.
@@ -144,37 +152,32 @@ namespace Mezzanine
                 /// @brief Set based on which constructor is called, and only used during destruction.
                 bool LoggingToAnOwnedFileStream;
 
+            ////////////////////////////////////////////////////////////////////////////////
+            // Protected Methods
+
                 /// @brief Get the endpoint for the logs.
                 /// @return An std:ostream reference which can be streame to commit log entries.
                 std::ostream& GetLog();
 
-                /// @brief Create more threads if they are required.
-                void CreateThreads();
-
-                /// @brief Used when completing the work of a frame, to cleaning end the execution of the threads.
-                void JoinAllThreads();
-
+                /// @brief Used in destruction to tear down threads.
                 void CleanUpThreads();
 
                 /// @brief Simply iterates over and deletes everything in Threads.
                 void DeleteThreads();
 
-                /// @brief Wait until enough time has elapsed to allow each frame an equal amount of time in one second if as many frames as the target framerate are run.
-                /// @details Wait 1/TargetFrame Seconds, minus time already run.
-                void WaitUntilNextThread();
-
-                /// @brief
+                /// @brief Adds the dependencies of the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s in the passed containter to the the internal reverse dependency graph.
+                /// @param Units The container to examine for dependency relationships.
                 void UpdateDependentGraph(const std::vector<WorkUnitKey> &Units);
+
+                /// @brief Iterate over the passed container of @ref WorkUnitKey "WorkUnitKey"s and refresh them with the correct data from their respective @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s
+                /// @param Units The container to examine for @ref WorkUnitKey "WorkUnitKey" metadata.
                 void UpdateWorkUnitKeys(std::vector<WorkUnitKey> &Units);
 
-                //std::vector<WorkUnit*> WorkUnitsWithAffinity;
-                //virtual void StartEachThread();
-                //virtual void JoinWithEachThread();
-                //virtual bool CheckWorkIsComplete();
-                // some way to expiriment with thread size.
+            public:
 
-           public:
-                /// @brief Create a Framescheduler, that owns a filestream for logging.
+            ////////////////////////////////////////////////////////////////////////////////
+            // Construction and Destruction
+                /// @brief Create a Framescheduler that owns a filestream for logging.
                 /// @param _LogDestination An fstream that will be closed and deleted when this framescheduler is destroyed. Defaults to a new Filestream Logging to 'Log.txt'.
                 /// @param StartingThreadCount How many threadsDefaults to 1.
                 /// @warning This must be constructed from the Main(only) thread for any features with thread affinity to work correctly.
@@ -182,7 +185,6 @@ namespace Mezzanine
                         std::fstream *_LogDestination = new std::fstream("Log.txt", std::ios::out | std::ios::app),
                         Whole StartingThreadCount = GetCPUCount()
                     );
-
 
                 /// @brief Create a Framescheduler, that logs to an unowned stream.
                 /// @param _LogDestination Any stream, other than an fstream, and it will be closed (not deleted) when this frame scheduler is destroyed.
@@ -197,28 +199,51 @@ namespace Mezzanine
                 /// @details Deletes all std::fstream, WorkUnit, MonopolyWorkUnit and ThreadSpecificStorage objects that this was passed or created during its lifetime.
                 virtual ~FrameScheduler();
 
-                //ThreadSpecificStorage& GetThreadSpecificStorage(thread::id ThreadID);
-                //ThreadSpecificStorage& GetThisThreadsSpecificStorage();
-
-                /// @brief Add a normal WorkUnit to this For scheduling.
+            ////////////////////////////////////////////////////////////////////////////////
+            // WorkUnit management
+                /// @brief Add a normal @ref iWorkUnit to this For fcheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
                 virtual void AddWorkUnit(iWorkUnit* MoreWork);
 
-                /// @brief Add a normal WorkUnit to this For scheduling.
+                /// @brief Add a normal @ref iWorkUnit to this For scheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
                 virtual void AddWorkUnitAffinity(iWorkUnit* MoreWork);
 
-                /// @brief Remove a WorkUnit, and regain ownership of it
+                /// @brief Add a @ref MonopolyWorkUnit for execution at the beginning of the frame.
+                /// @param MoreWork A pointer to the @ref MonopolyWorkUnit to add.
+                virtual void AddWorkUnitMonopoly(MonopolyWorkUnit* MoreWork);
+
+                /// @brief Sort the the main pool of WorkUnits to allow them to be used more efficiently in the next frame executed.
+                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
+                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
+                /// for the appropriate times to use this.
+                virtual void SortWorkUnitsMain(bool UpdateDependentGraph_ = true);
+
+                /// @brief Sort the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.
+                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
+                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
+                /// for the appropriate times to use this.
+                virtual void SortWorkUnitsAffinity(bool UpdateDependentGraph_ = true);
+
+                /// @brief Sort all the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.
+                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
+                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
+                /// for the appropriate times to use this.
+                virtual void SortWorkUnitsAll(bool UpdateDependentGraph_ = true);
+
+                /// @brief Remove a WorkUnit, and caller regains ownership of it.
                 /// @param LessWork a pointer to a WorkUnit that should no longer be scheduled.
                 /// @details This is relative slow compared to adding or finding a working unit, this works in linear time relative to the number of WorkUnits in the scheduler.
                 /// @warning This does not cleanup dependencies and can get you in trouble if other work units depend on the one removed
                 virtual void RemoveWorkUnit(iWorkUnit* LessWork);
 
+            ////////////////////////////////////////////////////////////////////////////////
+            // Algorithm essentials
                 /// @brief How many other WorkUnit instances must wait on this one.
                 /// @param Work The WorkUnit to get the Updated count of.
-                /// @param UsedCached If the cache is already up to date leaving this false, and not updating it can save significant time.
+                /// @param UsedCachedDepedentGraph If the cache is already up to date leaving this false, and not updating it can save significant time.
                 /// @return A Whole Number representing the amount of WorkUnit instances that cannot start until this finishes.
-                virtual Whole GetDependentCountOf(iWorkUnit *Work, bool UsedCached=false);
+                virtual Whole GetDependentCountOf(iWorkUnit *Work, bool UsedCachedDepedentGraph=false);
 
                 /// @brief Gets the next available workunit for execution.
                 /// @details This finds the next available WorkUnit which has not started execution, has no dependencies that have
@@ -234,55 +259,20 @@ namespace Mezzanine
                 /// @return This returns true if all the WorkUnit instances are complete, and false otherwise.
                 virtual bool AreAllWorkUnitsComplete();
 
-                /// @brief Get the amount of threads that will be used to execute WorkUnits a the start of the next frame.
-                /// @return A Whole with the current desired thread count.
-                virtual Whole GetThreadCount();
+                /// @brief Create a reverse depedent graph that can be used for sorting @ref iWorkUnit "iWorkUnit"s to optimize execution each frame
+                /// @details This can be called automatically from any of several places that make sense by passing a boolean true value.
+                /// These place include create a @ref WorkUnitKey or Sorting the work units in a framescheduler.
+                virtual void UpdateDependentGraph();
 
-                /// @brief Set the amount of thread to use.
-                /// @param NewThreadCount The amount of threads to use starting at the begining of the next frame.
-                virtual void SetThreadCount(Whole NewThreadCount);
-
-                /// @brief Do one frame worth of work.
-                /// @details Every Monopoly will be executed once and each work unit will be executed once.
-                /// @warning Do not call this on an unsorted set of WorkUnits. Use @ref FrameScheduler::SortWorkUnitsAll() and @ref DependentGraph to sort WorkUnits after
-                /// They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just the frames
-                /// new WorkUnits are added.
-                virtual void DoOneFrame();
-
-                virtual void RunFramePreliminaryWork();
-                virtual void RunAllMonopolies();
-                virtual void RunMainThreadWork();
-
-                /// @brief Take any steps required to prepare all owned WorkUnits for execution next frame.
-                virtual void ResetAllWorkUnits();
-
-                /// @brief Sort the the main pool of WorkUnits to allow them to be used more efficiently in the next frame executed.
-                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
-                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
-                /// for the appropriate times to use this.
-                void SortWorkUnitsMain(bool UpdateDependentGraph_ = true);
-
-                /// @brief Sort the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.
-                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
-                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
-                /// for the appropriate times to use this.
-                void SortWorkUnitsAffinity(bool UpdateDependentGraph_ = true);
-
-                /// @brief Sort all the WorkUnits that must run on the main thread to allow them to be used more efficiently in the next frame executed.
-                /// @param UpdateDependentGraph_ Should the internal cache of reverse dependents be updated.
-                /// @details See @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph"
-                /// for the appropriate times to use this.
-                void SortWorkUnitsAll(bool UpdateDependentGraph_ = true);
-
-                // advanced is done by default when sorting the WorkUnits
-                void UpdateDependentGraph();
+            ////////////////////////////////////////////////////////////////////////////////
+            // Algorithm Configuration and Introspection
 
                 /// @brief Get the current number of frames that have elapsed
                 /// @return A Whole containing the Frame Count.
-                Whole GetFrameCount() const;
+                virtual Whole GetFrameCount() const;
 
                 /// @brief Get the desired length of a a frame.
-                Whole GetFrameLength() const;
+                virtual Whole GetFrameLength() const;
 
                 /// @brief Set the desired Frate rate.
                 /// @param FrameRate in frames per second
@@ -292,14 +282,107 @@ namespace Mezzanine
                 /// machine's resources from being completely tapped. @n @n Set this to 0 to never pause
                 /// and run as fast as possible.
                 /// @return A Whole containing the Target frame rate.
-                void SetFrameRate(Whole FrameRate);
+                virtual void SetFrameRate(Whole FrameRate);
 
                 /// @brief Set the Desired length of a frame in microseconds.
                 /// @param FrameLength The desired minimum length of the frame. Use 0 for no pause.
-                void SetFrameLength(Whole FrameLength);
-        };
-    }
+                virtual void SetFrameLength(Whole FrameLength);
 
-}
+                /// @brief Get the amount of threads that will be used to execute WorkUnits a the start of the next frame.
+                /// @return A Whole with the current desired thread count.
+                virtual Whole GetThreadCount();
+
+                /// @brief Set the amount of thread to use.
+                /// @param NewThreadCount The amount of threads to use starting at the begining of the next frame.
+                /// @note Currently the thread count cannot be reduced if Mezz_MinimizeThreadsEachFrame is selected in cmake configuration.
+                virtual void SetThreadCount(Whole NewThreadCount);
+
+                /// @brief When did this frame start?
+                /// @return A MaxInt with the timestamp corresponding to when this frame started.
+                virtual MaxInt GetCurrentFrameStart() const;
+
+            ////////////////////////////////////////////////////////////////////////////////
+            // Executing a Frame
+
+                /// @brief Do one frame worth of work.
+                /// @details This just calls the following functions in the order presented:
+                /// @code
+                /// void FrameScheduler::DoOneFrame()
+                /// {
+                ///   RunFramePreliminaryWork();
+                ///   RunAllMonopolies();
+                ///   CreateThreads();
+                ///   RunMainThreadWork();
+                ///   JoinAllThreads();
+                ///   ResetAllWorkUnits();
+                ///   WaitUntilNextThread();
+                /// }
+                /// @endcode
+                /// This can be replaced calling these functions in this order. You can add any other calls you like between the various stages. This can be done to
+                /// allow maximum integration with existing projects. It can also be used to prevent a giant migration and replace it with a piecemeal upgrade.
+                /// @warning Do not call this on an unsorted set of WorkUnits. Use @ref FrameScheduler::SortWorkUnitsAll() and the @ref DependentGraph to sort WorkUnits after
+                /// They are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just after any new work units are added or removed
+                /// (except Monopolies).
+                virtual void DoOneFrame();
+
+                /// @brief This is the 1st step (of 7) in a frame.
+                /// @details This captures the frame start time for use in later metrics. This time can
+                /// retrieved with @ref GetCurrentFrameStart() "GetCurrentFrameStart()". Other functionality may be added later.
+                virtual void RunFramePreliminaryWork();
+
+                /// @brief This is the 2nd step (of 7) in a frame.
+                /// @details This Iterates over the listing of @ref MonopolyWorkUnit "MonopolyWorkUnit"s and executes each one in the order
+                /// it was added. This should be considered as consuming all available CPU time until it returns. This call blocks until execution
+                /// of monopolies is complete.
+                virtual void RunAllMonopolies();
+
+                /// @brief This is the 3rd step (of 7) in a frame.
+                /// @details This starts all the threads on their work. Until @ref JoinAllThreads() is called some thread may still be working.
+                /// This thread starts the man @ref algorithm_sec "scheduling algorithm" working on every thread except the calling thread. This
+                /// call does not block and tends to return very quickly.
+                /// @n @n
+                /// This checks the amount of threads as set by @ref SetFrameLength(Whole) "SetFrameLength(Whole)". It creates any
+                /// @ref ThreadSpecificStorage instances required and creates threads if they are required. If the build option
+                /// @ref MEZZ_USEBARRIERSEACHFRAME Mezz_MinimizeThreadsEachFrame was enabled then this will reuse threads from previous frames,
+                /// otherwise this will re-use thread specific resources and create a new set of threads. Re-use of threads is synchronized
+                /// with the @ref Barrier StartFrameSync member variable. It is unclear, and likely platform specific, which option has
+                /// better performance characteristics.
+                /// @warning While this is running any changes to the @ref FrameScheduler be made with an atomic operation like the
+                /// @ref AtomicCompareAndSwap32 "AtomicCompareAndSwap32" or @ref AtomicAdd "AtomicAdd". Any other threads
+                /// @ref ThreadSpecificStorage or workunit may be accessed as long as they are protected by some kind of synchronization
+                /// mechanism.
+                virtual void CreateThreads();
+
+                /// @brief This is the 4th step (of 7) in a frame.
+                /// @details This runs the main portion of the @ref algorithm_sec "scheduling algorithm" on the main thread. This call
+                /// blocks until the execution of all workunits with main thread affinity are complete and all other work units have at
+                /// least started. This could return and other threads could still be working.
+                virtual void RunMainThreadWork();
+
+                /// @brief This is the 5th step (of 7) in a frame.
+                /// @details Used when completing the work of a frame, to cleaning end the execution of the threads. This function will
+                /// only return when all the work started by @ref CreateThreads() and @ref RunMainThreadWork() have completed. This call
+                /// blocks until all threads executing. If a thread takes too long then this simply waits for it to finish. No attempt is
+                /// made to timeout or interupt a work unit before it finishes.
+                void JoinAllThreads();
+
+                /// @brief This is the 6th step (of 7) in a frame.
+                /// @details Take any steps required to prepare all owned WorkUnits for execution next frame. This usually includes reseting
+                /// all the work units running state to @ref NotStarted "NotStarted". This can cause work units to be executed multiple times
+                /// if a thread is still executing.
+                virtual void ResetAllWorkUnits();
+
+                /// @brief This is the final step (of 7) in a frame.
+                /// @details Wait until this frame has consumed its fair share of a second. This uses the value passed in
+                /// @ref SetFrameRate(Whole) "SetFrameRate(Whole)" to determine what portion of a second each frame should
+                /// use. If a frame took too long to execute this calculates that and returns.
+                /// @n @n
+                ///  Wait 1/TargetFrame Seconds, minus time already run.
+                void WaitUntilNextThread();
+
+        };
+    } // \Threading
+}// \Mezanine
+
 
 #endif

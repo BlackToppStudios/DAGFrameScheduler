@@ -11,9 +11,9 @@
 <polygon fill="white" stroke="white" points="-4,5 -4,-26 157,-26 157,5 -4,5"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1mutex.html" target="_top" xlink:title="A cross&#45;platform abstraction of the OS&#39;s mutex.">
+<a xlink:href="classMezzanine_1_1Threading_1_1Mutex.html" target="_top" xlink:title="A cross&#45;platform abstraction of the OS&#39;s mutex.">
 <polygon fill="white" stroke="black" points="0,-0 0,-22 152,-22 152,-0 0,-0"/>
-<text text-anchor="middle" x="76" y="-9" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::mutex</text>
+<text text-anchor="middle" x="76" y="-9" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::Mutex</text>
 </a>
 </g>
 </g>
