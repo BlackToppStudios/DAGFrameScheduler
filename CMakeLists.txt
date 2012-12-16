@@ -42,7 +42,6 @@ project (DAGFrameScheduler)
 
 message (STATUS "${PROJECT_NAME} - Begin")
 
-
 ##############################################################################
 # Some variables
 set(RootProjectSourceDir ${${PROJECT_NAME}_SOURCE_DIR}/)
@@ -80,33 +79,32 @@ if (Mezz_MinimizeThreadsEachFrame)
     set(MinimizeThreads MINTHREADS)
 endif (Mezz_MinimizeThreadsEachFrame)
 
+# Allow the developer to disable mandatory compiler wanrings, in case it breaks stuff
+option(Mezz_AllWarnings "Used atomics to minimize thread creation" ON)
+if (Mezz_AllWarnings)
+    if(MSVC)
+    # Force to always compile with W4
+        if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
+            string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+        else()
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
+        endif()
+    elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
+            # Update if necessary
+            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
+    endif()
+endif (Mezz_AllWarnings)
+
 # todo add options
-# An option that will turn off all of the threading header and use std::classes via typedefs instead.
-# An option that will turn off all of the chrono header and use std::classes via typedefs instead.
+# An option that will turn off all of the threading header and use std::thread via typedefs instead.
 # An option that will turn off the mutex class and use std::classes via typedefs instead.
 # An option that will turn off the lock_guard class and use std::classes via typedefs instead.
-# an option that will turn of mutexes and std::atomic_flag where possible instead.
-
-
-
-if(MSVC)
-  # Force to always compile with W4
-  if(CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
-    string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-  else()
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4")
-  endif()
-elseif(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
-  # Update if necessary
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
-endif()
-
 
 ##############################################################################
 # A complete list of our source files and headers
 
 # All the headers that the library uses, so they can be pulled out for SDK creation or whatever.
-set(${PROJECT_NAME}_lib_headers
+set( ${PROJECT_NAME}_lib_headers
         "${RootProjectSourceDir}src/dagframescheduler.h"    # The header to include in projects using this
         "${RootProjectSourceDir}src/datatypes.h"            # If integrating tightly into another project re-implementing this will allow for easier binary compatibility.
         "${RootProjectSourceDir}src/compilerthreadcompat.h" # For tight integration re-working this might be useful too.
@@ -129,7 +127,7 @@ set(${PROJECT_NAME}_lib_headers
 )
 
 # All the source files in the library
-set(${PROJECT_NAME}_lib_sources
+set( ${PROJECT_NAME}_lib_sources
         "${RootProjectSourceDir}src/asynchronousfileloadingworkunit.cpp"
         "${RootProjectSourceDir}src/asynchronousworkunit.cpp"
         "${RootProjectSourceDir}src/atomicoperations.cpp"
@@ -146,17 +144,16 @@ set(${PROJECT_NAME}_lib_sources
 )
 
 # Headers required for the Test to run.
-set(${PROJECT_NAME}_exe_headers
+set( ${PROJECT_NAME}_exe_headers
         "${RootProjectSourceDir}tests/pugiconfig.h"
         "${RootProjectSourceDir}tests/pugixml.h"
 )
 
 # Source files on the executable/tests need.
-set(${PROJECT_NAME}_exe_sources
+set( ${PROJECT_NAME}_exe_sources
         "${RootProjectSourceDir}tests/main.cpp"
         "${RootProjectSourceDir}tests/pugixml.cpp"
 )
-
 
 ##############################################################################
 # Define the libraries and say what they require
