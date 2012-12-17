@@ -79,6 +79,32 @@ namespace Mezzanine
             }
         }
 
+        WorkSorter::WorkSorter() :
+            SortingFrequency(10), /// @todo replace this and rolling average buffer length with a compile time option.
+            FramesSinceLastSort(0)
+        {}
+
+        void WorkSorter::DoWork(DefaultThreadSpecificStorage::Type &CurrentThreadStorage)
+        {
+            FramesSinceLastSort++;
+            if(FramesSinceLastSort==SortingFrequency)
+            {
+                FramesSinceLastSort=0;
+                /// @todo finish WorkSorter
+                /// copy workunitsmain
+                /// sort it
+                /// copy workunits affinity
+                /// sort it
+                /// put them somewhere they can be found by frame scheduler.
+            }
+        }
+
+        void WorkSorter::SetSortingFrequency(Whole FramesBetweenSorts)
+            { SortingFrequency = FramesBetweenSorts; }
+
+        Whole WorkSorter::GetSortingFrequency()
+            { return SortingFrequency; }
+
     }
 }
 

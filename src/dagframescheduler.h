@@ -96,7 +96,7 @@
 /// feature. Having the knowledge that one @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" will complete after
 /// another allows for resources to be used without using expensive and complex synchronization mechansisms
 /// like @ref Mezzanine::Threading::Mutex "mutexes", semaphores, or even an
-/// @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic Compare And Swap". These primitives are provided
+/// @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic Compare And Swaps". These primitives are provided
 /// to allow use of this library in advanced ways for developers who are already familiar with
 /// multithreaded systems.
 /// @n @n
@@ -113,16 +113,20 @@
 ///
 /// @section broken_sec Broken Algorithms
 /// To understand why a new multithreading system is needed, it is helpful to look at other methods
-/// of threading that have been used in the past, and understand what they lack or how they aren't ideal
-/// for the kinds of work this algorithm is is intended for.
+/// of threading that have been used in the past. This can give us an understanding of what they lack
+///  or how they aren't ideal for the kinds of work this algorithm is intended for. This overview is
+/// intentionally simplified. There are variations on many of these algorithms that can fix some of
+/// the problems presented. Despite these workarounds there are fundamental limitations that prevent
+/// these algorithms from being ideal for the video games and similar tasks.
+/// These threading models aren't necessarily broken, some of these clearly have a place in software
+/// development. Many of these require complex algorithms, require subtle knowledge or simply aren't
+/// performant enough for realtime environments.
 /// @n @n
 /// I will use charts that plot possible resource use of a computer across time. Generally time will
-/// run accross the top a resources, usually CPUs will run down one side.
-/// @n @n
-/// These threading models aren't necessarily broken, some of these clearly have a place in software
-/// development. None of these are ideal for video games or other tasks that have realtime recurring execution
-/// requirements. Many of these require complex algorithms, require subtle knowledge or simply aren't
-/// performant enough for realtime environments.
+/// run accross the top a resources, usually CPUs will run down one side. Most of these algorithms have a
+/// concept of tasks or workunits, these are just piece of work with a distinct begining and end. The
+/// width of a piece of work loosely represents the execution time (the names are just for show and not
+/// related to anything real).
 /// @subsection broken_Single Single Threaded
 /// An application using this threading model is not actually multithreaded at all. However, It has been shown
 /// that software can run in a single and get good perfomance. This is benchmark all other threading models
@@ -140,7 +144,7 @@
 /// @image rtf Single.png "Single Threaded Execution - Fig 1."
 /// @n @n The DAGFrameScheduler library tries to tailor the threading model to the problem to minimize that
 /// overhead. With a single threaded application one thread does all the work and always wastes every other
-/// thread, but there is no overhead
+/// thread, but there is no overhead if the system only has one thread.
 /// @n @n
 /// @subsection broken_Unplanned Unplanned Thread
 /// Sometimes someone means well and tries to increase the performance of a single threaded program and tries
@@ -218,31 +222,77 @@
 /// for a useful guarantee.
 ///
 /// @section algorithm_sec The Algorithm
-/// When first creating the DAGFrameScheduler it was called it "Dagma-CP" because when describing it
-/// the phrase "Directed Acyclic Graph Minimal Assembly of Critical Path" if you are in the lucky 1%
-/// who knows what all those terms mean they are very descriptive. For rest of us the algorithm tries
-/// to determine what is the shortest way to execute the work that must be executed each frame. It
-/// does this by assembling a logical graph of work that must done each frame and executing it.
-/// Because all the entries in this will have a definite location somewhere between the beginning
-/// and end, and will never circle around back to an earlier point this is called an acyclic graph.
+/// When first creating the DAGFrameScheduler it was called it "Dagma-CP". When describing it this
+/// phrase "Directed Acyclic Graph Minimal Assembly of Critical Path" was used. If you are lucky
+/// enough to knows what all those terms mean when assembled this way they are very descriptive. For
+/// rest of us the algorithm tries to determine what is the shortest way to execute the work in a
+/// minimalistic way using a mathematical graph. The graph is based on what work must done each
+/// before what other work each frame and executing it. All the work in this graph will have a
+/// location somewhere between the beginning and end, and will never circle around back so it can
+/// be called acyclic.
 /// @n @n
-/// For scheduling concerns, there are 3 kinds of @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s.
-/// All @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are expected to monopolize cpu
-/// resources at the beginning of each frame. This is ideal when working with other systems, for
-/// example a phsyics system like Bullet3D. If the calls to a physics system are wrapped in a
-/// @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit" then it will be given full
-/// opportunity to run before the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s and
-/// @ref Mezzanine::Threading::iAsynchronousWorkUnit "iAsynchronousWorkUnit"s are run.
-/// in time. The automatic thread adjusting hueristic is also not complete.
+/// This algorithm was designed with practicality as the first priority. To accomodate and integrate
+/// with a variety of other algorithms and system a variety of Work Units are provided. New classes
+/// can be created that inherit from these to allow them to be in the scheduler where they will work
+/// best.
+///     @li @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" - The interface for a common workunit.
+/// These work units will be executed once be frame after all their dependencies have completed.
+/// These are also expected to complete execution in a relatively brief period of time compared to
+/// the length of a frame, and create no threads while doing so.
+///     @li @ref Mezzanine::Threading::DefaultWorkUnit "DefaultWorkUnit" - A simple implementation
+/// of an @ref Mezzanine::Threading::iWorkUnit "iWorkUnit". This may not be suitable for every
+/// use case, but it should be suitable for most. Just one function for derived classes to
+/// implement, the one that does actual work.
+///     @li @ref Mezzanine::Threading::iAsynchronousWorkUnit "iAsynchronousWorkUnit" - Intended to
+/// allow loading of files and streams even after the framescheduler has paused. Work units are
+/// to spawn one thread and manage it without interfering with other execution. DMA, and other
+/// hardware coprocessors are expected to be utilized to their fullest to help accomplish this.
+///     @li @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit" - These are expected
+/// to monopolize cpu resources at the beginning of each frame. This is ideal when working with
+/// other systems, forexample a phsyics system like Bullet3D. If the calls to a physics system are
+/// wrapped in a @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit" then it will be
+/// given full opportunity to run before other work units.
 ///
 /// Once all the @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s are done then the
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" class instance spawns or activates
-/// a number of threads based on a simple heuristic. Each thread queries the
-/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for the next piece of work that has
-/// the most @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s that depend on it, and in the case of
-/// a tie the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" that takes the longest to execute.
-/// Execution length rather than brevity is preferred because it helps keep each thread's execution
-/// time consistently short (I will add a few more pictures to describe this clearly).
+/// a number of threads based on a simple heuristic. This heuristic is the way work units are sorted
+/// in preparation for execution. To understand how these are sorted, the dependency system needs to
+/// be understood.
+/// @n @n
+/// Most other work queues do not provide any guarantee about the order work will be executed in.
+/// This means that each piece of work must ensure its own data integrity using synchronization
+/// primitives like mutexes and semaphores to protect from being corrupted by multithread access. In
+/// most cases these should be removed and one of any two work units that must read/write the data
+/// must depend on the other. This allows the code in the workunits to be very simple even if it
+/// needs to use a great deal of data other work units may also consume or produce.
+/// @n @n
+/// Once all the dependencies are in place for any synchronization that has been removed, a
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" can be created and started. At
+/// runtime this create a reverse dependency graph, a dependent graph. This is used for determine
+/// which work units are the most depended on. For each work unit s simple count of how many work
+/// units cannot start until has been completed is generated. The higher this number the earlier
+/// the work unit will be executed in a frame. Additionally workunits that take longer to execute
+/// will be prioritized ahead of work units that are faster.
+/// @n @n
+/// Here is a chart that provides an example of this re-factoring and the runtime sorting process:
+/// @image html DAGSorting.png "DAG WorkSorting - Fig 4."
+/// @image latex DAGSorting.png "DAG WorkSorting - Fig 4."
+/// @image rtf DAGSorting.png "DAG WorkSorting - Fig 4."
+/// @n @n
+/// There are several advantages this sorting provides that are not immediately obvious. It separates
+/// the scheduling from the execution allowing, the relatively costly sorting process to be executed
+/// only when work units are added, removed or changed. In theory the sorting could be done in a
+/// work then updated when the frame is complete. Prioritizing Workunits that take longer to run
+/// should help insure the shortest critical path is found by minimizing how often dependencies
+/// cause threads to wait for more work.
+/// @todo Create a work sorting work unit.
+///
+/// @n @n
+/// Each thread queries the
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for the next piece of work...asdf
+/// @image html DAGThreads.png "DAG threads - Fig 5."
+/// @image latex DAGThread.png "DAG threads - Fig 5."
+/// @image rtf DAGThreads.png "DAG threads - Fig 5."
 /// @n @n
 /// Some work must be run on specific threads, such as calls to underlying devices (for example,
 /// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s
@@ -286,7 +336,6 @@
 /// @n @n
 /// This documentation should not be considered complete nor should the algorithm
 /// both are still under development.
-
 
 
 

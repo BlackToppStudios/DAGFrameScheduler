@@ -1,7 +1,7 @@
 # Compiling the DAGFrameScheduler #
 
-To build this library all that should be required is 
- * A c++ compiler
+To build this library all that should be required is:
+ * A C++ compiler
  * CMake
 
 This has been tested on a variety of compilers on a variety of platforms including:
@@ -36,17 +36,24 @@ This is one of the build options intrinsic to CMake. Set it to 'DEBUG' to enable
 ## Creating Build Files with CMake ##
 The first step is getting the source code. If you have this file you probably have the source code. If not you can get the source code from the [DAGFrameScheduler Github repository][1] as a zip archive. It needs to be unzipped before compilation. If you have git installed you can use `git clone git://github.com/BlackToppStudios/DAGFrameScheduler.git` to download a copy of the source already in a revision control system.
 
-CMake can create the files for the actual build separate from the source files. Make a directory for the build, a sibling directory relative to the source code works well.
+Make a directory for the build. CMake can create the files for the actual build separate from the source files. A sibling directory relative to the source code works well.
 
-You will need a copy of CMake software. This can be downloaded from the [CMake website][2]. If you are using the Graphical UI for it, all of the options will be presented when you open it and point it to the source directory with the `CMakeLists.txt`. CMake also has an option to specify where to build the binaries, direct this towards the directory you created earlier.
+You will need a copy of CMake software. This can be downloaded from the [CMake website][2]. If you are using the graphical UI for it, all of the options will be presented when you open it and point it to the source directory with the `CMakeLists.txt`. CMake also has an option to specify where to build the binaries, direct this towards the directory you created earlier.
 
-To get CMake to present you the options you may need to click the 'Configure' button after you point it at the correct directories. CMake will also ask you which compiler to create build scripts for, simply select from the menu when it does. If you change any of the settings be sure to click the 'Configure' button to save your settings in the 'CMakeCache.txt'. The file 'CMakeCache.txt' is saved in the build directory and is used whenever the 'Generate' button is clicked. When the 'Generate' button is clicked CMake will attempt to generate the build scripts or project fi files that your compiler or IDE can use.
+To get CMake to present you the options you may need to click the 'Configure' button after you point it at the correct directories. CMake will also ask you which compiler to create build scripts for, simply select from the menu when it does. If you change any of the settings be sure to click the 'Configure' button to save your settings in the 'CMakeCache.txt'. The file 'CMakeCache.txt' is saved in the build directory and is used whenever the 'Generate' button is clicked. When the 'Generate' button is clicked CMake will attempt to generate the build scripts or project files that your compiler or IDE can use.
 
-Open the resulting files in your IDE. Doing this with Code::Blocks, visual studio, or QT Creator is trivially easy. Use the open project option frome the file menu of any of these programs. For IDEs like Eclipse or Codelite you will want to create 'Unix Makefiles' and use the Makefile project option in your IDE.
+Use the resulting files to compile the library. Doing this with Code::Blocks, visual studio, or QT Creator is trivially easy. Use the 'Open Project' option frome the 'File' menu of any of these programs. For IDEs like Eclipse or Codelite you will want to create 'Unix Makefiles' and use the Makefile project option.
 
-Alternatively, if you just want to use the library and not look at its source in an IDE, you can use make from a command line. When CMake creates 'Unix makefiles' you can use just about any version of make to perform the build. On windows you can use 'mingw32-make.exe' to build 'Unix Makefiles'. The nmake tool shipped with visual studio cannot build Unix makefiles, however when choosing the compiler in CMake there is an option for 'NMake Makefiles'.
+Alternatively, you can build the library from the command line. If you want to use the library and not look at its source in an IDE, you can use make from a command line. When CMake creates 'Unix makefiles' you can use just about any version of make to perform the build. On windows you can use 'mingw32-make.exe' to build 'Unix Makefiles'. The nmake tool shipped with visual studio cannot build Unix makefiles, however when choosing the compiler in CMake there is an option for 'NMake Makefiles'.
 
-Links:
+## Skipping CMake Entirely ##
+You can also add the source code to an existing project. If you already have a project and you wish to tightly integrate this with that there are only a few technical steps.
+
+Be aware of licensing concerns. If you are not comfortable with the GPL v3 as specified in the LICENSE file, you should contact Joe (toppij@blacktoppstudios.com) or John (blackwoodj@blacktoppstudios.com) about your licensing concerns. They will work with you to get a license you can use.
+
+You will need to configure your existing project to provide preprocessor directives for any of the the build options you want to use. The source code checks the if `_MEZZ_STATIC_BUILD_` or `_MEZZ_SHARED_BUILD_` are defined to determine if it is being build statically of dynamically. This mostly matters on windows when compiling a dynamic, because the default is to not export symbols. The other big option that needs to be define in the pre-processor is whether to minimize thread of to create threads each frame, this can be specified by defining `_MEZZ_MINTHREADS_` or `_MEZZ_THREADSEACHFRAME_`.
+
+
 
 [1]: https://github.com/BlackToppStudios/DAGFrameScheduler "DAGFrameScheduler Github repository"
 [2]: http://www.cmake.org/cmake/resources/software.html "CMake Downloads"

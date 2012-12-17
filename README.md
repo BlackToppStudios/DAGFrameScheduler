@@ -1,5 +1,4 @@
 # README #
-
 The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library designed for use in video games.
 
 The source code is stored publically at https://github.com/BlackToppStudios/DAGFrameScheduler
@@ -9,20 +8,24 @@ This is licensed under the GPL v3 license as per the file 'LICENSE'.
 See COMPILING.md for details on building this library.
 
 ## Project layout  ##
-
 The 'src' folder includes the source and header in the library.
 
 The contents of the 'tests' folder are required only for verifying the library works.
 
 The 'doc' folder contains further licensing details, technical documentation and notes BTS developers may a have left.
-Technical docs derived from the source code are located in 'doc/html', see 'index.html'
 
-The Doxygen configuration resides in 'doc/doxyfiles'
+### Doxygen Docs ###
+Doxygen is used to generate the technical docs in the 'doc/html' folder. This generates a series of html files from the source code. See 'index.html' for an overview of the API and a good starting point for perusing the documentation. 
+
+The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the contents of the 'doc/html directory with a command similar to `doc/doxyfiles$ doxygen Doxyfile 2> DoxygenWarnings.txt` depending on your platform. To get the higher quality graphs graphviz and dot need to be installed an doxygen needs to be able to find them.
 
 ## NEWS ##
 
 ### Dec 16, 2012 ###
 * I added proper markdown to the README and added a document, COMPILING.md that loosely describes the build process and some of the technicial decisions made while creating this library.
+* Further cleaning of doxygen docs. Almost done with main algorithm page.
+* Started work on a WorkSorter work unit to offload execution time of that into another thread, to maximize concurrency.
+* Simplifed FrameScheduler::DoOneFrame() and made frame pause timings more accurate, down to around .004% variance on my dev system.
 
 ### Dec 14, 2012 ###
 * A large documentation update. No more warnings in doxygen doc generation. I still need to describe the algorithm in greater detail on the main page though.

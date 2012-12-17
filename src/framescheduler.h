@@ -75,6 +75,7 @@ namespace Mezzanine
         {
             friend class LogAggregator;
             friend class LogBufferSwapper;
+            friend class WorkSorter;
 
             protected:
 
@@ -309,13 +310,12 @@ namespace Mezzanine
                 /// @code
                 /// void FrameScheduler::DoOneFrame()
                 /// {
-                ///   RunFramePreliminaryWork();
                 ///   RunAllMonopolies();
                 ///   CreateThreads();
                 ///   RunMainThreadWork();
                 ///   JoinAllThreads();
                 ///   ResetAllWorkUnits();
-                ///   WaitUntilNextThread();
+                ///   WaitUntilNextFrame();
                 /// }
                 /// @endcode
                 /// This can be replaced calling these functions in this order. You can add any other calls you like between the various stages. This can be done to
@@ -325,18 +325,13 @@ namespace Mezzanine
                 /// (except Monopolies).
                 virtual void DoOneFrame();
 
-                /// @brief This is the 1st step (of 7) in a frame.
-                /// @details This captures the frame start time for use in later metrics. This time can
-                /// retrieved with @ref GetCurrentFrameStart() "GetCurrentFrameStart()". Other functionality may be added later.
-                virtual void RunFramePreliminaryWork();
-
-                /// @brief This is the 2nd step (of 7) in a frame.
+                /// @brief This is the 1st step (of 6) in a frame.
                 /// @details This Iterates over the listing of @ref MonopolyWorkUnit "MonopolyWorkUnit"s and executes each one in the order
                 /// it was added. This should be considered as consuming all available CPU time until it returns. This call blocks until execution
                 /// of monopolies is complete.
                 virtual void RunAllMonopolies();
 
-                /// @brief This is the 3rd step (of 7) in a frame.
+                /// @brief This is the 2nd step (of 6) in a frame.
                 /// @details This starts all the threads on their work. Until @ref JoinAllThreads() is called some thread may still be working.
                 /// This thread starts the man @ref algorithm_sec "scheduling algorithm" working on every thread except the calling thread. This
                 /// call does not block and tends to return very quickly.
@@ -353,32 +348,33 @@ namespace Mezzanine
                 /// mechanism.
                 virtual void CreateThreads();
 
-                /// @brief This is the 4th step (of 7) in a frame.
+                /// @brief This is the 3rd step (of 6) in a frame.
                 /// @details This runs the main portion of the @ref algorithm_sec "scheduling algorithm" on the main thread. This call
                 /// blocks until the execution of all workunits with main thread affinity are complete and all other work units have at
                 /// least started. This could return and other threads could still be working.
                 virtual void RunMainThreadWork();
 
-                /// @brief This is the 5th step (of 7) in a frame.
+                /// @brief This is the 4th step (of 6) in a frame.
                 /// @details Used when completing the work of a frame, to cleaning end the execution of the threads. This function will
                 /// only return when all the work started by @ref CreateThreads() and @ref RunMainThreadWork() have completed. This call
                 /// blocks until all threads executing. If a thread takes too long then this simply waits for it to finish. No attempt is
                 /// made to timeout or interupt a work unit before it finishes.
                 void JoinAllThreads();
 
-                /// @brief This is the 6th step (of 7) in a frame.
+                /// @brief This is the 5th step (of 6) in a frame.
                 /// @details Take any steps required to prepare all owned WorkUnits for execution next frame. This usually includes reseting
                 /// all the work units running state to @ref NotStarted "NotStarted". This can cause work units to be executed multiple times
                 /// if a thread is still executing.
                 virtual void ResetAllWorkUnits();
 
-                /// @brief This is the final step (of 7) in a frame.
+                /// @brief This is the final step (of 6) in a frame.
                 /// @details Wait until this frame has consumed its fair share of a second. This uses the value passed in
                 /// @ref SetFrameRate(Whole) "SetFrameRate(Whole)" to determine what portion of a second each frame should
                 /// use. If a frame took too long to execute this calculates that and returns.
                 /// @n @n
-                ///  Wait 1/TargetFrame Seconds, minus time already run.
-                void WaitUntilNextThread();
+                /// Wait 1/TargetFrame Seconds, minus time already run. This also starts the timer for the next frame so
+                /// any other logic that needs to run after the frame does not interfere with frame timing.
+                void WaitUntilNextFrame();
 
         };
     } // \Threading

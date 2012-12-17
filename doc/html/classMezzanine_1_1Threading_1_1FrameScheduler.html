@@ -107,8 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1FrameScheduler__coll__graph.svg" width="100%" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1FrameScheduler__coll__graph.svg" width="100%" height="336"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classMezzanine_1_1Threading_1_1FrameScheduler-members.html">List of all members.</a></p>
@@ -634,7 +633,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>Gets the next available workunit for execution. </p>
 <p>This finds the next available WorkUnit which has not started execution, has no dependencies that have not complete, has the most WorkUnits Units that depend on it (has the highest runtime in the case of a tie). </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the WorkUnit that could be executed or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00289">289</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
@@ -656,7 +655,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 
 <p>Just like <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4b969aa874a74fa503518d5e0b3a3bc">GetNextWorkUnit</a> except that it searchs through and prioritizes work units with affinity. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit. </dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located. </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00300">300</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
@@ -749,7 +748,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 
 <p>This is the 6th step (of 7) in a frame. </p>
 <p>Take any steps required to prepare all owned WorkUnits for execution next frame. This usually includes reseting all the work units running state to <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70">NotStarted</a>. This can cause work units to be executed multiple times if a thread is still executing. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>could be replace with a parallel for, or a monopoly </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>could be replace with a parallel for, or a monopoly </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8cpp_source.html#l00434">434</a> of file <a class="el" href="framescheduler_8cpp_source.html">framescheduler.cpp</a>.</p>
 
@@ -1101,7 +1100,7 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 <p>This structure allows reverse lookup of dependencies. </p>
 <p>This is is a key part of the workunit sorting algorithm. This is calculated during calls to generate <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>s, </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd></dd></dl>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">Todo:</a></b></dt><dd>write this warning, it is important, but not easy to lay out. </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000005">Todo:</a></b></dt><dd>write this warning, it is important, but not easy to lay out. </dd></dl>
 
 <p>Definition at line <a class="el" href="framescheduler_8h_source.html#l00107">107</a> of file <a class="el" href="framescheduler_8h_source.html">framescheduler.h</a>.</p>
 
@@ -1217,6 +1216,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>LogBufferSwapper</b>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 15 2012 00:27:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Dec 17 2012 00:25:38 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

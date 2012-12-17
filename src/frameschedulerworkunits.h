@@ -44,6 +44,9 @@
 
 #include "datatypes.h"
 #include "workunit.h"
+#include "workunitkey.h"
+
+#include <vector>
 
 /// @file
 /// @brief This defines a number of workunits that are required for doing some tasks that the Framescheduler requires.
@@ -70,8 +73,41 @@ namespace Mezzanine
         {
             public:
                 /// @brief This does the swapping of buffers.
-                /// @param CurrentThreadStorage Ignored, this workunits goals requires this.
+                /// @param CurrentThreadStorage Just to get a reference to the framescheduler.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
+        };
+
+        /// @brief Sorts all of the WorkUnits in the @ref FrameScheduler
+        class MEZZ_LIB WorkSorter : public DefaultWorkUnit
+        {
+                friend class FrameScheduler;
+            protected:
+                /// @brief 1 in every this many frames Sorting happens.
+                Whole SortingFrequency;
+
+                /// @brief How long since the last sort?
+                Whole FramesSinceLastSort;
+
+                /// @brief A freshly sorted WorkUnitsMain or an empty vector.
+                std::vector<WorkUnitKey> WorkUnitsMain;
+
+                /// @brief A freshly sorted WorkUnitsAffinity or an empty vector.
+                std::vector<WorkUnitKey> WorkUnitsAffinity;
+            public:
+                /// @brief Default constructor.
+                WorkSorter();
+
+                /// @brief This usually does not nothing, but sometimes it will do a whole bunch of work sorting.
+                /// @param CurrentThreadStorage Just to get a reference to the framescheduler.
+                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
+
+                /// @brief Set how often this actually does work
+                /// @param FramesBetweenSorts 1 in every this many frame this will sort the work units.
+                virtual void SetSortingFrequency(Whole FramesBetweenSorts);
+
+                /// @brief Check how often this sorts.
+                /// @return A Whole containing the sorting frequency.
+                virtual Whole GetSortingFrequency();
         };
 
     }

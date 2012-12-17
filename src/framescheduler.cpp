@@ -160,7 +160,7 @@ namespace Mezzanine
         // Construction and Destruction
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
-            CurrentFrameStart(0),
+            CurrentFrameStart(GetTimeStamp()),
             #ifdef MEZZ_USEBARRIERSEACHFRAME
             StartFrameSync(StartingThreadCount),
             EndFrameSync(StartingThreadCount),
@@ -174,7 +174,7 @@ namespace Mezzanine
 
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
-            CurrentFrameStart(0),
+            CurrentFrameStart(GetTimeStamp()),
             #ifdef MEZZ_USEBARRIERSEACHFRAME
             StartFrameSync(StartingThreadCount),
             EndFrameSync(StartingThreadCount),
@@ -368,17 +368,13 @@ namespace Mezzanine
 
         void FrameScheduler::DoOneFrame()
         {
-            RunFramePreliminaryWork();
             RunAllMonopolies();
             CreateThreads();
             RunMainThreadWork();
             JoinAllThreads();
             ResetAllWorkUnits();
-            WaitUntilNextThread();
+            WaitUntilNextFrame();
         }
-
-        void FrameScheduler::RunFramePreliminaryWork()
-            { CurrentFrameStart=GetTimeStamp(); }
 
         void FrameScheduler::RunAllMonopolies()
         {
@@ -438,7 +434,7 @@ namespace Mezzanine
                 { Iter->Unit->PrepareForNextFrame(); }
         }
 
-        void FrameScheduler::WaitUntilNextThread()
+        void FrameScheduler::WaitUntilNextFrame()
         {
             FrameCount++;
             if(TargetFrameLength)
@@ -463,7 +459,9 @@ namespace Mezzanine
                 if(WaitTime>1000000)
                     { WaitTime = 0; }
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );
-                TimingCostAllowance -= (GetTimeStamp()-TargetFrameEnd);
+                CurrentFrameStart=GetTimeStamp();
+                TimingCostAllowance -= (CurrentFrameStart-TargetFrameEnd);
+
             }
         }
     } // \Threading
