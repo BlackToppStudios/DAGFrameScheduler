@@ -56,6 +56,7 @@
 #include <algorithm>
 #include <cctype>
 #include <iomanip>
+#include <climits>
 #include <limits>
 #include <numeric>
 
@@ -1358,15 +1359,27 @@ void PerformanceFrames()
     Durations.push_back(100000000);
 
     Whole EmptyMaxFR = 0;
+    #if defined(_MEZZ_THREAD_WIN32_) //because visual studio is stupid, and thinks max is a macro
+    Whole EmptyMinFR = UINT_MAX;
+    #else
     Whole EmptyMinFR = std::numeric_limits<Whole>::max();
+    #endif
     std::vector<Whole> EmptyResults;
 
     Whole OneMaxFR = 0;
+    #if defined(_MEZZ_THREAD_WIN32_) //because visual studio is stupid, and thinks max is a macro
+    Whole OneMinFR = UINT_MAX;
+    #else
     Whole OneMinFR = std::numeric_limits<Whole>::max();
+    #endif
     std::vector<Whole> OneResults;
 
     Whole ChainMaxFR = 0;
+    #if defined(_MEZZ_THREAD_WIN32_) //because visual studio is stupid, and thinks max is a macro
+    Whole ChainMinFR = UINT_MAX;
+    #else
     Whole ChainMinFR = std::numeric_limits<Whole>::max();
+    #endif
     std::vector<Whole> ChainResults;
 
     for(vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
@@ -1491,15 +1504,27 @@ void PerformanceSeconds()
     Durations.push_back(10000000);
 
     Whole EmptyMaxFR = 0;
+    #if defined(_MEZZ_THREAD_WIN32_) //because visual studio is stupid, and thinks max is a macro
+    Whole EmptyMinFR = UINT_MAX;
+    #else
     Whole EmptyMinFR = std::numeric_limits<Whole>::max();
+    #endif
     std::vector<Whole> EmptyResults;
 
     Whole OneMaxFR = 0;
+    #if defined(_MEZZ_THREAD_WIN32_) //because visual studio is stupid, and thinks max is a macro
+    Whole OneMinFR = UINT_MAX;
+    #else
     Whole OneMinFR = std::numeric_limits<Whole>::max();
+    #endif
     std::vector<Whole> OneResults;
 
     Whole ChainMaxFR = 0;
+    #if defined(_MEZZ_THREAD_WIN32_) //because visual studio is stupid, and thinks max is a macro
+    Whole ChainMinFR = UINT_MAX;
+    #else
     Whole ChainMinFR = std::numeric_limits<Whole>::max();
+    #endif
     std::vector<Whole> ChainResults;
 
     for(vector<Whole>::iterator Iter = Durations.begin(); Iter!=Durations.end(); ++Iter)
