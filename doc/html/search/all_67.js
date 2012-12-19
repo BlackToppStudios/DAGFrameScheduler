@@ -22,6 +22,7 @@ var searchData=
   ['getperformancelog',['GetPerformanceLog',['../classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#ad43f18063b2c07c919fb8c34135bcf1f',1,'Mezzanine::Threading::DefaultWorkUnit']]],
   ['getresource',['GetResource',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
   ['getrunningstate',['GetRunningState',['../classMezzanine_1_1Threading_1_1iWorkUnit.html#a50584bcb28f98f249540649cda7181a6',1,'Mezzanine::Threading::iWorkUnit::GetRunningState()'],['../classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17',1,'Mezzanine::Threading::DefaultWorkUnit::GetRunningState()']]],
+  ['getsortingfrequency',['GetSortingFrequency',['../classMezzanine_1_1Threading_1_1WorkSorter.html#a33ecf4675298cb6c1d46085c456e8c9a',1,'Mezzanine::Threading::WorkSorter']]],
   ['getsortingkey',['GetSortingKey',['../classMezzanine_1_1Threading_1_1iWorkUnit.html#a9b38531395f4ed1db70552368e044b4a',1,'Mezzanine::Threading::iWorkUnit::GetSortingKey()'],['../classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a7f3eb2d4ddf0c6fbbdb65b277c08668e',1,'Mezzanine::Threading::DefaultWorkUnit::GetSortingKey()']]],
   ['getthreadcount',['GetThreadCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a45299a4ebe34674b09c7b40ccccae8ce',1,'Mezzanine::Threading::FrameScheduler']]],
   ['gettimestamp',['GetTimeStamp',['../namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849',1,'Mezzanine']]],

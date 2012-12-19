@@ -67,7 +67,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Mezzanine Namespace Reference</div>  </div>
@@ -134,18 +133,6 @@ typedef uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el"
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a493d0c130650b4bf1c4f793ba191cec2"></a><!-- doxytag: member="Mezzanine::Whole" ref="a493d0c130650b4bf1c4f793ba191cec2" args="" -->
 typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most efficient unsigned type for math. <br/></td></tr>
-<tr><td colspan="2"><h2><a name="enum-members"></a>
-Enumerations</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> { <br/>
-&#160;&#160;<a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70">NotStarted</a> = 0, 
-<a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f">Starting</a> = 1, 
-<a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a31afc171358d68f4c28355838d8d0bea">Running</a> = 2, 
-<a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a2ef2cd5b107719273e85a7ee1bd52968">Complete</a> = 3, 
-<br/>
-&#160;&#160;<a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a12f28368b48ed21281f8f801e04117d0">Failed</a> = 4
-<br/>
- }</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to track whether a thread has started, completed, etc...  <a href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#afc972295dbb71a9a6c2f57d5290caf46">GetCPUCount</a> ()</td></tr>
@@ -192,43 +179,6 @@ Functions</h2></td></tr>
 <p>For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807. In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for 292 years. </p>
 
 <p>Definition at line <a class="el" href="datatypes_8h_source.html#l00109">109</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
-
-</div>
-</div>
-<hr/><h2>Enumeration Type Documentation</h2>
-<a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8"></a><!-- doxytag: member="Mezzanine::RunningState" ref="a087b86fe436e7ee3e22481c1ba1843a8" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">Mezzanine::RunningState</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Used to track whether a thread has started, completed, etc... </p>
-<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
-<tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70"></a><!-- doxytag: member="NotStarted" ref="a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70" args="" -->NotStarted</em>&nbsp;</td><td>
-<p>Task is not yet started this frame, this can change without notice. </p>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f"></a><!-- doxytag: member="Starting" ref="a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f" args="" -->Starting</em>&nbsp;</td><td>
-<p>Only used when a thread successfully attempts to gain ownership of a task, or some other tasks successfully starts. </p>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8a31afc171358d68f4c28355838d8d0bea"></a><!-- doxytag: member="Running" ref="a087b86fe436e7ee3e22481c1ba1843a8a31afc171358d68f4c28355838d8d0bea" args="" -->Running</em>&nbsp;</td><td>
-<p>Task is running when the value was check, it could become Complete or Failed with no notice. </p>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8a2ef2cd5b107719273e85a7ee1bd52968"></a><!-- doxytag: member="Complete" ref="a087b86fe436e7ee3e22481c1ba1843a8a2ef2cd5b107719273e85a7ee1bd52968" args="" -->Complete</em>&nbsp;</td><td>
-<p>Thread has completed all work this from frame, will not change until this frame ends. </p>
-</td></tr>
-<tr><td valign="top"><em><a class="anchor" id="a087b86fe436e7ee3e22481c1ba1843a8a12f28368b48ed21281f8f801e04117d0"></a><!-- doxytag: member="Failed" ref="a087b86fe436e7ee3e22481c1ba1843a8a12f28368b48ed21281f8f801e04117d0" args="" -->Failed</em>&nbsp;</td><td>
-<p>Indicates an abnormal termination of a Workunit or other failure, Likely the whole application will need to stop. </p>
-</td></tr>
-</table>
-</dd>
-</dl>
-
-<p>Definition at line <a class="el" href="threadingenumerations_8h_source.html#l00050">50</a> of file <a class="el" href="threadingenumerations_8h_source.html">threadingenumerations.h</a>.</p>
 
 </div>
 </div>
@@ -314,6 +264,6 @@ Functions</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 17 2012 00:25:38 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

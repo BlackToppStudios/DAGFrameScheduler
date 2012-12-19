@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['failed',['Failed',['../namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a12f28368b48ed21281f8f801e04117d0',1,'Mezzanine']]],
+  ['failed',['Failed',['../namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8ea53794343608e08e2d57c07380bbb7436',1,'Mezzanine::Threading']]],
   ['filenames',['Filenames',['../classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a22ebc4c42abf9961e780c0d6c2d7038a',1,'Mezzanine::Threading::AsynchronousFileLoadWorkUnit']]],
   ['filesraw',['FilesRaw',['../classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a080568934399e6bdd97b369d37c31c66',1,'Mezzanine::Threading::AsynchronousFileLoadWorkUnit']]],
   ['framecount',['FrameCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4d36e8edc6bb1a6a41fe7d8663648a8',1,'Mezzanine::Threading::FrameScheduler']]],
@@ -9,5 +9,6 @@ var searchData=
   ['framescheduler_2ecpp',['framescheduler.cpp',['../framescheduler_8cpp.html',1,'']]],
   ['framescheduler_2eh',['framescheduler.h',['../framescheduler_8h.html',1,'']]],
   ['frameschedulerworkunits_2ecpp',['frameschedulerworkunits.cpp',['../frameschedulerworkunits_8cpp.html',1,'']]],
-  ['frameschedulerworkunits_2eh',['frameschedulerworkunits.h',['../frameschedulerworkunits_8h.html',1,'']]]
+  ['frameschedulerworkunits_2eh',['frameschedulerworkunits.h',['../frameschedulerworkunits_8h.html',1,'']]],
+  ['framessincelastsort',['FramesSinceLastSort',['../classMezzanine_1_1Threading_1_1WorkSorter.html#a113b00be89661994d0c2f1482d43bf3b',1,'Mezzanine::Threading::WorkSorter']]]
 ];

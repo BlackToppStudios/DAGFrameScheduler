@@ -70,6 +70,9 @@ namespace Mezzanine
 
         void LogBufferSwapper::DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
         {
+            #ifdef MEZZ_DEBUG
+            CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable() << "<LogRotation ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << std::endl;
+            #endif
             FrameScheduler& CurrentFrameScheduler= * CurrentThreadStorage.GetFrameScheduler();
             for(std::vector<DefaultThreadSpecificStorage::Type*>::const_iterator Iter=CurrentFrameScheduler.Resources.begin();
                 Iter!=CurrentFrameScheduler.Resources.end();
@@ -80,7 +83,7 @@ namespace Mezzanine
         }
 
         WorkSorter::WorkSorter() :
-            SortingFrequency(10), /// @todo replace this and rolling average buffer length with a compile time option.
+            SortingFrequency(MEZZ_FRAMESTOTRACK*2),
             FramesSinceLastSort(0)
         {}
 
@@ -89,13 +92,24 @@ namespace Mezzanine
             FramesSinceLastSort++;
             if(FramesSinceLastSort==SortingFrequency)
             {
+                #ifdef MEZZ_DEBUG
+                CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable() << "<SortWork sorting=\"0\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << std::endl;
+                #endif
                 FramesSinceLastSort=0;
-                /// @todo finish WorkSorter
-                /// copy workunitsmain
-                /// sort it
-                /// copy workunits affinity
-                /// sort it
-                /// put them somewhere they can be found by frame scheduler.
+                FrameScheduler& FS = *CurrentThreadStorage.GetFrameScheduler();
+                //WorkUnitsMain.clear(); // should be cleared by the framescheduler or whatever copies this into the framscheduler
+                //WorkUnitsAffinity.clear();
+                WorkUnitsMain.clear();
+                WorkUnitsAffinity.clear();
+                WorkUnitsMain.insert(WorkUnitsMain.end(),FS.WorkUnitsMain.begin(),FS.WorkUnitsMain.end());
+                FS.UpdateWorkUnitKeys(WorkUnitsMain);
+                WorkUnitsAffinity.insert(WorkUnitsAffinity.end(),FS.WorkUnitsAffinity.begin(),FS.WorkUnitsAffinity.end());
+                FS.UpdateWorkUnitKeys(WorkUnitsAffinity);
+                FS.Sorter = this;
+            }else{
+                #ifdef MEZZ_DEBUG
+                CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable() << "<SortWork sorting=\"1\" ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << std::endl;
+                #endif
             }
         }
 

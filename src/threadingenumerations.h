@@ -41,20 +41,24 @@
 #ifndef _DAGenumerations_h
 #define _DAGenumerations_h
 
+#include "datatypes.h"
+
 /// @file
 /// @brief Any enumerations the threading library requires are all declared here.
 
 namespace Mezzanine
 {
-    /// @brief Used to track whether a thread has started, completed, etc...
-    enum RunningState
+    namespace Threading
     {
-        NotStarted=0,   ///< Task is not yet started this frame, this can change without notice.
-        Starting=1,     ///< Only used when a thread successfully attempts to gain ownership of a task, or some other tasks successfully starts
-        Running=2,      ///< Task is running when the value was check, it could become Complete or Failed with no notice.
-        Complete=3,     ///< Thread has completed all work this from frame, will not change until this frame ends.
-        Failed=4        ///< Indicates an abnormal termination of a Workunit or other failure, Likely the whole application will need to stop.
-    };
+        /// @brief Used to track whether a thread has started, completed, etc...
+        enum RunningState
+        {
+            NotStarted=0,   ///< Task is not yet started this frame, this can change without notice.
+            Starting=1,     ///< Only used when a thread successfully attempts to gain ownership of a task, or some other tasks successfully starts
+            Running=2,      ///< Task is running when the value was check, it could become Complete or Failed with no notice.
+            Complete=3,     ///< Thread has completed all work this from frame, will not change until this frame ends.
+            Failed=4        ///< Indicates an abnormal termination of a Workunit or other failure, Likely the whole application will need to stop.
+        };
+    }
 }
-
 #endif

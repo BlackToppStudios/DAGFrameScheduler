@@ -44,6 +44,11 @@
 #include "framescheduler.h"
 #include "doublebufferedresource.h"
 #include "monopoly.h"
+#include "frameschedulerworkunits.h"
+#ifdef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+    #include "atomicoperations.h"
+#endif
+
 
 #include <exception>
 #include <iostream>
@@ -161,10 +166,15 @@ namespace Mezzanine
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
             CurrentFrameStart(GetTimeStamp()),
+            Sorter(0),
             #ifdef MEZZ_USEBARRIERSEACHFRAME
             StartFrameSync(StartingThreadCount),
             EndFrameSync(StartingThreadCount),
             LastFrame(0),
+            #endif
+            #ifdef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+            DecacheMain(0),
+            DecacheAffinity(0),
             #endif
 			CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
@@ -175,10 +185,15 @@ namespace Mezzanine
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
             CurrentFrameStart(GetTimeStamp()),
+            Sorter(0),
             #ifdef MEZZ_USEBARRIERSEACHFRAME
             StartFrameSync(StartingThreadCount),
             EndFrameSync(StartingThreadCount),
             LastFrame(0),
+            #endif
+            #ifdef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+            DecacheMain(0),
+            DecacheAffinity(0),
             #endif
             CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
@@ -285,27 +300,75 @@ namespace Mezzanine
             }
             return Results;
         }
-
+        //DecacheMain(0),
+        //DecacheAffinity(0),
         iWorkUnit* FrameScheduler::GetNextWorkUnit()
         {
-            /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
+            #ifdef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+            bool CompleteSoFar = true;
+            Int32 CurrentRun = DecacheMain;
+            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin()+CurrentRun; Iter!=WorkUnitsMain.rend(); ++Iter)
+            {
+                if (NotStarted==Iter->Unit->GetRunningState())
+                {
+                    if(Iter->Unit->IsEveryDependencyComplete())
+                        { return Iter->Unit; }
+                    CompleteSoFar=false;
+                }
+
+                if(CompleteSoFar)
+                {
+                    CurrentRun++;
+                    if(Complete==Iter->Unit->GetRunningState())
+                        { AtomicCompareAndSwap32(&DecacheMain,DecacheMain,CurrentRun); }
+                }
+            }
+            #else
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
             {
-                if(NotStarted==Iter->Unit->GetRunningState() && Iter->Unit->IsEveryDependencyComplete())
-                    { return Iter->Unit; }
+                if (NotStarted==Iter->Unit->GetRunningState())
+                {
+                    if(Iter->Unit->IsEveryDependencyComplete())
+                        { return Iter->Unit; }
+                }
             }
+            #endif
+
             return 0;
         }
 
         iWorkUnit* FrameScheduler::GetNextWorkUnitAffinity()
         {
-            /// @todo Try adding a shortcut of keeping an iterator to the most forward unit on the first contiguous set is located.
+            #ifdef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+            bool CompleteSoFar = true;
+            Int32 CurrentRun = DecacheAffinity;
+            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsAffinity.rbegin()+CurrentRun; Iter!=WorkUnitsAffinity.rend(); ++Iter)
+            {
+                if (NotStarted==Iter->Unit->GetRunningState())
+                {
+                    if(Iter->Unit->IsEveryDependencyComplete())
+                        { return Iter->Unit; }
+                    CompleteSoFar=false;
+                }
 
+                if(CompleteSoFar)
+                {
+                    CurrentRun++;
+                    if(Complete==Iter->Unit->GetRunningState())
+                        { AtomicCompareAndSwap32(&DecacheAffinity,DecacheAffinity,CurrentRun); }
+                }
+            }
+            #else
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsAffinity.rbegin(); Iter!=WorkUnitsAffinity.rend(); ++Iter)
             {
-                if(NotStarted==Iter->Unit->GetRunningState() && Iter->Unit->IsEveryDependencyComplete())
-                    { return Iter->Unit; }
+                if (NotStarted==Iter->Unit->GetRunningState())
+                {
+                    if(Iter->Unit->IsEveryDependencyComplete())
+                        { return Iter->Unit; }
+                }
             }
+            #endif
+
             return GetNextWorkUnit();
         }
 
@@ -314,13 +377,17 @@ namespace Mezzanine
             // start reading from units likely to be executed last.
             for(std::vector<WorkUnitKey>::iterator Iter = WorkUnitsMain.begin(); Iter!=WorkUnitsMain.end(); ++Iter)
             {
-                if(!Iter->Unit->IsEveryDependencyComplete())
+                //if(!Iter->Unit->IsEveryDependencyComplete())
+                    //{ return false; }
+                if(Complete!=Iter->Unit->GetRunningState())
                     { return false; }
             }
 
             for(std::vector<WorkUnitKey>::iterator Iter = WorkUnitsAffinity.begin(); Iter!=WorkUnitsAffinity.end(); ++Iter)
             {
-                if(!Iter->Unit->IsEveryDependencyComplete())
+                //if(!Iter->Unit->IsEveryDependencyComplete())
+                //    { return false; }
+                if(Complete!=Iter->Unit->GetRunningState())
                     { return false; }
             }
 
@@ -392,7 +459,7 @@ namespace Mezzanine
                     if(Count+1>Resources.size())
                     {
                         Resources.push_back(new DefaultThreadSpecificStorage::Type(this));
-                        Threads.push_back(new thread(ThreadWork, Resources[Count]));
+                        Threads.push_back(new Thread(ThreadWork, Resources[Count]));
                     }
                 }
                 StartFrameSync.Wait();
@@ -404,7 +471,6 @@ namespace Mezzanine
                     Threads.push_back(new Thread(ThreadWork, Resources[Count]));
                 }
             #endif
-            // Add the check for trying a different amount of frames here
         }
 
         void FrameScheduler::RunMainThreadWork()
@@ -425,6 +491,13 @@ namespace Mezzanine
             Threads.clear();
             Threads.reserve(CurrentThreadCount);
             #endif
+
+            if(Sorter)
+            {
+                WorkUnitsAffinity = Sorter->WorkUnitsAffinity;
+                WorkUnitsMain = Sorter->WorkUnitsMain;
+                Sorter=0;
+            }
         }
 
         void FrameScheduler::ResetAllWorkUnits()
@@ -432,6 +505,12 @@ namespace Mezzanine
             /// @todo could be replace with a parallel for, or a monopoly
             for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsMain.rbegin(); Iter!=WorkUnitsMain.rend(); ++Iter)
                 { Iter->Unit->PrepareForNextFrame(); }
+            for(std::vector<WorkUnitKey>::reverse_iterator Iter = WorkUnitsAffinity.rbegin(); Iter!=WorkUnitsAffinity.rend(); ++Iter)
+                { Iter->Unit->PrepareForNextFrame(); }
+            #ifdef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+            DecacheMain=0;
+            DecacheAffinity=0;
+            #endif
         }
 
         void FrameScheduler::WaitUntilNextFrame()

@@ -137,13 +137,13 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the internal rolling average for querying.  <a href="#a1ac48751586feb4f0db8c8af28a63f9f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1RollingAverage.html">RollingAverage</a>&lt; <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#ad43f18063b2c07c919fb8c34135bcf1f">GetPerformanceLog</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the internal rolling average for querying.  <a href="#ad43f18063b2c07c919fb8c34135bcf1f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">GetRunningState</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">GetRunningState</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current RunningState of the thread.  <a href="#aa3518b6585638e25c2b36fa33a288b17"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a7f3eb2d4ddf0c6fbbdb65b277c08668e">GetSortingKey</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sorting metadata.  <a href="#a7f3eb2d4ddf0c6fbbdb65b277c08668e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aef801e574d26553f5e9ef824547f8f3f">IsEveryDependencyComplete</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this WorkUnit could concievably run right now.  <a href="#aef801e574d26553f5e9ef824547f8f3f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html#aa7713d5ebcf444790366846aa40707cf">IsWorkDone</a> ()=0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html#aa7713d5ebcf444790366846aa40707cf">IsWorkDone</a> ()=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This will atomically allow any thread to check if this WorkUnit has completed its work.  <a href="#aa7713d5ebcf444790366846aa40707cf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aebc6b20afcd5b0498809987d427ea151">operator()</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This tracks work unit metadata, then calls DoWork.  <a href="#aebc6b20afcd5b0498809987d427ea151"></a><br/></td></tr>
@@ -152,7 +152,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This resets the running state and takes any further action required to use the WorkUnit again. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a25d7b720861687a4c5009c8cb4f7817d">RemoveDependency</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *<a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a25d7b720861687a4c5009c8cb4f7817d">RemoveDependency</a>)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a dependency.  <a href="#a25d7b720861687a4c5009c8cb4f7817d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">TakeOwnerShip</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">TakeOwnerShip</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to atomically start the work unit in the current thread.  <a href="#a77a94c8e7bc398eb4e54d1e217d4f3b3"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -359,7 +359,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">Mezzanine::Threading::DefaultWorkUnit::GetRunningState</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">Mezzanine::Threading::DefaultWorkUnit::GetRunningState</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const<code> [virtual, inherited]</code></td>
@@ -435,7 +435,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html#aa7713d5ebcf444790366846aa40707cf">Mezzanine::Threading::iAsynchronousWorkUnit::IsWorkDone</a> </td>
+          <td class="memname">virtual <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html#aa7713d5ebcf444790366846aa40707cf">Mezzanine::Threading::iAsynchronousWorkUnit::IsWorkDone</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [pure virtual]</code></td>
@@ -445,7 +445,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 <div class="memdoc">
 
 <p>This will atomically allow any thread to check if this WorkUnit has completed its work. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>This returns a <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> indicating the current status of the asynchronous work. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>This returns a <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> indicating the current status of the asynchronous work. </dd></dl>
 
 <p>Implemented in <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">Mezzanine::Threading::AsynchronousFileLoadWorkUnit</a>.</p>
 
@@ -514,7 +514,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">Mezzanine::Threading::DefaultWorkUnit::TakeOwnerShip</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">Mezzanine::Threading::DefaultWorkUnit::TakeOwnerShip</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [virtual, inherited]</code></td>
@@ -551,6 +551,6 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 17 2012 00:25:38 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

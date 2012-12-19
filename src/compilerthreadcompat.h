@@ -160,4 +160,27 @@
         #undef MEZZ_USEBARRIERSEACHFRAME
     #endif
 
+    /// @def MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+    /// @brief This is used to configure whether to atomically store a shortcut to skip checking all workunits.
+    /// @details When this is enabled @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic CAS" operations are used to maintain
+    /// a count of the number of complete workunits at the beginning of the work unit listings. Normally these
+    /// listings are read-only during frame execution, and the work units store whether or not they are
+    /// complete. The default algorithm forces iteration over a large number of work units to simply check for
+    /// completion in some situations. If memory bandwidth is slow or limited this can be a large source of
+    /// of contention. Enable this option when there are many work units trades atomic operations for memory
+    /// bandwidth. This must be tested on a per system basis to determine full preformance ramifications. This
+    /// is controlled by the CMake (or other build system) option Mezz_DecacheWorkUnits.
+    #define MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+    #ifndef _MEZZ_DECACHEWORKUNIT_
+        #undef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+    #endif
+
+    /// @def MEZZ_FRAMESTOTRACK
+    /// @brief Used to control how long frames track length and other similar values. This is
+    /// controlled by the CMake (or other build system) option Mezz_FramesToTrack.
+    #define MEZZ_FRAMESTOTRACK 10
+    #ifdef _MEZZ_FRAMESTOTRACK_
+        #undef MEZZ_FRAMESTOTRACK
+        #define MEZZ_FRAMESTOTRACK _MEZZ_FRAMESTOTRACK_
+    #endif
 #endif // include guard

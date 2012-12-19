@@ -21,6 +21,11 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### Dec 19, 2012 ###
+* Added option for configuring how long frames track performance. A few other options throughout the library also use this.
+* Complete the Work Unit Sorter and tested. There is no proper unit test for this, but the helperunits does emit a verbose log in debug mode to facilitate debugging features like this.
+* I added a potential optimization that should skip many cache flush when working with large amount of workunits, this can be enabled with the Mezz_DecacheWorkUnits CMake option.
+
 ### Dec 16, 2012 ###
 * I added proper markdown to the README and added a document, COMPILING.md that loosely describes the build process and some of the technicial decisions made while creating this library.
 * Further cleaning of doxygen docs. Almost done with main algorithm page.

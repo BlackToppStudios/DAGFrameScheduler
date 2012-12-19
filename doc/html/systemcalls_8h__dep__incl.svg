@@ -32,7 +32,7 @@
         </defs>
 
 <script type="text/javascript">
-var viewWidth = 973;
+var viewWidth = 977;
 var viewHeight = 392;
 var sectionId = 'dynsection-1';
 </script>
@@ -40,258 +40,263 @@ var sectionId = 'dynsection-1';
 <svg id="graph" class="graph">
 <g id="viewport">
 <title>G</title>
-<polygon fill="white" stroke="white" points="-4,5 -4,-388 970,-388 970,5 -4,5"/>
+<polygon fill="white" stroke="white" points="-4,5 -4,-388 974,-388 974,5 -4,5"/>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<polygon fill="#bfbfbf" stroke="black" points="188.5,-361 188.5,-383 265.5,-383 265.5,-361 188.5,-361"/>
-<text text-anchor="middle" x="227" y="-370" font-family="FreeSans" font-size="10.00">systemcalls.h</text>
+<polygon fill="#bfbfbf" stroke="black" points="661.5,-361 661.5,-383 738.5,-383 738.5,-361 661.5,-361"/>
+<text text-anchor="middle" x="700" y="-370" font-family="FreeSans" font-size="10.00">systemcalls.h</text>
 </g>
 <!-- Node2 -->
 <g id="node3" class="node"><title>Node2</title>
 <a xlink:href="thread_8h.html" target="_top" xlink:title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks...">
-<polygon fill="white" stroke="black" points="200.5,-301 200.5,-323 253.5,-323 253.5,-301 200.5,-301"/>
-<text text-anchor="middle" x="227" y="-310" font-family="FreeSans" font-size="10.00">thread.h</text>
+<polygon fill="white" stroke="black" points="673.5,-301 673.5,-323 726.5,-323 726.5,-301 673.5,-301"/>
+<text text-anchor="middle" x="700" y="-310" font-family="FreeSans" font-size="10.00">thread.h</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node2 -->
 <g id="edge2" class="edge"><title>Node1&#45;&gt;Node2</title>
-<path fill="none" stroke="midnightblue" d="M227,-350.918C227,-341.639 227,-331.108 227,-323.343"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="223.5,-350.995 227,-360.995 230.5,-350.995 223.5,-350.995"/>
+<path fill="none" stroke="midnightblue" d="M700,-350.918C700,-341.639 700,-331.108 700,-323.343"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="696.5,-350.995 700,-360.995 703.5,-350.995 696.5,-350.995"/>
 </g>
 <!-- Node3 -->
 <g id="node5" class="node"><title>Node3</title>
 <a xlink:href="framescheduler_8h.html" target="_top" xlink:title="This file has the Declarations for the main FrameScheduler class.">
-<polygon fill="white" stroke="black" points="76,-241 76,-263 170,-263 170,-241 76,-241"/>
-<text text-anchor="middle" x="123" y="-250" font-family="FreeSans" font-size="10.00">framescheduler.h</text>
+<polygon fill="white" stroke="black" points="528,-241 528,-263 622,-263 622,-241 528,-241"/>
+<text text-anchor="middle" x="575" y="-250" font-family="FreeSans" font-size="10.00">framescheduler.h</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node3 -->
-<g id="edge50" class="edge"><title>Node1&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M210.633,-353.115C188.666,-327.769 150.357,-283.566 132.574,-263.047"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="208.208,-355.661 217.402,-360.926 213.498,-351.077 208.208,-355.661"/>
+<g id="edge52" class="edge"><title>Node1&#45;&gt;Node3</title>
+<path fill="none" stroke="midnightblue" d="M681.012,-353.772C654.729,-328.539 608.067,-283.744 586.508,-263.047"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="678.827,-356.525 688.464,-360.926 683.674,-351.476 678.827,-356.525"/>
 </g>
 <!-- Node8 -->
 <g id="node15" class="node"><title>Node8</title>
 <a xlink:href="dagframescheduler_8h.html" target="_top" xlink:title="This is the file that code using this library should include. It includes all the required components...">
-<polygon fill="white" stroke="black" points="295,-1 295,-23 407,-23 407,-1 295,-1"/>
-<text text-anchor="middle" x="351" y="-10" font-family="FreeSans" font-size="10.00">dagframescheduler.h</text>
+<polygon fill="white" stroke="black" points="459,-1 459,-23 571,-23 571,-1 459,-1"/>
+<text text-anchor="middle" x="515" y="-10" font-family="FreeSans" font-size="10.00">dagframescheduler.h</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node8 -->
-<g id="edge48" class="edge"><title>Node1&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M178.194,-367.679C111.481,-358.79 0,-331.973 0,-252 0,-252 0,-252 0,-132 0,-95.1754 10.6779,-80.8954 41,-60 81.1916,-32.3034 217.084,-19.8597 294.954,-14.8878"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="178.138,-371.198 188.493,-368.956 179,-364.252 178.138,-371.198"/>
+<g id="edge50" class="edge"><title>Node1&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M650.933,-368.785C491.762,-357.71 0,-318.141 0,-252 0,-252 0,-252 0,-132 0,-93.2925 15.7593,-79.8325 49,-60 83.5292,-39.3987 342.774,-21.9834 458.963,-15.1247"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="651.151,-372.309 661.368,-369.504 651.632,-365.325 651.151,-372.309"/>
 </g>
 <!-- Node15 -->
-<g id="node33" class="node"><title>Node15</title>
+<g id="node34" class="node"><title>Node15</title>
 <a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit.">
-<polygon fill="white" stroke="black" points="739.5,-121 739.5,-143 810.5,-143 810.5,-121 739.5,-121"/>
-<text text-anchor="middle" x="775" y="-130" font-family="FreeSans" font-size="10.00">workunit.cpp</text>
+<polygon fill="white" stroke="black" points="842.5,-121 842.5,-143 913.5,-143 913.5,-121 842.5,-121"/>
+<text text-anchor="middle" x="878" y="-130" font-family="FreeSans" font-size="10.00">workunit.cpp</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node15 -->
-<g id="edge54" class="edge"><title>Node1&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M261.564,-356.863C363.404,-312.261 660.742,-182.04 749.621,-143.115"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="260.088,-353.688 252.332,-360.906 262.896,-360.1 260.088,-353.688"/>
+<g id="edge56" class="edge"><title>Node1&#45;&gt;Node15</title>
+<path fill="none" stroke="midnightblue" d="M727.662,-355.11C756.577,-336.177 801.492,-302.975 829,-264 856.91,-224.457 870.959,-167.119 875.892,-143.167"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="725.406,-352.399 718.879,-360.744 729.186,-358.29 725.406,-352.399"/>
 </g>
 <!-- Node17 -->
-<g id="node43" class="node"><title>Node17</title>
+<g id="node44" class="node"><title>Node17</title>
 <a xlink:href="systemcalls_8cpp.html" target="_top" xlink:title="This file defines some platform specifc functions.">
-<polygon fill="white" stroke="black" points="453,-301 453,-323 541,-323 541,-301 453,-301"/>
-<text text-anchor="middle" x="497" y="-310" font-family="FreeSans" font-size="10.00">systemcalls.cpp</text>
+<polygon fill="white" stroke="black" points="881,-301 881,-323 969,-323 969,-301 881,-301"/>
+<text text-anchor="middle" x="925" y="-310" font-family="FreeSans" font-size="10.00">systemcalls.cpp</text>
 </a>
 </g>
 <!-- Node1&#45;&gt;Node17 -->
-<g id="edge52" class="edge"><title>Node1&#45;&gt;Node17</title>
-<path fill="none" stroke="midnightblue" d="M275.672,-361.184C325.983,-350.004 403.85,-332.7 452.55,-321.878"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="274.687,-357.817 265.684,-363.403 276.206,-364.651 274.687,-357.817"/>
+<g id="edge54" class="edge"><title>Node1&#45;&gt;Node17</title>
+<path fill="none" stroke="midnightblue" d="M748.526,-359.06C788.723,-348.341 845.241,-333.269 883.396,-323.094"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="747.439,-355.727 738.679,-361.686 749.243,-362.491 747.439,-355.727"/>
 </g>
 <!-- Node2&#45;&gt;Node3 -->
 <g id="edge4" class="edge"><title>Node2&#45;&gt;Node3</title>
-<path fill="none" stroke="midnightblue" d="M199.049,-295.874C181.102,-285.52 158.253,-272.338 142.306,-263.138"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="197.514,-299.029 207.925,-300.995 201.012,-292.966 197.514,-299.029"/>
+<path fill="none" stroke="midnightblue" d="M667.88,-296.582C646.098,-286.127 617.811,-272.549 598.205,-263.138"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="666.543,-299.823 677.073,-300.995 669.572,-293.512 666.543,-299.823"/>
 </g>
 <!-- Node4 -->
 <g id="node7" class="node"><title>Node4</title>
 <a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit.">
-<polygon fill="white" stroke="black" points="336.5,-181 336.5,-203 397.5,-203 397.5,-181 336.5,-181"/>
-<text text-anchor="middle" x="367" y="-190" font-family="FreeSans" font-size="10.00">workunit.h</text>
+<polygon fill="white" stroke="black" points="598.5,-181 598.5,-203 659.5,-203 659.5,-181 598.5,-181"/>
+<text text-anchor="middle" x="629" y="-190" font-family="FreeSans" font-size="10.00">workunit.h</text>
 </a>
 </g>
 <!-- Node2&#45;&gt;Node4 -->
-<g id="edge46" class="edge"><title>Node2&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M254.018,-295.278C267.405,-286.549 283.542,-275.342 297,-264 320.329,-244.339 344.474,-217.913 357.418,-203.158"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="251.785,-292.552 245.256,-300.896 255.563,-298.445 251.785,-292.552"/>
+<g id="edge48" class="edge"><title>Node2&#45;&gt;Node4</title>
+<path fill="none" stroke="midnightblue" d="M709.795,-291.468C715.508,-276.314 719.994,-255.687 711,-240 700.005,-220.824 678.054,-208.572 659.628,-201.248"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="706.454,-290.383 705.794,-300.957 712.904,-293.102 706.454,-290.383"/>
 </g>
 <!-- Node2&#45;&gt;Node8 -->
-<g id="edge42" class="edge"><title>Node2&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M218.845,-291.339C210.267,-267.713 198,-227.686 198,-192 198,-192 198,-192 198,-132 198,-98.9046 194.625,-84.3859 217,-60 237.048,-38.1501 267.744,-26.2376 294.701,-19.7472"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="215.67,-292.84 222.469,-300.966 222.221,-290.374 215.67,-292.84"/>
+<g id="edge44" class="edge"><title>Node2&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M711.696,-292.227C737.954,-248.381 801.8,-144.909 834,-120 874.095,-88.9831 964.728,-97.8433 931,-60 907.449,-33.5753 678.979,-19.5764 571.001,-14.3904"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="708.664,-290.478 706.551,-300.86 714.677,-294.062 708.664,-290.478"/>
 </g>
 <!-- Node16 -->
-<g id="node38" class="node"><title>Node16</title>
+<g id="node39" class="node"><title>Node16</title>
 <a xlink:href="thread_8cpp.html" target="_top" xlink:title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks...">
-<polygon fill="white" stroke="black" points="225.5,-241 225.5,-263 288.5,-263 288.5,-241 225.5,-241"/>
-<text text-anchor="middle" x="257" y="-250" font-family="FreeSans" font-size="10.00">thread.cpp</text>
+<polygon fill="white" stroke="black" points="639.5,-241 639.5,-263 702.5,-263 702.5,-241 639.5,-241"/>
+<text text-anchor="middle" x="671" y="-250" font-family="FreeSans" font-size="10.00">thread.cpp</text>
 </a>
 </g>
 <!-- Node2&#45;&gt;Node16 -->
-<g id="edge44" class="edge"><title>Node2&#45;&gt;Node16</title>
-<path fill="none" stroke="midnightblue" d="M237.089,-291.822C241.835,-282.329 247.319,-271.361 251.329,-263.343"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="233.844,-290.486 232.502,-300.995 240.105,-293.616 233.844,-290.486"/>
+<g id="edge46" class="edge"><title>Node2&#45;&gt;Node16</title>
+<path fill="none" stroke="midnightblue" d="M690.247,-291.822C685.659,-282.329 680.358,-271.361 676.482,-263.343"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="687.178,-293.515 694.681,-300.995 693.48,-290.468 687.178,-293.515"/>
 </g>
 <!-- Node3&#45;&gt;Node4 -->
 <g id="edge6" class="edge"><title>Node3&#45;&gt;Node4</title>
-<path fill="none" stroke="midnightblue" d="M177.559,-238.584C226.539,-226.54 296.666,-209.295 336.421,-199.519"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="176.628,-235.208 167.753,-240.995 178.3,-242.006 176.628,-235.208"/>
+<path fill="none" stroke="midnightblue" d="M591.823,-233.308C600.657,-223.492 611.195,-211.783 618.791,-203.343"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="588.993,-231.221 584.904,-240.995 594.196,-235.903 588.993,-231.221"/>
 </g>
 <!-- Node3&#45;&gt;Node8 -->
-<g id="edge38" class="edge"><title>Node3&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M105.619,-233.014C73.6425,-195.761 12.6446,-112.184 57,-60 72.2189,-42.0949 214.017,-25.4195 294.991,-17.2527"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="103.088,-235.436 112.319,-240.637 108.347,-230.815 103.088,-235.436"/>
+<g id="edge40" class="edge"><title>Node3&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M517.905,-242.854C393.745,-221.59 106.342,-164.444 57,-84 51.4229,-74.9075 49.8614,-67.9258 57,-60 83.4517,-30.6312 342.324,-17.9935 458.762,-13.7629"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="517.536,-246.341 527.98,-244.561 518.706,-239.439 517.536,-246.341"/>
 </g>
-<!-- Node13 -->
-<g id="node28" class="node"><title>Node13</title>
+<!-- Node11 -->
+<g id="node23" class="node"><title>Node11</title>
 <a xlink:href="framescheduler_8cpp.html" target="_top" xlink:title="This is the core object implementation for this algorithm.">
-<polygon fill="white" stroke="black" points="66,-61 66,-83 170,-83 170,-61 66,-61"/>
-<text text-anchor="middle" x="118" y="-70" font-family="FreeSans" font-size="10.00">framescheduler.cpp</text>
+<polygon fill="white" stroke="black" points="268,-61 268,-83 372,-83 372,-61 268,-61"/>
+<text text-anchor="middle" x="320" y="-70" font-family="FreeSans" font-size="10.00">framescheduler.cpp</text>
 </a>
 </g>
-<!-- Node3&#45;&gt;Node13 -->
-<g id="edge40" class="edge"><title>Node3&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M122.407,-230.65C121.339,-192.221 119.13,-112.672 118.313,-83.2556"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="118.911,-230.841 122.687,-240.74 125.908,-230.647 118.911,-230.841"/>
+<!-- Node3&#45;&gt;Node11 -->
+<g id="edge42" class="edge"><title>Node3&#45;&gt;Node11</title>
+<path fill="none" stroke="midnightblue" d="M550.773,-234.899C498.962,-198.326 378.618,-113.377 335.62,-83.0257"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="548.861,-237.833 559.049,-240.74 552.897,-232.114 548.861,-237.833"/>
 </g>
 <!-- Node5 -->
 <g id="node9" class="node"><title>Node5</title>
 <a xlink:href="asynchronousworkunit_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu...">
-<polygon fill="white" stroke="black" points="599.5,-121 599.5,-143 722.5,-143 722.5,-121 599.5,-121"/>
-<text text-anchor="middle" x="661" y="-130" font-family="FreeSans" font-size="10.00">asynchronousworkunit.h</text>
+<polygon fill="white" stroke="black" points="567.5,-121 567.5,-143 690.5,-143 690.5,-121 567.5,-121"/>
+<text text-anchor="middle" x="629" y="-130" font-family="FreeSans" font-size="10.00">asynchronousworkunit.h</text>
 </a>
 </g>
 <!-- Node4&#45;&gt;Node5 -->
 <g id="edge8" class="edge"><title>Node4&#45;&gt;Node5</title>
-<path fill="none" stroke="midnightblue" d="M407.725,-180.775C408.827,-180.51 409.92,-180.251 411,-180 474.825,-165.192 548.567,-151.438 599.336,-142.482"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="406.535,-177.466 397.696,-183.306 408.248,-184.253 406.535,-177.466"/>
+<path fill="none" stroke="midnightblue" d="M629,-170.918C629,-161.639 629,-151.108 629,-143.343"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="625.5,-170.995 629,-180.995 632.5,-170.995 625.5,-170.995"/>
 </g>
 <!-- Node4&#45;&gt;Node8 -->
-<g id="edge34" class="edge"><title>Node4&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M402.619,-176.748C452.029,-154.747 537.109,-113.512 553,-84 558.057,-74.6083 559.613,-68.369 553,-60 535.121,-37.3748 460.685,-24.2811 407.371,-17.6425"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="400.982,-173.645 393.244,-180.882 403.806,-180.049 400.982,-173.645"/>
+<g id="edge36" class="edge"><title>Node4&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M664.279,-175.988C677.355,-168.227 690.947,-157.598 699,-144 718.073,-111.796 727.997,-89.5298 705,-60 688.642,-38.9957 621.277,-25.7338 571.382,-18.5977"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="662.443,-173.004 655.383,-180.904 665.829,-179.131 662.443,-173.004"/>
 </g>
 <!-- Node10 -->
 <g id="node20" class="node"><title>Node10</title>
 <a xlink:href="frameschedulerworkunits_8h.html" target="_top" xlink:title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req...">
-<polygon fill="white" stroke="black" points="317,-121 317,-143 453,-143 453,-121 317,-121"/>
-<text text-anchor="middle" x="385" y="-130" font-family="FreeSans" font-size="10.00">frameschedulerworkunits.h</text>
+<polygon fill="white" stroke="black" points="184,-121 184,-143 320,-143 320,-121 184,-121"/>
+<text text-anchor="middle" x="252" y="-130" font-family="FreeSans" font-size="10.00">frameschedulerworkunits.h</text>
 </a>
 </g>
 <!-- Node4&#45;&gt;Node10 -->
 <g id="edge20" class="edge"><title>Node4&#45;&gt;Node10</title>
-<path fill="none" stroke="midnightblue" d="M373.234,-171.22C376.039,-161.869 379.242,-151.193 381.597,-143.343"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="369.823,-170.411 370.301,-180.995 376.527,-172.423 369.823,-170.411"/>
+<path fill="none" stroke="midnightblue" d="M588.334,-185.528C524.124,-175.309 398.534,-155.321 320.312,-142.872"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="588.042,-189.025 598.468,-187.141 589.142,-182.112 588.042,-189.025"/>
 </g>
-<!-- Node12 -->
-<g id="node25" class="node"><title>Node12</title>
+<!-- Node13 -->
+<g id="node27" class="node"><title>Node13</title>
 <a xlink:href="monopoly_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread.">
-<polygon fill="white" stroke="black" points="231,-121 231,-143 299,-143 299,-121 231,-121"/>
-<text text-anchor="middle" x="265" y="-130" font-family="FreeSans" font-size="10.00">monopoly.h</text>
+<polygon fill="white" stroke="black" points="438,-121 438,-143 506,-143 506,-121 438,-121"/>
+<text text-anchor="middle" x="472" y="-130" font-family="FreeSans" font-size="10.00">monopoly.h</text>
 </a>
 </g>
-<!-- Node4&#45;&gt;Node12 -->
-<g id="edge26" class="edge"><title>Node4&#45;&gt;Node12</title>
-<path fill="none" stroke="midnightblue" d="M339.586,-175.874C321.985,-165.52 299.575,-152.338 283.935,-143.138"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="337.898,-178.942 348.292,-180.995 341.447,-172.908 337.898,-178.942"/>
+<!-- Node4&#45;&gt;Node13 -->
+<g id="edge28" class="edge"><title>Node4&#45;&gt;Node13</title>
+<path fill="none" stroke="midnightblue" d="M590.816,-177.408C563.094,-166.813 526.166,-152.7 500.879,-143.037"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="589.613,-180.695 600.204,-180.995 592.112,-174.156 589.613,-180.695"/>
 </g>
 <!-- Node4&#45;&gt;Node15 -->
-<g id="edge36" class="edge"><title>Node4&#45;&gt;Node15</title>
-<path fill="none" stroke="midnightblue" d="M407.701,-180.662C408.81,-180.43 409.911,-180.208 411,-180 551.567,-153.091 590.433,-170.909 731,-144 733.644,-143.494 736.362,-142.91 739.087,-142.279"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="406.581,-177.329 397.631,-182.998 408.163,-184.148 406.581,-177.329"/>
+<g id="edge38" class="edge"><title>Node4&#45;&gt;Node15</title>
+<path fill="none" stroke="midnightblue" d="M669.266,-182.297C717.223,-170.741 796.583,-151.619 842.391,-140.581"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="668.434,-178.898 659.532,-184.643 670.074,-185.703 668.434,-178.898"/>
 </g>
 <!-- Node6 -->
 <g id="node11" class="node"><title>Node6</title>
 <a xlink:href="asynchronousfileloadingworkunit_8h.html" target="_top" xlink:title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro...">
-<polygon fill="white" stroke="black" points="790,-61 790,-83 960,-83 960,-61 790,-61"/>
-<text text-anchor="middle" x="875" y="-70" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.h</text>
+<polygon fill="white" stroke="black" points="752,-61 752,-83 922,-83 922,-61 752,-61"/>
+<text text-anchor="middle" x="837" y="-70" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.h</text>
 </a>
 </g>
 <!-- Node5&#45;&gt;Node6 -->
 <g id="edge10" class="edge"><title>Node5&#45;&gt;Node6</title>
-<path fill="none" stroke="midnightblue" d="M710.103,-118.233C748.184,-107.556 800.266,-92.9534 835.636,-83.0366"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="708.935,-114.925 700.251,-120.995 710.825,-121.665 708.935,-114.925"/>
+<path fill="none" stroke="midnightblue" d="M677.199,-118.096C714.171,-107.432 764.508,-92.9112 798.74,-83.0366"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="675.789,-114.861 667.15,-120.995 677.729,-121.586 675.789,-114.861"/>
 </g>
 <!-- Node5&#45;&gt;Node8 -->
 <g id="edge18" class="edge"><title>Node5&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M646.527,-113.012C632.793,-96.3878 610.635,-72.9268 586,-60 555.534,-44.0133 466.48,-28.6651 407.171,-19.7923"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="643.929,-115.368 652.909,-120.99 649.395,-110.995 643.929,-115.368"/>
+<path fill="none" stroke="midnightblue" d="M595.639,-115.961C581.245,-107.853 564.997,-96.9676 553,-84 536.01,-65.6363 524.349,-38.2471 518.769,-23.0916"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="594.303,-119.217 604.766,-120.883 597.625,-113.056 594.303,-119.217"/>
 </g>
 <!-- Node9 -->
 <g id="node17" class="node"><title>Node9</title>
 <a xlink:href="asynchronousworkunit_8cpp.html" target="_top" xlink:title="Contains very little actually.">
-<polygon fill="white" stroke="black" points="638,-61 638,-83 772,-83 772,-61 638,-61"/>
-<text text-anchor="middle" x="705" y="-70" font-family="FreeSans" font-size="10.00">asynchronousworkunit.cpp</text>
+<polygon fill="white" stroke="black" points="562,-61 562,-83 696,-83 696,-61 562,-61"/>
+<text text-anchor="middle" x="629" y="-70" font-family="FreeSans" font-size="10.00">asynchronousworkunit.cpp</text>
 </a>
 </g>
 <!-- Node5&#45;&gt;Node9 -->
 <g id="edge16" class="edge"><title>Node5&#45;&gt;Node9</title>
-<path fill="none" stroke="midnightblue" d="M675.141,-112.717C682.249,-103.025 690.616,-91.6147 696.682,-83.3428"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="672.162,-110.861 669.07,-120.995 677.806,-115.001 672.162,-110.861"/>
+<path fill="none" stroke="midnightblue" d="M629,-110.918C629,-101.639 629,-91.1082 629,-83.3428"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="625.5,-110.995 629,-120.995 632.5,-110.995 625.5,-110.995"/>
 </g>
 <!-- Node7 -->
 <g id="node13" class="node"><title>Node7</title>
 <a xlink:href="asynchronousfileloadingworkunit_8cpp.html" target="_top" xlink:title="The implemtation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchr...">
-<polygon fill="white" stroke="black" points="785,-1 785,-23 965,-23 965,-1 785,-1"/>
-<text text-anchor="middle" x="875" y="-10" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.cpp</text>
+<polygon fill="white" stroke="black" points="747,-1 747,-23 927,-23 927,-1 747,-1"/>
+<text text-anchor="middle" x="837" y="-10" font-family="FreeSans" font-size="10.00">asynchronousfileloadingworkunit.cpp</text>
 </a>
 </g>
 <!-- Node6&#45;&gt;Node7 -->
 <g id="edge12" class="edge"><title>Node6&#45;&gt;Node7</title>
-<path fill="none" stroke="midnightblue" d="M875,-50.9183C875,-41.6393 875,-31.1082 875,-23.3428"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="871.5,-50.995 875,-60.9951 878.5,-50.9951 871.5,-50.995"/>
+<path fill="none" stroke="midnightblue" d="M837,-50.9183C837,-41.6393 837,-31.1082 837,-23.3428"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="833.5,-50.995 837,-60.9951 840.5,-50.9951 833.5,-50.995"/>
 </g>
 <!-- Node6&#45;&gt;Node8 -->
 <g id="edge14" class="edge"><title>Node6&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M779.874,-59.878C639.579,-43.1602 487.217,-26.5743 407.037,-17.9696"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="779.609,-63.3711 789.953,-61.0818 780.439,-56.4205 779.609,-63.3711"/>
+<path fill="none" stroke="midnightblue" d="M768.007,-59.1442C709.292,-48.2034 626.002,-32.6835 571.258,-22.4828"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="767.468,-62.6039 777.94,-60.9951 768.751,-55.7224 767.468,-62.6039"/>
 </g>
 <!-- Node10&#45;&gt;Node8 -->
 <g id="edge22" class="edge"><title>Node10&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M379.076,-111.093C371.819,-85.4787 359.792,-43.0303 354.13,-23.0475"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="375.769,-112.259 381.862,-120.926 382.504,-110.35 375.769,-112.259"/>
-</g>
-<!-- Node11 -->
-<g id="node23" class="node"><title>Node11</title>
-<a xlink:href="frameschedulerworkunits_8cpp.html" target="_top" xlink:title="The implementation of any workunits the framescheduler needs to work correctly.">
-<polygon fill="white" stroke="black" points="398,-61 398,-83 544,-83 544,-61 398,-61"/>
-<text text-anchor="middle" x="471" y="-70" font-family="FreeSans" font-size="10.00">frameschedulerworkunits.cpp</text>
-</a>
+<path fill="none" stroke="midnightblue" d="M247.889,-110.851C246.089,-94.8767 246.668,-73.4738 259,-60 285.256,-31.3133 391.793,-19.5064 458.881,-14.8467"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="244.448,-111.511 249.399,-120.878 251.37,-110.468 244.448,-111.511"/>
 </g>
 <!-- Node10&#45;&gt;Node11 -->
 <g id="edge24" class="edge"><title>Node10&#45;&gt;Node11</title>
-<path fill="none" stroke="midnightblue" d="M409.348,-115.013C423.99,-104.798 442.211,-92.0852 455.035,-83.1383"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="406.972,-112.403 400.774,-120.995 410.978,-118.144 406.972,-112.403"/>
+<path fill="none" stroke="midnightblue" d="M272.189,-114.186C283.51,-104.197 297.292,-92.0367 307.145,-83.3428"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="269.655,-111.754 264.472,-120.995 274.286,-117.003 269.655,-111.754"/>
 </g>
-<!-- Node12&#45;&gt;Node8 -->
-<g id="edge28" class="edge"><title>Node12&#45;&gt;Node8</title>
-<path fill="none" stroke="midnightblue" d="M285.818,-113.815C294.831,-105.311 305.101,-94.7098 313,-84 327.682,-64.0943 340.049,-37.7578 346.404,-23.0845"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="283.317,-111.36 278.314,-120.699 288.049,-116.519 283.317,-111.36"/>
-</g>
-<!-- Node12&#45;&gt;Node13 -->
-<g id="edge30" class="edge"><title>Node12&#45;&gt;Node13</title>
-<path fill="none" stroke="midnightblue" d="M228.566,-117.129C202.689,-106.567 168.509,-92.6158 145.04,-83.0366"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="227.457,-120.457 238.038,-120.995 230.102,-113.976 227.457,-120.457"/>
-</g>
-<!-- Node14 -->
-<g id="node30" class="node"><title>Node14</title>
-<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class.">
-<polygon fill="white" stroke="black" points="225.5,-61 225.5,-83 304.5,-83 304.5,-61 225.5,-61"/>
-<text text-anchor="middle" x="265" y="-70" font-family="FreeSans" font-size="10.00">monopoly.cpp</text>
+<!-- Node12 -->
+<g id="node25" class="node"><title>Node12</title>
+<a xlink:href="frameschedulerworkunits_8cpp.html" target="_top" xlink:title="The implementation of any workunits the framescheduler needs to work correctly.">
+<polygon fill="white" stroke="black" points="66,-61 66,-83 212,-83 212,-61 66,-61"/>
+<text text-anchor="middle" x="139" y="-70" font-family="FreeSans" font-size="10.00">frameschedulerworkunits.cpp</text>
 </a>
 </g>
-<!-- Node12&#45;&gt;Node14 -->
-<g id="edge32" class="edge"><title>Node12&#45;&gt;Node14</title>
-<path fill="none" stroke="midnightblue" d="M265,-110.918C265,-101.639 265,-91.1082 265,-83.3428"/>
-<polygon fill="midnightblue" stroke="midnightblue" points="261.5,-110.995 265,-120.995 268.5,-110.995 261.5,-110.995"/>
+<!-- Node10&#45;&gt;Node12 -->
+<g id="edge26" class="edge"><title>Node10&#45;&gt;Node12</title>
+<path fill="none" stroke="midnightblue" d="M222.432,-116.3C202.815,-105.884 177.542,-92.465 159.977,-83.1383"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="220.8,-119.397 231.274,-120.995 224.083,-113.214 220.8,-119.397"/>
+</g>
+<!-- Node13&#45;&gt;Node8 -->
+<g id="edge30" class="edge"><title>Node13&#45;&gt;Node8</title>
+<path fill="none" stroke="midnightblue" d="M479.369,-111.435C488.534,-85.8582 503.849,-43.1195 511.041,-23.0475"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="476.047,-110.331 475.968,-120.926 482.636,-112.693 476.047,-110.331"/>
+</g>
+<!-- Node13&#45;&gt;Node11 -->
+<g id="edge32" class="edge"><title>Node13&#45;&gt;Node11</title>
+<path fill="none" stroke="midnightblue" d="M434.68,-117.269C407.881,-106.69 372.334,-92.658 347.959,-83.0366"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="433.534,-120.579 444.121,-120.995 436.104,-114.068 433.534,-120.579"/>
+</g>
+<!-- Node14 -->
+<g id="node31" class="node"><title>Node14</title>
+<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class.">
+<polygon fill="white" stroke="black" points="389.5,-61 389.5,-83 468.5,-83 468.5,-61 389.5,-61"/>
+<text text-anchor="middle" x="429" y="-70" font-family="FreeSans" font-size="10.00">monopoly.cpp</text>
+</a>
+</g>
+<!-- Node13&#45;&gt;Node14 -->
+<g id="edge34" class="edge"><title>Node13&#45;&gt;Node14</title>
+<path fill="none" stroke="midnightblue" d="M458.18,-112.717C451.234,-103.025 443.057,-91.6147 437.129,-83.3428"/>
+<polygon fill="midnightblue" stroke="midnightblue" points="455.443,-114.906 464.113,-120.995 461.133,-110.828 455.443,-114.906"/>
 </g>
 </g>
 </svg>

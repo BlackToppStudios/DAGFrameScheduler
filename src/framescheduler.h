@@ -67,6 +67,7 @@ namespace Mezzanine
         class LogAggregator;
         class LogBufferSwapper;
         class FrameScheduler;
+        class WorkSorter;
 
         /// @brief This is central object in this algorithm, it is responsible for spawning threads and managing the order that work units are executed.
         /// @details For a detailed description of the @ref algorithm_sec "Algorithm" this implements see the @ref algorithm_sec "Algorithm" section on
@@ -124,6 +125,9 @@ namespace Mezzanine
                 /// @brief What time did the current Frame Start at.
                 MaxInt CurrentFrameStart;
 
+                /// @brief If this pointer is non-zero then the @ref WorkSorter it points at will be used to sort WorkUnits
+                WorkSorter* Sorter;
+
                 #ifdef MEZZ_USEBARRIERSEACHFRAME
             public:
                 /// @brief Used to synchronize the starting an stopping of all threads before the frame starts
@@ -135,6 +139,14 @@ namespace Mezzanine
                 /// @brief When using barriers instead of thread creation for synchronization this is what tells the threads to end.
                 Int32 LastFrame;
             protected:
+                #endif
+
+                #ifdef MEZZ_USEATOMICSTODECACHECOMPLETEWORK
+                /// @brief Indicates the begining of work that must be searched when starting a fresh search for work in WorkUnitsMain.
+                Int32 DecacheMain;
+
+                /// @brief Indicates the begining of work that must be searched when starting a fresh search for work in WorkUnitsAffinity.
+                Int32 DecacheAffinity;
                 #endif
 
                 /// @brief How many threads will this try to execute with in the next frame.

@@ -126,7 +126,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor, deletes all loaded files. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#ab8cc25210e6951975b3c5a5b47484785">AddDependency</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *NewDependency)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Force this WorkUnit to Start after another has completed.  <a href="#ab8cc25210e6951975b3c5a5b47484785"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> (std::vector&lt; <a class="el" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">String</a> &gt; Filenames_)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> (std::vector&lt; <a class="el" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">String</a> &gt; Filenames_)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Begin loading a list of files based on their names.  <a href="#adf1f17ea0cd77ecdd7d8e372f9381bf2"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab90e01c1aedde65369c9c3de4eae232c"></a><!-- doxytag: member="Mezzanine::Threading::AsynchronousFileLoadWorkUnit::ClearDependencies" ref="ab90e01c1aedde65369c9c3de4eae232c" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#ab90e01c1aedde65369c9c3de4eae232c">ClearDependencies</a> ()</td></tr>
@@ -153,14 +153,14 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the internal rolling average for querying.  <a href="#a1ac48751586feb4f0db8c8af28a63f9f"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1RollingAverage.html">RollingAverage</a>&lt; <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#ad43f18063b2c07c919fb8c34135bcf1f">GetPerformanceLog</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the internal rolling average for querying.  <a href="#ad43f18063b2c07c919fb8c34135bcf1f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">GetRunningState</a> () const </td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">GetRunningState</a> () const </td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current RunningState of the thread.  <a href="#aa3518b6585638e25c2b36fa33a288b17"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a7f3eb2d4ddf0c6fbbdb65b277c08668e">GetSortingKey</a> (<a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> &amp;SchedulerToCount)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the sorting metadata.  <a href="#a7f3eb2d4ddf0c6fbbdb65b277c08668e"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aef801e574d26553f5e9ef824547f8f3f">IsEveryDependencyComplete</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this WorkUnit could concievably run right now.  <a href="#aef801e574d26553f5e9ef824547f8f3f"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">IsWorkDone</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> of the file loading.  <a href="#a158c5b409c9c19120d257cfdcdd02666"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">IsWorkDone</a> ()</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> of the file loading.  <a href="#a158c5b409c9c19120d257cfdcdd02666"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aebc6b20afcd5b0498809987d427ea151">operator()</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This tracks work unit metadata, then calls DoWork.  <a href="#aebc6b20afcd5b0498809987d427ea151"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad23d15834990a68bed95a0ef0a87d352"></a><!-- doxytag: member="Mezzanine::Threading::AsynchronousFileLoadWorkUnit::PrepareForNextFrame" ref="ad23d15834990a68bed95a0ef0a87d352" args="()" -->
@@ -168,7 +168,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This resets the running state and takes any further action required to use the WorkUnit again. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a25d7b720861687a4c5009c8cb4f7817d">RemoveDependency</a> (<a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> *<a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a25d7b720861687a4c5009c8cb4f7817d">RemoveDependency</a>)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a dependency.  <a href="#a25d7b720861687a4c5009c8cb4f7817d"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">TakeOwnerShip</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">TakeOwnerShip</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to atomically start the work unit in the current thread.  <a href="#a77a94c8e7bc398eb4e54d1e217d4f3b3"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="pro-types"></a>
 Protected Types</h2></td></tr>
@@ -241,7 +241,7 @@ std::vector&lt; <a class="el" href="namespaceMezzanine.html#a1a35eea04e090afa580
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">Mezzanine::Threading::AsynchronousFileLoadWorkUnit::BeginLoading</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">Mezzanine::Threading::AsynchronousFileLoadWorkUnit::BeginLoading</a> </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">String</a> &gt;&#160;</td>
           <td class="paramname"><em>Filenames_</em></td><td>)</td>
@@ -262,11 +262,11 @@ std::vector&lt; <a class="el" href="namespaceMezzanine.html#a1a35eea04e090afa580
  <br/>
  This starts by clearing the previous list of loaded files. If that list has not been deleted then this will cause a memory leak. Use <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a477d63a5500540cdc0c2cdfdd3b41f73">DeleteLoadedFiles</a> to clear this list or copy all the pointers elsewhere before calling this and delete them manually at your convience. When this work unit is destroyed it deletes any loaded files from the last call of this method. <br/>
  <br/>
- If this is called while it is loading files the behavior is undefined, most likely it will crash or fail silently, either way no good can come from it. Use <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">IsWorkDone</a> to see if the work is <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a2ef2cd5b107719273e85a7ee1bd52968">Complete</a>. If the work is complete then this can be called after any call to this class's <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#aae0d9271469d7543e371d300794d239b">DoWork</a> member function. </p>
+ If this is called while it is loading files the behavior is undefined, most likely it will crash or fail silently, either way no good can come from it. Use <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">IsWorkDone</a> to see if the work is <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eaf28bda6aff605414109c09f5e69b6ebf">Complete</a>. If the work is complete then this can be called after any call to this class's <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#aae0d9271469d7543e371d300794d239b">DoWork</a> member function. </p>
 <dl class="warning"><dt><b>Warning:</b></dt><dd>This can leak memory if not used in conjuction with memory management or <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a477d63a5500540cdc0c2cdfdd3b41f73">DeleteLoadedFiles</a> and read the details. </dd>
 <dd>
 This can fail in horrible ways if called twice without waiting for the first call to finish, use <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">IsWorkDone</a> and read the details. </dd></dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>This returns <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f">Starting</a> when loading is successful started and who knows what it returns if it fails, likely a segfault or GPF. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>This returns <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8ea775d9b5a7145448690f06ffc1d2a04b4">Starting</a> when loading is successful started and who knows what it returns if it fails, likely a segfault or GPF. </dd></dl>
 
 <p>Definition at line <a class="el" href="asynchronousfileloadingworkunit_8cpp_source.html#l00105">105</a> of file <a class="el" href="asynchronousfileloadingworkunit_8cpp_source.html">asynchronousfileloadingworkunit.cpp</a>.</p>
 
@@ -409,7 +409,7 @@ This can fail in horrible ways if called twice without waiting for the first cal
   </dd>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>This returns a null pointer if the correct <a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html">RawFile</a> cannot be retrieved, otherwise a pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html">RawFile</a> with index corresponing to the index of a passed in filename is returned. </dd></dl>
-<dl class="warning"><dt><b>Warning:</b></dt><dd>Do no call this before <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">IsWorkDone()</a> indicates that the work is <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a2ef2cd5b107719273e85a7ee1bd52968">Complete</a>. These memory addresses are subject to change until all loading is complete. </dd></dl>
+<dl class="warning"><dt><b>Warning:</b></dt><dd>Do no call this before <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">IsWorkDone()</a> indicates that the work is <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eaf28bda6aff605414109c09f5e69b6ebf">Complete</a>. These memory addresses are subject to change until all loading is complete. </dd></dl>
 
 <p>Definition at line <a class="el" href="asynchronousfileloadingworkunit_8cpp_source.html#l00146">146</a> of file <a class="el" href="asynchronousfileloadingworkunit_8cpp_source.html">asynchronousfileloadingworkunit.cpp</a>.</p>
 
@@ -487,7 +487,7 @@ This can fail in horrible ways if called twice without waiting for the first cal
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">Mezzanine::Threading::DefaultWorkUnit::GetRunningState</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">Mezzanine::Threading::DefaultWorkUnit::GetRunningState</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const<code> [virtual, inherited]</code></td>
@@ -563,7 +563,7 @@ This can fail in horrible ways if called twice without waiting for the first cal
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">Mezzanine::Threading::AsynchronousFileLoadWorkUnit::IsWorkDone</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666">Mezzanine::Threading::AsynchronousFileLoadWorkUnit::IsWorkDone</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [virtual]</code></td>
@@ -572,14 +572,14 @@ This can fail in horrible ways if called twice without waiting for the first cal
 </div>
 <div class="memdoc">
 
-<p>Get the <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> of the file loading. </p>
-<p>This can return any <a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> and the meaning applies to the current state of the files being loaded.</p>
+<p>Get the <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> of the file loading. </p>
+<p>This can return any <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> and the meaning applies to the current state of the files being loaded.</p>
 <ul>
-<li><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a5947ec85fc962a0b4fe01f46461b4b70">NotStarted</a> - Either <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> has not been called or it has been called and has not progressed to the point where it sets this. Not usefu for making logical decisions without knowledge of how many times <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> has been called.</li>
-<li><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8ab973f9df9fe3e4bac6c3f6886c67db9f">Starting</a> - This is returned from <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> is success conditions, and is never returned from this.</li>
-<li><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a31afc171358d68f4c28355838d8d0bea">Running</a> - This means that the loading thread has started but not yet completed.</li>
-<li><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a2ef2cd5b107719273e85a7ee1bd52968">Complete</a> - The loading thread has completed its work, and new loading can definitely begin after the next call to <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#aae0d9271469d7543e371d300794d239b">DoWork</a> method.</li>
-<li><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8a12f28368b48ed21281f8f801e04117d0">Failed</a> - If somekind of recoverable error occured, this will be returned, there are no guarantees about the state of the loaded files. <dl class="return"><dt><b>Returns:</b></dt><dd>The running state as of the time of this call, though it is subjecct to immediate thread unsafe change. </dd></dl>
+<li><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eabbce5705b2c11ab3749cd3081e760233">NotStarted</a> - Either <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> has not been called or it has been called and has not progressed to the point where it sets this. Not usefu for making logical decisions without knowledge of how many times <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> has been called.</li>
+<li><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8ea775d9b5a7145448690f06ffc1d2a04b4">Starting</a> - This is returned from <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#adf1f17ea0cd77ecdd7d8e372f9381bf2">BeginLoading</a> is success conditions, and is never returned from this.</li>
+<li><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eafe9d54e5a334f99e969e519c35d590e4">Running</a> - This means that the loading thread has started but not yet completed.</li>
+<li><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eaf28bda6aff605414109c09f5e69b6ebf">Complete</a> - The loading thread has completed its work, and new loading can definitely begin after the next call to <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#aae0d9271469d7543e371d300794d239b">DoWork</a> method.</li>
+<li><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8ea53794343608e08e2d57c07380bbb7436">Failed</a> - If somekind of recoverable error occured, this will be returned, there are no guarantees about the state of the loaded files. <dl class="return"><dt><b>Returns:</b></dt><dd>The running state as of the time of this call, though it is subjecct to immediate thread unsafe change. </dd></dl>
 </li>
 </ul>
 
@@ -652,7 +652,7 @@ This can fail in horrible ways if called twice without waiting for the first cal
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="namespaceMezzanine.html#a087b86fe436e7ee3e22481c1ba1843a8">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">Mezzanine::Threading::DefaultWorkUnit::TakeOwnerShip</a> </td>
+          <td class="memname"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a77a94c8e7bc398eb4e54d1e217d4f3b3">Mezzanine::Threading::DefaultWorkUnit::TakeOwnerShip</a> </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td><code> [virtual, inherited]</code></td>
@@ -690,6 +690,6 @@ This can fail in horrible ways if called twice without waiting for the first cal
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 17 2012 00:25:38 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

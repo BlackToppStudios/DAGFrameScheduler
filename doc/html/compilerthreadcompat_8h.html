@@ -122,8 +122,13 @@ Defines</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a71ff5bc7f0f85f601fab126a57a41998"></a><!-- doxytag: member="compilerthreadcompat.h::MEZZ_DEBUG" ref="a71ff5bc7f0f85f601fab126a57a41998" args="" -->
 #define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a71ff5bc7f0f85f601fab126a57a41998">MEZZ_DEBUG</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if when it is needed. <br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac384449f00498b42a495646c6aecfb8f"></a><!-- doxytag: member="compilerthreadcompat.h::MEZZ_FRAMESTOTRACK" ref="ac384449f00498b42a495646c6aecfb8f" args="" -->
+#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#ac384449f00498b42a495646c6aecfb8f">MEZZ_FRAMESTOTRACK</a>&#160;&#160;&#160;10</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to control how long frames track length and other similar values. This is controlled by the CMake (or other build system) option Mezz_FramesToTrack. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc">MEZZ_LIB</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Some platforms require special decorations to denote what is exported/imported in a share library. This is that decoration if/when it is needed.  <a href="#a455f91aab9e6a1cf4286f5cdfa74c7bc"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a491f7cf4e0e45f1f6e9a0098eff815a0">MEZZ_USEATOMICSTODECACHECOMPLETEWORK</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is used to configure whether to atomically store a shortcut to skip checking all workunits.  <a href="#a491f7cf4e0e45f1f6e9a0098eff815a0"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="compilerthreadcompat_8h.html#a922f06bad05fd18425c1c933801686d3">MEZZ_USEBARRIERSEACHFRAME</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">This is used to configure whether to re-create threads each frame of or synchronize.  <a href="#a922f06bad05fd18425c1c933801686d3"></a><br/></td></tr>
 </table>
@@ -168,6 +173,24 @@ Defines</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a491f7cf4e0e45f1f6e9a0098eff815a0"></a><!-- doxytag: member="compilerthreadcompat.h::MEZZ_USEATOMICSTODECACHECOMPLETEWORK" ref="a491f7cf4e0e45f1f6e9a0098eff815a0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define <a class="el" href="compilerthreadcompat_8h.html#a491f7cf4e0e45f1f6e9a0098eff815a0">MEZZ_USEATOMICSTODECACHECOMPLETEWORK</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>This is used to configure whether to atomically store a shortcut to skip checking all workunits. </p>
+<p>When this is enabled <a class="el" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b">Atomic CAS</a> operations are used to maintain a count of the number of complete workunits at the beginning of the work unit listings. Normally these listings are read-only during frame execution, and the work units store whether or not they are complete. The default algorithm forces iteration over a large number of work units to simply check for completion in some situations. If memory bandwidth is slow or limited this can be a large source of of contention. Enable this option when there are many work units trades atomic operations for memory bandwidth. This must be tested on a per system basis to determine full preformance ramifications. This is controlled by the CMake (or other build system) option Mezz_DecacheWorkUnits. </p>
+
+<p>Definition at line <a class="el" href="compilerthreadcompat_8h_source.html#l00173">173</a> of file <a class="el" href="compilerthreadcompat_8h_source.html">compilerthreadcompat.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a922f06bad05fd18425c1c933801686d3"></a><!-- doxytag: member="compilerthreadcompat.h::MEZZ_USEBARRIERSEACHFRAME" ref="a922f06bad05fd18425c1c933801686d3" args="" -->
 <div class="memitem">
 <div class="memproto">
@@ -202,6 +225,6 @@ Defines</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 17 2012 00:25:38 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

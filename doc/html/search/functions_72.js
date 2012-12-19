@@ -6,6 +6,5 @@ var searchData=
   ['removeworkunit',['RemoveWorkUnit',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ae3d34cfcbafae9a60f43b0b6f81aabbe',1,'Mezzanine::Threading::FrameScheduler']]],
   ['resetallworkunits',['ResetAllWorkUnits',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#af11e18b5ea39b77fee60c3a3d0e65bd4',1,'Mezzanine::Threading::FrameScheduler']]],
   ['runallmonopolies',['RunAllMonopolies',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8dfbc810d2d24bf4c5ba4bec6c08b5c',1,'Mezzanine::Threading::FrameScheduler']]],
-  ['runframepreliminarywork',['RunFramePreliminaryWork',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a4a987e5e743f49055f568876350792a4',1,'Mezzanine::Threading::FrameScheduler']]],
   ['runmainthreadwork',['RunMainThreadWork',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5',1,'Mezzanine::Threading::FrameScheduler']]]
 ];

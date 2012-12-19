@@ -62,6 +62,18 @@
 #include "workunit.h"
 #include "workunitkey.h"
 
+/// @def MEZZ_DAGFRAMESCHEDULER_MAJOR_VERSION
+/// @brief The Major version number of the library. (The front/left number)
+#define MEZZ_DAGFRAMESCHEDULER_MAJOR_VERSION 1
+
+/// @def MEZZ_DAGFRAMESCHEDULER_MINOR_VERSION
+/// @brief The Minor version number of the library. (The middle number)
+#define MEZZ_DAGFRAMESCHEDULER_MINOR_VERSION 0
+
+/// @def MEZZ_DAGFRAMESCHEDULER_REVISION_VERSION
+/// @brief The revision version number of the library. (This right/back number)
+#define MEZZ_DAGFRAMESCHEDULER_REVISION_VERSION 0
+
 /// @mainpage Directed Acyclic Graph Frame Scheduler.
 /// @section goal_sec Goals
 /// This library tries to make writing multithreaded software easier by changing the kinds of primitives that
@@ -285,8 +297,6 @@
 /// work then updated when the frame is complete. Prioritizing Workunits that take longer to run
 /// should help insure the shortest critical path is found by minimizing how often dependencies
 /// cause threads to wait for more work.
-/// @todo Create a work sorting work unit.
-///
 /// @n @n
 /// Each thread queries the
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for the next piece of work...asdf

@@ -30,6 +30,11 @@ By default this library creates and destroys threads each frame. This allows the
 
 This could change performance on a per platform and maybe even per workload basis. On platforms where thread creation is inexpensive, the default configuration performs measurably faster. On systems with slower thread creation, OS implemented (rather than CPU instruction) synchronization primitives, or slow atomic operations this could easily be significantly faster in the other direction. On Ubuntu x64 it is 3% to 10% faster to create threads. It is recommended that this be tested and measured in both configurations for maximum performance before deployment. 
 
+### Mezz_DecacheWorkUnits ###
+When a thread is looking for work, it simply iterates over a container of potential workunits and executes the first one it finds in the NotStarted status with all its dependencies. Checking its status means that it has to be loaded from RAM into the CPU's cache. If there are many workunits this potentially means saturating the Memory Bus with Workunits that will quickly fall out of cache. This option keeps a handle to the latest point in this container it makes sense to start searching from. This way all searches will take on average some very small amount of checks, which may be proportional to the amount of threads. The cost for doing this is the added complexity of the algorithm and atomic cas operations where none previously existed.
+
+In theory the more workunits the greater the potential gain, tests with small numbers of work units show this to be disadvantageous. More testing, with larger pools of workunits is required. This is controled by the Mezz_DecacheWorkUnits CMake option.
+
 ### CMAKE_BUILD_TYPE ###
 This is one of the build options intrinsic to CMake. Set it to 'DEBUG' to enable debugging options in IDEs like Code::Blocks or QT Creator. Set it to 'RELEASE' for performance. Depending in the compiler this can make between a 5x and 20x difference in performance, making the one of the most influential performance options, second only to choosing correct algorithms.
 

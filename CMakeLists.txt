@@ -72,6 +72,9 @@ if (Mezz_BuildSharedLib)
     set(LibType SHARED)
 endif (Mezz_BuildSharedLib)
 
+#How long should the default length on rolling averages and other multiframe periods be.
+set(Mezz_FramesToTrack 10 CACHE STRING "How long should frame durations be tracked for")
+
 # Allow the developer to select if New thread should be created each frame or if an atomic barrier should be used to synchronized threads.
 option(Mezz_MinimizeThreadsEachFrame "Used atomics to minimize thread creation" OFF)
 set(MinimizeThreads THREADSEACHFRAME)
@@ -94,6 +97,13 @@ if (Mezz_AllWarnings)
             set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-long-long -pedantic")
     endif()
 endif (Mezz_AllWarnings)
+
+#When looking for work use atomics to advance iterators past complete work units.
+option(Mezz_DecacheWorkUnits "Used atomics to minimize how many WorkUnits are likely to be in CPU cache." ON)
+set(DecacheWork NODECACHEWORKUNIT)
+if (Mezz_DecacheWorkUnits)
+    set(DecacheWork DECACHEWORKUNIT)
+endif (Mezz_DecacheWorkUnits)
 
 # todo add options
 # An option that will turn off all of the threading header and use std::thread via typedefs instead.
@@ -166,8 +176,12 @@ find_package(Threads)
 add_library(${LibName} ${LibType} ${${PROJECT_NAME}_lib_headers} ${${PROJECT_NAME}_lib_sources} )
 target_link_libraries(${LibName} ${CMAKE_THREAD_LIBS_INIT})
 
-add_definitions(-D_MEZZ_${LibType}_BUILD_  -D_MEZZ_${MinimizeThreads}_)
-
+add_definitions(
+    -D_MEZZ_${LibType}_BUILD_                   # Trailing slash indicates that compiler header should massage this before the library consumes
+    -D_MEZZ_${MinimizeThreads}_
+    -D_MEZZ_${DecacheWork}_
+    -D_MEZZ_FRAMESTOTRACK_=${Mezz_FramesToTrack}
+)
 
 # A basic executable that will define some tests to prove this works (at least in the small scale)
 include_directories( ${RootProjectIncludeDir} )

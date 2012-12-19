@@ -68,7 +68,8 @@ namespace Mezzanine
 
         /// @brief Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.
         /// @note If other doublebuffered resources are used then this or another work unit like it should be adjusted/created to swap those buffers.
-        /// @details This needs to have every other workunit that uses the logger as a dependency. If you use the logger in a workunit,
+        /// @details This needs to have every other workunit that uses the logger as a dependency. If you use the log in a work unit
+        /// that work unit needs to depend on this one, or this one needs to depend on that one.
         class MEZZ_LIB LogBufferSwapper : public DefaultWorkUnit
         {
             public:
@@ -77,7 +78,7 @@ namespace Mezzanine
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
         };
 
-        /// @brief Sorts all of the WorkUnits in the @ref FrameScheduler
+        /// @brief Sorts all of the WorkUnits in the @ref FrameScheduler.
         class MEZZ_LIB WorkSorter : public DefaultWorkUnit
         {
                 friend class FrameScheduler;
@@ -93,12 +94,13 @@ namespace Mezzanine
 
                 /// @brief A freshly sorted WorkUnitsAffinity or an empty vector.
                 std::vector<WorkUnitKey> WorkUnitsAffinity;
+
             public:
                 /// @brief Default constructor.
                 WorkSorter();
 
                 /// @brief This usually does not nothing, but sometimes it will do a whole bunch of work sorting.
-                /// @param CurrentThreadStorage Just to get a reference to the framescheduler.
+                /// @param CurrentThreadStorage Just to get a reference to the framescheduler. So the WorkUnits can sorted and passed back to the Scheduler outisde of scheduling.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
 
                 /// @brief Set how often this actually does work
@@ -109,6 +111,7 @@ namespace Mezzanine
                 /// @return A Whole containing the sorting frequency.
                 virtual Whole GetSortingFrequency();
         };
+
 
     }
 }

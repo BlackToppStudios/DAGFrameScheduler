@@ -132,40 +132,79 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00044"></a>00044 <span class="preprocessor"></span>
 <a name="l00045"></a>00045 <span class="preprocessor">#include &quot;<a class="code" href="datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired.">datatypes.h</a>&quot;</span>
 <a name="l00046"></a>00046 <span class="preprocessor">#include &quot;<a class="code" href="workunit_8h.html" title="This file has the definition of the workunit.">workunit.h</a>&quot;</span>
-<a name="l00047"></a>00047 <span class="comment"></span>
-<a name="l00048"></a>00048 <span class="comment">/// @file</span>
-<a name="l00049"></a>00049 <span class="comment">/// @brief This defines a number of workunits that are required for doing some tasks that the Framescheduler requires.</span>
+<a name="l00047"></a>00047 <span class="preprocessor">#include &quot;<a class="code" href="workunitkey_8h.html" title="This file defines the metadata used to sort workunits.">workunitkey.h</a>&quot;</span>
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049 <span class="preprocessor">#include &lt;vector&gt;</span>
 <a name="l00050"></a>00050 <span class="comment"></span>
-<a name="l00051"></a>00051 <span class="keyword">namespace </span>Mezzanine
-<a name="l00052"></a>00052 {
-<a name="l00053"></a>00053     <span class="keyword">namespace </span>Threading
-<a name="l00054"></a>00054     {<span class="comment"></span>
-<a name="l00055"></a>00055 <span class="comment">        /// @brief Gather all the thread specific logs and commit them to the main log</span>
-<a name="l00056"></a>00056 <span class="comment">        /// @details All the logs are double buffered. This reads from the commitable buffer</span>
-<a name="l00057"></a>00057 <span class="comment">        /// which should otherwise be unused. This task was separated</span>
-<a name="l00058"></a><a class="code" href="classMezzanine_1_1Threading_1_1LogAggregator.html">00058</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1LogAggregator.html" title="Gather all the thread specific logs and commit them to the main log.">LogAggregator</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">DefaultWorkUnit</a>
-<a name="l00059"></a>00059         {
-<a name="l00060"></a>00060             <span class="keyword">public</span>:<span class="comment"></span>
-<a name="l00061"></a>00061 <span class="comment">                /// @brief This does the actual work of log aggregation.</span>
-<a name="l00062"></a>00062 <span class="comment">                /// @param CurrentThreadStorage Ignored, this workunits goals requires this.</span>
-<a name="l00063"></a>00063 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage);
-<a name="l00064"></a>00064         };
-<a name="l00065"></a>00065 <span class="comment"></span>
-<a name="l00066"></a>00066 <span class="comment">        /// @brief Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.</span>
-<a name="l00067"></a>00067 <span class="comment">        /// @note If other doublebuffered resources are used then this or another work unit like it should be adjusted/created to swap those buffers.</span>
-<a name="l00068"></a>00068 <span class="comment">        /// @details This needs to have every other workunit that uses the logger as a dependency. If you use the logger in a workunit,</span>
-<a name="l00069"></a><a class="code" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html">00069</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html" title="Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.">LogBufferSwapper</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">DefaultWorkUnit</a>
-<a name="l00070"></a>00070         {
-<a name="l00071"></a>00071             <span class="keyword">public</span>:<span class="comment"></span>
-<a name="l00072"></a>00072 <span class="comment">                /// @brief This does the swapping of buffers.</span>
-<a name="l00073"></a>00073 <span class="comment">                /// @param CurrentThreadStorage Ignored, this workunits goals requires this.</span>
-<a name="l00074"></a>00074 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage);
-<a name="l00075"></a>00075         };
-<a name="l00076"></a>00076 
-<a name="l00077"></a>00077     }
-<a name="l00078"></a>00078 }
-<a name="l00079"></a>00079 
-<a name="l00080"></a>00080 <span class="preprocessor">#endif</span>
+<a name="l00051"></a>00051 <span class="comment">/// @file</span>
+<a name="l00052"></a>00052 <span class="comment">/// @brief This defines a number of workunits that are required for doing some tasks that the Framescheduler requires.</span>
+<a name="l00053"></a>00053 <span class="comment"></span>
+<a name="l00054"></a>00054 <span class="keyword">namespace </span>Mezzanine
+<a name="l00055"></a>00055 {
+<a name="l00056"></a>00056     <span class="keyword">namespace </span>Threading
+<a name="l00057"></a>00057     {<span class="comment"></span>
+<a name="l00058"></a>00058 <span class="comment">        /// @brief Gather all the thread specific logs and commit them to the main log</span>
+<a name="l00059"></a>00059 <span class="comment">        /// @details All the logs are double buffered. This reads from the commitable buffer</span>
+<a name="l00060"></a>00060 <span class="comment">        /// which should otherwise be unused. This task was separated</span>
+<a name="l00061"></a><a class="code" href="classMezzanine_1_1Threading_1_1LogAggregator.html">00061</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1LogAggregator.html" title="Gather all the thread specific logs and commit them to the main log.">LogAggregator</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">DefaultWorkUnit</a>
+<a name="l00062"></a>00062         {
+<a name="l00063"></a>00063             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00064"></a>00064 <span class="comment">                /// @brief This does the actual work of log aggregation.</span>
+<a name="l00065"></a>00065 <span class="comment">                /// @param CurrentThreadStorage Ignored, this workunits goals requires this.</span>
+<a name="l00066"></a>00066 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage);
+<a name="l00067"></a>00067         };
+<a name="l00068"></a>00068 <span class="comment"></span>
+<a name="l00069"></a>00069 <span class="comment">        /// @brief Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.</span>
+<a name="l00070"></a>00070 <span class="comment">        /// @note If other doublebuffered resources are used then this or another work unit like it should be adjusted/created to swap those buffers.</span>
+<a name="l00071"></a>00071 <span class="comment">        /// @details This needs to have every other workunit that uses the logger as a dependency. If you use the log in a work unit</span>
+<a name="l00072"></a>00072 <span class="comment">        /// that work unit needs to depend on this one, or this one needs to depend on that one.</span>
+<a name="l00073"></a><a class="code" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html">00073</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html" title="Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.">LogBufferSwapper</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">DefaultWorkUnit</a>
+<a name="l00074"></a>00074         {
+<a name="l00075"></a>00075             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00076"></a>00076 <span class="comment">                /// @brief This does the swapping of buffers.</span>
+<a name="l00077"></a>00077 <span class="comment">                /// @param CurrentThreadStorage Just to get a reference to the framescheduler.</span>
+<a name="l00078"></a>00078 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage);
+<a name="l00079"></a>00079         };
+<a name="l00080"></a>00080 <span class="comment"></span>
+<a name="l00081"></a>00081 <span class="comment">        /// @brief Sorts all of the WorkUnits in the @ref FrameScheduler.</span>
+<a name="l00082"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html">00082</a> <span class="comment"></span>        <span class="keyword">class </span><a class="code" href="compilerthreadcompat_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html" title="Sorts all of the WorkUnits in the FrameScheduler.">WorkSorter</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time.">DefaultWorkUnit</a>
+<a name="l00083"></a>00083         {
+<a name="l00084"></a>00084                 <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a>;
+<a name="l00085"></a>00085             <span class="keyword">protected</span>:<span class="comment"></span>
+<a name="l00086"></a>00086 <span class="comment">                /// @brief 1 in every this many frames Sorting happens.</span>
+<a name="l00087"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#ae1441fa8a17fbb857964872e4ea55a0c">00087</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#ae1441fa8a17fbb857964872e4ea55a0c" title="1 in every this many frames Sorting happens.">SortingFrequency</a>;
+<a name="l00088"></a>00088 <span class="comment"></span>
+<a name="l00089"></a>00089 <span class="comment">                /// @brief How long since the last sort?</span>
+<a name="l00090"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#a113b00be89661994d0c2f1482d43bf3b">00090</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#a113b00be89661994d0c2f1482d43bf3b" title="How long since the last sort?">FramesSinceLastSort</a>;
+<a name="l00091"></a>00091 <span class="comment"></span>
+<a name="l00092"></a>00092 <span class="comment">                /// @brief A freshly sorted WorkUnitsMain or an empty vector.</span>
+<a name="l00093"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#a1bd07f88328e5f907ca4078d17ec4515">00093</a> <span class="comment"></span>                std::vector&lt;WorkUnitKey&gt; <a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#a1bd07f88328e5f907ca4078d17ec4515" title="A freshly sorted WorkUnitsMain or an empty vector.">WorkUnitsMain</a>;
+<a name="l00094"></a>00094 <span class="comment"></span>
+<a name="l00095"></a>00095 <span class="comment">                /// @brief A freshly sorted WorkUnitsAffinity or an empty vector.</span>
+<a name="l00096"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#a5375cc0c8ff1a3a398e7dc028615e5e6">00096</a> <span class="comment"></span>                std::vector&lt;WorkUnitKey&gt; <a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html#a5375cc0c8ff1a3a398e7dc028615e5e6" title="A freshly sorted WorkUnitsAffinity or an empty vector.">WorkUnitsAffinity</a>;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098             <span class="keyword">public</span>:<span class="comment"></span>
+<a name="l00099"></a>00099 <span class="comment">                /// @brief Default constructor.</span>
+<a name="l00100"></a>00100 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkSorter.html" title="Sorts all of the WorkUnits in the FrameScheduler.">WorkSorter</a>();
+<a name="l00101"></a>00101 <span class="comment"></span>
+<a name="l00102"></a>00102 <span class="comment">                /// @brief This usually does not nothing, but sometimes it will do a whole bunch of work sorting.</span>
+<a name="l00103"></a>00103 <span class="comment">                /// @param CurrentThreadStorage Just to get a reference to the framescheduler. So the WorkUnits can sorted and passed back to the Scheduler outisde of scheduling.</span>
+<a name="l00104"></a>00104 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> DoWork(<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage);
+<a name="l00105"></a>00105 <span class="comment"></span>
+<a name="l00106"></a>00106 <span class="comment">                /// @brief Set how often this actually does work</span>
+<a name="l00107"></a>00107 <span class="comment">                /// @param FramesBetweenSorts 1 in every this many frame this will sort the work units.</span>
+<a name="l00108"></a>00108 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> SetSortingFrequency(<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> FramesBetweenSorts);
+<a name="l00109"></a>00109 <span class="comment"></span>
+<a name="l00110"></a>00110 <span class="comment">                /// @brief Check how often this sorts.</span>
+<a name="l00111"></a>00111 <span class="comment">                /// @return A Whole containing the sorting frequency.</span>
+<a name="l00112"></a>00112 <span class="comment"></span>                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetSortingFrequency();
+<a name="l00113"></a>00113         };
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117 }
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -182,6 +221,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 17 2012 00:25:38 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

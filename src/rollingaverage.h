@@ -105,7 +105,7 @@ namespace Mezzanine
 
             /// @brief Constructor
             /// @param RecordCount The capacity of the Rolling average. Thsi defaults to 10.
-            BufferedRollingAverage(Whole RecordCount=10)
+            BufferedRollingAverage(Whole RecordCount=MEZZ_FRAMESTOTRACK)
             {
                 Records.assign(RecordCount,RecordType(0));
                 Current = Records.begin();
@@ -167,14 +167,13 @@ namespace Mezzanine
             /// @brief Replaces the capacity of normal rolling averages.
             Whole WeightCount;
 
-
         public:
             /// @brief Used for accessing the derived type when it may not be directly known.
             typedef RecordType Type;
 
             /// @brief Constructor
             /// @param RecordCount How many records should this emulate
-            WeightedRollingAverage(Whole RecordCount=10) :
+            WeightedRollingAverage(Whole RecordCount=MEZZ_FRAMESTOTRACK) :
                 CurrentAverage(0),
 				WeightCount(RecordCount)
                 {}

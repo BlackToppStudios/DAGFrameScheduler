@@ -87,6 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a href="#namespaces">Namespaces</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
+<a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -138,6 +139,8 @@ Classes</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A small wrapper around the system thread.  <a href="classMezzanine_1_1Threading_1_1Thread.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A thread specific collection of double-buffered and algorithm specific resources.  <a href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#details">More...</a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkSorter.html">WorkSorter</a></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Sorts all of the WorkUnits in the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a>.  <a href="classMezzanine_1_1Threading_1_1WorkSorter.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html">WorkUnitKey</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores data about a single work unit so that it can easily be sorted.  <a href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#details">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="typedef-members"></a>
@@ -146,6 +149,18 @@ Typedefs</h2></td></tr>
 typedef <a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html">DoubleBufferedResource</a><br class="typebreak"/>
 &lt; std::stringstream &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#af29e296febda9ded4f29ae72a9d37f31">DoubleBufferedLogger</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A better default name for the Default Logger instance. <br/></td></tr>
+<tr><td colspan="2"><h2><a name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">RunningState</a> { <br/>
+&#160;&#160;<a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eabbce5705b2c11ab3749cd3081e760233">NotStarted</a> = 0, 
+<a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8ea775d9b5a7145448690f06ffc1d2a04b4">Starting</a> = 1, 
+<a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eafe9d54e5a334f99e969e519c35d590e4">Running</a> = 2, 
+<a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8eaf28bda6aff605414109c09f5e69b6ebf">Complete</a> = 3, 
+<br/>
+&#160;&#160;<a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8ea53794343608e08e2d57c07380bbb7436">Failed</a> = 4
+<br/>
+ }</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to track whether a thread has started, completed, etc...  <a href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">More...</a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a7d13f167b7b993e5c5cabe560ac42f8d">AtomicAdd</a> (<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> Value)</td></tr>
@@ -166,7 +181,44 @@ static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f79
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This is where game specific threading algorithms and a minimalistic subset of the std threading library a held. </p>
 <p>this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread, std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are intended to be used in game code. </p>
-</div><hr/><h2>Function Documentation</h2>
+</div><hr/><h2>Enumeration Type Documentation</h2>
+<a class="anchor" id="a1a21883adf1ed757a3926c29a5486a8e"></a><!-- doxytag: member="Mezzanine::Threading::RunningState" ref="a1a21883adf1ed757a3926c29a5486a8e" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="namespaceMezzanine_1_1Threading.html#a1a21883adf1ed757a3926c29a5486a8e">Mezzanine::Threading::RunningState</a></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Used to track whether a thread has started, completed, etc... </p>
+<dl><dt><b>Enumerator: </b></dt><dd><table border="0" cellspacing="2" cellpadding="0">
+<tr><td valign="top"><em><a class="anchor" id="a1a21883adf1ed757a3926c29a5486a8eabbce5705b2c11ab3749cd3081e760233"></a><!-- doxytag: member="NotStarted" ref="a1a21883adf1ed757a3926c29a5486a8eabbce5705b2c11ab3749cd3081e760233" args="" -->NotStarted</em>&nbsp;</td><td>
+<p>Task is not yet started this frame, this can change without notice. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a1a21883adf1ed757a3926c29a5486a8ea775d9b5a7145448690f06ffc1d2a04b4"></a><!-- doxytag: member="Starting" ref="a1a21883adf1ed757a3926c29a5486a8ea775d9b5a7145448690f06ffc1d2a04b4" args="" -->Starting</em>&nbsp;</td><td>
+<p>Only used when a thread successfully attempts to gain ownership of a task, or some other tasks successfully starts. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a1a21883adf1ed757a3926c29a5486a8eafe9d54e5a334f99e969e519c35d590e4"></a><!-- doxytag: member="Running" ref="a1a21883adf1ed757a3926c29a5486a8eafe9d54e5a334f99e969e519c35d590e4" args="" -->Running</em>&nbsp;</td><td>
+<p>Task is running when the value was check, it could become Complete or Failed with no notice. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a1a21883adf1ed757a3926c29a5486a8eaf28bda6aff605414109c09f5e69b6ebf"></a><!-- doxytag: member="Complete" ref="a1a21883adf1ed757a3926c29a5486a8eaf28bda6aff605414109c09f5e69b6ebf" args="" -->Complete</em>&nbsp;</td><td>
+<p><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html" title="A small wrapper around the system thread.">Thread</a> has completed all work this from frame, will not change until this frame ends. </p>
+</td></tr>
+<tr><td valign="top"><em><a class="anchor" id="a1a21883adf1ed757a3926c29a5486a8ea53794343608e08e2d57c07380bbb7436"></a><!-- doxytag: member="Failed" ref="a1a21883adf1ed757a3926c29a5486a8ea53794343608e08e2d57c07380bbb7436" args="" -->Failed</em>&nbsp;</td><td>
+<p>Indicates an abnormal termination of a Workunit or other failure, Likely the whole application will need to stop. </p>
+</td></tr>
+</table>
+</dd>
+</dl>
+
+<p>Definition at line <a class="el" href="threadingenumerations_8h_source.html#l00054">54</a> of file <a class="el" href="threadingenumerations_8h_source.html">threadingenumerations.h</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Function Documentation</h2>
 <a class="anchor" id="a7d13f167b7b993e5c5cabe560ac42f8d"></a><!-- doxytag: member="Mezzanine::Threading::AtomicAdd" ref="a7d13f167b7b993e5c5cabe560ac42f8d" args="(Int32 *VariableToChange, Int32 Value)" -->
 <div class="memitem">
 <div class="memproto">
@@ -289,6 +341,6 @@ static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f79
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Dec 17 2012 00:25:38 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

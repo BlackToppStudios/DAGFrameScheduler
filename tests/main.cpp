@@ -208,6 +208,7 @@ void Sizes()
          << "WorkUnitMonpoly: " << sizeof(MonopolyWorkUnit) << endl
          << "DefaultThreadSpecificStorage::Type: " << sizeof(DefaultThreadSpecificStorage::Type) << endl
          << "FrameScheduler: " << sizeof(FrameScheduler) << endl
+         << "WorkSorter: " << sizeof(WorkSorter) << endl
          << "thread: " << sizeof(Thread) << endl
          << "mutex: " << sizeof(Mutex) << endl
          << "Barrier: " << sizeof(Barrier) << endl
@@ -240,6 +241,8 @@ void Untestable()
         #else
             << "Release." << endl
         #endif
+         << "Default length to track frames: " << MEZZ_FRAMESTOTRACK << endl
+
 
 
 //         << "Cache size available before using RAM GetCacheSize(): " << GetCacheSize() << endl;
@@ -1915,7 +1918,73 @@ void Async()
     File3b.close();
 }
 
+/// @brief The 'helperunits' Test. A smoke test for the monopoly
+void HelperUnits()
+{
+    cout << "Creating a frame scheduler with a variety of Work units for integration testing of the helper workunits." << endl;
 
+    LogAggregator* LA = new LogAggregator;
+    LogBufferSwapper* LBS = new LogBufferSwapper;
+    WorkSorter* WS = new WorkSorter;
+    LBS->AddDependency(LA);
+    #ifdef MEZZ_DEBUG
+    LBS->AddDependency(WS);
+    #endif
+
+    PiMakerWorkUnit *AffinityA = new PiMakerWorkUnit(100000,"A",false);
+    LBS->AddDependency(AffinityA);
+    PiMakerWorkUnit *AffinityB = new PiMakerWorkUnit(100000,"B",false);
+    LBS->AddDependency(AffinityB);
+    PiMakerWorkUnit *AffinityAffinity = new PiMakerWorkUnit(10000,"Affinity",false);
+    LBS->AddDependency(AffinityAffinity);
+    AffinityAffinity->AddDependency(AffinityA);
+    AffinityAffinity->AddDependency(AffinityB);
+    PiMakerWorkUnit *AffinityC = new PiMakerWorkUnit(100000,"C",false);
+    LBS->AddDependency(AffinityC);
+    AffinityC->AddDependency(AffinityAffinity);
+    PiMakerWorkUnit *AffinityD = new PiMakerWorkUnit(100000,"D",false);
+    LBS->AddDependency(AffinityD);
+    AffinityD->AddDependency(AffinityAffinity);
+
+    PiMakerWorkUnit *AffinityFog1 = new PiMakerWorkUnit(100000,"Fog1",false);
+    LBS->AddDependency(AffinityFog1);
+    PiMakerWorkUnit *AffinityFog2 = new PiMakerWorkUnit(100000,"Fog2",false);
+    LBS->AddDependency(AffinityFog2);
+    PiMakerWorkUnit *AffinityFog3 = new PiMakerWorkUnit(100000,"Fog3",false);
+    LBS->AddDependency(AffinityFog3);
+
+    PiMakerMonopoly* Pioply = new PiMakerMonopoly(50,"Pioply",false,4);
+
+    stringstream LogCache;
+
+    FrameScheduler IntegrationTester(&LogCache,4);
+    IntegrationTester.AddWorkUnit(LA);
+    IntegrationTester.AddWorkUnit(LBS);
+    IntegrationTester.AddWorkUnit(WS);
+    IntegrationTester.AddWorkUnit(AffinityA);
+    IntegrationTester.AddWorkUnit(AffinityB);
+    IntegrationTester.AddWorkUnit(AffinityC);
+    IntegrationTester.AddWorkUnit(AffinityD);
+    IntegrationTester.AddWorkUnit(AffinityFog1);
+    IntegrationTester.AddWorkUnit(AffinityFog2);
+    IntegrationTester.AddWorkUnit(AffinityFog3);
+
+    IntegrationTester.AddWorkUnitMonopoly(Pioply);
+    IntegrationTester.AddWorkUnitAffinity(AffinityAffinity);
+
+    IntegrationTester.SetFrameRate(0); //MAX Frame Rate !!!!1!!11!!!!1!one!!
+    MaxInt ExternalFrameStart = 0;
+    for(Whole Counter=0; Counter<MEZZ_FRAMESTOTRACK*4; Counter++)
+    {
+        ExternalFrameStart = GetTimeStamp();
+        IntegrationTester.DoOneFrame();
+        cout << "Frame " << IntegrationTester.GetFrameCount() << " Took " << GetTimeStamp()-ExternalFrameStart << " microseconds." << endl;
+    }
+
+    cout    << "Log from 20 frames of execution" << endl
+            << LogCache.str() << endl;
+
+}
 
 
 
@@ -1956,6 +2025,7 @@ int main (int argc, char** argv)
     AllTheTests["threadaffinity"]=ThreadAffinity;
     AllTheTests["barrier"]=BarrierTest;
     AllTheTests["async"]=Async;
+    AllTheTests["helperunits"]=HelperUnits;
     //AllTheTests["basicthreading"]=BasicThreading;
     //AllTheTests["basicthreading"]=BasicThreading;
     //AllTheTests["basicthreading"]=BasicThreading;
@@ -1977,13 +2047,12 @@ int main (int argc, char** argv)
 
         for(TestGroup::iterator Iter=AllTheTests.begin(); Iter!=AllTheTests.end(); ++Iter)
         {
-            cout << "Beginning test '" << Iter->first << "' :" << endl;
+            cout << endl << endl << "Beginning test '" << Iter->first << "' :" << endl;
             Iter->second();
             cout << endl << endl;
         }
 
     }
-
 
     #ifdef _MSC_VER
     system("pause");
