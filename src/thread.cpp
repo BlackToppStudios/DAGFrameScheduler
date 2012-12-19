@@ -122,7 +122,7 @@ namespace Mezzanine
 
         // Thread wrapper function.
         #if defined(_MEZZ_THREAD_WIN32_)
-        unsigned WINAPI thread::wrapper_function(void * aArg)
+        unsigned WINAPI Thread::wrapper_function(void * aArg)
         #elif defined(_MEZZ_THREAD_POSIX_)
         void * Thread::wrapper_function(void * aArg)
         #endif
