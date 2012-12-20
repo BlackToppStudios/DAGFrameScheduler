@@ -292,7 +292,7 @@ namespace Mezzanine
         Thread::id this_thread::get_id()
         {
         #if defined(_MEZZ_THREAD_WIN32_)
-          return thread::id((unsigned long int) GetCurrentThreadId());
+          return Thread::id((unsigned long int) GetCurrentThreadId());
         #elif defined(_MEZZ_THREAD_POSIX_)
           return _pthread_t_to_ID(pthread_self());
         #endif

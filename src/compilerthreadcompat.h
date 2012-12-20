@@ -93,6 +93,7 @@
             #define WIN32_LEAN_AND_MEAN
             #define __UNDEF_LEAN_AND_MEAN
         #endif
+        #define NOMINMAX
         #include <windows.h>
         #include <process.h>
         #ifdef __UNDEF_LEAN_AND_MEAN

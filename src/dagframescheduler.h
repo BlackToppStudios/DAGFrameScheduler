@@ -280,7 +280,8 @@
 /// @n @n
 /// Once all the dependencies are in place for any synchronization that has been removed, a
 /// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" can be created and started. At
-/// runtime this create a reverse dependency graph, a dependent graph. This is used for determine
+/// runtime this create a reverse dependency graph, a
+/// @ref Mezzanine::Threading::FrameScheduler::DependentGraph "DependentGraph". This is used to determine
 /// which work units are the most depended on. For each work unit s simple count of how many work
 /// units cannot start until has been completed is generated. The higher this number the earlier
 /// the work unit will be executed in a frame. Additionally workunits that take longer to execute
@@ -293,13 +294,36 @@
 /// @n @n
 /// There are several advantages this sorting provides that are not immediately obvious. It separates
 /// the scheduling from the execution allowing, the relatively costly sorting process to be executed
-/// only when work units are added, removed or changed. In theory the sorting could be done in a
-/// work then updated when the frame is complete. Prioritizing Workunits that take longer to run
-/// should help insure the shortest critical path is found by minimizing how often dependencies
-/// cause threads to wait for more work.
+/// only when work units are added, removed or changed. Prioritizing Workunits that
+/// take longer to run should help insure the shortest critical path is found by minimizing how often
+/// dependencies cause threads to wait for more work.
 /// @n @n
-/// Each thread queries the
-/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for the next piece of work...asdf
+/// Sorting the work can be done by a manual call to
+/// @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAll "FrameScheduler::SortWorkUnitsAll()",
+/// @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsMain "FrameScheduler::SortWorkUnitsMain()",
+/// @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAffinity "FrameScheduler::SortWorkUnitsAffinity()"
+/// or by adding a @ref Mezzanine::Threading::WorkSorter "WorkSorter" WorkUnit to the
+/// @ref Mezzanine::Threading::FrameScheduler "FrameScheduler". This only needs to be done when work
+/// units have been added, removed, or their times are likely to have changed.
+/// @n @n
+/// Each thread queries the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for the next
+/// piece of work. The @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" maintains the
+/// list of work units and the next available piece of work can be retrieved with
+/// @ref Mezzanine::Threading::FrameScheduler::GetNextWorkUnit "FrameScheduler::GetNextWorkUnit()" or
+/// @ref Mezzanine::Threading::FrameScheduler::GetNextWorkUnitAffinity "FrameScheduler::GetNextWorkUnitAffinity()".
+/// This by itself is not the atomic operation that allows the thread to execute the workunit, instead
+/// @ref Mezzanine::Threading::iWorkUnit::TakeOwnerShip "iWorkUnit::TakeOwnerShip()" can grant that.
+/// Internally this uses an @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic Compare And Swap"
+/// operation to maximize performance.
+/// By having the workunit manage the right to execute it removes the work queue as the primary source
+/// of contention that would prevent scaling. This does add another potential point of slowdowns though;
+/// threads must iterate over each other workunit until they reach the work to be executed. If atomic
+/// operations are used to maintain an iterator that keeps track of where to start searching for work,
+/// in a waitfree way, then we can trade the cost of this iteration for a number of atomic operations.
+/// On some systems this is a great idea, on others a terrible idea, so it is a
+/// @ref MEZZ_USEATOMICSTODECACHECOMPLETEWORK "CMake option called DecachingWork". Because this update
+/// can be skipped if it work incur a wait, it does not recreate a central workqueues primary point of
+/// contention while providing all the benefits.
 /// @image html DAGThreads.png "DAG threads - Fig 5."
 /// @image latex DAGThread.png "DAG threads - Fig 5."
 /// @image rtf DAGThreads.png "DAG threads - Fig 5."
@@ -308,20 +332,13 @@
 /// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s
 /// are put into a different listing where only the main thread will attempt to execute them. Other
 /// than running these, and running these first, the behavior of the main thread is very similar to
-/// other threads. Once a @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" has been completed the
-/// thread will query the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" for more work.
-/// Because the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" is never modified during
-/// a frame there is no need for synchronization with it specifically, this avoids a key point of
-/// contention that reduces scaling. Instead the synchronization is performed with each
-/// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" and is an
-/// @ref Mezzanine::Threading::AtomicCompareAndSwap32 "Atomic Compare And Swap" operation to maximize
-/// performance.
+/// other threads.
 /// @n @n
 /// Even much of the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler"'s work is performed
-/// in @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s, such as log aggregation and certain functions
-/// that must be performed each frame.
+/// in @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s, such as log aggregation and
+/// @ref Mezzanine::Threading::WorkSorter "Sorting the work listing"
 /// @ref Mezzanine::Threading::iAsynchronousWorkUnit "iAsynchronousWorkUnit"s continue to run in a thread
-/// beyond normal scheduling and are intended to will consume fewer CPU resources and more IO resources.
+/// beyond normal scheduling and are intended to consume fewer CPU resources and more IO resources.
 /// For example loading a large file or listening for network traffic. These will be normal
 /// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s in most regards and will check on the asynchronous
 /// tasks they manage each frame when they run as a normally scheduled.
