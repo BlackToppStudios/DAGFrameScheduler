@@ -324,9 +324,7 @@
 /// @ref MEZZ_USEATOMICSTODECACHECOMPLETEWORK "CMake option called DecachingWork". Because this update
 /// can be skipped if it work incur a wait, it does not recreate a central workqueues primary point of
 /// contention while providing all the benefits.
-/// @image html DAGThreads.png "DAG threads - Fig 5."
-/// @image latex DAGThread.png "DAG threads - Fig 5."
-/// @image rtf DAGThreads.png "DAG threads - Fig 5."
+/// @image html DAGThreads.gif "DAG threads - Fig 5."
 /// @n @n
 /// Some work must be run on specific threads, such as calls to underlying devices (for example,
 /// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s

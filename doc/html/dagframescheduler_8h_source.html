@@ -368,89 +368,104 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00280"></a>00280 <span class="comment">/// @n @n</span>
 <a name="l00281"></a>00281 <span class="comment">/// Once all the dependencies are in place for any synchronization that has been removed, a</span>
 <a name="l00282"></a>00282 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; can be created and started. At</span>
-<a name="l00283"></a>00283 <span class="comment">/// runtime this create a reverse dependency graph, a dependent graph. This is used for determine</span>
-<a name="l00284"></a>00284 <span class="comment">/// which work units are the most depended on. For each work unit s simple count of how many work</span>
-<a name="l00285"></a>00285 <span class="comment">/// units cannot start until has been completed is generated. The higher this number the earlier</span>
-<a name="l00286"></a>00286 <span class="comment">/// the work unit will be executed in a frame. Additionally workunits that take longer to execute</span>
-<a name="l00287"></a>00287 <span class="comment">/// will be prioritized ahead of work units that are faster.</span>
-<a name="l00288"></a>00288 <span class="comment">/// @n @n</span>
-<a name="l00289"></a>00289 <span class="comment">/// Here is a chart that provides an example of this re-factoring and the runtime sorting process:</span>
-<a name="l00290"></a>00290 <span class="comment">/// @image html DAGSorting.png &quot;DAG WorkSorting - Fig 4.&quot;</span>
-<a name="l00291"></a>00291 <span class="comment">/// @image latex DAGSorting.png &quot;DAG WorkSorting - Fig 4.&quot;</span>
-<a name="l00292"></a>00292 <span class="comment">/// @image rtf DAGSorting.png &quot;DAG WorkSorting - Fig 4.&quot;</span>
-<a name="l00293"></a>00293 <span class="comment">/// @n @n</span>
-<a name="l00294"></a>00294 <span class="comment">/// There are several advantages this sorting provides that are not immediately obvious. It separates</span>
-<a name="l00295"></a>00295 <span class="comment">/// the scheduling from the execution allowing, the relatively costly sorting process to be executed</span>
-<a name="l00296"></a>00296 <span class="comment">/// only when work units are added, removed or changed. In theory the sorting could be done in a</span>
-<a name="l00297"></a>00297 <span class="comment">/// work then updated when the frame is complete. Prioritizing Workunits that take longer to run</span>
-<a name="l00298"></a>00298 <span class="comment">/// should help insure the shortest critical path is found by minimizing how often dependencies</span>
-<a name="l00299"></a>00299 <span class="comment">/// cause threads to wait for more work.</span>
+<a name="l00283"></a>00283 <span class="comment">/// runtime this create a reverse dependency graph, a</span>
+<a name="l00284"></a>00284 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::DependentGraph &quot;DependentGraph&quot;. This is used to determine</span>
+<a name="l00285"></a>00285 <span class="comment">/// which work units are the most depended on. For each work unit s simple count of how many work</span>
+<a name="l00286"></a>00286 <span class="comment">/// units cannot start until has been completed is generated. The higher this number the earlier</span>
+<a name="l00287"></a>00287 <span class="comment">/// the work unit will be executed in a frame. Additionally workunits that take longer to execute</span>
+<a name="l00288"></a>00288 <span class="comment">/// will be prioritized ahead of work units that are faster.</span>
+<a name="l00289"></a>00289 <span class="comment">/// @n @n</span>
+<a name="l00290"></a>00290 <span class="comment">/// Here is a chart that provides an example of this re-factoring and the runtime sorting process:</span>
+<a name="l00291"></a>00291 <span class="comment">/// @image html DAGSorting.png &quot;DAG WorkSorting - Fig 4.&quot;</span>
+<a name="l00292"></a>00292 <span class="comment">/// @image latex DAGSorting.png &quot;DAG WorkSorting - Fig 4.&quot;</span>
+<a name="l00293"></a>00293 <span class="comment">/// @image rtf DAGSorting.png &quot;DAG WorkSorting - Fig 4.&quot;</span>
+<a name="l00294"></a>00294 <span class="comment">/// @n @n</span>
+<a name="l00295"></a>00295 <span class="comment">/// There are several advantages this sorting provides that are not immediately obvious. It separates</span>
+<a name="l00296"></a>00296 <span class="comment">/// the scheduling from the execution allowing, the relatively costly sorting process to be executed</span>
+<a name="l00297"></a>00297 <span class="comment">/// only when work units are added, removed or changed. Prioritizing Workunits that</span>
+<a name="l00298"></a>00298 <span class="comment">/// take longer to run should help insure the shortest critical path is found by minimizing how often</span>
+<a name="l00299"></a>00299 <span class="comment">/// dependencies cause threads to wait for more work.</span>
 <a name="l00300"></a>00300 <span class="comment">/// @n @n</span>
-<a name="l00301"></a>00301 <span class="comment">/// Each thread queries the</span>
-<a name="l00302"></a>00302 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; for the next piece of work...asdf</span>
-<a name="l00303"></a>00303 <span class="comment">/// @image html DAGThreads.png &quot;DAG threads - Fig 5.&quot;</span>
-<a name="l00304"></a>00304 <span class="comment">/// @image latex DAGThread.png &quot;DAG threads - Fig 5.&quot;</span>
-<a name="l00305"></a>00305 <span class="comment">/// @image rtf DAGThreads.png &quot;DAG threads - Fig 5.&quot;</span>
-<a name="l00306"></a>00306 <span class="comment">/// @n @n</span>
-<a name="l00307"></a>00307 <span class="comment">/// Some work must be run on specific threads, such as calls to underlying devices (for example,</span>
-<a name="l00308"></a>00308 <span class="comment">/// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s</span>
-<a name="l00309"></a>00309 <span class="comment">/// are put into a different listing where only the main thread will attempt to execute them. Other</span>
-<a name="l00310"></a>00310 <span class="comment">/// than running these, and running these first, the behavior of the main thread is very similar to</span>
-<a name="l00311"></a>00311 <span class="comment">/// other threads. Once a @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; has been completed the</span>
-<a name="l00312"></a>00312 <span class="comment">/// thread will query the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; for more work.</span>
-<a name="l00313"></a>00313 <span class="comment">/// Because the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; is never modified during</span>
-<a name="l00314"></a>00314 <span class="comment">/// a frame there is no need for synchronization with it specifically, this avoids a key point of</span>
-<a name="l00315"></a>00315 <span class="comment">/// contention that reduces scaling. Instead the synchronization is performed with each</span>
-<a name="l00316"></a>00316 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; and is an</span>
-<a name="l00317"></a>00317 <span class="comment">/// @ref Mezzanine::Threading::AtomicCompareAndSwap32 &quot;Atomic Compare And Swap&quot; operation to maximize</span>
-<a name="l00318"></a>00318 <span class="comment">/// performance.</span>
-<a name="l00319"></a>00319 <span class="comment">/// @n @n</span>
-<a name="l00320"></a>00320 <span class="comment">/// Even much of the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;&#39;s work is performed</span>
-<a name="l00321"></a>00321 <span class="comment">/// in @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s, such as log aggregation and certain functions</span>
-<a name="l00322"></a>00322 <span class="comment">/// that must be performed each frame.</span>
-<a name="l00323"></a>00323 <span class="comment">/// @ref Mezzanine::Threading::iAsynchronousWorkUnit &quot;iAsynchronousWorkUnit&quot;s continue to run in a thread</span>
-<a name="l00324"></a>00324 <span class="comment">/// beyond normal scheduling and are intended to will consume fewer CPU resources and more IO resources.</span>
-<a name="l00325"></a>00325 <span class="comment">/// For example loading a large file or listening for network traffic. These will be normal</span>
-<a name="l00326"></a>00326 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s in most regards and will check on the asynchronous</span>
-<a name="l00327"></a>00327 <span class="comment">/// tasks they manage each frame when they run as a normally scheduled.</span>
+<a name="l00301"></a>00301 <span class="comment">/// Sorting the work can be done by a manual call to</span>
+<a name="l00302"></a>00302 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAll &quot;FrameScheduler::SortWorkUnitsAll()&quot;,</span>
+<a name="l00303"></a>00303 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsMain &quot;FrameScheduler::SortWorkUnitsMain()&quot;,</span>
+<a name="l00304"></a>00304 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAffinity &quot;FrameScheduler::SortWorkUnitsAffinity()&quot;</span>
+<a name="l00305"></a>00305 <span class="comment">/// or by adding a @ref Mezzanine::Threading::WorkSorter &quot;WorkSorter&quot; WorkUnit to the</span>
+<a name="l00306"></a>00306 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;. This only needs to be done when work</span>
+<a name="l00307"></a>00307 <span class="comment">/// units have been added, removed, or their times are likely to have changed.</span>
+<a name="l00308"></a>00308 <span class="comment">/// @n @n</span>
+<a name="l00309"></a>00309 <span class="comment">/// Each thread queries the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; for the next</span>
+<a name="l00310"></a>00310 <span class="comment">/// piece of work. The @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; maintains the</span>
+<a name="l00311"></a>00311 <span class="comment">/// list of work units and the next available piece of work can be retrieved with</span>
+<a name="l00312"></a>00312 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::GetNextWorkUnit &quot;FrameScheduler::GetNextWorkUnit()&quot; or</span>
+<a name="l00313"></a>00313 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::GetNextWorkUnitAffinity &quot;FrameScheduler::GetNextWorkUnitAffinity()&quot;.</span>
+<a name="l00314"></a>00314 <span class="comment">/// This by itself is not the atomic operation that allows the thread to execute the workunit, instead</span>
+<a name="l00315"></a>00315 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit::TakeOwnerShip &quot;iWorkUnit::TakeOwnerShip()&quot; can grant that.</span>
+<a name="l00316"></a>00316 <span class="comment">/// Internally this uses an @ref Mezzanine::Threading::AtomicCompareAndSwap32 &quot;Atomic Compare And Swap&quot;</span>
+<a name="l00317"></a>00317 <span class="comment">/// operation to maximize performance.</span>
+<a name="l00318"></a>00318 <span class="comment">/// By having the workunit manage the right to execute it removes the work queue as the primary source</span>
+<a name="l00319"></a>00319 <span class="comment">/// of contention that would prevent scaling. This does add another potential point of slowdowns though;</span>
+<a name="l00320"></a>00320 <span class="comment">/// threads must iterate over each other workunit until they reach the work to be executed. If atomic</span>
+<a name="l00321"></a>00321 <span class="comment">/// operations are used to maintain an iterator that keeps track of where to start searching for work,</span>
+<a name="l00322"></a>00322 <span class="comment">/// in a waitfree way, then we can trade the cost of this iteration for a number of atomic operations.</span>
+<a name="l00323"></a>00323 <span class="comment">/// On some systems this is a great idea, on others a terrible idea, so it is a</span>
+<a name="l00324"></a>00324 <span class="comment">/// @ref MEZZ_USEATOMICSTODECACHECOMPLETEWORK &quot;CMake option called DecachingWork&quot;. Because this update</span>
+<a name="l00325"></a>00325 <span class="comment">/// can be skipped if it work incur a wait, it does not recreate a central workqueues primary point of</span>
+<a name="l00326"></a>00326 <span class="comment">/// contention while providing all the benefits.</span>
+<a name="l00327"></a>00327 <span class="comment">/// @image html DAGThreads.gif &quot;DAG threads - Fig 5.&quot;</span>
 <a name="l00328"></a>00328 <span class="comment">/// @n @n</span>
-<a name="l00329"></a>00329 <span class="comment">/// If a thread should run out of work because all the work is completed the frame will pause until it</span>
-<a name="l00330"></a>00330 <span class="comment">/// should start the next frame. This pause length is calulated using a runtime configurable value on</span>
-<a name="l00331"></a>00331 <span class="comment">/// the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;. If a thread has checked every</span>
-<a name="l00332"></a>00332 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; and some are still not executing, but could not</span>
-<a name="l00333"></a>00333 <span class="comment">/// be started because of incomplete dependencies the thread will simply iterate over every</span>
-<a name="l00334"></a>00334 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; in the</span>
-<a name="l00335"></a>00335 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; until the dependencies of one are</span>
-<a name="l00336"></a>00336 <span class="comment">/// met and allows one to be executed. This implicitly guarantees that at least one thread will</span>
-<a name="l00337"></a>00337 <span class="comment">/// always do work, and if dependencies chains are kept short then it is more likely that several</span>
-<a name="l00338"></a>00338 <span class="comment">/// threads will advance.</span>
-<a name="l00339"></a>00339 <span class="comment">/// @n @n</span>
-<a name="l00340"></a>00340 <span class="comment">/// The @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; classes are designed to be inherited from</span>
-<a name="l00341"></a>00341 <span class="comment">/// and inserted into a @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; which will</span>
-<a name="l00342"></a>00342 <span class="comment">/// manage their lifetime and execute them when requested via</span>
-<a name="l00343"></a>00343 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() &quot;FrameScheduler::DoOneFrame()&quot;.</span>
-<a name="l00344"></a>00344 <span class="comment">/// @n @n</span>
-<a name="l00345"></a>00345 <span class="comment">/// Insert DAGFramescheduler picture here.</span>
-<a name="l00346"></a>00346 <span class="comment">/// @n @n</span>
-<a name="l00347"></a>00347 <span class="comment">/// This documentation should not be considered complete nor should the algorithm</span>
-<a name="l00348"></a>00348 <span class="comment">/// both are still under development.</span>
-<a name="l00349"></a>00349 <span class="comment"></span>
-<a name="l00350"></a>00350 
-<a name="l00351"></a>00351 <span class="comment"></span>
-<a name="l00352"></a>00352 <span class="comment">/// @brief All of the Mezzanine game library components reside in this namespace.</span>
-<a name="l00353"></a>00353 <span class="comment">/// @details The DAG Frame Scheduler is just one part of many in the Mezzanine. The Mezzanine as a</span>
-<a name="l00354"></a>00354 <span class="comment">/// whole is intended to tie a complex collection of libraries into one cohesive library.</span>
-<a name="l00355"></a>00355 <span class="comment"></span><span class="keyword">namespace </span>Mezzanine
-<a name="l00356"></a>00356 {<span class="comment"></span>
-<a name="l00357"></a>00357 <span class="comment">    /// @brief This is where game specific threading algorithms and a minimalistic subset of the std threading library a held</span>
-<a name="l00358"></a>00358 <span class="comment">    /// @details this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread,</span>
-<a name="l00359"></a>00359 <span class="comment">    /// std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are</span>
-<a name="l00360"></a>00360 <span class="comment">    /// intended to be used in game code.</span>
-<a name="l00361"></a>00361 <span class="comment"></span>    <span class="keyword">namespace </span>Threading
-<a name="l00362"></a>00362         {}
-<a name="l00363"></a>00363 }
-<a name="l00364"></a>00364 
-<a name="l00365"></a>00365 <span class="preprocessor">#endif</span>
+<a name="l00329"></a>00329 <span class="comment">/// Some work must be run on specific threads, such as calls to underlying devices (for example,</span>
+<a name="l00330"></a>00330 <span class="comment">/// graphics cards using Directx or OpenGL). These @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s</span>
+<a name="l00331"></a>00331 <span class="comment">/// are put into a different listing where only the main thread will attempt to execute them. Other</span>
+<a name="l00332"></a>00332 <span class="comment">/// than running these, and running these first, the behavior of the main thread is very similar to</span>
+<a name="l00333"></a>00333 <span class="comment">/// other threads.</span>
+<a name="l00334"></a>00334 <span class="comment">/// @n @n</span>
+<a name="l00335"></a>00335 <span class="comment">/// Even much of the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;&#39;s work is performed</span>
+<a name="l00336"></a>00336 <span class="comment">/// in @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s, such as log aggregation and</span>
+<a name="l00337"></a>00337 <span class="comment">/// @ref Mezzanine::Threading::WorkSorter &quot;Sorting the work listing&quot;</span>
+<a name="l00338"></a>00338 <span class="comment">/// @ref Mezzanine::Threading::iAsynchronousWorkUnit &quot;iAsynchronousWorkUnit&quot;s continue to run in a thread</span>
+<a name="l00339"></a>00339 <span class="comment">/// beyond normal scheduling and are intended to consume fewer CPU resources and more IO resources.</span>
+<a name="l00340"></a>00340 <span class="comment">/// For example loading a large file or listening for network traffic. These will be normal</span>
+<a name="l00341"></a>00341 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s in most regards and will check on the asynchronous</span>
+<a name="l00342"></a>00342 <span class="comment">/// tasks they manage each frame when they run as a normally scheduled.</span>
+<a name="l00343"></a>00343 <span class="comment">/// @n @n</span>
+<a name="l00344"></a>00344 <span class="comment">/// If a thread should run out of work because all the work is completed the frame will pause until it</span>
+<a name="l00345"></a>00345 <span class="comment">/// should start the next frame. This pause length is calulated using a runtime configurable value on</span>
+<a name="l00346"></a>00346 <span class="comment">/// the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;. If a thread has checked every</span>
+<a name="l00347"></a>00347 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; and some are still not executing, but could not</span>
+<a name="l00348"></a>00348 <span class="comment">/// be started because of incomplete dependencies the thread will simply iterate over every</span>
+<a name="l00349"></a>00349 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; in the</span>
+<a name="l00350"></a>00350 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; until the dependencies of one are</span>
+<a name="l00351"></a>00351 <span class="comment">/// met and allows one to be executed. This implicitly guarantees that at least one thread will</span>
+<a name="l00352"></a>00352 <span class="comment">/// always do work, and if dependencies chains are kept short then it is more likely that several</span>
+<a name="l00353"></a>00353 <span class="comment">/// threads will advance.</span>
+<a name="l00354"></a>00354 <span class="comment">/// @n @n</span>
+<a name="l00355"></a>00355 <span class="comment">/// The @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; classes are designed to be inherited from</span>
+<a name="l00356"></a>00356 <span class="comment">/// and inserted into a @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; which will</span>
+<a name="l00357"></a>00357 <span class="comment">/// manage their lifetime and execute them when requested via</span>
+<a name="l00358"></a>00358 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() &quot;FrameScheduler::DoOneFrame()&quot;.</span>
+<a name="l00359"></a>00359 <span class="comment">/// @n @n</span>
+<a name="l00360"></a>00360 <span class="comment">/// Insert DAGFramescheduler picture here.</span>
+<a name="l00361"></a>00361 <span class="comment">/// @n @n</span>
+<a name="l00362"></a>00362 <span class="comment">/// This documentation should not be considered complete nor should the algorithm</span>
+<a name="l00363"></a>00363 <span class="comment">/// both are still under development.</span>
+<a name="l00364"></a>00364 <span class="comment"></span>
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366 <span class="comment"></span>
+<a name="l00367"></a>00367 <span class="comment">/// @brief All of the Mezzanine game library components reside in this namespace.</span>
+<a name="l00368"></a>00368 <span class="comment">/// @details The DAG Frame Scheduler is just one part of many in the Mezzanine. The Mezzanine as a</span>
+<a name="l00369"></a>00369 <span class="comment">/// whole is intended to tie a complex collection of libraries into one cohesive library.</span>
+<a name="l00370"></a>00370 <span class="comment"></span><span class="keyword">namespace </span>Mezzanine
+<a name="l00371"></a>00371 {<span class="comment"></span>
+<a name="l00372"></a>00372 <span class="comment">    /// @brief This is where game specific threading algorithms and a minimalistic subset of the std threading library a held</span>
+<a name="l00373"></a>00373 <span class="comment">    /// @details this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread,</span>
+<a name="l00374"></a>00374 <span class="comment">    /// std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are</span>
+<a name="l00375"></a>00375 <span class="comment">    /// intended to be used in game code.</span>
+<a name="l00376"></a>00376 <span class="comment"></span>    <span class="keyword">namespace </span>Threading
+<a name="l00377"></a>00377         {}
+<a name="l00378"></a>00378 }
+<a name="l00379"></a>00379 
+<a name="l00380"></a>00380 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -467,6 +482,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sat Dec 22 2012 01:53:17 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

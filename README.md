@@ -21,6 +21,9 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### Dec 20, 2012 ###
+* A better fix for a visual studio compiler bug involving the max macro.
+
 ### Dec 19, 2012 ###
 * Added option for configuring how long frames track performance. A few other options throughout the library also use this.
 * Complete the Work Unit Sorter and tested. There is no proper unit test for this, but the helperunits does emit a verbose log in debug mode to facilitate debugging features like this.

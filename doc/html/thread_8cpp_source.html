@@ -210,7 +210,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00122"></a>00122 
 <a name="l00123"></a>00123         <span class="comment">// Thread wrapper function.</span>
 <a name="l00124"></a>00124 <span class="preprocessor">        #if defined(_MEZZ_THREAD_WIN32_)</span>
-<a name="l00125"></a>00125 <span class="preprocessor"></span>        <span class="keywordtype">unsigned</span> WINAPI thread::wrapper_function(<span class="keywordtype">void</span> * aArg)
+<a name="l00125"></a>00125 <span class="preprocessor"></span>        <span class="keywordtype">unsigned</span> WINAPI Thread::wrapper_function(<span class="keywordtype">void</span> * aArg)
 <a name="l00126"></a>00126         <span class="preprocessor">#elif defined(_MEZZ_THREAD_POSIX_)</span>
 <a name="l00127"></a>00127 <span class="preprocessor"></span>        <span class="keywordtype">void</span> * Thread::wrapper_function(<span class="keywordtype">void</span> * aArg)
 <a name="l00128"></a>00128         <span class="preprocessor">#endif</span>
@@ -380,7 +380,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00292"></a><a class="code" href="namespaceMezzanine_1_1Threading_1_1this__thread.html#a9d7f994aed04273d2ab06b103fc381de">00292</a>         <a class="code" href="classMezzanine_1_1Threading_1_1Thread_1_1id.html" title="The thread ID is a unique identifier for each thread.">Thread::id</a> <a class="code" href="namespaceMezzanine_1_1Threading_1_1this__thread.html#a9d7f994aed04273d2ab06b103fc381de" title="Return the thread ID of the calling thread.">this_thread::get_id</a>()
 <a name="l00293"></a>00293         {
 <a name="l00294"></a>00294 <span class="preprocessor">        #if defined(_MEZZ_THREAD_WIN32_)</span>
-<a name="l00295"></a>00295 <span class="preprocessor"></span>          <span class="keywordflow">return</span> thread::id((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span>) GetCurrentThreadId());
+<a name="l00295"></a>00295 <span class="preprocessor"></span>          <span class="keywordflow">return</span> <a class="code" href="classMezzanine_1_1Threading_1_1Thread_1_1id.html" title="The thread ID is a unique identifier for each thread.">Thread::id</a>((<span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> <span class="keywordtype">int</span>) GetCurrentThreadId());
 <a name="l00296"></a>00296 <span class="preprocessor">        #elif defined(_MEZZ_THREAD_POSIX_)</span>
 <a name="l00297"></a>00297 <span class="preprocessor"></span>          <span class="keywordflow">return</span> _pthread_t_to_ID(pthread_self());
 <a name="l00298"></a>00298 <span class="preprocessor">        #endif</span>
@@ -426,6 +426,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 19 2012 01:35:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sat Dec 22 2012 01:53:17 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>
