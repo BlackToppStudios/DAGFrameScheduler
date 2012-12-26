@@ -410,7 +410,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00322"></a>00322 <span class="comment">/// in a waitfree way, then we can trade the cost of this iteration for a number of atomic operations.</span>
 <a name="l00323"></a>00323 <span class="comment">/// On some systems this is a great idea, on others a terrible idea, so it is a</span>
 <a name="l00324"></a>00324 <span class="comment">/// @ref MEZZ_USEATOMICSTODECACHECOMPLETEWORK &quot;CMake option called DecachingWork&quot;. Because this update</span>
-<a name="l00325"></a>00325 <span class="comment">/// can be skipped if it work incur a wait, it does not recreate a central workqueues primary point of</span>
+<a name="l00325"></a>00325 <span class="comment">/// can be skipped if it work incur a wait, it does not recreate a central workqueue&#39;s primary point of</span>
 <a name="l00326"></a>00326 <span class="comment">/// contention while providing all the benefits.</span>
 <a name="l00327"></a>00327 <span class="comment">/// @image html DAGThreads.gif &quot;DAG threads - Fig 5.&quot;</span>
 <a name="l00328"></a>00328 <span class="comment">/// @n @n</span>
@@ -429,9 +429,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00341"></a>00341 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s in most regards and will check on the asynchronous</span>
 <a name="l00342"></a>00342 <span class="comment">/// tasks they manage each frame when they run as a normally scheduled.</span>
 <a name="l00343"></a>00343 <span class="comment">/// @n @n</span>
-<a name="l00344"></a>00344 <span class="comment">/// If a thread should run out of work because all the work is completed the frame will pause until it</span>
-<a name="l00345"></a>00345 <span class="comment">/// should start the next frame. This pause length is calulated using a runtime configurable value on</span>
-<a name="l00346"></a>00346 <span class="comment">/// the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;. If a thread has checked every</span>
+<a name="l00344"></a>00344 <span class="comment">/// If a thread runs out of work because all the work is completed the frame will pause until it</span>
+<a name="l00345"></a>00345 <span class="comment">/// should start again the next frame. This pause length is calulated using a runtime configurable value</span>
+<a name="l00346"></a>00346 <span class="comment">/// on the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;. If a thread has checked every</span>
 <a name="l00347"></a>00347 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; and some are still not executing, but could not</span>
 <a name="l00348"></a>00348 <span class="comment">/// be started because of incomplete dependencies the thread will simply iterate over every</span>
 <a name="l00349"></a>00349 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; in the</span>
@@ -439,33 +439,68 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00351"></a>00351 <span class="comment">/// met and allows one to be executed. This implicitly guarantees that at least one thread will</span>
 <a name="l00352"></a>00352 <span class="comment">/// always do work, and if dependencies chains are kept short then it is more likely that several</span>
 <a name="l00353"></a>00353 <span class="comment">/// threads will advance.</span>
-<a name="l00354"></a>00354 <span class="comment">/// @n @n</span>
-<a name="l00355"></a>00355 <span class="comment">/// The @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; classes are designed to be inherited from</span>
-<a name="l00356"></a>00356 <span class="comment">/// and inserted into a @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; which will</span>
-<a name="l00357"></a>00357 <span class="comment">/// manage their lifetime and execute them when requested via</span>
-<a name="l00358"></a>00358 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() &quot;FrameScheduler::DoOneFrame()&quot;.</span>
-<a name="l00359"></a>00359 <span class="comment">/// @n @n</span>
-<a name="l00360"></a>00360 <span class="comment">/// Insert DAGFramescheduler picture here.</span>
-<a name="l00361"></a>00361 <span class="comment">/// @n @n</span>
-<a name="l00362"></a>00362 <span class="comment">/// This documentation should not be considered complete nor should the algorithm</span>
-<a name="l00363"></a>00363 <span class="comment">/// both are still under development.</span>
-<a name="l00364"></a>00364 <span class="comment"></span>
-<a name="l00365"></a>00365 
-<a name="l00366"></a>00366 <span class="comment"></span>
-<a name="l00367"></a>00367 <span class="comment">/// @brief All of the Mezzanine game library components reside in this namespace.</span>
-<a name="l00368"></a>00368 <span class="comment">/// @details The DAG Frame Scheduler is just one part of many in the Mezzanine. The Mezzanine as a</span>
-<a name="l00369"></a>00369 <span class="comment">/// whole is intended to tie a complex collection of libraries into one cohesive library.</span>
-<a name="l00370"></a>00370 <span class="comment"></span><span class="keyword">namespace </span>Mezzanine
-<a name="l00371"></a>00371 {<span class="comment"></span>
-<a name="l00372"></a>00372 <span class="comment">    /// @brief This is where game specific threading algorithms and a minimalistic subset of the std threading library a held</span>
-<a name="l00373"></a>00373 <span class="comment">    /// @details this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread,</span>
-<a name="l00374"></a>00374 <span class="comment">    /// std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are</span>
-<a name="l00375"></a>00375 <span class="comment">    /// intended to be used in game code.</span>
-<a name="l00376"></a>00376 <span class="comment"></span>    <span class="keyword">namespace </span>Threading
-<a name="l00377"></a>00377         {}
-<a name="l00378"></a>00378 }
-<a name="l00379"></a>00379 
-<a name="l00380"></a>00380 <span class="preprocessor">#endif</span>
+<a name="l00354"></a>00354 <span class="comment">/// @section algorithmintegrate_sec Integrating with the Algorithm</span>
+<a name="l00355"></a>00355 <span class="comment">/// When</span>
+<a name="l00356"></a>00356 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() &quot;FrameScheduler::DoOneFrame()&quot;</span>
+<a name="l00357"></a>00357 <span class="comment">/// is called several things happen. All work units are executed, all threads are paused until the</span>
+<a name="l00358"></a>00358 <span class="comment">/// this frame has consumed the amount of time it should, and the timer is restarted for the next</span>
+<a name="l00359"></a>00359 <span class="comment">/// frame.</span>
+<a name="l00360"></a>00360 <span class="comment">/// @n @n</span>
+<a name="l00361"></a>00361 <span class="comment">/// This process is actually divided into six steps. The function</span>
+<a name="l00362"></a>00362 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() &quot;FrameScheduler::DoOneFrame()&quot;</span>
+<a name="l00363"></a>00363 <span class="comment">/// simply calls the following functions:</span>
+<a name="l00364"></a>00364 <span class="comment">/// @subsection integrate1 Step 1 - Run All the Monopolies</span>
+<a name="l00365"></a>00365 <span class="comment">/// The function</span>
+<a name="l00366"></a>00366 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::RunAllMonopolies() &quot;FrameScheduler::RunAllMonopolies()&quot;</span>
+<a name="l00367"></a>00367 <span class="comment">/// simply iterates through all the @ref Mezzanine::Threading::MonopolyWorkUnit &quot;MonopolyWorkUnit&quot;</span>
+<a name="l00368"></a>00368 <span class="comment">/// that have been added with</span>
+<a name="l00369"></a>00369 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnitMonopoly() &quot;FrameScheduler::AddWorkUnitMonopoly()&quot;.</span>
+<a name="l00370"></a>00370 <span class="comment">/// It does this in no specific order.</span>
+<a name="l00371"></a>00371 <span class="comment">/// @n @n</span>
+<a name="l00372"></a>00372 <span class="comment">/// In general @ref Mezzanine::Threading::MonopolyWorkUnit &quot;MonopolyWorkUnit&quot;s can be expected to use</span>
+<a name="l00373"></a>00373 <span class="comment">/// all available CPU resources. Other threads should not be executed in general.</span>
+<a name="l00374"></a>00374 <span class="comment">/// @subsection integrate2 Step 2 - Create and Start Threads</span>
+<a name="l00375"></a>00375 <span class="comment">/// The function</span>
+<a name="l00376"></a>00376 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::CreateThreads() &quot;FrameScheduler::CreateThreads()&quot;</span>
+<a name="l00377"></a>00377 <span class="comment">/// Creates enough threads to get to the amount set by</span>
+<a name="l00378"></a>00378 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SetThreadCount(Whole) &quot;FrameScheduler::SetThreadCount(Whole)&quot;</span>
+<a name="l00379"></a>00379 <span class="comment">/// . Depending on how this library is configured this could mean either creating that many threads each</span>
+<a name="l00380"></a>00380 <span class="comment">/// frame or creating additional threads only if this changed.</span>
+<a name="l00381"></a>00381 <span class="comment">/// @n @n</span>
+<a name="l00382"></a>00382 <span class="comment">/// Regardless of the amount of threads created, all but one of them will start executing work units as</span>
+<a name="l00383"></a>00383 <span class="comment">/// described in the section @ref algorithm_sec &quot;The Algorithm&quot;. If there is only one thread, the main</span>
+<a name="l00384"></a>00384 <span class="comment">/// thread, then this will return immediately and no work will be done.</span>
+<a name="l00385"></a>00385 <span class="comment">/// @subsection integrate3 Step 3 - Run Work Units</span>
+<a name="l00386"></a>00386 <span class="comment">/// The call to</span>
+<a name="l00387"></a>00387 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::RunMainThreadWork() &quot;FrameScheduler::RunMainThreadWork()&quot;</span>
+<a name="l00388"></a>00388 <span class="comment">/// will start the main thread executing work units. This is the call that executes work units added with</span>
+<a name="l00389"></a>00389 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnitAffinity(iWorkUnit*) &quot;FrameScheduler::AddWorkUnitAffinity(iWorkUnit*)&quot;.</span>
+<a name="l00390"></a>00390 <span class="comment">/// @n @n</span>
+<a name="l00391"></a>00391 <span class="comment">/// If you have single thread work that is not part of a work unit and will not interfere with and work</span>
+<a name="l00392"></a>00392 <span class="comment">/// units execution then you can run it before calling this. Be care when doing this, if there are any</span>
+<a name="l00393"></a>00393 <span class="comment">/// work units that depend on work units with affinity</span>
+<a name="l00394"></a>00394 <span class="comment">/// @subsection integrate4 Step 4</span>
+<a name="l00395"></a>00395 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::JoinAllThreads() &quot;FrameScheduler::JoinAllThreads()&quot;</span>
+<a name="l00396"></a>00396 <span class="comment">/// @subsection integrate5 Step 5</span>
+<a name="l00397"></a>00397 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::ResetAllWorkUnits() &quot;FrameScheduler::ResetAllWorkUnits()&quot;</span>
+<a name="l00398"></a>00398 <span class="comment">/// @subsection integrate6 Step 6</span>
+<a name="l00399"></a>00399 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::WaitUntilNextFrame() &quot;FrameScheduler::WaitUntilNextFrame()&quot;</span>
+<a name="l00400"></a>00400 <span class="comment"></span>
+<a name="l00401"></a>00401 <span class="comment"></span>
+<a name="l00402"></a>00402 <span class="comment">/// @brief All of the Mezzanine game library components reside in this namespace.</span>
+<a name="l00403"></a>00403 <span class="comment">/// @details The DAG Frame Scheduler is just one part of many in the Mezzanine. The Mezzanine as a</span>
+<a name="l00404"></a>00404 <span class="comment">/// whole is intended to tie a complex collection of libraries into one cohesive library.</span>
+<a name="l00405"></a>00405 <span class="comment"></span><span class="keyword">namespace </span>Mezzanine
+<a name="l00406"></a>00406 {<span class="comment"></span>
+<a name="l00407"></a>00407 <span class="comment">    /// @brief This is where game specific threading algorithms and a minimalistic subset of the std threading library a held</span>
+<a name="l00408"></a>00408 <span class="comment">    /// @details this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread,</span>
+<a name="l00409"></a>00409 <span class="comment">    /// std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are</span>
+<a name="l00410"></a>00410 <span class="comment">    /// intended to be used in game code.</span>
+<a name="l00411"></a>00411 <span class="comment"></span>    <span class="keyword">namespace </span>Threading
+<a name="l00412"></a>00412         {}
+<a name="l00413"></a>00413 }
+<a name="l00414"></a>00414 
+<a name="l00415"></a>00415 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -482,6 +517,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Dec 22 2012 01:53:17 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Wed Dec 26 2012 07:29:09 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

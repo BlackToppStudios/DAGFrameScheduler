@@ -322,7 +322,7 @@
 /// in a waitfree way, then we can trade the cost of this iteration for a number of atomic operations.
 /// On some systems this is a great idea, on others a terrible idea, so it is a
 /// @ref MEZZ_USEATOMICSTODECACHECOMPLETEWORK "CMake option called DecachingWork". Because this update
-/// can be skipped if it work incur a wait, it does not recreate a central workqueues primary point of
+/// can be skipped if it work incur a wait, it does not recreate a central workqueue's primary point of
 /// contention while providing all the benefits.
 /// @image html DAGThreads.gif "DAG threads - Fig 5."
 /// @n @n
@@ -341,9 +341,9 @@
 /// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s in most regards and will check on the asynchronous
 /// tasks they manage each frame when they run as a normally scheduled.
 /// @n @n
-/// If a thread should run out of work because all the work is completed the frame will pause until it
-/// should start the next frame. This pause length is calulated using a runtime configurable value on
-/// the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler". If a thread has checked every
+/// If a thread runs out of work because all the work is completed the frame will pause until it
+/// should start again the next frame. This pause length is calulated using a runtime configurable value
+/// on the @ref Mezzanine::Threading::FrameScheduler "FrameScheduler". If a thread has checked every
 /// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" and some are still not executing, but could not
 /// be started because of incomplete dependencies the thread will simply iterate over every
 /// @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" in the
@@ -351,17 +351,65 @@
 /// met and allows one to be executed. This implicitly guarantees that at least one thread will
 /// always do work, and if dependencies chains are kept short then it is more likely that several
 /// threads will advance.
+/// @section algorithmintegrate_sec Integrating with the Algorithm
+/// When
+/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() "FrameScheduler::DoOneFrame()"
+/// is called several things happen. All work units are executed, all threads are paused until the
+/// this frame has consumed the amount of time it should, and the timer is restarted for the next
+/// frame.
 /// @n @n
-/// The @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" classes are designed to be inherited from
-/// and inserted into a @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" which will
-/// manage their lifetime and execute them when requested via
-/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() "FrameScheduler::DoOneFrame()".
+/// This process is actually divided into six steps. The function
+/// @ref Mezzanine::Threading::FrameScheduler::DoOneFrame() "FrameScheduler::DoOneFrame()"
+/// simply calls the following functions:
+/// @subsection integrate1 Step 1 - Run All the Monopolies
+/// The function
+/// @ref Mezzanine::Threading::FrameScheduler::RunAllMonopolies() "FrameScheduler::RunAllMonopolies()"
+/// simply iterates through all the @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"
+/// that have been added with
+/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnitMonopoly() "FrameScheduler::AddWorkUnitMonopoly()".
+/// It does this in no specific order.
 /// @n @n
-/// Insert DAGFramescheduler picture here.
+/// In general @ref Mezzanine::Threading::MonopolyWorkUnit "MonopolyWorkUnit"s can be expected to use
+/// all available CPU resources. Other threads should not be executed in general.
+/// @subsection integrate2 Step 2 - Create and Start Threads
+/// The function
+/// @ref Mezzanine::Threading::FrameScheduler::CreateThreads() "FrameScheduler::CreateThreads()"
+/// Creates enough threads to get to the amount set by
+/// @ref Mezzanine::Threading::FrameScheduler::SetThreadCount(Whole) "FrameScheduler::SetThreadCount(Whole)"
+/// . Depending on how this library is configured this could mean either creating that many threads each
+/// frame or creating additional threads only if this changed.
 /// @n @n
-/// This documentation should not be considered complete nor should the algorithm
-/// both are still under development.
-
+/// Regardless of the amount of threads created, all but one of them will start executing work units as
+/// described in the section @ref algorithm_sec "The Algorithm". This will execute as much work as possible
+/// (work units with affinity can affect how much work can be done with out waiting) that was added by
+/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnit(iWorkUnit*) "FrameScheduler::AddWorkUnit(iWorkUnit*)".
+/// If there is only one thread, the main thread, then this will return immediately and no work will be done.
+/// @subsection integrate3 Step 3 - Main Thread Work
+/// The call to
+/// @ref Mezzanine::Threading::FrameScheduler::RunMainThreadWork() "FrameScheduler::RunMainThreadWork()"
+/// will start the main thread executing work units. This is the call that executes work units added with
+/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnitAffinity(iWorkUnit*) "FrameScheduler::AddWorkUnitAffinity(iWorkUnit*)".
+/// @n @n
+/// If you have single thread work that is not part of a work unit and will not interfere with and work
+/// units execution then you can run it before calling this. Be care when doing this, if there are any
+/// work units that depend on work units with affinity then they will not be able to start until some
+/// point after this is called.
+/// @n @n
+/// Once every work unit has started this call can return. This does not mean every wor kunit is complete,
+/// though every work unit with affinity will be complete. There could be work in other threads still
+/// executing. This is another good point to run work that is single threaded and won't interfere with
+/// workunits that could be executing.
+/// @subsection integrate4 Step 4 - Clean Up Threads
+/// If you must execute something that could interfere with work units, you shoul do that after
+/// @ref Mezzanine::Threading::FrameScheduler::JoinAllThreads() "FrameScheduler::JoinAllThreads()" is
+/// called. This joins, destroys or otherwise cleans up the threads the scheduler has used, depending
+/// on how this library is configured.
+/// @subsection integrate5 Step 5 - Prepare for the next frame.
+/// All the work units are marked as complete and need to be reset with
+/// @ref Mezzanine::Threading::FrameScheduler::ResetAllWorkUnits() "FrameScheduler::ResetAllWorkUnits()"
+/// to be used by the next frame.
+/// @subsection integrate6 Step 6
+/// @ref Mezzanine::Threading::FrameScheduler::WaitUntilNextFrame() "FrameScheduler::WaitUntilNextFrame()"
 
 
 /// @brief All of the Mezzanine game library components reside in this namespace.
