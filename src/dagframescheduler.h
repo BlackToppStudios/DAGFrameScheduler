@@ -400,16 +400,32 @@
 /// executing. This is another good point to run work that is single threaded and won't interfere with
 /// workunits that could be executing.
 /// @subsection integrate4 Step 4 - Clean Up Threads
-/// If you must execute something that could interfere with work units, you shoul do that after
+/// If you must execute something that could interfere (write to anything they coudl read or write)
+/// with work units, you should do that after
 /// @ref Mezzanine::Threading::FrameScheduler::JoinAllThreads() "FrameScheduler::JoinAllThreads()" is
 /// called. This joins, destroys or otherwise cleans up the threads the scheduler has used, depending
 /// on how this library is configured.
 /// @subsection integrate5 Step 5 - Prepare for the next frame.
 /// All the work units are marked as complete and need to be reset with
 /// @ref Mezzanine::Threading::FrameScheduler::ResetAllWorkUnits() "FrameScheduler::ResetAllWorkUnits()"
-/// to be used by the next frame.
-/// @subsection integrate6 Step 6
+/// to be used by the next frame. This simply iterates over each work unit resetting their status. A
+/// potential future optimization could run this as a multithreaded monopoly instead.
+/// @subsection integrate6 Step 6 - Wait for next frame.
+/// The final step is to wait until the next frame should begin. To do this tracking the begining of
+/// of each frame is required. The value in
+/// @ref Mezzanine::Threading::FrameScheduler::CurrentFrameStart "FrameScheduler::CurrentFrameStart"
+/// is on @ref Mezzanine::Threading::FrameScheduler "FrameScheduler" construction to the current time,
+/// and reset every to the current time when
 /// @ref Mezzanine::Threading::FrameScheduler::WaitUntilNextFrame() "FrameScheduler::WaitUntilNextFrame()"
+/// is called. The value set by
+/// @ref Mezzanine::Threading::FrameScheduler::SetFrameRate(Whole) "FrameScheduler::SetFrameRate(Whole)"
+/// is used to calculate the desired length of a frame in microseconds. If the begining of the next
+/// frame has not been reached, then this function will sleep the scheduler until the next frame should
+/// begin. To compensate for systems with an imprecise sleep mechanism (or timing mechanism) an internal
+/// @ref Mezzanine::Threading::FrameScheduler::TimingCostAllowance "FrameScheduler::TimingCostAllowance"
+/// is tracked that averages the effects of imprecision across multiple frames to prevent roundings
+/// errors form consistently lengthening of shortening frames.
+
 
 
 /// @brief All of the Mezzanine game library components reside in this namespace.

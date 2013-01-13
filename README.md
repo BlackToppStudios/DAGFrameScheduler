@@ -21,6 +21,13 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### Jan 13, 2013 ###
+* Documentation Updates, finished basic integration docs.
+* Update copyright dates.
+
+### Dec 27, 2012 ###
+* Documentation Updates
+
 ### Dec 20, 2012 ###
 * A better fix for a visual studio compiler bug involving the max macro.
 

@@ -181,21 +181,23 @@ Step 1 - Run All the Monopolies</h3>
 Step 2 - Create and Start Threads</h3>
 <p>The function <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e">FrameScheduler::CreateThreads()</a> Creates enough threads to get to the amount set by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a810bda1947bafd31168e02d391b709ad">FrameScheduler::SetThreadCount(Whole)</a> . Depending on how this library is configured this could mean either creating that many threads each frame or creating additional threads only if this changed. <br/>
  <br/>
- Regardless of the amount of threads created, all but one of them will start executing work units as described in the section <a class="el" href="index.html#algorithm_sec">The Algorithm</a>. If there is only one thread, the main thread, then this will return immediately and no work will be done. </p>
+ Regardless of the amount of threads created, all but one of them will start executing work units as described in the section <a class="el" href="index.html#algorithm_sec">The Algorithm</a>. This will execute as much work as possible (work units with affinity can affect how much work can be done with out waiting) that was added by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ade0d8966dff2c1fb2a87214a8069abf9">FrameScheduler::AddWorkUnit(iWorkUnit*)</a>. If there is only one thread, the main thread, then this will return immediately and no work will be done. </p>
 <h3><a class="anchor" id="integrate3"></a>
-Step 3 - Run Work Units</h3>
+Step 3 - Main Thread Work</h3>
 <p>The call to <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5">FrameScheduler::RunMainThreadWork()</a> will start the main thread executing work units. This is the call that executes work units added with <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9b910ace4574464bd2a5c7741a0d729c">FrameScheduler::AddWorkUnitAffinity(iWorkUnit*)</a>. <br/>
  <br/>
- If you have single thread work that is not part of a work unit and will not interfere with and work units execution then you can run it before calling this. Be care when doing this, if there are any work units that depend on work units with affinity </p>
+ If you have single thread work that is not part of a work unit and will not interfere with and work units execution then you can run it before calling this. Be care when doing this, if there are any work units that depend on work units with affinity then they will not be able to start until some point after this is called. <br/>
+ <br/>
+ Once every work unit has started this call can return. This does not mean every wor kunit is complete, though every work unit with affinity will be complete. There could be work in other threads still executing. This is another good point to run work that is single threaded and won't interfere with workunits that could be executing. </p>
 <h3><a class="anchor" id="integrate4"></a>
-Step 4</h3>
-<p><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a96d872719e50177ac5028c43bf68de21">FrameScheduler::JoinAllThreads()</a> </p>
+Step 4 - Clean Up Threads</h3>
+<p>If you must execute something that could interfere (write to anything they coudl read or write) with work units, you should do that after <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a96d872719e50177ac5028c43bf68de21">FrameScheduler::JoinAllThreads()</a> is called. This joins, destroys or otherwise cleans up the threads the scheduler has used, depending on how this library is configured. </p>
 <h3><a class="anchor" id="integrate5"></a>
-Step 5</h3>
-<p><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af11e18b5ea39b77fee60c3a3d0e65bd4">FrameScheduler::ResetAllWorkUnits()</a> </p>
+Step 5 - Prepare for the next frame.</h3>
+<p>All the work units are marked as complete and need to be reset with <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#af11e18b5ea39b77fee60c3a3d0e65bd4">FrameScheduler::ResetAllWorkUnits()</a> to be used by the next frame. This simply iterates over each work unit resetting their status. a Potential future optimization could run this as a multithreaded monopoly instead. </p>
 <h3><a class="anchor" id="integrate6"></a>
-Step 6</h3>
-<p><a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac5babf56caf6f2a1bddfa461b9e999b2">FrameScheduler::WaitUntilNextFrame()</a> </p>
+Step 6 - Wait for next frame.</h3>
+<p>The final step is to wait until the next frame should begin. To do this tracking the begining of of each frame is required. The value in <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a2c2540f09e443e7d9f8bd2ed48354f93">FrameScheduler::CurrentFrameStart</a> is on <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> construction to the current time, and reset every to the current time when <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac5babf56caf6f2a1bddfa461b9e999b2">FrameScheduler::WaitUntilNextFrame()</a> is called. The value set by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f018d5cd5f64a25dddd274068177add">FrameScheduler::SetFrameRate(Whole)</a> is used to calculate the desired length of a frame in microseconds. If the begining of the next frame has not been reached, then this function will sleep the scheduler until the next frame should begin. To compensate for systems with an imprecise sleep mechanism (or timing mechanism) an internal <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae1494801b8b8c6f041d19abd9a332e46">FrameScheduler::TimingCostAllowance</a> is tracked that averages the effects of imprecision across multiple frames to prevent roundings errors form consistently lengthening of shortening frames. </p>
 </div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -212,6 +214,6 @@ Step 6</h3>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Dec 26 2012 07:29:10 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Sun Jan 13 2013 02:10:51 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>
