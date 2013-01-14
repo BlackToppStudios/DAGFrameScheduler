@@ -133,7 +133,7 @@ namespace Mezzanine
         RawFile* AsynchronousFileLoadWorkUnit::GetFile(const String& FileName) const
         {
             Whole Index=0;
-            for(std::vector<String>::iterator CurrentFileName = Filenames.begin();
+            for(std::vector<String>::const_iterator CurrentFileName = Filenames.begin();
                 CurrentFileName!=Filenames.end();
                 CurrentFileName++, Index++)
             {

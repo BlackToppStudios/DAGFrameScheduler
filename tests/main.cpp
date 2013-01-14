@@ -678,7 +678,7 @@ class PiMakerMonopoly : public MonopolyWorkUnit
 
         /// @brief Set the amount of threads to use
         /// @param AmountToUse A whole indicating the amount of times Pi should uselessly be calculated in parrallel
-        virtual void UseThreads(Whole AmountToUse)
+        virtual void UseThreads(const Whole& AmountToUse)
             { HowManyThreads = AmountToUse; }
 
         /// @brief Get the current thread count
