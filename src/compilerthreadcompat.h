@@ -70,7 +70,7 @@
 
     #if defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__)
         /// @def _MEZZ_THREAD_WIN32_
-        /// @brief Defined if this is running on windows
+        /// @brief Defined if this is running on windows.
         #define _MEZZ_THREAD_WIN32_
         /// @details if this is not defined, then most likely _MEZZ_THREAD_POSIX_ is.
     #else

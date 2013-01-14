@@ -134,7 +134,7 @@ namespace Mezzanine
                     delete ResourceA;
                     delete ResourceB;
                 }
-        };
+        };//DoubleBufferedResource
 
 
         /// @brief A better default name for the Default Logger instance.
@@ -166,7 +166,7 @@ namespace Mezzanine
                 /// @param ResourceID The ID the resource provided.
                 /// @return A reference to the resource if it exists, or undefined behavior and maybe an exception if it doesn't.
                 template <typename DBR>
-                DBR& GetResource(Whole ResourceID)
+                DBR& GetResource(const Whole& ResourceID)
                     { return *((DBR*)(this->ThreadResources[ResourceID])); }
 
                 /// @brief Get the usable logger for this thread specific resource
@@ -190,7 +190,7 @@ namespace Mezzanine
                     delete (DoubleBufferedLogger*)this->ThreadResources[DBRLogger]; // Items must wind up in the correct spot in the vector for this to work. Be careful to get the order right if you overload this.
                 }
 
-        };
+        };//ThreadSpecificStorage
 
         /// @brief Use this to change the default resource type.
         /// @details use "DefaultThreadSpecificStorage::Type" as Type to instantiate an instance of whatever type this is.
@@ -198,8 +198,8 @@ namespace Mezzanine
         {
             /// @brief A single point at which all the thread specific resources can be changed.
             typedef ThreadSpecificStorage Type;
-        };
+        };//DefaultThreadSpecificStorage
+    }//Threading
+}//Mezzanine
 
-    }
-}
 #endif

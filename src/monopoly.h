@@ -61,17 +61,17 @@ namespace Mezzanine
             public:
                 /// @brief Provides a hint to the monopoly as to how many threads it should use.
                 /// @param AmountToUse The amount of threads you would like the monopoly to consume.
-                virtual void UseThreads(Whole AmountToUse) = 0;
+                virtual void UseThreads(const Whole& AmountToUse) = 0;
 
-                /// @brief Retrieves the Amount of threads that the monopoly will actually use.
+                /// @brief Retrieves the amount of threads that the monopoly will actually use.
                 /// @details The monopoly is free to ignore any value passed @ref UseThreads(Whole) and
-                /// use any many of heuristic or threading model instead.
-                /// @return A whole with the amount of thread to be used.
+                /// use any heuristic or threading model instead.
+                /// @return A whole with the amount of threads to be used.
                 virtual Whole UsingThreadCount() = 0;
 
                 /// @brief A virtual destructor, currently empty.
                 virtual ~MonopolyWorkUnit();
-        };
-    }
-}
+        };//MonopolyWorkUnit
+    }//Threading
+}//Mezzanine
 #endif

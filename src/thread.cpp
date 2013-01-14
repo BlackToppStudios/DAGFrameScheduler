@@ -315,10 +315,8 @@ namespace Mezzanine
             usleep(MicroSeconds);
         #endif
         }
-
-
-    }
-}
+    }//Threading
+}//Mezzanine
 
 
 #endif

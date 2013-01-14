@@ -132,7 +132,7 @@ namespace Mezzanine
                 /// @details If any threads are waiting for the lock on this mutex, one of them will
                 /// be unblocked.
                 void Unlock();
-        };
+        };//Mutex
 
         /// @brief Lock guard class.
         /// @details The constructor locks the mutex, and the destructor unlocks the mutex, so
@@ -151,15 +151,15 @@ namespace Mezzanine
         template <class T>
         class lock_guard {
             public:
-                /// @brief This allows other code to use the type of this mutex in a more safe way
+                /// @brief This allows other code to use the type of this mutex in a more safe way.
                 typedef T mutex_type;
 
                 // @brief Empty Constructor
                 //lock_guard() : mMutex(0) {}
 
                 /// @brief The constructor locks the mutex.
-                /// @param aMutex Any mutex which implements lock() and unlock();
-                explicit lock_guard(mutex_type &aMutex)
+                /// @param aMutex Any mutex which implements lock() and unlock().
+                explicit lock_guard(mutex_type& aMutex)
                 {
                     mMutex = &aMutex;
                     mMutex->Lock();
@@ -173,13 +173,11 @@ namespace Mezzanine
                 }
 
             private:
+				/// @internal
                 /// @brief A non-owning pointer to the mutex.
-                /// @internal
-                mutex_type * mMutex;
-        };
-
-
-    }
-}
+                mutex_type* mMutex;
+        };//lock_guard
+    }//Threading
+}//Mezzanine
 
 #endif

@@ -81,6 +81,6 @@ namespace Mezzanine
     // @return The size of a single cache line/cache unit
     //Whole MEZZ_LIB GetCachelineSize();
 
-}
+}//Mezzanine
 
 #endif

@@ -57,7 +57,7 @@ namespace Mezzanine
         /// In either case since VariableToChange has been derefenced the value stored before any exchange that might have
         /// occured is returned.
         /// @param VariableToChange A pointer to the value to compare and if it matches OldValue Atomically change.
-        /// @param OldValue what is expected to be at the other end of VariableToChange
+        /// @param OldValue what is expected to be at the other end of VariableToChange.
         /// @param NewValue The value to be written to VariableToChange if at the time the actual CPU instruction is executed OldValue Matches *VariableToChange.
         /// @return This always returns the value that was pointed to by VariableToChange immediately before this call.
         Int32 MEZZ_LIB AtomicCompareAndSwap32(Int32* VariableToChange, const Int32& OldValue, const Int32& NewValue);
@@ -69,17 +69,17 @@ namespace Mezzanine
         // In either case since VariableToChange has been derefenced the value stored before any exchange that might have
         // occured is returned.
         // @param VariableToChange A pointer to the value to compare and if it matches OldValue Atomically change.
-        // @param OldValue what is expected to be at the other end of VariableToChange
+        // @param OldValue what is expected to be at the other end of VariableToChange.
         // @param NewValue The value to be written to VariableToChange if at the time the actual CPU instruction is executed OldValue Matches *VariableToChange.
         // @return This always returns the value that was pointed to by VariableToChange immediately before this call.
         Int64 MEZZ_LIB AtomicCompareAndSwap64(Int64* VariableToChange, const Int64& OldValue, const Int64& NewValue);
 */
         /// @brief Increments a value in a way guaranteed to not lose any atomic increments.
-        /// @param VariableToChange A pointer to the 32 bit integer to increment by the amount specified
+        /// @param VariableToChange A pointer to the 32 bit integer to increment by the amount specified.
         /// @param Value The amount to increment the VariableToChange by.
         /// @return The newly incremented value. This is not always *VariableToChange+Value. If another thread attempted and atomic operation on this at the same time the result could be the new value pointed to by VariableToChange plus Value.
         Int32 MEZZ_LIB AtomicAdd(Int32* VariableToChange, Int32 Value);
-    }
-}
+    }//Threading
+}//Mezzanine
 
 #endif

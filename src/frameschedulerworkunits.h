@@ -55,18 +55,18 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @brief Gather all the thread specific logs and commit them to the main log
+        /// @brief Gather all the thread specific logs and commit them to the main log.
         /// @details All the logs are double buffered. This reads from the commitable buffer
-        /// which should otherwise be unused. This task was separated
+        /// which should otherwise be unused. This task was separated.
         class MEZZ_LIB LogAggregator : public DefaultWorkUnit
         {
             public:
                 /// @brief This does the actual work of log aggregation.
                 /// @param CurrentThreadStorage Ignored, this workunits goals requires this.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
-        };
+        };//LogAggregator
 
-        /// @brief Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.
+        /// @brief Swaps all of the Logs so the usable logs can be commited, and the usable commitable.
         /// @note If other doublebuffered resources are used then this or another work unit like it should be adjusted/created to swap those buffers.
         /// @details This needs to have every other workunit that uses the logger as a dependency. If you use the log in a work unit
         /// that work unit needs to depend on this one, or this one needs to depend on that one.
@@ -76,7 +76,7 @@ namespace Mezzanine
                 /// @brief This does the swapping of buffers.
                 /// @param CurrentThreadStorage Just to get a reference to the framescheduler.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
-        };
+        };//LogBufferSwapper
 
         /// @brief Sorts all of the WorkUnits in the @ref FrameScheduler.
         class MEZZ_LIB WorkSorter : public DefaultWorkUnit
@@ -99,7 +99,7 @@ namespace Mezzanine
                 /// @brief Default constructor.
                 WorkSorter();
 
-                /// @brief This usually does not nothing, but sometimes it will do a whole bunch of work sorting.
+                /// @brief This usually does nothing, but sometimes it will do a whole bunch of work sorting.
                 /// @param CurrentThreadStorage Just to get a reference to the framescheduler. So the WorkUnits can sorted and passed back to the Scheduler outisde of scheduling.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
 
@@ -110,10 +110,8 @@ namespace Mezzanine
                 /// @brief Check how often this sorts.
                 /// @return A Whole containing the sorting frequency.
                 virtual Whole GetSortingFrequency();
-        };
-
-
-    }
-}
+        };//WorkSorter
+    }//Threading
+}//Mezzanine
 
 #endif

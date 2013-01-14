@@ -58,7 +58,7 @@ namespace Mezzanine
             Running=2,      ///< Task is running when the value was check, it could become Complete or Failed with no notice.
             Complete=3,     ///< Thread has completed all work this from frame, will not change until this frame ends.
             Failed=4        ///< Indicates an abnormal termination of a Workunit or other failure, Likely the whole application will need to stop.
-        };
-    }
-}
+        };//RunningState
+    }//Threading
+}//Mezzanine
 #endif

@@ -410,7 +410,7 @@ namespace Mezzanine
         Whole FrameScheduler::GetFrameLength() const
             { return TargetFrameLength; }
 
-        void FrameScheduler::SetFrameRate(Whole FrameRate)
+        void FrameScheduler::SetFrameRate(const Whole& FrameRate)
         {
             if(FrameRate)
                 { TargetFrameLength = 1000000/FrameRate; }
@@ -418,14 +418,14 @@ namespace Mezzanine
                 { TargetFrameLength = 0; }
         }
 
-        void FrameScheduler::SetFrameLength(Whole FrameLength)
+        void FrameScheduler::SetFrameLength(const Whole& FrameLength)
             { TargetFrameLength = FrameLength; }
 
         Whole FrameScheduler::GetThreadCount()
             { return CurrentThreadCount; }
 
-        void FrameScheduler::SetThreadCount(Whole NewThreadCount)
-        { CurrentThreadCount=NewThreadCount; }
+        void FrameScheduler::SetThreadCount(const Whole& NewThreadCount)
+			{ CurrentThreadCount = NewThreadCount; }
 
         MaxInt FrameScheduler::GetCurrentFrameStart() const
             { return CurrentFrameStart; }

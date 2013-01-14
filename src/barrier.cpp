@@ -50,7 +50,7 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        Barrier::Barrier (Whole SynchThreadCount) : ThreadGoal (SynchThreadCount), ThreadCurrent (0) {}
+        Barrier::Barrier (const Int32& SynchThreadCount) : ThreadGoal (SynchThreadCount), ThreadCurrent (0) {}
 
         bool Barrier::Wait()
         {

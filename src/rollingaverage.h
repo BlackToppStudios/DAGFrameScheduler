@@ -72,7 +72,7 @@ namespace Mezzanine
 
             /// @brief Empty virtual Destructor.
             virtual ~RollingAverage(){}
-    };
+    };//RollingAverage
 
     // Possible optimizations
     // once the average is calculated store it until another insert is done, costs memory, saves cpu time
@@ -86,7 +86,7 @@ namespace Mezzanine
     {
         protected:
             /// @brief The collection of all the records that are being have been added going back as far as the capacity will allow.
-            /// @note All writes to this are performed through the Iterator @ref Current
+            /// @note All writes to this are performed through the iterator @ref Current
             std::vector<RecordType> Records;
 
             /// @brief The iterator used to treat an std::vector as a circular buffer.
@@ -104,8 +104,8 @@ namespace Mezzanine
             typedef RecordType Type;
 
             /// @brief Constructor
-            /// @param RecordCount The capacity of the Rolling average. Thsi defaults to 10.
-            BufferedRollingAverage(Whole RecordCount=MEZZ_FRAMESTOTRACK)
+            /// @param RecordCount The capacity of the Rolling average. This defaults to 10.
+            BufferedRollingAverage(const Whole& RecordCount = MEZZ_FRAMESTOTRACK)
             {
                 Records.assign(RecordCount,RecordType(0));
                 Current = Records.begin();
@@ -116,7 +116,7 @@ namespace Mezzanine
                 { return Records.size(); }
 
             /// @brief Inserts a new record into the rolling average and if needed drops the oldest one out.
-            /// @param Datum The record to add
+            /// @param Datum The record to add.
             virtual void Insert(RecordType Datum)
             {
                 IncrementIterator();
@@ -152,12 +152,12 @@ namespace Mezzanine
 
             /// @brief Deconstructor.
             virtual ~BufferedRollingAverage(){}
-    };
+    };//BufferedRollingAverage
 
     /// @brief A weighted average that does math with every insertion and stores nothing.
-    /// @details This is possibly an optimization over the BufferedRollingAverage, It has not yet been shown whether the amount of memory for
-    /// each task will significantly affect load times (From RAM to CPU cache), when starting a rolling average, or whether any
-    /// innacuracies in sorting using this would outweigh that.
+    /// @details This is possibly an optimization over the BufferedRollingAverage. It has not yet been shown whether the amount of memory for
+    /// each task will significantly affect load times (From RAM to CPU cache) when starting a rolling average, or whether any
+    /// innaccuracies in sorting using this would outweigh that.
     template <typename RecordType, typename MathType> class WeightedRollingAverage : public RollingAverage<RecordType>
     {
         protected:
@@ -171,9 +171,9 @@ namespace Mezzanine
             /// @brief Used for accessing the derived type when it may not be directly known.
             typedef RecordType Type;
 
-            /// @brief Constructor
-            /// @param RecordCount How many records should this emulate
-            WeightedRollingAverage(Whole RecordCount=MEZZ_FRAMESTOTRACK) :
+            /// @brief Class Constructor.
+            /// @param RecordCount How many records should this emulate.
+            WeightedRollingAverage(const Whole& RecordCount = MEZZ_FRAMESTOTRACK) :
                 CurrentAverage(0),
 				WeightCount(RecordCount)
                 {}
@@ -183,7 +183,7 @@ namespace Mezzanine
             virtual Whole RecordCapacity() const
                 { return WeightCount; }
 
-            /// @brief Update the Current stored Rolling average with a new data point/record
+            /// @brief Update the currently stored Rolling average with a new data point/record.
             /// @param Datum Update the Current Average according to the following formula CurrentAverage = CurrentAverage * ((RecordCount-1)/RecordCount) + Datum/RecordCount.
             virtual void Insert(RecordType Datum)
             {
@@ -197,9 +197,9 @@ namespace Mezzanine
             virtual RecordType GetAverage() const
                 { return CurrentAverage; }
 
-            /// @brief Destructor
+            /// @brief Class Destructor.
             virtual ~WeightedRollingAverage(){}
-    };
+    };//WeightedRollingAverage
 
     /// @brief Use this to get the default rolling average for a given type.
     /// @details use "DefaultRollingAverage<Whole>::Type" as Type to instantiate an instance of whatever type this is. This allows
@@ -210,7 +210,7 @@ namespace Mezzanine
         /// @brief The Default rolling average for all types is currently BufferedRollingAverage, this could change with future testing.
         //typedef BufferedRollingAverage<RecordType> Type;
         typedef WeightedRollingAverage<RecordType,RecordType> Type;
-    };
-}
+    };//DefaultRollingAverage
+}//Mezzanine
 #endif
 

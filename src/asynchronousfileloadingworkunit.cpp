@@ -102,7 +102,7 @@ namespace Mezzanine
         AsynchronousFileLoadWorkUnit::~AsynchronousFileLoadWorkUnit()
             { DeleteLoadedFiles(); }
 
-        RunningState AsynchronousFileLoadWorkUnit::BeginLoading(std::vector<String> Filenames_)
+        RunningState AsynchronousFileLoadWorkUnit::BeginLoading(const std::vector<String>& Filenames_)
         {
             if(Running!=AtomicCompareAndSwap32(&Status, Status, Running))
             {
@@ -130,7 +130,7 @@ namespace Mezzanine
         RunningState AsynchronousFileLoadWorkUnit::IsWorkDone()
             { return (RunningState)Status; }
 
-        RawFile* AsynchronousFileLoadWorkUnit::GetFile(String FileName)
+        RawFile* AsynchronousFileLoadWorkUnit::GetFile(const String& FileName) const
         {
             Whole Index=0;
             for(std::vector<String>::iterator CurrentFileName = Filenames.begin();
@@ -143,7 +143,7 @@ namespace Mezzanine
             return 0;
         }
 
-        RawFile* AsynchronousFileLoadWorkUnit::GetFile(Whole Index)
+        RawFile* AsynchronousFileLoadWorkUnit::GetFile(const Whole& Index) const
         {
             if(FilesRaw.size()<=Index)
                 { return 0; }

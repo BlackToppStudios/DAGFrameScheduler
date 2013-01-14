@@ -70,7 +70,7 @@ namespace Mezzanine
 
                 /// @brief This returns the count workunits that depend on this work unit.
                 /// @param SchedulerToCount The @ref FrameScheduler has a cache of this data, it is impossible to calculate without the complete list of WorkUnits on it either.
-                /// @details Because Dependents are not tracked this iterates over entry in the FrameScheduler it is passed
+                /// @details Because Dependents are not tracked this iterates over entry in the FrameScheduler it is passed.
                 /// @return A Whole is returned containing the count.
                 virtual Whole GetDependentCount(FrameScheduler &SchedulerToCount) = 0;
 
@@ -78,7 +78,7 @@ namespace Mezzanine
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Work with the dependencies as in what must finish before we can run this work unit.
 
-                /// @brief This is used to iterate of all the dependencies
+                /// @brief This is used to iterate of all the dependencies.
                 /// @param Index The 0 based index of the dependency you are trying to retrieve. No ordering is guaranteed, just that counting from 0 to @ref GetImmediateDependencyCount() with access each iWorkUnit once.
                 /// @return A pointer to an iWorkUnit.
                 virtual iWorkUnit* GetDependency(Whole Index) const = 0;
@@ -100,11 +100,11 @@ namespace Mezzanine
                 /// @warning Changing this outside the schedule, once the scheduler has started can cause undefined behavior.
                 virtual void AddDependency(iWorkUnit* NewDependency) = 0;
 
-                /// @brief Remove a dependency
-                /// @param RemoveDependency A pointer to the WorkUnit to remove as a dependency
+                /// @brief Remove a dependency.
+                /// @param RemoveDependency A pointer to the WorkUnit to remove as a dependency.
                 virtual void RemoveDependency(iWorkUnit* RemoveDependency) = 0;
 
-                /// @brief Drop any information about what work Units this one depends on.
+                /// @brief Drop any information about what work units this one depends on.
                 virtual void ClearDependencies() = 0;
 
                 /// @brief Check if this WorkUnit could concievably run right now.
@@ -116,7 +116,7 @@ namespace Mezzanine
                 // Work with the ownership and RunningState
 
                 /// @brief Attempts to atomically start the work unit in the current thread.
-                /// @return Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise
+                /// @return Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise.
                 virtual RunningState TakeOwnerShip() = 0;
 
                 /// @brief Retrieves the current RunningState of the thread.
@@ -138,21 +138,21 @@ namespace Mezzanine
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Deciding when to and doing the work
 
-                /// @brief This tracks work unit metadata, then calls DoWork
+                /// @brief This tracks work unit metadata, then calls DoWork.
                 /// @param CurrentThreadStorage The @ref ThreadSpecificStorage that this WorkUnit will operate with when executing.
                 virtual void operator() (DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
 
                 /// @brief Get the sorting metadata.
                 /// @param SchedulerToCount This uses the metadata on the @ref FrameScheduler to generate the Dependency listing required.
-                /// @return A WorkUnitKey suitable for sorting this workunit
+                /// @return A WorkUnitKey suitable for sorting this workunit.
                 virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount) = 0;
 
-                /// @brief WorkUnits Must implement these to do the work
+                /// @brief WorkUnits Must implement these to do the work.
                 virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage) = 0;
 
-                /// @brief Virtual destructor
+                /// @brief Virtual destructor.
                 virtual ~iWorkUnit(){}
-        };
+        };//iWorkUnit
 
 
         /// @brief Default implementation of WorkUnit. This represents on piece of work through time.
@@ -180,10 +180,10 @@ namespace Mezzanine
                 DefaultWorkUnit& operator=(DefaultWorkUnit& Unused);
 
             public:
-                /// @brief Simple constructor
+                /// @brief Simple constructor.
                 DefaultWorkUnit();
 
-                /// @brief Virtual destructor, doesn't actually do much
+                /// @brief Virtual destructor, doesn't actually do much.
                 virtual ~DefaultWorkUnit();
 
                 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -234,12 +234,8 @@ namespace Mezzanine
 
                 virtual WorkUnitKey GetSortingKey(FrameScheduler &SchedulerToCount);
 
-
-        };
-
-
-
-    } // \Threading
-}
+        };//DefaultWorkUnit
+    }//Threading
+}//Mezzanine
 
 #endif

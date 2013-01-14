@@ -79,8 +79,8 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @brief A small wrapper around the system thread
-        /// @details in general game code should not be creating this if they are using the
+        /// @brief A small wrapper around the system thread.
+        /// @details In general game code should not be creating this if they are using the
         /// DAG Frame Scheduler, as it tries to maintain control over the threads created
         /// by a game. This tries to keep the names the same as the standard thread, and might
         /// at some point be replace by some template machinery that wraps the minor difference
@@ -108,8 +108,8 @@ namespace Mezzanine
             #endif
                 {}
 
-                /// @brief Thread starting constructor with no parameters
-                /// @note may work in templates that do not attempt to pass values to threads, but not standard conformant.
+                /// @brief Thread starting constructor with no parameters.
+                /// @note May work in templates that do not attempt to pass values to threads, but not standard conformant.
                 /// @param[in] aFunction A function pointer to a function of type:
                 ///          @code void fun(void * arg) @endcode
                 explicit Thread(void (*aFunction)(void *));
@@ -138,7 +138,7 @@ namespace Mezzanine
 
                 /// @brief Check if the thread is joinable.
                 /// @details A thread object is joinable if it has an associated thread of execution.
-                /// @return A bool, false if the thread has been detached, joined or otherwisemade unjoinable by exceptional circumstances, true otherwise.
+                /// @return A bool, false if the thread has been detached, joined or otherwise made unjoinable by exceptional circumstances, true otherwise.
                 bool joinable() const;
 
                 /// @brief Detach from the thread.
@@ -166,14 +166,14 @@ namespace Mezzanine
                 static unsigned hardware_concurrency();
 
             private:
-                /// @brief Deleted assignment operator
+                /// @brief Deleted assignment operator.
                 #ifdef _MEZZ_CPP11_PARTIAL_
                     Thread& operator=(const Thread&) = delete;
                 #else
                     Thread& operator=(const Thread&);
                 #endif
 
-                /// @brief Deleted assignment operator copy constructor
+                /// @brief Deleted assignment operator copy constructor.
                 #ifdef _MEZZ_CPP11_PARTIAL_
                     Thread(const Thread&) = delete;
                 #else
@@ -195,7 +195,7 @@ namespace Mezzanine
                 /// @brief This is the internal thread wrapper function.
                 static void * wrapper_function(void * aArg);
             #endif
-        };
+        };//Thread
 
         /// @brief The thread ID is a unique identifier for each thread.
         /// @see thread::get_id()
@@ -208,18 +208,18 @@ namespace Mezzanine
                 id() : mId(0)
                     {}
 
-                /// @brief Creation from long
-                /// @param aId The OS provided long to create an ID from
+                /// @brief Creation from long.
+                /// @param aId The OS provided long to create an ID from.
                 id(unsigned long int aId) : mId(aId)
                     {}
 
-                /// @brief Copy constructor
+                /// @brief Copy constructor.
                 /// @param aId The other id to create a copy of.
                 id(const id& aId) : mId(aId.mId)
                     {}
 
-                /// @brief Assignment Operator
-                /// @param aId The right hand operand during assignment
+                /// @brief Assignment Operator.
+                /// @param aId The right hand operand during assignment.
                 /// @return A reference to the left hand operand after it has been assigned.
                 inline id & operator=(const id &aId)
                 {
@@ -227,51 +227,51 @@ namespace Mezzanine
                       return *this;
                 }
 
-                /// @brief Equality Comparison
-                /// @param aId1 Left hand operand
-                /// @param aId2 Right hand operand
-                /// @returns True boolean value if the OS specific IDs match and false otherwise
+                /// @brief Equality Comparison.
+                /// @param aId1 Left hand operand.
+                /// @param aId2 Right hand operand.
+                /// @returns True boolean value if the OS specific IDs match and false otherwise.
                 inline friend bool operator==(const id &aId1, const id &aId2)
                     { return (aId1.mId == aId2.mId); }
 
-                /// @brief Inequality Comparison
-                /// @param aId1 Left hand operand
-                /// @param aId2 Right hand operand
-                /// @returns False boolean value if the OS specific IDs match and true otherwise
+                /// @brief Inequality Comparison.
+                /// @param aId1 Left hand operand.
+                /// @param aId2 Right hand operand.
+                /// @returns False boolean value if the OS specific IDs match and true otherwise.
                 inline friend bool operator!=(const id &aId1, const id &aId2)
                     { return (aId1.mId != aId2.mId); }
 
-                /// @brief Greater than or equal to Comparison
-                /// @param aId1 Left hand operand
-                /// @param aId2 Right hand operand
+                /// @brief Greater than or equal to Comparison.
+                /// @param aId1 Left hand operand.
+                /// @param aId2 Right hand operand.
                 /// @returns A consistent value to allow for sorting/ordering of threads.
                 inline friend bool operator<=(const id &aId1, const id &aId2)
                     { return (aId1.mId <= aId2.mId); }
 
-                /// @brief Greater than Comparison
-                /// @param aId1 Left hand operand
-                /// @param aId2 Right hand operand
+                /// @brief Greater than Comparison.
+                /// @param aId1 Left hand operand.
+                /// @param aId2 Right hand operand.
                 /// @returns A consistent value to allow for sorting/ordering of threads.
                 inline friend bool operator<(const id &aId1, const id &aId2)
                     { return (aId1.mId < aId2.mId); }
 
-                /// @brief Less than or equal to Comparison
-                /// @param aId1 Left hand operand
-                /// @param aId2 Right hand operand
+                /// @brief Less than or equal to Comparison.
+                /// @param aId1 Left hand operand.
+                /// @param aId2 Right hand operand.
                 /// @returns A consistent value to allow for sorting/ordering of threads.
                 inline friend bool operator>=(const id &aId1, const id &aId2)
                     { return (aId1.mId >= aId2.mId); }
 
-                /// @brief Less than Comparison
-                /// @param aId1 Left hand operand
-                /// @param aId2 Right hand operand
+                /// @brief Less than Comparison.
+                /// @param aId1 Left hand operand.
+                /// @param aId2 Right hand operand.
                 /// @returns A consistent value to allow for sorting/ordering of threads.
                 inline friend bool operator>(const id &aId1, const id &aId2)
                     { return (aId1.mId > aId2.mId); }
 
-                /// @brief Output Streaming operator
-                /// @param os The output stream to send the id into
-                /// @param obj the streamed id
+                /// @brief Output Streaming operator.
+                /// @param os The output stream to send the id into.
+                /// @param obj the streamed id.
                 /// @returns A reference to the output stream to allow for operator chaining.
                 inline friend std::ostream& operator <<(std::ostream &os, const id &obj)
                 {
@@ -280,10 +280,10 @@ namespace Mezzanine
                 }
 
             private:
+				/// @internal
                 /// @brief The ID value
-                /// @internal
                 unsigned long int mId;
-        };
+        };//Thread::id
 
         /// @brief A partial implementation of std::thread::this_thread.
         namespace this_thread
@@ -322,9 +322,7 @@ namespace Mezzanine
             }
             */
         } // namespace this_thread
-
-
-    }
-}
+    }//Threading
+}//Mezzanine
 
 #endif

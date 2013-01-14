@@ -44,12 +44,9 @@
 /// @file
 /// @brief This would store the implementation of the Rolling averages if any were required, but templates...
 
-
 namespace Mezzanine
 {
 
-}
-
-
+}//Mezzanine
 
 #endif

@@ -60,14 +60,14 @@ namespace Mezzanine
 				iWorkUnit* Unit;
                 
 				/// @brief This stores how many things must run after the target workunit.
-                /// @details This is most important sorting factor. In the Default algorithm
+                /// @details This is most important sorting factor. In the Default algorithm.
                 /// All of the Workunit that the most workunits depend on are run before the
                 /// any others. Since this number is usually low (less than 10ish) in large
                 /// groups of workunits, then there must be a tie-breaker. This should be
                 /// calculated including the dependers of all the dependers (I don't think
                 /// counting a workunit twice hurts, and it may even help if something
                 /// actually depend on multiple workunits that depend on this.)
-                /// @note I chose the word depender instead of dependent, to make the distinction between this field and dependencies more clear when communicated verbally. In some english dialects dependencies it pronounced Dee-pen-dent-sees only one syllable off from Dee-pen-dent.
+                /// @note I chose the word depender instead of dependent, to make the distinction between this field and dependencies more clear when communicated verbally. In some english dialects dependencies is pronounced Dee-pen-dent-sees only one syllable off from Dee-pen-dent.
                 Whole Dependers;
 
                 /// @brief Some representation of the time the target workunit takes to execute.
@@ -80,10 +80,10 @@ namespace Mezzanine
                 Whole Time;
 
                 /// @brief Constructor
-                /// @param Dependers_ How many items depend on this, This needs to be calculated the same for all WorkUnitKeys
-                /// @param Time_ How long is this workunit expected to execute for, This needs to be calculated the same for all WorkUnitKeys
+                /// @param Dependers_ How many items depend on this. This needs to be calculated the same for all WorkUnitKeys.
+                /// @param Time_ How long is this workunit expected to execute for. This needs to be calculated the same for all WorkUnitKeys.
                 /// @param WorkUnit_ A pointer to the workunit in question.
-                WorkUnitKey(Whole Dependers_, Whole Time_, iWorkUnit* WorkUnit_);
+                WorkUnitKey(const Whole& Dependers_, const Whole& Time_, iWorkUnit* WorkUnit_);
 
                 /// @brief Destructor
                 virtual ~WorkUnitKey();
@@ -104,12 +104,10 @@ namespace Mezzanine
                 virtual bool operator< (const WorkUnitKey& rhs ) const;
 
                 /// @brief Does this key point to the Same work unit as another?
-                /// @param rhs The other key
-                /// @return true If the both keys are for the same unit, other parameters are ignored.
+                /// @param rhs The other key.
+                /// @return True if the both keys are for the same unit, other parameters are ignored.
                 virtual bool operator== (const WorkUnitKey& rhs ) const;
-        };
-		
-		
-    }
-}
+        };//WorkUnitKey
+    }//Threading
+}//Mezzanine
 #endif

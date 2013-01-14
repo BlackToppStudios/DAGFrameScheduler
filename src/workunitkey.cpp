@@ -51,7 +51,7 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        WorkUnitKey::WorkUnitKey(Whole Dependers_, Whole Time_, iWorkUnit* WorkUnit_)
+        WorkUnitKey::WorkUnitKey(const Whole& Dependers_, const Whole& Time_, iWorkUnit* WorkUnit_)
             : Unit(WorkUnit_), Dependers(Dependers_), Time(Time_)
             {}
 
@@ -83,6 +83,6 @@ namespace Mezzanine
 
         bool WorkUnitKey::operator ==(const WorkUnitKey &rhs) const
             { return Unit == rhs.Unit; }
-    }
-}
+    }//Threading
+}//Mezzanine
 #endif

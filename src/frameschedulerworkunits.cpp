@@ -119,8 +119,8 @@ namespace Mezzanine
         Whole WorkSorter::GetSortingFrequency()
             { return SortingFrequency; }
 
-    }
-}
+    }//Threading
+}//Mezzanine
 
 
 #endif

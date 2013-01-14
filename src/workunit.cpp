@@ -171,13 +171,7 @@ namespace Mezzanine
         WorkUnitKey DefaultWorkUnit::GetSortingKey(FrameScheduler& SchedulerToCount)
             { return WorkUnitKey( this->GetDependentCount(SchedulerToCount), GetPerformanceLog().GetAverage(), this); }
 
-
-
-
-
-
-    }
-
-}
+    }//Threading
+}//Mezzanine
 
 #endif

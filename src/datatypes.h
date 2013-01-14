@@ -112,6 +112,6 @@ namespace Mezzanine
     /// @brief In case we ever replace the stringstream with another class, this will allow us to swap it out.
     /// @details This will always support <<, str() but may lose support for formatting functions like std::hex.
     typedef std::stringstream Logger;
-}
+}//Mezzanine
 
 #endif

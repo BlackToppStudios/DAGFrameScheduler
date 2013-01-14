@@ -79,7 +79,7 @@ namespace Mezzanine
                 return __sync_add_and_fetch(VariableToChange,Value);
             #endif
         }
-    }
-}
+    }//Threading
+}//Mezzanine
 
 #endif
