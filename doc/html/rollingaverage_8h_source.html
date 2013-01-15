@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="rollingaverage_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.</span>
-<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2012 BlackTopp Studios Inc.</span>
+<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2013 BlackTopp Studios Inc.</span>
 <a name="l00003"></a>00003 <span class="comment">/* This file is part of The DAGFrameScheduler.</span>
 <a name="l00004"></a>00004 <span class="comment"></span>
 <a name="l00005"></a>00005 <span class="comment">    The DAGFrameScheduler is free software: you can redistribute it and/or modify</span>
@@ -160,7 +160,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00072"></a>00072 <span class="comment"></span>
 <a name="l00073"></a>00073 <span class="comment">            /// @brief Empty virtual Destructor.</span>
 <a name="l00074"></a><a class="code" href="classMezzanine_1_1RollingAverage.html#a0d5272057984b3c6c1432fc271580689">00074</a> <span class="comment"></span>            <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1RollingAverage.html#a0d5272057984b3c6c1432fc271580689" title="Empty virtual Destructor.">~RollingAverage</a>(){}
-<a name="l00075"></a>00075     };
+<a name="l00075"></a>00075     };<span class="comment">//RollingAverage</span>
 <a name="l00076"></a>00076 
 <a name="l00077"></a>00077     <span class="comment">// Possible optimizations</span>
 <a name="l00078"></a>00078     <span class="comment">// once the average is calculated store it until another insert is done, costs memory, saves cpu time</span>
@@ -174,7 +174,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00086"></a>00086     {
 <a name="l00087"></a>00087         <span class="keyword">protected</span>:<span class="comment"></span>
 <a name="l00088"></a>00088 <span class="comment">            /// @brief The collection of all the records that are being have been added going back as far as the capacity will allow.</span>
-<a name="l00089"></a>00089 <span class="comment">            /// @note All writes to this are performed through the Iterator @ref Current</span>
+<a name="l00089"></a>00089 <span class="comment">            /// @note All writes to this are performed through the iterator @ref Current</span>
 <a name="l00090"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91">00090</a> <span class="comment"></span>            std::vector&lt;RecordType&gt; <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>;
 <a name="l00091"></a>00091 <span class="comment"></span>
 <a name="l00092"></a>00092 <span class="comment">            /// @brief The iterator used to treat an std::vector as a circular buffer.</span>
@@ -192,8 +192,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00104"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a59c3b97932518ed077c83593b17ab643">00104</a> <span class="comment"></span>            <span class="keyword">typedef</span> RecordType <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a59c3b97932518ed077c83593b17ab643" title="Used for accessing the derived type when it may not be directly known.">Type</a>;
 <a name="l00105"></a>00105 <span class="comment"></span>
 <a name="l00106"></a>00106 <span class="comment">            /// @brief Constructor</span>
-<a name="l00107"></a>00107 <span class="comment">            /// @param RecordCount The capacity of the Rolling average. Thsi defaults to 10.</span>
-<a name="l00108"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a412988dcd8f300620dd9068b2c3e8c86">00108</a> <span class="comment"></span>            <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a412988dcd8f300620dd9068b2c3e8c86" title="Constructor.">BufferedRollingAverage</a>(<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> RecordCount=<a class="code" href="compilerthreadcompat_8h.html#ac384449f00498b42a495646c6aecfb8f" title="Used to control how long frames track length and other similar values. This is controlled by the CMak...">MEZZ_FRAMESTOTRACK</a>)
+<a name="l00107"></a>00107 <span class="comment">            /// @param RecordCount The capacity of the Rolling average. This defaults to 10.</span>
+<a name="l00108"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a3c311bbd4e29bd58395c099094aa5d70">00108</a> <span class="comment"></span>            <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a3c311bbd4e29bd58395c099094aa5d70" title="Constructor.">BufferedRollingAverage</a>(<span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>&amp; RecordCount = <a class="code" href="compilerthreadcompat_8h.html#ac384449f00498b42a495646c6aecfb8f" title="Used to control how long frames track length and other similar values. This is controlled by the CMak...">MEZZ_FRAMESTOTRACK</a>)
 <a name="l00109"></a>00109             {
 <a name="l00110"></a>00110                 <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>.assign(RecordCount,RecordType(0));
 <a name="l00111"></a>00111                 <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a3315c77e867e8ba0583aa251bfc7fafb" title="The iterator used to treat an std::vector as a circular buffer.">Current</a> = <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>.begin();
@@ -204,7 +204,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00116"></a>00116 <span class="keyword">                </span>{ <span class="keywordflow">return</span> <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>.size(); }
 <a name="l00117"></a>00117 <span class="comment"></span>
 <a name="l00118"></a>00118 <span class="comment">            /// @brief Inserts a new record into the rolling average and if needed drops the oldest one out.</span>
-<a name="l00119"></a>00119 <span class="comment">            /// @param Datum The record to add</span>
+<a name="l00119"></a>00119 <span class="comment">            /// @param Datum The record to add.</span>
 <a name="l00120"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a8b7c419c29bd915fef575685bfde4922">00120</a> <span class="comment"></span>            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a8b7c419c29bd915fef575685bfde4922" title="Inserts a new record into the rolling average and if needed drops the oldest one out.">Insert</a>(RecordType Datum)
 <a name="l00121"></a>00121             {
 <a name="l00122"></a>00122                 <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#abc1975b576f3bc70e8ce60bd1edc1e3e" title="Move Current to the next place to be written.">IncrementIterator</a>();
@@ -223,7 +223,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00135"></a>00135 <span class="comment"></span>
 <a name="l00136"></a>00136 <span class="comment">            /// @brief Copy constructor, performs deep copy.</span>
 <a name="l00137"></a>00137 <span class="comment">            /// @param Rhs The Rolling average to copy.</span>
-<a name="l00138"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#af9fa6080b1fa1632a720f0c41132ea65">00138</a> <span class="comment"></span>            <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a412988dcd8f300620dd9068b2c3e8c86" title="Constructor.">BufferedRollingAverage</a>(<span class="keyword">const</span> <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html" title="A RollingAverage that stores a copy of each record. and does the math when queried.">BufferedRollingAverage</a>&amp; Rhs)
+<a name="l00138"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#af9fa6080b1fa1632a720f0c41132ea65">00138</a> <span class="comment"></span>            <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a3c311bbd4e29bd58395c099094aa5d70" title="Constructor.">BufferedRollingAverage</a>(<span class="keyword">const</span> <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html" title="A RollingAverage that stores a copy of each record. and does the math when queried.">BufferedRollingAverage</a>&amp; Rhs)
 <a name="l00139"></a>00139             {
 <a name="l00140"></a>00140                 this-&gt;<a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a3315c77e867e8ba0583aa251bfc7fafb" title="The iterator used to treat an std::vector as a circular buffer.">Current</a>=this-&gt;<a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>.end() - (Rhs-&gt;<a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>.end()-Rhs-&gt;<a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a3315c77e867e8ba0583aa251bfc7fafb" title="The iterator used to treat an std::vector as a circular buffer.">Current</a>);
 <a name="l00141"></a>00141                 this-&gt;<a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>(Rhs-&gt;<a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#a788f3fdd57b7429826a36081b373ff91" title="The collection of all the records that are being have been added going back as far as the capacity wi...">Records</a>);
@@ -240,12 +240,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00152"></a>00152 <span class="comment"></span>
 <a name="l00153"></a>00153 <span class="comment">            /// @brief Deconstructor.</span>
 <a name="l00154"></a><a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#ad57776611f25e2c4c363ab054d163ae3">00154</a> <span class="comment"></span>            <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1BufferedRollingAverage.html#ad57776611f25e2c4c363ab054d163ae3" title="Deconstructor.">~BufferedRollingAverage</a>(){}
-<a name="l00155"></a>00155     };
+<a name="l00155"></a>00155     };<span class="comment">//BufferedRollingAverage</span>
 <a name="l00156"></a>00156 <span class="comment"></span>
 <a name="l00157"></a>00157 <span class="comment">    /// @brief A weighted average that does math with every insertion and stores nothing.</span>
-<a name="l00158"></a>00158 <span class="comment">    /// @details This is possibly an optimization over the BufferedRollingAverage, It has not yet been shown whether the amount of memory for</span>
-<a name="l00159"></a>00159 <span class="comment">    /// each task will significantly affect load times (From RAM to CPU cache), when starting a rolling average, or whether any</span>
-<a name="l00160"></a>00160 <span class="comment">    /// innacuracies in sorting using this would outweigh that.</span>
+<a name="l00158"></a>00158 <span class="comment">    /// @details This is possibly an optimization over the BufferedRollingAverage. It has not yet been shown whether the amount of memory for</span>
+<a name="l00159"></a>00159 <span class="comment">    /// each task will significantly affect load times (From RAM to CPU cache) when starting a rolling average, or whether any</span>
+<a name="l00160"></a>00160 <span class="comment">    /// innaccuracies in sorting using this would outweigh that.</span>
 <a name="l00161"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html">00161</a> <span class="comment"></span>    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> RecordType, <span class="keyword">typename</span> MathType&gt; <span class="keyword">class </span><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html" title="A weighted average that does math with every insertion and stores nothing.">WeightedRollingAverage</a> : <span class="keyword">public</span> <a class="code" href="classMezzanine_1_1RollingAverage.html" title="The interface for rolling averages used in the Mezzanine, and threading library.">RollingAverage</a>&lt;RecordType&gt;
 <a name="l00162"></a>00162     {
 <a name="l00163"></a>00163         <span class="keyword">protected</span>:<span class="comment"></span>
@@ -259,9 +259,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00171"></a>00171 <span class="comment">            /// @brief Used for accessing the derived type when it may not be directly known.</span>
 <a name="l00172"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a23f7fc77e9861b8fdd0ffef5fc291177">00172</a> <span class="comment"></span>            <span class="keyword">typedef</span> RecordType <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a23f7fc77e9861b8fdd0ffef5fc291177" title="Used for accessing the derived type when it may not be directly known.">Type</a>;
 <a name="l00173"></a>00173 <span class="comment"></span>
-<a name="l00174"></a>00174 <span class="comment">            /// @brief Constructor</span>
-<a name="l00175"></a>00175 <span class="comment">            /// @param RecordCount How many records should this emulate</span>
-<a name="l00176"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a9602d299f0892f379c43be58b7f724c7">00176</a> <span class="comment"></span>            <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a9602d299f0892f379c43be58b7f724c7" title="Constructor.">WeightedRollingAverage</a>(<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> RecordCount=<a class="code" href="compilerthreadcompat_8h.html#ac384449f00498b42a495646c6aecfb8f" title="Used to control how long frames track length and other similar values. This is controlled by the CMak...">MEZZ_FRAMESTOTRACK</a>) :
+<a name="l00174"></a>00174 <span class="comment">            /// @brief Class Constructor.</span>
+<a name="l00175"></a>00175 <span class="comment">            /// @param RecordCount How many records should this emulate.</span>
+<a name="l00176"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a4a13b88532c212f888cca727719686ac">00176</a> <span class="comment"></span>            <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a4a13b88532c212f888cca727719686ac" title="Class Constructor.">WeightedRollingAverage</a>(<span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>&amp; RecordCount = <a class="code" href="compilerthreadcompat_8h.html#ac384449f00498b42a495646c6aecfb8f" title="Used to control how long frames track length and other similar values. This is controlled by the CMak...">MEZZ_FRAMESTOTRACK</a>) :
 <a name="l00177"></a>00177                 <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#abee604713707f22224965db2e0e8249f" title="What the math says the current avergage is.">CurrentAverage</a>(0),
 <a name="l00178"></a>00178                 <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a52a288d29cee49d532edc611d8cd15d4" title="Replaces the capacity of normal rolling averages.">WeightCount</a>(RecordCount)
 <a name="l00179"></a>00179                 {}
@@ -271,9 +271,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00183"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aacc6ea790c916ca0bb285ea34d6f31e8">00183</a> <span class="comment"></span>            <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aacc6ea790c916ca0bb285ea34d6f31e8" title="Returns how many records this is emulating.">RecordCapacity</a>()<span class="keyword"> const</span>
 <a name="l00184"></a>00184 <span class="keyword">                </span>{ <span class="keywordflow">return</span> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a52a288d29cee49d532edc611d8cd15d4" title="Replaces the capacity of normal rolling averages.">WeightCount</a>; }
 <a name="l00185"></a>00185 <span class="comment"></span>
-<a name="l00186"></a>00186 <span class="comment">            /// @brief Update the Current stored Rolling average with a new data point/record</span>
+<a name="l00186"></a>00186 <span class="comment">            /// @brief Update the currently stored Rolling average with a new data point/record.</span>
 <a name="l00187"></a>00187 <span class="comment">            /// @param Datum Update the Current Average according to the following formula CurrentAverage = CurrentAverage * ((RecordCount-1)/RecordCount) + Datum/RecordCount.</span>
-<a name="l00188"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aee6feb9822529b2a044906a56be737b4">00188</a> <span class="comment"></span>            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aee6feb9822529b2a044906a56be737b4" title="Update the Current stored Rolling average with a new data point/record.">Insert</a>(RecordType Datum)
+<a name="l00188"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aee6feb9822529b2a044906a56be737b4">00188</a> <span class="comment"></span>            <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aee6feb9822529b2a044906a56be737b4" title="Update the currently stored Rolling average with a new data point/record.">Insert</a>(RecordType Datum)
 <a name="l00189"></a>00189             {
 <a name="l00190"></a>00190                 <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#abee604713707f22224965db2e0e8249f" title="What the math says the current avergage is.">CurrentAverage</a> = ( MathType(this-&gt;<a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#abee604713707f22224965db2e0e8249f" title="What the math says the current avergage is.">CurrentAverage</a>) ? MathType(this-&gt;<a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#abee604713707f22224965db2e0e8249f" title="What the math says the current avergage is.">CurrentAverage</a>) : MathType(1)) <span class="comment">// A zero really screws with averages that tend to move away from zero</span>
 <a name="l00191"></a>00191                         * ((MathType(<a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a52a288d29cee49d532edc611d8cd15d4" title="Replaces the capacity of normal rolling averages.">WeightCount</a>)-MathType(1))/MathType(<a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#a52a288d29cee49d532edc611d8cd15d4" title="Replaces the capacity of normal rolling averages.">WeightCount</a>))                             <span class="comment">//Get weight of all the older members</span>
@@ -285,9 +285,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00197"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#ad07296ff457965af06e956ac2f96c6f1">00197</a> <span class="comment"></span>            <span class="keyword">virtual</span> RecordType <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#ad07296ff457965af06e956ac2f96c6f1" title="Get the current rolling average.">GetAverage</a>()<span class="keyword"> const</span>
 <a name="l00198"></a>00198 <span class="keyword">                </span>{ <span class="keywordflow">return</span> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#abee604713707f22224965db2e0e8249f" title="What the math says the current avergage is.">CurrentAverage</a>; }
 <a name="l00199"></a>00199 <span class="comment"></span>
-<a name="l00200"></a>00200 <span class="comment">            /// @brief Destructor</span>
-<a name="l00201"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aa58eed1d5eb81c191881f139565d20c5">00201</a> <span class="comment"></span>            <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aa58eed1d5eb81c191881f139565d20c5" title="Destructor.">~WeightedRollingAverage</a>(){}
-<a name="l00202"></a>00202     };
+<a name="l00200"></a>00200 <span class="comment">            /// @brief Class Destructor.</span>
+<a name="l00201"></a><a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aa58eed1d5eb81c191881f139565d20c5">00201</a> <span class="comment"></span>            <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html#aa58eed1d5eb81c191881f139565d20c5" title="Class Destructor.">~WeightedRollingAverage</a>(){}
+<a name="l00202"></a>00202     };<span class="comment">//WeightedRollingAverage</span>
 <a name="l00203"></a>00203 <span class="comment"></span>
 <a name="l00204"></a>00204 <span class="comment">    /// @brief Use this to get the default rolling average for a given type.</span>
 <a name="l00205"></a>00205 <span class="comment">    /// @details use &quot;DefaultRollingAverage&lt;Whole&gt;::Type&quot; as Type to instantiate an instance of whatever type this is. This allows</span>
@@ -298,8 +298,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00210"></a>00210 <span class="comment">        /// @brief The Default rolling average for all types is currently BufferedRollingAverage, this could change with future testing.</span>
 <a name="l00211"></a>00211 <span class="comment"></span>        <span class="comment">//typedef BufferedRollingAverage&lt;RecordType&gt; Type;</span>
 <a name="l00212"></a><a class="code" href="structMezzanine_1_1DefaultRollingAverage.html#a28660737085597a377331c4f607f945c">00212</a>         <span class="keyword">typedef</span> <a class="code" href="classMezzanine_1_1WeightedRollingAverage.html" title="A weighted average that does math with every insertion and stores nothing.">WeightedRollingAverage&lt;RecordType,RecordType&gt;</a> <a class="code" href="structMezzanine_1_1DefaultRollingAverage.html#a28660737085597a377331c4f607f945c" title="The Default rolling average for all types is currently BufferedRollingAverage, this could change with...">Type</a>;
-<a name="l00213"></a>00213     };
-<a name="l00214"></a>00214 }
+<a name="l00213"></a>00213     };<span class="comment">//DefaultRollingAverage</span>
+<a name="l00214"></a>00214 }<span class="comment">//Mezzanine</span>
 <a name="l00215"></a>00215 <span class="preprocessor">#endif</span>
 <a name="l00216"></a>00216 <span class="preprocessor"></span>
 </pre></div></div><!-- contents -->
@@ -318,6 +318,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

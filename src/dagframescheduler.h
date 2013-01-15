@@ -375,7 +375,7 @@
 /// The function
 /// @ref Mezzanine::Threading::FrameScheduler::CreateThreads() "FrameScheduler::CreateThreads()"
 /// Creates enough threads to get to the amount set by
-/// @ref Mezzanine::Threading::FrameScheduler::SetThreadCount(Whole) "FrameScheduler::SetThreadCount(Whole)"
+/// @ref Mezzanine::Threading::FrameScheduler::SetThreadCount() "FrameScheduler::SetThreadCount()"
 /// . Depending on how this library is configured this could mean either creating that many threads each
 /// frame or creating additional threads only if this changed.
 /// @n @n
@@ -418,7 +418,7 @@
 /// and reset every to the current time when
 /// @ref Mezzanine::Threading::FrameScheduler::WaitUntilNextFrame() "FrameScheduler::WaitUntilNextFrame()"
 /// is called. The value set by
-/// @ref Mezzanine::Threading::FrameScheduler::SetFrameRate(Whole) "FrameScheduler::SetFrameRate(Whole)"
+/// @ref Mezzanine::Threading::FrameScheduler::SetFrameRate() "FrameScheduler::SetFrameRate()"
 /// is used to calculate the desired length of a frame in microseconds. If the begining of the next
 /// frame has not been reached, then this function will sleep the scheduler until the next frame should
 /// begin. To compensate for systems with an imprecise sleep mechanism (or timing mechanism) an internal

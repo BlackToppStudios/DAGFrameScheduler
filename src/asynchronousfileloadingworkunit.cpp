@@ -53,10 +53,6 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @cond 0
-
-        /// @brief This is the function that AsynchronousFileLoadWorkUnit instances will use to load data and will do do very little other than load data.
-        /// @param ThreadStorage A pointer to the calling AsynchronousFileLoadWorkUnit
         void ThreadLoading(void* WU)
         {
             AsynchronousFileLoadWorkUnit& Unit = *((AsynchronousFileLoadWorkUnit*)WU);
@@ -92,7 +88,6 @@ namespace Mezzanine
             }
             while(Unit.Status!=AtomicCompareAndSwap32(&(Unit.Status), Unit.Status, Complete));
         }
-        /// @endcond
 
         AsynchronousFileLoadWorkUnit::AsynchronousFileLoadWorkUnit() :
             LoadingThread(0),

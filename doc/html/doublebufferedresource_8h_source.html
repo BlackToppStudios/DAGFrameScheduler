@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="doublebufferedresource_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.</span>
-<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2012 BlackTopp Studios Inc.</span>
+<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2013 BlackTopp Studios Inc.</span>
 <a name="l00003"></a>00003 <span class="comment">/* This file is part of The DAGFrameScheduler.</span>
 <a name="l00004"></a>00004 <span class="comment"></span>
 <a name="l00005"></a>00005 <span class="comment">    The DAGFrameScheduler is free software: you can redistribute it and/or modify</span>
@@ -222,7 +222,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00134"></a>00134                     <span class="keyword">delete</span> ResourceA;
 <a name="l00135"></a>00135                     <span class="keyword">delete</span> ResourceB;
 <a name="l00136"></a>00136                 }
-<a name="l00137"></a>00137         };
+<a name="l00137"></a>00137         };<span class="comment">//DoubleBufferedResource</span>
 <a name="l00138"></a>00138 
 <a name="l00139"></a>00139 <span class="comment"></span>
 <a name="l00140"></a>00140 <span class="comment">        /// @brief A better default name for the Default Logger instance.</span>
@@ -254,7 +254,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00166"></a>00166 <span class="comment">                /// @param ResourceID The ID the resource provided.</span>
 <a name="l00167"></a>00167 <span class="comment">                /// @return A reference to the resource if it exists, or undefined behavior and maybe an exception if it doesn&#39;t.</span>
 <a name="l00168"></a>00168 <span class="comment"></span>                <span class="keyword">template</span> &lt;<span class="keyword">typename</span> DBR&gt;
-<a name="l00169"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a6cdaad6b28d0a207f26a65041f0b8493">00169</a>                 DBR&amp; GetResource(<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> ResourceID)
+<a name="l00169"></a><a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#ad7fb682f1a90910b079fb4e93c6cf328">00169</a>                 DBR&amp; GetResource(<span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>&amp; ResourceID)
 <a name="l00170"></a>00170                     { <span class="keywordflow">return</span> *((DBR*)(this-&gt;ThreadResources[ResourceID])); }
 <a name="l00171"></a>00171 <span class="comment"></span>
 <a name="l00172"></a>00172 <span class="comment">                /// @brief Get the usable logger for this thread specific resource</span>
@@ -278,7 +278,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00190"></a>00190                     <span class="keyword">delete</span> (<a class="code" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html" title="A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanis...">DoubleBufferedLogger</a>*)this-&gt;ThreadResources[<a class="code" href="namespaceMezzanine_1_1Threading.html#abc50da1ff1d766b8f17d2f177146ce7f" title="Double buffered resources are identified by a Whole which is their type ID, This number identifies lo...">DBRLogger</a>]; <span class="comment">// Items must wind up in the correct spot in the vector for this to work. Be careful to get the order right if you overload this.</span>
 <a name="l00191"></a>00191                 }
 <a name="l00192"></a>00192 
-<a name="l00193"></a>00193         };
+<a name="l00193"></a>00193         };<span class="comment">//ThreadSpecificStorage</span>
 <a name="l00194"></a>00194 <span class="comment"></span>
 <a name="l00195"></a>00195 <span class="comment">        /// @brief Use this to change the default resource type.</span>
 <a name="l00196"></a>00196 <span class="comment">        /// @details use &quot;DefaultThreadSpecificStorage::Type&quot; as Type to instantiate an instance of whatever type this is.</span>
@@ -286,10 +286,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00198"></a>00198         {<span class="comment"></span>
 <a name="l00199"></a>00199 <span class="comment">            /// @brief A single point at which all the thread specific resources can be changed.</span>
 <a name="l00200"></a><a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">00200</a> <span class="comment"></span>            <span class="keyword">typedef</span> <a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">ThreadSpecificStorage</a> <a class="code" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab" title="A single point at which all the thread specific resources can be changed.">Type</a>;
-<a name="l00201"></a>00201         };
-<a name="l00202"></a>00202 
-<a name="l00203"></a>00203     }
-<a name="l00204"></a>00204 }
+<a name="l00201"></a>00201         };<span class="comment">//DefaultThreadSpecificStorage</span>
+<a name="l00202"></a>00202     }<span class="comment">//Threading</span>
+<a name="l00203"></a>00203 }<span class="comment">//Mezzanine</span>
+<a name="l00204"></a>00204 
 <a name="l00205"></a>00205 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
@@ -307,6 +307,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

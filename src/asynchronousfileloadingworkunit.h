@@ -49,19 +49,15 @@ namespace Mezzanine
 {
     namespace Threading
     {
-        /// @cond 0
-
-        /// @brief An Internal helper function for the @ref AsynchronousFileLoadWorkUnit .
+        /// @brief An Internal helper function for the @ref AsynchronousFileLoadWorkUnit. This is the function that AsynchronousFileLoadWorkUnit instances will use to load data.
         /// @details There is a 1 to 1 relationship between this function and its associated @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit".
         /// This is the function run in another thread to allow loading asynchrously.
-        /// @param WU A pointer to the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit" that is goes t
+        /// @param WU A pointer to the @ref Mezzanine::Threading::AsynchronousFileLoadWorkUnit "AsynchronousFileLoadWorkUnit" that is passed to the asynchronous thread to be used as metadata.
         void ThreadLoading(void* WU);
-
-        /// @endcond
 
         /// @brief A simple in memory representation of a file.
         class MEZZ_LIB RawFile
-        {                
+        {
             public:
                 /// @brief How big is the file in bytes?
                 MaxInt Size;
@@ -89,7 +85,7 @@ namespace Mezzanine
 
                 /// @brief Assigning this class is bad, private operator=.
                 /// @param Unused Like it says it is unused in any real sense, it is returned to prevent compiler warnings.
-				/// @return Returns *this.
+                /// @return Returns *this.
                 RawFile& operator=(RawFile& Unused) { return Unused; }
         };//RawFile
 
@@ -131,8 +127,8 @@ namespace Mezzanine
 
                 /// @brief Begin loading a list of files based on their names.
                 /// @param Filenames_ A vector of Strings that correspond to either relative or absolute filenames that will be loaded.
-                /// @details When the file is loaded its contents are placed in a @ref RawFile and can be retrieved with @ref GetFile(String)
-                /// or @ref GetFile(Whole) member functions.
+                /// @details When the file is loaded its contents are placed in a @ref RawFile and can be retrieved with @ref GetFile
+                /// or @ref GetFile member functions.
                 /// @n @n
                 /// This starts by clearing the previous list of loaded files. If that list has not been deleted then
                 /// this will cause a memory leak. Use @ref DeleteLoadedFiles to clear this list or copy all the pointers elsewhere before
@@ -161,7 +157,7 @@ namespace Mezzanine
                 virtual RunningState IsWorkDone();
 
                 /// @brief Get a loaded @ref RawFile in linear time.
-                /// @details This searches the list of files names to determine the index of the filename then calls @ref GetFile(Whole) "GetFile(Whole)".
+                /// @details This searches the list of files names to determine the index of the filename then calls @ref GetFile "GetFile".
                 /// @param FileName The file to retrieve.
                 /// @return A pointer to a @ref RawFile or 0 if it cannot be retrieved for any reason.
                 RawFile* GetFile(const String& FileName) const;

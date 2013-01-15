@@ -103,16 +103,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__inherit__graph.svg" width="100%" height="230"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__inherit__graph.svg" width="100%" height="230"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Mezzanine::Threading::DefaultWorkUnit:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__coll__graph.svg" width="100%" height="132"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__coll__graph.svg" width="100%" height="132"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 
 <p><a href="classMezzanine_1_1Threading_1_1DefaultWorkUnit-members.html">List of all members.</a></p>
@@ -129,7 +127,7 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Force this WorkUnit to Start after another has completed.  <a href="#ab8cc25210e6951975b3c5a5b47484785"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab90e01c1aedde65369c9c3de4eae232c"></a><!-- doxytag: member="Mezzanine::Threading::DefaultWorkUnit::ClearDependencies" ref="ab90e01c1aedde65369c9c3de4eae232c" args="()" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#ab90e01c1aedde65369c9c3de4eae232c">ClearDependencies</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Drop any information about what work Units this one depends on. <br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Drop any information about what work units this one depends on. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9ac07631b2aa961e4c226d0753e3d2b0"></a><!-- doxytag: member="Mezzanine::Threading::DefaultWorkUnit::DoWork" ref="a9ac07631b2aa961e4c226d0753e3d2b0" args="(DefaultThreadSpecificStorage::Type &amp;CurrentThreadStorage)=0" -->
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a9ac07631b2aa961e4c226d0753e3d2b0">DoWork</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage)=0</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">WorkUnits Must implement these to do the work. <br/></td></tr>
@@ -284,7 +282,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
   </table>
   </dd>
 </dl>
-<p>Because Dependents are not tracked this iterates over entry in the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> it is passed </p>
+<p>Because Dependents are not tracked this iterates over entry in the <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> it is passed. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A Whole is returned containing the count. </dd></dl>
 
 <p>Implements <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a316284547c9222ae0410fce75366c992">Mezzanine::Threading::iWorkUnit</a>.</p>
@@ -405,7 +403,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> suitable for sorting this workunit </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A <a class="el" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> suitable for sorting this workunit. </dd></dl>
 
 <p>Implements <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a9b38531395f4ed1db70552368e044b4a">Mezzanine::Threading::iWorkUnit</a>.</p>
 
@@ -483,7 +481,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 <p>Remove a dependency. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">RemoveDependency</td><td>A pointer to the WorkUnit to remove as a dependency </td></tr>
+    <tr><td class="paramname">RemoveDependency</td><td>A pointer to the WorkUnit to remove as a dependency. </td></tr>
   </table>
   </dd>
 </dl>
@@ -509,7 +507,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 <div class="memdoc">
 
 <p>Attempts to atomically start the work unit in the current thread. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Returns RunningState::Starting if this thread was able to gain ownership and start the workunit, returns RunningState::NotStarted otherwise. </dd></dl>
 
 <p>Implements <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#aaf745da02fb9519cb453134846e1fde4">Mezzanine::Threading::iWorkUnit</a>.</p>
 
@@ -537,6 +535,6 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

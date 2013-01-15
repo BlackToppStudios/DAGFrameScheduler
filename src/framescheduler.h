@@ -288,6 +288,7 @@ namespace Mezzanine
                 virtual Whole GetFrameCount() const;
 
                 /// @brief Get the desired length of a frame.
+		/// @return The desired frame length as a Whole in Microseconfs
                 virtual Whole GetFrameLength() const;
 
                 /// @brief Set the desired Frate rate.
@@ -351,7 +352,7 @@ namespace Mezzanine
                 /// This thread starts the man @ref algorithm_sec "scheduling algorithm" working on every thread except the calling thread. This
                 /// call does not block and tends to return very quickly.
                 /// @n @n
-                /// This checks the amount of threads as set by @ref SetFrameLength(Whole) "SetFrameLength(Whole)". It creates any
+                /// This checks the amount of threads as set by @ref SetFrameLength "SetFrameLength". It creates any
                 /// @ref ThreadSpecificStorage instances required and creates threads if they are required. If the build option
                 /// @ref MEZZ_USEBARRIERSEACHFRAME Mezz_MinimizeThreadsEachFrame was enabled then this will reuse threads from previous frames,
                 /// otherwise this will re-use thread specific resources and create a new set of threads. Re-use of threads is synchronized
@@ -384,7 +385,7 @@ namespace Mezzanine
 
                 /// @brief This is the final step (of 6) in a frame.
                 /// @details Wait until this frame has consumed its fair share of a second. This uses the value passed in
-                /// @ref SetFrameRate(Whole) "SetFrameRate(Whole)" to determine what portion of a second each frame should
+                /// @ref SetFrameRate "SetFrameRate" to determine what portion of a second each frame should
                 /// use. If a frame took too long to execute this calculates that and returns.
                 /// @n @n
                 /// Wait 1/TargetFrame seconds, minus time already run. This also starts the timer for the next frame so

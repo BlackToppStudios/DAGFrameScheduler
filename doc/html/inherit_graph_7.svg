@@ -54,7 +54,7 @@
 </g>
 <!-- Node6 -->
 <g id="node11" class="node"><title>Node6</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html" target="_top" xlink:title="Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.">
+<a xlink:href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html" target="_top" xlink:title="Swaps all of the Logs so the usable logs can be commited, and the usable commitable.">
 <polygon fill="white" stroke="black" points="449,-80 449,-102 657,-102 657,-80 449,-80"/>
 <text text-anchor="middle" x="553" y="-89" font-family="FreeSans" font-size="10.00">Mezzanine::Threading::LogBufferSwapper</text>
 </a>

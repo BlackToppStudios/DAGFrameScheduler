@@ -103,11 +103,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8">RawFile</a> (<a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a> Size_)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#aad1399f87c1a92dc2ef348a370efcfa8"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html#a34c487840df68f027f0627486c216130">RawFile</a> (const <a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a> BufferSize)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a34c487840df68f027f0627486c216130"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae225a8eb5d0080c5baa180bbe6a00276"></a><!-- doxytag: member="Mezzanine::Threading::RawFile::~RawFile" ref="ae225a8eb5d0080c5baa180bbe6a00276" args="()" -->
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html#ae225a8eb5d0080c5baa180bbe6a00276">~RawFile</a> ()</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">De-allocates the memory for the file, this make deleting Data a bad idea. <br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">De-allocates the memory for the file. This make deleting Data manually a bad idea. <br/></td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab771fdd617ed0e93ddc0fe2b9e1d8d47"></a><!-- doxytag: member="Mezzanine::Threading::RawFile::Data" ref="ab771fdd617ed0e93ddc0fe2b9e1d8d47" args="" -->
@@ -120,17 +120,17 @@ Public Attributes</h2></td></tr>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A simple in memory representation of a file. </p>
 
-<p>Definition at line <a class="el" href="asynchronousfileloadingworkunit_8h_source.html#l00063">63</a> of file <a class="el" href="asynchronousfileloadingworkunit_8h_source.html">asynchronousfileloadingworkunit.h</a>.</p>
+<p>Definition at line <a class="el" href="asynchronousfileloadingworkunit_8h_source.html#l00059">59</a> of file <a class="el" href="asynchronousfileloadingworkunit_8h_source.html">asynchronousfileloadingworkunit.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="aad1399f87c1a92dc2ef348a370efcfa8"></a><!-- doxytag: member="Mezzanine::Threading::RawFile::RawFile" ref="aad1399f87c1a92dc2ef348a370efcfa8" args="(MaxInt Size_)" -->
+<a class="anchor" id="a34c487840df68f027f0627486c216130"></a><!-- doxytag: member="Mezzanine::Threading::RawFile::RawFile" ref="a34c487840df68f027f0627486c216130" args="(const MaxInt BufferSize)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html#aad1399f87c1a92dc2ef348a370efcfa8">Mezzanine::Threading::RawFile::RawFile</a> </td>
+          <td class="memname"><a class="el" href="classMezzanine_1_1Threading_1_1RawFile.html#a34c487840df68f027f0627486c216130">Mezzanine::Threading::RawFile::RawFile</a> </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a>&#160;</td>
-          <td class="paramname"><em>Size_</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">MaxInt</a>&#160;</td>
+          <td class="paramname"><em>BufferSize</em></td><td>)</td>
           <td><code> [inline]</code></td>
         </tr>
       </table>
@@ -141,12 +141,12 @@ Public Attributes</h2></td></tr>
 <p>Allocates space of the amount passed. In the <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">AsynchronousFileLoadWorkUnit</a> this is the size of the file to be loaded. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">Size_</td><td>The size of the buffer to allocate. </td></tr>
+    <tr><td class="paramname">BufferSize</td><td>The size of the buffer to allocate. </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="asynchronousfileloadingworkunit_8h_source.html#l00076">76</a> of file <a class="el" href="asynchronousfileloadingworkunit_8h_source.html">asynchronousfileloadingworkunit.h</a>.</p>
+<p>Definition at line <a class="el" href="asynchronousfileloadingworkunit_8h_source.html#l00072">72</a> of file <a class="el" href="asynchronousfileloadingworkunit_8h_source.html">asynchronousfileloadingworkunit.h</a>.</p>
 
 </div>
 </div>
@@ -169,6 +169,6 @@ Public Attributes</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:51 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

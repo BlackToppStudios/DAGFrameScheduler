@@ -21,6 +21,10 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### Jan 14, 2013 ###
+* Mako made some const correctness changes.
+* Fixed some documentation typos
+
 ### Jan 13, 2013 ###
 * Documentation Updates, finished basic integration docs.
 * Update copyright dates.

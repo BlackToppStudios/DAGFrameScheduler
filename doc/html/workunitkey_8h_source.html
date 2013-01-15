@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="workunitkey_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.</span>
-<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2012 BlackTopp Studios Inc.</span>
+<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2013 BlackTopp Studios Inc.</span>
 <a name="l00003"></a>00003 <span class="comment">/* This file is part of The DAGFrameScheduler.</span>
 <a name="l00004"></a>00004 <span class="comment"></span>
 <a name="l00005"></a>00005 <span class="comment">    The DAGFrameScheduler is free software: you can redistribute it and/or modify</span>
@@ -148,14 +148,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00060"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a4645d10e28d7c3fdd7dd091aeb78f703">00060</a> <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time.">iWorkUnit</a>* <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#a4645d10e28d7c3fdd7dd091aeb78f703" title="The WorkUnit this carries metadata for.">Unit</a>;
 <a name="l00061"></a>00061                 <span class="comment"></span>
 <a name="l00062"></a>00062 <span class="comment">                /// @brief This stores how many things must run after the target workunit.</span>
-<a name="l00063"></a>00063 <span class="comment">                /// @details This is most important sorting factor. In the Default algorithm</span>
+<a name="l00063"></a>00063 <span class="comment">                /// @details This is most important sorting factor. In the Default algorithm.</span>
 <a name="l00064"></a>00064 <span class="comment">                /// All of the Workunit that the most workunits depend on are run before the</span>
 <a name="l00065"></a>00065 <span class="comment">                /// any others. Since this number is usually low (less than 10ish) in large</span>
 <a name="l00066"></a>00066 <span class="comment">                /// groups of workunits, then there must be a tie-breaker. This should be</span>
 <a name="l00067"></a>00067 <span class="comment">                /// calculated including the dependers of all the dependers (I don&#39;t think</span>
 <a name="l00068"></a>00068 <span class="comment">                /// counting a workunit twice hurts, and it may even help if something</span>
 <a name="l00069"></a>00069 <span class="comment">                /// actually depend on multiple workunits that depend on this.)</span>
-<a name="l00070"></a>00070 <span class="comment">                /// @note I chose the word depender instead of dependent, to make the distinction between this field and dependencies more clear when communicated verbally. In some english dialects dependencies it pronounced Dee-pen-dent-sees only one syllable off from Dee-pen-dent.</span>
+<a name="l00070"></a>00070 <span class="comment">                /// @note I chose the word depender instead of dependent, to make the distinction between this field and dependencies more clear when communicated verbally. In some english dialects dependencies is pronounced Dee-pen-dent-sees only one syllable off from Dee-pen-dent.</span>
 <a name="l00071"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#aaa1dc5448044054cd8c775416e710f4b">00071</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#aaa1dc5448044054cd8c775416e710f4b" title="This stores how many things must run after the target workunit.">Dependers</a>;
 <a name="l00072"></a>00072 <span class="comment"></span>
 <a name="l00073"></a>00073 <span class="comment">                /// @brief Some representation of the time the target workunit takes to execute.</span>
@@ -168,10 +168,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00080"></a><a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f">00080</a> <span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f" title="Some representation of the time the target workunit takes to execute.">Time</a>;
 <a name="l00081"></a>00081 <span class="comment"></span>
 <a name="l00082"></a>00082 <span class="comment">                /// @brief Constructor</span>
-<a name="l00083"></a>00083 <span class="comment">                /// @param Dependers_ How many items depend on this, This needs to be calculated the same for all WorkUnitKeys</span>
-<a name="l00084"></a>00084 <span class="comment">                /// @param Time_ How long is this workunit expected to execute for, This needs to be calculated the same for all WorkUnitKeys</span>
+<a name="l00083"></a>00083 <span class="comment">                /// @param Dependers_ How many items depend on this. This needs to be calculated the same for all WorkUnitKeys.</span>
+<a name="l00084"></a>00084 <span class="comment">                /// @param Time_ How long is this workunit expected to execute for. This needs to be calculated the same for all WorkUnitKeys.</span>
 <a name="l00085"></a>00085 <span class="comment">                /// @param WorkUnit_ A pointer to the workunit in question.</span>
-<a name="l00086"></a>00086 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a>(<a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Dependers_, <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> Time_, <a class="code" href="classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time.">iWorkUnit</a>* WorkUnit_);
+<a name="l00086"></a>00086 <span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a>(<span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>&amp; Dependers_, <span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>&amp; Time_, <a class="code" href="classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time.">iWorkUnit</a>* WorkUnit_);
 <a name="l00087"></a>00087 <span class="comment"></span>
 <a name="l00088"></a>00088 <span class="comment">                /// @brief Destructor</span>
 <a name="l00089"></a>00089 <span class="comment"></span>                <span class="keyword">virtual</span> ~<a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a>();
@@ -192,15 +192,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00104"></a>00104 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">bool</span> operator&lt; (<span class="keyword">const</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a>&amp; rhs ) <span class="keyword">const</span>;
 <a name="l00105"></a>00105 <span class="comment"></span>
 <a name="l00106"></a>00106 <span class="comment">                /// @brief Does this key point to the Same work unit as another?</span>
-<a name="l00107"></a>00107 <span class="comment">                /// @param rhs The other key</span>
-<a name="l00108"></a>00108 <span class="comment">                /// @return true If the both keys are for the same unit, other parameters are ignored.</span>
+<a name="l00107"></a>00107 <span class="comment">                /// @param rhs The other key.</span>
+<a name="l00108"></a>00108 <span class="comment">                /// @return True if the both keys are for the same unit, other parameters are ignored.</span>
 <a name="l00109"></a>00109 <span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">bool</span> operator== (<span class="keyword">const</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a>&amp; rhs ) <span class="keyword">const</span>;
-<a name="l00110"></a>00110         };
-<a name="l00111"></a>00111         
-<a name="l00112"></a>00112         
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114 }
-<a name="l00115"></a>00115 <span class="preprocessor">#endif</span>
+<a name="l00110"></a>00110         };<span class="comment">//WorkUnitKey</span>
+<a name="l00111"></a>00111     }<span class="comment">//Threading</span>
+<a name="l00112"></a>00112 }<span class="comment">//Mezzanine</span>
+<a name="l00113"></a>00113 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -217,6 +215,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

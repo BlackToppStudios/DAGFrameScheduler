@@ -139,7 +139,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>A small wrapper around the system thread. </p>
-<p>in general game code should not be creating this if they are using the DAG Frame Scheduler, as it tries to maintain control over the threads created by a game. This tries to keep the names the same as the standard thread, and might at some point be replace by some template machinery that wraps the minor difference that currently exist. </p>
+<p>In general game code should not be creating this if they are using the DAG Frame Scheduler, as it tries to maintain control over the threads created by a game. This tries to keep the names the same as the standard thread, and might at some point be replace by some template machinery that wraps the minor difference that currently exist. </p>
 
 <p>Definition at line <a class="el" href="thread_8h_source.html#l00088">88</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
@@ -180,7 +180,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="memdoc">
 
 <p><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html" title="A small wrapper around the system thread.">Thread</a> starting constructor with no parameters. </p>
-<dl class="note"><dt><b>Note:</b></dt><dd>may work in templates that do not attempt to pass values to threads, but not standard conformant. </dd></dl>
+<dl class="note"><dt><b>Note:</b></dt><dd>May work in templates that do not attempt to pass values to threads, but not standard conformant. </dd></dl>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">aFunction</td><td>A function pointer to a function of type: <div class="fragment"><pre class="fragment"> <span class="keywordtype">void</span> fun(<span class="keywordtype">void</span> * arg) 
@@ -358,7 +358,7 @@ Static Public Member Functions</h2></td></tr>
 
 <p>Check if the thread is joinable. </p>
 <p>A thread object is joinable if it has an associated thread of execution. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>A bool, false if the thread has been detached, joined or otherwisemade unjoinable by exceptional circumstances, true otherwise. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>A bool, false if the thread has been detached, joined or otherwise made unjoinable by exceptional circumstances, true otherwise. </dd></dl>
 
 <p>Definition at line <a class="el" href="thread_8cpp_source.html#l00236">236</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
@@ -406,6 +406,6 @@ Static Public Member Functions</h2></td></tr>
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:51 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

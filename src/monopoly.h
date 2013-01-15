@@ -64,7 +64,7 @@ namespace Mezzanine
                 virtual void UseThreads(const Whole& AmountToUse) = 0;
 
                 /// @brief Retrieves the amount of threads that the monopoly will actually use.
-                /// @details The monopoly is free to ignore any value passed @ref UseThreads(Whole) and
+                /// @details The monopoly is free to ignore any value passed @ref UseThreads and
                 /// use any heuristic or threading model instead.
                 /// @return A whole with the amount of threads to be used.
                 virtual Whole UsingThreadCount() = 0;

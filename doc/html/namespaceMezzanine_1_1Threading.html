@@ -128,7 +128,7 @@ Classes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1LogAggregator.html">LogAggregator</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Gather all the thread specific logs and commit them to the main log.  <a href="classMezzanine_1_1Threading_1_1LogAggregator.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html">LogBufferSwapper</a></td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps all of the Logs so the Usable logs can be commited, and the usable commitable.  <a href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html#details">More...</a><br/></td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps all of the Logs so the usable logs can be commited, and the usable commitable.  <a href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">A kind of workunit given exclusive runtime so it can consume time on multiple threads.  <a href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#details">More...</a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1Mutex.html">Mutex</a></td></tr>
@@ -167,6 +167,8 @@ Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Increments a value in a way guaranteed to not lose any atomic increments.  <a href="#a7d13f167b7b993e5c5cabe560ac42f8d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b">AtomicCompareAndSwap32</a> (<a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> *VariableToChange, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;OldValue, const <a class="el" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1">Int32</a> &amp;NewValue)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Atomically Compares And Swaps a 32 bit value.  <a href="#a176b8e4ae356f3bfb7630c4819fa021b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c">ThreadLoading</a> (void *WU)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">An Internal helper function for the <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">AsynchronousFileLoadWorkUnit</a>. This is the function that <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a> instances will use to load data.  <a href="#ad1ce7d1f48645a637bd5ffd8c692279c"></a><br/></td></tr>
 <tr><td colspan="2"><h2><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2b25e77bc7d4377570b358c9bd8c6e04"></a><!-- doxytag: member="Mezzanine::Threading::DBRInvalid" ref="a2b25e77bc7d4377570b358c9bd8c6e04" args="" -->
@@ -180,7 +182,7 @@ static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f79
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>This is where game specific threading algorithms and a minimalistic subset of the std threading library a held. </p>
-<p>this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread, std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are intended to be used in game code. </p>
+<p>This implements all of the multithreaded algorithms from BlackTopp Studios, parts of std::thread, std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are intended to be used in game code. </p>
 </div><hr/><h2>Enumeration Type Documentation</h2>
 <a class="anchor" id="a1a21883adf1ed757a3926c29a5486a8e"></a><!-- doxytag: member="Mezzanine::Threading::RunningState" ref="a1a21883adf1ed757a3926c29a5486a8e" args="" -->
 <div class="memitem">
@@ -247,7 +249,7 @@ static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f79
 <p>Increments a value in a way guaranteed to not lose any atomic increments. </p>
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
-    <tr><td class="paramname">VariableToChange</td><td>A pointer to the 32 bit integer to increment by the amount specified </td></tr>
+    <tr><td class="paramname">VariableToChange</td><td>A pointer to the 32 bit integer to increment by the amount specified. </td></tr>
     <tr><td class="paramname">Value</td><td>The amount to increment the VariableToChange by. </td></tr>
   </table>
   </dd>
@@ -294,7 +296,7 @@ static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f79
 <dl class="params"><dt><b>Parameters:</b></dt><dd>
   <table class="params">
     <tr><td class="paramname">VariableToChange</td><td>A pointer to the value to compare and if it matches OldValue Atomically change. </td></tr>
-    <tr><td class="paramname">OldValue</td><td>what is expected to be at the other end of VariableToChange </td></tr>
+    <tr><td class="paramname">OldValue</td><td>what is expected to be at the other end of VariableToChange. </td></tr>
     <tr><td class="paramname">NewValue</td><td>The value to be written to VariableToChange if at the time the actual CPU instruction is executed OldValue Matches *VariableToChange. </td></tr>
   </table>
   </dd>
@@ -302,6 +304,34 @@ static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f79
 <dl class="return"><dt><b>Returns:</b></dt><dd>This always returns the value that was pointed to by VariableToChange immediately before this call. </dd></dl>
 
 <p>Definition at line <a class="el" href="atomicoperations_8cpp_source.html#l00053">53</a> of file <a class="el" href="atomicoperations_8cpp_source.html">atomicoperations.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad1ce7d1f48645a637bd5ffd8c692279c"></a><!-- doxytag: member="Mezzanine::Threading::ThreadLoading" ref="ad1ce7d1f48645a637bd5ffd8c692279c" args="(void *WU)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c">Mezzanine::Threading::ThreadLoading</a> </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>WU</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>An Internal helper function for the <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">AsynchronousFileLoadWorkUnit</a>. This is the function that <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html" title="This is intended to load files asynchronously and continue doing so whether or not other the FrameSch...">AsynchronousFileLoadWorkUnit</a> instances will use to load data. </p>
+<p>There is a 1 to 1 relationship between this function and its associated <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">AsynchronousFileLoadWorkUnit</a>. This is the function run in another thread to allow loading asynchrously. </p>
+<dl class="params"><dt><b>Parameters:</b></dt><dd>
+  <table class="params">
+    <tr><td class="paramname">WU</td><td>A pointer to the <a class="el" href="classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html">AsynchronousFileLoadWorkUnit</a> that is passed to the asynchronous thread to be used as metadata. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Definition at line <a class="el" href="asynchronousfileloadingworkunit_8cpp_source.html#l00056">56</a> of file <a class="el" href="asynchronousfileloadingworkunit_8cpp_source.html">asynchronousfileloadingworkunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -341,6 +371,6 @@ static const <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f79
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>

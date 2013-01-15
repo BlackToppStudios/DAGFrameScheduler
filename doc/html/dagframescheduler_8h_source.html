@@ -87,7 +87,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <a href="dagframescheduler_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.</span>
-<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2012 BlackTopp Studios Inc.</span>
+<a name="l00002"></a>00002 <span class="comment">// © Copyright 2010 - 2013 BlackTopp Studios Inc.</span>
 <a name="l00003"></a>00003 <span class="comment">/* This file is part of The DAGFrameScheduler.</span>
 <a name="l00004"></a>00004 <span class="comment"></span>
 <a name="l00005"></a>00005 <span class="comment">    The DAGFrameScheduler is free software: you can redistribute it and/or modify</span>
@@ -167,30 +167,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00079"></a>00079 <span class="comment">/// This library tries to make writing multithreaded software easier by changing the kinds of primitives that</span>
 <a name="l00080"></a>00080 <span class="comment">/// multithreaded software is built upon. Several libraries before this have attempted this already.</span>
 <a name="l00081"></a>00081 <span class="comment">/// This library is different becuse it focuses on a specific kind of workload and provides the kinds of</span>
-<a name="l00082"></a>00082 <span class="comment">/// guarantees that workload needs while sacrificing other guarantees that workload does need.</span>
+<a name="l00082"></a>00082 <span class="comment">/// guarantees that the workload needs while sacrificing other guarantees that the workload does not need.</span>
 <a name="l00083"></a>00083 <span class="comment">/// @n @n</span>
 <a name="l00084"></a>00084 <span class="comment">/// This attempts to provide a multithreading solution for workloads that must be run in many iterations in</span>
-<a name="l00085"></a>00085 <span class="comment">/// a given amount of realtime. Games are an ideal example. Every frame a video game, must update physics</span>
+<a name="l00085"></a>00085 <span class="comment">/// a given amount of realtime. Games are an ideal example. Every frame a video game must update physics</span>
 <a name="l00086"></a>00086 <span class="comment">/// simulations, make AI decisions, accept/interpret user input, enforce game rules, perform dynamic I/O</span>
 <a name="l00087"></a>00087 <span class="comment">/// and render it to the screen all while maintaining a smooth FrameRate and do that while minimizing drain</span>
-<a name="l00088"></a>00088 <span class="comment">/// batteries on portable devices (sometimes without even knowing if the device is portable).</span>
+<a name="l00088"></a>00088 <span class="comment">/// to batteries on portable devices (sometimes without even knowing if the device is portable).</span>
 <a name="l00089"></a>00089 <span class="comment">/// @n @n</span>
 <a name="l00090"></a>00090 <span class="comment">/// This library accomplishes those goals by removing the conventional mutlithreading primitives that so many</span>
-<a name="l00091"></a>00091 <span class="comment">/// developers have come to fear, loathe or misunderstand. Mutexes, threads, memory fences, thread_local</span>
+<a name="l00091"></a>00091 <span class="comment">/// developers have come to fear, loathe, or misunderstand. Mutexes, threads, memory fences, thread_local</span>
 <a name="l00092"></a>00092 <span class="comment">/// storage, atomic variables, and all the pitfalls that come with them are replaced by a small set of</span>
 <a name="l00093"></a>00093 <span class="comment">/// of primitives that provide all the required sophistication a typical multi-threaded application</span>
 <a name="l00094"></a>00094 <span class="comment">/// requires. It does this using a new kind of @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;,</span>
-<a name="l00095"></a>00095 <span class="comment">/// @ref Mezzanine::Threading::DoubleBufferedResource &quot;Double Buffering&quot;, A strong concept of</span>
-<a name="l00096"></a>00096 <span class="comment">/// Dependencies and a @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; that uses heuristics</span>
+<a name="l00095"></a>00095 <span class="comment">/// @ref Mezzanine::Threading::DoubleBufferedResource &quot;Double Buffering&quot;, a strong concept of</span>
+<a name="l00096"></a>00096 <span class="comment">/// dependencies and a @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; that uses heuristics</span>
 <a name="l00097"></a>00097 <span class="comment">/// to decide how to run it all without exposing needless complexity to the application developer.</span>
 <a name="l00098"></a>00098 <span class="comment">///</span>
 <a name="l00099"></a>00099 <span class="comment">/// @section overview_sec Overview</span>
 <a name="l00100"></a>00100 <span class="comment">/// The DAGFrameScheduler is a variation on a common multithreaded work queue. It seeks to avoid its pitfalls,</span>
-<a name="l00101"></a>00101 <span class="comment">/// such as non-determinism, thread contention and lackluster scalability, while keeping its advantages</span>
-<a name="l00102"></a>00102 <span class="comment">/// including simplicity, understandiblity and low overhead.</span>
+<a name="l00101"></a>00101 <span class="comment">/// such as non-determinism, thread contention, and lackluster scalability while keeping its advantages</span>
+<a name="l00102"></a>00102 <span class="comment">/// including simplicity, understandiblity, and low overhead.</span>
 <a name="l00103"></a>00103 <span class="comment">/// @n @n</span>
-<a name="l00104"></a>00104 <span class="comment">/// With this algorithm very few if any</span>
-<a name="l00105"></a>00105 <span class="comment">/// calls will need to be made to the underlying system for synchronization in the actual work to be performed.</span>
+<a name="l00104"></a>00104 <span class="comment">/// With this algorithm very few, if any,</span>
+<a name="l00105"></a>00105 <span class="comment">/// calls will need to be made to the underlying system for synchronization of the actual work to be performed.</span>
 <a name="l00106"></a>00106 <span class="comment">/// Instead, this library will provide limited</span>
 <a name="l00107"></a>00107 <span class="comment">/// deterministic ordering of @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; execution through a dependency</span>
 <a name="l00108"></a>00108 <span class="comment">/// feature. Having the knowledge that one @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; will complete after</span>
@@ -202,13 +202,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00114"></a>00114 <span class="comment">/// @n @n</span>
 <a name="l00115"></a>00115 <span class="comment">/// The internal work queue is not changed while a frame is executing. Because it is only read, each</span>
 <a name="l00116"></a>00116 <span class="comment">/// thread can pick its own work. Synchronization still needs to occur, but it has been moved onto each</span>
-<a name="l00117"></a>00117 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; it is manages this with atomic CPU operations. Like this,</span>
-<a name="l00118"></a>00118 <span class="comment">/// contention is less frequent, occurring only when threads simultaneously attempt to start the same</span>
-<a name="l00119"></a>00119 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;, and it consumes far less time because atomic operations</span>
+<a name="l00117"></a>00117 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; amd is managed with atomic CPU operations. Like this,</span>
+<a name="l00118"></a>00118 <span class="comment">/// contention is less frequent occurring only when threads simultaneously attempt to start the same</span>
+<a name="l00119"></a>00119 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;.  This consumes far less time because atomic operations</span>
 <a name="l00120"></a>00120 <span class="comment">/// are CPU instructions instead of Operating System calls. This is managed by the library, so individual</span>
 <a name="l00121"></a>00121 <span class="comment">/// @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s do not need to worry synchronization beyond telling</span>
 <a name="l00122"></a>00122 <span class="comment">/// each @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; about its data dependencies and making sure</span>
-<a name="l00123"></a>00123 <span class="comment">/// all the @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s added to a</span>
+<a name="l00123"></a>00123 <span class="comment">/// all the @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s are added to a</span>
 <a name="l00124"></a>00124 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;.</span>
 <a name="l00125"></a>00125 <span class="comment">///</span>
 <a name="l00126"></a>00126 <span class="comment">/// @section broken_sec Broken Algorithms</span>
@@ -217,19 +217,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00129"></a>00129 <span class="comment">///  or how they aren&#39;t ideal for the kinds of work this algorithm is intended for. This overview is</span>
 <a name="l00130"></a>00130 <span class="comment">/// intentionally simplified. There are variations on many of these algorithms that can fix some of</span>
 <a name="l00131"></a>00131 <span class="comment">/// the problems presented. Despite these workarounds there are fundamental limitations that prevent</span>
-<a name="l00132"></a>00132 <span class="comment">/// these algorithms from being ideal for the video games and similar tasks.</span>
-<a name="l00133"></a>00133 <span class="comment">/// These threading models aren&#39;t necessarily broken, some of these clearly have a place in software</span>
-<a name="l00134"></a>00134 <span class="comment">/// development. Many of these require complex algorithms, require subtle knowledge or simply aren&#39;t</span>
+<a name="l00132"></a>00132 <span class="comment">/// these algorithms from being ideal for video games and similar tasks.</span>
+<a name="l00133"></a>00133 <span class="comment">/// These threading models aren&#39;t necessarily broken, as some of these clearly have a place in software</span>
+<a name="l00134"></a>00134 <span class="comment">/// development. Many of these require complex algorithms, require subtle knowledge, or simply aren&#39;t</span>
 <a name="l00135"></a>00135 <span class="comment">/// performant enough for realtime environments.</span>
 <a name="l00136"></a>00136 <span class="comment">/// @n @n</span>
 <a name="l00137"></a>00137 <span class="comment">/// I will use charts that plot possible resource use of a computer across time. Generally time will</span>
-<a name="l00138"></a>00138 <span class="comment">/// run accross the top a resources, usually CPUs will run down one side. Most of these algorithms have a</span>
-<a name="l00139"></a>00139 <span class="comment">/// concept of tasks or workunits, these are just piece of work with a distinct begining and end. The</span>
+<a name="l00138"></a>00138 <span class="comment">/// run across the top as resources, usually CPUs, will run down one side. Most of these algorithms have a</span>
+<a name="l00139"></a>00139 <span class="comment">/// concept of tasks or workunits, which are just pieces of work with a distinct begining and end. The</span>
 <a name="l00140"></a>00140 <span class="comment">/// width of a piece of work loosely represents the execution time (the names are just for show and not</span>
 <a name="l00141"></a>00141 <span class="comment">/// related to anything real).</span>
 <a name="l00142"></a>00142 <span class="comment">/// @subsection broken_Single Single Threaded</span>
 <a name="l00143"></a>00143 <span class="comment">/// An application using this threading model is not actually multithreaded at all. However, It has been shown</span>
-<a name="l00144"></a>00144 <span class="comment">/// that software can run in a single and get good perfomance. This is benchmark all other threading models</span>
+<a name="l00144"></a>00144 <span class="comment">/// that software can run in a single and get good perfomance. This is the benchmark all other threading models</span>
 <a name="l00145"></a>00145 <span class="comment">/// get compared too.</span>
 <a name="l00146"></a>00146 <span class="comment">/// @n @n</span>
 <a name="l00147"></a>00147 <span class="comment">/// There is a term, Speedup ( http://en.wikipedia.org/wiki/Speedup ), which is simply a</span>
@@ -238,7 +238,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00150"></a>00150 <span class="comment">/// longer the single threaded algorithm takes to the same work. Ideally two threads will be twice as fast</span>
 <a name="l00151"></a>00151 <span class="comment">/// (speedup of 2x), and three thread would be three times as fast (3x speedup), and so; this is called linear</span>
 <a name="l00152"></a>00152 <span class="comment">/// speedup. In practice there is always some overhead in creating and synchronizing threads, so achieving</span>
-<a name="l00153"></a>00153 <span class="comment">/// linear speedup is diffucult.</span>
+<a name="l00153"></a>00153 <span class="comment">/// linear speedup is difficult.</span>
 <a name="l00154"></a>00154 <span class="comment">/// @image html Single.png &quot;Single Threaded Execution - Fig 1.&quot;</span>
 <a name="l00155"></a>00155 <span class="comment">/// @image latex Single.png &quot;Single Threaded Execution - Fig 1.&quot;</span>
 <a name="l00156"></a>00156 <span class="comment">/// @image rtf Single.png &quot;Single Threaded Execution - Fig 1.&quot;</span>
@@ -248,7 +248,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00160"></a>00160 <span class="comment">/// @n @n</span>
 <a name="l00161"></a>00161 <span class="comment">/// @subsection broken_Unplanned Unplanned Thread</span>
 <a name="l00162"></a>00162 <span class="comment">/// Sometimes someone means well and tries to increase the performance of a single threaded program and tries</span>
-<a name="l00163"></a>00163 <span class="comment">/// to add extra threads to increase performance. Sometimes this works, really well, sometimes there is a</span>
+<a name="l00163"></a>00163 <span class="comment">/// to add extra threads to increase performance. Sometimes this works really well and sometimes there is a</span>
 <a name="l00164"></a>00164 <span class="comment">/// marginal increase in performance or a significant increase in bugs. If that someone has a good plan</span>
 <a name="l00165"></a>00165 <span class="comment">/// then they can usually achieve close to the best speedup possible in the given situation. This is not easy</span>
 <a name="l00166"></a>00166 <span class="comment">/// and many cannot do this or do not want to invest the time it would take. If not carefully planned</span>
@@ -262,7 +262,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00174"></a>00174 <span class="comment">/// unplanned software performs at least slightly better than single threaded versions of the software, but</span>
 <a name="l00175"></a>00175 <span class="comment">/// frequently does not utilize all the available resources. Generally performance does not scale well as</span>
 <a name="l00176"></a>00176 <span class="comment">/// unplanned software is run on more processors. Frequently, there is contention for a specific resource and</span>
-<a name="l00177"></a>00177 <span class="comment">/// a thread will wait for that resource longer than is actually need.</span>
+<a name="l00177"></a>00177 <span class="comment">/// a thread will wait for that resource longer than is actually needed.</span>
 <a name="l00178"></a>00178 <span class="comment">/// @image html Unplanned.png &quot;Unplanned Threaded Execution - Fig 2.&quot;</span>
 <a name="l00179"></a>00179 <span class="comment">/// @image latex Unplanned.png &quot;Unplanned Threaded Execution - Fig 2.&quot;</span>
 <a name="l00180"></a>00180 <span class="comment">/// @image rtf Unplanned.png &quot;Unplanned Threaded Execution - Fig 2.&quot;</span>
@@ -274,16 +274,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00186"></a>00186 <span class="comment">/// @n @n</span>
 <a name="l00187"></a>00187 <span class="comment">/// @subsubsection broken_TaskPerThread One Task Per Thread</span>
 <a name="l00188"></a>00188 <span class="comment">/// A common example of poor planning is the creation of one thread for each task in a game. Despite</span>
-<a name="l00189"></a>00189 <span class="comment">/// being conceptually simple, performance of systems designed this was is poor due to synchronization</span>
+<a name="l00189"></a>00189 <span class="comment">/// being conceptually simple, performance of systems designed this way is poor due to synchronization</span>
 <a name="l00190"></a>00190 <span class="comment">/// and complexities that synchronization requires.</span>
 <a name="l00191"></a>00191 <span class="comment">/// @subsection broken_ConventionWorkQueue Convention Work Queue/Thread Pools</span>
-<a name="l00192"></a>00192 <span class="comment">/// Conventional work queues and thread pools are well known and robust way to increase the throughput of</span>
+<a name="l00192"></a>00192 <span class="comment">/// Conventional work queues and thread pools are a well known and robust way to increase the throughput of</span>
 <a name="l00193"></a>00193 <span class="comment">/// of an application. These are ideal solutions for many systems, but not games.</span>
 <a name="l00194"></a>00194 <span class="comment">/// @n @n</span>
 <a name="l00195"></a>00195 <span class="comment">/// In conventional workqueues all of the work is broken into a number of small thread-safe</span>
 <a name="l00196"></a>00196 <span class="comment">/// units. As these units are created they are stuffed into a queue and threads pull out units of work</span>
 <a name="l00197"></a>00197 <span class="comment">/// as it completes other units it has started. This simple plan has many advantages. If there is work</span>
-<a name="l00198"></a>00198 <span class="comment">/// to do, then at least one thread will be doing some, and usually more threads will be working; this is</span>
+<a name="l00198"></a>00198 <span class="comment">/// to do then at least one thread will be doing some, and usually more threads will be working. This is</span>
 <a name="l00199"></a>00199 <span class="comment">/// good for games and the DAGFrameScheduler mimics it. If the kind of work is unknown when the software is</span>
 <a name="l00200"></a>00200 <span class="comment">/// written heuristics and runtime decisions can create the kind of units of work that are required. This</span>
 <a name="l00201"></a>00201 <span class="comment">/// is not the case with games and the others kinds of software this library caters to, so changes can</span>
@@ -299,13 +299,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00211"></a>00211 <span class="comment">/// to prevent other threads from modifying the queue as well. This impacts scalability, but can be</span>
 <a name="l00212"></a>00212 <span class="comment">/// circumvented to a point. Common ways to work around this try to split up the work queue</span>
 <a name="l00213"></a>00213 <span class="comment">/// pre-emptively, or feed the threads work units from varying points in the queue. The</span>
-<a name="l00214"></a>00214 <span class="comment">/// DAGFrameScheduler moves the synchronizantion onto each work to greatly reduce the contention as</span>
-<a name="l00215"></a>00215 <span class="comment">/// more workunits are added.</span>
+<a name="l00214"></a>00214 <span class="comment">/// DAGFrameScheduler moves the synchronizantion onto each work unit to greatly reduce the contention as</span>
+<a name="l00215"></a>00215 <span class="comment">/// more work units are added.</span>
 <a name="l00216"></a>00216 <span class="comment">/// @n @n</span>
 <a name="l00217"></a>00217 <span class="comment">/// The other, and less obvious, point of contention that has not be circumvented in a</span>
 <a name="l00218"></a>00218 <span class="comment">/// satisfactory way for games is the large of amount of synchronization required between units of</span>
 <a name="l00219"></a>00219 <span class="comment">/// work that must communicate. For example, there may be hundreds of thousands of pieces of data</span>
-<a name="l00220"></a>00220 <span class="comment">/// that must be passed from a system into a 3d rendering system. Apply mutexes to each would slow</span>
+<a name="l00220"></a>00220 <span class="comment">/// that must be passed from a system into a 3d rendering system. Applying mutexes to each would slow</span>
 <a name="l00221"></a>00221 <span class="comment">/// execution an impossibly long time (if it didn&#39;t introduce deadlock), while more coarse grained</span>
 <a name="l00222"></a>00222 <span class="comment">/// lock would prevent large portions of physics and rendering from occurring at the time causing</span>
 <a name="l00223"></a>00223 <span class="comment">/// one or both of them to wait/block. A simple solution would be to run physics before graphics,</span>
@@ -318,16 +318,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00230"></a>00230 <span class="comment">/// always be run before the graphics workunit in a given frame. The drawback of this is that it</span>
 <a name="l00231"></a>00231 <span class="comment">/// is more difficult to make runtime creation of workunits (It is possible but it cannot be done</span>
 <a name="l00232"></a>00232 <span class="comment">/// during any frame execution), but completely removes the locking</span>
-<a name="l00233"></a>00233 <span class="comment">/// mechanisms a conventional work queues. The DAGFrameScheduler has traded one useless feature</span>
+<a name="l00233"></a>00233 <span class="comment">/// mechanisms of conventional work queues. The DAGFrameScheduler has traded one useless feature</span>
 <a name="l00234"></a>00234 <span class="comment">/// for a useful guarantee.</span>
 <a name="l00235"></a>00235 <span class="comment">///</span>
 <a name="l00236"></a>00236 <span class="comment">/// @section algorithm_sec The Algorithm</span>
-<a name="l00237"></a>00237 <span class="comment">/// When first creating the DAGFrameScheduler it was called it &quot;Dagma-CP&quot;. When describing it this</span>
+<a name="l00237"></a>00237 <span class="comment">/// When first creating the DAGFrameScheduler it was called it &quot;Dagma-CP&quot;. When describing it the</span>
 <a name="l00238"></a>00238 <span class="comment">/// phrase &quot;Directed Acyclic Graph Minimal Assembly of Critical Path&quot; was used. If you are lucky</span>
 <a name="l00239"></a>00239 <span class="comment">/// enough to knows what all those terms mean when assembled this way they are very descriptive. For</span>
 <a name="l00240"></a>00240 <span class="comment">/// rest of us the algorithm tries to determine what is the shortest way to execute the work in a</span>
-<a name="l00241"></a>00241 <span class="comment">/// minimalistic way using a mathematical graph. The graph is based on what work must done each</span>
-<a name="l00242"></a>00242 <span class="comment">/// before what other work each frame and executing it. All the work in this graph will have a</span>
+<a name="l00241"></a>00241 <span class="comment">/// minimalistic way using a mathematical graph. The graph is based on what work must done</span>
+<a name="l00242"></a>00242 <span class="comment">/// before other work each frame and executing it. All the work in this graph will have a</span>
 <a name="l00243"></a>00243 <span class="comment">/// location somewhere between the beginning and end, and will never circle around back so it can</span>
 <a name="l00244"></a>00244 <span class="comment">/// be called acyclic.</span>
 <a name="l00245"></a>00245 <span class="comment">/// @n @n</span>
@@ -336,7 +336,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00248"></a>00248 <span class="comment">/// can be created that inherit from these to allow them to be in the scheduler where they will work</span>
 <a name="l00249"></a>00249 <span class="comment">/// best.</span>
 <a name="l00250"></a>00250 <span class="comment">///     @li @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot; - The interface for a common workunit.</span>
-<a name="l00251"></a>00251 <span class="comment">/// These work units will be executed once be frame after all their dependencies have completed.</span>
+<a name="l00251"></a>00251 <span class="comment">/// These work units will be executed once each frame after all their dependencies have completed.</span>
 <a name="l00252"></a>00252 <span class="comment">/// These are also expected to complete execution in a relatively brief period of time compared to</span>
 <a name="l00253"></a>00253 <span class="comment">/// the length of a frame, and create no threads while doing so.</span>
 <a name="l00254"></a>00254 <span class="comment">///     @li @ref Mezzanine::Threading::DefaultWorkUnit &quot;DefaultWorkUnit&quot; - A simple implementation</span>
@@ -349,7 +349,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00261"></a>00261 <span class="comment">/// hardware coprocessors are expected to be utilized to their fullest to help accomplish this.</span>
 <a name="l00262"></a>00262 <span class="comment">///     @li @ref Mezzanine::Threading::MonopolyWorkUnit &quot;MonopolyWorkUnit&quot; - These are expected</span>
 <a name="l00263"></a>00263 <span class="comment">/// to monopolize cpu resources at the beginning of each frame. This is ideal when working with</span>
-<a name="l00264"></a>00264 <span class="comment">/// other systems, forexample a phsyics system like Bullet3D. If the calls to a physics system are</span>
+<a name="l00264"></a>00264 <span class="comment">/// other systems. For example a phsyics system like Bullet3D. If the calls to a physics system are</span>
 <a name="l00265"></a>00265 <span class="comment">/// wrapped in a @ref Mezzanine::Threading::MonopolyWorkUnit &quot;MonopolyWorkUnit&quot; then it will be</span>
 <a name="l00266"></a>00266 <span class="comment">/// given full opportunity to run before other work units.</span>
 <a name="l00267"></a>00267 <span class="comment">///</span>
@@ -368,9 +368,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00280"></a>00280 <span class="comment">/// @n @n</span>
 <a name="l00281"></a>00281 <span class="comment">/// Once all the dependencies are in place for any synchronization that has been removed, a</span>
 <a name="l00282"></a>00282 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot; can be created and started. At</span>
-<a name="l00283"></a>00283 <span class="comment">/// runtime this create a reverse dependency graph, a</span>
+<a name="l00283"></a>00283 <span class="comment">/// runtime this creates a reverse dependency graph, a</span>
 <a name="l00284"></a>00284 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::DependentGraph &quot;DependentGraph&quot;. This is used to determine</span>
-<a name="l00285"></a>00285 <span class="comment">/// which work units are the most depended on. For each work unit s simple count of how many work</span>
+<a name="l00285"></a>00285 <span class="comment">/// which work units are the most depended upon. For each work unit a simple count of how many work</span>
 <a name="l00286"></a>00286 <span class="comment">/// units cannot start until has been completed is generated. The higher this number the earlier</span>
 <a name="l00287"></a>00287 <span class="comment">/// the work unit will be executed in a frame. Additionally workunits that take longer to execute</span>
 <a name="l00288"></a>00288 <span class="comment">/// will be prioritized ahead of work units that are faster.</span>
@@ -381,8 +381,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00293"></a>00293 <span class="comment">/// @image rtf DAGSorting.png &quot;DAG WorkSorting - Fig 4.&quot;</span>
 <a name="l00294"></a>00294 <span class="comment">/// @n @n</span>
 <a name="l00295"></a>00295 <span class="comment">/// There are several advantages this sorting provides that are not immediately obvious. It separates</span>
-<a name="l00296"></a>00296 <span class="comment">/// the scheduling from the execution allowing, the relatively costly sorting process to be executed</span>
-<a name="l00297"></a>00297 <span class="comment">/// only when work units are added, removed or changed. Prioritizing Workunits that</span>
+<a name="l00296"></a>00296 <span class="comment">/// the scheduling from the execution allowing the relatively costly sorting process to be executed</span>
+<a name="l00297"></a>00297 <span class="comment">/// only when work units are added, removed, or changed. Prioritizing Workunits that</span>
 <a name="l00298"></a>00298 <span class="comment">/// take longer to run should help insure the shortest critical path is found by minimizing how often</span>
 <a name="l00299"></a>00299 <span class="comment">/// dependencies cause threads to wait for more work.</span>
 <a name="l00300"></a>00300 <span class="comment">/// @n @n</span>
@@ -422,7 +422,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00334"></a>00334 <span class="comment">/// @n @n</span>
 <a name="l00335"></a>00335 <span class="comment">/// Even much of the @ref Mezzanine::Threading::FrameScheduler &quot;FrameScheduler&quot;&#39;s work is performed</span>
 <a name="l00336"></a>00336 <span class="comment">/// in @ref Mezzanine::Threading::iWorkUnit &quot;iWorkUnit&quot;s, such as log aggregation and</span>
-<a name="l00337"></a>00337 <span class="comment">/// @ref Mezzanine::Threading::WorkSorter &quot;Sorting the work listing&quot;</span>
+<a name="l00337"></a>00337 <span class="comment">/// @ref Mezzanine::Threading::WorkSorter &quot;Sorting the work listing&quot;.</span>
 <a name="l00338"></a>00338 <span class="comment">/// @ref Mezzanine::Threading::iAsynchronousWorkUnit &quot;iAsynchronousWorkUnit&quot;s continue to run in a thread</span>
 <a name="l00339"></a>00339 <span class="comment">/// beyond normal scheduling and are intended to consume fewer CPU resources and more IO resources.</span>
 <a name="l00340"></a>00340 <span class="comment">/// For example loading a large file or listening for network traffic. These will be normal</span>
@@ -463,7 +463,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00375"></a>00375 <span class="comment">/// The function</span>
 <a name="l00376"></a>00376 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::CreateThreads() &quot;FrameScheduler::CreateThreads()&quot;</span>
 <a name="l00377"></a>00377 <span class="comment">/// Creates enough threads to get to the amount set by</span>
-<a name="l00378"></a>00378 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SetThreadCount(Whole) &quot;FrameScheduler::SetThreadCount(Whole)&quot;</span>
+<a name="l00378"></a>00378 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SetThreadCount() &quot;FrameScheduler::SetThreadCount()&quot;</span>
 <a name="l00379"></a>00379 <span class="comment">/// . Depending on how this library is configured this could mean either creating that many threads each</span>
 <a name="l00380"></a>00380 <span class="comment">/// frame or creating additional threads only if this changed.</span>
 <a name="l00381"></a>00381 <span class="comment">/// @n @n</span>
@@ -479,25 +479,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00391"></a>00391 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnitAffinity(iWorkUnit*) &quot;FrameScheduler::AddWorkUnitAffinity(iWorkUnit*)&quot;.</span>
 <a name="l00392"></a>00392 <span class="comment">/// @n @n</span>
 <a name="l00393"></a>00393 <span class="comment">/// If you have single thread work that is not part of a work unit and will not interfere with and work</span>
-<a name="l00394"></a>00394 <span class="comment">/// units execution then you can run it before calling this. Be care when doing this, if there are any</span>
+<a name="l00394"></a>00394 <span class="comment">/// units execution then you can run it before calling this. Be careful when doing this, if there are any</span>
 <a name="l00395"></a>00395 <span class="comment">/// work units that depend on work units with affinity then they will not be able to start until some</span>
 <a name="l00396"></a>00396 <span class="comment">/// point after this is called.</span>
 <a name="l00397"></a>00397 <span class="comment">/// @n @n</span>
-<a name="l00398"></a>00398 <span class="comment">/// Once every work unit has started this call can return. This does not mean every wor kunit is complete,</span>
+<a name="l00398"></a>00398 <span class="comment">/// Once every work unit has started this call can return. This does not mean every work unit is complete,</span>
 <a name="l00399"></a>00399 <span class="comment">/// though every work unit with affinity will be complete. There could be work in other threads still</span>
 <a name="l00400"></a>00400 <span class="comment">/// executing. This is another good point to run work that is single threaded and won&#39;t interfere with</span>
 <a name="l00401"></a>00401 <span class="comment">/// workunits that could be executing.</span>
 <a name="l00402"></a>00402 <span class="comment">/// @subsection integrate4 Step 4 - Clean Up Threads</span>
-<a name="l00403"></a>00403 <span class="comment">/// If you must execute something that could interfere (write to anything they coudl read or write)</span>
+<a name="l00403"></a>00403 <span class="comment">/// If you must execute something that could interfere (write to anything they could read or write)</span>
 <a name="l00404"></a>00404 <span class="comment">/// with work units, you should do that after</span>
 <a name="l00405"></a>00405 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::JoinAllThreads() &quot;FrameScheduler::JoinAllThreads()&quot; is</span>
-<a name="l00406"></a>00406 <span class="comment">/// called. This joins, destroys or otherwise cleans up the threads the scheduler has used, depending</span>
+<a name="l00406"></a>00406 <span class="comment">/// called. This joins, destroys, or otherwise cleans up the threads the scheduler has used depending</span>
 <a name="l00407"></a>00407 <span class="comment">/// on how this library is configured.</span>
 <a name="l00408"></a>00408 <span class="comment">/// @subsection integrate5 Step 5 - Prepare for the next frame.</span>
 <a name="l00409"></a>00409 <span class="comment">/// All the work units are marked as complete and need to be reset with</span>
 <a name="l00410"></a>00410 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::ResetAllWorkUnits() &quot;FrameScheduler::ResetAllWorkUnits()&quot;</span>
-<a name="l00411"></a>00411 <span class="comment">/// to be used by the next frame. This simply iterates over each work unit resetting their status. a</span>
-<a name="l00412"></a>00412 <span class="comment">/// Potential future optimization could run this as a multithreaded monopoly instead.</span>
+<a name="l00411"></a>00411 <span class="comment">/// to be used by the next frame. This simply iterates over each work unit resetting their status. A</span>
+<a name="l00412"></a>00412 <span class="comment">/// potential future optimization could run this as a multithreaded monopoly instead.</span>
 <a name="l00413"></a>00413 <span class="comment">/// @subsection integrate6 Step 6 - Wait for next frame.</span>
 <a name="l00414"></a>00414 <span class="comment">/// The final step is to wait until the next frame should begin. To do this tracking the begining of</span>
 <a name="l00415"></a>00415 <span class="comment">/// of each frame is required. The value in</span>
@@ -506,13 +506,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00418"></a>00418 <span class="comment">/// and reset every to the current time when</span>
 <a name="l00419"></a>00419 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::WaitUntilNextFrame() &quot;FrameScheduler::WaitUntilNextFrame()&quot;</span>
 <a name="l00420"></a>00420 <span class="comment">/// is called. The value set by</span>
-<a name="l00421"></a>00421 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SetFrameRate(Whole) &quot;FrameScheduler::SetFrameRate(Whole)&quot;</span>
+<a name="l00421"></a>00421 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::SetFrameRate() &quot;FrameScheduler::SetFrameRate()&quot;</span>
 <a name="l00422"></a>00422 <span class="comment">/// is used to calculate the desired length of a frame in microseconds. If the begining of the next</span>
 <a name="l00423"></a>00423 <span class="comment">/// frame has not been reached, then this function will sleep the scheduler until the next frame should</span>
 <a name="l00424"></a>00424 <span class="comment">/// begin. To compensate for systems with an imprecise sleep mechanism (or timing mechanism) an internal</span>
 <a name="l00425"></a>00425 <span class="comment">/// @ref Mezzanine::Threading::FrameScheduler::TimingCostAllowance &quot;FrameScheduler::TimingCostAllowance&quot;</span>
 <a name="l00426"></a>00426 <span class="comment">/// is tracked that averages the effects of imprecision across multiple frames to prevent roundings</span>
-<a name="l00427"></a>00427 <span class="comment">/// errors form consistently lengthening of shortening frames.</span>
+<a name="l00427"></a>00427 <span class="comment">/// errors from consistently lengthening of shortening frames.</span>
 <a name="l00428"></a>00428 <span class="comment"></span>
 <a name="l00429"></a>00429 
 <a name="l00430"></a>00430 <span class="comment"></span>
@@ -522,14 +522,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00434"></a>00434 <span class="comment"></span><span class="keyword">namespace </span>Mezzanine
 <a name="l00435"></a>00435 {<span class="comment"></span>
 <a name="l00436"></a>00436 <span class="comment">    /// @brief This is where game specific threading algorithms and a minimalistic subset of the std threading library a held</span>
-<a name="l00437"></a>00437 <span class="comment">    /// @details this implements All of the Multithreaded Algorithms from BlackTopp Studios, parts of std::thread,</span>
+<a name="l00437"></a>00437 <span class="comment">    /// @details This implements all of the multithreaded algorithms from BlackTopp Studios, parts of std::thread,</span>
 <a name="l00438"></a>00438 <span class="comment">    /// std::this_thread, std:: mutex, and maybe a few others. In general only the specialized gaming algorithms store here are</span>
 <a name="l00439"></a>00439 <span class="comment">    /// intended to be used in game code.</span>
 <a name="l00440"></a>00440 <span class="comment"></span>    <span class="keyword">namespace </span>Threading
-<a name="l00441"></a>00441         {}
-<a name="l00442"></a>00442 }
-<a name="l00443"></a>00443 
-<a name="l00444"></a>00444 <span class="preprocessor">#endif</span>
+<a name="l00441"></a>00441     {
+<a name="l00442"></a>00442     
+<a name="l00443"></a>00443     }<span class="comment">//Threading</span>
+<a name="l00444"></a>00444 }<span class="comment">//Mezzanine</span>
+<a name="l00445"></a>00445 
+<a name="l00446"></a>00446 <span class="preprocessor">#endif</span>
 </pre></div></div><!-- contents -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
@@ -546,6 +548,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jan 13 2013 02:10:50 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
+Generated on Mon Jan 14 2013 21:08:53 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1</small></address>
 </body>
 </html>
