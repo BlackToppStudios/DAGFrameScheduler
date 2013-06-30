@@ -83,7 +83,7 @@ if (Mezz_MinimizeThreadsEachFrame)
 endif (Mezz_MinimizeThreadsEachFrame)
 
 # Allow the developer to disable mandatory compiler wanrings, in case it breaks stuff
-option(Mezz_AllWarnings "Used atomics to minimize thread creation" ON)
+option(Mezz_AllWarnings "Use atomics to minimize thread creation" ON)
 if (Mezz_AllWarnings)
     if(MSVC)
     # Force to always compile with W4
@@ -99,7 +99,7 @@ if (Mezz_AllWarnings)
 endif (Mezz_AllWarnings)
 
 #When looking for work use atomics to advance iterators past complete work units.
-option(Mezz_DecacheWorkUnits "Used atomics to minimize how many WorkUnits are likely to be in CPU cache." ON)
+option(Mezz_DecacheWorkUnits "Use atomics to minimize how many WorkUnits are likely to be in CPU cache]." ON)
 set(DecacheWork NODECACHEWORKUNIT)
 if (Mezz_DecacheWorkUnits)
     set(DecacheWork DECACHEWORKUNIT)
@@ -116,6 +116,7 @@ endif (Mezz_DecacheWorkUnits)
 # All the headers that the library uses, so they can be pulled out for SDK creation or whatever.
 set( ${PROJECT_NAME}_lib_headers
         "${RootProjectSourceDir}src/dagframescheduler.h"    # The header to include in projects using this
+        "${RootProjectSourceDir}src/crossplatformincludes.h"
 
         "${RootProjectSourceDir}src/datatypes.h"            # If integrating tightly into another project re-implementing this will allow for easier binary compatibility.
         "${RootProjectSourceDir}src/compilerthreadcompat.h" # For tight integration re-working this might be useful too.

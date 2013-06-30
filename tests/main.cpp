@@ -218,8 +218,63 @@ void Sizes()
          << "std::vector<WorkUnitKey>::reverse_iterator: " << sizeof(std::vector<WorkUnitKey>::reverse_iterator) << endl
          << "ostream*: " << sizeof(ostream*) << endl
          << "MaxInt: " << sizeof(MaxInt) << endl
-         << "Whole: " << sizeof(Whole) << endl;
+         << "Whole: " << sizeof(Whole) << endl << endl;
 }
+
+/// @brief A test to try to infer cache of CPU
+void InferCacheSize()
+{
+    Whole TestCount = 8000;
+    MaxInt VecCreateTime = 0;
+    MaxInt VecWorstCaseCreateTime = 0;
+    MaxInt VecLookTime = 0;
+    MaxInt MapCreateTime = 0;
+    MaxInt MapLookTime = 0;
+    Whole DefeatCompilerOptimizer=0;
+
+    MaxInt StartTime = GetTimeStamp();
+    vector<Whole> RandomVec;
+    for(Whole Counter=0; Counter<TestCount; Counter++)
+        { RandomVec.push_back(Dice2D3()); }
+    VecCreateTime = GetTimeStamp()-StartTime;
+    DefeatCompilerOptimizer=RandomVec[rand()%TestCount];
+    cout << "Output to defeat compiler optimization: " << DefeatCompilerOptimizer << endl;
+    cout << "Vector creation time: " << VecCreateTime << endl;
+    RandomVec.clear();
+
+    StartTime = GetTimeStamp();
+    for(Whole Counter=0; Counter<TestCount; Counter++)
+        { RandomVec.insert(RandomVec.begin(), Dice2D3()); }
+    VecWorstCaseCreateTime = GetTimeStamp()-StartTime;
+    cout << "Vector worst create time: " << VecWorstCaseCreateTime << endl;
+
+    StartTime = GetTimeStamp();
+    for(Whole Counter=0; Counter<TestCount; Counter++)
+        { DefeatCompilerOptimizer=RandomVec[rand()%TestCount]; }
+    VecLookTime = GetTimeStamp()-StartTime;
+    cout << "Vector rand lookup time: " << VecLookTime << endl;
+    cout << "Output to defeat compiler optimization: " << DefeatCompilerOptimizer << endl;
+
+    StartTime = GetTimeStamp();
+    map<Whole,Whole> RandomMap;
+    for(Whole Counter=0; Counter<TestCount; Counter++)
+        { RandomMap[Counter] = Dice2D3(); }
+    MapCreateTime = GetTimeStamp()-StartTime;
+    DefeatCompilerOptimizer=RandomVec[rand()%TestCount];
+    cout << "Map creation time: " << MapCreateTime << endl;
+    cout << "Output to defeat compiler optimization: " << DefeatCompilerOptimizer << endl;
+
+    StartTime = GetTimeStamp();
+    for(Whole Counter=0; Counter<TestCount; Counter++)
+        { DefeatCompilerOptimizer=RandomMap[rand()%TestCount]; }
+    MapLookTime = GetTimeStamp()-StartTime;
+    cout << "Map rand lookup time: " << MapLookTime << endl;
+    cout << "Output to defeat compiler optimization: " << DefeatCompilerOptimizer << endl;
+
+    cout << "Total Vector time: " << VecCreateTime+VecWorstCaseCreateTime+VecLookTime << " - Total Map Time " << MapCreateTime+MapLookTime << endl;
+    cout << endl << endl;
+}
+
 
 /// @brief The 'untestable' Test.
 /// @note This test never fails but can be verified manually if it seems something is wrong.
@@ -2004,6 +2059,7 @@ int main (int argc, char** argv)
     // The mapping of all the tests to their name
     TestGroup AllTheTests;
     AllTheTests["sizes"]=Sizes;
+    AllTheTests["infercachesize"]=InferCacheSize;
     AllTheTests["untestable"]=Untestable;
     AllTheTests["basicthreading"]=BasicThreading;
     AllTheTests["basicmutex"]=BasicMutex;
