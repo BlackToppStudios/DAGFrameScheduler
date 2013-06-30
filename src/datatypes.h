@@ -43,6 +43,8 @@
 
 /// @file
 /// @brief This file declares a few typedefs to allow flexibility, in case a change is required/desired.
+/// @details When integrating into the Mezzanine this file is dropped and the datatypes.h in the
+/// Mezzanine is used instead.
 
 #include "compilerthreadcompat.h"
 

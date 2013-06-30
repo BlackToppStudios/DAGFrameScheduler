@@ -116,6 +116,7 @@ endif (Mezz_DecacheWorkUnits)
 # All the headers that the library uses, so they can be pulled out for SDK creation or whatever.
 set( ${PROJECT_NAME}_lib_headers
         "${RootProjectSourceDir}src/dagframescheduler.h"    # The header to include in projects using this
+
         "${RootProjectSourceDir}src/datatypes.h"            # If integrating tightly into another project re-implementing this will allow for easier binary compatibility.
         "${RootProjectSourceDir}src/compilerthreadcompat.h" # For tight integration re-working this might be useful too.
 
