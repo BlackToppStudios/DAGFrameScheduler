@@ -119,7 +119,7 @@ set( ${PROJECT_NAME}_lib_headers
         "${RootProjectSourceDir}src/crossplatformincludes.h"
 
         "${RootProjectSourceDir}src/datatypes.h"            # If integrating tightly into another project re-implementing this will allow for easier binary compatibility.
-        "${RootProjectSourceDir}src/compilerthreadcompat.h" # For tight integration re-working this might be useful too.
+        "${RootProjectSourceDir}src/crossplatformexport.h"
 
         "${RootProjectSourceDir}src/asynchronousfileloadingworkunit.h"
         "${RootProjectSourceDir}src/asynchronousworkunit.h"
