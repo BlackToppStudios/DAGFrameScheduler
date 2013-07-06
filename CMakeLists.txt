@@ -200,6 +200,7 @@ set( ${PROJECT_NAME}_exe_headers
         "${RootProjectSourceDir}testframework/pugiconfig.h"
         "${RootProjectSourceDir}testframework/pugixml.h"
         "${RootProjectBinaryDir}/autodetect.h"
+        "${${PROJECT_NAME}_test}"
 
         "${RootProjectSourceDir}testframework/consolelogic.h"
         "${RootProjectSourceDir}testframework/consolestringmanipulation.h"

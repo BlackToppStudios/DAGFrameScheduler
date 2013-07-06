@@ -21,9 +21,14 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### July 6, 2013 ###
+* Fixed an issue that could in rare situations segfault or spawn an infinite loop because of mismatched iterators.
+* Replaced testing framework with a similar design to the Mezzanine Tests to make integration more seamless.
+* Adjusted the includes for compiler detection worked to match the Mezzanine to make integration more seamless.
+
 ### Jan 14, 2013 ###
 * Mako made some const correctness changes.
-* Fixed some documentation typos
+* Fixed some documentation typos.
 
 ### Jan 13, 2013 ###
 * Documentation Updates, finished basic integration docs.
