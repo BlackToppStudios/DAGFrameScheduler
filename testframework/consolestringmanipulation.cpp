@@ -37,39 +37,57 @@
    Joseph Toppi - toppij@gmail.com
    John Blackwood - makoenergy02@gmail.com
 */
-#ifndef _testtools_h
-#define _testtools_h
+#ifndef _consolestringmanipulation_cpp
+#define _consolestringmanipulation_cpp
 
 /// @file
-/// @brief Some random function to ease the lives of test developers.
-
-#include "mezzanine.h"
+/// @brief The implementation of the string manipulation functions the unit tests use
 
 #include "testenumerations.h"
+
+#include <locale>
+
+using namespace Mezzanine;
 
 namespace Mezzanine
 {
     namespace Testing
     {
+        String rtrim(const String &t)
+        {
+            String str = t;
+            size_t found;
+            found = str.find_last_not_of(" \n\r\t");
+            if (found != String::npos)
+                { str.erase(found+1); }
+            else
+                { str.clear(); }            // str is all whitespace
 
-        /// @brief Asked the user a question on the std output and get a TestResult as an answer
-        /// @param Question The question to ask the user.
-        /// @details The following strings provide the following results.
-        ///     -  "True", "Yes" as Success
-        ///     -  "False", "No" as Failed
-        ///     -  "Cancel" as "Canceled"
-        ///     -  "Unsure", "Inconclusive" as Inconclusive
-        /// @return Depends on users input
-        TestResult GetTestAnswerFromStdin(Mezzanine::String Question);
+            return str;
+        }
 
-        /// @brief Create and initialize a instance of the Entrosol, the engine
-        /// @details This creates and Entresol with one window(named "Window1"),
-        /// one camera (named "Camera1", and a postmainloops event callback that
-        /// ends execution after 120 frames. After this is called InitEngine
-        /// must be called to start the engine and have the window displayed.
-        /// @param CustomManagers
-        /// @return A pointer to intialized entrosol
-        CountedPtr<Entresol> SimpleEngineStartup(std::vector<ManagerBase*> CustomManagers = std::vector<ManagerBase*>());
+        // Used for padding spaces, after a piece of leader text, such that it always ends at teh expected colum
+        String MakePadding(String Leader, unsigned int Column)
+        {
+            String Spaces(" ");
+            for (unsigned int c=Leader.length(); c<Column;++c)
+                { Spaces+=" "; }
+            return Spaces;
+        }
+
+        char* AllLower(char* StringToConvert)
+        {
+            std::locale loc;
+            for(int c=0; StringToConvert[c]!='\0'; ++c)
+            {
+                StringToConvert[c]=tolower(StringToConvert[c],loc);
+            }
+            return StringToConvert;
+        }
+
+        Mezzanine::String BoolToString(bool i)
+            { return i?"True":"False" ; }
+
 
     }// Testing
 }// Mezzanine

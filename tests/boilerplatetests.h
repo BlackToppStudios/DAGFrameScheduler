@@ -37,40 +37,54 @@
    Joseph Toppi - toppij@gmail.com
    John Blackwood - makoenergy02@gmail.com
 */
-#ifndef _consolestringmanipulation_h
-#define _consolestringmanipulation_h
+#ifndef _boilerplatetests_h
+#define _boilerplatetests_h
+
+#include "main.h"
 
 /// @file
-/// @brief Some string manipulation functions geared towards console output for use in the Unit Tests.
+/// @brief this file should be used as template for building future Unit Tests
 
-#include "mezzanine.h"
+using namespace Mezzanine;
+using namespace Mezzanine::Testing;
 
-namespace Mezzanine
+/// @brief A small series of sample tests, which can be used as a boilerplate so creating new test groups
+class boilerplatetests : public UnitTestGroup
 {
-    namespace Testing
-    {
-        /// @brief Take the whitespace off the end of a String
-        /// @param t The Text to clean up.
-        /// @param If " asdf " is passed " asdf" is returned. Also removes carriage returns, newlines and tabs. Does not use the locale.
-        Mezzanine::String rtrim(const Mezzanine::String &t);
+    public:
+        /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
+        /// @return Returns a String containing "boilerplate"
+        virtual String Name()
+            { return String("boilerplate"); }
 
-        /// @brief Creates some blank spaces, useful for controlling the vertical location of console text.
-        /// @param Leader The string on the beginning of the line.
-        /// @param Column The desired column that the padding should lead toward
-        /// @return If "asdf" and 6 are passed this will return "  " (Two spaces).
-        Mezzanine::String MakePadding(Mezzanine::String Leader, unsigned int Column);
+        /// @copydoc Mezzanine::Testing::UnitTestGroup::RunTests
+        /// @detail provides on Sample interactive and one sample automatic test.
+        virtual void RunTests(bool RunAutomaticTests, bool RunInteractiveTests)
+        {
+            if (RunAutomaticTests)
+            {
+                TestResult temp;
 
-        /// @brief Makes a c style stron all lowercase with respect to the current locale
-        /// @param StringToConvert This string is actually changed.
-        /// @return for convience purposes the string is also returned.
-        char* AllLower(char* StringToConvert);
+                if(1)
+                    { temp=Success; }
+                else
+                    { temp=Failed; }
+                AddTestResult("BoilerPlate::Automatic", temp);
 
-        /// @brief Get a String Corresponding to a passed bool
-        /// @param i A bool
-        /// @return "True" if true is passed, "False" if false is passed.
-        Mezzanine::String BoolToString(bool i);
+            }else{
+                AddTestResult("BoilerPlate::Automatic", Skipped);
+            }
 
-    }// Testing
-}// Mezzanine
+            if (RunInteractiveTests)
+            {
+                TestResult temp;
+                temp = GetTestAnswerFromStdin( "Is this a question? ");
+                AddTestResult("BoilerPlate::Interactive", temp);
+            }else{
+                AddTestResult("BoilerPlate::Interactive", Skipped);
+            }
+        }
+};
 
 #endif
+

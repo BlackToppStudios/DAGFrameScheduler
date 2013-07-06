@@ -49,7 +49,9 @@ Message(STATUS "Using Source From: ${ProjectSourceDir}")
 set(RootProjectBinaryDir ${${PROJECT_NAME}_BINARY_DIR}/)
 Message(STATUS "Putting all major output in: ${ProjectBinaryDir}")
 
-set(RootProjectIncludeDir ${${PROJECT_NAME}_SOURCE_DIR}/src/)
+set(RootProjectTestDir ${${PROJECT_NAME}_SOURCE_DIR}/tests)
+Message(STATUS "Looking for tests output in: ${RootProjectTestDir}")
+set(RootProjectIncludeDir ${${PROJECT_NAME}_SOURCE_DIR}/src/ ${RootProjectTestDir})
 Message(STATUS "Include Search path has: ${RootProjectIncludeDir}")
 
 set(LIBRARY_OUTPUT_PATH "${RootProjectBinaryDir}bin/")
@@ -110,6 +112,44 @@ endif (Mezz_DecacheWorkUnits)
 # An option that will turn off the mutex class and use std::classes via typedefs instead.
 # An option that will turn off the lock_guard class and use std::classes via typedefs instead.
 
+###############################################################################
+# Sources
+File(GLOB ${PROJECT_NAME}_test "${RootProjectTestDir}/"  "${RootProjectTestDir}/*.h")
+
+message( STATUS "Looking for Tests in ${RootProjectTestDir}")
+foreach(CurrentFileName ${${PROJECT_NAME}_test})
+    String(REGEX MATCH "/([^/]*)\\.h$" DirtyName "${CurrentFileName}")
+    String(LENGTH ${DirtyName} DirtyNameLength)
+    MATH(EXPR TargetLength "${DirtyNameLength} - 3")
+    String(SUBSTRING "${DirtyName}" "1" "${TargetLength}" TargetName)
+    #message (${TargetLength})
+    #message (${DirtyName})
+    #message("${TargetName}")
+    list(APPEND FoundTests ${TargetName})
+endforeach(CurrentFileName ${${PROJECT_NAME}_test})
+
+message(STATUS "Found Tests: ")
+foreach(CurrentTest ${FoundTests})
+    message(STATUS "   ${CurrentTest}")
+endforeach(CurrentTest ${FoundTests})
+
+message(STATUS "Generating Test Instantiation and include Code: ")
+foreach(CurrentTest ${FoundTests})
+    set(CppIncludes "${CppIncludes}
+    #include \"${CurrentTest}.h\" ")
+
+    set(CppInstantiations "${CppInstantiations}
+    ${CurrentTest} ${CurrentTest}Implementation;")
+
+    set(CppNameRegistration "${CppNameRegistration}
+                this->operator[](${CurrentTest}Implementation.Name()) = &${CurrentTest}Implementation;")
+endforeach(CurrentTest ${FoundTests})
+
+configure_file( "${RootProjectSourceDir}/autodetect.h.in"  "${RootProjectBinaryDir}/autodetect.h")
+
+include_directories(${RootProjectBinaryDir} ${RootProjectSourceDir}/testframework/)
+
+
 ##############################################################################
 # A complete list of our source files and headers
 
@@ -157,14 +197,28 @@ set( ${PROJECT_NAME}_lib_sources
 
 # Headers required for the Test to run.
 set( ${PROJECT_NAME}_exe_headers
-        "${RootProjectSourceDir}tests/pugiconfig.h"
-        "${RootProjectSourceDir}tests/pugixml.h"
+        "${RootProjectSourceDir}testframework/pugiconfig.h"
+        "${RootProjectSourceDir}testframework/pugixml.h"
+        "${RootProjectBinaryDir}/autodetect.h"
+
+        "${RootProjectSourceDir}testframework/consolelogic.h"
+        "${RootProjectSourceDir}testframework/consolestringmanipulation.h"
+        "${RootProjectSourceDir}testframework/main.h"
+        "${RootProjectSourceDir}testframework/testdata.h"
+        "${RootProjectSourceDir}testframework/testenumerations.h"
+        "${RootProjectSourceDir}testframework/testtools.h"
 )
 
 # Source files on the executable/tests need.
 set( ${PROJECT_NAME}_exe_sources
-        "${RootProjectSourceDir}tests/main.cpp"
-        "${RootProjectSourceDir}tests/pugixml.cpp"
+        "${RootProjectSourceDir}testframework/pugixml.cpp"
+
+        "${RootProjectSourceDir}testframework/consolelogic.cpp"
+        "${RootProjectSourceDir}testframework/consolestringmanipulation.cpp"
+        "${RootProjectSourceDir}testframework/main.cpp"
+        "${RootProjectSourceDir}testframework/testdata.cpp"
+        "${RootProjectSourceDir}testframework/testenumerations.cpp"
+        "${RootProjectSourceDir}testframework/testtools.cpp"
 )
 
 ##############################################################################

@@ -37,57 +37,38 @@
    Joseph Toppi - toppij@gmail.com
    John Blackwood - makoenergy02@gmail.com
 */
-#ifndef _consolestringmanipulation_cpp
-#define _consolestringmanipulation_cpp
+#ifndef _consolestringmanipulation_h
+#define _consolestringmanipulation_h
 
 /// @file
-/// @brief The implementation of the string manipulation functions the unit tests use
+/// @brief Some string manipulation functions geared towards console output for use in the Unit Tests.
 
-#include "mezzanine.h"
-
-#include "testenumerations.h"
-
-using namespace Mezzanine;
+#include "datatypes.h"
 
 namespace Mezzanine
 {
     namespace Testing
     {
-        String rtrim(const String &t)
-        {
-            String str = t;
-            size_t found;
-            found = str.find_last_not_of(" \n\r\t");
-            if (found != String::npos)
-                { str.erase(found+1); }
-            else
-                { str.clear(); }            // str is all whitespace
+        /// @brief Take the whitespace off the end of a String
+        /// @param t The Text to clean up.
+        /// @param If " asdf " is passed " asdf" is returned. Also removes carriage returns, newlines and tabs. Does not use the locale.
+        Mezzanine::String rtrim(const Mezzanine::String &t);
 
-            return str;
-        }
+        /// @brief Creates some blank spaces, useful for controlling the vertical location of console text.
+        /// @param Leader The string on the beginning of the line.
+        /// @param Column The desired column that the padding should lead toward
+        /// @return If "asdf" and 6 are passed this will return "  " (Two spaces).
+        Mezzanine::String MakePadding(Mezzanine::String Leader, unsigned int Column);
 
-        // Used for padding spaces, after a piece of leader text, such that it always ends at teh expected colum
-        String MakePadding(String Leader, unsigned int Column)
-        {
-            String Spaces(" ");
-            for (unsigned int c=Leader.length(); c<Column;++c)
-                { Spaces+=" "; }
-            return Spaces;
-        }
+        /// @brief Makes a c style stron all lowercase with respect to the current locale
+        /// @param StringToConvert This string is actually changed.
+        /// @return for convience purposes the string is also returned.
+        char* AllLower(char* StringToConvert);
 
-        char* AllLower(char* StringToConvert)
-        {
-            std::locale loc;
-            for(int c=0; StringToConvert[c]!='\0'; ++c)
-            {
-                StringToConvert[c]=tolower(StringToConvert[c],loc);
-            }
-            return StringToConvert;
-        }
-
-        Mezzanine::String BoolToString(bool i)
-            { return i?"True":"False" ; }
-
+        /// @brief Get a String Corresponding to a passed bool
+        /// @param i A bool
+        /// @return "True" if true is passed, "False" if false is passed.
+        Mezzanine::String BoolToString(bool i);
 
     }// Testing
 }// Mezzanine
