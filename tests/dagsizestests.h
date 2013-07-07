@@ -128,6 +128,8 @@ class dagsizestests : public UnitTestGroup
                 cout << "Determining sizeof() important types that are used throughout:" << endl
                      << "iWorkUnit: " << sizeof(iWorkUnit) << endl
                      << "DefaultWorkUnit: " << sizeof(DefaultWorkUnit) << endl
+                     << "LogAggregator: " << sizeof(LogAggregator) << endl
+                     << "LogBufferSwapper: " << sizeof(LogBufferSwapper) << endl
                      << "WorkUnitKey: " << sizeof(WorkUnitKey) << endl
                      << "DefaultRollingAverage<Whole>::Type: " << sizeof(DefaultRollingAverage<Whole>::Type) << endl
                      << "WeightedRollingAverage<Whole,Whole>: " << sizeof(WeightedRollingAverage<Whole,Whole>) << endl
