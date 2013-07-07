@@ -240,12 +240,6 @@ class workunitkeytests : public UnitTestGroup
 
                 delete WorkUnitK1; delete WorkUnitK2; delete WorkUnitK3; delete WorkUnitK4;
 
-                if(true)
-                    { temp=Testing::Success; }
-                else
-                    { temp=Testing::Failed; }
-                AddTestResult("DAGFrameScheduler::WorkUnitKey::xxx", temp);
-
             }else{
                 AddTestResult("DAGFrameScheduler::WorkUnitKey::Second<First", Testing::Skipped);
                 AddTestResult("DAGFrameScheduler::WorkUnitKey::Third<First", Testing::Skipped);
