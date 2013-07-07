@@ -124,7 +124,7 @@ class workunittests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "timestamp"
+        /// @return Returns a String containing "workunit"
         virtual String Name()
             { return String("workunit"); }
 
