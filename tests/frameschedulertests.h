@@ -44,6 +44,7 @@
 
 #include "dagframescheduler.h"
 #include "workunittests.h"
+#include "pugixml.h"
 
 /// @file
 /// @brief Test the core Framescheduler
@@ -641,6 +642,69 @@ class frameschedulertests : public UnitTestGroup
                 //AddTestResult("DAGFrameScheduler::temp", Testing::Skipped);
 
             }
+
+            if(RunAutomaticTests)
+            {
+                stringstream LogCache;
+                FrameScheduler RemovalScheduler(&LogCache,1);
+                ThreadSpecificStorage RemovalResource(&RemovalScheduler);
+
+                cout << "Creating 5 workunits each depending on the next: A -> B -> C -> D -> E" << endl
+                     << "And a 6th that has no dependency relations: F" << endl;
+                PausesWorkUnit *EraseA = new PausesWorkUnit(10,"A");
+                PausesWorkUnit *EraseB = new PausesWorkUnit(10,"B");
+                PausesWorkUnit *EraseC = new PausesWorkUnit(10,"C");
+                PausesWorkUnit *EraseD = new PausesWorkUnit(10,"D");
+                PausesWorkUnit *EraseE = new PausesWorkUnit(10,"E");
+                PausesWorkUnit *EraseF = new PausesWorkUnit(10,"F");
+                EraseE->AddDependency(EraseD);
+                EraseD->AddDependency(EraseC);
+                EraseC->AddDependency(EraseB);
+                EraseB->AddDependency(EraseA);
+
+                cout << "Stuffing all 6 into a test frame scheduler and preparing it for a run" << endl;
+                RemovalScheduler.AddWorkUnit(EraseA);
+                RemovalScheduler.AddWorkUnit(EraseB);
+                RemovalScheduler.AddWorkUnit(EraseC);
+                RemovalScheduler.AddWorkUnit(EraseD);
+                RemovalScheduler.AddWorkUnit(EraseE);
+                RemovalScheduler.AddWorkUnit(EraseF);
+
+                RemovalScheduler.SortWorkUnitsMain();
+
+                PausesWorkUnit* Next;
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //A
+                Next->operator() (RemovalResource);
+
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //B
+                Next->operator() (RemovalResource);
+
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //C
+                Next->operator() (RemovalResource);
+
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //D
+                Next->operator() (RemovalResource);
+
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //E or F
+                Next->operator() (RemovalResource);
+                PausesWorkUnit* EitherOr = Next;
+
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //E or F Whichever was not EitherOr
+                Next->operator() (RemovalResource);
+                Next->DoWork(RemovalResource);
+
+                RemovalScheduler.ResetAllWorkUnits();
+
+            }else{
+
+            }
+
 
         }
 };
