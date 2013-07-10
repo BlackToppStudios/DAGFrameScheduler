@@ -672,37 +672,70 @@ class frameschedulertests : public UnitTestGroup
 
                 RemovalScheduler.SortWorkUnitsMain();
 
+                cout << "Checking the order of the workunits (Should be \"A B C D E F\" or \"A B C D F E\"): ";
+                Whole PrepCount = 0;
+
                 PausesWorkUnit* Next;
                 Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
                 cout << Next->Name << " "; //A
                 Next->operator() (RemovalResource);
-
+                if(Next->Name=="A") { PrepCount++; }
                 Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
                 cout << Next->Name << " "; //B
                 Next->operator() (RemovalResource);
-
+                if(Next->Name=="B") { PrepCount++; }
                 Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
                 cout << Next->Name << " "; //C
                 Next->operator() (RemovalResource);
-
+                if(Next->Name=="C") { PrepCount++; }
                 Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
                 cout << Next->Name << " "; //D
                 Next->operator() (RemovalResource);
-
+                if(Next->Name=="D") { PrepCount++; }
                 Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
                 cout << Next->Name << " "; //E or F
                 Next->operator() (RemovalResource);
-                PausesWorkUnit* EitherOr = Next;
-
+                PausesWorkUnit* OtherEF = Next;
+                if(Next->Name=="E" || Next->Name=="F") { PrepCount++; }
                 Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
-                cout << Next->Name << " "; //E or F Whichever was not EitherOr
+                cout << Next->Name << " " << endl; //E or F Whichever was not EitherOr
                 Next->operator() (RemovalResource);
-                Next->DoWork(RemovalResource);
+                if( (Next->Name=="E" || Next->Name=="F") && OtherEF!= Next) { PrepCount++; }
+                Test((6==PrepCount),"DAGFrameScheduler::FrameScheduler::Erase::OrderingPreTest");
 
+                cout << endl << "Removing F from Scheduler then resorting and resetting it (New order should be \"A B C D E\"): ";
                 RemovalScheduler.ResetAllWorkUnits();
+                RemovalScheduler.RemoveWorkUnitMain(EraseF);
+                RemovalScheduler.SortWorkUnitsMain();
+                PrepCount = 0;
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //A
+                Next->operator() (RemovalResource);
+                if(Next->Name=="A") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //B
+                Next->operator() (RemovalResource);
+                if(Next->Name=="B") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //C
+                Next->operator() (RemovalResource);
+                if(Next->Name=="C") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //D
+                Next->operator() (RemovalResource);
+                if(Next->Name=="D") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " " << endl; //E
+                Next->operator() (RemovalResource);
+                if(Next->Name=="E") { PrepCount++; }
+                Test(5==PrepCount, "DAGFrameScheduler::FrameScheduler::Erase::Simple");
+
+
+
 
             }else{
-
+                AddTestResult("DAGFrameScheduler::FrameScheduler::Erase::OrderingPreTest", Testing::Skipped);
+                AddTestResult("DAGFrameScheduler::FrameScheduler::Erase::Simple", Testing::Skipped);
             }
 
 
