@@ -730,12 +730,71 @@ class frameschedulertests : public UnitTestGroup
                 if(Next->Name=="E") { PrepCount++; }
                 Test(5==PrepCount, "DAGFrameScheduler::FrameScheduler::Erase::Simple");
 
+                cout << endl << "Removing E from Scheduler then resorting and resetting it (New order should be \"A B C D\"): ";
+                RemovalScheduler.ResetAllWorkUnits();
+                RemovalScheduler.RemoveWorkUnitMain(EraseE);
+                RemovalScheduler.SortWorkUnitsMain();
+                PrepCount = 0;
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //A
+                Next->operator() (RemovalResource);
+                if(Next->Name=="A") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //B
+                Next->operator() (RemovalResource);
+                if(Next->Name=="B") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //C
+                Next->operator() (RemovalResource);
+                if(Next->Name=="C") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " " << endl; //D
+                Next->operator() (RemovalResource);
+                if(Next->Name=="D") { PrepCount++; }
+                Test(4==PrepCount, "DAGFrameScheduler::FrameScheduler::Erase::WithDep");
 
+                cout << endl << "Removing A from Scheduler then resorting and resetting it (New order should be \"B C D\"): ";
+                RemovalScheduler.ResetAllWorkUnits();
+                RemovalScheduler.RemoveWorkUnitMain(EraseA);
+                RemovalScheduler.SortWorkUnitsMain();
+                PrepCount = 0;
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //B
+                Next->operator() (RemovalResource);
+                if(Next->Name=="B") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " "; //C
+                Next->operator() (RemovalResource);
+                if(Next->Name=="C") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " " << endl; //D
+                Next->operator() (RemovalResource);
+                if(Next->Name=="D") { PrepCount++; }
+                Test(3==PrepCount, "DAGFrameScheduler::FrameScheduler::Erase::AsDep");
+
+                cout << endl << "Removing C from Scheduler then resorting and resetting it (New order should be \"B D\" or \"D B\"): ";
+                RemovalScheduler.ResetAllWorkUnits();
+                RemovalScheduler.RemoveWorkUnitMain(EraseC);
+                RemovalScheduler.SortWorkUnitsMain();
+                PrepCount = 0;
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                PausesWorkUnit* BorD = Next;
+                cout << Next->Name << " "; //B or D
+                Next->operator() (RemovalResource);
+                if(Next->Name=="B"||Next->Name=="D") { PrepCount++; }
+                Next = static_cast<PausesWorkUnit*>(RemovalScheduler.GetNextWorkUnit());
+                cout << Next->Name << " " << endl; // The other
+                Next->operator() (RemovalResource);
+                if( (Next->Name=="B"||Next->Name=="D") && Next!=BorD) { PrepCount++; }
+                Test(2==PrepCount, "DAGFrameScheduler::FrameScheduler::Erase::WithAndAsDep");
 
 
             }else{
                 AddTestResult("DAGFrameScheduler::FrameScheduler::Erase::OrderingPreTest", Testing::Skipped);
                 AddTestResult("DAGFrameScheduler::FrameScheduler::Erase::Simple", Testing::Skipped);
+                AddTestResult("DAGFrameScheduler::FrameScheduler::Erase::WithDep", Testing::Skipped);
+                AddTestResult("DAGFrameScheduler::FrameScheduler::Erase::AsDep", Testing::Skipped);
+                AddTestResult("DAGFrameScheduler::FrameScheduler::Erase::WithAndAsDep", Testing::Skipped);
             }
 
 

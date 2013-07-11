@@ -178,8 +178,6 @@ namespace Mezzanine
             }
         }
 
-
-
     }// Testing
 }// Mezzanine
 

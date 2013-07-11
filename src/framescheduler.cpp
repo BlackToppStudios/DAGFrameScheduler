@@ -268,7 +268,14 @@ namespace Mezzanine
                                     LessWork->GetSortingKey(*this)
                                     )
                         );
-
+           WorkUnitsMain.erase
+                        (
+                            std::remove(
+                                    WorkUnitsMain.begin(),
+                                    WorkUnitsMain.end(),
+                                    LessWork->GetSortingKey(*this)
+                                    )
+                        );
            WorkUnitMonopolies.erase
                         (
                             std::remove(
