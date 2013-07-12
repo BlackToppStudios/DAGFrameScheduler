@@ -21,6 +21,11 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### July 9, 2013 ###
+* Removing work units now works correctly and there are tests to prove it.
+* Add some methods to inspect the counts of work units in a framescheduler.
+* Since the API changed I bumped the minor version again, now the version is 1.4.0.
+
 ### July 6, 2013 ###
 * Fixed an issue that could in rare situations segfault or spawn an infinite loop because of mismatched iterators.
 * Replaced testing framework with a similar design to the Mezzanine Tests to make integration more seamless.
