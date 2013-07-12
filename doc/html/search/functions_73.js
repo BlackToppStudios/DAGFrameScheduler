@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['setaggregationtarget',['SetAggregationTarget',['../classMezzanine_1_1Threading_1_1LogAggregator.html#a01dddb31508dd09563d374bc4580f301',1,'Mezzanine::Threading::LogAggregator']]],
   ['setframelength',['SetFrameLength',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ac99c8d36d2571fcb3e1bfcd9cd757dfe',1,'Mezzanine::Threading::FrameScheduler']]],
   ['setframerate',['SetFrameRate',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a36c450ded7b1df6276dafc699cdf1ee2',1,'Mezzanine::Threading::FrameScheduler']]],
   ['setsortingfrequency',['SetSortingFrequency',['../classMezzanine_1_1Threading_1_1WorkSorter.html#a49557d535f0f305ae6800802e6b5b6e2',1,'Mezzanine::Threading::WorkSorter']]],

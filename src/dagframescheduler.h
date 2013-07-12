@@ -383,7 +383,7 @@
 /// Regardless of the amount of threads created, all but one of them will start executing work units as
 /// described in the section @ref algorithm_sec "The Algorithm". This will execute as much work as possible
 /// (work units with affinity can affect how much work can be done with out waiting) that was added by
-/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnit(iWorkUnit*) "FrameScheduler::AddWorkUnit(iWorkUnit*)".
+/// @ref Mezzanine::Threading::FrameScheduler::AddWorkUnitMain(iWorkUnit*) "FrameScheduler::AddWorkUnitMain(iWorkUnit*)".
 /// If there is only one thread, the main thread, then this will return immediately and no work will be done.
 /// @subsection integrate3 Step 3 - Main Thread Work
 /// The call to

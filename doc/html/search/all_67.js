@@ -1,6 +1,7 @@
 var searchData=
 [
   ['get_5fid',['get_id',['../classMezzanine_1_1Threading_1_1Thread.html#a850c3a6537f41e79d87a6789a8515317',1,'Mezzanine::Threading::Thread::get_id()'],['../namespaceMezzanine_1_1Threading_1_1this__thread.html#a9d7f994aed04273d2ab06b103fc381de',1,'Mezzanine::Threading::this_thread::get_id()']]],
+  ['getaggregationtarget',['GetAggregationTarget',['../classMezzanine_1_1Threading_1_1LogAggregator.html#ad1a0b212c44a3581ae1ac8241621f546',1,'Mezzanine::Threading::LogAggregator']]],
   ['getaverage',['GetAverage',['../classMezzanine_1_1RollingAverage.html#a052c4ea7eab2d2a0cf61ed8b7c629f24',1,'Mezzanine::RollingAverage::GetAverage()'],['../classMezzanine_1_1BufferedRollingAverage.html#a785aa3edf81af2a5b6c6949bc7fc38a1',1,'Mezzanine::BufferedRollingAverage::GetAverage()'],['../classMezzanine_1_1WeightedRollingAverage.html#ad07296ff457965af06e956ac2f96c6f1',1,'Mezzanine::WeightedRollingAverage::GetAverage()']]],
   ['getcommittable',['GetCommittable',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#ab0aaaaaf6b15449d22e5ce2f1aa7c373',1,'Mezzanine::Threading::DoubleBufferedResource']]],
   ['getcommittablepointer',['GetCommittablePointer',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a1317e9d70311d22351c186908848f211',1,'Mezzanine::Threading::DoubleBufferedResource']]],
@@ -29,5 +30,8 @@ var searchData=
   ['gettimestampresolution',['GetTimeStampResolution',['../namespaceMezzanine.html#a13a4a2c3420cfd2a2b3a9e4db40c583b',1,'Mezzanine']]],
   ['getusable',['GetUsable',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a36c65f2a937d73bc918fb42becd6412c',1,'Mezzanine::Threading::DoubleBufferedResource']]],
   ['getusablelogger',['GetUsableLogger',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a947c267feef339a148c215bdbf7692b8',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
-  ['getusablepointer',['GetUsablePointer',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a79d66e2596805d091278670c5e5ab6d2',1,'Mezzanine::Threading::DoubleBufferedResource']]]
+  ['getusablepointer',['GetUsablePointer',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a79d66e2596805d091278670c5e5ab6d2',1,'Mezzanine::Threading::DoubleBufferedResource']]],
+  ['getworkunitaffinitycount',['GetWorkUnitAffinityCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ad4d2716a54859732eec1f0f4eb1d8aa6',1,'Mezzanine::Threading::FrameScheduler']]],
+  ['getworkunitmaincount',['GetWorkUnitMainCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a47e9fc9b1de7361a4e581deb5dadfd09',1,'Mezzanine::Threading::FrameScheduler']]],
+  ['getworkunitmonopolycount',['GetWorkUnitMonopolyCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#adf1a416060df1507d7fa90f687d6a89f',1,'Mezzanine::Threading::FrameScheduler']]]
 ];

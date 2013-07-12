@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="788,34,1049,65"/>
-<area shape="rect" id="node4" href="$classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time." alt="" coords="7,5,228,35"/>
-<area shape="rect" id="node6" href="$structMezzanine_1_1DefaultRollingAverage.html" title="Mezzanine::DefaultRollingAverage\&lt; Whole \&gt;" alt="" coords="340,87,633,118"/>
+<map id="Mezzanine::Threading::LogBufferSwapper" name="Mezzanine::Threading::LogBufferSwapper">
+<area shape="rect" id="node2" href="$classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="573,39,720,83"/>
+<area shape="rect" id="node4" href="$classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time." alt="" coords="5,5,152,49"/>
+<area shape="rect" id="node9" href="$structMezzanine_1_1DefaultRollingAverage.html" title="Mezzanine::DefaultRolling\lAverage\&lt; Whole \&gt;" alt="" coords="257,106,425,150"/>
 </map>

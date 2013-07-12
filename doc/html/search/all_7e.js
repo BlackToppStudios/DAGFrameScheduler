@@ -7,6 +7,7 @@ var searchData=
   ['_7eframescheduler',['~FrameScheduler',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a1045e9a709d7366dded6cc670d474491',1,'Mezzanine::Threading::FrameScheduler']]],
   ['_7eiworkunit',['~iWorkUnit',['../classMezzanine_1_1Threading_1_1iWorkUnit.html#af902949bd5480c87e9764e12bcb959d6',1,'Mezzanine::Threading::iWorkUnit']]],
   ['_7elock_5fguard',['~lock_guard',['../classMezzanine_1_1Threading_1_1lock__guard.html#a824bd54f9053330848d4704492fe35c8',1,'Mezzanine::Threading::lock_guard']]],
+  ['_7elogaggregator',['~LogAggregator',['../classMezzanine_1_1Threading_1_1LogAggregator.html#a91be64e045a03eb69b78a152462082d9',1,'Mezzanine::Threading::LogAggregator']]],
   ['_7emonopolyworkunit',['~MonopolyWorkUnit',['../classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html#aea2791c09c26477dc120ea1733527125',1,'Mezzanine::Threading::MonopolyWorkUnit']]],
   ['_7emutex',['~Mutex',['../classMezzanine_1_1Threading_1_1Mutex.html#ab41e71f0aec389942754139b2f7a56f3',1,'Mezzanine::Threading::Mutex']]],
   ['_7erawfile',['~RawFile',['../classMezzanine_1_1Threading_1_1RawFile.html#ae225a8eb5d0080c5baa180bbe6a00276',1,'Mezzanine::Threading::RawFile']]],

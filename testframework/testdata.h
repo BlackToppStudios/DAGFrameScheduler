@@ -97,7 +97,7 @@ namespace Mezzanine
                 /// @param RunInteractiveTests True if the interactive tests should run false otherwise/.RunInteractiveTests
                 /// @note One of two methods that must be implmented on a UnitTestGroup
                 virtual void RunTests(bool RunAutomaticTests, bool RunInteractiveTests)
-                    {}
+                {}
 
                 /// @brief Get Name of this UnitTestGroup
                 /// @return The string that must be type at the command line to run this testgroup, should be all lowercase.

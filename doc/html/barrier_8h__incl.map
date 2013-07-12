@@ -1,5 +1,5 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="273,166,364,197"/>
-<area shape="rect" id="node19" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="304,86,437,117"/>
-<area shape="rect" id="node5" href="$compilerthreadcompat_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="103,246,268,277"/>
+<map id="barrier.h" name="barrier.h">
+<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="260,161,345,189"/>
+<area shape="rect" id="node19" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="289,83,420,111"/>
+<area shape="rect" id="node5" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="108,238,252,266"/>
 </map>

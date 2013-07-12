@@ -1,15 +1,15 @@
-<map id="G" name="G">
-<area shape="rect" id="node2" href="$classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing..." alt="" coords="1775,17,1980,47"/>
-<area shape="rect" id="node6" href="$classMezzanine_1_1Threading_1_1Thread.html" title="A small wrapper around the system thread." alt="" coords="1291,70,1501,101"/>
-<area shape="rect" id="node10" href="$classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double&#45;buffered and algorithm specific resources." alt="" coords="1243,123,1549,154"/>
-<area shape="rect" id="node16" href="$classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time." alt="" coords="7,247,228,278"/>
-<area shape="rect" id="node23" href="$classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="808,247,1069,278"/>
-<area shape="rect" id="node36" href="$classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted." alt="" coords="365,353,608,383"/>
-<area shape="rect" id="node21" href="$classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads." alt="" coords="1257,227,1535,258"/>
-<area shape="rect" id="node31" href="$classMezzanine_1_1Threading_1_1WorkSorter.html" title="Sorts all of the WorkUnits in the FrameScheduler." alt="" coords="1279,285,1513,315"/>
-<area shape="rect" id="node26" href="$structMezzanine_1_1DefaultRollingAverage.html" title="Mezzanine::DefaultRollingAverage\&lt; Whole \&gt;" alt="" coords="340,195,633,226"/>
-<area shape="rect" id="node40" title="STL class." alt="" coords="1829,406,1925,437"/>
-<area shape="rect" id="node42" title="STL class." alt="" coords="1303,406,1489,437"/>
-<area shape="rect" id="node44" title="STL class." alt="" coords="860,406,1017,437"/>
-<area shape="rect" id="node46" title="STL class." alt="" coords="436,406,537,437"/>
+<map id="Mezzanine::Threading::FrameScheduler" name="Mezzanine::Threading::FrameScheduler">
+<area shape="rect" id="node4" href="$classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double&#45;buffered and algorithm specific resources." alt="" coords="903,13,1060,57"/>
+<area shape="rect" id="node6" href="$classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing..." alt="" coords="1247,87,1393,131"/>
+<area shape="rect" id="node12" href="$classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time." alt="" coords="5,227,152,271"/>
+<area shape="rect" id="node21" href="$classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" title="Default implementation of WorkUnit. This represents on piece of work through time." alt="" coords="589,227,736,271"/>
+<area shape="rect" id="node31" href="$classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted." alt="" coords="268,353,415,397"/>
+<area shape="rect" id="node17" href="$classMezzanine_1_1Threading_1_1Thread.html" title="A small wrapper around the system thread." alt="" coords="908,389,1055,433"/>
+<area shape="rect" id="node19" href="$classMezzanine_1_1Threading_1_1WorkSorter.html" title="Sorts all of the WorkUnits in the FrameScheduler." alt="" coords="908,271,1055,315"/>
+<area shape="rect" id="node36" href="$classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads." alt="" coords="908,205,1055,249"/>
+<area shape="rect" id="node27" href="$structMezzanine_1_1DefaultRollingAverage.html" title="Mezzanine::DefaultRolling\lAverage\&lt; Whole \&gt;" alt="" coords="257,169,425,213"/>
+<area shape="rect" id="node40" title="STL class." alt="" coords="1275,457,1365,485"/>
+<area shape="rect" id="node42" title="STL class." alt="" coords="917,455,1045,499"/>
+<area shape="rect" id="node44" title="STL class." alt="" coords="589,463,736,491"/>
+<area shape="rect" id="node46" title="STL class." alt="" coords="295,463,388,491"/>
 </map>
