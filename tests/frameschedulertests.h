@@ -1139,16 +1139,50 @@ class frameschedulertests : public UnitTestGroup
 
             if(RunAutomaticTests)
             {
-                /*stringstream LogCache;
+                stringstream LogCache;
                 FrameScheduler RemovalScheduler(&LogCache,1);
-                ThreadSpecificStorage RemovalResource(&RemovalScheduler);
+                //ThreadSpecificStorage RemovalResource(&RemovalScheduler);
 
                 cout << endl << "Creating 3 Monopoly Workunits and an affinity Workunit and a normal/Main workunit" << endl;
-                PauseMonopoly *EraseA = new PauseMonopoly(10,"A");
-                PauseMonopoly *EraseB = new PauseMonopoly(10,"B");
-                PauseMonopoly *EraseC = new PauseMonopoly(10,"C");
-*/
+                PauseMonopoly *EraseMonoA = new PauseMonopoly(10,"MonoA");
+                PauseMonopoly *EraseMonoB = new PauseMonopoly(10,"MonoB");
+                PauseMonopoly *EraseMonoC = new PauseMonopoly(10,"MonoC");
 
+                PausesWorkUnit *EraseA = new PausesWorkUnit(10,"NeedsA");
+                PausesWorkUnit *EraseB = new PausesWorkUnit(10,"NeedsB");
+
+                EraseA->AddDependency(EraseMonoA);
+                EraseB->AddDependency(EraseMonoB);
+
+                RemovalScheduler.AddWorkUnitAffinity(EraseA);
+                RemovalScheduler.AddWorkUnitMain(EraseB);
+                RemovalScheduler.AddWorkUnitMonopoly(EraseMonoA);
+                RemovalScheduler.AddWorkUnitMonopoly(EraseMonoB);
+                RemovalScheduler.AddWorkUnitMonopoly(EraseMonoC);
+
+                cout << "Test Scheduler has " << RemovalScheduler.GetWorkUnitMonopolyCount() << " WorkUnits, and the affinity unit has " << EraseA->GetDependencyCount()
+                     << " Dependencies and the main workunit has " << EraseB->GetDependencyCount() << "." << endl;
+                Test(EraseA->GetDependencyCount()==1 &&
+                     EraseB->GetDependencyCount()==1 &&
+                     RemovalScheduler.GetWorkUnitMonopolyCount()==3, "DAGFrameScheduler::FrameScheduler::RemoveMopoly::PreTest");
+
+                RemovalScheduler.RemoveWorkUnitMonopoly(EraseMonoC);
+                cout << "Removing Monopoly is no dependent, now the are " << RemovalScheduler.GetWorkUnitMonopolyCount() << " Monopolies (should be 2)." << endl << endl;
+                Test(RemovalScheduler.GetWorkUnitMonopolyCount()==2, "DAGFrameScheduler::FrameScheduler::RemoveMopoly::Simple");
+
+                RemovalScheduler.RemoveWorkUnitMonopoly(EraseMonoA);
+                cout << "Removing Monopoly is a dependent for an Affinity unit, now the are " << RemovalScheduler.GetWorkUnitMonopolyCount() << " Monopolies (should be 1)" << endl
+                     << "and the affinity unit has " << EraseA->GetDependencyCount() << " deps (should be 0)." << endl << endl;
+                Test(RemovalScheduler.GetWorkUnitMonopolyCount()==1 &&
+                     EraseA->GetDependencyCount()==0, "DAGFrameScheduler::FrameScheduler::RemoveMopoly::AffinityDep");
+
+                RemovalScheduler.RemoveWorkUnitMonopoly(EraseMonoB);
+                cout << "Removing Monopoly is a dependent for an main unit, now the are " << RemovalScheduler.GetWorkUnitMonopolyCount() << " Monopolies (should be 0)" << endl
+                     << "and the main unit has " << EraseB->GetDependencyCount() << " deps (should be 0)." << endl << endl;
+                Test(RemovalScheduler.GetWorkUnitMonopolyCount()==0 &&
+                     EraseB->GetDependencyCount()==0, "DAGFrameScheduler::FrameScheduler::RemoveMopoly::AffinityDep");
+
+                //delete EraseA; delete EraseB; delete EraseMonoA; delete EraseMonoB; delete EraseMonoC;
 
             }else{
                 AddTestResult("DAGFrameScheduler::FrameScheduler::RemoveAffinity::OrderingPreTest", Testing::Skipped);
