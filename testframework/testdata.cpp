@@ -47,6 +47,7 @@
 #include "consolestringmanipulation.h"
 
 #include <vector>
+#include <stdexcept>
 
 using namespace Mezzanine;
 
@@ -65,8 +66,8 @@ namespace Mezzanine
         {
             TestData Results;
             size_t LastSpace=Line.rfind(' ');
-            Results.second=StringToTestResult(Line.substr(LastSpace+1,100)); // No testdata should be longer than 100
-            Results.first=rtrim(Line.substr(0,LastSpace));
+            Results.Results = StringToTestResult(Line.substr(LastSpace+1));
+            Results.TestName=rtrim(Line.substr(0,LastSpace));
             return Results;
         }
 
@@ -78,22 +79,36 @@ namespace Mezzanine
         {
             bool Added=false;
 
-            TestDataStorage::iterator PreExisting = this->find(FreshMeat.first);
+            if(FreshMeat.TestName.npos != FreshMeat.TestName.find(" "))
+            {
+                { throw std::invalid_argument("Invalid Test Name, contains space character(s), TestName: \"" + FreshMeat.TestName + "\""); }
+            }
+
+            TestDataStorage::iterator PreExisting = this->find(FreshMeat.TestName);
             if(this->end()!=PreExisting)
             {
                 switch(Behavior)
                 {
                     case OverWriteIfLessSuccessful:
-                        if (PreExisting->second <= FreshMeat.second)
-                            { PreExisting->second = FreshMeat.second; Added=true; }
+                        if (PreExisting->Results <= FreshMeat.Results)
+                        {
+                            this->erase(PreExisting);
+                            this->insert(FreshMeat);
+                            Added=true;
+                        }
                         break;
                     case OverWrite:
-                        PreExisting->second = FreshMeat.second;
+                        this->erase(PreExisting);
+                        this->insert(FreshMeat);
                         Added=true;
                         break;
                     case OverWriteIfMoreSuccessful:
-                        if (PreExisting->second >= FreshMeat.second)
-                            { PreExisting->second = FreshMeat.second; Added=true; }
+                        if (PreExisting->Results >= FreshMeat.Results)
+                        {
+                            this->erase(PreExisting);
+                            this->insert(FreshMeat);
+                            Added=true;
+                        }
                         break;
                     case DoNotOverWrite:
                         break;
@@ -105,8 +120,8 @@ namespace Mezzanine
 
             if (Added)
             {
-                if(FreshMeat.first.length()>LongestNameLength)
-                    { LongestNameLength=FreshMeat.first.length(); }
+                if(FreshMeat.TestName.length()>LongestNameLength)
+                    { LongestNameLength=FreshMeat.TestName.length(); }
             }
         }
 
@@ -133,6 +148,7 @@ namespace Mezzanine
             if(FullOutput && HeaderOutput) // No point in displaying the header without the other content.
             {
                 Mezzanine::String TestName("Test Name");
+
                 Output << std::endl << " " << TestName << MakePadding(TestName, LongestNameLength) << "Result" << std::endl;
             }
 
@@ -140,9 +156,11 @@ namespace Mezzanine
             {
                 if(FullOutput)
                 {
-                    Output << Iter->first << MakePadding(Iter->first, LongestNameLength+1) << TestResultToString(Iter->second) << std::endl;
+                    Output << Iter->TestName << MakePadding(Iter->TestName, LongestNameLength+1) << TestResultToString(Iter->Results);
+                    //Output << " " << Iter->FileName;
+                    Output << std::endl;
                 }
-                TestCounts.at((unsigned int)Iter->second)++; // Count this test result
+                TestCounts.at((unsigned int)Iter->Results)++; // Count this test result
             }
 
             if(Summary)
@@ -157,17 +175,15 @@ namespace Mezzanine
             }
         }
 
-        bool UnitTestGroup::AddSuccessFromBool(Mezzanine::String TestName, bool Condition)
+        void UnitTestGroup::Test(bool TestCondition, const String& TestName, TestResult IfFalse, TestResult IfTrue, const String& FuncName, const String& File, Whole Line )
         {
-            if(Condition)
+            if(TestCondition)
             {
-                AddTestResult(TestName, Success, OverWrite);
+                AddTestResult(TestName, IfTrue);
             }else{
-                AddTestResult(TestName, Failed, OverWrite);
+                AddTestResult(TestName, IfFalse);
             }
-            return Condition;
         }
-
 
     }// Testing
 }// Mezzanine

@@ -17,9 +17,21 @@ The 'doc' folder contains further licensing details, technical documentation and
 ### Doxygen Docs ###
 Doxygen is used to generate the technical docs in the 'doc/html' folder. This generates a series of html files from the source code. See 'index.html' for an overview of the API and a good starting point for perusing the documentation. 
 
-The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the contents of the 'doc/html directory with a command similar to `doc/doxyfiles$ doxygen Doxyfile 2> DoxygenWarnings.txt` depending on your platform. To get the higher quality graphs graphviz and dot need to be installed an doxygen needs to be able to find them.
+The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the contents of the 'doc/html directory with a command similar to `doc/doxyfiles$ doxygen Doxyfile 2> DoxygenWarnings.txt` depending on your platform. To get the higher quality graphs 'graphviz' and 'dot' need to be installed and doxygen needs to be able to find them. You can also enable the CMake option 'Mezz_Doc' to build the doxygen documentation when you build the code as well.
 
 ## NEWS ##
+
+### July 13, 2013 ###
+* Upgraded the TestData to contain more metadata than before.
+
+### July 12, 2013 ###
+* Added Automatic build support and IDE for doxygen
+* Corrected all doxygen warnings
+
+### July 10, 2013 ###
+* Removing work units now works correctly and there are tests to prove it.
+* Add some methods to inspect the counts of work units in a framescheduler.
+* Since the API changed I bumped the minor version again, now the version is 1.4.0.
 
 ### July 6, 2013 ###
 * Fixed an issue that could in rare situations segfault or spawn an infinite loop because of mismatched iterators.

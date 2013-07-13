@@ -1,6 +1,6 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="80,86,307,117"/>
-<area shape="rect" id="node7" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="269,166,419,197"/>
-<area shape="rect" id="node9" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually." alt="" coords="381,86,560,117"/>
-<area shape="rect" id="node5" href="$asynchronousfileloadingworkunit_8cpp.html" title="The implemtation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchr..." alt="" coords="5,166,245,197"/>
+<map id="asynchronousworkunit.h" name="asynchronousworkunit.h">
+<area shape="rect" id="node3" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="79,83,292,111"/>
+<area shape="rect" id="node7" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="259,161,400,189"/>
+<area shape="rect" id="node9" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually." alt="" coords="367,83,537,111"/>
+<area shape="rect" id="node5" href="$asynchronousfileloadingworkunit_8cpp.html" title="The implementation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files async..." alt="" coords="5,161,235,189"/>
 </map>

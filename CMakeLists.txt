@@ -107,6 +107,25 @@ if (Mezz_DecacheWorkUnits)
     set(DecacheWork DECACHEWORKUNIT)
 endif (Mezz_DecacheWorkUnits)
 
+###############################################################################
+# Doxygen options
+option (Mezz_Doc "Refresh Doxygen documentation during a build" OFF)
+
+if(Mezz_Doc)
+    Message(STATUS "Starting Doxygen Configuration.")
+    find_package(Doxygen)
+    if(DOXYGEN_FOUND)
+        add_custom_target(MezzanineDocumentation ALL
+            ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/doc/DoxyFiles/Doxyfile
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doc/DoxyFiles/
+            COMMENT "Generating API documentation with Doxygen" VERBATIM
+        )
+    else(DOXYGEN_FOUND)
+        Message(STATUS "Doxygen not found.")
+    endif(DOXYGEN_FOUND)
+    Message(STATUS "Finishing Doxygen Configuration.")
+endif(Mezz_Doc)
+
 # todo add options
 # An option that will turn off all of the threading header and use std::thread via typedefs instead.
 # An option that will turn off the mutex class and use std::classes via typedefs instead.

@@ -90,10 +90,22 @@ namespace Mezzanine
                 /// to @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsMain "SortWorkUnitsMain" or @ref Mezzanine::Threading::FrameScheduler::SortWorkUnitsAll "SortWorkUnitsAll".
                 std::vector<WorkUnitKey> WorkUnitsMain;
 
+                /// @brief An iterator suitable for iterating over the main pool of work units.
+                typedef std::vector<WorkUnitKey>::iterator IteratorMain;
+
+                /// @brief A const iterator suitable for iterating over the main pool of work units.
+                typedef std::vector<WorkUnitKey>::const_iterator ConstIteratorMain;
+
                 /// @brief A collection of @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s that must be run on the main thread.
                 /// @details This is very similar to @ref WorkUnitsMain except that the @ref Mezzanine::Threading::iWorkUnit "iWorkUnit"s
                 /// are only run in the main thread and are sorted by calls to @ref SortWorkUnitsAll or @ref SortWorkUnitsAffinity .
                 std::vector<WorkUnitKey> WorkUnitsAffinity;
+
+                /// @brief An iterator suitable for iterating over the main pool of work units.
+                typedef std::vector<WorkUnitKey>::iterator IteratorAffinity;
+
+                /// @brief A const iterator suitable for iterating over the main pool of work units.
+                typedef std::vector<WorkUnitKey>::const_iterator ConstIteratorAffinity;
 
                 /// @brief A structure designed to minimalistically represent Dependency and Reverse Dependency Graphs in work units.
                 typedef std::map<
@@ -117,7 +129,13 @@ namespace Mezzanine
                 std::vector<Thread*> Threads;
 
                 /// @brief A collection of all the monopolies this scheduler must run and keep ownership of.
-                std::vector<MonopolyWorkUnit*> WorkUnitMonopolies;
+                std::vector<MonopolyWorkUnit*> WorkUnitsMonopolies;
+
+                /// @brief An iterator suitable for iterating over the main pool of work units.
+                typedef std::vector<MonopolyWorkUnit*>::iterator IteratorMonoply;
+
+                /// @brief A const iterator suitable for iterating over the main pool of work units.
+                typedef std::vector<MonopolyWorkUnit*>::const_iterator ConstIteratorMonopoly;
 
                 /// @brief When the logs are aggregated, this is where they are sent
                 std::ostream* LogDestination;
@@ -218,7 +236,7 @@ namespace Mezzanine
 			
                 /// @brief Add a normal @ref iWorkUnit to this For fcheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
-                virtual void AddWorkUnit(iWorkUnit* MoreWork);
+                virtual void AddWorkUnitMain(iWorkUnit* MoreWork);
 
                 /// @brief Add a normal @ref iWorkUnit to this For scheduling.
                 /// @param MoreWork A pointer the the WorkUnit, that the FrameScheduler will take ownership of, and schedule for work.
@@ -246,11 +264,22 @@ namespace Mezzanine
                 /// for the appropriate times to use this.
                 virtual void SortWorkUnitsAll(bool UpdateDependentGraph_ = true);
 
-                /// @brief Remove a WorkUnit, and caller regains ownership of it.
-                /// @param LessWork A pointer to a WorkUnit that should no longer be scheduled.
-                /// @details This is relative slow compared to adding or finding a working unit, this works in linear time relative to the number of WorkUnits in the scheduler.
-                /// @warning This does not cleanup dependencies and can get you in trouble if other work units depend on the one being removed.
-                virtual void RemoveWorkUnit(iWorkUnit* LessWork);
+                // @brief Remove a WorkUnit regardless of type, and caller regains ownership of it.
+                // @param LessWork A pointer to a WorkUnit that should no longer be scheduled.
+                // @details This is relative slow compared to adding or finding a working unit, this works in linear time relative to the number of WorkUnits in the scheduler.
+                //virtual void RemoveWorkUnit(iWorkUnit* LessWork);
+
+                /// @brief Remove a WorkUnit from the main pool of WorkUnits (and not from the groups of Affinity or MonpolyWorkUnits).
+                /// @param LessWork A pointer to the workunit the calling coding will reclaim ownership of and will no longer be scheduled, and have its dependencies removed.
+                virtual void RemoveWorkUnitMain(iWorkUnit* LessWork);
+
+                /// @brief Remove a WorkUnit from the Affinity pool of WorkUnits (and not from the Main group or MonpolyWorkUnits).
+                /// @param LessWork A pointer to the workunit the calling coding will reclaim ownership of and will no longer be scheduled, and have its dependencies removed.
+                virtual void RemoveWorkUnitAffinity(iWorkUnit* LessWork);
+
+                /// @brief Remove a WorkUnit from the Monopoly pool of WorkUnits (and not from the Main or Affinity group).
+                /// @param LessWork A pointer to the MonopolyWorkUnit the calling coding will reclaim ownership of and will no longer be scheduled, and have its dependencies removed.
+                virtual void RemoveWorkUnitMonopoly(MonopolyWorkUnit* LessWork);
 
 				////////////////////////////////////////////////////////////////////////////////
 				// Algorithm essentials
@@ -267,7 +296,7 @@ namespace Mezzanine
                 /// @return A pointer to the WorkUnit that could be executed or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
                 virtual iWorkUnit* GetNextWorkUnit();
 
-                /// @brief Just like @ref GetNextWorkUnit except that it searchs through and prioritizes work units with affinity.
+                /// @brief Just like @ref GetNextWorkUnit except that it also searches through and prioritizes work units with affinity too.
                 /// @return A pointer to the WorkUnit that could be executed *in the main thread* or a null pointer if that could not be acquired. This does not give ownership of that WorkUnit.
                 virtual iWorkUnit* GetNextWorkUnitAffinity();
 
@@ -389,8 +418,24 @@ namespace Mezzanine
                 /// use. If a frame took too long to execute this calculates that and returns.
                 /// @n @n
                 /// Wait 1/TargetFrame seconds, minus time already run. This also starts the timer for the next frame so
-                /// any other logic that needs to run after the frame does not interfere with frame timing.
+                /// any other logic that needs to run after the frame does not interfere with frame timing. Because
+                /// This is designed to wait fractions of a second any amount of waiting above 1 second fails automaticall.
                 void WaitUntilNextFrame();
+
+                ////////////////////////////////////////////////////////////////////////////////
+                // Basic container features
+
+                /// @brief Returns the amount of MonopolyWorkUnit ready to be scheduled
+                /// @return A Whole containing this amount
+                Whole GetWorkUnitMonopolyCount() const;
+
+                /// @brief Returns the amount of iWorkUnit ready to be scheduled in the Affinity pool
+                /// @return A Whole containing this amount
+                Whole GetWorkUnitAffinityCount() const;
+
+                /// @brief Returns the amount of iWorkUnit ready to be scheduled in the Main pool
+                /// @return A Whole containing this amount
+                Whole GetWorkUnitMainCount() const;
 
         };//FrameScheduler
     } // \Threading
