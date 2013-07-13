@@ -47,6 +47,7 @@
 
 #include "testenumerations.h"
 
+#include <set>
 #include <map>
 #include <iostream>
 
@@ -54,15 +55,48 @@ namespace Mezzanine
 {
     namespace Testing
     {
+        #ifndef TEST
+        /// @brief An easy way to add a test to the currently running UnitTestGroup
+        /// @param Cond A boolean operand of some kind
+        /// @param Name The name of the current test
+        #define TEST(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+        //Test(bool TestCondition, const String& TestName, TestResult IfFalse = Testing::Failed, TestResult IfTrue = Testing::Success);
+        #endif
+
+
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// @brief The name of a test paired with the Results of a test.
-        typedef std::pair<Mezzanine::String,TestResult> TestData;
+        //typedef std::pair<Mezzanine::String,TestResult> TestData;
+
+        /// @brief The information about a test and how to easily find it in the filesystem
+        struct TestData
+        {
+            /// @brief The name of a given test
+            Mezzanine::String TestName;
+            /// @brief How did the test turn out
+            TestResult Results;
+            /// @brief The function the test was called from
+            Mezzanine::String FunctionName;
+            /// @brief The File The test happened in
+            Mezzanine::String FileName;
+            /// @brief What line in the file this test occurred when the test was compiled
+            Mezzanine::Whole LineNumber;
+
+            TestData(const String& Name = "", TestResult Result = Testing::Success, const String& FuncName = "", const String& File = "", Mezzanine::Whole Line = 0)
+                : TestName(Name), Results(Result), FunctionName(FuncName), FileName(File), LineNumber(Line)
+            {}
+
+            bool operator<(const TestData& Rhs) const
+                { return this->TestName < Rhs.TestName; }
+        };
 
         /// @brief Just a map to store the content of TestData, incidentally it will lexographically sort the list of tests.
-        typedef std::map<Mezzanine::String,TestResult> TestDataStorage;
+        //typedef std::map<Mezzanine::String,TestResult> TestDataStorage;
+        typedef std::set<TestData> TestDataStorage;
 
         // Forward declaration.
         class UnitTestGroup;
+
         /// @brief A group of testnames and the Actual test that implement those test(s).
         typedef std::map<Mezzanine::String, UnitTestGroup*> CoreTestGroup;
 
@@ -72,7 +106,7 @@ namespace Mezzanine
         int PrintList(CoreTestGroup &TestGroups);
 
         /// @brief Trim the whitespace from a line of text and try to interpret the remains as TestResults and a testname
-        /// @param Line A line of Test that starts with whitespace, then a TestResult String, then has a whitesapce delimiter and a ends witht eh name of test.
+        /// @param Line A line of Test that starts with whitespace, then a TestResult String, then has a whitesapce delimiter and a ends with the name of test.
         /// @return A parsed TestData.
         TestData StringToTestData(Mezzanine::String Line);
 
@@ -97,7 +131,7 @@ namespace Mezzanine
                 /// @param RunInteractiveTests True if the interactive tests should run false otherwise/.RunInteractiveTests
                 /// @note One of two methods that must be implmented on a UnitTestGroup
                 virtual void RunTests(bool RunAutomaticTests, bool RunInteractiveTests)
-                {}
+                    {}
 
                 /// @brief Get Name of this UnitTestGroup
                 /// @return The string that must be type at the command line to run this testgroup, should be all lowercase.
@@ -112,13 +146,14 @@ namespace Mezzanine
                 void AddTestResult(TestData FreshMeat, OverWriteResults Behavior=OverWriteIfLessSuccessful);
 
                 /// @brief Add a test results without having to to construct a TestData first
-                /// @details It is expected that every member of a class in Mezzanine will be tested and its full name, include scoping operators, namespace,
+                /// @details It is recomended that every member of a class in Mezzanine will be tested and its full name, include scoping operators, namespace,
                 /// class and function name will here (include argnames if required). Functions outside of classes should use their namespace, functionname
                 /// and arguments if required as the testname.
                 /// Example TestNames (The Fresh parameter)
                 ///      "Mezzanine::Vector2::Vector2(Real,Real)"     //Test of the Vector2 Constructor that accepts 2 reals
                 ///      "Mezzanine::Vector2::operator+"              //Test of only operator+ on Vector2
-                ///      "operator<<(ostream,Vector2)"           //Test of streaming operator for vector2 in root namespace
+                ///      "operator<<(ostream,Vector2)"                //Test of streaming operator for vector2 in root namespace
+                /// @warning The name of the test can have no spaces in it. An exception will be thrown if found.
                 /// @param Fresh The name of the Test
                 /// @param Meat The actual TestResult
                 /// @param Behavior An OverWriteResults that defines the overwirte behavior of this function, defaults to OverWriteIfLessSuccessful
@@ -133,22 +168,18 @@ namespace Mezzanine
                 /// @param Output the stream to send the results to.
                 /// @param Summary Print Statistics at the end, not needed when sending results between processes. Defaults to true/enabled.
                 /// @param FullOutput Sometimes the user does not want to see each test results and just wants a little blurb. Defaults to true/enabled.
-                /// @param HeaderOutput makes the output a little more understandif it is short or needs to be copied into a spreadsheet. Defaults to true/enabled.
+                /// @param HeaderOutput Makes the output a little more understandable it is short or needs to be copied into a spreadsheet. Defaults to true/enabled.
                 virtual void DisplayResults(std::ostream& Output=std::cout, bool Summary = true, bool FullOutput = true, bool HeaderOutput = true);
 
-                /// @brief Convert a Bool to an added test.
-                /// @param TestName The name of the Test.
-                /// @param Condition if false converted to Failed and if true converted Success.
-                /// @return The value passed in as the condition.
-                virtual bool AddSuccessFromBool(Mezzanine::String TestName, bool Condition);
-
-                /// @brief Interpret Boolean value as a test result.
+                /// @brief Interpret Boolean value as a test result. Also Prepends the name of the current test, as returned by Name() + "::", to ease test scoping.
                 /// @warning IfFalse comes first in the argument list, This is because the common test cases have IfTrue = Testing::Success while IfFalse makes sense as other things
                 /// @param TestCondition The test itself or the results of it.
                 /// @param TestName The comple name of the test, used to track results.
                 /// @param IfFalse Defaults to Testing::Failed but can be whatever Testing::TestResult you want if a false passed as the TestCondition.
                 /// @param IfTrue Defaults to Testing::Success but can be whatever Testing::TestResult you want if a true passed as the TestCondition.
-                virtual void Test(bool TestCondition, const String& TestName, TestResult IfFalse = Testing::Failed, TestResult IfTrue = Testing::Success);
+                /// @param FuncName The function the test was called from, if blank
+                virtual void Test(bool TestCondition, const String& TestName, TestResult IfFalse = Testing::Failed, TestResult IfTrue = Testing::Success,
+                                  const String& FuncName = "", const String& File = "", Mezzanine::Whole Line = 0);
         };
 
 

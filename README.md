@@ -21,11 +21,14 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
-### July 10, 2013 ###
+### July 13, 2013 ###
+* Upgraded the TestData to contain more metadata than before.
+
+### July 12, 2013 ###
 * Added Automatic build support and IDE for doxygen
 * Corrected all doxygen warnings
 
-### July 9, 2013 ###
+### July 10, 2013 ###
 * Removing work units now works correctly and there are tests to prove it.
 * Add some methods to inspect the counts of work units in a framescheduler.
 * Since the API changed I bumped the minor version again, now the version is 1.4.0.
