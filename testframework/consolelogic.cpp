@@ -46,7 +46,6 @@
 #include "consolelogic.h"
 #include "consolestringmanipulation.h"
 
-#include <fstream>
 #include <vector>
 #include <sstream>
 
@@ -56,7 +55,6 @@ namespace Mezzanine
 {
     namespace Testing
     {
-
         int Usage(Mezzanine::String ThisName, CoreTestGroup& TestGroups)
         {
             std::cout   << std::endl << "Usage: " << ThisName << " [help] [summary] [testlist] [interactive|automatic] [all]\n\t[skipfile] Test Group Names ..." << std::endl << std::endl
@@ -82,48 +80,6 @@ namespace Mezzanine
             std::cout << std::endl;
 
             return ExitInvalidArguments;
-        }
-
-        void ClearTempFile()
-        {
-            std::ofstream FileToClear;
-            FileToClear.open(TempFile.c_str(),std::ios_base::out|std::ios_base::trunc); // Clear the work file.
-            FileToClear.close();
-        }
-
-        UnitTestGroup GetResultsFromTempFile()
-        {
-            UnitTestGroup Results;
-            std::vector<Mezzanine::String> FileContents;
-
-            char SingleLine[1024];
-            std::ifstream TheSourceFile(TempFile.c_str());
-            while( TheSourceFile.good() )
-            {
-                TheSourceFile.getline(SingleLine,1024);
-                FileContents.push_back(Mezzanine::String(SingleLine));
-            }
-
-            if(TheSourceFile.eof()) // We successfully reached the end of the file
-                { }
-            if(TheSourceFile.bad()) // We fail somehow
-                { std::cerr << "Error reading temp file." << std::endl; }
-            TheSourceFile.close();
-
-            for(std::vector<Mezzanine::String>::iterator Iter=FileContents.begin(); FileContents.end()!=Iter; ++Iter) // for each line in the file, that is now loaded in RAM
-            {
-                if(rtrim(*Iter).size()) // If there is more than whitespace
-                {
-                    Results.AddTestResult(StringToTestData(*Iter));
-                }
-            }
-
-            return Results;
-        }
-
-        void DeleteTempFile()
-        {
-            remove(TempFile.c_str());
         }
 
         TestResult GetTestAnswerFromStdin(Mezzanine::String Question)

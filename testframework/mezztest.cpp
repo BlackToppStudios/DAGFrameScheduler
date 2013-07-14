@@ -47,29 +47,123 @@
 #include <vector>
 #include <stdexcept>
 
+/// @internal
+/// @brief If this is passed to the command line the test is executed without launching a separate processs.
+/// @details In most cases each test is launched as a separate process and this is passed to it.
 static const Mezzanine::String MemSpaceArg("inthismemoryspacetheworkshallbedone");
+
+/// @internal
+/// @brief This is the name of the file used to communicate results from child processes
+/// @warning This variable is used to create temporary files in a percieved insecure way
+/// Everything will be fine as long as nothing else writes to this this file during or
+/// between Tests. If something does, then you probably have big enough problems you
+/// shouldn't be developing software until that is fixed.
+static const String TempFile("UnitTestWork.txt");
+
+/// @internal
+/// @brief This will store the name of the command that launched this executable at run time
 Mezzanine::String CommandName;
 
-// this does all the heavy lifting
+/// @brief Write the passed UnitTestGroup to an XML temp file
+/// @param TestsToWrite Teh group of tests to write.
+void WriteTempFile(const UnitTestGroup &TestsToWrite)
+{
+    std::ofstream File(TempFile.c_str());
+    File << TestsToWrite.GetAsXML();
+    File.close();
+}
+
+/// @internal
+/// @brief This will open then parse the contents of the file specified by TempFile and interpret any test results located
+/// @throw This can throw any exception that the C++ filestream classes can throw.
+/// @return This "reads" the temp file and interprets it. It tries to extract the name of the test as the whole of a line minus
+/// the last word. The last word is then converted into a @ref TestResult using @ref StringToTestResult . Any Whitespace between
+/// between the end of the last word and the end of the test name is dropped. All lines are interpretted this way and returned
+/// as a single @ref UnitTestGroup.
+UnitTestGroup GetResultsFromTempFile()
+{
+    UnitTestGroup Results;
+
+    pugi::xml_document Doc;
+
+    std::ifstream InputFile(TempFile.c_str());
+    pugi::xml_parse_result LoadResults = Doc.load(InputFile);
+
+    if(LoadResults)
+    {
+        Results.AddTestsFromXML(Doc.first_child());
+    }else{
+        std::stringstream FailStream;
+        FailStream << "Failure loading tempfile from SubProcess: "
+                   << LoadResults.description() << std::endl
+                   << "At " << LoadResults.offset << " bytes into the file.";
+        throw runtime_error(FailStream.str());
+    }
+
+
+
+    return Results;
+}
+
+/// @internal
+/// @brief Empty the file specified by TempFile
+/// @warning This doesn't ask for permission and can't easily be cancelled or recovered
+/// from. This will open, then erase the contents of the file.
+/// @throw This can throw any exception that the C++ filestream classes can throw.
+void ClearTempFile()
+{
+    std::ofstream FileToClear;
+    FileToClear.open(TempFile.c_str(),std::ios_base::out|std::ios_base::trunc); // Clear the work file.
+    FileToClear.close();
+}
+
+/// @brief Attempts to delete TempFile. Silently fails if not possible.
+void DeleteTempFile()
+    { std::remove(TempFile.c_str()); }
+
+
+/// @internal
+/// @brief This aggregates the results of all the other test groups.
 class AllUnitTestGroups : public UnitTestGroup
 {
     public:
+        /// @internal
+        /// @brief Should all tests be run.
         bool RunAll;
+
+        /// @internal
+        /// @brief Should automatic tests be run
         bool RunAutomaticTests;
+
+        /// @internal
+        /// @brief Should interactive tests be run
         bool RunInteractiveTests;
+
+        /// @internal
+        /// @brief Should the test be run without launching another process.
         bool ExecuteInThisMemorySpace;
+
+        /// @internal
+        /// @brief A collection of all the test groups
         GlobalCoreTestGroup& TestGroups;
 
-        AllUnitTestGroups(GlobalCoreTestGroup& GlobalTestGroups) :
-            RunAll(true),
-            RunAutomaticTests(false),
-            RunInteractiveTests(false),
-            ExecuteInThisMemorySpace(false),
-            TestGroups(GlobalTestGroups)
+        /// @internal
+        /// @brief Constructor
+        /// @param GlobalTestGroups The collection of tests that could be run
+        AllUnitTestGroups(GlobalCoreTestGroup& GlobalTestGroups)
+            : RunAll(true),
+              RunAutomaticTests(false),
+              RunInteractiveTests(false),
+              ExecuteInThisMemorySpace(false),
+              TestGroups(GlobalTestGroups)
         {}
 
+        /// @internal
+        /// @brief When determining what tests to run the name are aggregated here
         std::vector<Mezzanine::String> TestGroupsToRun;           //List of tests to run
 
+        /// @internal
+        /// @brief Determine which tests need to be run and run them
         virtual void RunTests()
         {
             if (RunAutomaticTests==RunInteractiveTests && RunInteractiveTests==false)   // enforce running automatic tests if no type of test is specified
@@ -88,6 +182,7 @@ class AllUnitTestGroups : public UnitTestGroup
                     try{
                         TestGroups[*CurrentTestName]->RunTests(RunAutomaticTests, RunInteractiveTests);
                     }catch (std::exception e){
+                        std::cerr << std::endl << e.what() << std::endl;
                         // maybe we should log or somehting.
                     }
 
@@ -97,7 +192,6 @@ class AllUnitTestGroups : public UnitTestGroup
                 for(std::vector<Mezzanine::String>::iterator CurrentTestName=TestGroupsToRun.begin(); CurrentTestName!=TestGroupsToRun.end(); ++CurrentTestName )
                 {
                     ClearTempFile();
-                    //std::cout << String(CommandName + " " + *CurrentTestName + " " + MemSpaceArg) << std::endl;
                     if(system(String(CommandName + " " + *CurrentTestName + " " + MemSpaceArg + " " + Mezzanine::String(RunAutomaticTests?"automatic ":"") + Mezzanine::String(RunInteractiveTests?"interactive ":"")).c_str()))   // Run a single unit test as another process
                     {
                         this->AddTestResult(String("Process::" + *CurrentTestName), Testing::Failed);
@@ -106,27 +200,45 @@ class AllUnitTestGroups : public UnitTestGroup
                     }
 
                     (*this) += GetResultsFromTempFile();
-
                 }
                 DeleteTempFile();
             } // \if(ExecuteInThisMemorySpace)
         } // \function
 
-        virtual void DisplayResults(std::ostream& Output=std::cout, bool Summary = true, bool FullOutput = true, bool HeaderOutput = true)
+        /// @internal
+        /// @brief Display the results either to the console or to the temp file for the main process to pick up.
+        /// @param Output Where to present the output, this only works for the main process. Defaults to std::cout.
+        /// @param Summary Passed onto the UnitTests UnitTestGroup::DisplayResults if run from the main process.
+        /// @param FullOutput Passed onto the UnitTests UnitTestGroup::DisplayResults if run from the main process.
+        /// @param HeaderOutput Passed onto the UnitTests UnitTestGroup::DisplayResults if run from the main process.
+        virtual void DisplayResults(std::ostream& Output=std::cout,
+                                    bool Summary = true,
+                                    bool FullOutput = true,
+                                    bool HeaderOutput = true)
         {
             if(ExecuteInThisMemorySpace) // we are running a test in a seperate process, so we need to control the output for communcation purposes
             {
-                std::ofstream OutputFile(TempFile.c_str(),std::ios_base::out|std::ios_base::trunc);
-                UnitTestGroup::DisplayResults(OutputFile,false,true,false);
-                OutputFile.close();
-
+                WriteTempFile(*this);
+                //std::ofstream OutputFile(TempFile.c_str(),std::ios_base::out|std::ios_base::trunc);
+                //UnitTestGroup::DisplayResults(OutputFile,false,true,false);
+                //OutputFile.close();
             }else{
                 UnitTestGroup::DisplayResults(Output, Summary, FullOutput, HeaderOutput);
             }
         }
 };
 
-/// @brief This
+/// @brief This is the entry point for the unit test executable.
+/// @details This will contruct an AllUnitTestGroups with the listing of unit tests
+/// available from autodetect.h. It will then interpret any command line arguments
+/// and direct the created AllUnitTestGroups about which tests to run and how to run
+/// them. In addition to sending the results to the standard output a copy of the
+/// test results will be written to TestResults.txt, if configured to do so.
+/// @return This will return EXIT_SUCCESS if the tests ran, even if some or all failed,
+/// even if a child process segfaulted, but will return other statuses only if the main
+/// process fails. If the main process cannot create child processes it will return EXIT_FAILURE.
+/// @param argc Is interpretted as the amount of passed arguments
+/// @param argv Is interpretted as the arguments passed in from the launching shell.
 int main (int argc, char** argv)
 {
     GlobalCoreTestGroup TestGroups;

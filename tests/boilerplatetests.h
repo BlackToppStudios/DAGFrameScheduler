@@ -42,6 +42,8 @@
 
 #include "mezztest.h"
 
+#include <stdexcept> //only used to throw for TEST_THROW
+
 /// @file
 /// @brief This file should be used as template for building future Unit Tests
 
@@ -57,33 +59,30 @@ class boilerplatetests : public UnitTestGroup
         virtual String Name()
             { return String("boilerplate"); }
 
-        /// @copydoc Mezzanine::Testing::UnitTestGroup::RunTests
-        /// @detail provides on Sample interactive and one sample automatic test.
-        virtual void RunTests(bool RunAutomaticTests, bool RunInteractiveTests)
+        /// @brief This is called when Automatic tests are run
+        void RunAutomaticTests()
         {
-            if (RunAutomaticTests)
-            {
-                TestResult temp;
+            // The TEST macro will capture Line, function file Metadata while
+            TEST(true,"AutomaticTest");
+            //TEST(false,"AutomaticFail");
 
-                if(1)
-                    { temp=Success; }
-                else
-                    { temp=Testing::Failed; }
-                AddTestResult("BoilerPlate::Automatic", temp);
+            TestResult Answer = Testing::Success;
+            TEST_RESULT(Answer, "AutomaticTestResult");
 
-            }else{
-                AddTestResult("BoilerPlate::Automatic", Skipped);
-            }
-
-            if (RunInteractiveTests)
-            {
-                TestResult temp;
-                temp = GetTestAnswerFromStdin( "Is this a question? ");
-                AddTestResult("BoilerPlate::Interactive", temp);
-            }else{
-                AddTestResult("BoilerPlate::Interactive", Skipped);
-            }
+            // Multiline example
+            TEST_THROW( std::runtime_error&, \
+                        throw std::runtime_error("oh noes!"); \
+                        , "AutomaticTestThrow");
+            //TEST_THROW(std::runtime_error, throw "oh noes!";, "AutomaticTestThrow"); //Throws unexpected type so it fails
         }
+
+        /// @brief This is called when Interactive tests are run
+        void RunInteractiveTests()
+        {
+            TestResult Answer = GetTestAnswerFromStdin( "Is this a question? ");
+            TEST_RESULT(Answer, "BoilerPlate::Interactive");
+        }
+
 };
 
 #endif

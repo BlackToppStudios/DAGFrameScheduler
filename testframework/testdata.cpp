@@ -48,6 +48,7 @@
 
 #include <vector>
 #include <stdexcept>
+#include <sstream>
 
 using namespace Mezzanine;
 
@@ -55,6 +56,38 @@ namespace Mezzanine
 {
     namespace Testing
     {
+        TestData::TestData(const String& Name,
+                 TestResult Result,
+                 const String& FuncName,
+                 const String& File,
+                 Mezzanine::Whole Line)
+            : TestName(Name), Results(Result), FunctionName(FuncName), FileName(File), LineNumber(Line)
+        {}
+
+        TestData::TestData(pugi::xml_node Node)
+            : TestName( Node.attribute("TestName").as_string() ),
+              Results( StringToTestResult(Node.attribute ("Results").as_string())),
+              FunctionName( Node.attribute("FunctionName").as_string() ),
+              FileName( Node.attribute("FileName").as_string() ),
+              LineNumber( Node.attribute("LineNumber").as_uint() )
+        {}
+
+        bool TestData::operator<(const TestData& Rhs) const
+            { return this->TestName < Rhs.TestName; }
+
+        String TestData::GetAsXML() const
+        {
+            std::stringstream Snippet;
+            Snippet << "<TestData "
+                    << "TestName=\"" << TestName << "\" "
+                    << "Results=\"" << TestResultToString(Results) << "\" "
+                    << "FunctionName=\"" << FunctionName << "\" "
+                    << "FileName=\"" << FileName << "\" "
+                    << "LineNumber=\"" << LineNumber << "\" "
+                    << "/>";
+            return Snippet.str();
+        }
+
         int PrintList(CoreTestGroup& TestGroups)
         {
             for(CoreTestGroup::iterator Iter=TestGroups.begin(); Iter!=TestGroups.end(); ++Iter)
@@ -75,38 +108,75 @@ namespace Mezzanine
             LongestNameLength(0)
         {}
 
-        void UnitTestGroup::AddTestResult(TestData FreshMeat, OverWriteResults Behavior)
+        void UnitTestGroup::RunTests(bool RunAuto, bool RunInteractive)
+        {
+            if(RunAuto)
+                { RunAutomaticTests(); }
+            else
+                { AddTestResult( TestData("AutomaticTests",Testing::Skipped, "RunTests") );}
+
+            if(RunInteractive)
+                { RunInteractiveTests(); }
+            else
+                { AddTestResult( TestData("InteractiveTests",Testing::Skipped, "RunTests") );}
+        }
+
+        void UnitTestGroup::RunAutomaticTests()
+        {
+
+        }
+
+        void UnitTestGroup::RunInteractiveTests()
+        {
+
+        }
+
+        Mezzanine::String UnitTestGroup::Name()
+            { return ""; }
+
+
+        void UnitTestGroup::AddTestResult(TestData CurrentTest, OverWriteResults Behavior)
         {
             bool Added=false;
 
-            if(FreshMeat.TestName.npos != FreshMeat.TestName.find(" "))
+            if(CurrentTest.TestName.npos != CurrentTest.TestName.find(" "))
+                { throw std::invalid_argument("Invalid Test Name, contains one or more space character ( ), TestName: \"" + CurrentTest.TestName + "\""); }
+            if(CurrentTest.TestName.npos != CurrentTest.TestName.find("\""))
+                { throw std::invalid_argument("Invalid Test Name, contains one or more double quote (\") character(s), TestName: \"" + CurrentTest.TestName + "\""); }
+
+            if(this->Name().length())
             {
-                { throw std::invalid_argument("Invalid Test Name, contains space character(s), TestName: \"" + FreshMeat.TestName + "\""); }
+                if(this->Name().npos != this->Name().find(" "))
+                    { throw std::invalid_argument("Invalid UnitTestGroup Name, contains one or more space character ( ), name: \"" + this->Name() + "\""); }
+                if(this->Name().npos != this->Name().find("\""))
+                    { throw std::invalid_argument("Invalid UnitTestGroup Name, contains one or more double quote (\"), name: \"" + this->Name() + "\""); }
+                CurrentTest.TestName = this->Name() + "::" + CurrentTest.TestName;
             }
 
-            TestDataStorage::iterator PreExisting = this->find(FreshMeat.TestName);
+
+            TestDataStorage::iterator PreExisting = this->find(CurrentTest.TestName);
             if(this->end()!=PreExisting)
             {
                 switch(Behavior)
                 {
                     case OverWriteIfLessSuccessful:
-                        if (PreExisting->Results <= FreshMeat.Results)
+                        if (PreExisting->Results <= CurrentTest.Results)
                         {
                             this->erase(PreExisting);
-                            this->insert(FreshMeat);
+                            this->insert(CurrentTest);
                             Added=true;
                         }
                         break;
                     case OverWrite:
                         this->erase(PreExisting);
-                        this->insert(FreshMeat);
+                        this->insert(CurrentTest);
                         Added=true;
                         break;
                     case OverWriteIfMoreSuccessful:
-                        if (PreExisting->Results >= FreshMeat.Results)
+                        if (PreExisting->Results >= CurrentTest.Results)
                         {
                             this->erase(PreExisting);
-                            this->insert(FreshMeat);
+                            this->insert(CurrentTest);
                             Added=true;
                         }
                         break;
@@ -114,20 +184,20 @@ namespace Mezzanine
                         break;
                 }
             }else{
-                this->insert(FreshMeat);
+                this->insert(CurrentTest);
                 Added=true;
             }
 
             if (Added)
             {
-                if(FreshMeat.TestName.length()>LongestNameLength)
-                    { LongestNameLength=FreshMeat.TestName.length(); }
+                if(CurrentTest.TestName.length()>LongestNameLength)
+                    { LongestNameLength=CurrentTest.TestName.length(); }
             }
         }
 
         void UnitTestGroup::AddTestResult(const Mezzanine::String Fresh, TestResult Meat, OverWriteResults Behavior)
         {
-            std::cout << "Noting result of " << Fresh << " as " << TestResultToString(Meat) << std::endl;
+            std::cout << "Noting result of " << this->Name() + "::" + Fresh << " as " << TestResultToString(Meat) << std::endl;
             AddTestResult(TestData(Fresh,Meat),Behavior);
         }
 
@@ -140,6 +210,23 @@ namespace Mezzanine
             return *this;
         }
 
+        void UnitTestGroup::AddTestsFromXML(pugi::xml_node Node)
+        {
+            if(String("UnitTestGroup")!=Node.name())
+                { throw std::invalid_argument("UnitTestGroup::AddTestsFromXML can only handle XML with \"UnitTestGroup\" as passed element"); }
+            for(pugi::xml_node::iterator Iter = Node.begin(); Iter!=Node.end(); Iter++)
+                { this->AddTestResult(TestData(*Iter)); }
+        }
+
+        String UnitTestGroup::GetAsXML() const
+        {
+            String Results("<UnitTestGroup>");
+            for (iterator Iter=this->begin(); Iter!=this->end(); Iter++)
+                { Results += "\n  " + Iter->GetAsXML(); }
+            Results += "\n</UnitTestGroup>";
+            return Results;
+        }
+
         void UnitTestGroup::DisplayResults(std::ostream& Output, bool Summary, bool FullOutput, bool HeaderOutput)
         {
             std::vector<unsigned int> TestCounts; // This will store the counts of the Sucesses, failures, etc...
@@ -148,7 +235,6 @@ namespace Mezzanine
             if(FullOutput && HeaderOutput) // No point in displaying the header without the other content.
             {
                 Mezzanine::String TestName("Test Name");
-
                 Output << std::endl << " " << TestName << MakePadding(TestName, LongestNameLength) << "Result" << std::endl;
             }
 
@@ -157,7 +243,18 @@ namespace Mezzanine
                 if(FullOutput)
                 {
                     Output << Iter->TestName << MakePadding(Iter->TestName, LongestNameLength+1) << TestResultToString(Iter->Results);
-                    //Output << " " << Iter->FileName;
+                    if(Iter->Results) // Not Testing::Success
+                    {
+                        Output << "\t";
+                        if(Iter->FileName.length())
+                            { Output << " File: " << Iter->FileName; }
+                        if(Iter->FunctionName.length())
+                            { Output << " Function: " << Iter->FunctionName; }
+                        if(Iter->LineNumber)
+                            { Output << " Line: " << Iter->LineNumber; }
+                        if(Iter->FileName.length()==0 && Iter->FunctionName.length() == 0 && Iter->LineNumber==0)
+                            { Output << " No Metadata available able issue, use TEST to capture"; }
+                    }
                     Output << std::endl;
                 }
                 TestCounts.at((unsigned int)Iter->Results)++; // Count this test result
@@ -179,9 +276,9 @@ namespace Mezzanine
         {
             if(TestCondition)
             {
-                AddTestResult(TestName, IfTrue);
+                AddTestResult( TestData(TestName, IfTrue, FuncName, File, Line) );
             }else{
-                AddTestResult(TestName, IfFalse);
+                AddTestResult( TestData(TestName, IfFalse, FuncName, File, Line) );
             }
         }
 

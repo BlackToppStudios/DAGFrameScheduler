@@ -46,6 +46,7 @@
 #include "datatypes.h"
 
 #include "testenumerations.h"
+#include "pugixml.h"
 
 #include <set>
 #include <map>
@@ -56,11 +57,42 @@ namespace Mezzanine
     namespace Testing
     {
         #ifndef TEST
-        /// @brief An easy way to add a test to the currently running UnitTestGroup
-        /// @param Cond A boolean operand of some kind
-        /// @param Name The name of the current test
-        #define TEST(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
-        //Test(bool TestCondition, const String& TestName, TestResult IfFalse = Testing::Failed, TestResult IfTrue = Testing::Success);
+            /// @brief The easiest way to add a test to the currently running UnitTestGroup.
+            /// This captures test location meta data and should be considered the default way to record tests
+            /// @param Cond A boolean operand of some kind
+            /// @param Name The name of the current test
+            #define TEST(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+        #endif
+
+        #ifndef TEST_WARN
+            /// @brief Just like TEST but if the test fails only a warning is added.
+            /// This captures test location meta data and should be considered the default way to record tests that warn instead of fail
+            /// @param Cond A boolean operand of some kind
+            /// @param Name The name of the current test
+            #define TEST_WARN(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+        #endif
+
+        #ifndef TEST_RESULT
+            /// @brief An easy way to add a test and associated data to the currently running UnitTestGroup
+            /// This captures test location meta data and should be considered a good way to record tests that do not easily break down to a single conditional.
+            /// @param ExistingResult A TestResult To be added directy
+            /// @param Name The name of the current test
+            #define TEST_RESULT(ExistingResult, Name) AddTestResult( TestData( (Name), (ExistingResult), __func__, __FILE__, __LINE__)) ;
+        #endif
+
+        #ifndef TEST_THROW
+            /// @brief An easy way to add a test whether or not a function/code snippet throws the way planned.
+            /// This captures test location meta data and should be considered the default way to capture exception tests
+            /// @param ExpectThrown The type of the thing that should be thrown
+            /// @param Name The name of the current test
+            #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
+            try {                                                                                       \
+                CodeThatThrows;                                                                         \
+            } catch (ExpectThrown) {                                                                    \
+                AddTestResult( TestData( (Name), Testing::Success, __func__, __FILE__, __LINE__)) ;     \
+            } catch (...) {                                                                             \
+                AddTestResult( TestData( (Name), Testing::Failed, __func__, __FILE__, __LINE__)) ;      \
+            }
         #endif
 
 
@@ -82,16 +114,33 @@ namespace Mezzanine
             /// @brief What line in the file this test occurred when the test was compiled
             Mezzanine::Whole LineNumber;
 
-            TestData(const String& Name = "", TestResult Result = Testing::Success, const String& FuncName = "", const String& File = "", Mezzanine::Whole Line = 0)
-                : TestName(Name), Results(Result), FunctionName(FuncName), FileName(File), LineNumber(Line)
-            {}
+            /// @brief Create a TestData
+            /// @param Name the name of the test, defaults to "".
+            /// @param Result A TestResult, defaults to Testing::Success.
+            /// @param FuncName The name of the function this test was called from, Defaults to "".
+            /// @param File The name of the file in which the test exists, Defaults to "".
+            /// @param Line The line in the file in which the test exists, Defaults to 0.
+            TestData(const String& Name = "",
+                     TestResult Result = Testing::Success,
+                     const String& FuncName = "",
+                     const String& File = "",
+                     Mezzanine::Whole Line = 0);
 
-            bool operator<(const TestData& Rhs) const
-                { return this->TestName < Rhs.TestName; }
+            /// @brief Create Test data from xml.
+            /// @param Node The XMl node to create this from
+            TestData(pugi::xml_node Node);
+
+            /// @brief Used to sort TestData in std::std and other sorted containers, by TestName.
+            /// @param Rhs the right hand operand when using the less than comparison operator.
+            /// @return A bool with the same value as this->TestName < Rhs.TestName.
+            bool operator<(const TestData& Rhs) const;
+
+            /// @brief Return a snippet of xml describing this TestData
+            /// @return A String with a single XML element with an attribute for each of the TestName, Results, FunctionName, FileName, LineNumber
+            String GetAsXML() const;
         };
 
         /// @brief Just a map to store the content of TestData, incidentally it will lexographically sort the list of tests.
-        //typedef std::map<Mezzanine::String,TestResult> TestDataStorage;
         typedef std::set<TestData> TestDataStorage;
 
         // Forward declaration.
@@ -122,47 +171,52 @@ namespace Mezzanine
                 /// @brief Default constructor
                 UnitTestGroup();
 
-        // make iterating over tests that could be possible
-        // use to set skips and run
-
-                /// @brief This is expected to run all the tests that meet the criteria passed in.
+                /// @brief This will call RunAutomaticTests based on the values passed.
                 /// @details All test results should be inserted using AddTestResult to allow the returning of results.
                 /// @param RunAutomaticTests True if the automatic tests should be run false if they should
                 /// @param RunInteractiveTests True if the interactive tests should run false otherwise/.RunInteractiveTests
                 /// @note One of two methods that must be implmented on a UnitTestGroup
-                virtual void RunTests(bool RunAutomaticTests, bool RunInteractiveTests)
-                    {}
+                virtual void RunTests(bool RunAuto, bool RunInteractive);
+
+                /// @brief This should be overloaded to run all tests that do require not user interaction
+                virtual void RunAutomaticTests();
+
+                /// @brief This should be overloaded to run all tests require user interaction
+                virtual void RunInteractiveTests();
 
                 /// @brief Get Name of this UnitTestGroup
                 /// @return The string that must be type at the command line to run this testgroup, should be all lowercase.
                 /// @note One of two methods that must be implmented on a UnitTestGroup
-                virtual Mezzanine::String Name()
-                    { return String(); }
+                virtual Mezzanine::String Name();
 
                 /// @brief Its expected that tests will be inserted using this
                 /// @details This will automate tracking of the most and least successful tests
                 /// @param FreshMeat The New test results and name
                 /// @param Behavior An OverWriteResults that defines the overwirte behavior of this function, defaults to OverWriteIfLessSuccessful
-                void AddTestResult(TestData FreshMeat, OverWriteResults Behavior=OverWriteIfLessSuccessful);
+                void AddTestResult(TestData CurrentTest, OverWriteResults Behavior=OverWriteIfLessSuccessful);
 
                 /// @brief Add a test results without having to to construct a TestData first
-                /// @details It is recomended that every member of a class in Mezzanine will be tested and its full name, include scoping operators, namespace,
-                /// class and function name will here (include argnames if required). Functions outside of classes should use their namespace, functionname
-                /// and arguments if required as the testname.
-                /// Example TestNames (The Fresh parameter)
-                ///      "Mezzanine::Vector2::Vector2(Real,Real)"     //Test of the Vector2 Constructor that accepts 2 reals
-                ///      "Mezzanine::Vector2::operator+"              //Test of only operator+ on Vector2
-                ///      "operator<<(ostream,Vector2)"                //Test of streaming operator for vector2 in root namespace
+                /// @details This prepends the name of this UnitTestGroup and "::" to the
                 /// @warning The name of the test can have no spaces in it. An exception will be thrown if found.
-                /// @param Fresh The name of the Test
-                /// @param Meat The actual TestResult
+                /// @param TestName The name of the Test
+                /// @param TResult The actual TestResult
                 /// @param Behavior An OverWriteResults that defines the overwirte behavior of this function, defaults to OverWriteIfLessSuccessful
-                void AddTestResult(const Mezzanine::String Fresh, TestResult Meat, OverWriteResults Behavior=OverWriteIfLessSuccessful);
+                void AddTestResult(const Mezzanine::String TestName, TestResult TResult, OverWriteResults Behavior=OverWriteIfLessSuccessful);
 
                 /// @brief Add all the items in another UnitTestGroup to this one
                 /// @param rhs The item on the right hand side of the +=.
                 /// @return A reference to this is returned allowiong operator chaining.
                 const UnitTestGroup& operator+=(const UnitTestGroup& rhs);
+
+                /// @brief Create and add all the tests in a given piece of parsed xml
+                /// @param Node A pugi::xml_node referencing a UnitTestGroup
+                void AddTestsFromXML(pugi::xml_node Node);
+
+                /// @brief Get the Whole UnitTestGroup as a valid XML document
+                /// @details The root element of the XMl document is named UnitTestGroup
+                /// and it will contain the XML from each TestData this contains
+                /// @return A String containing some XML
+                String GetAsXML() const;
 
                 /// @brief Print the results or save them to a file.
                 /// @param Output the stream to send the results to.
