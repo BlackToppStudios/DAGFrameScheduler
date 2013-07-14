@@ -69,7 +69,7 @@ namespace Mezzanine
             /// This captures test location meta data and should be considered the default way to record tests that warn instead of fail
             /// @param Cond A boolean operand of some kind
             /// @param Name The name of the current test
-            #define TEST_WARN(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+            #define TEST_WARN(Cond, Name) Test( (Cond), (Name), Testing::Warning, Testing::Success, __func__, __FILE__, __LINE__ );
         #endif
 
         #ifndef TEST_RESULT
