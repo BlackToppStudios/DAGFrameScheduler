@@ -40,7 +40,7 @@
 #ifndef _randomtests_h
 #define _randomtests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 

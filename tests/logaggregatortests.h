@@ -40,7 +40,7 @@
 #ifndef _logaggregatortests_h
 #define _logaggregatortests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 #include "monopolytests.h"

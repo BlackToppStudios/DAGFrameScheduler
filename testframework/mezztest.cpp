@@ -40,7 +40,7 @@
 
 #include "autodetect.h"
 #include "datatypes.h"
-#include "main.h"
+#include "mezztest.h"
 
 #include <cstdlib> // For system
 #include <fstream>

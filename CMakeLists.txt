@@ -223,10 +223,9 @@ set( ${PROJECT_NAME}_exe_headers
 
         "${RootProjectSourceDir}testframework/consolelogic.h"
         "${RootProjectSourceDir}testframework/consolestringmanipulation.h"
-        "${RootProjectSourceDir}testframework/main.h"
+        "${RootProjectSourceDir}testframework/mezztest.h"
         "${RootProjectSourceDir}testframework/testdata.h"
         "${RootProjectSourceDir}testframework/testenumerations.h"
-        "${RootProjectSourceDir}testframework/testtools.h"
 )
 
 # Source files on the executable/tests need.
@@ -235,10 +234,9 @@ set( ${PROJECT_NAME}_exe_sources
 
         "${RootProjectSourceDir}testframework/consolelogic.cpp"
         "${RootProjectSourceDir}testframework/consolestringmanipulation.cpp"
-        "${RootProjectSourceDir}testframework/main.cpp"
+        "${RootProjectSourceDir}testframework/mezztest.cpp"
         "${RootProjectSourceDir}testframework/testdata.cpp"
         "${RootProjectSourceDir}testframework/testenumerations.cpp"
-        "${RootProjectSourceDir}testframework/testtools.cpp"
 )
 
 ##############################################################################

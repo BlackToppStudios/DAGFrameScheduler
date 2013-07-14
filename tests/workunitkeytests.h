@@ -40,7 +40,7 @@
 #ifndef _workunitkeytests_h
 #define _workunitkeytests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 #include "workunittests.h"

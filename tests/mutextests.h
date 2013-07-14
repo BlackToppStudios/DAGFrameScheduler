@@ -40,7 +40,7 @@
 #ifndef _mutextests_h
 #define _mutextests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 

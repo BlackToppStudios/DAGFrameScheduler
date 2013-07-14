@@ -40,7 +40,7 @@
 #ifndef _threadtests_h
 #define _threadtests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 

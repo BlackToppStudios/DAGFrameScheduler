@@ -40,7 +40,7 @@
 #ifndef _rollingaveragetests_h
 #define _rollingaveragetests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 

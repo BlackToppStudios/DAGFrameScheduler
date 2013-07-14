@@ -40,7 +40,7 @@
 #ifndef _barriertests_h
 #define _barriertests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 

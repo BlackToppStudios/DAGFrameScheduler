@@ -40,7 +40,7 @@
 #ifndef _monopolytests_h
 #define _monopolytests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 #include "workunittests.h"

@@ -40,7 +40,7 @@
 #ifndef _frameschedulertests_h
 #define _frameschedulertests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 #include "workunittests.h"

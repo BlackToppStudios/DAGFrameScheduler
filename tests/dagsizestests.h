@@ -40,7 +40,7 @@
 #ifndef _sizestests_h
 #define _sizestests_h
 
-#include "main.h"
+#include "mezztest.h"
 #include "dagrandomtests.h"
 
 #include "dagframescheduler.h"

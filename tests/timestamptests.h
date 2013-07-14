@@ -40,7 +40,7 @@
 #ifndef _timestamptests_h
 #define _timestamptests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 

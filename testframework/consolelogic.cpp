@@ -48,6 +48,7 @@
 
 #include <fstream>
 #include <vector>
+#include <sstream>
 
 using namespace Mezzanine;
 
@@ -123,6 +124,41 @@ namespace Mezzanine
         void DeleteTempFile()
         {
             remove(TempFile.c_str());
+        }
+
+        TestResult GetTestAnswerFromStdin(Mezzanine::String Question)
+        {
+            Mezzanine::String Input;
+            char Answer;
+
+            while(true)
+            {
+                std::cout << Question;
+                getline(std::cin, Input);
+                std::stringstream InputStream(Input);
+                if (InputStream >> Answer)
+                {
+                    Answer=tolower(Answer);
+                    if (Answer=='t' || Answer=='y' || Answer=='f' || Answer=='n' || Answer=='c' || Answer=='u' || Answer=='i')
+                        { break; }
+                }
+
+                std::cout << std::endl << "Expected (T)rue/(Y)es for Success, (F)alse/(N)o for Failure," << std::endl << " (C)anceled to cancel this test, or (U)nsure/(I)nconclusive if you don't know." << std::endl << std::endl;
+            }
+
+            switch(Answer)
+            {
+                case 't': case 'y':
+                    return Success;
+                case 'f': case 'n':
+                    return Failed;
+                case 'c':
+                    return Cancelled;
+                case 'u': case 'i':
+                    return Inconclusive;
+                default:
+                    return Unknown;
+            }
         }
 
     }// Testing

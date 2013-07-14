@@ -37,41 +37,12 @@
    Joseph Toppi - toppij@gmail.com
    John Blackwood - makoenergy02@gmail.com
 */
-#ifndef _testtools_h
-#define _testtools_h
+#ifndef _mezztests_h
+#define _mezztests_h
 
-/// @file
-/// @brief Some random function to ease the lives of test developers.
-
-#include "datatypes.h"
-
+#include "consolelogic.h"
+#include "consolestringmanipulation.h"
+#include "testdata.h"
 #include "testenumerations.h"
-
-namespace Mezzanine
-{
-    namespace Testing
-    {
-
-        /// @brief Asked the user a question on the std output and get a TestResult as an answer
-        /// @param Question The question to ask the user.
-        /// @details The following strings provide the following results.
-        ///     -  "True", "Yes" as Success
-        ///     -  "False", "No" as Failed
-        ///     -  "Cancel" as "Canceled"
-        ///     -  "Unsure", "Inconclusive" as Inconclusive
-        /// @return Depends on users input
-        TestResult GetTestAnswerFromStdin(Mezzanine::String Question);
-
-        // @brief Create and initialize a instance of the Entrosol, the engine
-        // @details This creates and Entresol with one window(named "Window1"),
-        // one camera (named "Camera1", and a postmainloops event callback that
-        // ends execution after 120 frames. After this is called InitEngine
-        // must be called to start the engine and have the window displayed.
-        // @param CustomManagers
-        // @return A pointer to intialized entrosol
-        //CountedPtr<Entresol> SimpleEngineStartup(std::vector<ManagerBase*> CustomManagers = std::vector<ManagerBase*>());
-
-    }// Testing
-}// Mezzanine
 
 #endif

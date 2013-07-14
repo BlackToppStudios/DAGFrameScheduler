@@ -40,7 +40,7 @@
 #ifndef _asyncworkunittests_h
 #define _asyncworkunittests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 

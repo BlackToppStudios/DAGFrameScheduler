@@ -40,7 +40,7 @@
 #ifndef _dagperformancetests_h
 #define _dagperformancetests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 #include "dagframescheduler.h"
 #include "dagrandomtests.h"

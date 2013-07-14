@@ -65,6 +65,9 @@ namespace Mezzanine
         /// shouldn't be developing software until that is fixed.
         static const String TempFile("UnitTestWork.txt");
 
+        /// @brief
+        void WriteTempFile();
+
         /// @brief Empty the file specified by TempFile
         /// @warning This doesn't ask for permission and can't easily be cancelled or recovered
         /// from. This will open, then erase the contents of the file.
@@ -82,6 +85,16 @@ namespace Mezzanine
 
         /// @brief Attempts to delete TempFile. Silently fails if not possible.
         void DeleteTempFile();
+
+        /// @brief Asked the user a question on the std output and get a TestResult as an answer
+        /// @param Question The question to ask the user.
+        /// @details The following strings provide the following results.
+        ///     -  "True", "Yes" as Success
+        ///     -  "False", "No" as Failed
+        ///     -  "Cancel" as "Canceled"
+        ///     -  "Unsure", "Inconclusive" as Inconclusive
+        /// @return Depends on users input
+        TestResult GetTestAnswerFromStdin(Mezzanine::String Question);
 
     }// Testing
 }// Mezzanine

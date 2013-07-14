@@ -40,7 +40,7 @@
 #ifndef _threaddefinetests_h
 #define _threaddefinetests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 
 /// @brief A simple test to see if the threading compiler flag are set correctly

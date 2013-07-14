@@ -40,7 +40,7 @@
 #ifndef _boilerplatetests_h
 #define _boilerplatetests_h
 
-#include "main.h"
+#include "mezztest.h"
 
 /// @file
 /// @brief This file should be used as template for building future Unit Tests
