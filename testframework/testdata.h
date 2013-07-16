@@ -81,8 +81,8 @@ namespace Mezzanine
         #endif
 
         #ifndef TEST_THROW
-            /// @brief An easy way to add a test whether or not a function/code snippet throws the way planned.
-            /// This captures test location meta data and should be considered the default way to capture exception tests
+            /// @brief An easy way to add a test whether or not a function/code snippet throws exceptions (or whatever) the way planned.
+            /// @details This captures test location meta data and should be considered the default way to capture exception tests
             /// @param ExpectThrown The type of the thing that should be thrown
             /// @param Name The name of the current test
             #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
@@ -173,16 +173,26 @@ namespace Mezzanine
 
                 /// @brief This will call RunAutomaticTests based on the values passed.
                 /// @details All test results should be inserted using AddTestResult to allow the returning of results.
+                /// @n @n This can be overloaded to enable better detection of skipped tests. This niavely reports only
+                /// "TestName::Interactive" and "TestName::Automatic" as skipped, and even then only if HasAutomaticTests
+                /// or HasInteractiveTests return true.
                 /// @param RunAutomaticTests True if the automatic tests should be run false if they should
                 /// @param RunInteractiveTests True if the interactive tests should run false otherwise/.RunInteractiveTests
-                /// @note One of two methods that must be implmented on a UnitTestGroup
                 virtual void RunTests(bool RunAuto, bool RunInteractive);
 
                 /// @brief This should be overloaded to run all tests that do require not user interaction
                 virtual void RunAutomaticTests();
 
+                /// @brief Used only to report skipped tests.
+                /// @return Defaults to returning false, but should be overloaded to return true if RunAutomaticTests() implements any tests.
+                virtual bool HasAutomaticTests();
+
                 /// @brief This should be overloaded to run all tests require user interaction
                 virtual void RunInteractiveTests();
+
+                /// @brief Used only to report skipped tests.
+                /// @return Defaults to returning false, but should be overloaded to return true if RunInteractiveTests() implements any tests.
+                virtual bool HasInteractiveTests();
 
                 /// @brief Get Name of this UnitTestGroup
                 /// @return The string that must be type at the command line to run this testgroup, should be all lowercase.

@@ -112,12 +112,12 @@ namespace Mezzanine
         {
             if(RunAuto)
                 { RunAutomaticTests(); }
-            else
+            else if(HasAutomaticTests())
                 { AddTestResult( TestData("AutomaticTests",Testing::Skipped, "RunTests") );}
 
             if(RunInteractive)
                 { RunInteractiveTests(); }
-            else
+            else if(HasInteractiveTests())
                 { AddTestResult( TestData("InteractiveTests",Testing::Skipped, "RunTests") );}
         }
 
@@ -126,10 +126,16 @@ namespace Mezzanine
 
         }
 
+        bool UnitTestGroup::HasAutomaticTests()
+            { return false; }
+
         void UnitTestGroup::RunInteractiveTests()
         {
 
         }
+
+        bool UnitTestGroup::HasInteractiveTests()
+            { return false; }
 
         Mezzanine::String UnitTestGroup::Name()
             { return ""; }
@@ -281,6 +287,7 @@ namespace Mezzanine
                 AddTestResult( TestData(TestName, IfFalse, FuncName, File, Line) );
             }
         }
+
 
     }// Testing
 }// Mezzanine

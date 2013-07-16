@@ -45,7 +45,7 @@
 #include <stdexcept> //only used to throw for TEST_THROW
 
 /// @file
-/// @brief This file should be used as template for building future Unit Tests
+/// @brief This file should be used as template/example for building future Unit Tests
 
 using namespace Mezzanine;
 using namespace Mezzanine::Testing;
@@ -58,6 +58,8 @@ class boilerplatetests : public UnitTestGroup
         /// @return Returns a String containing "boilerplate"
         virtual String Name()
             { return String("boilerplate"); }
+
+
 
         /// @brief This is called when Automatic tests are run
         void RunAutomaticTests()
@@ -78,12 +80,24 @@ class boilerplatetests : public UnitTestGroup
             //TEST_THROW(std::runtime_error, throw "oh noes!";, "AutomaticTestThrow"); //Throws unexpected type so it fails
         }
 
+        /// @brief Since RunAutomaticTests is implemented so is this.
+        /// @return returns true
+        virtual bool HasAutomaticTests()
+            { return true; }
+
+
+
         /// @brief This is called when Interactive tests are run
         void RunInteractiveTests()
         {
             TestResult Answer = GetTestAnswerFromStdin( "Is this a question? ");
             TEST_RESULT(Answer, "BoilerPlate::Interactive");
         }
+
+        /// @brief Since RunInteractiveTests is implemented so is this.
+        /// @return returns true
+        virtual bool HasInteractiveTests()
+            { return true; }
 
 };
 
