@@ -82,7 +82,7 @@ class boilerplatetests : public UnitTestGroup
 
         /// @brief Since RunAutomaticTests is implemented so is this.
         /// @return returns true
-        virtual bool HasAutomaticTests()
+        virtual bool HasAutomaticTests() const
             { return true; }
 
 
@@ -96,7 +96,7 @@ class boilerplatetests : public UnitTestGroup
 
         /// @brief Since RunInteractiveTests is implemented so is this.
         /// @return returns true
-        virtual bool HasInteractiveTests()
+        virtual bool HasInteractiveTests() const
             { return true; }
 
 };

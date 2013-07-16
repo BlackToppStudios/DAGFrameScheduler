@@ -288,7 +288,7 @@ class dagperformancetests : public UnitTestGroup
 
         /// @brief Since RunAutomaticTests implements no tests this does not true
         /// @return false
-        virtual void HasAutomaticTests() const
+        virtual bool HasAutomaticTests() const
             { return false; }
 };
 

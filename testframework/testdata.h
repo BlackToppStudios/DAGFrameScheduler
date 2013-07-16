@@ -185,14 +185,14 @@ namespace Mezzanine
 
                 /// @brief Used only to report skipped tests.
                 /// @return Defaults to returning false, but should be overloaded to return true if RunAutomaticTests() implements any tests.
-                virtual bool HasAutomaticTests();
+                virtual bool HasAutomaticTests() const;
 
                 /// @brief This should be overloaded to run all tests require user interaction
                 virtual void RunInteractiveTests();
 
                 /// @brief Used only to report skipped tests.
                 /// @return Defaults to returning false, but should be overloaded to return true if RunInteractiveTests() implements any tests.
-                virtual bool HasInteractiveTests();
+                virtual bool HasInteractiveTests() const;
 
                 /// @brief Get Name of this UnitTestGroup
                 /// @return The string that must be type at the command line to run this testgroup, should be all lowercase.

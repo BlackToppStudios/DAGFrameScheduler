@@ -126,7 +126,7 @@ namespace Mezzanine
 
         }
 
-        bool UnitTestGroup::HasAutomaticTests()
+        bool UnitTestGroup::HasAutomaticTests() const
             { return false; }
 
         void UnitTestGroup::RunInteractiveTests()
@@ -134,7 +134,7 @@ namespace Mezzanine
 
         }
 
-        bool UnitTestGroup::HasInteractiveTests()
+        bool UnitTestGroup::HasInteractiveTests() const
             { return false; }
 
         Mezzanine::String UnitTestGroup::Name()
