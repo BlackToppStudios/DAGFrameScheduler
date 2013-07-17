@@ -232,7 +232,7 @@ class dagsizestests : public UnitTestGroup
             cout << "Elemement count 2: " << Count2 << endl;
             Whole Count3 = WhenIsVectorSlowerThanSet(trash);
             cout << "Elemement count 3: " << Count3 << endl;
-            cout << "Are These higher than 800? " << ((Count1+Count2+Count3)/3>800) << " - If not the algorithm may need to be revised" << endl;
+            cout << "Are These higher than 800? " << ((Count1+Count2+Count3)/3>800) << " - If not the DAG scheduling algorithm may need to be revised" << endl;
             TEST_WARN((Count1+Count2+Count3)/3>800,"VectorSpeed");
         }
 
