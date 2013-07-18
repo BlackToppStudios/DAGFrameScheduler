@@ -1018,7 +1018,7 @@ class frameschedulertests : public UnitTestGroup
                 delete EraseA; delete EraseB; delete EraseC; delete EraseE; delete EraseF;
             }// \ Removal Affinity
 
-            { // REmoval Monopoly
+            { // Removal Monopoly
                 stringstream LogCache;
                 FrameScheduler RemovalScheduler(&LogCache,1);
                 //ThreadSpecificStorage RemovalResource(&RemovalScheduler);

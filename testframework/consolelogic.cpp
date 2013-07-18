@@ -69,13 +69,45 @@ namespace Mezzanine
                         << "If only test group names are entered, then all tests in those groups are run." << std::endl
                         << "This command is not case sensitive." << std::endl << std::endl
                         << "Current Test Groups: " << std::endl;
-            Mezzanine::Whole c = 0;
+            Mezzanine::Whole LongestName = 0;
             for(std::map<Mezzanine::String,UnitTestGroup*>::iterator Iter=TestGroups.begin(); Iter!=TestGroups.end(); ++Iter)
             {
-                std::cout << "\t" << Iter->first << (Iter->first.size()<7?"\t":"") << " ";
-                ++c;        //enforce 4 names per line
-                if (4==c)
-                    { std::cout << std::endl; c=0; }
+                if(Iter->first.size()>LongestName)
+                    { LongestName=Iter->first.size();}
+            }
+
+            // This presumes the console it 80 chars wide
+            Mezzanine::Whole TargetWidth=80;
+            Mezzanine::Whole ColumnWidth = LongestName+1;
+            Mezzanine::Whole Column = 0;
+            Mezzanine::Whole CurrentWidth=0;
+            for(std::map<Mezzanine::String,UnitTestGroup*>::iterator Iter=TestGroups.begin(); Iter!=TestGroups.end(); ++Iter)
+            {
+                if(0==Column)
+                {
+                    std::cout << "  ";
+                    CurrentWidth = 2;
+                } else {
+                    std::cout << " ";
+                    CurrentWidth ++;
+                }
+
+                std::cout << Iter->first << " ";
+                CurrentWidth += Iter->first.size() + 1;
+                Column++;
+                for(Mezzanine::Whole SpaceD=Iter->first.size()+1; SpaceD<=ColumnWidth; SpaceD++)
+                {
+                    std::cout << " ";
+                    CurrentWidth++;
+                }
+
+                if(CurrentWidth>TargetWidth-LongestName-1)
+                {
+                    std::cout << std::endl;
+                    Column = 0;
+                    CurrentWidth = 0;
+                }
+
             }
             std::cout << std::endl;
 

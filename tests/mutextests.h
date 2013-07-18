@@ -96,16 +96,11 @@ class mutextests : public UnitTestGroup
         virtual String Name()
             { return String("mutex"); }
 
-        /// @copydoc Mezzanine::Testing::UnitTestGroup::RunTests
-        /// @detail Test if the mutex works correctly were possible
-        virtual void RunTests(bool RunAutomaticTests, bool RunInteractiveTests)
+        /// @brief Even though the framescheduler does not use Mutexes, any library providing multithreading capabilites without them would be lacking, so we must test them.
+        virtual void RunAutomaticTests()
         {
-            RunInteractiveTests = false; //prevent warnings
 
-            if (RunAutomaticTests)
-            {
-                TestResult temp;
-
+            { // Lock
                 cout << "Testing basic mutex functionality" << endl;
                 cout << "Locking ThreadIDLock in thread: " << Mezzanine::Threading::this_thread::get_id() << endl;
                 ThreadIDLock.Lock();
@@ -121,21 +116,30 @@ class mutextests : public UnitTestGroup
 
                 ThreadIDLock.Lock();
                 cout << "Does the thread report the same ID as we gathered: " << (ThreadIDTest == T2id) << endl;
-                if(ThreadIDTest == T2id)
-                    { temp=Testing::Success; }
-                else
-                    { temp=Testing::Failed; }
-                AddTestResult("DAGFrameScheduler::mutex::lock", temp);
+                TEST(ThreadIDTest == T2id,"lock")
                 ThreadIDLock.Unlock();
 
                 cout << "Joining T2" << endl;
                 T2.join();
-            }else{
-                AddTestResult("DAGFrameScheduler::mutex::lock", Testing::Skipped);
+            } // \ Lock
 
-            }
+        }
 
-            if (RunAutomaticTests)
+        /// @brief Since RunAutomaticTests is implemented so is this.
+        /// @return returns true
+        virtual bool HasAutomaticTests() const
+            { return false; }
+
+
+        /// @copydoc Mezzanine::Testing::UnitTestGroup::RunTests
+        /// @detail Test if the mutex works correctly were possible
+        virtual void RunTests(bool RunAutoTests, bool RunInteractiveTests)
+        {
+            RunAutomaticTests();
+            RunInteractiveTests = false; //prevent warnings
+
+
+            if (RunAutoTests)
             {
                 TestResult temp;
                 cout << "Testing Mutex try_lock()" << endl;
