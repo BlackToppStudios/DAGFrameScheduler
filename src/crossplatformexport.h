@@ -96,6 +96,10 @@
         #ifdef _MSC_VER
             #pragma warning( disable : 4251) // Disable the dll import/export warnings on items that are set correctly.
             #pragma warning( disable : 4244) // Disable the double to float conversions, they are in their by design to minimize floating point rounding during intermediate calculations.
+            #pragma warning( disable : 4127) // Disable conditional expression is constant
+            #pragma warning( disable : 4800) // pugi xml unspecified bool type coercion has performance cost, used only in unit tests
+            #pragma warning( disable : 4221) // interfaces don't generate linkable symbols, well of course they don't
+            #pragma warning( disable : 4512) // Could not generate assignment operator for class that doesn't need one
         #endif
         #ifndef WIN32_LEAN_AND_MEAN
             #define WIN32_LEAN_AND_MEAN

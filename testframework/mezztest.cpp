@@ -126,6 +126,12 @@ void DeleteTempFile()
 /// @brief This aggregates the results of all the other test groups.
 class AllUnitTestGroups : public UnitTestGroup
 {
+    private:
+            /// @internal
+            /// @brief So no one uses it
+            void operator=(AllUnitTestGroups&)
+                {}
+
     public:
         /// @internal
         /// @brief Should all tests be run.
@@ -286,7 +292,7 @@ int main (int argc, char** argv)
                 TestGroups.at(ThisArg.c_str());
                 Runner.RunAll=false;
                 Runner.TestGroupsToRun.push_back(AllLower(argv[c]));
-            } catch ( const std::out_of_range& e) {
+            } catch ( const std::out_of_range&) {
                 std::cerr << ThisArg << " is not a valid testgroup or parameter." << std::endl;
                 Usage(CommandName, TestGroups);
                 return ExitInvalidArguments;

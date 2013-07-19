@@ -57,42 +57,70 @@ namespace Mezzanine
     namespace Testing
     {
         #ifndef TEST
+            /// @def TEST
             /// @brief The easiest way to add a test to the currently running UnitTestGroup.
             /// This captures test location meta data and should be considered the default way to record tests
             /// @param Cond A boolean operand of some kind
             /// @param Name The name of the current test
-            #define TEST(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+            #ifdef __FUNCTION__
+                #define TEST(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __FUNCTION__, __FILE__, __LINE__ );
+            #else
+                #define TEST(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+            #endif
         #endif
 
         #ifndef TEST_WARN
+            /// @def TEST_WARN
             /// @brief Just like TEST but if the test fails only a warning is added.
             /// This captures test location meta data and should be considered the default way to record tests that warn instead of fail
             /// @param Cond A boolean operand of some kind
             /// @param Name The name of the current test
-            #define TEST_WARN(Cond, Name) Test( (Cond), (Name), Testing::Warning, Testing::Success, __func__, __FILE__, __LINE__ );
+            #ifdef __FUNCTION__
+                #define TEST_WARN(Cond, Name) Test( (Cond), (Name), Testing::Warning, Testing::Success, __FUNCTION__, __FILE__, __LINE__ );
+            #else
+                #define TEST_WARN(Cond, Name) Test( (Cond), (Name), Testing::Warning, Testing::Success, __func__, __FILE__, __LINE__ );
+            #endif
         #endif
 
         #ifndef TEST_RESULT
+            /// @def TEST_RESULT
             /// @brief An easy way to add a test and associated data to the currently running UnitTestGroup
             /// This captures test location meta data and should be considered a good way to record tests that do not easily break down to a single conditional.
             /// @param ExistingResult A TestResult To be added directy
             /// @param Name The name of the current test
-            #define TEST_RESULT(ExistingResult, Name) AddTestResult( TestData( (Name), (ExistingResult), __func__, __FILE__, __LINE__)) ;
+            #ifdef __FUNCTION__
+                #define TEST_RESULT(ExistingResult, Name) AddTestResult( TestData( (Name), (ExistingResult), __FUNCTION__, __FILE__, __LINE__)) ;
+            #else
+                #define TEST_RESULT(ExistingResult, Name) AddTestResult( TestData( (Name), (ExistingResult), __func__, __FILE__, __LINE__)) ;
+            #endif
+
         #endif
 
         #ifndef TEST_THROW
+            /// @def TEST_THROW
             /// @brief An easy way to add a test whether or not a function/code snippet throws exceptions (or whatever) the way planned.
             /// @details This captures test location meta data and should be considered the default way to capture exception tests
             /// @param ExpectThrown The type of the thing that should be thrown
             /// @param Name The name of the current test
-            #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
-            try {                                                                                       \
-                CodeThatThrows;                                                                         \
-            } catch (ExpectThrown) {                                                                    \
-                AddTestResult( TestData( (Name), Testing::Success, __func__, __FILE__, __LINE__)) ;     \
-            } catch (...) {                                                                             \
-                AddTestResult( TestData( (Name), Testing::Failed, __func__, __FILE__, __LINE__)) ;      \
-            }
+            #ifdef __FUNCTION__
+                #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
+                try {                                                                                       \
+                    CodeThatThrows;                                                                         \
+                } catch (ExpectThrown) {                                                                    \
+                    AddTestResult( TestData( (Name), Testing::Success, __FUNCTION__, __FILE__, __LINE__)) ;     \
+                } catch (...) {                                                                             \
+                    AddTestResult( TestData( (Name), Testing::Failed, __FUNCTION__, __FILE__, __LINE__)) ;      \
+                }
+            #else
+                #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
+                try {                                                                                       \
+                    CodeThatThrows;                                                                         \
+                } catch (ExpectThrown) {                                                                    \
+                    AddTestResult( TestData( (Name), Testing::Success, __func__, __FILE__, __LINE__)) ;     \
+                } catch (...) {                                                                             \
+                    AddTestResult( TestData( (Name), Testing::Failed, __func__, __FILE__, __LINE__)) ;      \
+                }
+            #endif
         #endif
 
 

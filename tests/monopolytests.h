@@ -119,7 +119,7 @@ class PiMakerMonopoly : public MonopolyWorkUnit
 
         /// @brief Spawns several the amount of threads indicated by HowManyThreads then calculates Pi in each and logs teh results
         /// @param CurrentFrameScheduler
-        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
+        virtual void DoWork(DefaultThreadSpecificStorage::Type&)
         {
             vector<Thread*> ThreadIndex;
             vector<PiMakerThreadData*> ThreadData;
