@@ -182,7 +182,6 @@ class workunittests : public UnitTestGroup
             cout << "D dependency count: " << WorkUnitD->GetDependencyCount() << " \t D dependent count: " << WorkUnitD->GetDependentCount(TestScheduler) << endl;
             TEST(WorkUnitA->GetDependencyCount()==0,"A2DependencyCount");
             TEST(WorkUnitA->GetDependentCount(TestScheduler)==3,"A2DependentCount");
-
             TEST(WorkUnitB->GetDependencyCount()==1,"B2DependencyCount");
             TEST(WorkUnitB->GetDependentCount(TestScheduler)==2,"B2DependentCount");
             TEST(WorkUnitC->GetDependencyCount()==2,"C2DependencyCount");

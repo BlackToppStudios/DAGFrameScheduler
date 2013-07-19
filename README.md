@@ -21,6 +21,11 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### July 18, 2013 ###
+* Completely refactored and increased the reliability of the unit tests.
+* Add a function for getting cache size and added test that warns if certain structures are larger than that.
+* Bumped revision number to 1.4.1
+
 ### July 13, 2013 ###
 * Upgraded the TestData to contain more metadata than before.
 
