@@ -51,6 +51,7 @@
 #include <sstream>
 
 using namespace Mezzanine;
+using namespace std;
 
 namespace Mezzanine
 {
@@ -110,15 +111,29 @@ namespace Mezzanine
 
         void UnitTestGroup::RunTests(bool RunAuto, bool RunInteractive)
         {
-            if(RunAuto)
-                { RunAutomaticTests(); }
-            else if(HasAutomaticTests())
-                { AddTestResult( TestData("AutomaticTests",Testing::Skipped, "RunTests") );}
+            try
+            {
+                if(RunAuto)
+                    { RunAutomaticTests(); }
+                else if(HasAutomaticTests())
+                    { AddTestResult( TestData("AutomaticTests",Testing::Skipped, "RunTests") );}
+            }catch(exception& e){
+                cerr << "Caught an unhandled exception while doing RunAutomaticTests()." << endl
+                     << "Message: " << e.what() << endl;
+                AddTestResult( TestData("UnhandledException", Testing::Failed) );
+            }
 
-            if(RunInteractive)
-                { RunInteractiveTests(); }
-            else if(HasInteractiveTests())
-                { AddTestResult( TestData("InteractiveTests",Testing::Skipped, "RunTests") );}
+            try
+            {
+                if(RunInteractive)
+                    { RunInteractiveTests(); }
+                else if(HasInteractiveTests())
+                    { AddTestResult( TestData("InteractiveTests",Testing::Skipped, "RunTests") );}
+            }catch(exception& e){
+                cerr << "Caught an unhandled exception while doing RunInteractiveTests()." << endl
+                     << "Message: " << e.what() << endl;
+                AddTestResult( TestData("UnhandledException", Testing::Failed) );
+            }
         }
 
         void UnitTestGroup::RunAutomaticTests()
@@ -280,11 +295,18 @@ namespace Mezzanine
 
         void UnitTestGroup::Test(bool TestCondition, const String& TestName, TestResult IfFalse, TestResult IfTrue, const String& FuncName, const String& File, Whole Line )
         {
-            if(TestCondition)
+            try
             {
-                AddTestResult( TestData(TestName, IfTrue, FuncName, File, Line) );
-            }else{
-                AddTestResult( TestData(TestName, IfFalse, FuncName, File, Line) );
+                if(TestCondition)
+                {
+                    AddTestResult( TestData(TestName, IfTrue, FuncName, File, Line) );
+                }else{
+                    AddTestResult( TestData(TestName, IfFalse, FuncName, File, Line) );
+                }
+            }catch(exception& e){
+                cerr << "Caught an unhandled exception while adding results for " << TestName << endl
+                     << "Message: " << e.what() << endl;
+                AddTestResult( TestData("UnhandledException", Testing::Failed, FuncName, File, Line) );
             }
         }
 

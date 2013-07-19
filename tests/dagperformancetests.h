@@ -61,9 +61,9 @@ class dagperformancetests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "dagperformance"
+        /// @return Returns a String containing "DAGPerformance"
         virtual String Name()
-            { return String("dagperformance"); }
+            { return String("DAGPerformance"); }
 
         /// @brief Converts anything streamable to a Mezzanine::String
         /// @details Used in @ref ThreadCreate

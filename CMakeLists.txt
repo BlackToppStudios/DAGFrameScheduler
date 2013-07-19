@@ -161,7 +161,7 @@ foreach(CurrentTest ${FoundTests})
     ${CurrentTest} ${CurrentTest}Implementation;")
 
     set(CppNameRegistration "${CppNameRegistration}
-                this->operator[](${CurrentTest}Implementation.Name()) = &${CurrentTest}Implementation;")
+                this->operator[](AllLower(${CurrentTest}Implementation.Name())) = &${CurrentTest}Implementation;")
 endforeach(CurrentTest ${FoundTests})
 
 configure_file( "${RootProjectSourceDir}/autodetect.h.in"  "${RootProjectBinaryDir}/autodetect.h")

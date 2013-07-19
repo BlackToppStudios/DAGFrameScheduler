@@ -92,7 +92,7 @@ namespace Mezzanine
                     CurrentWidth ++;
                 }
 
-                std::cout << Iter->first << " ";
+                std::cout << Iter->second->Name() << " ";
                 CurrentWidth += Iter->first.size() + 1;
                 Column++;
                 for(Mezzanine::Whole SpaceD=Iter->first.size()+1; SpaceD<=ColumnWidth; SpaceD++)

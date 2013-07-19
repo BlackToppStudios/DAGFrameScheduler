@@ -249,9 +249,9 @@ class frameschedulertests : public UnitTestGroup
         }
 
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "framescheduler"
+        /// @return Returns a String containing "FrameScheduler"
         virtual String Name()
-            { return String("framescheduler"); }
+            { return String("FrameScheduler"); }
 
         /// @brief Performs a number of tests on the Framescheduler and the core algorithm
         virtual void RunAutomaticTests()

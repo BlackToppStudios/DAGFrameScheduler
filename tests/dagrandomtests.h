@@ -72,9 +72,9 @@ class dagrandomtests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "random"
+        /// @return Returns a String containing "DAGRandom"
         virtual String Name()
-            { return String("dagrandom"); }
+            { return String("DAGRandom"); }
 
         /// @brief Tests the random number facility used in other tests.
         void RunAutomaticTests()

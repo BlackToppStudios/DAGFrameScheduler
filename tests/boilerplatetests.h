@@ -55,9 +55,9 @@ class boilerplatetests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "boilerplate"
+        /// @return Returns a String containing "BoilerPlate"
         virtual String Name()
-            { return String("boilerplate"); }
+            { return String("BoilerPlate"); }
 
 
 
@@ -91,7 +91,7 @@ class boilerplatetests : public UnitTestGroup
         void RunInteractiveTests()
         {
             TestResult Answer = GetTestAnswerFromStdin( "Is this a question? ");
-            TEST_RESULT(Answer, "BoilerPlate::Interactive");
+            TEST_RESULT(Answer, "Interactive");
         }
 
         /// @brief Since RunInteractiveTests is implemented so is this.

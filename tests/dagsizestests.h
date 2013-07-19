@@ -184,9 +184,9 @@ class dagsizestests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "dagsizes"
+        /// @return Returns a String containing "DAGSizes"
         virtual String Name()
-            { return String("dagsizes"); }
+            { return String("DAGSizes"); }
 
         /// @brief Performs only basic Sanity tests on the assumptions the scheduler is built on.
         virtual void RunAutomaticTests()

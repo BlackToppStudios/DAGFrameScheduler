@@ -92,9 +92,9 @@ class mutextests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "thread"
+        /// @return Returns a String containing "Mutex"
         virtual String Name()
-            { return String("mutex"); }
+            { return String("Mutex"); }
 
         /// @brief Even though the framescheduler does not use Mutexes, any library providing multithreading capabilites without them would be lacking, so we must test them.
         virtual void RunAutomaticTests()
@@ -123,33 +123,11 @@ class mutextests : public UnitTestGroup
                 T2.join();
             } // \ Lock
 
-        }
-
-        /// @brief Since RunAutomaticTests is implemented so is this.
-        /// @return returns true
-        virtual bool HasAutomaticTests() const
-            { return false; }
-
-
-        /// @copydoc Mezzanine::Testing::UnitTestGroup::RunTests
-        /// @detail Test if the mutex works correctly were possible
-        virtual void RunTests(bool RunAutoTests, bool RunInteractiveTests)
-        {
-            RunAutomaticTests();
-            RunInteractiveTests = false; //prevent warnings
-
-
-            if (RunAutoTests)
-            {
-                TestResult temp;
+            { // Trylock
                 cout << "Testing Mutex try_lock()" << endl;
 
                 cout << "Locking TryLock in main thread with id: " << Mezzanine::Threading::this_thread::get_id() << endl;
-                if(TryLock.TryLock())
-                    { temp=Testing::Success; }
-                else
-                    { temp=Testing::Failed; }
-                AddTestResult("DAGFrameScheduler::Thread::TryLock", temp);
+                TEST(TryLock.TryLock(),"TryLock");
 
                 Mezzanine::Integer Value = 9;
                 cout << "Creating a thread with identifier T4 and unkown id." << endl;
@@ -166,25 +144,16 @@ class mutextests : public UnitTestGroup
                 TryLock.Unlock();
                 cout << "Value from thread's return point is " << TryLockTest << " it should be " << Value << " if it wasn't able to get mutex" << endl;
                 cout << "Did T4 not get the mutex and proceed past mutex as expected: " << (TryLockTest == Value) << endl;
-                if(TryLockTest == Value)
-                    { temp=Testing::Success; }
-                else
-                    { temp=Testing::Failed; }
-                AddTestResult("DAGFrameScheduler::Thread::TryLockExclude", temp);
+                TEST(TryLockTest == Value,"TryLockExclude");
+            } // Trylock
 
-            }else{
-                AddTestResult("DAGFrameScheduler::Thread::TryLock", Skipped);
-                AddTestResult("DAGFrameScheduler::Thread::TryLockExclude", Skipped);
-            }
-
-            /*if (RunInteractiveTests)
-            {   
-                AddTestResult("Threading::Interactive", Success
-                              );
-            }else{
-                AddTestResult("Threading::Interactive", Skipped);
-            }*/
         }
+
+        /// @brief Since RunAutomaticTests is implemented so is this.
+        /// @return returns true
+        virtual bool HasAutomaticTests() const
+            { return true; }
+
 };
 
 #endif

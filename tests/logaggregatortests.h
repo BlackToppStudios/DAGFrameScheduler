@@ -60,9 +60,9 @@ class logaggregatortests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "logaggregator"
+        /// @return Returns a String containing "LogAggregator"
         virtual String Name()
-            { return String("logaggregator"); }
+            { return String("LogAggregator"); }
 
         /// @copydoc Mezzanine::Testing::UnitTestGroup::RunTests
         /// @detail Test if the log aggregator aggregates

@@ -155,9 +155,9 @@ class monopolytests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "monopoly"
+        /// @return Returns a String containing "Monopoly"
         virtual String Name()
-            { return String("monopoly"); }
+            { return String("Monopoly"); }
 
         /// @brief Only a smoke test, to see if this compiles
         virtual void RunAutomaticTests()

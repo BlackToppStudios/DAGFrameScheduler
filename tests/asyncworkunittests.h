@@ -84,9 +84,9 @@ class asyncworkunittests : public UnitTestGroup
 {
     public:
         /// @copydoc Mezzanine::Testing::UnitTestGroup::Name
-        /// @return Returns a String containing "asyncworkunit"
+        /// @return Returns a String containing "AsyncWorkUnit"
         virtual String Name()
-            { return String("asyncworkunit"); }
+            { return String("AsyncWorkUnit"); }
 
         /// @copydoc Mezzanine::Testing::UnitTestGroup::RunTests
         /// @detail Test if the asyncronous workunits
