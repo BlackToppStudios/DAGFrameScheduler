@@ -80,6 +80,12 @@
         /// @brief Defined if this is running on Linux, Mac OS X, Android, or any other sane platform.
         /// @details if this is not defined, then most likely _MEZZ_THREAD_WIN32_ is.
         #define _MEZZ_THREAD_POSIX_
+
+        #if defined(__APPLE__) || defined(__MACH__) || defined(__OSX__)
+            /// @def _MEZZ_THREAD_APPLE_
+            /// @brief Sometimes specific workarounds are required for Mac OS this is how we detect it.
+            #define _MEZZ_THREAD_APPLE_
+        #endif
     #endif
 
     /// @def _MEZZ_PLATFORM_DEFINED_

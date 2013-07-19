@@ -180,18 +180,22 @@ namespace Mezzanine
             free(buffer);
             return Size;
         #else
-            Whole Size = sysconf(_SC_LEVEL4_CACHE_SIZE);
-            if(!Size)
-            {
-                Size = sysconf(_SC_LEVEL3_CACHE_SIZE);
+            #ifdef _MEZZ_THREAD_APPLE_
+                return 0;
+            #else
+                Whole Size = sysconf(_SC_LEVEL4_CACHE_SIZE);
                 if(!Size)
                 {
-                    Size = sysconf(_SC_LEVEL2_CACHE_SIZE);
+                    Size = sysconf(_SC_LEVEL3_CACHE_SIZE);
                     if(!Size)
-                        { Size = sysconf(_SC_LEVEL1_DCACHE_SIZE); }
+                    {
+                        Size = sysconf(_SC_LEVEL2_CACHE_SIZE);
+                        if(!Size)
+                            { Size = sysconf(_SC_LEVEL1_DCACHE_SIZE); }
+                    }
                 }
-            }
-            return Size;
+                return Size;
+           #endif
         #endif
     }
 
