@@ -54,6 +54,9 @@
     #ifdef _MEZZ_THREAD_WIN32_
         #include <windows.h>
     #else
+        #ifdef _MEZZ_THREAD_APPLE_
+            #include <sys/sysctl.h>
+        #endif
         #include <sys/time.h>
         #include <unistd.h>
     #endif
@@ -219,8 +222,10 @@ namespace Mezzanine
                 buffer = (SYSTEM_LOGICAL_PROCESSOR_INFORMATION *)malloc(buffer_size);
                 GetLogicalProcessorInformation(&buffer[0], &buffer_size);
 
-                for (i = 0; i != buffer_size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); ++i) {
-                    if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == 1) {
+                for (i = 0; i != buffer_size / sizeof(SYSTEM_LOGICAL_PROCESSOR_INFORMATION); ++i)
+                {
+                    if (buffer[i].Relationship == RelationCache && buffer[i].Cache.Level == 1)
+                    {
                         Size = buffer[i].Cache.LineSize;
                         break;
                     }
@@ -234,18 +239,25 @@ namespace Mezzanine
                 return 64;
             #endif
         #else
-            Whole Size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
-            if(!Size)
-            {
-                Size = sysconf(_SC_LEVEL2_CACHE_LINESIZE);
+            #ifdef _MEZZ_THREAD_APPLE_
+                size_t line_size = 0;
+                size_t sizeof_line_size = sizeof(line_size);
+                sysctlbyname("hw.cachelinesize", &line_size, &sizeof_line_size, 0, 0);
+                return line_size;
+            #else
+                Whole Size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
                 if(!Size)
                 {
-                    Size = sysconf(_SC_LEVEL3_CACHE_LINESIZE);
+                    Size = sysconf(_SC_LEVEL2_CACHE_LINESIZE);
                     if(!Size)
-                        { Size = sysconf(_SC_LEVEL4_CACHE_LINESIZE); }
+                    {
+                        Size = sysconf(_SC_LEVEL3_CACHE_LINESIZE);
+                        if(!Size)
+                            { Size = sysconf(_SC_LEVEL4_CACHE_LINESIZE); }
+                    }
                 }
-            }
-            return Size;
+                return Size;
+            #endif
         #endif
     }
 
