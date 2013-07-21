@@ -64,10 +64,6 @@ namespace Mezzanine
         /// @param StringToConvert This string is actually changed.
         /// @return for convience purposes the string is also returned.
         char* AllLower(char* StringToConvert);
-
-        /// @brief A function to reduce the case of all characters in the copy of a string
-        /// @param StringToConvert The String to be copied and reduce.
-        /// @return A String with not uppercase characters.
         String AllLower(String StringToConvert);
 
         /// @brief Get a String Corresponding to a passed bool
