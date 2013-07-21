@@ -21,6 +21,10 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### July 21, 2013 ###
+* Fixed Mac OS X versions of performance/size test functions
+* now versino 1.4.3
+
 ### July 18, 2013 ###
 * Fixed warnings in vc++, gcc on Mac OS and MinGW, but a bug in MinGW prevents querying cache properly on windows and Mac OS cache querying is unimplemented
 * bumped revision to 1.4.2
