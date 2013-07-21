@@ -235,14 +235,14 @@ class dagsizestests : public UnitTestGroup
                  << "100 WorkUnitKeys: " << KSize << endl
                  << "300 Workunit pointers (representing dependencies): " << WPSize << endl
                  << "Total sample workload (should be much smaller than cache): " << TotalSize << endl << endl;
-            TEST_WARN(TotalSize<GetCacheSize(), "WorkloadFitsInCache");
+            TEST_WARN(TotalSize<=GetCacheSize(), "WorkloadFitsInCache");
 
             Whole CachLineSize = GetCachelineSize();
             cout << "CPU cache line size: " << CachLineSize << endl;
             cout << "Checking Line size against frequently used types." << endl << endl;
-            TEST_WARN(sizeof(iWorkUnit)<CachLineSize,"iWorkUnitFitsInCacheLine");
-            TEST_WARN(sizeof(DefaultWorkUnit)<CachLineSize,"DefaultWorkUnitFitsInCacheLine");
-            TEST_WARN(sizeof(WorkUnitKey)<CachLineSize,"WorkUnitKeyFitsInCacheLine");
+            TEST_WARN(sizeof(iWorkUnit)<=CachLineSize,"iWorkUnitFitsInCacheLine");
+            TEST_WARN(sizeof(DefaultWorkUnit)<=CachLineSize,"DefaultWorkUnitFitsInCacheLine");
+            TEST_WARN(sizeof(WorkUnitKey)<=CachLineSize,"WorkUnitKeyFitsInCacheLine");
             TEST_WARN(sizeof(DefaultRollingAverage<Whole>::Type)<CachLineSize,"DefaultRollingAverageFitsInCacheLine");
 
             cout << "This algorithm presumes that vectors under a certain size are just faster than sets/trees/maps below that size. This checks where that stops being true." << endl;
