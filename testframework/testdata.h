@@ -261,7 +261,7 @@ namespace Mezzanine
                 /// @param Summary Print Statistics at the end, not needed when sending results between processes. Defaults to true/enabled.
                 /// @param FullOutput Sometimes the user does not want to see each test results and just wants a little blurb. Defaults to true/enabled.
                 /// @param HeaderOutput Makes the output a little more understandable it is short or needs to be copied into a spreadsheet. Defaults to true/enabled.
-                virtual void DisplayResults(std::ostream& Output=std::cout, bool Summary = true, bool FullOutput = true, bool HeaderOutput = true);
+                virtual void DisplayResults(std::ostream& Output=std::cout, std::ostream& Error=std::cerr, bool Summary = true, bool FullOutput = true, bool HeaderOutput = true);
 
                 /// @brief Interpret Boolean value as a test result. Also Prepends the name of the current test, as returned by Name() + "::", to ease test scoping.
                 /// @warning IfFalse comes first in the argument list, This is because the common test cases have IfTrue = Testing::Success while IfFalse makes sense as other things

@@ -248,7 +248,7 @@ namespace Mezzanine
             return Results;
         }
 
-        void UnitTestGroup::DisplayResults(std::ostream& Output, bool Summary, bool FullOutput, bool HeaderOutput)
+        void UnitTestGroup::DisplayResults(std::ostream& Output, std::ostream& Error, bool Summary, bool FullOutput, bool HeaderOutput)
         {
             std::vector<unsigned int> TestCounts; // This will store the counts of the Sucesses, failures, etc...
             TestCounts.insert(TestCounts.end(),1+(unsigned int)NotApplicable, 0); //Fill with the exact amount of 0s
@@ -266,7 +266,6 @@ namespace Mezzanine
                     Output << Iter->TestName << MakePadding(Iter->TestName, LongestNameLength+1) << TestResultToString(Iter->Results);
                     if(Iter->Results) // Not Testing::Success
                     {
-                        Output << "\t";
                         if(Iter->FileName.length())
                             { Output << " File: " << Iter->FileName; }
                         if(Iter->FunctionName.length())
@@ -276,7 +275,14 @@ namespace Mezzanine
                         if(Iter->FileName.length()==0 && Iter->FunctionName.length() == 0 && Iter->LineNumber==0)
                             { Output << " No Metadata available able issue, use TEST to capture"; }
                     }
-                    Output << std::endl;
+                    Output << endl;
+                }
+
+                if (Iter->Results && Iter->FileName.length() && Iter->FunctionName.length() && Iter->LineNumber)
+                {
+                    Error << Iter->FileName << ":" << Iter->LineNumber
+                          << " Test " << TestResultToString(Iter->Results)
+                          << " in function " << Iter->FunctionName << endl;
                 }
                 TestCounts.at((unsigned int)Iter->Results)++; // Count this test result
             }
