@@ -597,7 +597,7 @@ namespace Mezzanine
             {
                 Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
                 Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) + TimingCostAllowance;
-                if(WaitTime>1000000)
+                if(WaitTime>1000000) /// @todo Replace hard-code timeout with compiler/define/cmake_option
                     { WaitTime = 0; }
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );
                 CurrentFrameStart=GetTimeStamp();
@@ -617,6 +617,22 @@ namespace Mezzanine
 
         Whole FrameScheduler::GetWorkUnitMainCount() const
             { return this->WorkUnitsMain.size(); }
+
+        ////////////////////////////////////////////////////////////////////////////////
+        // Other Utility Features
+
+        FrameScheduler::Resource* FrameScheduler::GetThreadResource(Thread::id ID = this_thread::get_id())
+        {
+            std::vector<Resource*>::iterator Results = Resources.begin();
+            for(std::vector<Thread*>::iterator Iter=Threads.begin(); Iter!=Threads.end(); ++Iter)
+            {
+                Results++;
+                if ( (*Iter)->get_id()==ID)
+                    { return (*Results); }
+            }
+            return NULL;
+        }
+
 
     } // \Threading
 }// \Mezanine

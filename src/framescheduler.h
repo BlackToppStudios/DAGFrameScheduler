@@ -120,9 +120,12 @@ namespace Mezzanine
                 /// @todo write this warning, it is important, but not easy to lay out.
                 DependentGraphType DependentGraph;
 
+                /// @brief The kind of Resource the frame scheduler will use
+                typedef DefaultThreadSpecificStorage::Type* Resource;
+
                 /// @brief This maintains ownership of all the thread specific resources.
                 /// @note There should be the same amount or more of these than entries in the Threads vector.
-                std::vector<DefaultThreadSpecificStorage::Type*> Resources;
+                std::vector<Resource> Resources;
 
                 /// @brief A way to track an arbitrary number of threads.
                 /// @note There should never be more of these than Resources, and if there are more at the beginning of a frame the resources will be created in CreateThreads().
@@ -367,7 +370,7 @@ namespace Mezzanine
                 /// allow maximum integration with existing projects. It can also be used to prevent a giant migration and replace it with a piecemeal upgrade.
                 /// @warning Do not call this on an unsorted set of WorkUnits. Use @ref FrameScheduler::SortWorkUnitsAll() and the @ref DependentGraph to sort WorkUnits after
                 /// they are inserted into the frame scheduler for the first time. This doesn't need to happen each frame, just after any new work units are added or removed
-                /// (except Monopolies).
+                /// (except Monopolies) or you want to take the most recent performance number into account.
                 virtual void DoOneFrame();
 
                 /// @brief This is the 1st step (of 6) in a frame.
@@ -436,6 +439,25 @@ namespace Mezzanine
                 /// @brief Returns the amount of iWorkUnit ready to be scheduled in the Main pool
                 /// @return A Whole containing this amount
                 Whole GetWorkUnitMainCount() const;
+
+                ////////////////////////////////////////////////////////////////////////////////
+                // Other Utility Features
+
+                /// @brief Get the Resource to go with a thread of a given ID.
+                /// @details This gets the Resource that goes with a given thread
+                /// by performing a linear search through the available threads.
+                /// @n @n
+                /// This is cheap computationly but will likely perform much slower
+                /// than other methods of getting the resource, because the ID is
+                /// unlikely be be cached and it may require a system call to
+                /// retrieve. If used consider wrapppin it in #MEZZ_DEBUG/#ENDIF
+                /// to disable for release builds.
+                /// @param ID This uses the current Threads ID by default but
+                /// can search for any thread.
+                /// @return A pointer to ThreadSpecificResource or a null pointer on error.
+                Resource* GetThreadResource(Thread::id ID = this_thread::get_id());
+
+
 
         };//FrameScheduler
     } // \Threading

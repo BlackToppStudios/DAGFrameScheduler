@@ -1064,6 +1064,10 @@ class frameschedulertests : public UnitTestGroup
 
                 delete EraseMonoA; delete EraseMonoB; delete EraseMonoC;
             } // \Removal Monopoly
+
+            {
+
+            }
         }
 
         /// @brief Since RunAutomaticTests is implemented so is this.
