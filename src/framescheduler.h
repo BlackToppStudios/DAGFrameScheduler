@@ -120,9 +120,11 @@ namespace Mezzanine
                 /// @todo write this warning, it is important, but not easy to lay out.
                 DependentGraphType DependentGraph;
 
+            public:
                 /// @brief The kind of Resource the frame scheduler will use
                 typedef DefaultThreadSpecificStorage::Type Resource;
 
+            protected:
                 /// @brief This maintains ownership of all the thread specific resources.
                 /// @note There should be the same amount or more of these than entries in the Threads vector.
                 std::vector<Resource*> Resources;
@@ -220,7 +222,7 @@ namespace Mezzanine
                 /// @param StartingThreadCount How many threads. Defaults to the value returned by @ref Mezzanine::GetCPUCount "GetCPUCount()".
                 /// @warning This must be constructed from the Main(only) thread for any features with thread affinity to work correctly.
                 FrameScheduler(
-                        std::fstream* _LogDestination = new std::fstream("Log.txt", std::ios::out | std::ios::app),
+                        std::fstream* _LogDestination = new std::fstream("Mezzanine.log", std::ios::out | std::ios::app),
                         Whole StartingThreadCount = GetCPUCount()
                     );
 

@@ -25,6 +25,7 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 * Added Functions for getting the ThreadSpecificResource from the FrameScheduler without needing to have it passed into a workunit, but there is a cpu time cost, and likely a cache miss.
 * Added another function that retrieves the usable logger in a similar way.
 * Added tests for these functions.
+* Changed Default log target to "Mezzanine.log"
 * bumped version to 1.5.0
 
 ### July 21, 2013 ###
