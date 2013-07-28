@@ -59,8 +59,6 @@ class boilerplatetests : public UnitTestGroup
         virtual String Name()
             { return String("BoilerPlate"); }
 
-
-
         /// @brief This is called when Automatic tests are run
         void RunAutomaticTests()
         {

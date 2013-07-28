@@ -179,6 +179,7 @@ namespace Mezzanine
 			CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
             TimingCostAllowance(0),
+            MainThreadID(this_thread::get_id()),
 			LoggingToAnOwnedFileStream(true)
         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
@@ -198,6 +199,7 @@ namespace Mezzanine
             CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
             TimingCostAllowance(0),
+            MainThreadID(this_thread::get_id()),
 			LoggingToAnOwnedFileStream(false)
         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
 
@@ -621,20 +623,32 @@ namespace Mezzanine
         ////////////////////////////////////////////////////////////////////////////////
         // Other Utility Features
 
-        FrameScheduler::Resource* FrameScheduler::GetThreadResource(Thread::id ID = this_thread::get_id())
+        FrameScheduler::Resource* FrameScheduler::GetThreadResource(Thread::id ID)
         {
             std::vector<Resource*>::iterator Results = Resources.begin();
+            if(ID == MainThreadID)
+                { return *Results; } // Main Thread Resources are stored in slot 0
+
             for(std::vector<Thread*>::iterator Iter=Threads.begin(); Iter!=Threads.end(); ++Iter)
             {
                 Results++;
                 if ( (*Iter)->get_id()==ID)
-                    { return (*Results); }
+                    { return *Results; }
             }
             return NULL;
         }
 
+        Logger* FrameScheduler::GetThreadUsableLogger(Thread::id ID)
+        {
+            Resource* AlmostResults = GetThreadResource(ID);
+            if(AlmostResults)
+                { return &AlmostResults->GetUsableLogger(); }
+            return 0;
+        }
 
-    } // \Threading
+
+
+    } // \FrameScheduler
 }// \Mezanine
 
 
