@@ -71,6 +71,7 @@
 /// @brief The Minor version number of the library. (The middle number)
 #define MEZZ_DAGFRAMESCHEDULER_MINOR_VERSION 6
 
+
 /// @def MEZZ_DAGFRAMESCHEDULER_REVISION_VERSION
 /// @brief The revision version number of the library. (This right/back number)
 #define MEZZ_DAGFRAMESCHEDULER_REVISION_VERSION 0

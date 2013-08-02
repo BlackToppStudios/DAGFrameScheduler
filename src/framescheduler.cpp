@@ -630,8 +630,6 @@ namespace Mezzanine
         std::ostream& FrameScheduler::GetLog()
             { return *LogDestination; }
 
-
-
     } // \FrameScheduler
 }// \Mezanine
 

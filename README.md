@@ -29,6 +29,13 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 * Now version 1.6.0 (missed 1.5 in the Mezzanine core)
 * If some unit tests fail and they are only the ones related to logging in the framescheduler there is no problem.
 
+### July 28, 2013 ###
+* Added Functions for getting the ThreadSpecificResource from the FrameScheduler without needing to have it passed into a workunit, but there is a cpu time cost, and likely a cache miss.
+* Added another function that retrieves the usable logger in a similar way.
+* Added tests for these functions.
+* Changed Default log target to "Mezzanine.log"
+* bumped version to 1.5.0
+
 ### July 21, 2013 ###
 * Fixed Mac OS X versions of performance/size test functions
 * Document fixes
