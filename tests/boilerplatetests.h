@@ -59,8 +59,6 @@ class boilerplatetests : public UnitTestGroup
         virtual String Name()
             { return String("BoilerPlate"); }
 
-
-
         /// @brief This is called when Automatic tests are run
         void RunAutomaticTests()
         {
@@ -78,6 +76,8 @@ class boilerplatetests : public UnitTestGroup
                         throw std::runtime_error("oh noes!"); \
                         , "AutomaticTestThrow");
             //TEST_THROW(std::runtime_error, throw "oh noes!";, "AutomaticTestThrow"); //Throws unexpected type so it fails
+
+            TEST_NO_THROW( int x = 0; x++; , "ShouldNotThrow");
         }
 
         /// @brief Since RunAutomaticTests is implemented so is this.

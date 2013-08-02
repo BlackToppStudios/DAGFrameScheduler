@@ -101,6 +101,7 @@ namespace Mezzanine
             /// @brief An easy way to add a test whether or not a function/code snippet throws exceptions (or whatever) the way planned.
             /// @details This captures test location meta data and should be considered the default way to capture exception tests
             /// @param ExpectThrown The type of the thing that should be thrown
+            /// @param CodeThatThrows A snippet of code that throws an exception
             /// @param Name The name of the current test
             #ifdef __FUNCTION__
                 #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
@@ -123,6 +124,30 @@ namespace Mezzanine
             #endif
         #endif
 
+        #ifndef TEST_NO_THROW
+            /// @def TEST_THROW
+            /// @brief An easy way to add a test whether or not a function/code snippet throws exceptions (or whatever) the way planned.
+            /// @details This captures test location meta data and should be considered the default way to capture exception tests
+            /// @param CodeThatMightThrow The type of the thing that should be thrown
+            /// @param Name The name of the current test
+            #ifdef __FUNCTION__
+                #define TEST_NO_THROW(CodeThatMightThrow, Name)                                             \
+                try {                                                                                       \
+                    CodeThatMightThrow;                                                                     \
+                    AddTestResult( TestData( (Name), Testing::Success, __FUNCTION__, __FILE__, __LINE__)) ; \
+                } catch (...) {                                                                             \
+                    AddTestResult( TestData( (Name), Testing::Failed, __FUNCTION__, __FILE__, __LINE__)) ;  \
+                }
+            #else
+                #define TEST_NO_THROW(CodeThatMightThrow, Name)                                             \
+                try {                                                                                       \
+                    CodeThatMightThrow;                                                                     \
+                    AddTestResult( TestData( (Name), Testing::Success, __func__, __FILE__, __LINE__)) ;     \
+                } catch (...) {                                                                             \
+                    AddTestResult( TestData( (Name), Testing::Failed, __func__, __FILE__, __LINE__)) ;      \
+                }
+            #endif
+        #endif
 
         ///////////////////////////////////////////////////////////////////////////////////////////
         /// @brief The name of a test paired with the Results of a test.
@@ -258,6 +283,7 @@ namespace Mezzanine
 
                 /// @brief Print the results or save them to a file.
                 /// @param Output the stream to send the results to.
+                /// @param Error A stream to send errors to.
                 /// @param Summary Print Statistics at the end, not needed when sending results between processes. Defaults to true/enabled.
                 /// @param FullOutput Sometimes the user does not want to see each test results and just wants a little blurb. Defaults to true/enabled.
                 /// @param HeaderOutput Makes the output a little more understandable it is short or needs to be copied into a spreadsheet. Defaults to true/enabled.

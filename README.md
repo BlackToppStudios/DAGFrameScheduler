@@ -21,6 +21,14 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 1, 2013 ###
+* Removed Buffer swapper and integrated buffer swapping for double buffered resources into thread creation, it likely performs better and is certainly simple
+* Added checking support for openMP to the CMake configuration
+* Default LogStream is now a file name "Mezzanine.log" and the previous contents are truncated.
+* Upgraded testing tools: Added debugtests as an option, and added no throw tests
+* Now version 1.6.0 (missed 1.5 in the Mezzanine core)
+* If some unit tests fail and they are only the ones related to logging in the framescheduler there is no problem.
+
 ### July 21, 2013 ###
 * Fixed Mac OS X versions of performance/size test functions
 * Document fixes

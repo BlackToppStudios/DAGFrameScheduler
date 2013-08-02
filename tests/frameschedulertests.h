@@ -154,6 +154,38 @@ ostream& operator<< (ostream& out, RestartMetric Lhs)
     return out;
 }
 
+
+/// @brief Perform Basic tests of the functions to acquire resources
+class LoggerCheckWorkUnit : public DefaultWorkUnit
+{
+    public:
+        /// @brief Empty Virtual Deconstructor
+        virtual ~LoggerCheckWorkUnit()
+            { }
+
+        DefaultThreadSpecificStorage::Type* FromGetResource;
+        DefaultThreadSpecificStorage::Type* FromArgs;
+
+        Logger* LogFromGet;
+        Logger* LogFromArgs;
+
+        Thread::id InThread;
+
+        virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
+        {
+            FromGetResource = CurrentThreadStorage.GetFrameScheduler()->GetThreadResource();
+            FromArgs = &CurrentThreadStorage;
+
+            LogFromGet = &CurrentThreadStorage.GetFrameScheduler()->GetThreadResource()->GetUsableLogger();
+            LogFromArgs = &CurrentThreadStorage.GetUsableLogger();
+
+            InThread = this_thread::get_id();
+
+            this_thread::sleep_for(100000); // wait 1/10th of a second.
+        }
+};
+
+
 /// @brief Tests for the Framescheduler class
 class frameschedulertests : public UnitTestGroup
 {
@@ -201,24 +233,9 @@ class frameschedulertests : public UnitTestGroup
             //sort(WorkUnitNames.begin(),WorkUnitNames.end());
             for(set<String>::iterator Iter=WorkUnitNames.begin(); Iter!=WorkUnitNames.end(); Iter++)
                 { cout << *Iter << "\t"; }
-            //ThrowOnFalse(ThreadCount==TargetThreadCount_, "Thread count wrong");
-            if(ThreadCount==TargetThreadCount_)
-                { temp=Testing::Success; }
-            else
-                { temp=Testing::Failed; }
-            AddTestResult(TestName+"::ThreadCount", temp);
-            //ThrowOnFalse(WorkUnitCount_==WorkUnitNames.size(),"Wrong number of Unique WorkUnit Names");
-            if(WorkUnitCount_==WorkUnitNames.size())
-                { temp=Testing::Success; }
-            else
-                { temp=Testing::Failed; }
-            AddTestResult(TestName+"::LogcheckSizes", temp);
-            //ThrowOnFalse(WorkUnitCount_==WorkUnitCount,"Wrong number of WorkUnit Names");
-            if(WorkUnitCount_==WorkUnitCount)
-                { temp=Testing::Success; }
-            else
-                { temp=Testing::Failed; }
-            AddTestResult(TestName+"::LogcheckNames", temp);
+            TEST(ThreadCount==TargetThreadCount_,TestName+"::ThreadCount");
+            TEST(WorkUnitCount_==WorkUnitNames.size(),TestName+"::LogcheckSizes");
+            TEST(WorkUnitCount_==WorkUnitCount,TestName+"::LogcheckNamecount");
             return WorkUnitNames;
         }
 
@@ -359,18 +376,21 @@ class frameschedulertests : public UnitTestGroup
                 PiMakerWorkUnit* WorkUnitR2 = new PiMakerWorkUnit(50000,"Run2",false);
                 PiMakerWorkUnit* WorkUnitR3 = new PiMakerWorkUnit(50000,"Run3",false);
                 PiMakerWorkUnit* WorkUnitR4 = new PiMakerWorkUnit(50000,"Run4",false);
-                LogBufferSwapper Swapper2;
                 LogAggregator Agg2;
                 DefaultThreadSpecificStorage::Type SwapResource2(&ThreadCreationTest1);
+
                 ThreadCreationTest1.AddWorkUnitMain(WorkUnitR1);
                 ThreadCreationTest1.AddWorkUnitMain(WorkUnitR2);
                 ThreadCreationTest1.AddWorkUnitMain(WorkUnitR3);
                 ThreadCreationTest1.AddWorkUnitMain(WorkUnitR4);
-
                 cout << "Thread count on initial creation: " << ThreadCreationTest1.GetThreadCount() << endl;
                 cout << "Running One Frame." << endl;
-                ThreadCreationTest1.DoOneFrame();
-                Swapper2(SwapResource2);
+                ThreadCreationTest1.DoOneFrame(); // Do the work
+                ThreadCreationTest1.RemoveWorkUnitMain(WorkUnitR1);
+                ThreadCreationTest1.RemoveWorkUnitMain(WorkUnitR2);
+                ThreadCreationTest1.RemoveWorkUnitMain(WorkUnitR3);
+                ThreadCreationTest1.RemoveWorkUnitMain(WorkUnitR4);
+                ThreadCreationTest1.DoOneFrame(); // Remove the work, but swap the log buffers.
                 Agg2(SwapResource2);
                 cout << "Emitting log:" << endl;
                 cout << LogCache.str() << endl;
@@ -382,7 +402,6 @@ class frameschedulertests : public UnitTestGroup
                 cout << endl << "Thread count after setting to: " << ThreadCreationTest1.GetThreadCount() << endl;
                 cout << "Running One Frame." << endl;
                 ThreadCreationTest1.DoOneFrame();
-                Swapper2(SwapResource2);
                 Agg2(SwapResource2);
                 cout << "Emitting log:" << endl;
                 cout << LogCache.str() << endl;
@@ -394,7 +413,6 @@ class frameschedulertests : public UnitTestGroup
                 cout << endl << "Thread count after setting to: " << ThreadCreationTest1.GetThreadCount() << endl;
                 cout << "Running One Frame." << endl;
                 ThreadCreationTest1.DoOneFrame();
-                Swapper2(SwapResource2);
                 Agg2(SwapResource2);
                 cout << "Emitting log:" << endl;
                 cout << LogCache.str() << endl;
@@ -406,7 +424,6 @@ class frameschedulertests : public UnitTestGroup
                 cout << endl << "Thread count after setting to: " << ThreadCreationTest1.GetThreadCount() << endl;
                 cout << "Running One Frame." << endl;
                 ThreadCreationTest1.DoOneFrame();
-                Swapper2(SwapResource2);
                 Agg2(SwapResource2);
                 cout << "Emitting log:" << endl;
                 cout << LogCache.str() << endl;
@@ -421,13 +438,13 @@ class frameschedulertests : public UnitTestGroup
                 for (Whole Counter=0; Counter<Work; ++Counter)
                     { ThreadCreationTest1.AddWorkUnitMain( new PiMakerWorkUnit(50000,"Dyn"+ToString(Counter),false) ); }
                 ThreadCreationTest1.DoOneFrame();
-                Swapper2(SwapResource2);
                 Agg2(SwapResource2);
                 //CheckSchedulerLog(LogCache,4,12);
                 //cout << LogCache.str() << endl;
                 CheckSchedulerLog(LogCache,4,1004,"ThousandUnitStress");
                 cout << "It ran correctly." << endl;
                 LogCache.str("");
+
             } // \threading tests
 
             { // Dependency
@@ -447,7 +464,6 @@ class frameschedulertests : public UnitTestGroup
                 RestartC->AddDependency(RestartA);
                 LogCache.str("");
                 FrameScheduler RestartScheduler1(&LogCache,2);
-                LogBufferSwapper Swapper3;
                 LogAggregator Agg3;
                 DefaultThreadSpecificStorage::Type SwapResource3(&RestartScheduler1);
                 RestartScheduler1.AddWorkUnitMain(RestartA);
@@ -455,7 +471,6 @@ class frameschedulertests : public UnitTestGroup
                 RestartScheduler1.AddWorkUnitMain(RestartC);
                 RestartScheduler1.SortWorkUnitsMain();
                 RestartScheduler1.DoOneFrame();
-                Swapper3(SwapResource3);
                 Agg3(SwapResource3);
                 // Check that two threads exist and that B and C run in different thread, and after A finished
 
@@ -776,7 +791,6 @@ class frameschedulertests : public UnitTestGroup
                 AffinityD->AddDependency(AffinityAffinity);
 
                 FrameScheduler Scheduler1(&LogCache,2);
-                LogBufferSwapper Swapper1;
                 LogAggregator Agg1;
                 DefaultThreadSpecificStorage::Type SwapResource(&Scheduler1);
                 Scheduler1.AddWorkUnitMain(AffinityA);
@@ -786,7 +800,6 @@ class frameschedulertests : public UnitTestGroup
                 Scheduler1.AddWorkUnitMain(AffinityD);
                 Scheduler1.SortWorkUnitsMain();
                 Scheduler1.DoOneFrame();
-                Swapper1(SwapResource);
                 Agg1(SwapResource);
                 // Check that two threads exist and that B and C run in different thread, and after A finished
                 cout << "Affinity should run in this This thread and this thread has id: " << Mezzanine::Threading::this_thread::get_id() << endl;
@@ -1064,6 +1077,57 @@ class frameschedulertests : public UnitTestGroup
 
                 delete EraseMonoA; delete EraseMonoB; delete EraseMonoC;
             } // \Removal Monopoly
+
+            {
+                stringstream LogCache;
+                FrameScheduler Scheduler1(&LogCache,4);
+                LoggerCheckWorkUnit* Checker1 = new LoggerCheckWorkUnit;
+                LoggerCheckWorkUnit* Checker2 = new LoggerCheckWorkUnit;
+                LoggerCheckWorkUnit* Checker3 = new LoggerCheckWorkUnit;
+                LoggerCheckWorkUnit* Checker4 = new LoggerCheckWorkUnit;
+                Scheduler1.AddWorkUnitMain(Checker1); //scheduler should delete workunit
+                Scheduler1.AddWorkUnitMain(Checker2);
+                Scheduler1.AddWorkUnitMain(Checker3); // There is no guarantee these will run in different threads, but unless there is
+                Scheduler1.AddWorkUnitMain(Checker4); // a huge delay in starting these workunits the FS really should
+
+                Scheduler1.SortWorkUnitsAll();
+                Scheduler1.DoOneFrame();
+
+                cout << "Checking that FrameScheduler::GetThreadResource produces the same results as what is passed into WorkUnit::DoWork: "
+                     << endl
+                     << dec << "from thread :" << Checker1->InThread << " - " << hex
+                        << (Checker1->FromArgs) << " == " << (Checker1->FromGetResource) << " : " << (Checker1->FromArgs==Checker1->FromGetResource) << endl
+                     << dec << "from thread :" << Checker2->InThread << " - " << hex
+                        << (Checker2->FromArgs) << " == " << (Checker2->FromGetResource) << " : " << (Checker2->FromArgs==Checker2->FromGetResource) << endl
+                     << dec << "from thread :" << Checker3->InThread << " - " << hex
+                        << (Checker3->FromArgs) << " == " << (Checker3->FromGetResource) << " : " << (Checker3->FromArgs==Checker3->FromGetResource) << endl
+                     << dec << "from thread :" << Checker4->InThread << " - " << hex
+                        << (Checker4->FromArgs) << " == " << (Checker4->FromGetResource) << " : " << (Checker4->FromArgs==Checker4->FromGetResource) << endl
+                     << endl;
+                TEST(Checker1->FromArgs==Checker1->FromGetResource &&
+                     Checker2->FromArgs==Checker2->FromGetResource &&
+                     Checker3->FromArgs==Checker3->FromGetResource &&
+                     Checker4->FromArgs==Checker4->FromGetResource
+                     ,"GetThreadResource");
+
+                cout << "Checking that FrameScheduler::GetThreadUsableLogger produces the same results as what is passed into WorkUnit::DoWork: "
+                     << endl
+                     << dec << "from thread :" << Checker1->InThread << " - " << hex
+                        << (Checker1->LogFromArgs) << " == " << (Checker1->LogFromGet) << " : " << (Checker1->LogFromArgs==Checker1->LogFromGet) << endl
+                     << dec << "from thread :" << Checker2->InThread << " - " << hex
+                        << (Checker2->LogFromArgs) << " == " << (Checker2->LogFromGet) << " : " << (Checker2->LogFromArgs==Checker2->LogFromGet) << endl
+                     << dec << "from thread :" << Checker3->InThread << " - " << hex
+                        << (Checker3->LogFromArgs) << " == " << (Checker3->LogFromGet) << " : " << (Checker3->LogFromArgs==Checker3->LogFromGet) << endl
+                     << dec << "from thread :" << Checker4->InThread << " - " << hex
+                        << (Checker4->LogFromArgs) << " == " << (Checker4->LogFromGet) << " : " << (Checker4->LogFromArgs==Checker4->LogFromGet) << endl
+                     << endl;
+                TEST(Checker1->LogFromArgs==Checker1->LogFromGet &&
+                     Checker2->LogFromArgs==Checker2->LogFromGet &&
+                     Checker3->LogFromArgs==Checker3->LogFromGet &&
+                     Checker4->LogFromArgs==Checker4->LogFromGet
+                     ,"GetThreadUsableLogger");
+
+            }
         }
 
         /// @brief Since RunAutomaticTests is implemented so is this.

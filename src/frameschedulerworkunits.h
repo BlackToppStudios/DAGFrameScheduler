@@ -93,18 +93,6 @@ namespace Mezzanine
                 void SetAggregationTarget(FrameScheduler* NewTarget);
         }; //LogAggregator
 
-        /// @brief Swaps all of the Logs so the usable logs can be commited, and the usable commitable.
-        /// @note If other doublebuffered resources are used then this or another work unit like it should be adjusted/created to swap those buffers.
-        /// @details This needs to have every other workunit that uses the logger as a dependency. If you use the log in a work unit
-        /// that work unit needs to depend on this one, or this one needs to depend on that one.
-        class MEZZ_LIB LogBufferSwapper : public DefaultWorkUnit
-        {
-            public:
-                /// @brief This does the swapping of buffers.
-                /// @param CurrentThreadStorage Just to get a reference to the framescheduler.
-                virtual void DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage);
-        };//LogBufferSwapper
-
         /// @brief Sorts all of the WorkUnits in the @ref FrameScheduler.
         class MEZZ_LIB WorkSorter : public DefaultWorkUnit
         {

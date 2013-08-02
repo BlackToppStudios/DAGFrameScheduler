@@ -84,21 +84,6 @@ namespace Mezzanine
         void LogAggregator::SetAggregationTarget(FrameScheduler* NewTarget)
             { AggregationTarget = NewTarget; }
 
-
-        void LogBufferSwapper::DoWork(DefaultThreadSpecificStorage::Type& CurrentThreadStorage)
-        {
-            #ifdef MEZZ_DEBUG
-            CurrentThreadStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable() << "<LogRotation ThreadID=\"" << Mezzanine::Threading::this_thread::get_id() << "\" />" << std::endl;
-            #endif
-            FrameScheduler& CurrentFrameScheduler= * CurrentThreadStorage.GetFrameScheduler();
-            for(std::vector<DefaultThreadSpecificStorage::Type*>::const_iterator Iter=CurrentFrameScheduler.Resources.begin();
-                Iter!=CurrentFrameScheduler.Resources.end();
-                ++Iter)
-            {
-                (*Iter)->GetResource<DoubleBufferedLogger>(DBRLogger).SwapUsableAndCommitable();
-            }
-        }
-
         WorkSorter::WorkSorter() :
             SortingFrequency(MEZZ_FRAMESTOTRACK*2),
             FramesSinceLastSort(0)

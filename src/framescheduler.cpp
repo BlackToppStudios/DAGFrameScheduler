@@ -123,8 +123,6 @@ namespace Mezzanine
 
         ////////////////////////////////////////////////////////////////////////////////
         // Protected Methods
-        std::ostream& FrameScheduler::GetLog()
-            { return *LogDestination; }
 
         void FrameScheduler::CleanUpThreads()
         {
@@ -179,8 +177,12 @@ namespace Mezzanine
 			CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
             TimingCostAllowance(0),
+            MainThreadID(this_thread::get_id()),
 			LoggingToAnOwnedFileStream(true)
-        { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
+        {
+            Resources.push_back(new DefaultThreadSpecificStorage::Type(this));
+            GetLog() << "<MezzanineLog>" << std::endl;
+        }
 
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
 			LogDestination(_LogDestination),
@@ -198,12 +200,19 @@ namespace Mezzanine
             CurrentThreadCount(StartingThreadCount),
             FrameCount(0), TargetFrameLength(16666),
             TimingCostAllowance(0),
+            MainThreadID(this_thread::get_id()),
 			LoggingToAnOwnedFileStream(false)
-        { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
+        {
+            Resources.push_back(new DefaultThreadSpecificStorage::Type(this));
+            (*LogDestination) << "<MezzanineLog>" << std::endl;
+        }
 
         FrameScheduler::~FrameScheduler()
         {            
             CleanUpThreads();
+
+            (*LogDestination) << "</MezzanineLog>" << std::endl;
+            LogDestination->flush();
 
             if(LoggingToAnOwnedFileStream)
             {
@@ -258,34 +267,6 @@ namespace Mezzanine
             SortWorkUnitsMain(false);
         }
 
-        /*void FrameScheduler::RemoveWorkUnit(iWorkUnit *LessWork)
-        {
-            WorkUnitsAffinity.erase
-                        (
-                            std::remove(
-                                    WorkUnitsAffinity.begin(),
-                                    WorkUnitsAffinity.end(),
-                                    LessWork->GetSortingKey(*this)
-                                    )
-                        );
-           WorkUnitsMain.erase
-                        (
-                            std::remove(
-                                    WorkUnitsMain.begin(),
-                                    WorkUnitsMain.end(),
-                                    LessWork->GetSortingKey(*this)
-                                    )
-                        );
-           WorkUnitMonopolies.erase
-                        (
-                            std::remove(
-                                    WorkUnitMonopolies.begin(),
-                                    WorkUnitMonopolies.end(),
-                                    LessWork
-                                    )
-                       );
-        }*/
-
         void FrameScheduler::RemoveWorkUnitMain(iWorkUnit* LessWork)
         {
             if(WorkUnitsMain.size())
@@ -297,7 +278,7 @@ namespace Mezzanine
                     {
                         if(Iter+1 == WorkUnitsMain.end())   // once we find it, push it to the back linearly.
                             { RemovalTarget = Iter;}        // This way we can erase from the back where it is cheap
-                        else                                // to do soand still make just on pass through the list
+                        else                                // to do so and still make just on pass through the list
                             { std::swap (*Iter,*(Iter+1)); }
                     }
                     Iter->Unit->RemoveDependency(LessWork); // This has a ton of cache miss potential I am curious what it benchmarks like?!
@@ -536,6 +517,7 @@ namespace Mezzanine
                     if(Count+1>Resources.size())
                     {
                         Resources.push_back(new DefaultThreadSpecificStorage::Type(this));
+                        Resources[Count]->SwapAllBufferedResources();
                         Threads.push_back(new Thread(ThreadWork, Resources[Count]));
                     }
                 }
@@ -545,6 +527,7 @@ namespace Mezzanine
                 {
                     if(Count+1>Resources.size())
                         { Resources.push_back(new DefaultThreadSpecificStorage::Type(this)); }
+                    Resources[Count]->SwapAllBufferedResources();
                     Threads.push_back(new Thread(ThreadWork, Resources[Count]));
                 }
             #endif
@@ -597,7 +580,7 @@ namespace Mezzanine
             {
                 Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
                 Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) + TimingCostAllowance;
-                if(WaitTime>1000000)
+                if(WaitTime>1000000) /// @todo Replace hard-code timeout with compiler/define/cmake_option
                     { WaitTime = 0; }
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );
                 CurrentFrameStart=GetTimeStamp();
@@ -618,7 +601,38 @@ namespace Mezzanine
         Whole FrameScheduler::GetWorkUnitMainCount() const
             { return this->WorkUnitsMain.size(); }
 
-    } // \Threading
+        ////////////////////////////////////////////////////////////////////////////////
+        // Other Utility Features
+
+        FrameScheduler::Resource* FrameScheduler::GetThreadResource(Thread::id ID)
+        {
+            std::vector<Resource*>::iterator Results = Resources.begin();
+            if(ID == MainThreadID)
+                { return *Results; } // Main Thread Resources are stored in slot 0
+
+            for(std::vector<Thread*>::iterator Iter=Threads.begin(); Iter!=Threads.end(); ++Iter)
+            {
+                Results++;
+                if ( (*Iter)->get_id()==ID)
+                    { return *Results; }
+            }
+            return NULL;
+        }
+
+        Logger* FrameScheduler::GetThreadUsableLogger(Thread::id ID)
+        {
+            Resource* AlmostResults = GetThreadResource(ID);
+            if(AlmostResults)
+                { return &AlmostResults->GetUsableLogger(); }
+            return 0;
+        }
+
+        std::ostream& FrameScheduler::GetLog()
+            { return *LogDestination; }
+
+
+
+    } // \FrameScheduler
 }// \Mezanine
 
 
