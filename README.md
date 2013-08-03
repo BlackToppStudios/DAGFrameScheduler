@@ -21,6 +21,11 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 2, 2013 ###
+* Fixed an issue where log buffers (and potentially all double buffered resources) where not being swapped if they were associated with the main thread.
+* Fixed many but not all of the Tests that involv reading logs
+* Bumping version to 1.6.1, consider 1.6.0 too buggy to use if you need reliable logs.
+
 ### August 1, 2013 ###
 * Removed Buffer swapper and integrated buffer swapping for double buffered resources into thread creation, it likely performs better and is certainly simple
 * Added checking support for openMP to the CMake configuration
