@@ -21,6 +21,13 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 4, 2013 ###
+* A bunch of log format changes, some merged from the Mezzanine. Log is now compliant XML and has more metadata and should be faster.
+* Added a SpinLock threading primitive so now there are more performance choices when choosing exclusion/synchronization primitives.
+* Fixed a Race condition that sometimes caused LogAggregator to swap buffer on DoubleBufferResource before/as it was created by FrameScheduler::CreateThreads.
+* All Unit test 
+* Bumped version to 1.7.0, skip 1.6.x entirely if you use logging.
+
 ### August 2, 2013 ###
 * Fixed an issue where log buffers (and potentially all double buffered resources) where not being swapped if they were associated with the main thread.
 * Fixed many but not all of the Tests that involv reading logs
