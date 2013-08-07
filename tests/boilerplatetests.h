@@ -73,9 +73,11 @@ class boilerplatetests : public UnitTestGroup
             TEST_RESULT(Answer, "AutomaticTestResult");
 
             // Multiline example
-            TEST_THROW( std::runtime_error&, \
-                        throw std::runtime_error("oh noes!"); \
-                        , "AutomaticTestThrow");
+            TEST_THROW  (
+                            std::runtime_error&,
+                            throw std::runtime_error("oh noes!");
+                            , "AutomaticTestThrow"
+                        );
             //TEST_THROW(std::runtime_error, throw "oh noes!";, "AutomaticTestThrow"); //Throws unexpected type so it fails
 
             TEST_NO_THROW( int x = 0; x++; , "ShouldNotThrow");

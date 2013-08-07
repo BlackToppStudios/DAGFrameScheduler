@@ -22,6 +22,11 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 ## NEWS ##
 
 ### August 4, 2013 ###
+* Removed forward declaration for LogBufferSwapper, Functionality is now integrated into thread creation.
+* Removed a few warnings from FrameSchedulerTests
+* Bumped version to 1.7.1 (If your code depended on useless forward declares it wasn't really compatible, Just a linker error waiting to happen).
+
+### August 4, 2013 ###
 * A bunch of log format changes, some merged from the Mezzanine. Log is now compliant XML and has more metadata and should be faster.
 * Added a SpinLock threading primitive so now there are more performance choices when choosing exclusion/synchronization primitives.
 * Fixed a Race condition that sometimes caused LogAggregator to swap buffer on DoubleBufferResource before/as it was created by FrameScheduler::CreateThreads.

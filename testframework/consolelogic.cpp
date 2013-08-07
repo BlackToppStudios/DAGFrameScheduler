@@ -71,6 +71,7 @@ namespace Mezzanine
                     << "If only test group names are entered, then all tests in those groups are run." << std::endl
                     << "This command is not case sensitive." << std::endl << std::endl
                     << "Current Test Groups: " << std::endl;
+
             Mezzanine::Whole LongestName = 0;
             for(std::map<Mezzanine::String,UnitTestGroup*>::iterator Iter=TestGroups.begin(); Iter!=TestGroups.end(); ++Iter)
             {
