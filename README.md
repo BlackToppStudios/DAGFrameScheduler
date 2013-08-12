@@ -21,7 +21,13 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
-### August 4, 2013 ###
+### August 11, 2013 ###
+* Added tracking for pause and frame length each frame (no tests yet, I don't think it works right).
+* Split TEST macros and helpers into their own file.
+* Added querying features to rolling averages.
+* Bumped version to 1.8.0.
+
+### August 5, 2013 ###
 * Removed forward declaration for LogBufferSwapper, Functionality is now integrated into thread creation.
 * Removed a few warnings from FrameSchedulerTests
 * Bumped version to 1.7.1 (If your code depended on useless forward declares it wasn't really compatible, Just a linker error waiting to happen).

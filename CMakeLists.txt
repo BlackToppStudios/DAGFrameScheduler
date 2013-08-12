@@ -225,6 +225,7 @@ set( ${PROJECT_NAME}_exe_headers
         "${RootProjectSourceDir}testframework/consolestringmanipulation.h"
         "${RootProjectSourceDir}testframework/mezztest.h"
         "${RootProjectSourceDir}testframework/testdata.h"
+        "${RootProjectSourceDir}testframework/testdatatools.h"
         "${RootProjectSourceDir}testframework/testenumerations.h"
 )
 
@@ -236,6 +237,7 @@ set( ${PROJECT_NAME}_exe_sources
         "${RootProjectSourceDir}testframework/consolestringmanipulation.cpp"
         "${RootProjectSourceDir}testframework/mezztest.cpp"
         "${RootProjectSourceDir}testframework/testdata.cpp"
+        "${RootProjectSourceDir}testframework/testdatatools.cpp"
         "${RootProjectSourceDir}testframework/testenumerations.cpp"
 )
 
