@@ -611,8 +611,8 @@ namespace Mezzanine
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );
             }
             MaxInt Now = GetTimeStamp();
-            FrameTimeLog.Insert(CurrentFrameStart-Now); //Track Frame Time for the past while
-            PauseTimeLog.Insert(CurrentPauseStart-Now); //Track Pause Time for the past while
+            FrameTimeLog.Insert(Now-CurrentFrameStart); //Track Frame Time for the past while
+            PauseTimeLog.Insert(Now-CurrentPauseStart); //Track Pause Time for the past while
             CurrentFrameStart=Now;
             TimingCostAllowance -= (CurrentFrameStart-TargetFrameEnd);
         }

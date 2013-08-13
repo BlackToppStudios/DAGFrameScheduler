@@ -21,6 +21,9 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 12, 2013 - 1.8.1 ###
+* Fixed bug with innacurate metadata tracking, now frame and pause lengths are correct.
+
 ### August 11, 2013 ###
 * Added tracking for pause and frame length each frame (no tests yet, I don't think it works right).
 * Split TEST macros and helpers into their own file.
