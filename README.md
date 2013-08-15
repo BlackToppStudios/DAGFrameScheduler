@@ -21,6 +21,14 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 15, 2013 - 1.8.0  ###
+* Added work unit names without increasing the size of the work units.
+  When any function on the FrameScheduler is called that adds a work unit, A name must be provided.
+  This name is logged along with a unique ID (Currently a pointer interpretted as an integer). This is logged along with other log messages allowing tools to assemble the information from any log.
+
+### August 13, 2013 ###
+* where did this go?
+
 ### August 4, 2013 ###
 * Removed forward declaration for LogBufferSwapper, Functionality is now integrated into thread creation.
 * Removed a few warnings from FrameSchedulerTests
