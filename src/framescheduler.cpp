@@ -164,8 +164,11 @@ namespace Mezzanine
         ////////////////////////////////////////////////////////////////////////////////
         // Construction and Destruction
         FrameScheduler::FrameScheduler(std::fstream *_LogDestination, Whole StartingThreadCount) :
-            LogDestination(_LogDestination),
+            FrameTimeLog(MEZZ_FRAMESTOTRACK),
+            PauseTimeLog(MEZZ_FRAMESTOTRACK),
             CurrentFrameStart(GetTimeStamp()),
+            CurrentPauseStart(GetTimeStamp()),
+            LogDestination(_LogDestination),
             Sorter(0),
             #ifdef MEZZ_USEBARRIERSEACHFRAME
             StartFrameSync(StartingThreadCount),
@@ -187,8 +190,11 @@ namespace Mezzanine
         }
 
         FrameScheduler::FrameScheduler(std::ostream *_LogDestination, Whole StartingThreadCount) :
-            LogDestination(_LogDestination),
+            FrameTimeLog(MEZZ_FRAMESTOTRACK),
+            PauseTimeLog(MEZZ_FRAMESTOTRACK),
             CurrentFrameStart(GetTimeStamp()),
+            CurrentPauseStart(GetTimeStamp()),
+            LogDestination(_LogDestination),
             Sorter(0),
             #ifdef MEZZ_USEBARRIERSEACHFRAME
             StartFrameSync(StartingThreadCount),
@@ -500,6 +506,18 @@ namespace Mezzanine
         MaxInt FrameScheduler::GetCurrentFrameStart() const
             { return CurrentFrameStart; }
 
+        DefaultRollingAverage<Whole>::Type& FrameScheduler::GetPauseTimeRollingAverage()
+            { return this->PauseTimeLog; }
+
+        Whole FrameScheduler::GetLastPauseTime() const
+            { return this->FrameTimeLog[FrameTimeLog.RecordCapacity()-1]; }
+
+        DefaultRollingAverage<Whole>::Type& FrameScheduler::GetFrameTimeRollingAverage()
+            { return this->FrameTimeLog; }
+
+        Whole FrameScheduler::GetLastFrameTime() const
+            { return this->PauseTimeLog[PauseTimeLog.RecordCapacity()-1]; }
+
         ////////////////////////////////////////////////////////////////////////////////
         // Executing a Frame
 
@@ -574,6 +592,8 @@ namespace Mezzanine
                 WorkUnitsMain = Sorter->WorkUnitsMain;
                 Sorter=0;
             }
+
+            CurrentPauseStart=GetTimeStamp();
         }
 
         void FrameScheduler::ResetAllWorkUnits()
@@ -592,17 +612,20 @@ namespace Mezzanine
         void FrameScheduler::WaitUntilNextFrame()
         {
             FrameCount++;
+            Whole TargetFrameEnd;
             if(TargetFrameLength)
             {
-                Whole TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
+                TargetFrameEnd = TargetFrameLength + CurrentFrameStart;
                 Whole WaitTime = Whole(TargetFrameEnd - GetTimeStamp()) + TimingCostAllowance;
                 if(WaitTime>1000000) /// @todo Replace hard-code timeout with compiler/define/cmake_option
                     { WaitTime = 0; }
                 Mezzanine::Threading::this_thread::sleep_for( WaitTime );
-                CurrentFrameStart=GetTimeStamp();
-                TimingCostAllowance -= (CurrentFrameStart-TargetFrameEnd);
-
             }
+            MaxInt Now = GetTimeStamp();
+            FrameTimeLog.Insert(Now-CurrentFrameStart); //Track Frame Time for the past while
+            PauseTimeLog.Insert(Now-CurrentPauseStart); //Track Pause Time for the past while
+            CurrentFrameStart=Now;
+            TimingCostAllowance -= (CurrentFrameStart-TargetFrameEnd);
         }
 
         ////////////////////////////////////////////////////////////////////////////////
