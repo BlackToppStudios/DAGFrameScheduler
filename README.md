@@ -21,6 +21,10 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 16, 2013 - 1.9.0  ###
+* Bumped version to where I meant to yesterday.
+* merged pause and frame time returns are swapped bugfix from Mezzanine.
+
 ### August 15, 2013 - 1.8.0  ###
 * Added work unit names without increasing the size of the work units. When any function on the FrameScheduler is called that adds a work unit, A name must be provided. This name is logged along with a unique ID (Currently a pointer interpretted as an integer). This is logged along with other log messages allowing tools to assemble the information from any log.
 

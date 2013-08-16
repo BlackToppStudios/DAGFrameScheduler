@@ -510,13 +510,13 @@ namespace Mezzanine
             { return this->PauseTimeLog; }
 
         Whole FrameScheduler::GetLastPauseTime() const
-            { return this->FrameTimeLog[FrameTimeLog.RecordCapacity()-1]; }
+            { return this->PauseTimeLog[PauseTimeLog.RecordCapacity()-1]; }
 
         DefaultRollingAverage<Whole>::Type& FrameScheduler::GetFrameTimeRollingAverage()
             { return this->FrameTimeLog; }
 
         Whole FrameScheduler::GetLastFrameTime() const
-            { return this->PauseTimeLog[PauseTimeLog.RecordCapacity()-1]; }
+            { return this->FrameTimeLog[FrameTimeLog.RecordCapacity()-1]; }
 
         ////////////////////////////////////////////////////////////////////////////////
         // Executing a Frame
