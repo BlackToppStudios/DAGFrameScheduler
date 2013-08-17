@@ -21,6 +21,9 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 17, 2013 - 1.9.1  ###
+* Emit Frame length and Pause length to log each frame.
+
 ### August 16, 2013 - 1.9.0  ###
 * Bumped version to where I meant to yesterday.
 * merged pause and frame time returns are swapped bugfix from Mezzanine.
