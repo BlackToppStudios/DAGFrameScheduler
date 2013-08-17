@@ -21,6 +21,9 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### August 18, 2013 - 1.9.2  ###
+* Merge warning fixes in from the Mezzanine
+
 ### August 17, 2013 - 1.9.1  ###
 * Emit Frame length and Pause length to log each frame.
 
