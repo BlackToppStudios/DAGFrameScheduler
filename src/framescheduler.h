@@ -444,7 +444,7 @@ namespace Mezzanine
                 /// @warning While this is running any changes to the @ref FrameScheduler must be made with an atomic operation like the
                 /// @ref AtomicCompareAndSwap32 "AtomicCompareAndSwap32" or @ref AtomicAdd "AtomicAdd". Any other threads
                 /// workunit may be accessed as any normal shared data, but Thread specific Resources should not be accessed while this runs.
-                /// @warning This uses a Spinlock to prevent accesss to ThreadSpecifivResources that the LogAggregator needs. This is unlocked
+                /// @warning This uses a Spinlock to prevent accesss to ThreadSpecificResources that the LogAggregator needs. This is unlocked
                 /// in RunMainThreadWork.
                 virtual void CreateThreads();
 
@@ -455,7 +455,11 @@ namespace Mezzanine
                 /// @details This runs the main portion of the @ref algorithm_sec "scheduling algorithm" on the main thread. This call
                 /// blocks until the execution of all workunits with main thread affinity are complete and all other work units have at
                 /// least started. This could return and other threads could still be working.
-                /// @warning This uses a Spinlock to prevent accesss to ThreadSpecifivResources that the LogAggregator needs.  This should
+                /// @n @n
+                /// Before executing any work this checks a flag to determine if it should log the current work unit dependencies. After
+                /// this check or logging has occurred this then this releases the spinlock on the log, so there is a chance of brief
+                /// contention between a LogAggregator and this if depedencies have just changed or change frequently.
+                /// @warning This uses a Spinlock to prevent accesss to ThreadSpecificResources that the LogAggregator needs.  This should
                 /// be called immediately after CreateThreads to minimize any possible contention.
                 virtual void RunMainThreadWork();
 

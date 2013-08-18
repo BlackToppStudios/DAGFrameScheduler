@@ -21,10 +21,13 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
-### August 18, 2013 - 1.9.2  ###
-* Merge warning fixes in from the Mezzanine
+### August 18, 2013 - 1.10.0  ###
+* Added LogTools which provides an automatic scoped timer that logs its results as xml.
+* Log Dependency data when dependency data has changed.
+* Added tests for log tool ScopedTimer
 
-### August 17, 2013 - 1.9.1  ###
+### August 17, 2013 - 1.9.1 - 1.9.2  ###
+* Merge warning fixes in from the Mezzanine
 * Emit Frame length and Pause length to log each frame.
 
 ### August 16, 2013 - 1.9.0  ###

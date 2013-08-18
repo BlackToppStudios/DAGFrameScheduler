@@ -243,18 +243,21 @@ namespace Mezzanine
         // WorkUnit management
         void FrameScheduler::AddWorkUnitMain(iWorkUnit* MoreWork, const String& WorkUnitName)
         {
+            DependenciesChanged();
             this->WorkUnitsMain.push_back(MoreWork->GetSortingKey(*this));
             (*this->LogDestination) << "<WorkUnitMainInsertion ID=\"" << hex << MoreWork << "\" Name=\"" << WorkUnitName << "\" />" << endl;
         }
 
         void FrameScheduler::AddWorkUnitAffinity(iWorkUnit* MoreWork, const String& WorkUnitName)
         {
+            DependenciesChanged();
             this->WorkUnitsAffinity.push_back(MoreWork->GetSortingKey(*this));
             (*this->LogDestination) << "<WorkUnitAffinityInsertion ID=\"" << hex << MoreWork << "\" Name=\"" << WorkUnitName << "\" />" << endl;
         }
 
         void FrameScheduler::AddWorkUnitMonopoly(MonopolyWorkUnit* MoreWork, const String& WorkUnitName)
         {
+            DependenciesChanged();
             this->WorkUnitsMonopolies.push_back(MoreWork);
             (*this->LogDestination) << "<WorkUnitMonopolyInsertion ID=\"" << hex << MoreWork << "\" Name=\"" << WorkUnitName << "\" />" << endl;
         }
@@ -565,6 +568,7 @@ namespace Mezzanine
         void FrameScheduler::RunMainThreadWork()
         {
             Resources[0]->SwapAllBufferedResources();
+            LogDependencies();
             LogResources.Unlock();
             ThreadWorkAffinity(Resources[0]); // Do work in this thread and get the units with affinity
 
@@ -675,19 +679,38 @@ namespace Mezzanine
                 this->NeedToLogDeps = false;
                 for(IteratorMain Iter = WorkUnitsMain.begin(); Iter!=WorkUnitsMain.end(); ++Iter)
                 {
-                    Whole Count = Iter->Unit->GetDependencyCount();
-                    //for
-                            //DefaultWorkUnit.GetDependencyCount()
+                    Whole MainCount = Iter->Unit->GetImmediateDependencyCount();
+                    for(Whole Counter = 0; Counter<MainCount; Counter++)
+                    {
+                        *(this->LogDestination) << "<WorkUnitDependency "
+                                                   "Unit=\"" << hex << Iter->Unit
+                                                << "\" DependsOn=\"" << Iter->Unit->GetDependency(Counter) << "\" "
+                                                   "/>" << endl;
+                    }
                 }
 
                 for(IteratorAffinity Iter = WorkUnitsAffinity.begin(); Iter!=WorkUnitsAffinity.end(); ++Iter)
                 {
-
+                    Whole AffinityCount = Iter->Unit->GetImmediateDependencyCount();
+                    for(Whole Counter = 0; Counter<AffinityCount; Counter++)
+                    {
+                        *(this->LogDestination) << "<WorkUnitDependency "
+                                                   "Unit=\"" << hex << Iter->Unit
+                                                << "\" DependsOn=\"" << Iter->Unit->GetDependency(Counter) << "\" "
+                                                   "/>" << endl;
+                    }
                 }
 
                 for(IteratorMonoply Iter = WorkUnitsMonopolies.begin(); Iter!=WorkUnitsMonopolies.end(); ++Iter)
                 {
-
+                    Whole MonopolyCount = (*Iter)->GetImmediateDependencyCount();
+                    for(Whole Counter = 0; Counter<MonopolyCount; Counter++)
+                    {
+                        *(this->LogDestination) << "<WorkUnitDependency "
+                                                   "Unit=\"" << hex << (*Iter)
+                                                << "\" DependsOn=\"" << (*Iter)->GetDependency(Counter) << "\" "
+                                                   "/>" << endl;
+                    }
                 }
             }
         }
