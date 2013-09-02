@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -100,16 +102,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1BufferedRollingAverage__inherit__graph.svg" width="184" height="150"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1BufferedRollingAverage__inherit__graph.svg" width="184" height="150"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Mezzanine::BufferedRollingAverage&lt; RecordType &gt;:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1BufferedRollingAverage__coll__graph.svg" width="379" height="182"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
+<div class="center"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1BufferedRollingAverage__coll__graph.svg" width="379" height="182"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
@@ -140,6 +140,12 @@ virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <tr class="memitem:a5608eb1300c883a25827f234faee1842"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMezzanine_1_1BufferedRollingAverage.html">BufferedRollingAverage</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a5608eb1300c883a25827f234faee1842">operator=</a> (const <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html">BufferedRollingAverage</a> &amp;Rhs)</td></tr>
 <tr class="memdesc:a5608eb1300c883a25827f234faee1842"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator, performs deep copy.  <a href="#a5608eb1300c883a25827f234faee1842">More...</a><br/></td></tr>
 <tr class="separator:a5608eb1300c883a25827f234faee1842"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1ae7c26b8c91d9e03152a859f26612da"><td class="memItemLeft" align="right" valign="top">virtual RecordType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a1ae7c26b8c91d9e03152a859f26612da">operator[]</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> Index)</td></tr>
+<tr class="memdesc:a1ae7c26b8c91d9e03152a859f26612da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an accurate record of insertions up to <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a87f13140f7cb8cbb9ab8d2e4cbaac756" title="Gets the capacity of this rolling average. How many records will this store.">RecordCapacity()</a>  <a href="#a1ae7c26b8c91d9e03152a859f26612da">More...</a><br/></td></tr>
+<tr class="separator:a1ae7c26b8c91d9e03152a859f26612da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0df54a174af9aee42a555982debaf3c"><td class="memItemLeft" align="right" valign="top">virtual RecordType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#af0df54a174af9aee42a555982debaf3c">operator[]</a> (<a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> Index) const </td></tr>
+<tr class="memdesc:af0df54a174af9aee42a555982debaf3c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an accurate record of insertions up to <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a87f13140f7cb8cbb9ab8d2e4cbaac756" title="Gets the capacity of this rolling average. How many records will this store.">RecordCapacity()</a>  <a href="#af0df54a174af9aee42a555982debaf3c">More...</a><br/></td></tr>
+<tr class="separator:af0df54a174af9aee42a555982debaf3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a87f13140f7cb8cbb9ab8d2e4cbaac756"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a87f13140f7cb8cbb9ab8d2e4cbaac756"></a>
 virtual <a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a87f13140f7cb8cbb9ab8d2e4cbaac756">RecordCapacity</a> () const </td></tr>
 <tr class="memdesc:a87f13140f7cb8cbb9ab8d2e4cbaac756"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the capacity of this rolling average. How many records will this store. <br/></td></tr>
@@ -168,7 +174,7 @@ class Mezzanine::BufferedRollingAverage&lt; RecordType &gt;</h3>
 
 <p>A <a class="el" href="classMezzanine_1_1RollingAverage.html" title="The interface for rolling averages used in the Mezzanine, and threading library.">RollingAverage</a> that stores a copy of each record. and does the math when queried. </p>
 
-<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00085">85</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00099">99</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a3c311bbd4e29bd58395c099094aa5d70"></a>
 <div class="memitem">
@@ -202,7 +208,7 @@ template&lt;typename RecordType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00108">108</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00122">122</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
 
 </div>
 </div>
@@ -238,7 +244,7 @@ template&lt;typename RecordType &gt; </div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00138">138</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00152">152</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
 
 </div>
 </div>
@@ -271,7 +277,7 @@ template&lt;typename RecordType &gt; </div>
 
 <p>Implements <a class="el" href="classMezzanine_1_1RollingAverage.html#a052c4ea7eab2d2a0cf61ed8b7c629f24">Mezzanine::RollingAverage&lt; RecordType &gt;</a>.</p>
 
-<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00128">128</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00142">142</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
 
 </div>
 </div>
@@ -309,7 +315,7 @@ template&lt;typename RecordType &gt; </div>
 
 <p>Implements <a class="el" href="classMezzanine_1_1RollingAverage.html#ad29ab7a9fa37da889756e4c982d6ffce">Mezzanine::RollingAverage&lt; RecordType &gt;</a>.</p>
 
-<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00120">120</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00134">134</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
 
 </div>
 </div>
@@ -346,7 +352,85 @@ template&lt;typename RecordType &gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to this rolling average after assignment has occurred, to allow for operator chaining. </dd></dl>
 
-<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00147">147</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00161">161</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1ae7c26b8c91d9e03152a859f26612da"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RecordType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual RecordType&amp; <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html">Mezzanine::BufferedRollingAverage</a>&lt; RecordType &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td>
+          <td class="paramname"><em>Index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get an accurate record of insertions up to <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a87f13140f7cb8cbb9ab8d2e4cbaac756" title="Gets the capacity of this rolling average. How many records will this store.">RecordCapacity()</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to an insertion. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Index</td><td>Which insertion to retrieve? 0 being the oldest still tracked and <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a87f13140f7cb8cbb9ab8d2e4cbaac756" title="Gets the capacity of this rolling average. How many records will this store.">RecordCapacity()</a>-1 begin the newest </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classMezzanine_1_1RollingAverage.html#ab31cd75cb9180277e8daf14b77e64577">Mezzanine::RollingAverage&lt; RecordType &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00170">170</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af0df54a174af9aee42a555982debaf3c"></a>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename RecordType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual RecordType <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html">Mezzanine::BufferedRollingAverage</a>&lt; RecordType &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td>
+          <td class="paramname"><em>Index</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get an accurate record of insertions up to <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a87f13140f7cb8cbb9ab8d2e4cbaac756" title="Gets the capacity of this rolling average. How many records will this store.">RecordCapacity()</a> </p>
+<dl class="section return"><dt>Returns</dt><dd>A copy of an inserted value. </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">Index</td><td>Which insertion to retrieve? 0 being the oldest still tracked and <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a87f13140f7cb8cbb9ab8d2e4cbaac756" title="Gets the capacity of this rolling average. How many records will this store.">RecordCapacity()</a>-1 begin the newest </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classMezzanine_1_1RollingAverage.html#a6fb84370fd8fae7b23e942c3d5814d75">Mezzanine::RollingAverage&lt; RecordType &gt;</a>.</p>
+
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00186">186</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
 
 </div>
 </div>
@@ -374,7 +458,7 @@ template&lt;typename RecordType &gt; </div>
 <p>The collection of all the records that are being have been added going back as far as the capacity will allow. </p>
 <dl class="section note"><dt>Note</dt><dd>All writes to this are performed through the iterator <a class="el" href="classMezzanine_1_1BufferedRollingAverage.html#a3315c77e867e8ba0583aa251bfc7fafb">Current</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00090">90</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
+<p>Definition at line <a class="el" href="rollingaverage_8h_source.html#l00104">104</a> of file <a class="el" href="rollingaverage_8h_source.html">rollingaverage.h</a>.</p>
 
 </div>
 </div>
@@ -383,6 +467,6 @@ template&lt;typename RecordType &gt; </div>
 </ul>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Mon Sep 2 2013 17:02:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

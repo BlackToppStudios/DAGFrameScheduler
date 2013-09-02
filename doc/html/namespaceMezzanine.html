@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -110,6 +112,9 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
+<tr class="memitem:a942580f9d14a57c4a192270eb78f7d57"><td class="memItemLeft" align="right" valign="top">typedef bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a942580f9d14a57c4a192270eb78f7d57">Bool</a></td></tr>
+<tr class="memdesc:a942580f9d14a57c4a192270eb78f7d57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generally acts a single bit, true or false.  <a href="#a942580f9d14a57c4a192270eb78f7d57">More...</a><br/></td></tr>
+<tr class="separator:a942580f9d14a57c4a192270eb78f7d57"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07cdc0ed7dd61212948bc2fcb2b1c129"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a07cdc0ed7dd61212948bc2fcb2b1c129"></a>
 typedef intptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a07cdc0ed7dd61212948bc2fcb2b1c129">ConvertiblePointer</a></td></tr>
 <tr class="memdesc:a07cdc0ed7dd61212948bc2fcb2b1c129"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type that any pointer can be converted to and back from, and insures after the conversion back it will be identical. <br/></td></tr>
@@ -167,6 +172,12 @@ typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a1148f128945da44e7e7fda12dea39af2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#a1148f128945da44e7e7fda12dea39af2">GetCachelineSize</a> ()</td></tr>
+<tr class="memdesc:a1148f128945da44e7e7fda12dea39af2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the size of one unit of storage on the CPU cache for purposes of tuning alogrithms.  <a href="#a1148f128945da44e7e7fda12dea39af2">More...</a><br/></td></tr>
+<tr class="separator:a1148f128945da44e7e7fda12dea39af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed94cd60110c03a305dc0fe6f3c46103"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#aed94cd60110c03a305dc0fe6f3c46103">GetCacheSize</a> ()</td></tr>
+<tr class="memdesc:aed94cd60110c03a305dc0fe6f3c46103"><td class="mdescLeft">&#160;</td><td class="mdescRight">How much storage can be used before RAM must be used.  <a href="#aed94cd60110c03a305dc0fe6f3c46103">More...</a><br/></td></tr>
+<tr class="separator:aed94cd60110c03a305dc0fe6f3c46103"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc972295dbb71a9a6c2f57d5290caf46"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMezzanine.html#afc972295dbb71a9a6c2f57d5290caf46">GetCPUCount</a> ()</td></tr>
 <tr class="memdesc:afc972295dbb71a9a6c2f57d5290caf46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the amount of logical processors, a reasononable amount to use for thread creation.  <a href="#afc972295dbb71a9a6c2f57d5290caf46">More...</a><br/></td></tr>
 <tr class="separator:afc972295dbb71a9a6c2f57d5290caf46"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,6 +192,23 @@ Functions</h2></td></tr>
 <div class="textblock"><p>All of the <a class="el" href="namespaceMezzanine.html" title="All of the Mezzanine game library components reside in this namespace.">Mezzanine</a> game library components reside in this namespace. </p>
 <p>The DAG Frame Scheduler is just one part of many in the <a class="el" href="namespaceMezzanine.html" title="All of the Mezzanine game library components reside in this namespace.">Mezzanine</a>. The <a class="el" href="namespaceMezzanine.html" title="All of the Mezzanine game library components reside in this namespace.">Mezzanine</a> as a whole is intended to tie a complex collection of libraries into one cohesive library. </p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
+<a class="anchor" id="a942580f9d14a57c4a192270eb78f7d57"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a942580f9d14a57c4a192270eb78f7d57">Mezzanine::Bool</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generally acts a single bit, true or false. </p>
+<p>Normally just a bool, but on some platform alignment matters more than size, so this could be as large as one cpu word in size. </p>
+
+<p>Definition at line <a class="el" href="datatypes_8h_source.html#l00096">96</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ac0e305210456ef0132dc20c06aa292dd"></a>
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +222,7 @@ Functions</h2></td></tr>
 <p>In case we ever replace the stringstream with another class, this will allow us to swap it out. </p>
 <p>This will always support &lt;&lt;, str() but may lose support for formatting functions like std::hex. </p>
 
-<p>Definition at line <a class="el" href="datatypes_8h_source.html#l00113">113</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
+<p>Definition at line <a class="el" href="datatypes_8h_source.html#l00117">117</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
 
 </div>
 </div>
@@ -211,11 +239,55 @@ Functions</h2></td></tr>
 <p>A large integer type suitable for compile time math and long term microsecond time keeping. </p>
 <p>For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807. In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for 292 years. </p>
 
-<p>Definition at line <a class="el" href="datatypes_8h_source.html#l00108">108</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
+<p>Definition at line <a class="el" href="datatypes_8h_source.html#l00112">112</a> of file <a class="el" href="datatypes_8h_source.html">datatypes.h</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a class="anchor" id="a1148f128945da44e7e7fda12dea39af2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> Mezzanine::GetCachelineSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the size of one unit of storage on the CPU cache for purposes of tuning alogrithms. </p>
+<p>This gets the smallest line size amongst available caches on the current system, it assumes that L1 cache lines are smaller than L2 and those are smaller than L3 and so if required. </p>
+<dl class="section return"><dt>Returns</dt><dd>The size of a single cache line/cache unit </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>There is a bug in MinGw which prevents this from working on windows. This always returns 64 in such situations. </dd></dl>
+
+<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00195">195</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aed94cd60110c03a305dc0fe6f3c46103"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">Whole</a> Mezzanine::GetCacheSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>How much storage can be used before RAM must be used. </p>
+<p>In many modern system cache (of all levels) is signifigantly faster than main memory. For this reason the most useful cache value is the largest cache. This attempts to get the largest value of cache on the CPU. If there are multiple physical CPUs (as opposed to multiple cores) this will likely return the amount of cache on each CPU package. This is useful for tuning alogrithms in a specific places and only in a single thread. </p>
+<dl class="section return"><dt>Returns</dt><dd>The size of the largest CPU cache in bytes. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>There is a bug in MinGw which prevents this from working on windows. This always returns 32768 in such situations. </dd></dl>
+
+<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00126">126</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="afc972295dbb71a9a6c2f57d5290caf46"></a>
 <div class="memitem">
 <div class="memproto">
@@ -233,7 +305,7 @@ Functions</h2></td></tr>
 <p>This returns whatever your OS thinks is the count of CPUs. This could include Hyperthreading unit on Intel's chip, or it might not, it could include the threads from Niagra CPUs or it might not, it could return just about any value on a given piece of and should return a reasonable value for how many threads should be used. </p>
 <dl class="section return"><dt>Returns</dt><dd>A Whole containing the amount of processors. </dd></dl>
 
-<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00111">111</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
+<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00114">114</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
 
 </div>
 </div>
@@ -254,7 +326,7 @@ Functions</h2></td></tr>
 <dl class="section warning"><dt>Warning</dt><dd>On some platforms this requires a static initialization, an can cause undefined behavior if called before static initializations are complete </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The largest size integer containing a timestamp that can be compared to other timestamps, but hads no guarantees for external value. </dd></dl>
 
-<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00098">98</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
+<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00101">101</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
 
 </div>
 </div>
@@ -274,12 +346,12 @@ Functions</h2></td></tr>
 <p>Get the resolution of the timestamp in microseconds. This is the smallest amount of time that the GetTimeStamp can accurately track. </p>
 <dl class="section return"><dt>Returns</dt><dd>A Whole which returns in millionths of a second the smallest unit of time that GetTimeStamp can measure. </dd></dl>
 
-<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00105">105</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
+<p>Definition at line <a class="el" href="systemcalls_8cpp_source.html#l00108">108</a> of file <a class="el" href="systemcalls_8cpp_source.html">systemcalls.cpp</a>.</p>
 
 </div>
 </div>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Mon Sep 2 2013 17:02:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

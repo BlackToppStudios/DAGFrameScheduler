@@ -12,6 +12,8 @@ var searchData=
   ['_7emutex',['~Mutex',['../classMezzanine_1_1Threading_1_1Mutex.html#ab41e71f0aec389942754139b2f7a56f3',1,'Mezzanine::Threading::Mutex']]],
   ['_7erawfile',['~RawFile',['../classMezzanine_1_1Threading_1_1RawFile.html#ae225a8eb5d0080c5baa180bbe6a00276',1,'Mezzanine::Threading::RawFile']]],
   ['_7erollingaverage',['~RollingAverage',['../classMezzanine_1_1RollingAverage.html#a0d5272057984b3c6c1432fc271580689',1,'Mezzanine::RollingAverage']]],
+  ['_7escopedtimer',['~ScopedTimer',['../classMezzanine_1_1Threading_1_1ScopedTimer.html#a5e4e721c43e7c972a2b5b9b37bdae8ac',1,'Mezzanine::Threading::ScopedTimer']]],
+  ['_7espinlock',['~SpinLock',['../classMezzanine_1_1Threading_1_1SpinLock.html#a56c7ad29cd7f8fb14a034795b6a989e0',1,'Mezzanine::Threading::SpinLock']]],
   ['_7ethread',['~Thread',['../classMezzanine_1_1Threading_1_1Thread.html#a0460c275cc2f38d1bccaa0d509afdc6b',1,'Mezzanine::Threading::Thread']]],
   ['_7ethreadspecificstorage',['~ThreadSpecificStorage',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#ac2a2a2f4b4ee086944f04057df016d46',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
   ['_7eweightedrollingaverage',['~WeightedRollingAverage',['../classMezzanine_1_1WeightedRollingAverage.html#aa58eed1d5eb81c191881f139565d20c5',1,'Mezzanine::WeightedRollingAverage']]],

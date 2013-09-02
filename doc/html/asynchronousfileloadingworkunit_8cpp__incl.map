@@ -1,18 +1,17 @@
 <map id="asynchronousfileloadingworkunit.cpp" name="asynchronousfileloadingworkunit.cpp">
-<area shape="rect" id="node3" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="945,83,1159,111"/>
-<area shape="rect" id="node5" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="973,161,1131,189"/>
-<area shape="rect" id="node7" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="557,547,643,575"/>
-<area shape="rect" id="node23" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="935,393,1097,421"/>
-<area shape="rect" id="node32" href="$workunit_8h.html" title="This file has the definition of the workunit." alt="" coords="673,238,753,266"/>
-<area shape="rect" id="node9" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="172,625,316,653"/>
-<area shape="rect" id="node35" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="420,315,540,343"/>
-<area shape="rect" id="node39" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="76,393,143,421"/>
-<area shape="rect" id="node51" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="5,470,72,498"/>
-<area shape="rect" id="node58" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="167,393,265,421"/>
-<area shape="rect" id="node75" href="$rollingaverage_8h.html" title="This stores the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="801,393,911,421"/>
-<area shape="rect" id="node79" href="$threadingenumerations_8h.html" title="Any enumerations the threading library requires are all declared here." alt="" coords="852,315,1015,343"/>
-<area shape="rect" id="node48" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="288,470,387,498"/>
-<area shape="rect" id="node62" href="$barrier_8h.html" title="The declaration of the Mezzanine::Threading::Barrier Barrier synchronization primitive." alt="" coords="609,393,676,421"/>
-<area shape="rect" id="node41" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="32,547,187,575"/>
-<area shape="rect" id="node65" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="484,470,615,498"/>
+<area shape="rect" id="node3" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="853,83,1067,111"/>
+<area shape="rect" id="node38" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="781,547,912,575"/>
+<area shape="rect" id="node5" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="868,161,1025,189"/>
+<area shape="rect" id="node7" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="701,625,787,653"/>
+<area shape="rect" id="node15" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="59,393,221,421"/>
+<area shape="rect" id="node24" href="$workunit_8h.html" title="This file has the definition of the workunit." alt="" coords="895,238,975,266"/>
+<area shape="rect" id="node9" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="735,702,879,730"/>
+<area shape="rect" id="node27" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="573,315,693,343"/>
+<area shape="rect" id="node31" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="296,393,363,421"/>
+<area shape="rect" id="node36" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="589,470,656,498"/>
+<area shape="rect" id="node45" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="387,393,485,421"/>
+<area shape="rect" id="node49" href="$rollingaverage_8h.html" title="This stores the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage." alt="" coords="880,393,989,421"/>
+<area shape="rect" id="node65" href="$threadingenumerations_8h.html" title="Any enumerations the threading library requires are all declared here." alt="" coords="987,547,1149,575"/>
+<area shape="rect" id="node33" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="467,470,565,498"/>
+<area shape="rect" id="node53" href="$barrier_8h.html" title="The declaration of the Mezzanine::Threading::Barrier Barrier synchronization primitive." alt="" coords="795,470,861,498"/>
 </map>

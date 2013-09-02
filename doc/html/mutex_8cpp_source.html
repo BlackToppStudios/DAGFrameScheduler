@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -180,7 +182,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            <span class="keywordflow">return</span> ret;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">        #else</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor"></span>            <span class="keywordflow">return</span> (pthread_mutex_trylock(&amp;mHandle) == 0) ? <span class="keyword">true</span> : <span class="keyword">false</span>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor"></span>        }</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;</div>
 <div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1Mutex.html#a246134ca86c84c891fc6094f2f8b0344">  102</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1Threading_1_1Mutex.html#a246134ca86c84c891fc6094f2f8b0344" title="Unlock the mutex.">Mutex::Unlock</a>()</div>
@@ -193,13 +195,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">        #endif</span></div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor"></span>        }</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    } <span class="comment">// \Threading namespace</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;} <span class="comment">// \Mezzanine namespace</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a6b071a3919f292f9d756eeb0172ba924">  112</a></span>&#160;        <a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a6b071a3919f292f9d756eeb0172ba924" title="Constructor, creates an unlocked mutex.">SpinLock::SpinLock</a>() : Locked(0)</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        {}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
+<div class="line"><a name="l00115"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a56c7ad29cd7f8fb14a034795b6a989e0">  115</a></span>&#160;        <a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a56c7ad29cd7f8fb14a034795b6a989e0" title="Destructor.">SpinLock::~SpinLock</a>()</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;        {}</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;</div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#ae2ad51111a49d2092704eb9035045eca">  118</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#ae2ad51111a49d2092704eb9035045eca" title="Lock the SpinLoc.">SpinLock::Lock</a>()</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;        {</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            <span class="keywordflow">while</span>(<a class="code" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b" title="Atomically Compares And Swaps a 32 bit value.">AtomicCompareAndSwap32</a>(&amp;Locked,0,1))</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;                {}</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        }</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;</div>
+<div class="line"><a name="l00124"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a2659487f9df5247575ebe8400389829b">  124</a></span>&#160;        <span class="keywordtype">bool</span> <a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a2659487f9df5247575ebe8400389829b" title="Try to lock the spinlock.">SpinLock::TryLock</a>()</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;            { <span class="keywordflow">return</span> !<a class="code" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b" title="Atomically Compares And Swaps a 32 bit value.">AtomicCompareAndSwap32</a>(&amp;Locked,0,1); }</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00127"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a8c8521e77c11d03554447ab80b798e4a">  127</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classMezzanine_1_1Threading_1_1SpinLock.html#a8c8521e77c11d03554447ab80b798e4a" title="Unlock the splinlock.">SpinLock::Unlock</a>()</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            { <a class="code" href="namespaceMezzanine_1_1Threading.html#a176b8e4ae356f3bfb7630c4819fa021b" title="Atomically Compares And Swaps a 32 bit value.">AtomicCompareAndSwap32</a>(&amp;Locked,1,0); }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    } <span class="comment">// \Threading namespace</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;} <span class="comment">// \Mezzanine namespace</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:25 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Mon Sep 2 2013 17:02:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -185,17 +187,17 @@ Integrating with the Algorithm</h1>
  This process is actually divided into six steps. The function <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a93e8f9d384197837fcf8fc0f3c058a5c">FrameScheduler::DoOneFrame()</a> simply calls the following functions: </p>
 <h2><a class="anchor" id="integrate1"></a>
 Step 1 - Run All the Monopolies</h2>
-<p>The function <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8dfbc810d2d24bf4c5ba4bec6c08b5c">FrameScheduler::RunAllMonopolies()</a> simply iterates through all the <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> that have been added with <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#abdc9197afda420e075dc35e585c138fe">FrameScheduler::AddWorkUnitMonopoly()</a>. It does this in no specific order. <br/>
+<p>The function <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac8dfbc810d2d24bf4c5ba4bec6c08b5c">FrameScheduler::RunAllMonopolies()</a> simply iterates through all the <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a> that have been added with <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#add1449feaeebf3ecef327a9cbed9b890">FrameScheduler::AddWorkUnitMonopoly()</a>. It does this in no specific order. <br/>
  <br/>
  In general <a class="el" href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html">MonopolyWorkUnit</a>s can be expected to use all available CPU resources. Other threads should not be executed in general. </p>
 <h2><a class="anchor" id="integrate2"></a>
 Step 2 - Create and Start Threads</h2>
 <p>The function <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#aa2cc09939a4779cbb6c0affcb0b1431e">FrameScheduler::CreateThreads()</a> Creates enough threads to get to the amount set by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a4f444bf0555ec26f1af052ea5e056e9f">FrameScheduler::SetThreadCount()</a> . Depending on how this library is configured this could mean either creating that many threads each frame or creating additional threads only if this changed. <br/>
  <br/>
- Regardless of the amount of threads created, all but one of them will start executing work units as described in the section <a class="el" href="index.html#algorithm_sec">The Algorithm</a>. This will execute as much work as possible (work units with affinity can affect how much work can be done with out waiting) that was added by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9c4085b85ab6254e9c92145887e633f9">FrameScheduler::AddWorkUnitMain(iWorkUnit*)</a>. If there is only one thread, the main thread, then this will return immediately and no work will be done. </p>
+ Regardless of the amount of threads created, all but one of them will start executing work units as described in the section <a class="el" href="index.html#algorithm_sec">The Algorithm</a>. This will execute as much work as possible (work units with affinity can affect how much work can be done with out waiting) that was added by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3096193b64c75e185400a6d011bc0e6a">FrameScheduler::AddWorkUnitMain</a>. If there is only one thread, the main thread, then this will return immediately and no work will be done. </p>
 <h2><a class="anchor" id="integrate3"></a>
 Step 3 - Main Thread Work</h2>
-<p>The call to <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5">FrameScheduler::RunMainThreadWork()</a> will start the main thread executing work units. This is the call that executes work units added with <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a9b910ace4574464bd2a5c7741a0d729c">FrameScheduler::AddWorkUnitAffinity(iWorkUnit*)</a>. <br/>
+<p>The call to <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a27b7bda2596fbbf669143688398f1fa5">FrameScheduler::RunMainThreadWork()</a> will start the main thread executing work units. This is the call that executes work units added with <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a0df64d2a90622056d94284eda250c975">FrameScheduler::AddWorkUnitAffinity</a>. <br/>
  <br/>
  If you have single thread work that is not part of a work unit and will not interfere with and work units execution then you can run it before calling this. Be careful when doing this, if there are any work units that depend on work units with affinity then they will not be able to start until some point after this is called. <br/>
  <br/>
@@ -211,6 +213,6 @@ Step 6 - Wait for next frame.</h2>
 <p>The final step is to wait until the next frame should begin. To do this tracking the begining of of each frame is required. The value in <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a2c2540f09e443e7d9f8bd2ed48354f93">FrameScheduler::CurrentFrameStart</a> is on <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> construction to the current time, and reset every to the current time when <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac5babf56caf6f2a1bddfa461b9e999b2">FrameScheduler::WaitUntilNextFrame()</a> is called. The value set by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a36c450ded7b1df6276dafc699cdf1ee2">FrameScheduler::SetFrameRate()</a> is used to calculate the desired length of a frame in microseconds. If the begining of the next frame has not been reached, then this function will sleep the scheduler until the next frame should begin. To compensate for systems with an imprecise sleep mechanism (or timing mechanism) an internal <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae1494801b8b8c6f041d19abd9a332e46">FrameScheduler::TimingCostAllowance</a> is tracked that averages the effects of imprecision across multiple frames to prevent roundings errors from consistently lengthening of shortening frames. </p>
 </div></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Mon Sep 2 2013 17:02:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

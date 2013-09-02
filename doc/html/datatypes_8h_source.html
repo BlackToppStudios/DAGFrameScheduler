@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -174,32 +176,36 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">    /// @brief An 64-bit unsigned integer.</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#ac690bcdbbe92a684875c5e8b16a33097">   91</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> uint64_t <a class="code" href="namespaceMezzanine.html#ac690bcdbbe92a684875c5e8b16a33097" title="An 64-bit unsigned integer.">UInt64</a>;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    /// @brief Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most efficient unsigned type for math.</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">   94</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>;<span class="comment"></span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    /// @brief Integer is a signed integer. In general it will be the most efficient signed type for math.</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#ad03e394cd98434cc30bc665e8f2ba30f">   96</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code" href="namespaceMezzanine.html#ad03e394cd98434cc30bc665e8f2ba30f" title="Integer is a signed integer. In general it will be the most efficient signed type for math...">Integer</a>;<span class="comment"></span></div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    /// @brief String will provide most of the functionality of std::string but could be implemented in a variety of ways to optimize it.</span></div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">   98</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> std::string <a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67" title="String will provide most of the functionality of std::string but could be implemented in a variety of...">String</a>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="comment">    /// @brief A large integer type suitable for compile time math and long term microsecond time keeping.</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    /// @details For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807.</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="comment">    /// In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment">    /// 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    /// 292 years.</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment"></span><span class="preprocessor">    #ifdef _MEZZ_CPP11_PARTIAL_</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor"></span>        <span class="keyword">typedef</span> intmax_t  <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a>;</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">    #else</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">  108</a></span>&#160;<span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a>;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">    #endif</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor"></span><span class="comment"></span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="comment">    /// @brief In case we ever replace the stringstream with another class, this will allow us to swap it out.</span></div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="comment">    /// @details This will always support &lt;&lt;, str() but may lose support for formatting functions like std::hex.</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd">  113</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> std::stringstream <a class="code" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd" title="In case we ever replace the stringstream with another class, this will allow us to swap it out...">Logger</a>;</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}<span class="comment">//Mezzanine</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="comment">    /// @typedef Bool</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment">    /// @brief Generally acts a single bit, true or false</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="comment">    /// @details Normally just a bool, but on some platform alignment matters more than size, so this could be as large as one cpu word in size.</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#a942580f9d14a57c4a192270eb78f7d57">   96</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceMezzanine.html#a942580f9d14a57c4a192270eb78f7d57" title="Generally acts a single bit, true or false.">Bool</a>;<span class="comment"></span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">    /// @brief Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most efficient unsigned type for math.</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2">   98</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a>;<span class="comment"></span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="comment">    /// @brief Integer is a signed integer. In general it will be the most efficient signed type for math.</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#ad03e394cd98434cc30bc665e8f2ba30f">  100</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> <span class="keywordtype">int</span> <a class="code" href="namespaceMezzanine.html#ad03e394cd98434cc30bc665e8f2ba30f" title="Integer is a signed integer. In general it will be the most efficient signed type for math...">Integer</a>;<span class="comment"></span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="comment">    /// @brief String will provide most of the functionality of std::string but could be implemented in a variety of ways to optimize it.</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67">  102</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> std::string <a class="code" href="namespaceMezzanine.html#a1a35eea04e090afa5803c92b8be71c67" title="String will provide most of the functionality of std::string but could be implemented in a variety of...">String</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="comment">    /// @brief A large integer type suitable for compile time math and long term microsecond time keeping.</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="comment">    /// @details For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807.</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="comment">    /// In seconds that is approximately 292,277,000,000 years and the universe is only 14,600,000,000 years old. So this is good for any time between</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">    /// 20x the age of the universe before and after the beginning of any chosen epoch. Even if used to track nanoseconds it should be good for</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">    /// 292 years.</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="comment"></span><span class="preprocessor">    #ifdef _MEZZ_CPP11_PARTIAL_</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor"></span>        <span class="keyword">typedef</span> intmax_t  <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">    #else</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b">  112</a></span>&#160;<span class="preprocessor"></span>        <span class="keyword">typedef</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> <a class="code" href="namespaceMezzanine.html#ad7ab1b85229be184e16d96c505143f9b" title="A large integer type suitable for compile time math and long term microsecond time keeping...">MaxInt</a>;</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">    #endif</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor"></span><span class="comment"></span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="comment">    /// @brief In case we ever replace the stringstream with another class, this will allow us to swap it out.</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">    /// @details This will always support &lt;&lt;, str() but may lose support for formatting functions like std::hex.</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno"><a class="code" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd">  117</a></span>&#160;<span class="comment"></span>    <span class="keyword">typedef</span> std::stringstream <a class="code" href="namespaceMezzanine.html#ac0e305210456ef0132dc20c06aa292dd" title="In case we ever replace the stringstream with another class, this will allow us to swap it out...">Logger</a>;</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;}<span class="comment">//Mezzanine</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:25 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Mon Sep 2 2013 17:02:20 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

@@ -1,8 +1,0 @@
-/home/sqeaky/Projects/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:98: Warning: problem evaluating expression '0': Syntax error in part '0'
-/home/sqeaky/Projects/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:98: Warning: problem evaluating expression '0': Syntax error in part '0'
-/home/sqeaky/Projects/DAGFrameScheduler/src/asynchronousfileloadingworkunit.h:98: Warning: problem evaluating expression '0': Syntax error in part '0'
-/home/sqeaky/Projects/DAGFrameScheduler/src/framescheduler.cpp:72: Warning: problem evaluating expression '0': Syntax error in part '0'
-/home/sqeaky/Projects/DAGFrameScheduler/src/framescheduler.cpp:72: Warning: problem evaluating expression '0': Syntax error in part '0'
-/home/sqeaky/Projects/DAGFrameScheduler/src/thread.cpp:92: Warning: problem evaluating expression '0': Syntax error in part '0'
-/home/sqeaky/Projects/DAGFrameScheduler/src/thread.cpp:92: Warning: problem evaluating expression '0': Syntax error in part '0'
-/home/sqeaky/Projects/DAGFrameScheduler/src/dagframescheduler.h:386: warning: unable to resolve reference to `Mezzanine::Threading::FrameScheduler::AddWorkUnit(iWorkUnit*)' for \ref command

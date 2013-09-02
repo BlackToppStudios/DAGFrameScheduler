@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -127,7 +129,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 class Mezzanine::Threading::DoubleBufferedResource&lt; T &gt;</h3>
 
 <p>A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanisms. </p>
-<p>It is intended for a <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html">iWorkUnit</a> like the <a class="el" href="classMezzanine_1_1Threading_1_1LogBufferSwapper.html">LogBufferSwapper</a> that just swaps buffers. This work unit should be configured to depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict with any other double buffered resources). </p>
+<p>It is intended for a <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html" title="Interface of a WorkUnit. This represents on piece of work through time.">Mezzanine::Threading::iWorkUnit</a> "iWorkUnit" like the to provide asynchronous access to resources that to not need immediate atomicity. For example, it is ok if logs are gathered asynchronously and aggregated later as long no log messages are damaged, lost or taken out of order. This allows IO and other potentially expensive tasks to be used without blocking the current thread. </p>
 
 <p>Definition at line <a class="el" href="doublebufferedresource_8h_source.html#l00073">73</a> of file <a class="el" href="doublebufferedresource_8h_source.html">doublebufferedresource.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -334,6 +336,6 @@ template&lt;typename T &gt; </div>
 </ul>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Mon Sep 2 2013 17:02:21 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>
