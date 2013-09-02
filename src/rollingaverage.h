@@ -71,13 +71,15 @@ namespace Mezzanine
             virtual RecordType GetAverage() const = 0;
 
             /// @brief Get a 0 indexed record of the past few insertions.
-            /// @detail This returns one insertion, with RecordCapacity()-1 being the newest, and 0 being the oldest.
+            /// @details This returns one insertion, with RecordCapacity()-1 being the newest, and 0 being the oldest.
             /// @warning This is not guaranteed to accurate in all rolling averages.
+            /// @param Index Which entry to retrieve, generally 0 based, but really dependent on the base class.
             /// @return A reference to something the resembles an inserted record.
             virtual RecordType& operator[] (Whole Index) = 0;
 
             /// @brief Get a 0 indexed record of the past few insertions.
-            /// @detail This returns one insertion, with RecordCapacity()-1 being the newest, and 0 being the oldest.
+            /// @details This returns one insertion, with RecordCapacity()-1 being the newest, and 0 being the oldest.
+            /// @param Index Which entry to retrieve, generally 0 based, but really dependent on the base class.
             /// @return A copy to something the resembles an inserted record.
             virtual RecordType operator[] (Whole Index) const = 0;
 

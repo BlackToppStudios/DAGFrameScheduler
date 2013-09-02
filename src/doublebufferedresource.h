@@ -65,8 +65,8 @@ namespace Mezzanine
         const static Whole DBRUser = 1;
 
         /// @brief A thread specific resource that uses double buffering to avoid multithreaded synchronization mechanisms.
-        /// @details It is intended for a @ref Mezzanine::Threading::iWorkUnit "iWorkUnit" like the
-        /// @ref Mezzanine::Threading::LogBufferSwapper "LogBufferSwapper" that just swaps buffers. This work unit should be
+        /// @details It is intended for a Mezzanine::Threading::iWorkUnit "iWorkUnit" like the
+        /// Mezzanine::Threading::LogBufferSwapper "LogBufferSwapper" that just swaps buffers. This work unit should be
         /// configured to depend on every other work unit (that is not also not a buffer swapper, so that it will not conflict
         /// with any other double buffered resources).
         template<typename T>
