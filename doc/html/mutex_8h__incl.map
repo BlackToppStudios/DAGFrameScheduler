@@ -1,4 +1,5 @@
 <map id="mutex.h" name="mutex.h">
-<area shape="rect" id="node3" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="123,83,277,111"/>
-<area shape="rect" id="node5" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="128,161,272,189"/>
+<area shape="rect" id="node3" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="125,83,256,111"/>
+<area shape="rect" id="node5" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="159,161,244,189"/>
+<area shape="rect" id="node7" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="5,238,149,266"/>
 </map>

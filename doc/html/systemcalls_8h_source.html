@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -148,28 +150,30 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">    /// and should return a reasonable value for how many threads should be used.</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="comment">    /// @return A Whole containing the amount of processors.</span></div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment"></span>    <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="crossplatformexport_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="namespaceMezzanine.html#afc972295dbb71a9a6c2f57d5290caf46" title="Get the amount of logical processors, a reasononable amount to use for thread creation.">GetCPUCount</a>();</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">// @brief How much storage can be used before RAM must be used.</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="comment">// @details In many modern system cache (of all levels) is signifigantly faster than main</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">// memory. For this reason the most useful cache value is the largest cache. This attempts</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="comment">// to get the largest value of cache on the CPU. If there are multiple physical CPUs (as</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="comment">// opposed to multiple cores) this will likely return the amount of cache on each CPU</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="comment">// package. This is useful for tuning alogrithms in a specific places and only in a single</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="comment">// thread.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    <span class="comment">// @return The size of the largest CPU cache in bytes.</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="comment">//Whole MEZZ_LIB GetCacheSize();</span></div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="comment">// @brief Get the size of one unit of storage on the CPU cache for purposes of tuning alogrithms.</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="comment">// @details This gets the smallest line size amongst available caches on the current system, it</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="comment">// assumes that L1 cache lines are smaller than L2 and those are smaller than L3 and so if required.</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="comment">// @return The size of a single cache line/cache unit</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="comment">//Whole MEZZ_LIB GetCachelineSize();</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;}<span class="comment">//Mezzanine</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    /// @brief How much storage can be used before RAM must be used.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">    /// @details In many modern system cache (of all levels) is signifigantly faster than main</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">    /// memory. For this reason the most useful cache value is the largest cache. This attempts</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">    /// to get the largest value of cache on the CPU. If there are multiple physical CPUs (as</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">    /// opposed to multiple cores) this will likely return the amount of cache on each CPU</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">    /// package. This is useful for tuning alogrithms in a specific places and only in a single</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">    /// thread.</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">    /// @return The size of the largest CPU cache in bytes.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">    /// @warning There is a bug in MinGw which prevents this from working on windows. This always returns 32768 in such situations.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span>    <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="crossplatformexport_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="namespaceMezzanine.html#aed94cd60110c03a305dc0fe6f3c46103" title="How much storage can be used before RAM must be used.">GetCacheSize</a>();</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">    /// @brief Get the size of one unit of storage on the CPU cache for purposes of tuning alogrithms.</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="comment">    /// @details This gets the smallest line size amongst available caches on the current system, it</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="comment">    /// assumes that L1 cache lines are smaller than L2 and those are smaller than L3 and so if required.</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="comment">    /// @return The size of a single cache line/cache unit</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="comment">    /// @warning There is a bug in MinGw which prevents this from working on windows. This always returns 64 in such situations.</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment"></span>    <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> <a class="code" href="crossplatformexport_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="namespaceMezzanine.html#a1148f128945da44e7e7fda12dea39af2" title="Get the size of one unit of storage on the CPU cache for purposes of tuning alogrithms.">GetCachelineSize</a>();</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;}<span class="comment">//Mezzanine</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Sun Sep 1 2013 22:01:09 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

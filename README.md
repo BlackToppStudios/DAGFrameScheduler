@@ -17,7 +17,7 @@ The 'doc' folder contains further licensing details, technical documentation and
 ### Doxygen Docs ###
 Doxygen is used to generate the technical docs in the 'doc/html' folder. This generates a series of html files from the source code. See 'index.html' for an overview of the API and a good starting point for perusing the documentation. 
 
-The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the contents of the 'doc/html directory with a command similar to `doc/doxyfiles$ doxygen Doxyfile 2> DoxygenWarnings.txt` depending on your platform. To get the higher quality graphs 'graphviz' and 'dot' need to be installed and doxygen needs to be able to find them. You can also enable the CMake option 'Mezz_Doc' to build the doxygen documentation when you build the code as well.
+The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the you can create contents of the 'doc/html' directory with a command similar to `doc/doxyfiles$ doxygen Doxyfile 2> DoxygenWarnings.txt` depending on your platform. To get the higher quality graphs 'graphviz' and 'dot' need to be installed and doxygen needs to be able to find them. You can also enable the CMake option 'Mezz_Doc' to build the doxygen documentation when you build the code as well.
 
 ## NEWS ##
 

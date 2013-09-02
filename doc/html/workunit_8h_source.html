@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -303,7 +305,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;                <span class="keyword">virtual</span> <span class="keywordtype">void</span> PrepareForNextFrame();</div>
 <div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span></div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span>                <span class="comment">// Work with the preformance log</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="comment"></span>                <span class="comment">// Work with the performance log</span></div>
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;            <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="namespaceMezzanine.html#a493d0c130650b4bf1c4f793ba191cec2" title="Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most effi...">Whole</a> GetPerformance() <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="comment"></span></div>
@@ -313,18 +315,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment"></span></div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">                /////////////////////////////////////////////////////////////////////////////////////////////</span></div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;<span class="comment"></span>                <span class="comment">// Deciding when to and doing the work</span></div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                <span class="keyword">virtual</span> <span class="keywordtype">void</span> operator() (<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage);</div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;</div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> GetSortingKey(<a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> &amp;SchedulerToCount);</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;</div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        };<span class="comment">//DefaultWorkUnit</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    }<span class="comment">//Threading</span></div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;}<span class="comment">//Mezzanine</span></div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;<span class="comment">                /// @brief This does everything required to track metadata and log work</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;<span class="comment">                /// @param CurrentThreadStorage The FrameScheduler passes this in</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;<span class="comment">                /// @details This wraps the log output in a WorkUnit element with a unique ID</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;<span class="comment">                /// as and an attribute. This causes all the log output to be valid xml as long</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;<span class="comment">                /// no &#39;&lt;&#39; or &#39;&gt;&#39; are emitted.</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;<span class="comment">                /// @n @n</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;<span class="comment">                ///</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="comment"></span>                <span class="keyword">virtual</span> <span class="keywordtype">void</span> operator() (<a class="code" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html" title="A thread specific collection of double-buffered and algorithm specific resources.">DefaultThreadSpecificStorage::Type</a>&amp; CurrentThreadStorage);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="classMezzanine_1_1Threading_1_1WorkUnitKey.html" title="Stores data about a single work unit so that it can easily be sorted.">WorkUnitKey</a> GetSortingKey(<a class="code" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> &amp;SchedulerToCount);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        };<span class="comment">//DefaultWorkUnit</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    }<span class="comment">//Threading</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}<span class="comment">//Mezzanine</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Sun Sep 1 2013 22:01:09 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

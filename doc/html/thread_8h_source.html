@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -152,7 +154,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">    distribution.</span></div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">*/</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o...">crossplatformincludes.h</a>&quot;</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">//#include &quot;crossplatformincludes.h&quot;</span></div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="systemcalls_8h.html" title="This file defines a minimalistic cross-platform thread that the scheduler uses to schedule tasks...">systemcalls.h</a>&quot;</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation.">mutex.h</a>&quot;</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
@@ -385,33 +387,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;<span class="comment">            /// @param MicroSeconds Minimum time to put the thread to sleep.</span></div>
 <div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;<span class="comment"></span>            <span class="keywordtype">void</span> <a class="code" href="crossplatformexport_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="namespaceMezzanine_1_1Threading_1_1this__thread.html#abde9ffefb05497810fe038149cbd513f" title="Blocks the calling thread for a period of time.">sleep_for</a>(<a class="code" href="namespaceMezzanine.html#abea3b8e8e9b03d2547b2800284ba682d" title="An 32-bit unsigned integer.">UInt32</a> MicroSeconds);</div>
 <div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            <span class="comment">// At some point I would like an overload of this function</span></div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            <span class="comment">/*</span></div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;<span class="comment">            // Blocks the calling thread for a period of time.</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;<span class="comment">            // @param aTime Minimum time to put the thread to sleep.</span></div>
-<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="comment">            // Example usage:</span></div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;<span class="comment">            // @code</span></div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;<span class="comment">            // // Sleep for 100 milliseconds</span></div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;<span class="comment">            // this_thread::sleep_for(chrono::milliseconds(100));</span></div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;<span class="comment">            // @endcode</span></div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;<span class="comment">            // @note Supported duration types are: nanoseconds, microseconds,</span></div>
-<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;<span class="comment">            // milliseconds, seconds, minutes and hours.</span></div>
-<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;<span class="comment">            template &lt;class _Rep, class _Period&gt; void sleep_for(const chrono::duration&lt;_Rep, _Period&gt;&amp; aTime)</span></div>
-<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;<span class="comment">            {</span></div>
-<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;<span class="comment">            #if defined(_MEZZ_THREAD_WIN32_)</span></div>
-<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;<span class="comment">                Sleep(int(double(aTime.count()) * (1000.0 * _Period::_as_double()) + 0.5));</span></div>
-<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;<span class="comment">            #else</span></div>
-<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;<span class="comment">                usleep(int(double(aTime.count()) * (1000000.0 * _Period::_as_double()) + 0.5));</span></div>
-<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;<span class="comment">            #endif</span></div>
-<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;<span class="comment">            }</span></div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;<span class="comment">            */</span></div>
-<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;        } <span class="comment">// namespace this_thread</span></div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    }<span class="comment">//Threading</span></div>
-<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;}<span class="comment">//Mezzanine</span></div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;</div>
-<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        } <span class="comment">// namespace this_thread</span></div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }<span class="comment">//Threading</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}<span class="comment">//Mezzanine</span></div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Sun Sep 1 2013 22:01:09 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

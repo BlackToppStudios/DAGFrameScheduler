@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -115,8 +117,9 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A cross-platform abstraction of the OS's mutex. </p>
+<p>Use this for potentially long delays, like making multiple system calls. This is likely slower than a spinlock, but it informs the OS of delay and could allow another thread to be scheduled, making use of the time the current thread would otherwise spin. </p>
 
-<p>Definition at line <a class="el" href="mutex_8h_source.html#l00083">83</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
+<p>Definition at line <a class="el" href="mutex_8h_source.html#l00086">86</a> of file <a class="el" href="mutex_8h_source.html">mutex.h</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="aa740ef84033df8b8e94e50b64c8f1edf"></a>
 <div class="memitem">
@@ -186,6 +189,6 @@ Public Member Functions</h2></td></tr>
 </ul>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Sun Sep 1 2013 22:01:09 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

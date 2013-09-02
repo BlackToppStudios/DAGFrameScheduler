@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -98,16 +100,14 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-0-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__inherit__graph.svg" width="100%" height="540"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__inherit__graph.svg" width="100%" height="490"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div id="dynsection-1" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-1-trigger" src="closed.png" alt="+"/> Collaboration diagram for Mezzanine::Threading::DefaultWorkUnit:</div>
 <div id="dynsection-1-summary" class="dynsummary" style="display:block;">
 </div>
 <div id="dynsection-1-content" class="dyncontent" style="display:none;">
-<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__coll__graph.svg" width="100%" height="416"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<div class="center"><div class="zoom"><iframe scrolling="no" frameborder="0" src="classMezzanine_1_1Threading_1_1DefaultWorkUnit__coll__graph.svg" width="100%" height="416"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -159,7 +159,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" hr
 <tr class="memdesc:aef801e574d26553f5e9ef824547f8f3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if this WorkUnit could concievably run right now.  <a href="#aef801e574d26553f5e9ef824547f8f3f">More...</a><br/></td></tr>
 <tr class="separator:aef801e574d26553f5e9ef824547f8f3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aebc6b20afcd5b0498809987d427ea151"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aebc6b20afcd5b0498809987d427ea151">operator()</a> (<a class="el" href="structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab">DefaultThreadSpecificStorage::Type</a> &amp;CurrentThreadStorage)</td></tr>
-<tr class="memdesc:aebc6b20afcd5b0498809987d427ea151"><td class="mdescLeft">&#160;</td><td class="mdescRight">This tracks work unit metadata, then calls DoWork.  <a href="#aebc6b20afcd5b0498809987d427ea151">More...</a><br/></td></tr>
+<tr class="memdesc:aebc6b20afcd5b0498809987d427ea151"><td class="mdescLeft">&#160;</td><td class="mdescRight">This does everything required to track metadata and log work.  <a href="#aebc6b20afcd5b0498809987d427ea151">More...</a><br/></td></tr>
 <tr class="separator:aebc6b20afcd5b0498809987d427ea151"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad23d15834990a68bed95a0ef0a87d352"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad23d15834990a68bed95a0ef0a87d352"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#ad23d15834990a68bed95a0ef0a87d352">PrepareForNextFrame</a> ()</td></tr>
@@ -487,7 +487,7 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 
 <p>Implements <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a9b38531395f4ed1db70552368e044b4a">Mezzanine::Threading::iWorkUnit</a>.</p>
 
-<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00171">171</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
+<p>Definition at line <a class="el" href="workunit_8cpp_source.html#l00175">175</a> of file <a class="el" href="workunit_8cpp_source.html">workunit.cpp</a>.</p>
 
 </div>
 </div>
@@ -543,13 +543,16 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 </table>
 </div><div class="memdoc">
 
-<p>This tracks work unit metadata, then calls DoWork. </p>
+<p>This does everything required to track metadata and log work. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">CurrentThreadStorage</td><td>The <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html">ThreadSpecificStorage</a> that this WorkUnit will operate with when executing. </td></tr>
+    <tr><td class="paramname">CurrentThreadStorage</td><td>The <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html" title="This is central object in this algorithm, it is responsible for spawning threads and managing the ord...">FrameScheduler</a> passes this in</td></tr>
   </table>
   </dd>
 </dl>
+<p>This wraps the log output in a WorkUnit element with a unique ID as and an attribute. This causes all the log output to be valid xml as long no '&lt;' or '&gt;' are emitted. <br/>
+ <br/>
+ </p>
 
 <p>Implements <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a2f733750a24168a54c9c0c324aebb426">Mezzanine::Threading::iWorkUnit</a>.</p>
 
@@ -629,6 +632,6 @@ std::vector&lt; <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.htm
 </ul>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Sun Sep 1 2013 22:01:09 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

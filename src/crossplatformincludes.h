@@ -72,7 +72,8 @@
 
 #include "crossplatformexport.h"
 
-/// @file Include headers for common tasks like those offered by the Posix or win32 API
+/// @file
+/// @brief Include headers for common tasks like those offered by the Posix or win32 API
 /// @warning Do not include in headers even if it appears to work. The windows headers
 /// heartlessly set preprocessor macros to names that a sane person would use for functions.
 /// So even if said function is on a class or in a namespace the poor underprivileged

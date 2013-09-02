@@ -9,6 +9,8 @@
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
 <link href="DoxyStyle.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script> 
 </head>
 <body onload='searchBox.OnSelectItem(0);'>
 <div id="top"><!-- do not remove this div! -->
@@ -17,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">November 2012</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -160,9 +162,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>GetFrameScheduler()
 : <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a613ddf6ec3fdd5fbc5295479237a883a">Mezzanine::Threading::ThreadSpecificStorage</a>
 </li>
+<li>GetFrameTimeRollingAverage()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#acb8ccb698529a96bbaebf797875aa110">Mezzanine::Threading::FrameScheduler</a>
+</li>
 <li>GetImmediateDependencyCount()
 : <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#ac077dd37376f8db9aec525729c2e9b55">Mezzanine::Threading::iWorkUnit</a>
 , <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a9d87219f0e4619f6cbd645b8ff8d9cff">Mezzanine::Threading::DefaultWorkUnit</a>
+</li>
+<li>GetLastFrameTime()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a385a69f432201b07b285e51e649ed86c">Mezzanine::Threading::FrameScheduler</a>
+</li>
+<li>GetLastPauseTime()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a8143510f4b1e4dc1e6c044be5fb7180d">Mezzanine::Threading::FrameScheduler</a>
 </li>
 <li>GetLog()
 : <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad10391522f786d4b5644362aa5e75897">Mezzanine::Threading::FrameScheduler</a>
@@ -172,6 +183,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>GetNextWorkUnitAffinity()
 : <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a63ecabada780522819ca611399e806c6">Mezzanine::Threading::FrameScheduler</a>
+</li>
+<li>GetPauseTimeRollingAverage()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a3dfbac6f7d5c7f17c2b1b79616c9b44f">Mezzanine::Threading::FrameScheduler</a>
 </li>
 <li>GetPerformance()
 : <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a1ac48751586feb4f0db8c8af28a63f9f">Mezzanine::Threading::DefaultWorkUnit</a>
@@ -184,8 +198,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 : <a class="el" href="classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#ad7fb682f1a90910b079fb4e93c6cf328">Mezzanine::Threading::ThreadSpecificStorage</a>
 </li>
 <li>GetRunningState()
-: <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">Mezzanine::Threading::DefaultWorkUnit</a>
-, <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a50584bcb28f98f249540649cda7181a6">Mezzanine::Threading::iWorkUnit</a>
+: <a class="el" href="classMezzanine_1_1Threading_1_1iWorkUnit.html#a50584bcb28f98f249540649cda7181a6">Mezzanine::Threading::iWorkUnit</a>
+, <a class="el" href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aa3518b6585638e25c2b36fa33a288b17">Mezzanine::Threading::DefaultWorkUnit</a>
 </li>
 <li>GetSortingFrequency()
 : <a class="el" href="classMezzanine_1_1Threading_1_1WorkSorter.html#a33ecf4675298cb6c1d46085c456e8c9a">Mezzanine::Threading::WorkSorter</a>
@@ -196,6 +210,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>GetThreadCount()
 : <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a45299a4ebe34674b09c7b40ccccae8ce">Mezzanine::Threading::FrameScheduler</a>
+</li>
+<li>GetThreadResource()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a26aaf64a3f83bcdf35d4ce62c4e85ce2">Mezzanine::Threading::FrameScheduler</a>
+</li>
+<li>GetThreadUsableLogger()
+: <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ad3a097d958a2a79dbd4aeeadd0daa3ca">Mezzanine::Threading::FrameScheduler</a>
 </li>
 <li>GetUsable()
 : <a class="el" href="classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a36c65f2a937d73bc918fb42becd6412c">Mezzanine::Threading::DoubleBufferedResource&lt; T &gt;</a>
@@ -218,6 +238,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Jul 14 2013 05:39:26 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Sun Sep 1 2013 22:01:09 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

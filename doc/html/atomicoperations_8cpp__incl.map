@@ -1,5 +1,5 @@
 <map id="atomicoperations.cpp" name="atomicoperations.cpp">
-<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="345,83,431,111"/>
-<area shape="rect" id="node19" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="96,83,251,111"/>
-<area shape="rect" id="node5" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="175,161,319,189"/>
+<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="128,83,213,111"/>
+<area shape="rect" id="node11" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="343,83,497,111"/>
+<area shape="rect" id="node5" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="168,161,312,189"/>
 </map>

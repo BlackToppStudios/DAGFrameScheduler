@@ -5,7 +5,7 @@
 #---------------------------------------------------------------------------
 DOXYFILE_ENCODING      = UTF-8
 PROJECT_NAME           = "DagFrameScheduler"
-PROJECT_NUMBER         = 0.5
+PROJECT_NUMBER         = 1.10.1
 PROJECT_BRIEF          = A scheduler for repeated workloads that must be run every frame.
 PROJECT_LOGO           = img/logogreen100pxtall.png
 OUTPUT_DIRECTORY       = ../
@@ -283,7 +283,7 @@ DOT_PATH               =
 DOTFILE_DIRS           =
 MSCFILE_DIRS           =
 DOT_GRAPH_MAX_NODES    = 50
-MAX_DOT_GRAPH_DEPTH    = 0
+MAX_DOT_GRAPH_DEPTH    = 50
 DOT_TRANSPARENT        = NO
 DOT_MULTI_TARGETS      = YES
 GENERATE_LEGEND        = YES
