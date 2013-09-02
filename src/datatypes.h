@@ -90,6 +90,10 @@ namespace Mezzanine
     /// @brief An 64-bit unsigned integer.
     typedef uint64_t UInt64;
 
+    /// @typedef Bool
+    /// @brief Generally acts a single bit, true or false
+    /// @details Normally just a bool, but on some platform alignment matters more than size, so this could be as large as one cpu word in size.
+    typedef bool Bool;
     /// @brief Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most efficient unsigned type for math.
     typedef unsigned int Whole;
     /// @brief Integer is a signed integer. In general it will be the most efficient signed type for math.

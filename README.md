@@ -21,6 +21,15 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the co
 
 ## NEWS ##
 
+### September 1, 2013 - 1.10.1  ###
+* Fixed Tests relying on Now() in windows.
+* Documentation fixes in headers.
+* Fixed some undefined references on windows by including MEZZ_LIB.
+Some of the changes this go around were to the testing and merge in frame the Mezzanine to keep the codebase similar
+* Added option to test framework for asked questions with warngins as results.
+* Test tracking or ArgC and ArgV to make referencing them easier in tests.
+* Added Bool to keep integration with Mezzanine clean.
+
 ### August 18, 2013 - 1.10.0  ###
 * Added LogTools which provides an automatic scoped timer that logs its results as xml.
 * Log Dependency data when dependency data has changed.
