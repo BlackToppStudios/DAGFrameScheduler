@@ -159,7 +159,9 @@ namespace Mezzanine
                 /// @brief If this pointer is non-zero then the @ref WorkSorter it points at will be used to sort WorkUnits.
                 WorkSorter* Sorter;
 
+                /// @cond false
                 #ifdef MEZZ_USEBARRIERSEACHFRAME
+                /// @endcond
             public:
                 /// @brief Used to synchronize the starting an stopping of all threads before the frame starts.
                 Barrier StartFrameSync;
@@ -170,9 +172,10 @@ namespace Mezzanine
                 /// @brief When using barriers instead of thread creation for synchronization this is what tells the threads to end.
                 Int32 LastFrame;
             protected:
+                /// @cond false
                 #endif
+                /// @endcond
 
-                /// @internal
                 /// @brief Protects DoubleBufferedResources during creation from being accessed by the LogAggregator.
                 SpinLock LogResources;
 

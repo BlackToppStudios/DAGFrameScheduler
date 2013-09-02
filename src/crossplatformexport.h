@@ -43,7 +43,7 @@
 
     /// @file
     /// @brief This file determines what features are offered by the compiler that this library can take advantage of.
-    /// @details This file is dropped when integrating with the Mezzanine. Its contents are manually merged with 
+    /// @details This file is dropped when integrating with the Mezzanine. Its contents are manually merged with
     /// crossplatformexport.h instead.
 
     // Parts of this library use the TinyThread++ libary and those parts are also covered by the following license
@@ -101,24 +101,6 @@
             #pragma warning( disable : 4221) // interfaces don't generate linkable symbols, well of course they don't
             #pragma warning( disable : 4512) // Could not generate assignment operator for class that doesn't need one
         #endif
-        #ifndef WIN32_LEAN_AND_MEAN
-            #define WIN32_LEAN_AND_MEAN
-            #define __UNDEF_LEAN_AND_MEAN
-        #endif
-        #ifndef NOMINMAX
-            #define NOMINMAX
-        #endif
-        #include <windows.h>
-        #include <process.h>
-        #ifdef __UNDEF_LEAN_AND_MEAN
-            #undef WIN32_LEAN_AND_MEAN
-            #undef __UNDEF_LEAN_AND_MEAN
-        #endif
-    #else
-        #include <pthread.h>
-        #include <signal.h>
-        #include <sched.h>
-        #include <unistd.h>
     #endif
 
 /* // Currently C++11 disabled because it is never used.
