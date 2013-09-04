@@ -21,10 +21,13 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 
 ## NEWS ##
 
+### September 3, 2013 - 1.10.2  ###
+* Attempt to fix build on Windows with inluding system headers in Mezzanine headers.
+
 ### September 1, 2013 - 1.10.1  ###
 * Fixed Tests relying on Now() in windows.
 * Documentation fixes in headers.
-* Fixed some undefined references on windows by including MEZZ_LIB.
+* Fixed some undefine d references on windows by including MEZZ_LIB.
 Some of the changes this go around were to the testing and merge in frame the Mezzanine to keep the codebase similar
 * Added option to test framework for asked questions with warngins as results.
 * Test tracking or ArgC and ArgV to make referencing them easier in tests.

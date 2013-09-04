@@ -19,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png" /></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -97,14 +97,16 @@ Broken Algorithms</h1>
 Single Threaded</h2>
 <p>An application using this threading model is not actually multithreaded at all. However, It has been shown that software can run in a single and get good perfomance. This is the benchmark all other threading models get compared too. <br/>
  <br/>
- There is a term, Speedup ( <a href="http://en.wikipedia.org/wiki/Speedup">http://en.wikipedia.org/wiki/Speedup</a> ), which is simply a comparison of the single threaded performance of an algorithm to the mutlithreaded performance. You simply determine how many times more work the multithreaded algorithm does in the same time, or how many times longer the single threaded algorithm takes to the same work. Ideally two threads will be twice as fast (speedup of 2x), and three thread would be three times as fast (3x speedup), and so; this is called linear speedup. In practice there is always some overhead in creating and synchronizing threads, so achieving linear speedup is difficult. </p>
+ There is a term, Speedup ( <a href="http://en.wikipedia.org/wiki/Speedup">http://en.wikipedia.org/wiki/Speedup</a> ), which is simply a comparison of the single threaded performance of an algorithm to the mutlithreaded performance. You simply determine how many times more work the multithreaded algorithm does in the same time, or how many times longer the single threaded algorithm takes to the same work. Ideally two threads will be twice as fast (speedup of 2x), and three thread would be three times as fast (3x speedup), and so; this is called linear speedup. In practice there is always some overhead in creating and synchronizing threads, so achieving linear speedup is difficult. <br/>
+ <br/>
+ </p>
 <div class="image">
 <img src="Single.png" alt="Single.png"/>
 <div class="caption">
 Single Threaded Execution - Fig 1.</div></div>
 <br/>
  <br/>
- The DAGFrameScheduler library tries to tailor the threading model to the problem to minimize that overhead. With a single threaded application one thread does all the work and always wastes every other thread, but there is no overhead if the system only has one thread. <br/>
+ The DAGFrameScheduler library tries to tailor the threading model to a specific problem to minimize that overhead. With a single threaded application one thread does all the work and always wastes every other thread, but there is no overhead if the system only has one thread. <br/>
  <br/>
  </p>
 <h2><a class="anchor" id="broken_Unplanned"></a>
@@ -213,6 +215,6 @@ Step 6 - Wait for next frame.</h2>
 <p>The final step is to wait until the next frame should begin. To do this tracking the begining of of each frame is required. The value in <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a2c2540f09e443e7d9f8bd2ed48354f93">FrameScheduler::CurrentFrameStart</a> is on <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html">FrameScheduler</a> construction to the current time, and reset every to the current time when <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ac5babf56caf6f2a1bddfa461b9e999b2">FrameScheduler::WaitUntilNextFrame()</a> is called. The value set by <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#a36c450ded7b1df6276dafc699cdf1ee2">FrameScheduler::SetFrameRate()</a> is used to calculate the desired length of a frame in microseconds. If the begining of the next frame has not been reached, then this function will sleep the scheduler until the next frame should begin. To compensate for systems with an imprecise sleep mechanism (or timing mechanism) an internal <a class="el" href="classMezzanine_1_1Threading_1_1FrameScheduler.html#ae1494801b8b8c6f041d19abd9a332e46">FrameScheduler::TimingCostAllowance</a> is tracked that averages the effects of imprecision across multiple frames to prevent roundings errors from consistently lengthening of shortening frames. </p>
 </div></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 2 2013 17:07:47 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Tue Sep 3 2013 23:25:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

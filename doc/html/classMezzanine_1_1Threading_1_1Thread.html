@@ -19,7 +19,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;" nowrap="nowrap">
-   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png"></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
+   <div id="projectname"><a href="http://blacktoppstudios.com"><img src="logogreen100pxtall.png" /></a>DAGFrameScheduler&#160;<span id="projectnumber">September 2013</span></div>
   </td>
  </tr>
  </tbody>
@@ -151,7 +151,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock"><p>A small wrapper around the system thread. </p>
 <p>In general game code should not be creating this if they are using the DAG Frame Scheduler, as it tries to maintain control over the threads created by a game. This tries to keep the names the same as the standard thread, and might at some point be replace by some template machinery that wraps the minor difference that currently exist. </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00088">88</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00087">87</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1e1d609c4cf14081ed7350856c92640f"></a>
 <div class="memitem">
@@ -177,7 +177,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Default constructor. </p>
 <p>Construct a <code>thread</code> object without an associated thread of execution (i.e. non-joinable). </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00105">105</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00110">110</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -213,7 +213,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00157">157</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00158">158</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -253,7 +253,7 @@ Static Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This constructor is not fully compatible with the standard C++ thread class. It is more similar to the pthread_create() (POSIX) and CreateThread() (Windows) functions. </dd></dl>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00188">188</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00189">189</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -273,7 +273,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Destructor. </p>
 <dl class="section note"><dt>Note</dt><dd>If the thread is joinable upon destruction, <code>std::terminate()</code> will be called, which terminates the process. It is always wise to do <code><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html#a0414b6839a3027fd14e244f4d3ada7d3" title="Wait for the thread to finish (join execution flows).">join()</a></code> before deleting a thread object. </dd></dl>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00219">219</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00220">220</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -294,7 +294,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Detach from the thread. </p>
 <p>After calling <code><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html#ae2bd84e420ce68d503b07947987d44c9" title="Detach from the thread.">detach()</a></code>, the thread object is no longer assicated with a thread of execution (i.e. it is not joinable). The thread continues execution without the calling thread blocking, and when the thread ends execution, any owned resources are released. </p>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00246">246</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00247">247</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -314,7 +314,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Return the thread ID of a thread object. </p>
 <dl class="section return"><dt>Returns</dt><dd>A platform specific handle for the thread. </dd></dl>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00261">261</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00262">262</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -344,7 +344,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The number of hardware thread contexts in the system. </dd></dl>
 <dl class="section note"><dt>Note</dt><dd>If this value is not defined, the function returns zero (0). </dd></dl>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00272">272</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00273">273</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -364,7 +364,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Wait for the thread to finish (join execution flows). </p>
 <p>After calling <code><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html#a0414b6839a3027fd14e244f4d3ada7d3" title="Wait for the thread to finish (join execution flows).">join()</a></code>, the thread object is no longer associated with a thread of execution (i.e. it is not joinable, and you may not join with it nor detach from it). </p>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00225">225</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00226">226</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ Static Public Member Functions</h2></td></tr>
 <p>A thread object is joinable if it has an associated thread of execution. </p>
 <dl class="section return"><dt>Returns</dt><dd>A bool, false if the thread has been detached, joined or otherwise made unjoinable by exceptional circumstances, true otherwise. </dd></dl>
 
-<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00238">238</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
+<p>Definition at line <a class="el" href="thread_8cpp_source.html#l00239">239</a> of file <a class="el" href="thread_8cpp_source.html">thread.cpp</a>.</p>
 
 </div>
 </div>
@@ -414,7 +414,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Under Windows, this is a <code>HANDLE</code>, and under POSIX systems, this is a <code>pthread_t</code>. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The native handle for the thread in case it is desired to use it with OS APIs. </dd></dl>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00158">158</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00163">163</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -424,6 +424,6 @@ Static Public Member Functions</h2></td></tr>
 </ul>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Sep 2 2013 17:07:47 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Tue Sep 3 2013 23:25:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

@@ -153,10 +153,12 @@
 /// (speedup of 2x), and three thread would be three times as fast (3x speedup), and so; this is called linear
 /// speedup. In practice there is always some overhead in creating and synchronizing threads, so achieving
 /// linear speedup is difficult.
+/// @n @n
 /// @image html Single.png "Single Threaded Execution - Fig 1."
 /// @image latex Single.png "Single Threaded Execution - Fig 1."
 /// @image rtf Single.png "Single Threaded Execution - Fig 1."
-/// @n @n The DAGFrameScheduler library tries to tailor the threading model to the problem to minimize that
+/// @n @n
+/// The DAGFrameScheduler library tries to tailor the threading model to a specific problem to minimize that
 /// overhead. With a single threaded application one thread does all the work and always wastes every other
 /// thread, but there is no overhead if the system only has one thread.
 /// @n @n
