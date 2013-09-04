@@ -153,7 +153,6 @@
 /// (speedup of 2x), and three thread would be three times as fast (3x speedup), and so; this is called linear
 /// speedup. In practice there is always some overhead in creating and synchronizing threads, so achieving
 /// linear speedup is difficult.
-/// @n @n
 /// @image html Single.png "Single Threaded Execution - Fig 1."
 /// @image latex Single.png "Single Threaded Execution - Fig 1."
 /// @image rtf Single.png "Single Threaded Execution - Fig 1."
