@@ -22,6 +22,9 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 ## NEWS ##
 
 ### September 3, 2013 - 1.10.2  ###
+* Merged Mako's fixes for the mutex
+
+### September 3, 2013 - 1.10.2  ###
 * Attempt to fix build on Windows with inluding system headers in Mezzanine headers.
 * Tweaked doxygen doc settings to more closely match Mezzanine
 
