@@ -9,7 +9,7 @@
 <area shape="rect" id="node21" href="$classMezzanine_1_1Threading_1_1Thread.html" title="A small wrapper around the system thread." alt="" coords="908,326,1055,370"/>
 <area shape="rect" id="node23" href="$classMezzanine_1_1Threading_1_1WorkSorter.html" title="Sorts all of the WorkUnits in the FrameScheduler." alt="" coords="908,459,1055,503"/>
 <area shape="rect" id="node41" href="$classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" title="A kind of workunit given exclusive runtime so it can consume time on multiple threads." alt="" coords="908,393,1055,437"/>
-<area shape="rect" id="node37" href="$classMezzanine_1_1Threading_1_1Thread_1_1id.html" title="The thread ID is a unique identifier for each thread." alt="" coords="1259,513,1405,557"/>
+<area shape="rect" id="node37" href="$classMezzanine_1_1Threading_1_1ThreadId.html" title="The thread ID is a unique identifier for each thread." alt="" coords="1259,513,1405,557"/>
 <area shape="rect" id="node45" title="STL class." alt="" coords="1287,631,1377,659"/>
 <area shape="rect" id="node47" title="STL class." alt="" coords="917,630,1045,674"/>
 <area shape="rect" id="node49" title="STL class." alt="" coords="589,638,736,666"/>

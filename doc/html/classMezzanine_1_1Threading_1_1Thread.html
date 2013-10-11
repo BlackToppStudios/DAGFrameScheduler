@@ -83,7 +83,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
@@ -98,12 +97,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p><code>#include &lt;<a class="el" href="thread_8h_source.html">thread.h</a>&gt;</code></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1Thread_1_1id.html">id</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The thread ID is a unique identifier for each thread.  <a href="classMezzanine_1_1Threading_1_1Thread_1_1id.html#details">More...</a><br/></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:ae035051c0e066c9665ce17d4829c4ff3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae035051c0e066c9665ce17d4829c4ff3"></a>
@@ -128,9 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae2bd84e420ce68d503b07947987d44c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html#ae2bd84e420ce68d503b07947987d44c9">detach</a> ()</td></tr>
 <tr class="memdesc:ae2bd84e420ce68d503b07947987d44c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detach from the thread.  <a href="#ae2bd84e420ce68d503b07947987d44c9">More...</a><br/></td></tr>
 <tr class="separator:ae2bd84e420ce68d503b07947987d44c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a850c3a6537f41e79d87a6789a8515317"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMezzanine_1_1Threading_1_1Thread_1_1id.html">id</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html#a850c3a6537f41e79d87a6789a8515317">get_id</a> () const </td></tr>
-<tr class="memdesc:a850c3a6537f41e79d87a6789a8515317"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the thread ID of a thread object.  <a href="#a850c3a6537f41e79d87a6789a8515317">More...</a><br/></td></tr>
-<tr class="separator:a850c3a6537f41e79d87a6789a8515317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d41e1113e49ceebd7af0713101d8fa3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadId.html">ThreadId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html#a6d41e1113e49ceebd7af0713101d8fa3">get_id</a> () const </td></tr>
+<tr class="memdesc:a6d41e1113e49ceebd7af0713101d8fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the thread ID of a thread object.  <a href="#a6d41e1113e49ceebd7af0713101d8fa3">More...</a><br/></td></tr>
+<tr class="separator:a6d41e1113e49ceebd7af0713101d8fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0414b6839a3027fd14e244f4d3ada7d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classMezzanine_1_1Threading_1_1Thread.html#a0414b6839a3027fd14e244f4d3ada7d3">join</a> ()</td></tr>
 <tr class="memdesc:a0414b6839a3027fd14e244f4d3ada7d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait for the thread to finish (join execution flows).  <a href="#a0414b6839a3027fd14e244f4d3ada7d3">More...</a><br/></td></tr>
 <tr class="separator:a0414b6839a3027fd14e244f4d3ada7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -151,7 +144,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="textblock"><p>A small wrapper around the system thread. </p>
 <p>In general game code should not be creating this if they are using the DAG Frame Scheduler, as it tries to maintain control over the threads created by a game. This tries to keep the names the same as the standard thread, and might at some point be replace by some template machinery that wraps the minor difference that currently exist. </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00087">87</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00092">92</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1e1d609c4cf14081ed7350856c92640f"></a>
 <div class="memitem">
@@ -177,7 +170,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Default constructor. </p>
 <p>Construct a <code>thread</code> object without an associated thread of execution (i.e. non-joinable). </p>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00110">110</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00112">112</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -298,12 +291,12 @@ Static Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a850c3a6537f41e79d87a6789a8515317"></a>
+<a class="anchor" id="a6d41e1113e49ceebd7af0713101d8fa3"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMezzanine_1_1Threading_1_1Thread_1_1id.html">Thread::id</a> Mezzanine::Threading::Thread::get_id </td>
+          <td class="memname"><a class="el" href="classMezzanine_1_1Threading_1_1ThreadId.html">ThreadId</a> Mezzanine::Threading::Thread::get_id </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -414,7 +407,7 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>Under Windows, this is a <code>HANDLE</code>, and under POSIX systems, this is a <code>pthread_t</code>. </dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>The native handle for the thread in case it is desired to use it with OS APIs. </dd></dl>
 
-<p>Definition at line <a class="el" href="thread_8h_source.html#l00163">163</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
+<p>Definition at line <a class="el" href="thread_8h_source.html#l00165">165</a> of file <a class="el" href="thread_8h_source.html">thread.h</a>.</p>
 
 </div>
 </div>
@@ -424,6 +417,6 @@ Static Public Member Functions</h2></td></tr>
 </ul>
 </div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 3 2013 23:25:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Fri Oct 11 2013 00:59:05 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

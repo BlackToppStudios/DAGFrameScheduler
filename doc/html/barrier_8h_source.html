@@ -130,43 +130,44 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired.">datatypes.h</a>&quot;</span></div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically.">atomicoperations.h</a>&quot;</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">/// @file</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/// @brief The declaration of the @ref Mezzanine::Threading::Barrier Barrier synchronization primitive</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="keyword">namespace </span>Mezzanine</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;{</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">namespace </span>Threading</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    {<span class="comment"></span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">        /// @brief A synchronization primitive that causes a predefined number of threads to all wait before continuing.</span></div>
-<div class="line"><a name="l00056"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html">   56</a></span>&#160;<span class="comment"></span>        <span class="keyword">class </span><a class="code" href="crossplatformexport_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing...">Barrier</a></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">protected</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">                /// @brief The number of threads to have wait.</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b">   60</a></span>&#160;<span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">                /// @brief The number of threads currently waiting.</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785">   63</a></span>&#160;<span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads currently waiting.">ThreadCurrent</a>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            <span class="keyword">public</span>:<span class="comment"></span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">                /// @brief Constructor</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">                /// @param SynchThreadCount The amount of threads that this should wait for. If 0 is passed all threads waiting advance.</span></div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing...">Barrier</a> (<span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a>&amp; SynchThreadCount);</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment">                /// @brief Wait until the specified number of threads reach this point.</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">                /// @return The last thread to reach this point gets true, the others are returned false.</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span>                <span class="keywordtype">bool</span> Wait ();</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">                /// @brief Set the Thread count Atomically.</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">                /// @param NewCount The new amounf threads to sync.</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment"></span>                <span class="keywordtype">void</span> SetThreadSyncCount(<a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> NewCount);</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        };<span class="comment">//Barrier</span></div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }<span class="comment">//Threading</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;}<span class="comment">//Mezzanine</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="comment">/// @file</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">/// @brief The declaration of the @ref Mezzanine::Threading::Barrier Barrier synchronization primitive</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="keyword">namespace </span>Mezzanine</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;{</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">namespace </span>Threading</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {<span class="comment"></span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">        /// @brief A synchronization primitive that causes a predefined number of threads to all wait before continuing.</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html">   57</a></span>&#160;<span class="comment"></span>        <span class="keyword">class </span><a class="code" href="crossplatformexport_8h.html#a455f91aab9e6a1cf4286f5cdfa74c7bc" title="Some platforms require special decorations to denote what is exported/imported in a share library...">MEZZ_LIB</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing...">Barrier</a></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            <span class="keyword">protected</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">                /// @brief The number of threads to have wait.</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b">   61</a></span>&#160;<span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a2ed5739bd75cebb82af5ed1258fcfb2b" title="The number of threads to have wait.">ThreadGoal</a>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">                /// @brief The number of threads currently waiting.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785">   64</a></span>&#160;<span class="comment"></span>                <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html#a50ceca76c119a21808ce92b3d5019785" title="The number of threads currently waiting.">ThreadCurrent</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">public</span>:<span class="comment"></span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="comment">                /// @brief Constructor</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">                /// @param SynchThreadCount The amount of threads that this should wait for. If 0 is passed all threads waiting advance.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment"></span>                <a class="code" href="classMezzanine_1_1Threading_1_1Barrier.html" title="A synchronization primitive that causes a predefined number of threads to all wait before continuing...">Barrier</a> (<span class="keyword">const</span> <a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a>&amp; SynchThreadCount);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="comment">                /// @brief Wait until the specified number of threads reach this point.</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">                /// @return The last thread to reach this point gets true, the others are returned false.</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment"></span>                <span class="keywordtype">bool</span> Wait ();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="comment">                /// @brief Set the Thread count Atomically.</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="comment">                /// @param NewCount The new amounf threads to sync.</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="comment"></span>                <span class="keywordtype">void</span> SetThreadSyncCount(<a class="code" href="namespaceMezzanine.html#a590a2f3eb4a187e1b25209e546e540e1" title="An 32-bit integer.">Int32</a> NewCount);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        };<span class="comment">//Barrier</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }<span class="comment">//Threading</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}<span class="comment">//Mezzanine</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 3 2013 23:25:06 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
+Generated on Fri Oct 11 2013 00:59:05 for DagFrameScheduler by&#160;<a href="http://www.doxygen.org/index.html"><img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.3.1</small></address>
 </body>
 </html>

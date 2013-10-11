@@ -23,9 +23,10 @@ var searchData=
   ['detach',['detach',['../classMezzanine_1_1Threading_1_1Thread.html#ae2bd84e420ce68d503b07947987d44c9',1,'Mezzanine::Threading::Thread']]],
   ['dooneframe',['DoOneFrame',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a93e8f9d384197837fcf8fc0f3c058a5c',1,'Mezzanine::Threading::FrameScheduler']]],
   ['doublebufferedlogger',['DoubleBufferedLogger',['../namespaceMezzanine_1_1Threading.html#af29e296febda9ded4f29ae72a9d37f31',1,'Mezzanine::Threading']]],
-  ['doublebufferedresource',['DoubleBufferedResource',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html',1,'Mezzanine::Threading']]],
   ['doublebufferedresource',['DoubleBufferedResource',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a2047b7dee35eef0c761c43cb03a20929',1,'Mezzanine::Threading::DoubleBufferedResource::DoubleBufferedResource()'],['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a3b8495b0cf2dc75678de681deccdccf9',1,'Mezzanine::Threading::DoubleBufferedResource::DoubleBufferedResource(T *Current, T *Buffer)']]],
+  ['doublebufferedresource',['DoubleBufferedResource',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html',1,'Mezzanine::Threading']]],
   ['doublebufferedresource_2eh',['doublebufferedresource.h',['../doublebufferedresource_8h.html',1,'']]],
   ['dowork',['DoWork',['../classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#aae0d9271469d7543e371d300794d239b',1,'Mezzanine::Threading::AsynchronousFileLoadWorkUnit::DoWork()'],['../classMezzanine_1_1Threading_1_1LogAggregator.html#a8b55d0fd87b1b13c631598fdf89450cb',1,'Mezzanine::Threading::LogAggregator::DoWork()'],['../classMezzanine_1_1Threading_1_1WorkSorter.html#ace1024fd5e095f86488925cc62acdeec',1,'Mezzanine::Threading::WorkSorter::DoWork()'],['../classMezzanine_1_1Threading_1_1iWorkUnit.html#a9ac07631b2aa961e4c226d0753e3d2b0',1,'Mezzanine::Threading::iWorkUnit::DoWork()']]],
-  ['directed_20acyclic_20graph_20frame_20scheduler_2e',['Directed Acyclic Graph Frame Scheduler.',['../index.html',1,'']]]
+  ['directed_20acyclic_20graph_20frame_20scheduler_2e',['Directed Acyclic Graph Frame Scheduler.',['../index.html',1,'']]],
+  ['directed_20acyclic_20graph_20frame_20scheduler',['Directed Acyclic Graph Frame Scheduler',['../ThreadingManual.html',1,'']]]
 ];

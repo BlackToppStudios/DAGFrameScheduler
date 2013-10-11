@@ -265,10 +265,10 @@
 </g>
 <!-- Node17 -->
 <g id="node37" class="node"><title>Node17</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1Thread_1_1id.html" target="_top" xlink:title="The thread ID is a unique identifier for each thread.">
+<a xlink:href="classMezzanine_1_1Threading_1_1ThreadId.html" target="_top" xlink:title="The thread ID is a unique identifier for each thread.">
 <polygon fill="white" stroke="black" points="940,-88 940,-120 1050,-120 1050,-88 940,-88"/>
 <text text-anchor="start" x="948" y="-107" font-family="FreeSans" font-size="10.00">Mezzanine::Threading</text>
-<text text-anchor="middle" x="995" y="-95" font-family="FreeSans" font-size="10.00">::Thread::id</text>
+<text text-anchor="middle" x="995" y="-95" font-family="FreeSans" font-size="10.00">::ThreadId</text>
 </a>
 </g>
 <!-- Node17&#45;&gt;Node1 -->

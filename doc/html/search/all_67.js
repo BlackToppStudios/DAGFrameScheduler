@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['get_5fid',['get_id',['../classMezzanine_1_1Threading_1_1Thread.html#a850c3a6537f41e79d87a6789a8515317',1,'Mezzanine::Threading::Thread::get_id()'],['../namespaceMezzanine_1_1Threading_1_1this__thread.html#a9d7f994aed04273d2ab06b103fc381de',1,'Mezzanine::Threading::this_thread::get_id()']]],
+  ['get_5fid',['get_id',['../classMezzanine_1_1Threading_1_1Thread.html#a6d41e1113e49ceebd7af0713101d8fa3',1,'Mezzanine::Threading::Thread::get_id()'],['../namespaceMezzanine_1_1Threading_1_1this__thread.html#a474742b1fee1b6067a03928b6100e9d9',1,'Mezzanine::Threading::this_thread::get_id()']]],
   ['getaggregationtarget',['GetAggregationTarget',['../classMezzanine_1_1Threading_1_1LogAggregator.html#ad1a0b212c44a3581ae1ac8241621f546',1,'Mezzanine::Threading::LogAggregator']]],
   ['getaverage',['GetAverage',['../classMezzanine_1_1RollingAverage.html#a052c4ea7eab2d2a0cf61ed8b7c629f24',1,'Mezzanine::RollingAverage::GetAverage()'],['../classMezzanine_1_1BufferedRollingAverage.html#a785aa3edf81af2a5b6c6949bc7fc38a1',1,'Mezzanine::BufferedRollingAverage::GetAverage()'],['../classMezzanine_1_1WeightedRollingAverage.html#ad07296ff457965af06e956ac2f96c6f1',1,'Mezzanine::WeightedRollingAverage::GetAverage()']]],
   ['getcachelinesize',['GetCachelineSize',['../namespaceMezzanine.html#a1148f128945da44e7e7fda12dea39af2',1,'Mezzanine']]],
@@ -32,8 +32,8 @@ var searchData=
   ['getsortingfrequency',['GetSortingFrequency',['../classMezzanine_1_1Threading_1_1WorkSorter.html#a33ecf4675298cb6c1d46085c456e8c9a',1,'Mezzanine::Threading::WorkSorter']]],
   ['getsortingkey',['GetSortingKey',['../classMezzanine_1_1Threading_1_1iWorkUnit.html#a9b38531395f4ed1db70552368e044b4a',1,'Mezzanine::Threading::iWorkUnit::GetSortingKey()'],['../classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#a7f3eb2d4ddf0c6fbbdb65b277c08668e',1,'Mezzanine::Threading::DefaultWorkUnit::GetSortingKey()']]],
   ['getthreadcount',['GetThreadCount',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a45299a4ebe34674b09c7b40ccccae8ce',1,'Mezzanine::Threading::FrameScheduler']]],
-  ['getthreadresource',['GetThreadResource',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a26aaf64a3f83bcdf35d4ce62c4e85ce2',1,'Mezzanine::Threading::FrameScheduler']]],
-  ['getthreadusablelogger',['GetThreadUsableLogger',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ad3a097d958a2a79dbd4aeeadd0daa3ca',1,'Mezzanine::Threading::FrameScheduler']]],
+  ['getthreadresource',['GetThreadResource',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a78a749cb509260f38ea6612b89d97f1c',1,'Mezzanine::Threading::FrameScheduler']]],
+  ['getthreadusablelogger',['GetThreadUsableLogger',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a086deefdba81ca9dad14f8d2a6efdab3',1,'Mezzanine::Threading::FrameScheduler']]],
   ['gettimestamp',['GetTimeStamp',['../namespaceMezzanine.html#ab6d717bb285a5e718d7f9946071d4849',1,'Mezzanine']]],
   ['gettimestampresolution',['GetTimeStampResolution',['../namespaceMezzanine.html#a13a4a2c3420cfd2a2b3a9e4db40c583b',1,'Mezzanine']]],
   ['getusable',['GetUsable',['../classMezzanine_1_1Threading_1_1DoubleBufferedResource.html#a36c65f2a937d73bc918fb42becd6412c',1,'Mezzanine::Threading::DoubleBufferedResource']]],

@@ -46,7 +46,9 @@
 #include "workunit.h"
 #include "workunitkey.h"
 
+#ifndef SWIG
 #include <vector>
+#endif
 
 /// @file
 /// @brief This defines a number of workunits that are required for doing some tasks that the Framescheduler requires.

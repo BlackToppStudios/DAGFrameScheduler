@@ -21,6 +21,12 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 
 ## NEWS ##
 
+### October 11, 2013 - 1.11.0  ###
+* Sqeaky's Birthday Update!
+* Include a few minor bugfixes
+* Simplified Threading::Thread::Id into its own Class Threading::ThreadId
+* Included preprocessor support for using SWIG to generate Lua Bindings
+
 ### September 3, 2013 - 1.10.2  ###
 * Merged Mako's fixes for the mutex
 
