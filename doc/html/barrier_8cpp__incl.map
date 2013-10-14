@@ -1,6 +1,6 @@
 <map id="barrier.cpp" name="barrier.cpp">
-<area shape="rect" id="node3" href="$barrier_8h.html" title="The declaration of the Mezzanine::Threading::Barrier Barrier synchronization primitive." alt="" coords="167,83,233,111"/>
-<area shape="rect" id="node5" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="157,238,243,266"/>
-<area shape="rect" id="node13" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="187,161,317,189"/>
+<area shape="rect" id="node3" href="$barrier_8h.html" title="The declaration of the Mezzanine::Threading::Barrier Barrier synchronization primitive." alt="" coords="443,83,509,111"/>
+<area shape="rect" id="node5" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="433,238,519,266"/>
+<area shape="rect" id="node27" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="463,161,593,189"/>
 <area shape="rect" id="node7" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="5,315,149,343"/>
 </map>

@@ -1,5 +1,5 @@
 <map id="workunitkey.cpp" name="workunitkey.cpp">
-<area shape="rect" id="node3" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="151,83,249,111"/>
-<area shape="rect" id="node5" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="157,161,243,189"/>
+<area shape="rect" id="node3" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits." alt="" coords="427,83,525,111"/>
+<area shape="rect" id="node5" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="433,161,519,189"/>
 <area shape="rect" id="node7" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="5,238,149,266"/>
 </map>

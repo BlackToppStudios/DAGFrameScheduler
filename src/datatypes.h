@@ -47,8 +47,16 @@
 /// Mezzanine is used instead.
 
 #include "crossplatformexport.h"
-
-#include <string>
+#ifndef SWIG
+    #include <vector>
+    #include <string>
+    #include <ostream>
+    #include <map>
+    #include <set>
+    #include <sstream>
+    #include <fstream>
+    #include <algorithm>
+#endif
 
 #ifdef _MEZZ_CPP11_PARTIAL_
 #include <cstdint>

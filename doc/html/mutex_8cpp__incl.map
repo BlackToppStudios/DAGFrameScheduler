@@ -1,7 +1,7 @@
 <map id="mutex.cpp" name="mutex.cpp">
-<area shape="rect" id="node3" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="101,83,168,111"/>
-<area shape="rect" id="node16" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="283,83,437,111"/>
-<area shape="rect" id="node5" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="69,161,200,189"/>
-<area shape="rect" id="node7" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="81,238,167,266"/>
-<area shape="rect" id="node9" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="168,315,312,343"/>
+<area shape="rect" id="node3" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation." alt="" coords="357,83,424,111"/>
+<area shape="rect" id="node29" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="535,83,689,111"/>
+<area shape="rect" id="node5" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically." alt="" coords="283,161,413,189"/>
+<area shape="rect" id="node7" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired." alt="" coords="305,238,391,266"/>
+<area shape="rect" id="node9" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="747,315,891,343"/>
 </map>
