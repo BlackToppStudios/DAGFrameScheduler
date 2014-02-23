@@ -38,11 +38,14 @@
    Joseph Toppi - toppij@gmail.com
    John Blackwood - makoenergy02@gmail.com
 */
-#ifndef _mezz_mutex_cpp
-#define _mezz_mutex_cpp
+#ifndef _readwritespinlock_cpp
+#define _readwritespinlock_cpp
 
-#include "mutex.h"
+#include "atomicoperations.h"
+#include "readwritespinlock.h"
 #include "crossplatformincludes.h"
+#include <limits>
+#include <cassert>
 
 /// @file
 /// @brief Contains the implementation for the @ref Mezzanine::Threading::Mutex Mutex synchronization object.
@@ -51,65 +54,76 @@ namespace Mezzanine
 {
     namespace Threading
     {
+        ReadWriteSpinLock::ReadWriteSpinLock() : Locked(0)
+        {}
 
-        Mutex::Mutex()
-        #if defined(_MEZZ_THREAD_WIN32_)
-            : mAlreadyLocked(false)
-        #endif
-        {
-        #if defined(_MEZZ_THREAD_WIN32_)
-            mHandle = (CRITICAL_SECTION*)( malloc(sizeof(CRITICAL_SECTION) ) );
-            InitializeCriticalSection(mHandle);
-        #else
-            pthread_mutex_init(&mHandle, NULL);
-        #endif
-        }
+        ReadWriteSpinLock::~ReadWriteSpinLock()
+        {}
 
-        Mutex::~Mutex()
-        {
-        #if defined(_MEZZ_THREAD_WIN32_)
-            DeleteCriticalSection(mHandle);
-            free(mHandle);
-        #else
-            pthread_mutex_destroy(&mHandle);
-        #endif
-        }
 
-        void Mutex::Lock()
-        {
-        #if defined(_MEZZ_THREAD_WIN32_)
-            EnterCriticalSection(mHandle);
-            while(mAlreadyLocked) Sleep(100); // Simulate deadlock...
-            mAlreadyLocked = true;
-        #else
-            pthread_mutex_lock(&mHandle);
-        #endif
-        }
+        void ReadWriteSpinLock::LockForRead()
+            { while(!TryLockForRead()){} }
 
-        bool Mutex::TryLock()
+        bool ReadWriteSpinLock::TryLockForRead()
         {
-        #if defined(_MEZZ_THREAD_WIN32_)
-            bool ret = (TryEnterCriticalSection(mHandle) ? true : false);
-            if(ret && mAlreadyLocked)
+            if(CountGaurd.TryLock())
             {
-                LeaveCriticalSection(mHandle);
-                ret = false;
+                if(0<=Locked)
+                {
+                    assert(0<=Locked); // fail because of timing bug in this lock
+                    Locked++;
+                    CountGaurd.Unlock();
+                    return true;
+                }else{
+                    CountGaurd.Unlock();
+                    return false;
+                }
+            }else{
+                return false;
             }
-            return ret;
-        #else
-            return (pthread_mutex_trylock(&mHandle) == 0) ? true : false;
-        #endif
         }
 
-        void Mutex::Unlock()
+        void ReadWriteSpinLock::UnlockRead()
         {
-        #if defined(_MEZZ_THREAD_WIN32_)
-            mAlreadyLocked = false;
-            LeaveCriticalSection(mHandle);
-        #else
-            pthread_mutex_unlock(&mHandle);
-        #endif
+            CountGaurd.Lock();
+            assert(!(0>Locked));  // fail because of writelock
+            assert(!(0==Locked)); // fail because not locked
+            Locked--;
+            CountGaurd.Unlock();
         }
+
+        void ReadWriteSpinLock::LockForWrite()
+            { while(!TryLockForWrite()){} }
+
+        bool ReadWriteSpinLock::TryLockForWrite()
+        {
+            if(CountGaurd.TryLock())
+            {
+                if(0==Locked)
+                {
+                    Locked=std::numeric_limits<Int32>::min();
+                    CountGaurd.Unlock();
+                    return true;
+                }else{
+                    CountGaurd.Unlock();
+                    return false;
+                }
+            }else{
+                return false;
+            }
+        }
+
+        void ReadWriteSpinLock::UnlockWrite()
+        {
+            CountGaurd.Lock();
+            assert(!(0<Locked));  // fail because of Readlock
+            assert(!(0==Locked)); // fail because not locked
+            assert(!(std::numeric_limits<Int32>::min()!=Locked)); // failed because cannot unlocked if already unlocked
+            Locked=0;
+            CountGaurd.Unlock();
+        }
+
+
 
     } // \Threading namespace
 } // \Mezzanine namespace

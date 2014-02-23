@@ -38,32 +38,37 @@
    Joseph Toppi - toppij@gmail.com
    John Blackwood - makoenergy02@gmail.com
 */
-#ifndef _asynchronousworkunit_h
-#define _asynchronousworkunit_h
+#ifndef _spinlock_cpp
+#define _spinlock_cpp
 
-#include "datatypes.h"
-
-#if !defined(SWIG) || defined(SWIG_THREADING) // Do not read when in swig and not in the threading module
-#include "doublebufferedresource.h"
-#include "workunit.h"
-#endif
+#include "spinlock.h"
+#include "atomicoperations.h"
+#include "crossplatformincludes.h"
 
 /// @file
-/// @brief Contains an interface for a kind of WorkUnit that loads or does other work even when the frame scheduler is paused.
+/// @brief Contains the implementation for the @ref Mezzanine::Threading::SpinLock synchronization object.
 
 namespace Mezzanine
 {
     namespace Threading
     {
-        /// @brief The interface for a WorkUnit that will keep running when the rest of the scheduler is paused.
-        class MEZZ_LIB iAsynchronousWorkUnit : public DefaultWorkUnit
-        {
-            public:
-                /// @brief This will atomically allow any thread to check if this WorkUnit has completed its work.
-                /// @return This returns a @ref RunningState indicating the current status of the asynchronous work.
-                virtual RunningState IsWorkDone() = 0;
-        };//iAsynchronousWorkUnit
+        SpinLock::SpinLock() : Locked(0)
+        {}
 
-    } // \Threading
-}// \Mezzanine
+        SpinLock::~SpinLock()
+        {}
+
+        void SpinLock::Lock()
+        {
+            while(AtomicCompareAndSwap32(&Locked,0,1))
+                {}
+        }
+
+        bool SpinLock::TryLock()
+            { return !AtomicCompareAndSwap32(&Locked,0,1); }
+
+        void SpinLock::Unlock()
+            { AtomicCompareAndSwap32(&Locked,1,0); }
+    } // \Threading namespace
+} // \Mezzanine namespace
 #endif

@@ -1,5 +1,5 @@
 // The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.
-// © Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The DAGFrameScheduler.
 
     The DAGFrameScheduler is free software: you can redistribute it and/or modify
@@ -42,7 +42,6 @@
 #define _atomic_black_ops_would_be_an_awesome_name_for_a_cheezy_game_h
 
 #include "datatypes.h"
-
 
 /// @file
 /// @brief Simple thread safe ways to check and change a specified variable atomically.

@@ -21,6 +21,26 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 
 ## NEWS ##
 
+### October 11, 2013 - 1.12.0  ###
+* Merged many changes from Mezzanine 
+
+Test updates
+* Unit tests framework now captures Standard output of test, unless c std output is used.
+* Updated copyright dates to 2014
+* Fixed return code of unit tests (Useful for CI systems)
+* Added macros for testing with a floating point delta TEST_EQUAL_EPSILON and TEST_EQUAL_MULTI_EPSILON
+* Fixed bug with Faulty TEST_THROW macro that caused some test to pass incorrectly
+
+Actual updates to stuff you want to use
+* I think I fixed WINAPI build issue in thread.h
+* Reduced size of workunit to size of cache line on all architectures (I think)
+* Prepared All of the Framescheduler for creating SWIG bindings
+* Added LockGaurd, ReadWriteSpinlock
+* Moved SpinLock to its own file
+* Fixed a test in the Barrier that was incorrectly passing because of synchronization in the std streams
+* Added Maintanence section to documentation
+
+
 ### October 11, 2013 - 1.11.1  ###
 * Merge changes from Mezzanine for cleaning up included headers.
 

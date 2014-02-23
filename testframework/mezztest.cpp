@@ -1,4 +1,4 @@
-//© Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The Mezzanine Engine.
 
     The Mezzanine Engine is free software: you can redistribute it and/or modify
@@ -108,8 +108,6 @@ UnitTestGroup GetResultsFromTempFile()
         throw runtime_error(FailStream.str());
     }
 
-
-
     return Results;
 }
 
@@ -195,8 +193,8 @@ class AllUnitTestGroups : public UnitTestGroup
                 {
                     try{
                         TestGroups[*CurrentTestName]->RunTests(RunAutomaticTests, RunInteractiveTests);
-                    }catch (std::exception e){
-                        std::cerr << std::endl << e.what() << std::endl;
+                    } catch (std::exception e) {
+                        TestError << std::endl << e.what() << std::endl;
                         // maybe we should log or somehting.
                     }
 
@@ -217,7 +215,7 @@ class AllUnitTestGroups : public UnitTestGroup
                     {
                         (*this) += GetResultsFromTempFile();
                     } catch (std::exception& e) {
-                        cerr << e.what() << endl;
+                        TestError << e.what() << endl;
                     }
 
                 }
@@ -241,6 +239,7 @@ class AllUnitTestGroups : public UnitTestGroup
             if(ExecuteInThisMemorySpace) // we are running a test in a seperate process, so we need to control the output for communcation purposes
             {
                 WriteTempFile(*this);
+                UnitTestGroup::DisplayResults(Output, Error, Summary, FullOutput, HeaderOutput);
                 //std::ofstream OutputFile(TempFile.c_str(),std::ios_base::out|std::ios_base::trunc);
                 //UnitTestGroup::DisplayResults(OutputFile,false,true,false);
                 //OutputFile.close();
@@ -327,10 +326,15 @@ int main (int argc, char** argv)
     {
         String FileName("TestResults.txt");
         std::ofstream OutFile(FileName.c_str());
-        Runner.DisplayResults(OutFile, OutFile, SummaryDisplay,FullDisplay);
+        Runner.DisplayResults(OutFile, OutFile, SummaryDisplay, FullDisplay);
         OutFile.close();
     }
-    Runner.DisplayResults(cout, cerr, SummaryDisplay,FullDisplay);
+    Runner.DisplayResults(cout, cerr, SummaryDisplay, FullDisplay);
 
+    for(AllUnitTestGroups::iterator Iter = Runner.begin(); Iter!=Runner.end(); Iter++)
+    {
+        if(Iter->Results>Skipped)
+            { return ExitFailure; }
+    }
     return ExitSuccess;
  }

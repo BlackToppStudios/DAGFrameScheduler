@@ -1,5 +1,5 @@
 // The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.
-// © Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The DAGFrameScheduler.
 
     The DAGFrameScheduler is free software: you can redistribute it and/or modify
@@ -208,8 +208,8 @@ namespace Mezzanine
             /// @brief What the math says the current avergage is.
             RecordType CurrentAverage;
 
-            /// @brief Replaces the capacity of normal rolling averages.
-            Whole WeightCount;
+            // @brief Replaces the capacity of normal rolling averages.
+            //Whole WeightCount;
 
             /// @brief Sometimes retrieving the value just inserted is too useful.
             RecordType LastEntry;
@@ -219,17 +219,17 @@ namespace Mezzanine
             typedef RecordType Type;
 
             /// @brief Class Constructor.
-            /// @param RecordCount How many records should this emulate.
-            WeightedRollingAverage(const Whole& RecordCount = MEZZ_FRAMESTOTRACK) :
-                CurrentAverage(0),
-                WeightCount(RecordCount),
+            /// @param Ignored This parameter is ignored.
+            WeightedRollingAverage(const Whole& Ignored = MEZZ_FRAMESTOTRACK)
+               :CurrentAverage(0),
+                //WeightCount(RecordCount),
                 LastEntry(1)
                 {}
 
             /// @brief Returns how many records this is emulating.
             /// @return A Whole that stores the count of record emulation.
             virtual Whole RecordCapacity() const
-                { return WeightCount; }
+                { return MEZZ_FRAMESTOTRACK; }
 
             /// @brief Update the currently stored Rolling average with a new data point/record.
             /// @param Datum Update the Current Average according to the following formula CurrentAverage = CurrentAverage * ((RecordCount-1)/RecordCount) + Datum/RecordCount.
@@ -237,8 +237,8 @@ namespace Mezzanine
             {
                 LastEntry = Datum;
                 CurrentAverage = ( MathType(this->CurrentAverage) ? MathType(this->CurrentAverage) : MathType(1)) // A zero really screws with averages that tend to move away from zero
-                        * ((MathType(WeightCount)-MathType(1))/MathType(WeightCount))                             // Get weight of all the older members
-                        + MathType(Datum)/MathType(WeightCount);                                                  // wGet the Weight of the Current Member
+                        * ((MathType(MEZZ_FRAMESTOTRACK)-MathType(1))/MathType(MEZZ_FRAMESTOTRACK))               // Get weight of all the older members
+                        + MathType(Datum)/MathType(MEZZ_FRAMESTOTRACK);                                           // wGet the Weight of the Current Member
             }
 
             /// @brief Get the current rolling average.

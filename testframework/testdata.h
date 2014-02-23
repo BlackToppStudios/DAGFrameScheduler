@@ -1,4 +1,4 @@
-//© Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The Mezzanine Engine.
 
     The Mezzanine Engine is free software: you can redistribute it and/or modify
@@ -51,6 +51,7 @@
 #include <set>
 #include <map>
 #include <iostream>
+#include <sstream>
 
 namespace Mezzanine
 {
@@ -121,12 +122,22 @@ namespace Mezzanine
         class UnitTestGroup : public TestDataStorage
         {
             protected:
+                /// @brief A destination for all normal ouput in the tests.
+                std::stringstream TestOutput;
+
+                /// @brief A destination for errors
+                std::stringstream TestError;
+
                 /// @brief Some basic variable for tracking simple statistics
                 unsigned int LongestNameLength;
 
             public:
                 /// @brief Default constructor
                 UnitTestGroup();
+
+                /// @brief Copy constructor
+                /// @param OtherGroup A UnitTestGroup to copy into this one. The contents of any log streams are copied and the streams themselves.
+                UnitTestGroup(const UnitTestGroup& OtherGroup);
 
                 /// @brief This will call RunAutomaticTests based on the values passed.
                 /// @details All test results should be inserted using AddTestResult to allow the returning of results.

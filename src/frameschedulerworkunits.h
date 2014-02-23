@@ -1,5 +1,5 @@
 // The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.
-// © Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The DAGFrameScheduler.
 
     The DAGFrameScheduler is free software: you can redistribute it and/or modify
@@ -43,9 +43,11 @@
 #define _frameschedulerworkunits_h
 
 #include "datatypes.h"
+
+#if !defined(SWIG) || defined(SWIG_THREADING) // Do not read when in swig and not in the threading module
 #include "workunit.h"
 #include "workunitkey.h"
-
+#endif
 /// @file
 /// @brief This defines a number of workunits that are required for doing some tasks that the Framescheduler requires.
 

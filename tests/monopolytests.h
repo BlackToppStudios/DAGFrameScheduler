@@ -1,4 +1,4 @@
-//© Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The Mezzanine Engine.
 
     The Mezzanine Engine is free software: you can redistribute it and/or modify
@@ -162,13 +162,13 @@ class monopolytests : public UnitTestGroup
         /// @brief Only a smoke test, to see if this compiles
         virtual void RunAutomaticTests()
         {
-            cout << "Starting MonopolyWorkUnit test. Creating a monopoly that will calculate pi in a number of threads simultaneously." << endl;
+            TestOutput << "Starting MonopolyWorkUnit test. Creating a monopoly that will calculate pi in a number of threads simultaneously." << endl;
             PiMakerMonopoly Pioply(50,"Pioply",false,4);
-            FrameScheduler TestSchedulerMono(&cout,1);
+            FrameScheduler TestSchedulerMono(&TestOutput,1);
             DefaultThreadSpecificStorage::Type PioplyStorage(&TestSchedulerMono);
             for(Whole Counter=0; Counter<20; Counter++)
                 { Pioply(PioplyStorage); }
-            cout << "Here is the un-aggregated (main thread only) log of Twenty Test Runs" << endl
+            TestOutput << "Here is the un-aggregated (main thread only) log of Twenty Test Runs" << endl
                  << PioplyStorage.GetResource<DoubleBufferedLogger>(DBRLogger).GetUsable().str() // << endl // logs ends with a newline
                  << "Average Execution Time (Microseconds): " << Pioply.GetPerformanceLog().GetAverage() << endl;
         }

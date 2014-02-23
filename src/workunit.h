@@ -1,5 +1,5 @@
 // The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.
-// © Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The DAGFrameScheduler.
 
     The DAGFrameScheduler is free software: you can redistribute it and/or modify
@@ -42,12 +42,15 @@
 #define _workunit_h
 
 #include "datatypes.h"
+
+#if !defined(SWIG) || defined(SWIG_THREADING) // Do not read when in swig and not in the threading module
 #include "framescheduler.h"
 #include "mutex.h"
 #include "rollingaverage.h"
 #include "threadingenumerations.h"
 #include "thread.h"
 #include "workunitkey.h"
+#endif
 
 /// @file
 /// @brief This file has the definition of the workunit.
@@ -159,11 +162,11 @@ namespace Mezzanine
                 /////////////////////////////////////////////////////////////////////////////////////////////
                 // Data Members
             protected:
-                /// @brief A collection of of workunits that must be complete before this one can start.
-                std::vector<iWorkUnit*> Dependencies;
-
                 /// @brief A rolling average of execution times.
                 DefaultRollingAverage<Whole>::Type PerformanceLog;
+
+                /// @brief A collection of of workunits that must be complete before this one can start.
+                std::vector<iWorkUnit*> Dependencies;
 
                 /// @brief This controls do work with this after it has.
                 Int32 CurrentRunningState;

@@ -1,5 +1,5 @@
 // The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.
-// © Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The DAGFrameScheduler.
 
     The DAGFrameScheduler is free software: you can redistribute it and/or modify
@@ -72,6 +72,7 @@ freely, subject to the following restrictions:
 
 #include "thread.h"
 #include "crossplatformincludes.h"
+#include "lockguard.h"
 
 #if defined(_MEZZ_THREAD_POSIX_)
     #include <map>
@@ -264,7 +265,7 @@ namespace Mezzanine
           if(!joinable())
             return ThreadId();
         #if defined(_MEZZ_THREAD_WIN32_)
-          return id((unsigned long int) mWin32ThreadID);
+          return ThreadId((unsigned long int) mWin32ThreadID);
         #elif defined(_MEZZ_THREAD_POSIX_)
           return _pthread_t_to_ID(mHandle);
         #endif
@@ -295,7 +296,7 @@ namespace Mezzanine
         ThreadId this_thread::get_id()
         {
         #if defined(_MEZZ_THREAD_WIN32_)
-          return Thread::id((unsigned long int) GetCurrentThreadId());
+          return ThreadId((unsigned long int) GetCurrentThreadId());
         #elif defined(_MEZZ_THREAD_POSIX_)
           return _pthread_t_to_ID(pthread_self());
         #endif

@@ -1,5 +1,5 @@
 // The DAGFrameScheduler is a Multi-Threaded lock free and wait free scheduling library.
-// © Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The DAGFrameScheduler.
 
     The DAGFrameScheduler is free software: you can redistribute it and/or modify
@@ -68,8 +68,14 @@ freely, subject to the following restrictions:
     distribution.
 */
 
+#if !defined(SWIG) || defined(SWIG_THREADING) // Do not read when in swig and not in the threading module
 #include "systemcalls.h"
 #include "mutex.h"
+#endif
+
+#ifndef WINAPI
+    #define WINAPI __stdcall
+#endif
 
 namespace Mezzanine
 {

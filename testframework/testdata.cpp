@@ -1,4 +1,4 @@
-//© Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The Mezzanine Engine.
 
     The Mezzanine Engine is free software: you can redistribute it and/or modify
@@ -110,8 +110,21 @@ namespace Mezzanine
             LongestNameLength(0)
         {}
 
+        UnitTestGroup::UnitTestGroup(const UnitTestGroup& OtherGroup)
+            : //set(OtherGroup),
+              TestOutput(OtherGroup.TestOutput.str()),
+              TestError(OtherGroup.TestError.str())
+        { insert(OtherGroup.begin(),OtherGroup.end()); }
+
         void UnitTestGroup::RunTests(bool RunAuto, bool RunInteractive)
         {
+            streambuf* CoutStreamBuf = cout.rdbuf();
+            cout.rdbuf(TestOutput.rdbuf());
+            streambuf* CerrStreamBuf = cerr.rdbuf();
+            cerr.rdbuf(TestError.rdbuf());
+
+            TestOutput << std::endl << "<AutomaticTestOutput><![CDATA[" << std::endl;
+            TestError << std::endl<< "<AutomaticTestError><![CDATA[" << std::endl;
             try
             {
                 if(RunAuto)
@@ -119,11 +132,15 @@ namespace Mezzanine
                 else if(HasAutomaticTests())
                     { AddTestResult( TestData("AutomaticTests",Testing::Skipped, "RunTests") );}
             }catch(exception& e){
-                cerr << "Caught an unhandled exception while doing RunAutomaticTests()." << endl
-                     << "Message: " << e.what() << endl;
+                TestError << "Caught an unhandled exception while doing RunAutomaticTests()." << endl
+                          << "Message: " << e.what() << endl;
                 AddTestResult( TestData("UnhandledException", Testing::Failed) );
             }
+            TestOutput << std::endl<< "]]></AutomaticTestOutput>" << std::endl;
+            TestError << std::endl<< "]]></AutomaticTestError>" << std::endl;
 
+            TestOutput << "<InteractiveTestOutput><![CDATA[" << std::endl;
+            TestError << "<InteractiveTestError><![CDATA[" << std::endl;
             try
             {
                 if(RunInteractive)
@@ -131,25 +148,24 @@ namespace Mezzanine
                 else if(HasInteractiveTests())
                     { AddTestResult( TestData("InteractiveTests",Testing::Skipped, "RunTests") );}
             }catch(exception& e){
-                cerr << "Caught an unhandled exception while doing RunInteractiveTests()." << endl
-                     << "Message: " << e.what() << endl;
+                TestError << "Caught an unhandled exception while doing RunInteractiveTests()." << endl
+                          << "Message: " << e.what() << endl;
                 AddTestResult( TestData("UnhandledException", Testing::Failed) );
             }
+            TestOutput << std::endl << "]]></InteractiveTestOutput>" << std::endl;
+            TestError << std::endl << "]]></InteractiveTestError>" << std::endl;
+
+            cout.rdbuf(CoutStreamBuf);
+            cout.rdbuf(CerrStreamBuf);
         }
 
         void UnitTestGroup::RunAutomaticTests()
-        {
-
-        }
-
+            {}
         bool UnitTestGroup::HasAutomaticTests() const
             { return false; }
 
         void UnitTestGroup::RunInteractiveTests()
-        {
-
-        }
-
+            {}
         bool UnitTestGroup::HasInteractiveTests() const
             { return false; }
 
@@ -174,7 +190,6 @@ namespace Mezzanine
                     { throw std::invalid_argument("Invalid UnitTestGroup Name, contains one or more double quote (\"), name: \"" + this->Name() + "\""); }
                 CurrentTest.TestName = this->Name() + "::" + CurrentTest.TestName;
             }
-
 
             TestDataStorage::iterator PreExisting = this->find(CurrentTest.TestName);
             if(this->end()!=PreExisting)
@@ -219,7 +234,7 @@ namespace Mezzanine
 
         void UnitTestGroup::AddTestResult(const Mezzanine::String Fresh, TestResult Meat, OverWriteResults Behavior)
         {
-            std::cout << "Noting result of " << this->Name() + "::" + Fresh << " as " << TestResultToString(Meat) << std::endl;
+            this->TestOutput << "Noting result of " << this->Name() + "::" + Fresh << " as " << TestResultToString(Meat) << std::endl;
             AddTestResult(TestData(Fresh,Meat),Behavior);
         }
 
@@ -229,34 +244,65 @@ namespace Mezzanine
                 { LongestNameLength=rhs.LongestNameLength; }
 
             insert(rhs.begin(),rhs.end());
+            this->TestOutput << rhs.TestOutput.str();
+            this->TestError << rhs.TestError.str();
             return *this;
         }
 
         void UnitTestGroup::AddTestsFromXML(pugi::xml_node Node)
         {
-            if(!Node)
+            if(!Node) //Basic Sanity Check
             {
                 throw std::invalid_argument(
                         String("UnitTestGroup::AddTestsFromXML can only handle XML but was passed an empty file. Expected results from ")
                         + Node.name()
                     );
             }
-            if(String("UnitTestGroup")!=Node.name())
+
+            if(String("UnitTestGroup")==Node.name())
+            {
+                for(pugi::xml_node::iterator Iter = Node.begin(); Iter!=Node.end(); Iter++)
+                {
+                    String CurrentName(Iter->name());
+                    if(String("TestData")==CurrentName)
+                        { this->AddTestResult(TestData(*Iter)); }
+                    else if(String("UnitTestOutput")==CurrentName)
+                    {
+                        TestOutput << std::endl;
+                        Iter->print(TestOutput);
+                        TestOutput << std::endl;
+                    }
+                    else if(String("UnitTestError")==CurrentName)
+                        { TestError << std::endl << Iter->text() << std::endl; }
+                    else
+                    {
+                        throw std::invalid_argument(
+                                String("UnitTestGroup::AddTestsFromXML Invalid subelement passed from ")
+                                + Node.name()
+                            );
+                    }
+                }
+            }
+            else
             {
                 throw std::invalid_argument(
-                        String("UnitTestGroup::AddTestsFromXML can only handle XML with \"UnitTestGroup\" as passed element.  Expected results from ")
+                        String("UnitTestGroup::AddTestsFromXML can only handle XML with \"UnitTestGroup\" as root element.  Expected results from ")
                         + Node.name()
                     );
             }
-            for(pugi::xml_node::iterator Iter = Node.begin(); Iter!=Node.end(); Iter++)
-                { this->AddTestResult(TestData(*Iter)); }
         }
 
         String UnitTestGroup::GetAsXML() const
         {
-            String Results("<UnitTestGroup>");
+            String Results("\n<UnitTestGroup>");
             for (iterator Iter=this->begin(); Iter!=this->end(); Iter++)
                 { Results += "\n  " + Iter->GetAsXML(); }
+            Results += "\n<UnitTestOutput>";
+            Results += this->TestOutput.str();
+            Results += "\n</UnitTestOutput>";
+            Results += "\n<UnitTestError>";
+            Results += this->TestError.str();
+            Results += "\n</UnitTestError>";
             Results += "\n</UnitTestGroup>";
             return Results;
         }
@@ -271,6 +317,9 @@ namespace Mezzanine
                 Mezzanine::String TestName("Test Name");
                 Output << std::endl << " " << TestName << MakePadding(TestName, LongestNameLength) << "Result" << std::endl;
             }
+
+            if(FullOutput)
+                { Output << TestOutput.str(); }
 
             for (TestDataStorage::iterator Iter=this->begin(); Iter!=this->end(); Iter++)
             {
@@ -290,6 +339,7 @@ namespace Mezzanine
                             { Output << " No Metadata available able issue, use TEST to capture"; }
                     }
                     Output << endl;
+                    Output.flush();
                 }
 
                 if (Iter->Results && Iter->FileName.length() && Iter->FunctionName.length() && Iter->LineNumber)
@@ -297,6 +347,7 @@ namespace Mezzanine
                     Error << Iter->FileName << ":" << Iter->LineNumber
                           << " Test " << TestResultToString(Iter->Results)
                           << " in function " << Iter->FunctionName << endl;
+                    Error.flush();
                 }
                 TestCounts.at((unsigned int)Iter->Results)++; // Count this test result
             }
@@ -310,7 +361,11 @@ namespace Mezzanine
                     Output << "  " << ResultName << MakePadding(ResultName,16) << TestCounts.at(c) << std::endl;
                 }
                 Output << std::endl;
+                Output.flush();
             }
+
+            if(FullOutput && TestError.str().size()>3 ) // Sometimes the copying put "0\r\n" in TestError
+                { Error << "Errors: " << TestError.str(); }
         }
 
         void UnitTestGroup::Test(bool TestCondition, const String& TestName, TestResult IfFalse, TestResult IfTrue, const String& FuncName, const String& File, Whole Line )
@@ -324,8 +379,8 @@ namespace Mezzanine
                     AddTestResult( TestData(TestName, IfFalse, FuncName, File, Line) );
                 }
             }catch(exception& e){
-                cerr << "Caught an unhandled exception while adding results for " << TestName << endl
-                     << "Message: " << e.what() << endl;
+                TestError << "Caught an unhandled exception while adding results for " << TestName << endl
+                          << "Message: " << e.what() << endl;
                 AddTestResult( TestData("UnhandledException", Testing::Failed, FuncName, File, Line) );
             }
         }

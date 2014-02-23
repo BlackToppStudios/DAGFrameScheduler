@@ -1,4 +1,4 @@
-//© Copyright 2010 - 2013 BlackTopp Studios Inc.
+// © Copyright 2010 - 2014 BlackTopp Studios Inc.
 /* This file is part of The Mezzanine Engine.
 
     The Mezzanine Engine is free software: you can redistribute it and/or modify
@@ -47,6 +47,7 @@
 
 #include "testdata.h"
 
+#include <limits>
 
 namespace Mezzanine
 {
@@ -66,6 +67,50 @@ namespace Mezzanine
                 #define TEST(Cond, Name) Test( (Cond), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
             #endif
         #endif
+
+        /// @brief Calculate if an assumption is close enough to be considered equal
+        /// @details this uses std::numeric_limits<T>::epsilon() to get the amount of round that is acceptable.
+        /// This all the Epsilon to be included multiple times if required generally once is the right amount
+        /// to include. However, sometimes an operation can cause rounding multiple times, if this is case, then
+        /// an EpsilonFactor can be passed and set to the number of times rounding can be expected.
+        /// @param Left One value to check for equality.
+        /// @param Right The other value to check.
+        /// @param EpsilonFactor How many times should the epsilon be included.
+        template <typename T>
+        bool CompareEqualityWithEpsilon(const T& Left, const T& Right, size_t EpsilonFactor = 1)
+        {
+            T Epsilon(std::numeric_limits<T>::epsilon());
+            return Right-Epsilon*PreciseReal(EpsilonFactor) <= Left
+                   &&
+                   Left <= Right+Epsilon*PreciseReal(EpsilonFactor);
+        }
+
+        #ifndef TEST_EQUAL_EPSILON
+            /// @def TEST_EQUAL_EPSILON
+            /// @brief Compare types that might
+            /// @param LeftValue One value to compare
+            /// @param RightValue One value to compare
+            /// @param Name The name of the current test
+            #ifdef __FUNCTION__
+                #define TEST_EQUAL_EPSILON(LeftValue, RightValue, Name) Test( CompareEqualityWithEpsilon(LeftValue, RightValue), (Name), Testing::Failed, Testing::Success, __FUNCTION__, __FILE__, __LINE__ );
+            #else
+                #define TEST_EQUAL_EPSILON(LeftValue, RightValue, Name) Test( CompareEqualityWithEpsilon(LeftValue, RightValue), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+            #endif
+        #endif
+
+    #ifndef TEST_EQUAL_MULTI_EPSILON
+        /// @def TEST_EQUAL_MULTI_EPSILON
+        /// @details This is only rarely required. TEST_EQUAL_EPSILON should be prefferred as this can spuriously pass.
+        /// @param LeftValue One value to compare
+        /// @param RightValue One value to compare
+        /// @param EpsilonFactor How many times rounding could occur that could round to the epsilon, so that it can be accounted for?
+        /// @param Name The name of the current test
+        #ifdef __FUNCTION__
+            #define TEST_EQUAL_MULTI_EPSILON(LeftValue, RightValue, Name, EpsilonFactor) Test( CompareEqualityWithEpsilon(LeftValue, RightValue, EpsilonFactor), (Name), Testing::Failed, Testing::Success, __FUNCTION__, __FILE__, __LINE__ );
+        #else
+            #define TEST_EQUAL_MULTI_EPSILON(LeftValue, RightValue, Name, EpsilonFactor) Test( CompareEqualityWithEpsilon(LeftValue, RightValue, EpsilonFactor), (Name), Testing::Failed, Testing::Success, __func__, __FILE__, __LINE__ );
+        #endif
+    #endif
 
         #ifndef TEST_WARN
             /// @def TEST_WARN
@@ -111,6 +156,7 @@ namespace Mezzanine
                 #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
                 try {                                                                                       \
                     CodeThatThrows;                                                                         \
+                    AddTestResult( TestData( (Name), Testing::Failed, __FUNCTION__, __FILE__, __LINE__)) ;  \
                 } catch (ExpectThrown) {                                                                    \
                     AddTestResult( TestData( (Name), Testing::Success, __FUNCTION__, __FILE__, __LINE__)) ; \
                 } catch (...) {                                                                             \
@@ -120,6 +166,7 @@ namespace Mezzanine
                 #define TEST_THROW(ExpectThrown, CodeThatThrows, Name)                                      \
                 try {                                                                                       \
                     CodeThatThrows;                                                                         \
+                    AddTestResult( TestData( (Name), Testing::Failed, __func__, __FILE__, __LINE__)) ;      \
                 } catch (ExpectThrown) {                                                                    \
                     AddTestResult( TestData( (Name), Testing::Success, __func__, __FILE__, __LINE__)) ;     \
                 } catch (...) {                                                                             \

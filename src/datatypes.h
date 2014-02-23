@@ -98,16 +98,20 @@ namespace Mezzanine
     /// @brief An 64-bit unsigned integer.
     typedef uint64_t UInt64;
 
-    /// @typedef Bool
+    /// @typedef Boolean
     /// @brief Generally acts a single bit, true or false
     /// @details Normally just a bool, but on some platform alignment matters more than size, so this could be as large as one cpu word in size.
-    typedef bool Bool;
+    typedef bool Boolean;
     /// @brief Whole is an unsigned integer, it will be at least 32bits in size. In general it will be the most efficient unsigned type for math.
     typedef unsigned int Whole;
     /// @brief Integer is a signed integer. In general it will be the most efficient signed type for math.
     typedef int Integer;
     /// @brief String will provide most of the functionality of std::string but could be implemented in a variety of ways to optimize it.
     typedef std::string String;
+
+    /// @typedef PreciseReal
+    /// @brief A Real number that is at least as precise as the Real and could be considerabll moreso
+    typedef double PreciseReal;
 
     /// @brief A large integer type suitable for compile time math and long term microsecond time keeping.
     /// @details For reference when this is a 64 bit integer, it can store a number between −9,223,372,036,854,775,808 and 9,223,372,036,854,775,807.
