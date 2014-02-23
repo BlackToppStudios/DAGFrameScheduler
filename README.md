@@ -21,7 +21,7 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 
 ## NEWS ##
 
-### October 11, 2013 - 1.12.0  ###
+### Feb 22, 2014 - 1.12.0  ###
 * Merged many changes from Mezzanine 
 
 Test updates
