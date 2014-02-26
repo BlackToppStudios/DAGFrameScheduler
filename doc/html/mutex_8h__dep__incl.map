@@ -1,18 +1,18 @@
 <map id="mutex.h" name="mutex.h">
 <area shape="rect" id="node3" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="428,83,495,111"/>
-<area shape="rect" id="node7" href="$workunit_8h.html" title="This file has the definition of the workunit." alt="" coords="424,238,504,266"/>
+<area shape="rect" id="node7" href="$workunit_8h.html" title="This file has the definition of the workunit. " alt="" coords="424,238,504,266"/>
 <area shape="rect" id="node15" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="395,470,536,498"/>
 <area shape="rect" id="node44" href="$mutex_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Mutex Mutex synchronization object..." alt="" coords="1272,83,1352,111"/>
-<area shape="rect" id="node5" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class." alt="" coords="303,161,423,189"/>
+<area shape="rect" id="node5" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class. " alt="" coords="303,161,423,189"/>
 <area shape="rect" id="node40" href="$thread_8cpp.html" title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="499,161,581,189"/>
-<area shape="rect" id="node23" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm." alt="" coords="269,393,403,421"/>
+<area shape="rect" id="node23" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm. " alt="" coords="269,393,403,421"/>
 <area shape="rect" id="node9" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="831,315,988,343"/>
 <area shape="rect" id="node20" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="593,315,767,343"/>
-<area shape="rect" id="node27" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread." alt="" coords="203,315,288,343"/>
-<area shape="rect" id="node34" href="$workunit_8cpp.html" title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit." alt="" coords="476,315,569,343"/>
+<area shape="rect" id="node27" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. " alt="" coords="203,315,288,343"/>
+<area shape="rect" id="node34" href="$workunit_8cpp.html" title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit. " alt="" coords="476,315,569,343"/>
 <area shape="rect" id="node11" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="984,393,1197,421"/>
-<area shape="rect" id="node17" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually." alt="" coords="739,393,909,421"/>
+<area shape="rect" id="node17" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually. " alt="" coords="739,393,909,421"/>
 <area shape="rect" id="node13" href="$asynchronousfileloadingworkunit_8cpp.html" title="The implementation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files async..." alt="" coords="976,470,1205,498"/>
-<area shape="rect" id="node25" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly." alt="" coords="528,393,715,421"/>
-<area shape="rect" id="node31" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="93,393,195,421"/>
+<area shape="rect" id="node25" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly. " alt="" coords="528,393,715,421"/>
+<area shape="rect" id="node31" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class. " alt="" coords="93,393,195,421"/>
 </map>

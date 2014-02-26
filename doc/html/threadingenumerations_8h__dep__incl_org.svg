@@ -16,7 +16,7 @@
 </g>
 <!-- Node2 -->
 <g id="node3" class="node"><title>Node2</title>
-<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit.">
+<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit. ">
 <polygon fill="white" stroke="black" points="559,-175 559,-195 619,-195 619,-175 559,-175"/>
 <text text-anchor="middle" x="589" y="-182" font-family="FreeSans" font-size="10.00">workunit.h</text>
 </a>
@@ -69,7 +69,7 @@
 </g>
 <!-- Node11 -->
 <g id="node23" class="node"><title>Node11</title>
-<a xlink:href="monopoly_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread.">
+<a xlink:href="monopoly_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. ">
 <polygon fill="white" stroke="black" points="619.5,-117 619.5,-137 684.5,-137 684.5,-117 619.5,-117"/>
 <text text-anchor="middle" x="652" y="-124" font-family="FreeSans" font-size="10.00">monopoly.h</text>
 </a>
@@ -81,7 +81,7 @@
 </g>
 <!-- Node13 -->
 <g id="node30" class="node"><title>Node13</title>
-<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit.">
+<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit. ">
 <polygon fill="white" stroke="black" points="701.5,-117 701.5,-137 772.5,-137 772.5,-117 701.5,-117"/>
 <text text-anchor="middle" x="737" y="-124" font-family="FreeSans" font-size="10.00">workunit.cpp</text>
 </a>
@@ -110,7 +110,7 @@
 </g>
 <!-- Node7 -->
 <g id="node13" class="node"><title>Node7</title>
-<a xlink:href="asynchronousworkunit_8cpp.html" target="_top" xlink:title="Contains very little actually.">
+<a xlink:href="asynchronousworkunit_8cpp.html" target="_top" xlink:title="Contains very little actually. ">
 <polygon fill="white" stroke="black" points="221.5,-59 221.5,-79 350.5,-79 350.5,-59 221.5,-59"/>
 <text text-anchor="middle" x="286" y="-66" font-family="FreeSans" font-size="10.00">asynchronousworkunit.cpp</text>
 </a>
@@ -144,7 +144,7 @@
 </g>
 <!-- Node9 -->
 <g id="node19" class="node"><title>Node9</title>
-<a xlink:href="framescheduler_8cpp.html" target="_top" xlink:title="This is the core object implementation for this algorithm.">
+<a xlink:href="framescheduler_8cpp.html" target="_top" xlink:title="This is the core object implementation for this algorithm. ">
 <polygon fill="white" stroke="black" points="601.5,-59 601.5,-79 702.5,-79 702.5,-59 601.5,-59"/>
 <text text-anchor="middle" x="652" y="-66" font-family="FreeSans" font-size="10.00">framescheduler.cpp</text>
 </a>
@@ -156,7 +156,7 @@
 </g>
 <!-- Node10 -->
 <g id="node21" class="node"><title>Node10</title>
-<a xlink:href="frameschedulerworkunits_8cpp.html" target="_top" xlink:title="The implementation of any workunits the framescheduler needs to work correctly.">
+<a xlink:href="frameschedulerworkunits_8cpp.html" target="_top" xlink:title="The implementation of any workunits the framescheduler needs to work correctly. ">
 <polygon fill="white" stroke="black" points="443.5,-59 443.5,-79 584.5,-79 584.5,-59 443.5,-59"/>
 <text text-anchor="middle" x="514" y="-66" font-family="FreeSans" font-size="10.00">frameschedulerworkunits.cpp</text>
 </a>
@@ -178,7 +178,7 @@
 </g>
 <!-- Node12 -->
 <g id="node27" class="node"><title>Node12</title>
-<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class.">
+<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class. ">
 <polygon fill="white" stroke="black" points="758,-59 758,-79 834,-79 834,-59 758,-59"/>
 <text text-anchor="middle" x="796" y="-66" font-family="FreeSans" font-size="10.00">monopoly.cpp</text>
 </a>

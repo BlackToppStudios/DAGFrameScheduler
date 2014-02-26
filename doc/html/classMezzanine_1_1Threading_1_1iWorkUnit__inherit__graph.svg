@@ -6,6 +6,20 @@
 <!-- Title: Mezzanine::Threading::iWorkUnit Pages: 1 -->
 <!--zoomable 190 -->
 <svg id="main" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" onload="init(evt)">
+<style type="text/css"><![CDATA[
+.edge:hover path { stroke: red; }
+.edge:hover polygon { stroke: red; fill: red; }
+]]></style>
+<script type="text/javascript"><![CDATA[
+var edges = document.getElementsByTagName('g');
+if (edges && edges.length) {
+  for (var i=0;i<edges.length;i++) {
+    if (edges[i].id.substr(0,4)=='edge') {
+      edges[i].setAttribute('class','edge');
+    }
+  }
+}
+]]></script>
         <defs>
                 <circle id="rim" cx="0" cy="0" r="7"/>
                 <circle id="rim2" cx="0" cy="0" r="3.5"/>
@@ -49,7 +63,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node2 -->
 <g id="node3" class="node"><title>Node2</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" target="_top" xlink:title="Default implementation of WorkUnit. This represents on piece of work through time.">
+<a xlink:href="classMezzanine_1_1Threading_1_1DefaultWorkUnit.html" target="_top" xlink:title="Default implementation of WorkUnit. This represents on piece of work through time. ">
 <polygon fill="white" stroke="black" points="146,-75 146,-107 256,-107 256,-75 146,-75"/>
 <text text-anchor="start" x="154" y="-94" font-family="FreeSans" font-size="10.00">Mezzanine::Threading</text>
 <text text-anchor="middle" x="201" y="-82" font-family="FreeSans" font-size="10.00">::DefaultWorkUnit</text>
@@ -75,7 +89,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node5 -->
 <g id="node9" class="node"><title>Node5</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1LogAggregator.html" target="_top" xlink:title="Gather all the thread specific logs and commit them to the main log.">
+<a xlink:href="classMezzanine_1_1Threading_1_1LogAggregator.html" target="_top" xlink:title="Gather all the thread specific logs and commit them to the main log. ">
 <polygon fill="white" stroke="black" points="299,-100 299,-132 409,-132 409,-100 299,-100"/>
 <text text-anchor="start" x="307" y="-119" font-family="FreeSans" font-size="10.00">Mezzanine::Threading</text>
 <text text-anchor="middle" x="354" y="-107" font-family="FreeSans" font-size="10.00">::LogAggregator</text>
@@ -88,7 +102,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node6 -->
 <g id="node11" class="node"><title>Node6</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" target="_top" xlink:title="A kind of workunit given exclusive runtime so it can consume time on multiple threads.">
+<a xlink:href="classMezzanine_1_1Threading_1_1MonopolyWorkUnit.html" target="_top" xlink:title="A kind of workunit given exclusive runtime so it can consume time on multiple threads. ">
 <polygon fill="white" stroke="black" points="299,-50 299,-82 409,-82 409,-50 299,-50"/>
 <text text-anchor="start" x="307" y="-69" font-family="FreeSans" font-size="10.00">Mezzanine::Threading</text>
 <text text-anchor="middle" x="354" y="-57" font-family="FreeSans" font-size="10.00">::MonopolyWorkUnit</text>
@@ -101,7 +115,7 @@ var sectionId = 'dynsection-0';
 </g>
 <!-- Node7 -->
 <g id="node13" class="node"><title>Node7</title>
-<a xlink:href="classMezzanine_1_1Threading_1_1WorkSorter.html" target="_top" xlink:title="Sorts all of the WorkUnits in the FrameScheduler.">
+<a xlink:href="classMezzanine_1_1Threading_1_1WorkSorter.html" target="_top" xlink:title="Sorts all of the WorkUnits in the FrameScheduler. ">
 <polygon fill="white" stroke="black" points="299,-0 299,-32 409,-32 409,-0 299,-0"/>
 <text text-anchor="start" x="307" y="-19" font-family="FreeSans" font-size="10.00">Mezzanine::Threading</text>
 <text text-anchor="middle" x="354" y="-7" font-family="FreeSans" font-size="10.00">::WorkSorter</text>

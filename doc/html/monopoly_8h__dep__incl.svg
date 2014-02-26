@@ -28,7 +28,7 @@
 </g>
 <!-- Node3 -->
 <g id="node5" class="node"><title>Node3</title>
-<a xlink:href="framescheduler_8cpp.html" target="_top" xlink:title="This is the core object implementation for this algorithm.">
+<a xlink:href="framescheduler_8cpp.html" target="_top" xlink:title="This is the core object implementation for this algorithm. ">
 <polygon fill="white" stroke="black" points="123.5,-1 123.5,-21 224.5,-21 224.5,-1 123.5,-1"/>
 <text text-anchor="middle" x="174" y="-8" font-family="FreeSans" font-size="10.00">framescheduler.cpp</text>
 </a>
@@ -40,7 +40,7 @@
 </g>
 <!-- Node4 -->
 <g id="node7" class="node"><title>Node4</title>
-<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class.">
+<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class. ">
 <polygon fill="white" stroke="black" points="242,-1 242,-21 318,-21 318,-1 242,-1"/>
 <text text-anchor="middle" x="280" y="-8" font-family="FreeSans" font-size="10.00">monopoly.cpp</text>
 </a>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bool',['Bool',['../namespaceMezzanine.html#a942580f9d14a57c4a192270eb78f7d57',1,'Mezzanine']]]
+  ['boole',['Boole',['../namespaceMezzanine.html#a7d765759d1196aae20197055f00498f8',1,'Mezzanine']]]
 ];

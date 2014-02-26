@@ -13,11 +13,13 @@ var searchData=
   ['threadingenumerations_2eh',['threadingenumerations.h',['../threadingenumerations_8h.html',1,'']]],
   ['threadloading',['ThreadLoading',['../namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c',1,'Mezzanine::Threading']]],
   ['threads',['Threads',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#aaff58e33e8837a2aad9391a9d6a0dc84',1,'Mezzanine::Threading::FrameScheduler']]],
-  ['threadspecificstorage',['ThreadSpecificStorage',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a62bae0dcb2f299d187dbe156a04f8af5',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
   ['threadspecificstorage',['ThreadSpecificStorage',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html',1,'Mezzanine::Threading']]],
+  ['threadspecificstorage',['ThreadSpecificStorage',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a62bae0dcb2f299d187dbe156a04f8af5',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
   ['time',['Time',['../classMezzanine_1_1Threading_1_1WorkUnitKey.html#abd10e9d22795c4b933c899c1030e405f',1,'Mezzanine::Threading::WorkUnitKey']]],
   ['timingcostallowance',['TimingCostAllowance',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#ae1494801b8b8c6f041d19abd9a332e46',1,'Mezzanine::Threading::FrameScheduler']]],
   ['todo_20list',['Todo List',['../todo.html',1,'']]],
   ['trylock',['TryLock',['../classMezzanine_1_1Threading_1_1Mutex.html#a871a715362aac0fb6a582061f4c17b31',1,'Mezzanine::Threading::Mutex::TryLock()'],['../classMezzanine_1_1Threading_1_1SpinLock.html#a2659487f9df5247575ebe8400389829b',1,'Mezzanine::Threading::SpinLock::TryLock()']]],
+  ['trylockforread',['TryLockForRead',['../classMezzanine_1_1Threading_1_1ReadWriteSpinLock.html#a058d9e5c16c663dabadfb94348b0b5ac',1,'Mezzanine::Threading::ReadWriteSpinLock']]],
+  ['trylockforwrite',['TryLockForWrite',['../classMezzanine_1_1Threading_1_1ReadWriteSpinLock.html#a4416bb264eb1d1fe95248dcf80655ebe',1,'Mezzanine::Threading::ReadWriteSpinLock']]],
   ['type',['Type',['../structMezzanine_1_1Threading_1_1DefaultThreadSpecificStorage.html#a896916be2a41f29a6311ebee7a5f7aab',1,'Mezzanine::Threading::DefaultThreadSpecificStorage::Type()'],['../classMezzanine_1_1RollingAverage.html#addc5fdf3410716770761195e5a7df0ee',1,'Mezzanine::RollingAverage::Type()'],['../classMezzanine_1_1BufferedRollingAverage.html#a59c3b97932518ed077c83593b17ab643',1,'Mezzanine::BufferedRollingAverage::Type()'],['../classMezzanine_1_1WeightedRollingAverage.html#a23f7fc77e9861b8fdd0ffef5fc291177',1,'Mezzanine::WeightedRollingAverage::Type()'],['../structMezzanine_1_1DefaultRollingAverage.html#a28660737085597a377331c4f607f945c',1,'Mezzanine::DefaultRollingAverage::Type()']]]
 ];

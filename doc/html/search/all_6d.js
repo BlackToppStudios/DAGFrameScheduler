@@ -21,7 +21,7 @@ var searchData=
   ['mutex',['Mutex',['../classMezzanine_1_1Threading_1_1Mutex.html',1,'Mezzanine::Threading']]],
   ['mutex_2ecpp',['mutex.cpp',['../mutex_8cpp.html',1,'']]],
   ['mutex_2eh',['mutex.h',['../mutex_8h.html',1,'']]],
-  ['mutex_5ftype',['mutex_type',['../classMezzanine_1_1Threading_1_1lock__guard.html#ab2205a43e3b1714fd4d3d00123ff4aeb',1,'Mezzanine::Threading::lock_guard']]],
+  ['mutex_5ftype',['mutex_type',['../classMezzanine_1_1Threading_1_1lock__guard.html#ab2205a43e3b1714fd4d3d00123ff4aeb',1,'Mezzanine::Threading::lock_guard::mutex_type()'],['../classMezzanine_1_1Threading_1_1ReadOnlyLockGuard.html#a7eb48add6b1fe022df74bda865f8cb6d',1,'Mezzanine::Threading::ReadOnlyLockGuard::mutex_type()'],['../classMezzanine_1_1Threading_1_1ReadWriteLockGuard.html#a12cc44e2f54d948cbb656c6c152ce57d',1,'Mezzanine::Threading::ReadWriteLockGuard::mutex_type()']]],
   ['this_5fthread',['this_thread',['../namespaceMezzanine_1_1Threading_1_1this__thread.html',1,'Mezzanine::Threading']]],
   ['threading',['Threading',['../namespaceMezzanine_1_1Threading.html',1,'Mezzanine']]]
 ];

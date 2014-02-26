@@ -28,7 +28,7 @@
 </g>
 <!-- Node3 -->
 <g id="node5" class="node"><title>Node3</title>
-<a xlink:href="logtools_8cpp.html" target="_top" xlink:title="Tools that make logging specific data a little bit easier.">
+<a xlink:href="logtools_8cpp.html" target="_top" xlink:title="Tools that make logging specific data a little bit easier. ">
 <polygon fill="white" stroke="black" points="124,-1 124,-21 192,-21 192,-1 124,-1"/>
 <text text-anchor="middle" x="158" y="-8" font-family="FreeSans" font-size="10.00">logtools.cpp</text>
 </a>

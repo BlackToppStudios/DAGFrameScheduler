@@ -5,5 +5,7 @@ var searchData=
   ['threadid',['ThreadId',['../classMezzanine_1_1Threading_1_1ThreadId.html#a68800dae5083f8735f6de78d57e119a5',1,'Mezzanine::Threading::ThreadId::ThreadId()'],['../classMezzanine_1_1Threading_1_1ThreadId.html#a78b7af53e649a9d27f7ac8f708f0f4fa',1,'Mezzanine::Threading::ThreadId::ThreadId(unsigned long int aId)'],['../classMezzanine_1_1Threading_1_1ThreadId.html#aa675ad2f0e8b14a28d131a6dfa482d34',1,'Mezzanine::Threading::ThreadId::ThreadId(const ThreadId &amp;aId)']]],
   ['threadloading',['ThreadLoading',['../namespaceMezzanine_1_1Threading.html#ad1ce7d1f48645a637bd5ffd8c692279c',1,'Mezzanine::Threading']]],
   ['threadspecificstorage',['ThreadSpecificStorage',['../classMezzanine_1_1Threading_1_1ThreadSpecificStorage.html#a62bae0dcb2f299d187dbe156a04f8af5',1,'Mezzanine::Threading::ThreadSpecificStorage']]],
-  ['trylock',['TryLock',['../classMezzanine_1_1Threading_1_1Mutex.html#a871a715362aac0fb6a582061f4c17b31',1,'Mezzanine::Threading::Mutex::TryLock()'],['../classMezzanine_1_1Threading_1_1SpinLock.html#a2659487f9df5247575ebe8400389829b',1,'Mezzanine::Threading::SpinLock::TryLock()']]]
+  ['trylock',['TryLock',['../classMezzanine_1_1Threading_1_1Mutex.html#a871a715362aac0fb6a582061f4c17b31',1,'Mezzanine::Threading::Mutex::TryLock()'],['../classMezzanine_1_1Threading_1_1SpinLock.html#a2659487f9df5247575ebe8400389829b',1,'Mezzanine::Threading::SpinLock::TryLock()']]],
+  ['trylockforread',['TryLockForRead',['../classMezzanine_1_1Threading_1_1ReadWriteSpinLock.html#a058d9e5c16c663dabadfb94348b0b5ac',1,'Mezzanine::Threading::ReadWriteSpinLock']]],
+  ['trylockforwrite',['TryLockForWrite',['../classMezzanine_1_1Threading_1_1ReadWriteSpinLock.html#a4416bb264eb1d1fe95248dcf80655ebe',1,'Mezzanine::Threading::ReadWriteSpinLock']]]
 ];

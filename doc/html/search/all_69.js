@@ -8,6 +8,7 @@ var searchData=
   ['int64',['Int64',['../namespaceMezzanine.html#ab203dfc8311caab7cc86ee5a0bf962ed',1,'Mezzanine']]],
   ['int8',['Int8',['../namespaceMezzanine.html#acbb048ee99aa07566d5a6eb33f5a2c2d',1,'Mezzanine']]],
   ['integer',['Integer',['../namespaceMezzanine.html#ad03e394cd98434cc30bc665e8f2ba30f',1,'Mezzanine']]],
+  ['isblocking',['IsBlocking',['../classMezzanine_1_1Threading_1_1Barrier.html#a7810f1f5e595fc331b1c4618814ea169',1,'Mezzanine::Threading::Barrier']]],
   ['iseverydependencycomplete',['IsEveryDependencyComplete',['../classMezzanine_1_1Threading_1_1iWorkUnit.html#a53149e9332c748a6ce568c9171167a3a',1,'Mezzanine::Threading::iWorkUnit::IsEveryDependencyComplete()'],['../classMezzanine_1_1Threading_1_1DefaultWorkUnit.html#aef801e574d26553f5e9ef824547f8f3f',1,'Mezzanine::Threading::DefaultWorkUnit::IsEveryDependencyComplete()']]],
   ['isworkdone',['IsWorkDone',['../classMezzanine_1_1Threading_1_1AsynchronousFileLoadWorkUnit.html#a158c5b409c9c19120d257cfdcdd02666',1,'Mezzanine::Threading::AsynchronousFileLoadWorkUnit::IsWorkDone()'],['../classMezzanine_1_1Threading_1_1iAsynchronousWorkUnit.html#aa7713d5ebcf444790366846aa40707cf',1,'Mezzanine::Threading::iAsynchronousWorkUnit::IsWorkDone()']]],
   ['iteratoraffinity',['IteratorAffinity',['../classMezzanine_1_1Threading_1_1FrameScheduler.html#a5e2d52bf240a599969233fe20c12a155',1,'Mezzanine::Threading::FrameScheduler']]],

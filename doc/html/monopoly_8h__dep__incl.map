@@ -1,5 +1,5 @@
 <map id="monopoly.h" name="monopoly.h">
 <area shape="rect" id="node3" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="5,83,147,111"/>
-<area shape="rect" id="node5" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm." alt="" coords="171,83,304,111"/>
-<area shape="rect" id="node7" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class." alt="" coords="328,83,429,111"/>
+<area shape="rect" id="node5" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm. " alt="" coords="171,83,304,111"/>
+<area shape="rect" id="node7" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class. " alt="" coords="328,83,429,111"/>
 </map>

@@ -6,6 +6,20 @@
 <!-- Title: doublebufferedresource.h Pages: 1 -->
 <!--zoomable 320 -->
 <svg id="main" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" onload="init(evt)">
+<style type="text/css"><![CDATA[
+.edge:hover path { stroke: red; }
+.edge:hover polygon { stroke: red; fill: red; }
+]]></style>
+<script type="text/javascript"><![CDATA[
+var edges = document.getElementsByTagName('g');
+if (edges && edges.length) {
+  for (var i=0;i<edges.length;i++) {
+    if (edges[i].id.substr(0,4)=='edge') {
+      edges[i].setAttribute('class','edge');
+    }
+  }
+}
+]]></script>
         <defs>
                 <circle id="rim" cx="0" cy="0" r="7"/>
                 <circle id="rim2" cx="0" cy="0" r="3.5"/>
@@ -72,7 +86,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node7 -->
 <g id="node14" class="node"><title>Node7</title>
-<a xlink:href="framescheduler_8h.html" target="_top" xlink:title="This file has the Declarations for the main FrameScheduler class.">
+<a xlink:href="framescheduler_8h.html" target="_top" xlink:title="This file has the Declarations for the main FrameScheduler class. ">
 <polygon fill="white" stroke="black" points="403.268,-233 403.268,-253 493.268,-253 493.268,-233 403.268,-233"/>
 <text text-anchor="middle" x="448.268" y="-240" font-family="FreeSans" font-size="10.00">framescheduler.h</text>
 </a>
@@ -84,7 +98,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node10 -->
 <g id="node22" class="node"><title>Node10</title>
-<a xlink:href="framescheduler_8cpp.html" target="_top" xlink:title="This is the core object implementation for this algorithm.">
+<a xlink:href="framescheduler_8cpp.html" target="_top" xlink:title="This is the core object implementation for this algorithm. ">
 <polygon fill="white" stroke="black" points="504.768,-59 504.768,-79 605.768,-79 605.768,-59 504.768,-59"/>
 <text text-anchor="middle" x="555.268" y="-66" font-family="FreeSans" font-size="10.00">framescheduler.cpp</text>
 </a>
@@ -96,7 +110,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node11 -->
 <g id="node24" class="node"><title>Node11</title>
-<a xlink:href="frameschedulerworkunits_8cpp.html" target="_top" xlink:title="The implementation of any workunits the framescheduler needs to work correctly.">
+<a xlink:href="frameschedulerworkunits_8cpp.html" target="_top" xlink:title="The implementation of any workunits the framescheduler needs to work correctly. ">
 <polygon fill="white" stroke="black" points="716.768,-59 716.768,-79 857.768,-79 857.768,-59 716.768,-59"/>
 <text text-anchor="middle" x="787.268" y="-66" font-family="FreeSans" font-size="10.00">frameschedulerworkunits.cpp</text>
 </a>
@@ -108,7 +122,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node12 -->
 <g id="node26" class="node"><title>Node12</title>
-<a xlink:href="monopoly_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread.">
+<a xlink:href="monopoly_8h.html" target="_top" xlink:title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. ">
 <polygon fill="white" stroke="black" points="740.768,-117 740.768,-137 805.768,-137 805.768,-117 740.768,-117"/>
 <text text-anchor="middle" x="773.268" y="-124" font-family="FreeSans" font-size="10.00">monopoly.h</text>
 </a>
@@ -120,7 +134,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node14 -->
 <g id="node33" class="node"><title>Node14</title>
-<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit.">
+<a xlink:href="workunit_8cpp.html" target="_top" xlink:title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit. ">
 <polygon fill="white" stroke="black" points="614.768,-117 614.768,-137 685.768,-137 685.768,-117 614.768,-117"/>
 <text text-anchor="middle" x="650.268" y="-124" font-family="FreeSans" font-size="10.00">workunit.cpp</text>
 </a>
@@ -149,7 +163,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node6 -->
 <g id="node11" class="node"><title>Node6</title>
-<a xlink:href="asynchronousworkunit_8cpp.html" target="_top" xlink:title="Contains very little actually.">
+<a xlink:href="asynchronousworkunit_8cpp.html" target="_top" xlink:title="Contains very little actually. ">
 <polygon fill="white" stroke="black" points="206.768,-59 206.768,-79 335.768,-79 335.768,-59 206.768,-59"/>
 <text text-anchor="middle" x="271.268" y="-66" font-family="FreeSans" font-size="10.00">asynchronousworkunit.cpp</text>
 </a>
@@ -183,7 +197,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node8 -->
 <g id="node16" class="node"><title>Node8</title>
-<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit.">
+<a xlink:href="workunit_8h.html" target="_top" xlink:title="This file has the definition of the workunit. ">
 <polygon fill="white" stroke="black" points="466.268,-175 466.268,-195 526.268,-195 526.268,-175 466.268,-175"/>
 <text text-anchor="middle" x="496.268" y="-182" font-family="FreeSans" font-size="10.00">workunit.h</text>
 </a>
@@ -257,7 +271,7 @@ var sectionId = 'dynsection-1';
 </g>
 <!-- Node13 -->
 <g id="node30" class="node"><title>Node13</title>
-<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class.">
+<a xlink:href="monopoly_8cpp.html" target="_top" xlink:title="Contains the minimal implementation for the monopoly base class. ">
 <polygon fill="white" stroke="black" points="623.268,-59 623.268,-79 699.268,-79 699.268,-59 623.268,-59"/>
 <text text-anchor="middle" x="661.268" y="-66" font-family="FreeSans" font-size="10.00">monopoly.cpp</text>
 </a>
