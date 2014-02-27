@@ -21,6 +21,9 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 
 ## NEWS ##
 
+### Feb 26, 2014 - 1.14.0  ###
+* I left some test code in place in the Barrier. This cause undefined references on some compilers and has been removed.
+
 ### Feb 26, 2014 - 1.13.0  ###
 * Fixed barrier and added a better tests for it.
 * Change Boolean to Boole to dodge name collision on Mac OS X and to Match Mezzanine.

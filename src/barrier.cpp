@@ -83,6 +83,7 @@ namespace Mezzanine
 
         void Barrier::SetThreadSyncCount(Int32 NewCount)
             { while(ThreadGoal!=AtomicCompareAndSwap32(&ThreadGoal,ThreadGoal,NewCount)); }
+
     } // \Threading namespace
 } // \Mezzanine namespace
 #endif
