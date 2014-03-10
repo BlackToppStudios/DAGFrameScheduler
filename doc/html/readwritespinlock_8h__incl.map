@@ -1,0 +1,6 @@
+<map id="readwritespinlock.h" name="readwritespinlock.h">
+<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired. " alt="" coords="433,161,519,189"/>
+<area shape="rect" id="node25" href="$lockguard_8h.html" title="Declares a tool for automatically unlocking a mutex in an exception safe way. " alt="" coords="420,83,508,111"/>
+<area shape="rect" id="node27" href="$spinlock_8h.html" title="Declares a Mutex, Mutex tools, and at least one MutexLike object. " alt="" coords="532,83,609,111"/>
+<area shape="rect" id="node5" href="$crossplatformexport_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="5,238,149,266"/>
+</map>
