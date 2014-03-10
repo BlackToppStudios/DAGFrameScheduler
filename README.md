@@ -21,6 +21,11 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 
 ## NEWS ##
 
+### Mar 9, 2014 - 1.14.1  ###
+* Identified a race condition in Mutexes on Mac OS 10.6.8 that locks tests in about 50% of trials
+* Split Unit tests for mutexes into smaller groups to ease future troubleshooting.
+* Ran Mutex, Spinlock and ReadWriteSpinLock tests 20 times each to ensure confidence in Linux implementation.
+
 ### Feb 26, 2014 - 1.14.0  ###
 * I left some test code in place in the Barrier. This cause undefined references on some compilers and has been removed.
 
