@@ -17,7 +17,7 @@ The 'doc' folder contains further licensing details, technical documentation and
 ### Doxygen Docs ###
 Doxygen is used to generate the technical docs in the 'doc/html' folder. This generates a series of html files from the source code. See 'index.html' for an overview of the API and a good starting point for perusing the documentation. 
 
-The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the you can create contents of the 'doc/html' directory with a command similar to `doc/doxyfiles$ doxygen Doxyfile 2> DoxygenWarnings.txt` depending on your platform. To get the higher quality graphs 'graphviz' and 'dot' need to be installed and doxygen needs to be able to find them. You can also enable the CMake option 'Mezz_Doc' to build the doxygen documentation when you build the code as well.
+The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the you can create contents of the 'doc/html' directory with a command similar to `doc/doxyfiles$ doxygen Doxyfile 2> DoxygenWarnings.txt` depending on your platform. To get the higher quality graphs 'graphviz' and 'dot' need to be installed and doxygen needs to be able to find them. You can also enable the CMake option 'Mezz_Doc' to build  the doxygen documentation when you build the code as well.
 
 ## NEWS ##
 
@@ -25,6 +25,7 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 * Identified a race condition in Mutexes on Mac OS 10.6.8 that locks tests in about 50% of trials
 * Split Unit tests for mutexes into smaller groups to ease future troubleshooting.
 * Ran Mutex, Spinlock and ReadWriteSpinLock tests 20 times each to ensure confidence in Linux implementation.
+* Removed a compiler warning in FrameScheduler::WaitUntilNextFrame() about a potentially unitialized variable.
 
 ### Feb 26, 2014 - 1.14.0  ###
 * I left some test code in place in the Barrier. This cause undefined references on some compilers and has been removed.
