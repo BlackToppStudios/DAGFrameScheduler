@@ -207,6 +207,7 @@ set( ${PROJECT_NAME}_lib_sources
         "${RootProjectSourceDir}src/asynchronousworkunit.cpp"
         "${RootProjectSourceDir}src/atomicoperations.cpp"
         "${RootProjectSourceDir}src/barrier.cpp"
+        "${RootProjectSourceDir}src/doublebufferedresource.cpp"
         "${RootProjectSourceDir}src/framescheduler.cpp"
         "${RootProjectSourceDir}src/frameschedulerworkunits.cpp"
         "${RootProjectSourceDir}src/logtools.cpp"

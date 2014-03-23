@@ -21,6 +21,10 @@ The Doxygen configuration resides in 'doc/doxyfiles'. From this directory the yo
 
 ## NEWS ##
 
+### Mar 22, 2014 - 1.14.2  ###
+* Added some convenience methods that make it easier to get time statistics about the last frame
+* Removed a unit test that only tested assumptions the Framescheduler relied on and sometimes crashed other unittests
+
 ### Mar 9, 2014 - 1.14.1  ###
 * Identified a race condition in Mutexes on Mac OS 10.6.8 that locks tests in about 50% of trials
 * Split Unit tests for mutexes into smaller groups to ease future troubleshooting.

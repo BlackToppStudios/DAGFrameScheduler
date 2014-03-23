@@ -1,13 +1,14 @@
 <map id="barrier.h" name="barrier.h">
-<area shape="rect" id="node3" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class. " alt="" coords="201,83,321,111"/>
+<area shape="rect" id="node3" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class. " alt="" coords="321,83,441,111"/>
 <area shape="rect" id="node13" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="580,393,721,421"/>
-<area shape="rect" id="node36" href="$barrier_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Barrier Barrier synchronization object..." alt="" coords="345,83,428,111"/>
-<area shape="rect" id="node5" href="$workunit_8h.html" title="This file has the definition of the workunit. " alt="" coords="521,161,601,189"/>
+<area shape="rect" id="node38" href="$barrier_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Barrier Barrier synchronization object..." alt="" coords="465,83,548,111"/>
+<area shape="rect" id="node5" href="$workunit_8h.html" title="This file has the definition of the workunit. " alt="" coords="621,161,701,189"/>
 <area shape="rect" id="node21" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm. " alt="" coords="355,315,488,343"/>
+<area shape="rect" id="node35" href="$doublebufferedresource_8cpp.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="419,161,597,189"/>
 <area shape="rect" id="node7" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="807,238,964,266"/>
-<area shape="rect" id="node18" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="211,238,384,266"/>
-<area shape="rect" id="node25" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. " alt="" coords="576,238,661,266"/>
-<area shape="rect" id="node32" href="$workunit_8cpp.html" title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit. " alt="" coords="459,238,552,266"/>
+<area shape="rect" id="node18" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="171,238,344,266"/>
+<area shape="rect" id="node25" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. " alt="" coords="579,238,664,266"/>
+<area shape="rect" id="node32" href="$workunit_8cpp.html" title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit. " alt="" coords="461,238,555,266"/>
 <area shape="rect" id="node9" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="984,315,1197,343"/>
 <area shape="rect" id="node15" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually. " alt="" coords="739,315,909,343"/>
 <area shape="rect" id="node11" href="$asynchronousfileloadingworkunit_8cpp.html" title="The implementation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files async..." alt="" coords="976,393,1205,421"/>

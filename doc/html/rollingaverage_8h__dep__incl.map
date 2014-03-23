@@ -1,8 +1,9 @@
 <map id="rollingaverage.h" name="rollingaverage.h">
-<area shape="rect" id="node3" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class. " alt="" coords="355,83,475,111"/>
-<area shape="rect" id="node5" href="$workunit_8h.html" title="This file has the definition of the workunit. " alt="" coords="472,161,552,189"/>
+<area shape="rect" id="node3" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class. " alt="" coords="263,83,383,111"/>
+<area shape="rect" id="node5" href="$workunit_8h.html" title="This file has the definition of the workunit. " alt="" coords="465,161,545,189"/>
 <area shape="rect" id="node13" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="580,393,721,421"/>
 <area shape="rect" id="node21" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm. " alt="" coords="355,315,488,343"/>
+<area shape="rect" id="node35" href="$doublebufferedresource_8cpp.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="205,161,384,189"/>
 <area shape="rect" id="node7" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="807,238,964,266"/>
 <area shape="rect" id="node18" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="211,238,384,266"/>
 <area shape="rect" id="node25" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. " alt="" coords="576,238,661,266"/>

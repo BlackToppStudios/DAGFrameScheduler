@@ -501,7 +501,7 @@
 /// The most obvious is the usage of exceptions. The DAGFrameScheduler does not use
 /// Exceptions in any way. There are a few reasons for this.
 ///    1. Exception Thread Safety.
-///    2. No need to copy Exception.
+///    2. No need to copy Exception
 ///    3. Performance.
 /// @n @n
 /// The team at BlackTopp Studios Inc will be some of the first to extol the virtues of exceptions

@@ -1,38 +1,39 @@
 <map id="crossplatformexport.h" name="crossplatformexport.h">
-<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired. " alt="" coords="1397,83,1483,111"/>
-<area shape="rect" id="node11" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="1391,702,1532,730"/>
-<area shape="rect" id="node126" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="2367,238,2521,266"/>
-<area shape="rect" id="node5" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="1188,547,1345,575"/>
-<area shape="rect" id="node16" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="503,315,665,343"/>
-<area shape="rect" id="node19" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class. " alt="" coords="921,393,1041,421"/>
-<area shape="rect" id="node21" href="$workunit_8h.html" title="This file has the definition of the workunit. " alt="" coords="1012,470,1092,498"/>
-<area shape="rect" id="node24" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="319,547,492,575"/>
-<area shape="rect" id="node31" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. " alt="" coords="735,547,820,575"/>
-<area shape="rect" id="node49" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1391,238,1489,266"/>
-<area shape="rect" id="node59" href="$logtools_8h.html" title="The definitions of the logging tools. " alt="" coords="1233,315,1308,343"/>
-<area shape="rect" id="node65" href="$systemcalls_8cpp.html" title="This file defines some platform specifc functions. " alt="" coords="1575,315,1687,343"/>
-<area shape="rect" id="node68" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically. " alt="" coords="1745,161,1876,189"/>
-<area shape="rect" id="node77" href="$barrier_8h.html" title="The declaration of the Mezzanine::Threading::Barrier Barrier synchronization primitive. " alt="" coords="991,238,1057,266"/>
-<area shape="rect" id="node91" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits. " alt="" coords="140,315,239,343"/>
-<area shape="rect" id="node99" href="$spinlock_8h.html" title="Declares a Mutex, Mutex tools, and at least one MutexLike object. " alt="" coords="2093,238,2171,266"/>
-<area shape="rect" id="node102" href="$readwritespinlock_8h.html" title="Declares a Mutex, Mutex tools, and at least one MutexLike object. " alt="" coords="2169,315,2300,343"/>
-<area shape="rect" id="node108" href="$rollingaverage_8h.html" title="This stores the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage. " alt="" coords="689,315,799,343"/>
-<area shape="rect" id="node114" href="$threadingenumerations_8h.html" title="Any enumerations the threading library requires are all declared here. " alt="" coords="1913,393,2076,421"/>
-<area shape="rect" id="node118" href="$atomicoperations_8cpp.html" title="The implementation of simple thread safe ways to check and change a specified variable atomically..." alt="" coords="2543,315,2687,343"/>
-<area shape="rect" id="node7" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="1524,625,1737,653"/>
-<area shape="rect" id="node13" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually. " alt="" coords="1177,625,1348,653"/>
-<area shape="rect" id="node9" href="$asynchronousfileloadingworkunit_8cpp.html" title="The implementation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files async..." alt="" coords="2120,702,2349,730"/>
-<area shape="rect" id="node27" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm. " alt="" coords="600,625,733,653"/>
-<area shape="rect" id="node29" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly. " alt="" coords="389,625,576,653"/>
-<area shape="rect" id="node38" href="$workunit_8cpp.html" title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit. " alt="" coords="1071,547,1164,575"/>
-<area shape="rect" id="node35" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class. " alt="" coords="757,625,859,653"/>
-<area shape="rect" id="node51" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1433,315,1500,343"/>
-<area shape="rect" id="node56" href="$thread_8cpp.html" title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1652,393,1735,421"/>
-<area shape="rect" id="node62" href="$logtools_8cpp.html" title="Tools that make logging specific data a little bit easier. " alt="" coords="1217,393,1308,421"/>
-<area shape="rect" id="node70" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation. " alt="" coords="1707,238,1773,266"/>
-<area shape="rect" id="node86" href="$readwritespinlock_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Mutex Mutex synchronization object..." alt="" coords="2433,393,2577,421"/>
-<area shape="rect" id="node88" href="$spinlock_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::SpinLock synchronization object..." alt="" coords="2324,315,2417,343"/>
-<area shape="rect" id="node75" href="$mutex_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Mutex Mutex synchronization object..." alt="" coords="2015,315,2095,343"/>
-<area shape="rect" id="node80" href="$barrier_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Barrier Barrier synchronization object..." alt="" coords="873,315,956,343"/>
-<area shape="rect" id="node97" href="$workunitkey_8cpp.html" title="This file declares the functionality of the metadata used to sort the iWorkUnits. ..." alt="" coords="5,393,120,421"/>
+<area shape="rect" id="node3" href="$datatypes_8h.html" title="This file declares a few typedefs to allow flexibility, in case a change is required/desired. " alt="" coords="1189,83,1275,111"/>
+<area shape="rect" id="node11" href="$dagframescheduler_8h.html" title="This is the file that code using this library should include. It includes all the required components..." alt="" coords="1477,702,1619,730"/>
+<area shape="rect" id="node130" href="$crossplatformincludes_8h.html" title="This file determines what features are offered by the compiler that this library can take advantage o..." alt="" coords="2164,238,2319,266"/>
+<area shape="rect" id="node5" href="$asynchronousworkunit_8h.html" title="Contains an interface for a kind of WorkUnit that loads or does other work even when the frame schedu..." alt="" coords="364,547,521,575"/>
+<area shape="rect" id="node16" href="$doublebufferedresource_8h.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="653,315,816,343"/>
+<area shape="rect" id="node19" href="$framescheduler_8h.html" title="This file has the Declarations for the main FrameScheduler class. " alt="" coords="1232,393,1352,421"/>
+<area shape="rect" id="node21" href="$workunit_8h.html" title="This file has the definition of the workunit. " alt="" coords="1179,470,1259,498"/>
+<area shape="rect" id="node24" href="$frameschedulerworkunits_8h.html" title="This defines a number of workunits that are required for doing some tasks that the Framescheduler req..." alt="" coords="677,547,851,575"/>
+<area shape="rect" id="node31" href="$monopoly_8h.html" title="Contains an interface for a kind of WorkUnit that consumes time on multiple thread. " alt="" coords="1349,547,1435,575"/>
+<area shape="rect" id="node41" href="$doublebufferedresource_8cpp.html" title="This file defines the template double buffered resources that can be attached to a thread..." alt="" coords="672,470,851,498"/>
+<area shape="rect" id="node52" href="$systemcalls_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="955,238,1053,266"/>
+<area shape="rect" id="node62" href="$logtools_8h.html" title="The definitions of the logging tools. " alt="" coords="1864,315,1939,343"/>
+<area shape="rect" id="node68" href="$systemcalls_8cpp.html" title="This file defines some platform specifc functions. " alt="" coords="992,315,1104,343"/>
+<area shape="rect" id="node71" href="$atomicoperations_8h.html" title="Simple thread safe ways to check and change a specified variable atomically. " alt="" coords="1569,161,1700,189"/>
+<area shape="rect" id="node80" href="$barrier_8h.html" title="The declaration of the Mezzanine::Threading::Barrier Barrier synchronization primitive. " alt="" coords="1316,238,1383,266"/>
+<area shape="rect" id="node94" href="$workunitkey_8h.html" title="This file defines the metadata used to sort workunits. " alt="" coords="460,315,559,343"/>
+<area shape="rect" id="node102" href="$spinlock_8h.html" title="Declares a Mutex, Mutex tools, and at least one MutexLike object. " alt="" coords="2393,238,2471,266"/>
+<area shape="rect" id="node105" href="$readwritespinlock_8h.html" title="Declares a Mutex, Mutex tools, and at least one MutexLike object. " alt="" coords="2656,315,2787,343"/>
+<area shape="rect" id="node111" href="$rollingaverage_8h.html" title="This stores the implementation and the declaration of the RollingAverage, BufferedRollingAverage, WeightedRollingAverage and the DefaultRollingAverage. " alt="" coords="1437,315,1547,343"/>
+<area shape="rect" id="node117" href="$threadingenumerations_8h.html" title="Any enumerations the threading library requires are all declared here. " alt="" coords="245,393,408,421"/>
+<area shape="rect" id="node121" href="$atomicoperations_8cpp.html" title="The implementation of simple thread safe ways to check and change a specified variable atomically..." alt="" coords="2488,315,2632,343"/>
+<area shape="rect" id="node7" href="$asynchronousfileloadingworkunit_8h.html" title="The declaration of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files asynchro..." alt="" coords="245,625,459,653"/>
+<area shape="rect" id="node13" href="$asynchronousworkunit_8cpp.html" title="Contains very little actually. " alt="" coords="533,625,704,653"/>
+<area shape="rect" id="node9" href="$asynchronousfileloadingworkunit_8cpp.html" title="The implementation of the AsynchronousFileLoadWorkUnit a workunit that loads a listing of files async..." alt="" coords="64,702,293,730"/>
+<area shape="rect" id="node27" href="$framescheduler_8cpp.html" title="This is the core object implementation for this algorithm. " alt="" coords="1125,625,1259,653"/>
+<area shape="rect" id="node29" href="$frameschedulerworkunits_8cpp.html" title="The implementation of any workunits the framescheduler needs to work correctly. " alt="" coords="779,625,965,653"/>
+<area shape="rect" id="node38" href="$workunit_8cpp.html" title="This file has the implementation of the Mezzanine::Threading::DefaultWorkUnit. " alt="" coords="1019,547,1112,575"/>
+<area shape="rect" id="node35" href="$monopoly_8cpp.html" title="Contains the minimal implementation for the monopoly base class. " alt="" coords="1283,625,1384,653"/>
+<area shape="rect" id="node54" href="$thread_8h.html" title="This file defines a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1672,315,1739,343"/>
+<area shape="rect" id="node59" href="$thread_8cpp.html" title="This file implements a minimalistic cross&#45;platform thread that the scheduler uses to schedule tasks..." alt="" coords="1813,393,1896,421"/>
+<area shape="rect" id="node65" href="$logtools_8cpp.html" title="Tools that make logging specific data a little bit easier. " alt="" coords="1920,393,2011,421"/>
+<area shape="rect" id="node73" href="$mutex_8h.html" title="This file declares and defines a mutex that is a partial implementation. " alt="" coords="1672,238,1739,266"/>
+<area shape="rect" id="node89" href="$readwritespinlock_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Mutex Mutex synchronization object..." alt="" coords="2211,393,2355,421"/>
+<area shape="rect" id="node91" href="$spinlock_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::SpinLock synchronization object..." alt="" coords="2320,315,2413,343"/>
+<area shape="rect" id="node78" href="$mutex_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Mutex Mutex synchronization object..." alt="" coords="2115,315,2195,343"/>
+<area shape="rect" id="node83" href="$barrier_8cpp.html" title="Contains the implementation for the Mezzanine::Threading::Barrier Barrier synchronization object..." alt="" coords="1229,315,1312,343"/>
+<area shape="rect" id="node100" href="$workunitkey_8cpp.html" title="This file declares the functionality of the metadata used to sort the iWorkUnits. ..." alt="" coords="432,393,547,421"/>
 </map>
